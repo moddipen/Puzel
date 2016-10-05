@@ -30,5 +30,39 @@ App::uses('Controller', 'Controller');
  * @package		app.Controller
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
-class AppController extends Controller {
+class AppController extends Controller 
+{
+	public $helpers = array('Html', 'Form','Session');
+	public $components = array('Session','RequestHandler','Auth');
+
+
+
+	 function beforeFilter()
+	 {
+	    if ($this->params['prefix'] == 'admin')
+    	{
+    		$signup = 0 ;
+    		$this->set('Signup',$signup);
+    		$this->layout = "dashboard";
+    	}
+	    elseif ($this->params['prefix'] == 'business')
+	     {
+	     	$signup = 0 ;
+    		$this->set('Signup',$signup);
+	     	$this->layout = "dashboard";
+	     }
+	    elseif ($this->params['prefix'] == 'user')
+	     {
+	     	$signup = 0 ;
+    		$this->set('Signup',$signup);
+	     	$this->layout = "dashboard";
+	     } 
+	    else
+    	{
+    		$signup = 0 ;
+    		$this->set('Signup',$signup);
+    		$this->layout = "default";
+    	}
+	    
+	 }
 }

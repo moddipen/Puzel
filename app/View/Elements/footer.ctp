@@ -30,11 +30,11 @@
 	</div>
     <div class="row padding-row">
     <div class="six columns text-right">
-         <a href="<?php echo Configure::read('SITE_URL');?>users/signup/1" style="margin-right:20px; padding-bottom:15px; display: inline-block;"><span class="button-sign">Sign Up</span></a>
+         <a href="<?php echo Configure::read('SITE_USER_URL');?>/users/register" style="margin-right:20px; padding-bottom:15px; display: inline-block;"><span class="button-sign">Sign Up</span></a>
           
         </div>
         <div class="six columns">
-          <a href="<?php echo Configure::read('SITE_URL');?>users/signup/2"><span class="button-join">Join as a Business</span></a>
+          <a href="<?php echo Configure::read('SITE_USER_URL');?>/users/register/business"><span class="button-join">Join as a Business</span></a>
         </div>
     </div>
 
@@ -49,11 +49,11 @@
 		
 				 <ul id="navfirst">
 				 
-					 <li><a href="about.php">How It Works</a></li>
+					 <li><a href="<?php echo Configure::read('SITE_URL');?>users/about">How It Works</a></li>
 					 
-					 <li><a href="business.php">Puzel for Business</a></li>
+					 <li><a href="<?php echo Configure::read('SITE_URL');?>users/business">Puzel for Business</a></li>
 					 
-					 <li><a href="contact.php">Contact</a></li>
+					 <li><a href="<?php echo Configure::read('SITE_URL');?>users/contact">Contact</a></li>
 					 
 				 </ul>
           	

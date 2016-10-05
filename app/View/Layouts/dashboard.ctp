@@ -27,27 +27,33 @@ $cakeDescription = __d('cake_dev', 'Puzzel');
 		<?php echo $cakeDescription ?>:
 		<?php echo  $title; ?>
 	</title>
-	
-    
-    
-    
-    
-    
 	<?php
 		//echo $this->Html->meta('icon');
 		echo $this->Html->css('dashboard/vendor/bootstrap/bootstrap.min');?>
-		<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-	<?php 
+		<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">	
+	<?php //echo $this->Html->css('fonts/font-awesome.min.css');
 		echo $this->Html->css('dashboard/vendor/animate/animate.min');
 		echo $this->Html->css('dashboard/vendor/mmenu/jquery.mmenu.all.css');
 		echo $this->Html->css('dashboard/vendor/videobackground/jquery.videobackground');
 		echo $this->Html->css('dashboard/vendor/bootstrap-checkbox.css');
+		echo $this->Html->css('dashboard/vendor/chosen/chosen.min.css');
 		echo $this->Html->css('dashboard/vendor/datepicker/bootstrap-datepicker.css');
 		echo $this->Html->css('dashboard/vendor/chosen/chosen-bootstrap.css');
 		echo $this->Html->css('dashboard/vendor/bootstrap/bootstrap-dropdown-multilevel.css');	
 		echo $this->Html->css('dashboard/minimal.css');	
 		
 		
+		echo $this->Html->script('dashboard/jquery');	
+		echo $this->Html->script('dashboard/vendor/bootstrap/bootstrap.min.js');	
+		echo $this->Html->script('dashboard/vendor/bootstrap/bootstrap-dropdown-multilevel.js');	
+		echo $this->Html->script('dashboard/vendor/mmenu/jquery.mmenu.min.js');	
+		echo $this->Html->script('dashboard/vendor/sparkline/jquery.sparkline.min.js');	
+		echo $this->Html->script('dashboard/vendor/nicescroll/jquery.nicescroll.min.js');	
+		echo $this->Html->script('dashboard/vendor/animate-numbers/jquery.animateNumbers.js');	
+		echo $this->Html->script('dashboard/vendor/chosen/chosen.jquery.min.js');	
+		echo $this->Html->script('dashboard/vendor/datepicker/bootstrap-datepicker.js');	
+		echo $this->Html->script('dashboard/minimal.min.js');	
+
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
@@ -57,16 +63,58 @@ $cakeDescription = __d('cake_dev', 'Puzzel');
 <body class="bg-1">
 
     <!-- Preloader -->
-    <div class="mask"><div id="loader"></div></div>
+    <?php if($Signup != 1) {?>
+    	<div class="mask"><div id="loader"></div></div>
+    	<?php } ?>
     <!--/Preloader -->
 
     <!-- Wrap all page content here -->
     <div id="wrap">
-
-		<?php echo $this->Session->flash(); ?>
+    	<div class="row">
+    	<?php 
+    	if ($this->params['prefix'] == 'admin')
+    	{
+    		if($Signup  != 1)
+    		{
+    			echo $this->element('admin/leftbar');	
+    		}
+    		
+    	}
+	    elseif($this->params['prefix'] == 'business')
+	     {
+	     	if($Signup  != 1)
+    		{
+	     		echo $this->element('business/leftbar');
+	     	}	
+	     }
+	    else
+    	{
+    		if($Signup  != 1)
+    		{
+    			echo $this->element('user/leftbar');
+    		}	
+    	}
+    	 ?>
 		<?php echo $this->fetch('content'); ?>
-	
+		</div>
 	</div>
 	
 </body>
 </html>
+<script>
+    $(function(){
+		$(".chosen-select").chosen({disable_search_threshold: 10});
+		$('.date').datepicker({ format: 'yyyy-mm-dd', autoclose: true});
+		$('.input-group span.input-group-addon').click(function(){
+			$(this).parent().children('input.date').focus();
+		});
+      // Initialize card flip
+      $('.card.hover').hover(function(){
+        $(this).addClass('flip');
+      },function(){
+        $(this).removeClass('flip');
+      });  
+      
+    })
+      
+    </script>
