@@ -47,7 +47,7 @@
                   </li>
                   
                   <li class="active">
-                    <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/puzzels/index">
+                    <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/puzzles/index">
                       <i class="fa fa-puzel-icon-left"></i> Puzel
                       
                     </a>
@@ -64,14 +64,27 @@
                       
                     </a>
                   </li>
-                  <li class="welcome">Welcome Tony!</li>
+                  <li class="welcome"><?php 
+                      
+                      if(AuthComponent::user('User'))
+                      {
+                        $user = AuthComponent::user('User');
+                        $login_detail = $user['firstname'].' '.$user['lastname'];
+                      }
+                      if(AuthComponent::user('id'))
+                      {
+                        $user = AuthComponent::user();
+                        $login_detail = $user['firstname'].' '.$user['lastname']; 
+                      }  
+                      echo $login_detail;?>!</li>
+                      
                       <li>
                         <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>">
                           <i class="fa fa-cog"></i> Settings
                         </a>
                       </li>
                       <li>
-                        <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>">
+                        <a href="<?php echo Configure::read('SITE_USER_URL');?>/users/logout">
                           <i class="fa fa-power-off"></i> Logout
                         </a>
                       </li>

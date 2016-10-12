@@ -141,9 +141,9 @@
  *
  * Set to an array of prefixes you want to use in your application. Use for
  * admin or other prefixed routes.
- *
- * 	Routing.prefixes = array('admin', 'manager');
- *
+ */
+  	Configure::write('Routing.prefixes', array('admin','business','user'));
+ /*
  * Enables:
  *	`admin_index()` and `/admin/controller/index`
  *	`manager_index()` and `/manager/controller/index`
@@ -384,3 +384,13 @@ Cache::config('_cake_model_', array(
 	'serialize' => ($engine === 'File'),
 	'duration' => $duration
 ));
+
+$config = array(
+    'Facebook' => array(
+        'appId'  => '279157698951296',
+        'apiKey' => 'YOUR_API_KEY',
+        'secret' => '48b0894b478ae0984dcc7a9a2e772fd0',
+        'cookie' => true,
+        'locale' => 'en_US',
+    )
+);

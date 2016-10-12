@@ -37,7 +37,7 @@
                 <div style ="display:none" id="errorpassword"> Please Enter Password </div>
                 <div class="input-group">
                   <!-- <input type="password" class="form-control" name="data[User][confirm_password]" placeholder="Retype Password" id="confirmpassword"> -->
-                  <?php echo $this->Form->input('User.confirm_password',array('label'=>false,'div'=>false,'class'=>'form-control','placeholder'=>'Enter confirm password'));?>
+                  <?php echo $this->Form->input('User.confirm_password',array('type'=>'password','label'=>false,'div'=>false,'class'=>'form-control','placeholder'=>'Enter confirm password'));?>
                   <div class="input-group-addon"><i class="fa fa-key"></i></div>
                 </div>
                 <div style ="display:none" id="errorrepass"> Please Enter Retype Password </div>

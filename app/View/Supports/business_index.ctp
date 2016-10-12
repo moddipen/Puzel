@@ -107,7 +107,7 @@
                   </div>
                     <div class="table-responsive">
                       <table class="table nomargin text-center">
-                        <thead>
+                        <thead >
                           <tr>
                             <th class="text-center">Name</th>
                             <th class="text-center">Subject</th>
@@ -115,9 +115,9 @@
                             <th class="text-center">Options</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody id = "black">
                           <tr>
-                            <td>Tony</td>
+                            <td>Tony1</td>
                             <td>Subject 1</td>
                             <td>11:05 AM 25th May 2016</td>
                             <td><i class="fa fa-reply"></i>&nbsp; &nbsp;<i class="fa fa-trash-o"></i></td>
@@ -129,7 +129,7 @@
                             <td><i class="fa fa-reply"></i>&nbsp; &nbsp;<i class="fa fa-trash-o"></i></td>
                           </tr>
                           <tr>
-                            <td>Tony</td>
+                            <td>Tony2</td>
                             <td>Subject 1</td>
                             <td>11:05 AM 25th May 2016</td>
                             <td><i class="fa fa-reply"></i>&nbsp; &nbsp;<i class="fa fa-trash-o"></i></td>
@@ -185,15 +185,8 @@
 
                   <!-- tile footer -->
                   <div class="tile-footer text-center">
-                    <ul class="pagination pagination-sm nomargin pagination-custom">
-                      <li class="disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
-                      <li class="active"><a href="#">1</a></li>
-                      <li><a href="#">2</a></li>
-                      <li><a href="#">3</a></li>
-                      <li><a href="#">4</a></li>
-                      <li><a href="#">5</a></li>
-                      <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
-                    </ul>
+                    <ul class="pagination pagination-sm nomargin pagination-custom" id="myPager">
+                     </ul>
                   </div>
                   <!-- /tile footer -->
 
@@ -248,6 +241,129 @@
       });  
       
     })
+
+       /* pagination plugin */
+$.fn.pageMe = function(opts){
+    var $this = this,
+        defaults = {
+            perPage: 5,
+            showPrevNext: true,
+            numbersPerPage: 1,
+            hidePageNumbers: false
+        },
+        settings = $.extend(defaults, opts);
+    
+    var listElement = $this;
+    var perPage = settings.perPage; 
+    var children = listElement.children();
+    var pager = $('.pagination');
+    
+    if (typeof settings.childSelector!="undefined") {
+        children = listElement.find(settings.childSelector);
+    }
+    
+    if (typeof settings.pagerSelector!="undefined") {
+        pager = $(settings.pagerSelector);
+    }
+    
+    var numItems = children.size();
+    var numPages = Math.ceil(numItems/perPage);
+
+    var curr = 0;
+    pager.data("curr",curr);
+    
+    if (settings.showPrevNext){
+        $('<li><a href="#" class="prev_link">«</a></li>').appendTo(pager);
+    }
+    
+    while(numPages > curr && (settings.hidePageNumbers==false)){
+        $('<li><a href="#" class="page_link">'+(curr+1)+'</a></li>').appendTo(pager);
+        curr++;
+    }
+  
+    if (settings.numbersPerPage>1) {
+       $('.page_link').hide();
+       $('.page_link').slice(pager.data("curr"), settings.numbersPerPage).show();
+    }
+    
+    if (settings.showPrevNext){
+        $('<li><a href="#" class="next_link">»</a></li>').appendTo(pager);
+    }
+    
+    pager.find('.page_link:first').addClass('active');
+    pager.find('.prev_link').hide();
+    if (numPages<=1) {
+        pager.find('.next_link').hide();
+    }
+    pager.children().eq(0).addClass("active");
+    
+    children.hide();
+    children.slice(0, perPage).show();
+    
+    pager.find('li .page_link').click(function(){
+        var clickedPage = $(this).html().valueOf()-1;
+        goTo(clickedPage,perPage);
+        return false;
+    });
+    pager.find('li .prev_link').click(function(){
+        previous();
+        return false;
+    });
+    pager.find('li .next_link').click(function(){
+        next();
+        return false;
+    });
+    
+    function previous(){
+        var goToPage = parseInt(pager.data("curr")) - 1;
+        goTo(goToPage);
+    }
+     
+    function next(){
+        goToPage = parseInt(pager.data("curr")) + 1;
+        goTo(goToPage);
+    }
+    
+    function goTo(page){
+        var startAt = page * perPage,
+            endOn = startAt + perPage;
+        
+        children.css('display','none').slice(startAt, endOn).show();
+        
+        if (page>=1) {
+            pager.find('.prev_link').show();
+        }
+        else {
+            pager.find('.prev_link').hide();
+        }
+        
+        if (page<(numPages-1)) {
+            pager.find('.next_link').show();
+        }
+        else {
+            pager.find('.next_link').hide();
+        }
+        
+        pager.data("curr",page);
+       
+        if (settings.numbersPerPage>1) {
+          $('.page_link').hide();
+          $('.page_link').slice(page, settings.numbersPerPage+page).show();
+      }
+      
+        pager.children().removeClass("active");
+        pager.children().eq(page+1).addClass("active");
+    
+    }
+};
+$(document).ready(function(){
+    
+  $('#black').pageMe({pagerSelector:'#myPager',childSelector:'tr',showPrevNext:true,hidePageNumbers:false,perPage:5});
+    
+});
+
+
+
       
     </script>
 

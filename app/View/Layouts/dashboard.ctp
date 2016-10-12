@@ -28,7 +28,7 @@ $cakeDescription = __d('cake_dev', 'Puzzel');
 		<?php echo  $title; ?>
 	</title>
 	<?php
-		//echo $this->Html->meta('icon');
+		echo $this->Html->meta('icon');
 		echo $this->Html->css('dashboard/vendor/bootstrap/bootstrap.min');?>
 		<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">	
 	<?php //echo $this->Html->css('fonts/font-awesome.min.css');
@@ -57,8 +57,16 @@ $cakeDescription = __d('cake_dev', 'Puzzel');
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
-
 	?>
+        <!-- <meta property="og:url"           content="https://postmarkapp.com" />
+        <meta property="og:type"          content="website" />
+        <meta property="og:title"         content="Puzzle" />
+        <meta property="og:description"   content="Detail" />
+        <meta property="og:image"         content="https://postmarkapp.com" />
+      -->
+        <!-- Place this tag in your head or just before your close body tag. -->
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+
 </head>
 <body class="bg-1">
 
@@ -74,7 +82,7 @@ $cakeDescription = __d('cake_dev', 'Puzzel');
     	<?php 
     	if ($this->params['prefix'] == 'admin')
     	{
-    		if($Signup  != 1)
+    		if($Signup  == 0)
     		{
     			echo $this->element('admin/leftbar');	
     		}
@@ -82,14 +90,14 @@ $cakeDescription = __d('cake_dev', 'Puzzel');
     	}
 	    elseif($this->params['prefix'] == 'business')
 	     {
-	     	if($Signup  != 1)
+	     	if($Signup  == 0)
     		{
 	     		echo $this->element('business/leftbar');
 	     	}	
 	     }
 	    else
     	{
-    		if($Signup  != 1)
+    		if($Signup  == 0)
     		{
     			echo $this->element('user/leftbar');
     		}	
@@ -117,4 +125,13 @@ $cakeDescription = __d('cake_dev', 'Puzzel');
       
     })
       
-    </script>
+
+    ///////////////////////////////
+   $(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+  </script>

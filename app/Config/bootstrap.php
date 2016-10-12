@@ -105,7 +105,31 @@ Configure::write('Dispatcher.filters', array(
 App::uses('CakeLog', 'Log');
 
 // define('BASE_URL',"http://localhost/puzzel/");
-Configure::write('SITE_URL',"http://localhost/puzel/");
+Configure::write('SITE_URL',"http://pdev.stage.n-framescorp.com/");
+
+// Business Url 
+Configure::write('SITE_BUSINESS_URL',"http://pdev.stage.n-framescorp.com/business");
+
+// Admin Url 
+Configure::write('SITE_ADMIN_URL',"http://pdev.stage.n-framescorp.com/admin");
+
+// Admin Url 
+Configure::write('SITE_USER_URL',"http://pdev.stage.n-framescorp.com/user");
+
+// Postmark Tokenid
+Configure::write('POSTMARKTOKEN',"4fc3bc33-f599-4d30-8444-8eb159dc0318");
+
+// Postmark Server Tokenid
+Configure::write('POSTMARKSERVERTOKEN',"1e1c0acd-3356-446b-b604-8d5972592b06");
+
+// Postmark Email id 
+Configure::write('POSTMARKEMAIL',"016b0b1a09738628dd9daee086fde019@inbound.postmarkapp.com");
+
+// Sent Email Postmark
+CakePlugin::load('Postmark');
+// Facebook
+CakePlugin::load('Facebook');
+
 
 CakeLog::config('debug', array(
 	'engine' => 'File',

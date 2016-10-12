@@ -28,7 +28,7 @@ $cakeDescription = __d('cake_dev', 'Puzzel');
 		<?php echo  $title; ?>
 	</title>
 	<?php
-		//echo $this->Html->meta('icon');
+		echo $this->Html->meta('icon');
 
 		echo $this->Html->css('gumby');
 		echo $this->Html->css('styles');

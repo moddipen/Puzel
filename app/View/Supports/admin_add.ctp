@@ -18,10 +18,7 @@
               <h2><i class="fa fa-support-32"></i> Support</h2>
 
             </div>
-
-
-            <!-- row -->
-            <div class="row">
+                <div class="row">
 
 
               <!-- col 8 -->
@@ -41,18 +38,23 @@
 
                   <!-- tile body -->
                   <div class="tile-body">
-                    <form class="form-horizontal custom-form" role="form">
-                      
+                    <!-- <form class="form-horizontal custom-form" role="form"> -->
+                    <?php echo $this->Form->create('Support',array('action'=>'add','class'=>"form-horizontal custom-form" ,'role'=>"form"));?>
                       <div class="form-group">
-                        <label for="input01" class="col-sm-1 control-label">Company</label>
+                        <label class="col-sm-1 control-label">Company</label>
                         <div class="col-sm-6">
-                          <input type="text" class="form-control" id="input01">
+                          <select name ='data[Support][receiver_id]' class='form-control'>
+                              <?php foreach($CompanyName  as $company) {?>
+                              <option value = "<?php echo $company['User']['id']?>"><?php echo $company['User']['company_name']?></option>
+                              <?php } ?>
+                          </select>
+                          <?php //echo $this->Form->input('Support.company_name',array('label'=>false,'div'=>false,'class'=>'form-control','placeholder'=>'Enter Company'));?>  
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="input01" class="col-sm-1 control-label">Subject</label>
                         <div class="col-sm-6">
-                          <input type="text" class="form-control" id="input01">
+                        <?php echo $this->Form->input('Support.subject',array('label'=>false,'div'=>false,'class'=>'form-control','placeholder'=>'Enter subject'));?>
                         </div>
                       </div>
                       
@@ -60,7 +62,8 @@
                       <div class="form-group">
                         <label for="input05" class="col-sm-1 control-label">Message</label>
                         <div class="col-sm-6">
-                          <textarea class="form-control" id="input05" rows="6"></textarea>
+                          <!-- <textarea class="form-control" id="input05" rows="6"></textarea> -->
+                          <?php echo $this->Form->input('Support.message',array('label'=>false,'div'=>false,'class'=>'form-control','rows'=>"6",'placeholder'=>'Enter Message'));?>
                         </div>
                       </div>
 
@@ -71,7 +74,7 @@
                         </div>
                       </div>
 
-                    </form>
+                    <?php echo $this->Form->end();?>
                   </div>
                   <!-- /tile body -->
 
@@ -91,6 +94,10 @@
               
               
             </div>
+            <!-- /row -->
+
+
+           
 
           </div>
           <!-- /content container -->

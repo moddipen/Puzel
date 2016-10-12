@@ -33,12 +33,22 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller 
 {
 	public $helpers = array('Html', 'Form','Session');
-	public $components = array('Session','RequestHandler','Auth');
+	public $components = array('Session','RequestHandler','Auth' => array(
+        'authenticate' => array(
+            'Form' => array(
+                'fields' => array('username' => 'email')
+            )
+        )
+    ));
 
 
 
 	 function beforeFilter()
 	 {
+$this->Auth->authenticate = array('Form');
+    $this->Auth->autoRedirect = false;
+    Security::setHash("md5");
+
 	    if ($this->params['prefix'] == 'admin')
     	{
     		$signup = 0 ;
