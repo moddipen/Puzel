@@ -111,7 +111,7 @@ class  PuzzlesController  extends AppController {
 		$this->layout = '';
 		if(!empty($this->request->data))
 		{
-			$URL = $_SERVER['DOCUMENT_ROOT'].'app/webroot/img/puzzel/';
+			$URL = $_SERVER['DOCUMENT_ROOT'].'/app/webroot/img/puzzel/';
 			$image = time();
 			$imageName = $this->request->data['Puzzle']['name'].".jpg";
 			$path = $URL.$imageName;
