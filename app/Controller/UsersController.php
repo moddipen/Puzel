@@ -303,6 +303,47 @@ class UsersController extends AppController {
 		$this->redirect(array('controller'=>'users','action'=>'login','user'=>true));
 	}		
 
+/**
+	User Setting page 
+*/	
+	public function user_setting()
+	{
+		$this->layout = 'dashboard';
+		$this->set("title","Profile Page");
+		$user = $this->User->find('first',array('conditions'=>array('User.id'=>$this->Auth->user('id'))));
+		$this->set("User",$user);
+
+		if(!empty($this->request->data))
+		{
+			if($this->request->data['User']['newpassword'] == $this->request->data['User']['newpasswordrepeat'])
+			{
+				if($this->request->data['User']['newpassword'] == '')
+				{
+
+				}
+				else
+				{
+					$this->request->data['User']['password'] = $this->request->data['User']['newpassword'] ; 	
+				}	
+
+				
+				$this->request->data['User']['id'] = $this->Auth->user('id');	 
+				if($this->User->save($this->request->data))
+				{
+					$this->Session->setFlash(__('profile update successfully !!....', true), 'default', array('class' => 'alert alert-success'));		
+				}
+			}
+			else
+			{
+				$this->Session->setFlash(__('Password does not match !!....', true), 'default', array('class' => 'alert alert-danger'));
+			}	
+			
+		}
+
+
+
+	}			
+
 
 
 

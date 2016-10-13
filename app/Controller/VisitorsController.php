@@ -56,9 +56,10 @@ class  VisitorsController  extends AppController {
 /**
 	Visitor Add form page 
 */	
-	public function add()
+	public function add($name = Null)
 	{
 		$this->layout = '';
+
 	}
 
 

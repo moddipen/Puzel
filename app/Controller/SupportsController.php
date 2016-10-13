@@ -236,10 +236,11 @@ class  SupportsController  extends AppController {
 */	
 	public function user_conversation($id= Null)
 	{
+		$this->set('title',"Conversation");
 		if($id)
 		{
 			$viseversa  = $this->Support->find('all',array('conditions'=>array(array('OR'=>array('Support.receiver_id'=>$this->Auth->user('id'),'Support.sender_id'=>$this->Auth->user('id'),'Support.id'=>$id,'Support.reply_id'=>$id))),'order'=>'Support.created asc'));
-			debug($viseversa);exit;
+			$this->set("Conversation",$viseversa);
 		}
 	}
 
@@ -295,7 +296,7 @@ class  SupportsController  extends AppController {
 		{
 			$user = $this->Auth->user();
 			$this->request->data['Support']['sender_id'] = $this->Auth->user('id');
-			$this->request->data['Support']['receiver_id'] = $support['Support']['sender_id'];
+			$this->request->data['Support']['receiver_id'] = $support['Support']['receiver_id'];
 			$this->request->data['Support']['subject'] = "RE :".$support['Support']['subject'];
 			$this->Support->create();
 			if($this->Support->save($this->request->data))
@@ -303,7 +304,7 @@ class  SupportsController  extends AppController {
 				// Create a message and send it to admin 
 				$email = new CakeEmail();
 				$email->config('smtp');
-				$email->to($support['Sender']['email'],$support['Sender']['firstname'].' '.$support['Sender']['lastname']);
+				$email->to($support['Receiver']['email'],$support['Receiver']['firstname'].' '.$support['Receiver']['lastname']);
 			    $email->subject($this->request->data['Support']['subject']);
 			    $message = "User ".$this->Auth->user('firstname').' '.$this->Auth->user('lastname'). "reply support request  \n\n\n".$this->request->data['Support']['message'];
 			    

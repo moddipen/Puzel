@@ -18,25 +18,25 @@
                 </div>
                  <div style ="display:none" id="errorfname"> Please Enter First name </div>
                 <div class="input-group">
-                  <!-- <input type="text" class="form-control" name="data[User][lastname]" placeholder="Last Name" id="lastname"> -->
                   <?php echo $this->Form->input('User.lastname',array('label'=>false,'div'=>false,'class'=>'form-control','placeholder'=>'Enter last name'));?>
                   <div class="input-group-addon"><i class="fa fa-user"></i></div>
                 </div>
                 <div style ="display:none" id="errorlname"> Please Enter Last name </div>  
                 <div class="input-group">
-                  <!-- <input type="email" class="form-control" name="data[User][email]" placeholder="Email Address" id="useremail"> -->
+                  <?php echo $this->Form->input('User.company_name',array('label'=>false,'div'=>false,'class'=>'form-control','placeholder'=>'Enter company name'));?>
+                  <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                </div>
+                <div class="input-group">
                   <?php echo $this->Form->input('User.email',array('label'=>false,'div'=>false,'class'=>'form-control','placeholder'=>'Enter email name'));?>
                   <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
                 </div>
                 <div style ="display:none" id="erroremail"> Please Enter Email </div>
                 <div class="input-group">
-                  <!-- <input type="password" class="form-control" name="data[User][password]" placeholder="Password" id="password"> -->
                   <?php echo $this->Form->input('User.password',array('label'=>false,'div'=>false,'class'=>'form-control','placeholder'=>'Enter Password'));?>
                   <div class="input-group-addon"><i class="fa fa-key"></i></div>
                 </div>
                 <div style ="display:none" id="errorpassword"> Please Enter Password </div>
                 <div class="input-group">
-                  <!-- <input type="password" class="form-control" name="data[User][confirm_password]" placeholder="Retype Password" id="confirmpassword"> -->
                   <?php echo $this->Form->input('User.confirm_password',array('type'=>'password','label'=>false,'div'=>false,'class'=>'form-control','placeholder'=>'Enter confirm password'));?>
                   <div class="input-group-addon"><i class="fa fa-key"></i></div>
                 </div>

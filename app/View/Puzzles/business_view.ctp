@@ -72,7 +72,7 @@
                               <div class="row minipadding">
                                   <div class="col-sm-8">
                                       <div class="form-group">
-                                          <input type="text" class="form-control" value="http://pdev.stage.n-framescorp.com/<?php echo $this->Session->read('IMAGECAPTURE.Puzzel.name');?>" id="puzlename">
+                                          <input type="text" class="form-control" value="http://puzel.stage.n-framescorp.com/<?php echo $this->Session->read('IMAGECAPTURE.Puzzel.name');?>" id="puzlename">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">

@@ -97,7 +97,15 @@ class  PuzzlesController  extends AppController {
 		if(!empty($this->request->data))
 		{
 			$count = $this->Puzzle->find('first',array('order'=>'Puzzle.id Desc' , 'limit'=>1));
-			$data = $count['Puzzle']['id'] + 1; 
+			if(!empty($count))
+			{
+				$data = $count['Puzzle']['id'] + 1; 	
+			}
+			else
+			{
+				$data = 1;
+			}	
+			
 			$this->set("IMAGEID",$data);
 			$this->Session->write('IMAGECAPTURE',$this->request->data);
 		}		
@@ -111,7 +119,7 @@ class  PuzzlesController  extends AppController {
 		$this->layout = '';
 		if(!empty($this->request->data))
 		{
-			$URL = $_SERVER['DOCUMENT_ROOT'].'/app/webroot/img/puzzel/';
+			$URL = $_SERVER['DOCUMENT_ROOT'].'puzzel/app/webroot/img/puzzel/';
 			$image = time();
 			$imageName = $this->request->data['Puzzle']['name'].".jpg";
 			$path = $URL.$imageName;
