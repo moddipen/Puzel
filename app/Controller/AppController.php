@@ -66,7 +66,11 @@ $this->Auth->authenticate = array('Form');
 	     	$signup = 0 ;
     		$this->set('Signup',$signup);
 	     	$this->layout = "dashboard";
-	     } 
+	     }
+        elseif ($this->params['prefix'] == 'v')
+         {
+            $this->layout = "visitor";
+         }  
 	    else
     	{
     		$signup = 0 ;

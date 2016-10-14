@@ -32,7 +32,7 @@
 	Router::connect('/user', array('controller' => 'users', 'action' => 'login', 'user' => true));
 	Router::connect(
     '/:name', // E.g. /blog/3-CakePHP_Rocks
-    array('controller' => 'visitors', 'action' => 'add'),
+    array('controller' => 'visitors', 'action' => 'dynamic','v'=>true),
     array(
         // order matters since this will simply map ":id" to
         // $articleId in your action

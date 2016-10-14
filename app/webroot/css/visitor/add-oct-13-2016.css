@@ -1,0 +1,22 @@
+body.bg-1 {
+    background: rgba(203,129,127,1);
+    background: -moz-linear-gradient(left, rgba(203,129,127,1) 0%, rgba(159,78,210,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(203,129,127,1)), color-stop(100%, rgba(159,78,210,1)));
+    background: -webkit-linear-gradient(left, rgba(203,129,127,1) 0%, rgba(159,78,210,1) 100%);
+    background: -o-linear-gradient(left, rgba(203,129,127,1) 0%, rgba(159,78,210,1) 100%);
+    background: -ms-linear-gradient(left, rgba(203,129,127,1) 0%, rgba(159,78,210,1) 100%);
+    background: linear-gradient(to right, rgba(203,129,127,1) 0%, rgba(159,78,210,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cb817f', endColorstr='#9f4ed2', GradientType=1 );
+}
+.no-right a{margin-right:0px !important; padding-right:0px !important;}
+.page-hosted{margin-top:110px;}
+@media(max-width: 1024px)
+{
+	.page-hosted{margin-top:0px;}
+}
+.btn[class *="button-"]{width: 40%;}
+.btn[class *="button-"]:first-child{margin-right: 5%;}
+.share-social i{color: #333333; font-size: 40px !important;top: 0px;margin: 0px 2px;    position: relative;}
+.windows, .email{font-family:'SocialicoPlus'; }
+.title-page{text-shadow: 0px 3px 7px rgba(150, 150, 150,0.4); padding:30px 0px}
+#puzzle{padding:20px 0px; height:100%}

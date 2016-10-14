@@ -36,7 +36,7 @@ class  PuzzlesController  extends AppController {
  *
  * @var array
  */
- public $uses = array('Puzzle','User','Image');
+ public $uses = array('Puzzle','User','Image','Visitor','Support');
 
 /**
  * Displays a view
@@ -84,7 +84,14 @@ class  PuzzlesController  extends AppController {
 	public function user_index()
 	{
 		$this->set("title","Index");
-
+		$list = $this->Visitor->find('all',array('conditions'=>array('Visitor.user_id'=>$this->Auth->user('id'))));
+		foreach ($list as $key =>  $puzzle)
+		{
+			$list[$key]['Puzzle'] = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$puzzle['Visitor']['puzzle_id'])));
+			$list[$key]['All'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$puzzle['Visitor']['puzzle_id'] )));	
+			$list[$key]['Open'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$puzzle['Visitor']['puzzle_id'] ,'Image.status'=>1)));
+		}
+		$this->set('List',$list);
 	}		
 			
 /**
@@ -119,8 +126,9 @@ class  PuzzlesController  extends AppController {
 		$this->layout = '';
 		if(!empty($this->request->data))
 		{
+			$multipleimagefolder = WWW_ROOT.'img/puzzel/'.$this->request->data['Puzzle']['name'];//WWW_ROOT."img\puzzel\";
+			$folder = mkdir($multipleimagefolder);
 			$URL = $_SERVER['DOCUMENT_ROOT'].'puzzel/app/webroot/img/puzzel/';
-			$image = time();
 			$imageName = $this->request->data['Puzzle']['name'].".jpg";
 			$path = $URL.$imageName;
 			$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i','', $this->request->data['Puzzle']['image']));
@@ -202,7 +210,7 @@ class  PuzzlesController  extends AppController {
 				  		  $image_pieces = array(
 				  		  'puzzle_id'=>$this->Puzzle->getLastInsertID(),
 				  		  'user_id'=>$this->request->data['Puzzle']['user_id'],
-				  		  'name'=>"result_".$j.'_'.$i."1.jpg",
+				  		  'name'=>$this->request->data['Puzzle']['name'].'_'.$j.'_'.$i.'1.jpg',
 				  		  'width'=>$storewidth,
 				  		  'height'=>$storeheight,
 				  		  'total_width'=>$width,
@@ -210,7 +218,7 @@ class  PuzzlesController  extends AppController {
 				  		  )	;		  
 				  		  $this->Image->create();
 				  		  $insert = $this->Image->save($image_pieces);
-				       	  imagejpeg($output,WWW_ROOT.'img\puzzel\user\result_'.$j.'_'.$i.'1.jpg');
+				  		  imagejpeg($output,$multipleimagefolder.'/'.$this->request->data['Puzzle']['name'].'_'.$j.'_'.$i.'1.jpg');
 				  		  $Y = $Y + $width/$cut_width; 
 				  	  	}
 					   

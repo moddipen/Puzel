@@ -95,10 +95,12 @@
                           </tr>
                         </thead>
                         <tbody id ="datafile">
+                        <?php if(!empty($List)) {
+                          foreach ($List as $value) {?>
                           <tr>
-                            <td>04/15/2016</td>
-                            <td>Puzel 1</td>
-                            <td>40/100</td>
+                            <td><?php echo date('m/d/Y',strtotime($value['Visitor']['created']));?></td>
+                            <td><?php echo $value['Puzzle']['Puzzle']['name'];?></td>
+                            <td><?php echo $value['Open'];?>/<?php echo $value['All'];?></td>
                             <td>Grand</td>
                             <td class="minipadding controls">
                             <!-- <a href="https://www.facebook.com/" target="_blank" style="color:white;"><i class="fa fa-facebook"></i></a> -->
@@ -112,11 +114,11 @@
                                   return false">
                                   <i class="fa fa-facebook"></i>
                               </a> -->
-                              <a class="share-btn" href="http://www.facebook.com/share.php?u=www.google.com&title=Demo&description=Price 33$" onclick="return !window.open(this.href, 'Facebook', 'width=640,height=580')"><i class="fa fa-facebook"></i></a>
+                              <a class="share-btn" href="http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/<?php echo $value['Puzzle']['Puzzle']['name'];?>&title=<?php echo $value['Puzzle']['Puzzle']['name'];?>&description=Price 33$" onclick="return !window.open(this.href, 'Facebook', 'width=640,height=580')"><i class="fa fa-facebook"></i></a>
                                 &nbsp;&nbsp;
                                 <a class="twitter-share-button"
-                                    href="https://twitter.com/share"
-                                    data-url="https://postmarkapp.com"
+                                    href="https://twitter.com/intent/tweet?text=http://puzel.stage.n-framescorp.com/<?php echo $value['Puzzle']['Puzzle']['name'];?>"
+                                     data-size="large"
                                     target = "_blank">
                                 <i class="fa fa-twitter"></i></a>
                                &nbsp;&nbsp; 
@@ -131,12 +133,12 @@
                                     return false">
                                     <i class="fa fa-envelope"></i>
                                 </a> -->
-                                <a class="icon-gplus" href ="https://plus.google.com/share?url=www.google.com" onclick="return !window.open(this.href, 'Google', 'width=640,height=580')"><i class="fa fa-envelope"></i></a>
+                                <a class="icon-gplus" href ="https://plus.google.com/share?url=http://puzel.stage.n-framescorp.com/<?php echo $value['Puzzle']['Puzzle']['name'];?>&title=<?php echo $value['Puzzle']['Puzzle']['name'];?>" onclick="return !window.open(this.href, 'Google', 'width=640,height=580')"><i class="fa fa-envelope"></i></a>
                                &nbsp;&nbsp;<a href="https://login.live.com/login.srf" target="_blank" style="color:white;"><i class="fa fa-windows"></i></a>
                             
                           </td>
                           </tr>
-                         
+                         <?php } }?>
                         </tbody>
                       </table>
                     </div>

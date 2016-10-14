@@ -1,5 +1,5 @@
 
-<div id = 'ccontent'>
+<!-- <div id = 'puzzle1'> -->
 <?php 
       // Fetch Image From database 
     $i = 0;
@@ -13,9 +13,9 @@
         <?php $peices = $PuzzleData['Puzzle']['pieces'] ; 
         // Number of peices of block
         if($peices == 25) {    $cut_width = 5;  $cut_height = 5; }
-      elseif($peices == 50)  {   $cut_width = 10;   $cut_height = 5;  }
-      elseif($peices == 75)  {   $cut_width = 15;   $cut_height = 5;  }
-      else {   $cut_width = 10;  $cut_height = 10; }  ?>
+        elseif($peices == 50)  {   $cut_width = 10;   $cut_height = 5;  }
+        elseif($peices == 75)  {   $cut_width = 15;   $cut_height = 5;  }
+        else {   $cut_width = 10;  $cut_height = 10; }  ?>
     
         <div class="merge" >
         
@@ -26,7 +26,7 @@
               {
                 
                 // Get Image path 
-              $path =  $this->webroot.'img/puzzel/user/'.$image_data['Image']['name'] ;
+              $path =  $this->webroot.'img/puzzel/'.$PuzzleData['Puzzle']['name'].'/'.$image_data['Image']['name'] ;
               $split = substr($image_data['Image']['name'], strrpos($image_data['Image']['name'], '_') + 1);
                 
                 if    ($split == "01.jpg")  {   $block = "1";   }
@@ -72,4 +72,4 @@
       echo "</div>";  
     }?>
   </div> 
-  </div>
+  <!-- </div> -->
