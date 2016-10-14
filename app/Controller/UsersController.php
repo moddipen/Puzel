@@ -236,22 +236,22 @@ class UsersController extends AppController {
 	              	else
 	              	{
 	              		// Create a message and send it
-						$email = new CakeEmail();
-						$email->config('smtp');
-						$email->to($this->Auth->user('User.email'),$this->Auth->user('User.firstname').' '.$this->Auth->user('User.lastname'));
-					    $email->subject('Subject');
-					    $message = "You have signup Successfully";
+						// $email = new CakeEmail();
+						// $email->config('smtp');
+						// $email->to($this->Auth->user('User.email'),$this->Auth->user('User.firstname').' '.$this->Auth->user('User.lastname'));
+					 //    $email->subject('Subject');
+					 //    $message = "You have signup Successfully";
 					    
-						if($email->send($message))
-						{
+						// if($email->send($message))
+						// {
 							$this->Session->setFlash(__('Signup Successfully!!....', true), 'default', array('class' => 'alert alert-success'));
 	              			return $this->redirect(array('controller'=>'puzzles','action'=>'index'));		
-						}
-						else
-						{
-							$this->Session->setFlash(__('Email not sent !!....', true), 'default', array('class' => 'alert alert-danger'));
-	              			return $this->redirect(array('controller'=>'puzzles','action'=>'register'));			
-						}		    
+						// }
+						// else
+						// {
+						// 	$this->Session->setFlash(__('Email not sent !!....', true), 'default', array('class' => 'alert alert-danger'));
+	     //          			return $this->redirect(array('controller'=>'puzzles','action'=>'register'));			
+						// }		    
 						
 	              	}	
 
