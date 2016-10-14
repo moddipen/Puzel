@@ -58,7 +58,7 @@ class EmailConfig {
 		'log' => false,
 		//'charset' => 'utf-8',
 		//'headerCharset' => 'utf-8',
-	);
+	); 
 
 	public $fast = array(
 		'from' => 'you@localhost',
