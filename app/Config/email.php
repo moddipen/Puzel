@@ -56,7 +56,7 @@ class EmailConfig {
 		'password' => '1e1c0acd-3356-446b-b604-8d5972592b06',
 		'client' => null,
 		'log' => false,
-		'Authentication' => true
+		'Authentication' => 'Plain text'
 		//'charset' => 'utf-8',
 		//'headerCharset' => 'utf-8',
 	); 
