@@ -74,8 +74,7 @@
          <div id="logo"><a href="index.php"><img src="<?php echo $this->webroot;?>img/visitor/img/logo.png"></a></div>
         
          <ul id="nav">
-                  <li class="no-right"><a href="#"><span class="button-sign">Sign Up Prize</span></a></li>
-          <li class="no-right"><a href="#"><span class="button-sign">Milestone Prize</span></a></li> 
+            
                     <li class="no-right"><a href="#"><span class="button-sign">Grand Prize</span></a></li>                     
          </ul>
        
