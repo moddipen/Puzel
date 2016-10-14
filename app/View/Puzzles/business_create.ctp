@@ -112,7 +112,7 @@
                   <!-- tile footer -->
                   <div class="tile-footer text-center" style="display:none">
                     <div class="form-group">
-                      <input type="button" class="btn btn-black-transparent changebutton" value="Terms / Description" data-toggle="modal" data-target="#modal1">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-black-transparent changebutton" value="Sign Up Prize" data-toggle="modal" data-target="#modal2">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-black-transparent changebutton" value="Milestone Prize " data-toggle="modal" data-target="#modal3">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-black-transparent" value="Grand Prize" data-toggle="modal" data-target="#modal4">
+                      <input type="button" class="btn btn-black-transparent changebutton" value="Terms / Description" data-toggle="modal" data-target="#modal1">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-black-transparent" value="Grand Prize" data-toggle="modal" data-target="#modal4">
                     </div>
                     <div class="form-group">
                       <button type="submit" class="btn btn-oranges">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;

@@ -53,8 +53,6 @@
           <div class="mobile-menu-inner">
             <ul class="nav-mobile">
             
-             <li><a href="#">Sign Up Prize</a></li>
-             <li><a href="#">Milestone Prize</a></li>
              <li><a href="#">Grand Prize</a></li>
             </ul>
           </div>
