@@ -50,12 +50,13 @@ class EmailConfig {
 		'transport' => 'Smtp',
 		'from' => 'support@puzel.co',
 		'host' => 'smtp.postmarkapp.com',
-		'port' => 587,
+		'port' => 25,
 		'timeout' => 30,
 		'username' => '1e1c0acd-3356-446b-b604-8d5972592b06',
 		'password' => '1e1c0acd-3356-446b-b604-8d5972592b06',
 		'client' => null,
 		'log' => false,
+		'Authentication' => true
 		//'charset' => 'utf-8',
 		//'headerCharset' => 'utf-8',
 	); 
