@@ -49,7 +49,7 @@ class EmailConfig {
 	public $smtp = array(
 		'transport' => 'Smtp',
 		'from' => 'support@puzel.co',
-		'host' => 'ssl://smtp.postmarkapp.com',
+		'host' => 'smtp.postmarkapp.com',
 		'port' => 587,
 		'timeout' => 30,
 		'username' => '1e1c0acd-3356-446b-b604-8d5972592b06',
