@@ -136,7 +136,7 @@ class  VisitorsController  extends AppController {
 									$this->User->save($update);
 									$response = array("message"=>"success","Id"=>$update_puzzle['Image']['puzzle_id']);
 			                    	echo json_encode($response);
-								// }
+								}
 							}
 						}		
 					}	
