@@ -267,13 +267,14 @@ class  SupportsController  extends AppController {
 			if($this->Support->save($this->request->data))
 			{
 				// Create a message and send it to admin 
-				$email = new CakeEmail();
-				$email->config('smtp');
-				$email->to($support['Sender']['email'],$support['Sender']['firstname'].' '.$support['Sender']['lastname']);
-			    $email->subject($this->request->data['Support']['subject']);
-			    $message = "Admin reply your support request  \n\n\n".$this->request->data['Support']['message'];
-			    
-				if($email->send($message))
+				$email = array(
+	              			"from"=> "support@puzel.co",
+	              			'to'=>$support['Sender']['email'],
+	              			'subject'=>$this->request->data['Support']['subject'],
+	              			'text_body'=>"Admin reply your support request  \n\n\n".$this->request->data['Support']['message'],
+	              			'reply_to'=>"support@puzel.co",
+	              			'html_body'=>"<p>Admin reply your support request  \n\n\n".$this->request->data['Support']['message']."</p>" );	
+				if($this->sendemail($email))
 				{
 					$this->Session->setFlash(__('Support Send !!....', true), 'default', array('class' => 'alert alert-success'));
 					$this->redirect(array('action'=>'index'));
@@ -306,13 +307,14 @@ class  SupportsController  extends AppController {
 			if($this->Support->save($this->request->data))
 			{
 				// Create a message and send it to admin 
-				$email = new CakeEmail();
-				$email->config('smtp');
-				$email->to($support['Receiver']['email'],$support['Receiver']['firstname'].' '.$support['Receiver']['lastname']);
-			    $email->subject($this->request->data['Support']['subject']);
-			    $message = "User ".$this->Auth->user('firstname').' '.$this->Auth->user('lastname'). "reply support request  \n\n\n".$this->request->data['Support']['message'];
-			    
-				if($email->send($message))
+				$email = array(
+	              			"from"=> "support@puzel.co",
+	              			'to'=>$support['Receiver']['email'],
+	              			'subject'=>$this->request->data['Support']['subject'],
+	              			'text_body'=>"User ".$this->Auth->user('firstname').' '.$this->Auth->user('lastname'). "reply support request  \n\n\n".$this->request->data['Support']['message'],
+	              			'reply_to'=>"support@puzel.co",
+	              			'html_body'=>"<p>User ".$this->Auth->user('firstname').' '.$this->Auth->user('lastname'). "reply support request  \n\n\n".$this->request->data['Support']['message']."</p>" );	
+				if($this->sendemail($email))
 				{
 					$this->Session->setFlash(__('Support Send !!....', true), 'default', array('class' => 'alert alert-success'));
 					$this->redirect(array('action'=>'index'));

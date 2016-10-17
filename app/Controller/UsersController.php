@@ -53,7 +53,7 @@ class UsersController extends AppController {
 	 {
 	  	$signup = 0;
 		$this->set("Signup",$signup);
-	  	$this->Auth->allow(array('index','contact','user_register','user_login','about','business','user_forgetpassword','admin_login'));
+	  	$this->Auth->allow(array('index','contact','user_register','user_login','about','business','user_forgetpassword','admin_login','user_reset'));
 	 }
 
 	
@@ -312,7 +312,7 @@ class UsersController extends AppController {
 	}					
 
 /**
-	User Register page 
+	User forget password  page 
 */	
 	public function user_forgetpassword()
 	{
@@ -320,7 +320,124 @@ class UsersController extends AppController {
 		$signup = 1 ;
     	$this->set('Signup',$signup);
 		$this->set("title","Forgot Password ");
+		$this->User->recursive=-1;
+		if(!empty($this->data))
+		{
+			$email=$this->data['User']['email'];
+			$fu=$this->User->find('first',array('conditions'=>array('User.email'=>$email)));
+			if($fu)
+			{
+				if($fu['User']['email'])
+				{
+					$key = Security::hash(String::uuid(),'sha512',true);
+					$hash=sha1($fu['User']['email'].rand(0,100));
+					$url = Router::url( array('controller'=>'users','action'=>'reset','user'=>true), true ).'/'.$key.'#'.$hash;
+					$ms=$url;
+					$ms=wordwrap($ms,1000);
+					$fu['User']['tokenhash']=$key;
+					$this->User->id=$fu['User']['id'];
+					if($this->User->saveField('tokenhash',$fu['User']['tokenhash']))
+					{
+						$email = array(
+              			"templateid"=>1007061,
+              			"name"=>$fu['User']['firstname'].' '.$fu['User']['lastname'],
+              			"TemplateModel"=> array(
+						    "user_name"=> $fu['User']['firstname'].' '.$fu['User']['lastname'],
+						    "company"=> array(
+						      	"name"=> $fu['User']['company_name']
+						      	)),
+						"InlineCss"=> true, 
+              			"from"=> "support@puzel.co",
+              			'to'=>$fu['User']['email'],
+              			'subject'=>"Reset Your Puzzle Password",
+              			'text_body'=>"Please click on below link to reset your password".$ms,
+              			'reply_to'=>"support@puzel.co",
+              			'html_body'=>"dsadasd" );
+						
+
+						if($this->sendemail($email))
+						{
+							$this->Session->setFlash(__('Please check your email ', true), 'default', array('class' => 'alert alert-success'));
+							return $this->redirect(array('controller'=>'users','action'=>'login'));
+						} 
+						else
+						{
+							$this->Session->setFlash('Problem during sending email','gmail',array('class'=>'alert alert-warning'));
+						}
+
+						//============EndEmail=============//
+					}
+					else{
+						
+						$this->Session->setFlash(__(' Error Generating Reset link !!....', true), 'default', array('class' => 'alert alert-danger'));
+					}
+				}
+				else
+				{
+					
+					$this->Session->setFlash(__(' This Account is not Active yet.Check Your mail to activate it !!....', true), 'default', array('class' => 'alert alert-danger'));
+				}
+			}
+			else
+			{
+				
+				$this->Session->setFlash(__(' Email does Not Exist !!....', true), 'default', array('class' => 'alert alert-danger'));
+			}
+			
+		}
 	}
+
+/**
+	Password reset code 
+*/
+public function user_reset($token=null)
+	{
+		$this->layout = 'dashboard';
+		$signup = 1 ;
+    	$this->set('Signup',$signup);
+		$this->set("title","Reset Password ");
+		$this->User->recursive=-1;
+		if(!empty($token))
+		{
+			$this->set("token",$token);
+			$u=$this->User->findBytokenhash($token);
+			if($u)
+				{
+					$this->User->id=$u['User']['id'];
+					if(!empty($this->data))
+						{
+							if($this->User->validates())
+								{
+									if($this->data['User']['newpassword'] == $this->data['User']['cnfrmpassword'])
+									{
+										$new_hash=sha1($u['User']['email'].rand(0,100));//created token
+										$this->request->data['User']['tokenhash']=$new_hash;
+										$this->request->data['User']['id'] = $u['User']['id'];
+										$this->request->data['User']['password'] = $this->data['User']['newpassword'];
+										if($this->User->save($this->request->data))
+											{
+												$this->Session->setFlash(__(' Your New Password Has Been Reset !!....', true), 'default', array('class' => 'alert alert-success'));
+												$this->redirect(array('controller'=>'users','action'=>'login','user'=>true));
+											}
+									}
+									else
+									{
+										$this->Session->setFlash(__('Password does not match .', true), 'default', array('class' => 'alert alert-danger'));	
+									}	
+									
+								}
+						}
+					}
+			else
+				{
+					$this->Session->setFlash('Token Corrupted,,Please Retry.the reset link work only for once.',array('class'=>'alert alert-warning'));
+				}
+		}
+		else
+		{
+			$this->redirect('/');
+		}
+	}	
 
 /**
 	User Register page 
@@ -387,9 +504,6 @@ class UsersController extends AppController {
 			}	
 			
 		}
-
-
-
 	}			
 
 	

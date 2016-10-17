@@ -49,7 +49,31 @@ class AppController extends Controller
         $this->Auth->autoRedirect = false;
         Security::setHash("md5");
 
-    	    if ($this->params['prefix'] == 'admin')
+    	    // Manage session 
+            if($this->params['prefix'] == 'admin' && $this->Auth->user('usertype') != 2 )
+            {
+                $this->Cookie->delete('remember_me_cookie');
+                $this->Auth->logout();
+                $this->Session->setFlash(__('<div class="alert alert-danger alert-dismissible"><p>Unable access this panel.</p></div>'));
+                $this->redirect(array('controller'=>'users','action'=>'login','user'=>true));
+            }
+            elseif($this->params['prefix'] == 'business' && $this->Auth->user('usertype') != 1 )
+            {
+                $this->Cookie->delete('remember_me_cookie');
+                $this->Auth->logout();   
+                $this->Session->setFlash(__('<div class="alert alert-danger alert-dismissible"><p>Unable access this panel.</p></div>'));
+                $this->redirect(array('controller'=>'users','action'=>'login','user'=>true));
+            }
+            elseif($this->params['prefix'] == 'user' && $this->Auth->user('usertype') != 0 )
+            {
+                $this->Cookie->delete('remember_me_cookie');
+                $this->Auth->logout();   
+                $this->Session->setFlash(__('<div class="alert alert-danger alert-dismissible"><p>Unable access this panel.</p></div>'));
+                $this->redirect(array('controller'=>'users','action'=>'login','user'=>true));
+            } 
+
+            // prefix setting 
+            if ($this->params['prefix'] == 'admin')
         	{
         		$signup = 0 ;
         		$this->set('Signup',$signup);
@@ -99,36 +123,57 @@ class AppController extends Controller
             }
         }
 
-        // // Manage session 
-
-        // if (isset($this->params['prefix']) && $this->params['prefix'] == 'admin')
-        // {
-        //     AuthComponent::$sessionKey = 'Auth.Admin';
-        //     $this->Auth->loginAction = array('plugin' => false, 'controller' => 'users', 'action' => 'login','user'=>true);
-        //     $this->Auth->logoutRedirect = array('plugin' => false, 'controller' => 'admin', 'action' => 'dashboard');
-        // } 
-        // else
-        // {
-        //     AuthComponent::$sessionKey = 'Auth.Front';
-        //     $this->Auth->loginAction = array('plugin' => false, 'controller' => 'users', 'action' => 'login',$this->request->prefix=>false);
-        //     $this->Auth->logoutRedirect = array('plugin' => false, 'controller' => 'users', 'action' => 'dashboard');
-        // }
-    }
+      }
 
 
     // send email 
+    // public function sendemail($mail)
+    // {
+    //     $json = json_encode(array(
+    //     'From' => $mail['from'],
+    //     'To' => $mail['to'],
+    //     'Subject' => $mail['subject'],
+    //     'HtmlBody' => $mail['html_body'],
+    //     'TextBody' =>$mail['text_body'],
+    //     'ReplyTo' => $mail['reply_to'],
+    //     ));
+    //     $ch = curl_init();
+    //       curl_setopt($ch, CURLOPT_URL, 'http://api.postmarkapp.com/email');
+    //       curl_setopt($ch, CURLOPT_POST, true);
+    //       curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    //             'Accept: application/json',
+    //             'Content-Type: application/json',
+    //             'X-Postmark-Server-Token: ' .Configure::read("POSTMARKSERVERTOKEN")
+    //             ));
+    //     curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+    //     $response = json_decode(curl_exec($ch), true);
+    //     $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    //     curl_close($ch);
+
+    //     return $http_code === 200;
+    // }
+
+    // Send email with template
     public function sendemail($mail)
     {
         $json = json_encode(array(
+        'Name'=>$mail['name'],
+        'TemplateId'=>$mail['templateid'],
+        'TemplateModel'=>array(
+            'user_name'=>$mail['TemplateModel']['user_name'],
+            'company'=>array(
+                'name'=>$mail['TemplateModel']['company']['name'])),
         'From' => $mail['from'],
         'To' => $mail['to'],
+        'InlineCss'=>true,
         'Subject' => $mail['subject'],
         'HtmlBody' => $mail['html_body'],
         'TextBody' =>$mail['text_body'],
-        'ReplyTo' => $mail['reply_to'],
+        'ReplyTo' => $mail['reply_to']
         ));
+
         $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'http://api.postmarkapp.com/email');
+          curl_setopt($ch, CURLOPT_URL, 'http://api.postmarkapp.com/email/withTemplate');
           curl_setopt($ch, CURLOPT_POST, true);
           curl_setopt($ch, CURLOPT_HTTPHEADER, array(
                 'Accept: application/json',
@@ -142,6 +187,41 @@ class AppController extends Controller
 
         return $http_code === 200;
     }
+
+     public function gettemplate($mail)
+    {
+        $json = json_encode(array(
+        'Name'=>$mail['name'],
+        'TemplateId'=>$mail['templateid'],
+        'TemplateModel'=>array(
+            'user_name'=>$mail['TemplateModel']['user_name'],
+            'company'=>array(
+                'name'=>$mail['TemplateModel']['company']['name'])),
+        'From' => $mail['from'],
+        'To' => $mail['to'],
+        'InlineCss'=>true,
+        'Subject' => $mail['subject'],
+        'HtmlBody' => $mail['html_body'],
+        'TextBody' =>$mail['text_body'],
+        'ReplyTo' => $mail['reply_to']
+        ));
+
+        $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'http://api.postmarkapp.com/email/withTemplate');
+          curl_setopt($ch, CURLOPT_POST, true);
+          curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Accept: application/json',
+                'Content-Type: application/json',
+                'X-Postmark-Server-Token: ' .Configure::read("POSTMARKSERVERTOKEN")
+                ));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+        $response = json_decode(curl_exec($ch), true);
+        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        return $http_code === 200;
+    }
+
 
 
 
