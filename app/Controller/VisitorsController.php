@@ -119,9 +119,7 @@ class  VisitorsController  extends AppController {
 					              			"name"=>$user['User']['firstname'].' '.$user['User']['lastname'],
 					              			"TemplateModel"=> array(
 											    "user_name"=> $user['User']['firstname'].' '.$user['User']['lastname'],
-											    "company"=> array(
-											      	"name"=> ''),
-												"product_name"=>"Signup Successfully",
+											    "product_name"=>"Signup Successfully",
 												"action_url"=>$message),
 											"InlineCss"=> true, 
 					              			"from"=> "support@puzel.co",
