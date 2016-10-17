@@ -264,7 +264,7 @@ class UsersController extends AppController {
 				$this->request->data['User']['usertype'] = $Usertype ;
 				if($this->User->save($this->request->data))
 				{
-					$this->Auth->login($this->request->data);
+					$this->Auth->login();
 					// $email = array(
 	    //           			"from"=> "support@puzel.co",
 	    //           			'to'=>$this->Auth->user('User.email'),
