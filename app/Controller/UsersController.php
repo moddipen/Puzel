@@ -265,13 +265,13 @@ class UsersController extends AppController {
 				if($this->User->save($this->request->data))
 				{
 					$this->Auth->login($this->request->data);
-					$email = array(
-	              			"from"=> "support@puzel.co",
-	              			'to'=>$this->Auth->user('User.email'),
-	              			'subject'=>"Signup successfully",
-	              			'text_body'=>"You have signup Successfully",
-	              			'reply_to'=>"support@puzel.co",
-	              			'html_body'=>"<p>You have signup successfully</p>" );
+					// $email = array(
+	    //           			"from"=> "support@puzel.co",
+	    //           			'to'=>$this->Auth->user('User.email'),
+	    //           			'subject'=>"Signup successfully",
+	    //           			'text_body'=>"You have signup Successfully",
+	    //           			'reply_to'=>"support@puzel.co",
+	    //           			'html_body'=>"<p>You have signup successfully</p>" );
 					if($this->Auth->user('User.usertype') == 2)
 	              	{
 	              		$this->Session->setFlash(__('Signup Successfully!!....', true), 'default', array('class' => 'alert alert-success'));
@@ -279,11 +279,11 @@ class UsersController extends AppController {
 	              	}	
 	              	elseif($this->Auth->user('User.usertype') == 1)
 	              	{
-	              		if($this->sendemail($email))
-	              		{	
+	              		// if($this->sendemail($email))
+	              		// {	
 		              		$this->Session->setFlash(__('Signup Successfully!!....', true), 'default', array('class' => 'alert alert-success'));
 		              		return $this->redirect(array('controller'=>'puzzles','action'=>'index','business'=>true));
-	              		}
+	              		// }
 	              	}
 	              	else//if($this->Auth->user('User.usertype') == 0)
 	              	{
