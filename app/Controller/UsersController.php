@@ -285,18 +285,18 @@ class UsersController extends AppController {
 		              		return $this->redirect(array('controller'=>'puzzles','action'=>'index','business'=>true));
 	              		}
 	              	}
-	              	else
+	              	else//if($this->Auth->user('User.usertype') == 0)
 	              	{
-	     	         	if($this->sendemail($email))
-						{
+	     // 	         	if($this->sendemail($email))
+						// {
 							$this->Session->setFlash(__('Signup Successfully!!....', true), 'default', array('class' => 'alert alert-success'));
 	              			return $this->redirect(array('controller'=>'puzzles','action'=>'index','user'=>true));		
-						}
-						else
-						{
-							//$this->Session->setFlash(__('Email not sent !!....', true), 'default', array('class' => 'alert alert-danger'));
-	              			return $this->redirect(array('controller'=>'puzzles','action'=>'index','user'=>true));			
-						}		    
+						// }
+						// else
+						// {
+						// 	//$this->Session->setFlash(__('Email not sent !!....', true), 'default', array('class' => 'alert alert-danger'));
+	     //          			return $this->redirect(array('controller'=>'puzzles','action'=>'index','user'=>true));			
+						// }		    
 						
 	              	}	
 
