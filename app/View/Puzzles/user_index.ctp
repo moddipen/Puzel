@@ -6,7 +6,7 @@
             <!-- cards -->
             <?php echo $this->element('user/header');?>
                <!-- /cards -->
-            
+             <?php echo $this->Session->flash();?> 
              <div class="pagesubheader">
             
 

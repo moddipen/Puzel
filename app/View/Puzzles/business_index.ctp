@@ -13,7 +13,7 @@
             <!-- cards -->
             <?php echo $this->element('business/header');?>
                <!-- /cards -->
-            
+            <?php echo $this->Session->flash();?> 
              <div class="pagesubheader">
             
 

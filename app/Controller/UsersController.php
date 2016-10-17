@@ -169,29 +169,71 @@ class UsersController extends AppController {
 		$signup = 1 ;
     	$this->set('Signup',$signup);
 		$this->set("title","Login");
-		  if ($this->request->is('post')) {
-            
+		  if ($this->request->is('post'))
+		  {
+          	  
             if ($this->Auth->login())
             {
-              	if($this->Auth->user('usertype') == 2)
+              	// if user click on remember me checkbox
+              	if ($this->request->data['User']['remember_me'] == 1)
               	{
-              		$this->Session->setFlash(__('Login Successfully!!....', true), 'default', array('class' => 'alert alert-success'));
+	                // remove "remember me checkbox"
+	                unset($this->request->data['User']['remember_me']);
+
+	                // hash the user's password
+	                $this->request->data['User']['password'] = $this->Auth->password($this->request->data['User']['password']);
+
+	                // write the cookie
+	                $this->Cookie->write('remember_me_cookie', $this->Auth->user(), true, '2 weeks');
+            	}
+				
+				if($this->Auth->user('usertype') == 2)
+              	{
+              		$this->Session->setFlash(__('Login successfully!!....', true), 'default', array('class' => 'alert alert-success'));
               		return $this->redirect(array('controller'=>'puzzles','action'=>'index','admin'=>true));
               	}	
               	elseif($this->Auth->user('usertype') == 1)
               	{
-              		$this->Session->setFlash(__('Login Successfully!!....', true), 'default', array('class' => 'alert alert-success'));
+              		$this->Session->setFlash(__('Login successfully!!....', true), 'default', array('class' => 'alert alert-success'));
               		return $this->redirect(array('controller'=>'puzzles','action'=>'index','business'=>true));
               	}
               	else
               	{
-              		$this->Session->setFlash(__('Login Successfully!!....', true), 'default', array('class' => 'alert alert-success'));
+              		$this->Session->setFlash(__('Login successfully!!....', true), 'default', array('class' => 'alert alert-success'));
               		return $this->redirect(array('controller'=>'puzzles','action'=>'index'));	
               	}	
                 
             }
             $this->Session->setFlash(__('Invalid username or password, try again', true), 'default', array('class' => 'alert alert-danger'));
         }
+       
+        // Auto login 
+        if (empty($this->data))
+        {
+			$cookie = $this->Cookie->read('remember_me_cookie');
+			if (!is_null($cookie))
+			{
+				//  Clear auth message, just in case we use it.
+				$this->Session->delete('Message.auth');
+				if ($this->Auth->login($cookie['usertype'] == 2))
+				{
+					return $this->redirect(array('controller'=>'puzzles','action'=>'index','admin'=>true));
+				}
+				else if($this->Auth->login($cookie['usertype'] == 1))
+				{
+					return $this->redirect(array('controller'=>'puzzles','action'=>'index','business'=>true));	
+				}
+				else if($this->Auth->login($cookie['usertype'] == 0))
+				{
+					return $this->redirect(array('controller'=>'puzzles','action'=>'index'));	
+				}	
+				else
+				{ 
+					// Delete invalid Cookie
+					$this->Cookie->delete('remember_me_cookie');
+				}
+			}		
+		} 
 
 
 	}					
@@ -223,6 +265,13 @@ class UsersController extends AppController {
 				if($this->User->save($this->request->data))
 				{
 					$this->Auth->login($this->request->data);
+					$email = array(
+	              			"from"=> "support@puzel.co",
+	              			'to'=>$this->Auth->user('User.email'),
+	              			'subject'=>"Signup successfully",
+	              			'text_body'=>"You have signup Successfully",
+	              			'reply_to'=>"support@puzel.co",
+	              			'html_body'=>"<p>You have signup successfully</p>" );
 					if($this->Auth->user('User.usertype') == 2)
 	              	{
 	              		$this->Session->setFlash(__('Signup Successfully!!....', true), 'default', array('class' => 'alert alert-success'));
@@ -230,28 +279,24 @@ class UsersController extends AppController {
 	              	}	
 	              	elseif($this->Auth->user('User.usertype') == 1)
 	              	{
-	              		$this->Session->setFlash(__('Signup Successfully!!....', true), 'default', array('class' => 'alert alert-success'));
-	              		return $this->redirect(array('controller'=>'puzzles','action'=>'index','business'=>true));
+	              		if($this->sendemail($email))
+	              		{	
+		              		$this->Session->setFlash(__('Signup Successfully!!....', true), 'default', array('class' => 'alert alert-success'));
+		              		return $this->redirect(array('controller'=>'puzzles','action'=>'index','business'=>true));
+	              		}
 	              	}
 	              	else
 	              	{
-	              		// Create a message and send it
-						// $email = new CakeEmail();
-						// $email->config('smtp');
-						// $email->to($this->Auth->user('User.email'),$this->Auth->user('User.firstname').' '.$this->Auth->user('User.lastname'));
-					 //    $email->subject('Subject');
-					 //    $message = "You have signup Successfully";
-					    
-						// if($email->send($message))
-						// {
+	     	         	if($this->sendemail($email))
+						{
 							$this->Session->setFlash(__('Signup Successfully!!....', true), 'default', array('class' => 'alert alert-success'));
 	              			return $this->redirect(array('controller'=>'puzzles','action'=>'index'));		
-						// }
-						// else
-						// {
-						// 	$this->Session->setFlash(__('Email not sent !!....', true), 'default', array('class' => 'alert alert-danger'));
-	     //          			return $this->redirect(array('controller'=>'puzzles','action'=>'register'));			
-						// }		    
+						}
+						else
+						{
+							$this->Session->setFlash(__('Email not sent !!....', true), 'default', array('class' => 'alert alert-danger'));
+	              			return $this->redirect(array('controller'=>'puzzles','action'=>'register'));			
+						}		    
 						
 	              	}	
 
@@ -282,8 +327,11 @@ class UsersController extends AppController {
 */	
 	public function user_logout()
 	{
+		 // clear the cookie (if it exists) when logging out
+    	$this->Cookie->delete('remember_me_cookie');
+		
 		$this->Auth->logout();
-		$this->Session->setFlash(__('<div class="alert alert-success alert-dismissible"><p>logout Successfully.</p></div>'));
+		$this->Session->setFlash(__('<div class="alert alert-success alert-dismissible"><p>Logout successfully.</p></div>'));
 		$this->redirect(array('action'=>'login','user'=>true));
 	}	
 
@@ -315,6 +363,7 @@ class UsersController extends AppController {
 
 		if(!empty($this->request->data))
 		{
+			unset($this->User->validate['email']);
 			if($this->request->data['User']['newpassword'] == $this->request->data['User']['newpasswordrepeat'])
 			{
 				if($this->request->data['User']['newpassword'] == '')
@@ -326,7 +375,6 @@ class UsersController extends AppController {
 					$this->request->data['User']['password'] = $this->request->data['User']['newpassword'] ; 	
 				}	
 
-				
 				$this->request->data['User']['id'] = $this->Auth->user('id');	 
 				if($this->User->save($this->request->data))
 				{
@@ -344,7 +392,7 @@ class UsersController extends AppController {
 
 	}			
 
-
+	
 
 
 

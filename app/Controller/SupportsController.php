@@ -174,31 +174,35 @@ class  SupportsController  extends AppController {
 			if($this->Support->save($this->request->data))
 			{
 				// Create a message and send it to admin 
-				// $email = new CakeEmail();
-				// $email->config('smtp');
-				// $email->to($admin['User']['email'],$admin['User']['firstname'].' '.$admin['User']['lastname']);
-			 //    $email->subject($this->request->data['Support']['subject']);
-			 //    $message = "User  ".$this->Auth->user('firstname').' '.$this->Auth->user('lastname')." Sent you support request  \n\n\n".$this->request->data['Support']['message'];
-			  	
+			  	$adminemail = array(
+	              			"from"=> "support@puzel.co",
+	              			'to'=>$admin['User']['email'],
+	              			'subject'=>$this->request->data['Support']['subject'],
+	              			'text_body'=>"User  ".$this->Auth->user('firstname').' '.$this->Auth->user('lastname')." Sent you support request  \n\n\n".$this->request->data['Support']['message'],
+	              			'reply_to'=>"support@puzel.co",
+	              			'html_body'=>"<p>User  ".$this->Auth->user('firstname').' '.$this->Auth->user('lastname')." Sent you support request  \n\n\n".$this->request->data['Support']['message']."</p>" );	
 				
-				// // Create email to user self
-				// if($email->send($message))
-				// {	
-				// 	$useremail = new CakeEmail();
-				// 	$useremail->config('smtp');	
-				// 	$useremail->to($this->Auth->user('email'),$this->Auth->user('firstname').' '.$this->Auth->user('lastname'));
-				//     $useremail->subject($this->request->data['Support']['subject']);
-				//     $messageuser = "Hello  ".$this->Auth->user('firstname').' '.$this->Auth->user('lastname')."\n\n\n Administrative  department will reply soon your support ticket ";	
-				// 	if($useremail->send($messageuser))
-				//     {
+				// Create email to user self
+				if($this->sendemail($adminemail))
+				{	
+					$useremail = array(
+	              			"from"=> "support@puzel.co",
+	              			'to'=>$this->Auth->user('email'),$this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+	              			'subject'=>$this->request->data['Support']['subject'],
+	              			'text_body'=>"User  ".$this->Auth->user('firstname').' '.$this->Auth->user('lastname')." Sent you support request  \n\n\n".$this->request->data['Support']['message'],
+	              			'reply_to'=>"support@puzel.co",
+	              			'html_body'=>"<p>Hello  ".$this->Auth->user('firstname').' '.$this->Auth->user('lastname')."\n\n\n Administrative  department will reply soon your support ticket </p>");	
+					
+					if($this->sendemail($useremail))
+				    {
 						$this->Session->setFlash(__('Support Send to admin!!....', true), 'default', array('class' => 'alert alert-success'));
 						$this->redirect(array('action'=>'index'));
-				// 	}
-				// 	else
-				// 	{
-				// 		$this->Session->setFlash(__('Error in Send email to admin!!....', true), 'default', array('class' => 'alert alert-danger'));
-				// 	}
-				// }			
+					}
+					else
+					{
+						$this->Session->setFlash(__('Error in Send email to admin!!....', true), 'default', array('class' => 'alert alert-danger'));
+					}
+				}			
 			}
 			else
 			{
@@ -263,17 +267,17 @@ class  SupportsController  extends AppController {
 			if($this->Support->save($this->request->data))
 			{
 				// Create a message and send it to admin 
-				// $email = new CakeEmail();
-				// $email->config('smtp');
-				// $email->to($support['Sender']['email'],$support['Sender']['firstname'].' '.$support['Sender']['lastname']);
-			 //    $email->subject($this->request->data['Support']['subject']);
-			 //    $message = "Admin reply your support request  \n\n\n".$this->request->data['Support']['message'];
+				$email = new CakeEmail();
+				$email->config('smtp');
+				$email->to($support['Sender']['email'],$support['Sender']['firstname'].' '.$support['Sender']['lastname']);
+			    $email->subject($this->request->data['Support']['subject']);
+			    $message = "Admin reply your support request  \n\n\n".$this->request->data['Support']['message'];
 			    
-				// if($email->send($message))
-				// {
+				if($email->send($message))
+				{
 					$this->Session->setFlash(__('Support Send !!....', true), 'default', array('class' => 'alert alert-success'));
 					$this->redirect(array('action'=>'index'));
-				// }	
+				}	
 			}
 			else
 			{
@@ -302,17 +306,17 @@ class  SupportsController  extends AppController {
 			if($this->Support->save($this->request->data))
 			{
 				// Create a message and send it to admin 
-				// $email = new CakeEmail();
-				// $email->config('smtp');
-				// $email->to($support['Receiver']['email'],$support['Receiver']['firstname'].' '.$support['Receiver']['lastname']);
-			 //    $email->subject($this->request->data['Support']['subject']);
-			 //    $message = "User ".$this->Auth->user('firstname').' '.$this->Auth->user('lastname'). "reply support request  \n\n\n".$this->request->data['Support']['message'];
+				$email = new CakeEmail();
+				$email->config('smtp');
+				$email->to($support['Receiver']['email'],$support['Receiver']['firstname'].' '.$support['Receiver']['lastname']);
+			    $email->subject($this->request->data['Support']['subject']);
+			    $message = "User ".$this->Auth->user('firstname').' '.$this->Auth->user('lastname'). "reply support request  \n\n\n".$this->request->data['Support']['message'];
 			    
-				// if($email->send($message))
-				// {
+				if($email->send($message))
+				{
 					$this->Session->setFlash(__('Support Send !!....', true), 'default', array('class' => 'alert alert-success'));
 					$this->redirect(array('action'=>'index'));
-				// }	
+				}	
 			}
 			else
 			{

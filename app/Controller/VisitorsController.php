@@ -107,20 +107,20 @@ class  VisitorsController  extends AppController {
 							{
 								$password_random =$this->generateRandomString();
 								// Create a message and send it
-								// $email = new CakeEmail();
-								// $email->config('smtp');
-								// $email->to($user['User']['email'],$user['User']['firstname'].' '.$user['User']['lastname']);
-							 //    $email->subject('Signup Successfully');
-							 //    $message = "You have signup Successfully \n\n\n  Your password is :" .$password_random;
-							 //    if($email->send($message))
-								// {
+								$email = new CakeEmail();
+								$email->config('smtp');
+								$email->to($user['User']['email'],$user['User']['firstname'].' '.$user['User']['lastname']);
+							    $email->subject('Signup Successfully');
+							    $message = "You have signup Successfully \n\n\n  Your password is :" .$password_random;
+							    if($email->send($message))
+								{
 									$update = array(
 										'id'=>$user['User']['id'],
 										'password'=>$password_random);
 									$this->User->save($update);
 									$response = array("message"=>"success","Id"=>$update_puzzle['Image']['puzzle_id']);
 			                    	echo json_encode($response);
-								// }
+								}
 							}
 						}		
 					}	
@@ -187,6 +187,11 @@ class  VisitorsController  extends AppController {
 	{
 		$this->layout = "visitor";
 		$this->set('title',$name);
+		$name = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.name'=>$name)));
+		$this->set('PuzzleData',$name);
+		$image = $this->Image->find('all',array('Image.puzzle_id'=>$name['Puzzle']['id']))	;
+		$this->set('image',$image);
+		$this->set('drawimage_s',count($image));
 	}
 
 

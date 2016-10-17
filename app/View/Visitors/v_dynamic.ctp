@@ -7,40 +7,63 @@
 
       $("#Imagedata").submit(function(e)
       {
-        var url = "visitors/process"; // the script where you handle the form input.
-       // Form Submit Ajax  
-        $.ajax({
-                 type: "POST",
-                 url: url,
-                 dataType: 'json', 
-                 data: $("#Imagedata").serialize(), // serializes the form's elements.
-                 success: function(data)
-                 {
+         if($("#fname").val() == '')
+         {
+            $("#firsname").after("<p>Please enter first name. </p>")
+            return false;
+         } 
+         else if($("#lname").val() == '')
+         {
+            $("#laname").after("<p>Please enter last name. </p>")
+            return false;
+         }
+         else if($("#useremail").val() == '')
+         {
+            // var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            $("#useemail").after("<p>Please enter an email. </p>")
+            return false;
 
-                    
+         } 
+         else 
+         {
+            var url = "visitors/process"; // the script where you handle the form input.
+             // Form Submit Ajax  
+              $.ajax({
+                       type: "POST",
+                       url: url,
+                       dataType: 'json', 
+                       data: $("#Imagedata").serialize(), // serializes the form's elements.
+                       success: function(data)
+                       {
+                         if(data.message != "That email address has already taken. Please use another email.")
+                          {
+                            $.ajax
+                              ({
+                                 type: "POST",
+                                 url: "visitors/fetchimage/"+data.Id,
+                                 data:'' ,
+                                 success:function(data)
+                                 {
+                                    $("#puzzle").html(data);
+                                 }
+                            });
+                          }
+                          else
+                          {
+                            $("#alert").after("<p>"+data.message+"</p>")
+                          }  
+                       }
+                     });
 
-                    if(data.message != "That email address has already taken. Please use another email.")
-                    {
-                      $.ajax
-                        ({
-                           type: "POST",
-                           url: "visitors/fetchimage/"+data.Id,
-                           data:'' ,
-                           success:function(data)
-                           {
-                              $("#puzzle").html(data);
-                           }
-                      });
-                    }
-                    else
-                    {
-                      $("#alert").after("<p>"+data.message+"</p>")
-                    }  
-                 }
-               });
+                e.preventDefault(); // avoid to execute the actual submit of the form.
+            } 
+          });  
+          
 
-          e.preventDefault(); // avoid to execute the actual submit of the form.
-      });
+
+
+
+        
       }); 
     </script>
 <!-- NAVIGATION ############################################### -->
@@ -74,7 +97,6 @@
          <div id="logo"><a href="index.php"><img src="<?php echo $this->webroot;?>img/visitor/img/logo.png"></a></div>
         
          <ul id="nav">
-            
                     <li class="no-right"><a href="#"><span class="button-sign">Grand Prize</span></a></li>                     
          </ul>
        
@@ -101,31 +123,111 @@
 <h2 class="text-center title-page">Smart Weigh May Giveaway</h2>
  <div class="row"> 
   <div class="col-md-12">
-    <div id="puzzle"></div>
+    <div id="puzzle">
+      <div id="contentfield">
+
+<!-- <div id = 'puzzle1'> -->
+<?php 
+      // Fetch Image From database 
+    $i = 0;
+      
+    if ($drawimage_s > 0) 
+    {?>
+        <style>
+      .merge div{width:<?php echo $image[0]['Image']['width']."px";?>;height:<?php echo $image[0]['Image']['height']."px";?>;display:inline-block;margin-left:-5px;margin-bottom:-5px;}
+      .merge{width:<?php echo $image[0]['Image']['total_width']."px";?>;}
+      </style>
+        <?php $peices = $PuzzleData['Puzzle']['pieces'] ; 
+        // Number of peices of block
+        if($peices == 25) {    $cut_width = 5;  $cut_height = 5; }
+        elseif($peices == 50)  {   $cut_width = 10;   $cut_height = 5;  }
+        elseif($peices == 75)  {   $cut_width = 15;   $cut_height = 5;  }
+        else {   $cut_width = 10;  $cut_height = 10; }  ?>
+    
+        <div class="merge" >
+        
+           <?php 
+           // for blank image get 
+           // while ($image_data)
+            foreach($image as $image_data)
+              {
+                
+                // Get Image path 
+              $path =  $this->webroot.'img/puzzel/'.$PuzzleData['Puzzle']['name'].'/'.$image_data['Image']['name'] ;
+              $split = substr($image_data['Image']['name'], strrpos($image_data['Image']['name'], '_') + 1);
+                
+                if    ($split == "01.jpg")  {   $block = "1";   }
+              elseif($split == "11.jpg")  {   $block = "2";   }
+              elseif($split == "21.jpg")  {   $block = "3";   }
+              elseif($split == "31.jpg")  {   $block = "4";   }
+              elseif($split == "41.jpg")  {   $block = "5";   }
+              elseif($split == "51.jpg")  {   $block = "6";   }
+              elseif($split == "61.jpg")  { $block = "7";   }
+              elseif($split == "71.jpg")  {   $block = "8";   }
+              elseif($split == "81.jpg")  {   $block = "9";   }
+              else  {   $block = "10";  }
+              
+            
+                if($image_data['Image']['status'] == 0)
+              {
+                $class_image = "background-color:#D3D3D3;";
+                $getname = preg_replace('/\\.[^.\\s]{3,4}$/', '', $image_data['Image']['name']); 
+                $class_name = $getname  ;
+              }
+              else
+              {
+                $getname = preg_replace('/\\.[^.\\s]{3,4}$/', '', $image_data['Image']['name']); 
+                $class_name = $getname  ;
+                $class_image = "background:url('$path')"; 
+              }
+            
+            if($i%$cut_width == 0)
+            {
+              if($block == "1") {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }  
+                if($block == "2") {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
+                if($block == "3") {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
+                if($block == "4") {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
+                if($block == "5") {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
+                if($block == "6") {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
+                if($block == "7") {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
+                if($block == "8") {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
+                if($block == "9") {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
+                if($block == "10")  {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
+            }
+               
+          }
+      echo "</div>";  
+    }?>
+  </div> 
+  <!-- </div> -->
+      </div>
+    </div>
     </div>
  </div> 
 <div class="row">
   <div class="six columns" id="alert">
       <div class="share-social">
           <h3>Share with your friends</h3>
-            <i class="facebook">f</i>
-            <i class="twitter">l</i>
-            <i class="windows">w</i>
-            <i class="email">m</i>
+            <a class="share-btn" href="http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/<?php echo substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>&title=<?php echo substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>&description=Price 33$" onclick="return !window.open(this.href, 'Facebook', 'width=640,height=580')"><i class="facebook">f</i></a>
+             <a class="twitter-share-button"
+              href="https://twitter.com/intent/tweet?text=http://puzel.stage.n-framescorp.com/<?php echo substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>" data-size="large" target = "_blank"><i class="twitter">l</i>
+            <a href="https://login.live.com/login.srf" target="_blank" ><i class="windows">w</i></a>
+            <a class="icon-gplus" href ="https://plus.google.com/share?url=http://puzel.stage.n-framescorp.com/<?php echo substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>&title=<?php echo substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>" onclick="return !window.open(this.href, 'Google', 'width=640,height=580')">
+            <i class="email">m</i></a>
         </div>
     </div>
     <div class="six columns" >
         
       <form id="Imagedata">
-          <div class="form-group">
-            <input type="text" name="firstname" class="form-control" placeholder="First Name">
-            </div>
-            <div class="form-group">
-            <input type="text" name="lastname"  class="form-control" placeholder="Last Name">
-            </div>
-            <div class="form-group">
-            <input type="text" name="email" class="form-control" placeholder="Email">
-            </div>
+          <div class="form-group" id="firsname">
+            <input type="text" name="firstname" id="fname" class="form-control" placeholder="First Name"  required>
+          </div>
+          <div class="form-group" id="laname">
+            <input type="text" name="lastname"   id="lname"  class="form-control" placeholder="Last Name" required>
+          </div>
+          <div class="form-group" id="useemail">
+             <input type="text" name="email"  id="useremail"  class="form-control" placeholder="Email" required>
+          </div>
   
             <input type = "hidden" name ="puzzlename" value = "<?php echo substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>">
             <input type = "hidden" name ="signwithpuzzleaccount" id ="signwithpuzzleaccount" value = "">
@@ -137,7 +239,8 @@
 </div>
 </div> <!-- end of container -->
  <script>
-$(document).ready(function() {
+$(document).ready(function()
+{
 $('#collapse-menu').on('click', function(){
 if($(this).hasClass('active'))
 {

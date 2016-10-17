@@ -43,7 +43,7 @@
             
                 if($image_data['Image']['status'] == 0)
               {
-                $class_image = "background:none;";
+                $class_image = "background-color:#D3D3D3;";
                 $getname = preg_replace('/\\.[^.\\s]{3,4}$/', '', $image_data['Image']['name']); 
                 $class_name = $getname  ;
               }

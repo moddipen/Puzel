@@ -10,7 +10,7 @@
             <!-- cards -->
             <?php echo $this->element('admin/header');?>
                <!-- /cards -->
-            
+            <?php echo $this->Session->flash();?> 
              <div class="pagesubheader">
             
 

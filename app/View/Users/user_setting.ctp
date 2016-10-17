@@ -219,7 +219,7 @@
 
                             <label for="emailaddress">Email Address</label>
 
-                            <input type="text" class="form-control" id="emailaddress" value="<?php echo $User['User']['email']?>" readonly>
+                            <input type="text" class="form-control" id="emailaddress" name ="data[User][email]" value="<?php echo $User['User']['email']?>" >
 
                           </div>
 

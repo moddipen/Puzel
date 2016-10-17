@@ -33,7 +33,7 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller 
 {
 	public $helpers = array('Html', 'Form','Session');
-	public $components = array('Session','RequestHandler','Auth' => array(
+	public $components = array('Session','RequestHandler','Cookie','Auth' => array(
         'authenticate' => array(
             'Form' => array(
                 'fields' => array('username' => 'email')
@@ -45,38 +45,105 @@ class AppController extends Controller
 
 	 function beforeFilter()
 	 {
-$this->Auth->authenticate = array('Form');
-    $this->Auth->autoRedirect = false;
-    Security::setHash("md5");
+        $this->Auth->authenticate = array('Form');
+        $this->Auth->autoRedirect = false;
+        Security::setHash("md5");
 
-	    if ($this->params['prefix'] == 'admin')
-    	{
-    		$signup = 0 ;
-    		$this->set('Signup',$signup);
-    		$this->layout = "dashboard";
-    	}
-	    elseif ($this->params['prefix'] == 'business')
-	     {
-	     	$signup = 0 ;
-    		$this->set('Signup',$signup);
-	     	$this->layout = "dashboard";
-	     }
-	    elseif ($this->params['prefix'] == 'user')
-	     {
-	     	$signup = 0 ;
-    		$this->set('Signup',$signup);
-	     	$this->layout = "dashboard";
-	     }
-        elseif ($this->params['prefix'] == 'v')
-         {
-            $this->layout = "visitor";
-         }  
-	    else
-    	{
-    		$signup = 0 ;
-    		$this->set('Signup',$signup);
-    		$this->layout = "default";
-    	}
-	    
-	 }
+    	    if ($this->params['prefix'] == 'admin')
+        	{
+        		$signup = 0 ;
+        		$this->set('Signup',$signup);
+        		$this->layout = "dashboard";
+        	}
+    	    elseif ($this->params['prefix'] == 'business')
+    	     {
+    	     	$signup = 0 ;
+        		$this->set('Signup',$signup);
+    	     	$this->layout = "dashboard";
+    	     }
+    	    elseif ($this->params['prefix'] == 'user')
+    	     {
+    	     	$signup = 0 ;
+        		$this->set('Signup',$signup);
+    	     	$this->layout = "dashboard";
+    	     }
+            elseif ($this->params['prefix'] == 'v')
+             {
+                $this->layout = "visitor";
+             }  
+    	    else
+        	{
+        		$signup = 0 ;
+        		$this->set('Signup',$signup);
+        		$this->layout = "default";
+        	}
+
+        // cookie code
+        // set cookie options
+        $this->Cookie->key = 'qSI232qs*&sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^';
+        $this->Cookie->httpOnly = true;
+
+        if (!$this->Auth->loggedIn() && $this->Cookie->read('remember_me_cookie'))
+        {
+            $cookie = $this->Cookie->read('remember_me_cookie');
+
+            $user = $this->User->find('first', array(
+                'conditions' => array(
+                    'User.username' => $cookie['username'],
+                    'User.password' => $cookie['password']
+                )
+            ));
+
+            if ($user && !$this->Auth->login($user['User'])) {
+                $this->redirect('/users/logout'); // destroy session & cookie
+            }
+        }
+
+        // // Manage session 
+
+        // if (isset($this->params['prefix']) && $this->params['prefix'] == 'admin')
+        // {
+        //     AuthComponent::$sessionKey = 'Auth.Admin';
+        //     $this->Auth->loginAction = array('plugin' => false, 'controller' => 'users', 'action' => 'login','user'=>true);
+        //     $this->Auth->logoutRedirect = array('plugin' => false, 'controller' => 'admin', 'action' => 'dashboard');
+        // } 
+        // else
+        // {
+        //     AuthComponent::$sessionKey = 'Auth.Front';
+        //     $this->Auth->loginAction = array('plugin' => false, 'controller' => 'users', 'action' => 'login',$this->request->prefix=>false);
+        //     $this->Auth->logoutRedirect = array('plugin' => false, 'controller' => 'users', 'action' => 'dashboard');
+        // }
+    }
+
+
+    // send email 
+    public function sendemail($mail)
+    {
+        $json = json_encode(array(
+        'From' => $mail['from'],
+        'To' => $mail['to'],
+        'Subject' => $mail['subject'],
+        'HtmlBody' => $mail['html_body'],
+        'TextBody' =>$mail['text_body'],
+        'ReplyTo' => $mail['reply_to'],
+        ));
+        $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'http://api.postmarkapp.com/email');
+          curl_setopt($ch, CURLOPT_POST, true);
+          curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Accept: application/json',
+                'Content-Type: application/json',
+                'X-Postmark-Server-Token: ' .Configure::read("POSTMARKSERVERTOKEN")
+                ));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+        $response = json_decode(curl_exec($ch), true);
+        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        return $http_code === 200;
+    }
+
+
+
+
 }
