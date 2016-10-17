@@ -107,20 +107,36 @@ class  VisitorsController  extends AppController {
 							{
 								$password_random =$this->generateRandomString();
 								// Create a message and send it
-								$email = new CakeEmail();
-								$email->config('smtp');
-								$email->to($user['User']['email'],$user['User']['firstname'].' '.$user['User']['lastname']);
-							    $email->subject('Signup Successfully');
-							    $message = "You have signup Successfully \n\n\n  Your password is :" .$password_random;
-							    if($email->send($message))
-								{
+								// $email = new CakeEmail();
+								// $email->config('smtp');
+								// $email->to($user['User']['email'],$user['User']['firstname'].' '.$user['User']['lastname']);
+							 //    $email->subject('Signup Successfully');
+							     $message = "You have signup Successfully \n\n\n  Your password is :" .$password_random;
+							 //    if($email->send($message))
+								// {
+								$useremail = array(
+					              			"templateid"=>1007661,
+					              			"name"=>$user['User']['firstname'].' '.$user['User']['lastname'],
+					              			"TemplateModel"=> array(
+											    "user_name"=> $user['User']['firstname'].' '.$user['User']['lastname'],
+											    "company"=> array(
+											      	"name"=> ''),
+												"product_name"=>"Signup Successfully",
+												"action_url"=>$message),
+											"InlineCss"=> true, 
+					              			"from"=> "support@puzel.co",
+					              			'to'=>$user['User']['email'],
+					              			'reply_to'=>"support@puzel.co"
+					              			);	
+								if($this->sendemail($useremail))
+				    			{
 									$update = array(
 										'id'=>$user['User']['id'],
 										'password'=>$password_random);
 									$this->User->save($update);
 									$response = array("message"=>"success","Id"=>$update_puzzle['Image']['puzzle_id']);
 			                    	echo json_encode($response);
-								}
+								// }
 							}
 						}		
 					}	
