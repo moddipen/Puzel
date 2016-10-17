@@ -100,3 +100,25 @@
 
         </div>
         <!-- Fixed navbar end -->
+
+     <script type="text/javascript">
+
+    $(function(){
+        var current_page_URL = location.href;
+        var menu = window.location.href;
+        $( "a" ).each(function() {
+            if($(this).attr("href") !== "#") 
+            {
+                var target_URL = $(this).prop("href");
+                if (target_URL == current_page_URL) 
+                {
+                  $('.nav li.active').removeClass('active');
+                  $('a[href^="'+document.location+'"]').parent('li').addClass('active');
+                  return false;
+                }
+            }
+        });
+    }); 
+
+
+    </script>      

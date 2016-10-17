@@ -174,25 +174,40 @@ class  SupportsController  extends AppController {
 			if($this->Support->save($this->request->data))
 			{
 				// Create a message and send it to admin 
-			  	$adminemail = array(
-	              			"from"=> "support@puzel.co",
-	              			'to'=>$admin['User']['email'],
-	              			'subject'=>$this->request->data['Support']['subject'],
-	              			'text_body'=>"User  ".$this->Auth->user('firstname').' '.$this->Auth->user('lastname')." Sent you support request  \n\n\n".$this->request->data['Support']['message'],
-	              			'reply_to'=>"support@puzel.co",
-	              			'html_body'=>"<p>User  ".$this->Auth->user('firstname').' '.$this->Auth->user('lastname')." Sent you support request  \n\n\n".$this->request->data['Support']['message']."</p>" );	
-				
+				$adminemail = array(
+              			"templateid"=>1007242,
+              			"name"=>$this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+              			"TemplateModel"=> array(
+						    "user_name"=> $this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+						    "company"=> array(
+						      	"name"=> $this->Auth->user('comapny_name')),
+							"product_name"=>$this->request->data['Support']['subject'],
+							"action_url"=>$this->request->data['Support']['message']),
+						"InlineCss"=> true, 
+              			"from"=> "support@puzel.co",
+              			'to'=>$admin['User']['email'],
+              			'reply_to'=>"support@puzel.co"
+              			);
+
 				// Create email to user self
 				if($this->sendemail($adminemail))
 				{	
 					$useremail = array(
-	              			"from"=> "support@puzel.co",
-	              			'to'=>$this->Auth->user('email'),$this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
-	              			'subject'=>$this->request->data['Support']['subject'],
-	              			'text_body'=>"User  ".$this->Auth->user('firstname').' '.$this->Auth->user('lastname')." Sent you support request  \n\n\n".$this->request->data['Support']['message'],
-	              			'reply_to'=>"support@puzel.co",
-	              			'html_body'=>"<p>Hello  ".$this->Auth->user('firstname').' '.$this->Auth->user('lastname')."\n\n\n Administrative  department will reply soon your support ticket </p>");	
-					
+              			"templateid"=>1007245,
+              			"name"=>$this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+              			"TemplateModel"=> array(
+						    "user_name"=> $this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+						    "company"=> array(
+						      	"name"=> $this->Auth->user('comapny_name')),
+							"product_name"=>$this->request->data['Support']['subject'],
+							"action_url"=>$this->request->data['Support']['message']),
+						"InlineCss"=> true, 
+              			"from"=> "support@puzel.co",
+              			'to'=>$this->Auth->user('email'),
+              			'reply_to'=>"support@puzel.co"
+              			);	
+				
+
 					if($this->sendemail($useremail))
 				    {
 						$this->Session->setFlash(__('Support Send to admin!!....', true), 'default', array('class' => 'alert alert-success'));
@@ -266,15 +281,22 @@ class  SupportsController  extends AppController {
 			$this->Support->create();
 			if($this->Support->save($this->request->data))
 			{
-				// Create a message and send it to admin 
-				$email = array(
-	              			"from"=> "support@puzel.co",
-	              			'to'=>$support['Sender']['email'],
-	              			'subject'=>$this->request->data['Support']['subject'],
-	              			'text_body'=>"Admin reply your support request  \n\n\n".$this->request->data['Support']['message'],
-	              			'reply_to'=>"support@puzel.co",
-	              			'html_body'=>"<p>Admin reply your support request  \n\n\n".$this->request->data['Support']['message']."</p>" );	
-				if($this->sendemail($email))
+				// // Create a message and send it to admin 
+				$mail = array(
+              			"templateid"=>1007226,
+              			"name"=>$support['Sender']['firstname'].' '.$support['Sender']['lastname'],
+              			"TemplateModel"=> array(
+						    "user_name"=> $support['Sender']['firstname'].' '.$support['Sender']['lastname'],
+						    "company"=> array(
+						      	"name"=> $support['Sender']['company_name']),
+							"product_name"=>$this->request->data['Support']['subject'],
+							"action_url"=>$this->request->data['Support']['message']),
+						"InlineCss"=> true, 
+              			"from"=> "support@puzel.co",
+              			'to'=>$support['Sender']['email'],
+              			'reply_to'=>"support@puzel.co"
+              			);	
+				if($this->sendemail($mail))
 				{
 					$this->Session->setFlash(__('Support Send !!....', true), 'default', array('class' => 'alert alert-success'));
 					$this->redirect(array('action'=>'index'));
@@ -307,13 +329,28 @@ class  SupportsController  extends AppController {
 			if($this->Support->save($this->request->data))
 			{
 				// Create a message and send it to admin 
+				// $email = array(
+	   //            			"from"=> "support@puzel.co",
+	   //            			'to'=>$support['Receiver']['email'],
+	   //            			'subject'=>$this->request->data['Support']['subject'],
+	   //            			'text_body'=>"User ".$this->Auth->user('firstname').' '.$this->Auth->user('lastname'). "reply support request  \n\n\n".$this->request->data['Support']['message'],
+	   //            			'reply_to'=>"support@puzel.co",
+	   //            			'html_body'=>"<p>User ".$this->Auth->user('firstname').' '.$this->Auth->user('lastname'). "reply support request  \n\n\n".$this->request->data['Support']['message']."</p>" );	
 				$email = array(
-	              			"from"=> "support@puzel.co",
-	              			'to'=>$support['Receiver']['email'],
-	              			'subject'=>$this->request->data['Support']['subject'],
-	              			'text_body'=>"User ".$this->Auth->user('firstname').' '.$this->Auth->user('lastname'). "reply support request  \n\n\n".$this->request->data['Support']['message'],
-	              			'reply_to'=>"support@puzel.co",
-	              			'html_body'=>"<p>User ".$this->Auth->user('firstname').' '.$this->Auth->user('lastname'). "reply support request  \n\n\n".$this->request->data['Support']['message']."</p>" );	
+              			"templateid"=>1007227,
+              			"name"=>$this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+              			"TemplateModel"=> array(
+						    "user_name"=> $this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+						    "company"=> array(
+						      	"name"=> $this->Auth->user('company_name')),
+							"product_name"=>$support['Support']['subject'],
+							"action_url"=>$this->request->data['Support']['message']),
+						"InlineCss"=> true, 
+              			"from"=> "support@puzel.co",
+              			'to'=>$support['Receiver']['email'],
+              			'reply_to'=>"support@puzel.co"
+              			);	
+
 				if($this->sendemail($email))
 				{
 					$this->Session->setFlash(__('Support Send !!....', true), 'default', array('class' => 'alert alert-success'));

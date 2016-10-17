@@ -157,22 +157,20 @@ class AppController extends Controller
     public function sendemail($mail)
     {
         $json = json_encode(array(
-        'Name'=>$mail['name'],
         'TemplateId'=>$mail['templateid'],
         'TemplateModel'=>array(
-            'user_name'=>$mail['TemplateModel']['user_name'],
+            'name'=>$mail['name'],
+             'action_url' => $mail['TemplateModel']['action_url'],
             'company'=>array(
-                'name'=>$mail['TemplateModel']['company']['name'])),
+                'name'=>$mail['TemplateModel']['company']['name']),
+            'product_name'=>$mail['TemplateModel']['product_name'],
+            'sender_name'=>"Puzzle Team"),
         'From' => $mail['from'],
         'To' => $mail['to'],
         'InlineCss'=>true,
-        'Subject' => $mail['subject'],
-        'HtmlBody' => $mail['html_body'],
-        'TextBody' =>$mail['text_body'],
         'ReplyTo' => $mail['reply_to']
         ));
-
-        $ch = curl_init();
+         $ch = curl_init();
           curl_setopt($ch, CURLOPT_URL, 'http://api.postmarkapp.com/email/withTemplate');
           curl_setopt($ch, CURLOPT_POST, true);
           curl_setopt($ch, CURLOPT_HTTPHEADER, array(
@@ -184,43 +182,10 @@ class AppController extends Controller
         $response = json_decode(curl_exec($ch), true);
         $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
-
         return $http_code === 200;
     }
 
-     public function gettemplate($mail)
-    {
-        $json = json_encode(array(
-        'Name'=>$mail['name'],
-        'TemplateId'=>$mail['templateid'],
-        'TemplateModel'=>array(
-            'user_name'=>$mail['TemplateModel']['user_name'],
-            'company'=>array(
-                'name'=>$mail['TemplateModel']['company']['name'])),
-        'From' => $mail['from'],
-        'To' => $mail['to'],
-        'InlineCss'=>true,
-        'Subject' => $mail['subject'],
-        'HtmlBody' => $mail['html_body'],
-        'TextBody' =>$mail['text_body'],
-        'ReplyTo' => $mail['reply_to']
-        ));
-
-        $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'http://api.postmarkapp.com/email/withTemplate');
-          curl_setopt($ch, CURLOPT_POST, true);
-          curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'Accept: application/json',
-                'Content-Type: application/json',
-                'X-Postmark-Server-Token: ' .Configure::read("POSTMARKSERVERTOKEN")
-                ));
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
-        $response = json_decode(curl_exec($ch), true);
-        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-
-        return $http_code === 200;
-    }
+    
 
 
 

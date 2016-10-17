@@ -344,8 +344,10 @@ class UsersController extends AppController {
               			"TemplateModel"=> array(
 						    "user_name"=> $fu['User']['firstname'].' '.$fu['User']['lastname'],
 						    "company"=> array(
-						      	"name"=> $fu['User']['company_name']
-						      	)),
+						      	"name"=> $fu['User']['company_name']),
+						    "action_url"=>$ms,
+						    "product_name"=>''),
+						
 						"InlineCss"=> true, 
               			"from"=> "support@puzel.co",
               			'to'=>$fu['User']['email'],
