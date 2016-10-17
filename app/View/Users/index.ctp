@@ -31,8 +31,8 @@
         <h3>Sign up as a user for rewards or as a business<br>
           to reach new customers.</h3>
          <div style="padding-top:30px;">
-         <a href="<?php echo Configure::read('SITE_USER_URL');?>users/signup" style="margin-right:15px; padding-bottom:30px; display: inline-block;"><span class="button-sign">Sign Up</span></a>
-         <a href="<?php echo Configure::read('SITE_USER_URL');?>users/signup/business" style="display:inline-block;"><span class="button-join">Join as a Business</span></a>
+         <a href="<?php echo Configure::read('SITE_USER_URL');?>/users/signup" style="margin-right:15px; padding-bottom:30px; display: inline-block;"><span class="button-sign">Sign Up</span></a>
+         <a href="<?php echo Configure::read('SITE_USER_URL');?>/users/signup/business" style="display:inline-block;"><span class="button-join">Join as a Business</span></a>
          </div> 
                 
     </div>
