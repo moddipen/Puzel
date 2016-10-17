@@ -479,7 +479,7 @@ public function user_reset($token=null)
 		$this->set("title","Profile Page");
 		
 		$user = $this->User->find('first',array('conditions'=>array('User.id'=>$this->Auth->user('id'))));
-		echo "<pre>";print_r($this->Auth->user());exit;  
+		// echo "<pre>";print_r($this->Auth->user());exit;   
 		$this->set("User",$user);
 
 		if(!empty($this->request->data))
