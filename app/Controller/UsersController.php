@@ -477,7 +477,7 @@ public function user_reset($token=null)
 	{
 		$this->layout = 'dashboard';
 		$this->set("title","Profile Page");
-		
+		echo "<pre>";print_r($this->Auth->user);exit;
 		$user = $this->User->find('first',array('conditions'=>array('User.id'=>$this->Auth->user('id'))));
 		$this->set("User",$user);
 
