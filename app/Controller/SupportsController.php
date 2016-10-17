@@ -155,7 +155,7 @@ class  SupportsController  extends AppController {
 	public function user_index()
 	{
 		$this->set("title","Support");
-		$this->set('Supports',$this->Support->find('all',array('conditions'=>array('Support.receiver_id'=>$this->Auth->user('id')),'order'=>'Support.created desc')));
+		$this->set('Supports',$this->Support->find('all',array('conditions'=>array('OR'=>array('Support.receiver_id'=>$this->Auth->user('id'),'Support.sender_id'=>$this->Auth->user('id'))),'order'=>'Support.created desc')));
 	}
 
 /**
