@@ -290,12 +290,12 @@ class UsersController extends AppController {
 	     	         	if($this->sendemail($email))
 						{
 							$this->Session->setFlash(__('Signup Successfully!!....', true), 'default', array('class' => 'alert alert-success'));
-	              			return $this->redirect(array('controller'=>'puzzles','action'=>'index'));		
+	              			return $this->redirect(array('controller'=>'puzzles','action'=>'index','user'=>true));		
 						}
 						else
 						{
-							$this->Session->setFlash(__('Email not sent !!....', true), 'default', array('class' => 'alert alert-danger'));
-	              			return $this->redirect(array('controller'=>'puzzles','action'=>'register'));			
+							//$this->Session->setFlash(__('Email not sent !!....', true), 'default', array('class' => 'alert alert-danger'));
+	              			return $this->redirect(array('controller'=>'puzzles','action'=>'index','user'=>true));			
 						}		    
 						
 	              	}	
