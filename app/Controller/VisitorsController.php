@@ -203,7 +203,7 @@ class  VisitorsController  extends AppController {
 		$this->set('title',$name);
 		$name = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.name'=>$name)));
 		$this->set('PuzzleData',$name);
-		$image = $this->Image->find('all',array('Image.puzzle_id'=>$name['Puzzle']['id']))	;
+		$image = $this->Image->find('all',array('conditions'=>array('Image.puzzle_id'=>$name['Puzzle']['id'])))	;
 		$this->set('image',$image);
 		$this->set('drawimage_s',count($image));
 	}
