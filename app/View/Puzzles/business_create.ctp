@@ -80,7 +80,7 @@
                             <div class="col-md-2">
                               <div class="form-group">
                                     <select name="data[Puzzel][peice]" class="form-control chosen-select">
-                                      <option style="display:none">Number of Pieces</option>
+                                      <!-- <option style="display:none">Number of Pieces</option> -->
                                       <option value="25">25</option>
                                       <option value="50">50</option>
                                       <option value="75">75</option>
