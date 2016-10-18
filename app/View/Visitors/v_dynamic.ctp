@@ -46,6 +46,7 @@
                                  success:function(data)
                                  {
                                     $("#puzzle").html(data);
+                                    $("#Imagedata")[0].reset();
                                  }
                             });
                           }
@@ -169,7 +170,7 @@
             
                 if($image_data['Image']['status'] == 0)
               {
-                $class_image = "background-color:#D3D3D3;";
+                $class_image = "background-display:none;";
                 $getname = preg_replace('/\\.[^.\\s]{3,4}$/', '', $image_data['Image']['name']); 
                 $class_name = $getname  ;
               }
