@@ -240,7 +240,7 @@
             <input type="text" name="lastname"   id="lname"  class="form-control" placeholder="Last Name" required>
           </div>
           <div class="form-group" id="useemail">
-             <input type="text" name="email"  id="useremail"  class="form-control" placeholder="Email" required>
+             <input type="email" name="email"  id="useremail"  class="form-control" placeholder="Email" required>
           </div>
   
             <input type = "hidden" name ="puzzlename" value = "<?php echo substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>">
