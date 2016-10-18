@@ -42,7 +42,8 @@
 
                       <div class="actions" style="padding: 0px 20px;">
                      
-                        <?php  echo $this->html->link( '<button type="button" class="btn btn-default pull-right" style="margin-top: -53px;"></button>',array('action' => 'delete',$Conversation[0]['Support']['id']),array('class'=>'fa fa-trash-o','style'=>"color:white;","escape"=> false),' Do you want to delete this record?');?>
+                        <button onclick="location.href='<?php echo Configue::read("SITE_USER_URL")?>/supports/delete/<?php echo $Conversation[0]['Support']['id'];?>'" type="button" class="btn btn-default pull-right" style="margin-top: -53px;">
+                        <i class="fa fa-trash-o"></i></button>
 
                       </div>
                     </div>
