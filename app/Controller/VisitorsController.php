@@ -20,7 +20,6 @@
 
 App::uses('AppController', 'Controller');
 App::uses('CakeEmail', 'Network/Email');
-App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 
 /**
  * Static content controller
@@ -124,17 +123,12 @@ class  VisitorsController  extends AppController {
 					              			'to'=>$user['User']['email'],
 					              			'reply_to'=>"support@puzel.co"
 					              			);	
-								if($this->sendemail($useremail))
+								if($this->sendemail($useremail,$update_puzzle['Image']['puzzle_id'],"Front"))
 				    			{
-				    				$hasher = new SimplePasswordHasher();
-            						//$newpassword_random = $hasher->hash($password_random);
-
-									$update = array(
+				    				$update = array(
 										'id'=>$user['User']['id'],
 										'password'=>$password_random);
 									$this->User->save($update);
-									$response = array("message"=>"success","Id"=>$update_puzzle['Image']['puzzle_id']);
-			                    	echo json_encode($response);
 								}
 							}
 						}		

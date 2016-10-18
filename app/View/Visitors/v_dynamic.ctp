@@ -3,7 +3,13 @@
       $("#puzelacount").click(function()
       {
         $("#signwithpuzzleaccount").val(1);
-      });  
+      });
+      $("#normalsign").click(function()
+      {
+        $("#signwithpuzzleaccount").val(0);
+      }); 
+      
+
 
       $("#Imagedata").submit(function(e)
       {
@@ -32,8 +38,8 @@
               $.ajax({
                        type: "POST",
                        url: url,
-                       dataType: 'json', 
                        data: $("#Imagedata").serialize(), // serializes the form's elements.
+                       dataType: 'json', 
                        success: function(data)
                        {
                          if(data.message != "That email address has already taken. Please use another email.")
@@ -42,7 +48,7 @@
                               ({
                                  type: "POST",
                                  url: "<?php echo Configure::read('SITE_URL');?>visitors/fetchimage/"+data.Id,
-                                 data:'' ,
+                                 ///dataType: 'json', 
                                  success:function(data)
                                  {
                                     $("#puzzle").html(data);
@@ -54,9 +60,10 @@
                           }
                           else
                           {
-                            $("#alert").after("<p style='background:rgba(169,68,66,0.5);color:#A94442;font-size:14px;padding:20px'>"+data.message+"</p>");
+                            $("#alert").html("<p style='background:rgba(169,68,66,0.5);color:#A94442;font-size:14px;padding:20px;margin-bottom:10px;'>"+data.message+"</p>");
                             $("p").show().delay(3000).fadeOut(function(){ $(this).remove(); });
-                          }  
+                          }
+                          //$("#Imagedata")[0].reset();  
                        }
                      });
 
@@ -208,7 +215,7 @@
     </div>
  </div> 
 <div class="row">
-  <div class="six columns" id="alert">
+  <div class="six columns">
       <div class="share-social">
           <h3>Share with your friends</h3>
             <a class="share-btn" href="http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/<?php echo substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>&title=<?php echo substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>&description=Price 33$" onclick="return !window.open(this.href, 'Facebook', 'width=640,height=580')"><i class="facebook">f</i></a>
@@ -223,6 +230,7 @@
         </div>
     </div>
     <div class="six columns" >
+      <div id="alert"></div>
       <div id ="success"></div>  
       <form id="Imagedata">
           <div class="form-group" id="firsname">
@@ -238,7 +246,7 @@
             <input type = "hidden" name ="puzzlename" value = "<?php echo substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>">
             <input type = "hidden" name ="signwithpuzzleaccount" id ="signwithpuzzleaccount" value = "">
             <div class="form-group text-center">
-              <button type="submit" class="btn button-sign">Submit</button><button type="submit" class="btn button-sign" id="puzelacount" name="puzzle" value = "1">Signup with Puzel Account</button>
+              <button type="submit" class="btn button-sign" id="normalsign">Submit</button><button type="submit" class="btn button-sign" id="puzelacount" name="puzzle" value = "1">Signup with Puzel Account</button>
             </div>
         </form>
     </div>

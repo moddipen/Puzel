@@ -128,35 +128,8 @@ class AppController extends Controller
       }
 
 
-    // send email 
-    // public function sendemail($mail)
-    // {
-    //     $json = json_encode(array(
-    //     'From' => $mail['from'],
-    //     'To' => $mail['to'],
-    //     'Subject' => $mail['subject'],
-    //     'HtmlBody' => $mail['html_body'],
-    //     'TextBody' =>$mail['text_body'],
-    //     'ReplyTo' => $mail['reply_to'],
-    //     ));
-    //     $ch = curl_init();
-    //       curl_setopt($ch, CURLOPT_URL, 'http://api.postmarkapp.com/email');
-    //       curl_setopt($ch, CURLOPT_POST, true);
-    //       curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-    //             'Accept: application/json',
-    //             'Content-Type: application/json',
-    //             'X-Postmark-Server-Token: ' .Configure::read("POSTMARKSERVERTOKEN")
-    //             ));
-    //     curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
-    //     $response = json_decode(curl_exec($ch), true);
-    //     $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    //     curl_close($ch);
-
-    //     return $http_code === 200;
-    // }
-
     // Send email with template
-    public function sendemail($mail)
+    public function sendemail($mail,$puzzle_id = null,$layout = null)
     {
         $json = json_encode(array(
         'TemplateId'=>$mail['templateid'],
@@ -181,10 +154,13 @@ class AppController extends Controller
                 'X-Postmark-Server-Token: ' .Configure::read("POSTMARKSERVERTOKEN")
                 ));
         curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
-        $response = json_decode(curl_exec($ch), true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+       $response = json_decode($response);
+        if($puzzle_id != NULL && $layout != NULL){$response->Id = 1;}
         $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
-        return $http_code === 200;
+        echo json_encode($response);
     }
 
     
