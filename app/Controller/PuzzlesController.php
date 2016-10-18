@@ -46,6 +46,14 @@ class  PuzzlesController  extends AppController {
  *	or MissingViewException in debug mode.
  */
 	
+	function beforeFilter()
+	 {
+	 	parent::beforeFilter();
+	 }
+
+
+
+
 /**
 	Business index page 
 */	

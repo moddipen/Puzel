@@ -133,8 +133,11 @@
                                     return false">
                                     <i class="fa fa-envelope"></i>
                                 </a> -->
-                                <a class="icon-gplus" href ="https://plus.google.com/share?url=http://puzel.stage.n-framescorp.com/<?php echo $value['Puzzle']['Puzzle']['name'];?>&title=<?php echo $value['Puzzle']['Puzzle']['name'];?>" onclick="return !window.open(this.href, 'Google', 'width=640,height=580')"><i class="fa fa-envelope"></i></a>
-                               &nbsp;&nbsp;<a href="https://login.live.com/login.srf" target="_blank" style="color:white;"><i class="fa fa-windows"></i></a>
+                                <!-- <a class="icon-gplus" href ="https://plus.google.com/share?url=http://puzel.stage.n-framescorp.com/<?php echo $value['Puzzle']['Puzzle']['name'];?>&title=<?php echo $value['Puzzle']['Puzzle']['name'];?>" onclick="return !window.open(this.href, 'Google', 'width=640,height=580')"><i class="fa fa-envelope"></i></a>
+                               &nbsp;&nbsp;<a href="https://login.live.com/login.srf" target="_blank" style="color:white;"><i class="fa fa-windows"></i></a> -->
+                               <a class="icon-gplus" href ="https://mail.google.com/mail/?view=cm&fs=1&to=&su=Share new puzzle <?php echo $value['Puzzle']['Puzzle']['name'];?>&body=http://puzel.stage.n-framescorp.com/<?php echo $value['Puzzle']['Puzzle']['name'];?>" onclick="return !window.open(this.href, 'Google', 'width=640,height=580')"><i class="fa fa-envelope"></i></a>
+                               &nbsp;&nbsp;
+                               <a href="http://mail.live.com/default.aspx?rru=compose&to=&subject=Share new puzzle <?php echo $value['Puzzle']['Puzzle']['name'];?>&body=http://puzel.stage.n-framescorp.com/<?php echo $value['Puzzle']['Puzzle']['name'];?>" onclick="return !window.open(this.href, 'Outlook', 'width=640,height=580')" target="_blank" style="color:white;"><i class="fa fa-windows"></i></a>
                             
                           </td>
                           </tr>

@@ -51,6 +51,7 @@ class UsersController extends AppController {
 
 	 function beforeFilter()
 	 {
+	  	//parent::beforeFilter();
 	  	$signup = 0;
 		$this->set("Signup",$signup);
 	  	$this->Auth->allow(array('index','contact','user_register','user_login','about','business','user_forgetpassword','admin_login','user_reset'));
@@ -200,7 +201,7 @@ class UsersController extends AppController {
               	else
               	{
               		$this->Session->setFlash(__('Login successfully!!....', true), 'default', array('class' => 'alert alert-success'));
-              		return $this->redirect(array('controller'=>'puzzles','action'=>'index'));	
+              		return $this->redirect(array('controller'=>'puzzles','action'=>'index','user'=>true));	
               	}	
                 
             }
@@ -265,13 +266,6 @@ class UsersController extends AppController {
 				if($this->User->save($this->request->data))
 				{
 					$this->Auth->login();
-					// $email = array(
-	    //           			"from"=> "support@puzel.co",
-	    //           			'to'=>$this->Auth->user('User.email'),
-	    //           			'subject'=>"Signup successfully",
-	    //           			'text_body'=>"You have signup Successfully",
-	    //           			'reply_to'=>"support@puzel.co",
-	    //           			'html_body'=>"<p>You have signup successfully</p>" );
 					$email = array(
               			"templateid"=>1007701,
               			"name"=>$this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
@@ -295,9 +289,14 @@ class UsersController extends AppController {
 	              		{	
 		              		$this->Session->setFlash(__('Signup Successfully!!....', true), 'default', array('class' => 'alert alert-success'));
 		              		return $this->redirect(array('controller'=>'puzzles','action'=>'index','business'=>true));
-	              		 }
+	              		}
+	              		else
+	              		{
+	              			$this->Session->setFlash(__('Email not sent !!....', true), 'default', array('class' => 'alert alert-danger'));
+		              		return $this->redirect(array('controller'=>'puzzles','action'=>'index','business'=>true));	
+	              		}	
 	              	}
-	              	else//if($this->Auth->user('User.usertype') == 0)
+	              	else
 	              	{
 	     	         	if($this->sendemail($email))
 						{
@@ -306,7 +305,7 @@ class UsersController extends AppController {
 						}
 						else
 						{
-						// 	//$this->Session->setFlash(__('Email not sent !!....', true), 'default', array('class' => 'alert alert-danger'));
+							$this->Session->setFlash(__('Email not sent !!....', true), 'default', array('class' => 'alert alert-danger'));
 	              			return $this->redirect(array('controller'=>'puzzles','action'=>'index','user'=>true));			
 						}		    
 						
@@ -489,9 +488,7 @@ public function user_reset($token=null)
 	{
 		$this->layout = 'dashboard';
 		$this->set("title","Profile Page");
-		
 		$user = $this->User->find('first',array('conditions'=>array('User.id'=>$this->Auth->user('id'))));
-		// echo "<pre>";print_r($this->Auth->user());exit;   
 		$this->set("User",$user);
 
 		if(!empty($this->request->data))

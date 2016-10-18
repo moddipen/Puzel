@@ -43,7 +43,7 @@ class AppController extends Controller
 
 
 
-	 function beforeFilter()
+	   function beforeFilter() 
 	 {
         $this->Auth->authenticate = array('Form');
         $this->Auth->autoRedirect = false;
@@ -93,6 +93,8 @@ class AppController extends Controller
     	     }
             elseif ($this->params['prefix'] == 'v')
              {
+                // echo "<pre>";
+                // print_R($this->params);exit;
                 $this->layout = "visitor";
              }  
     	    else

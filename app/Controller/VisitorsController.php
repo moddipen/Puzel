@@ -20,6 +20,7 @@
 
 App::uses('AppController', 'Controller');
 App::uses('CakeEmail', 'Network/Email');
+App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 
 /**
  * Static content controller
@@ -37,6 +38,7 @@ class  VisitorsController  extends AppController {
  * @var array
  */
 	public $uses = array('Visitor','Puzzle','User','Order','Support','Image');
+	 public $components = array('Session','RequestHandler');
 	var $name = 'Visitors';
 /**
  * Displays a view
@@ -47,10 +49,11 @@ class  VisitorsController  extends AppController {
  */
 	function beforeFilter()
 	 {
+	 	//parent::beforeFilter();
 	 	$signup = 0;
 		$this->set("Signup",$signup);
 		// /$this->layout = 'default';
-	 	$this->Auth->allow('v_dynamic','process','fetchimage','generateRandomString');
+	 	$this->Auth->allow('v_dynamic','process','fetchimage','generateRandomString');	 		
 	 }
 
 
@@ -106,20 +109,15 @@ class  VisitorsController  extends AppController {
 							if($update_puzzle)
 							{
 								$password_random =$this->generateRandomString();
-								// Create a message and send it
-								// $email = new CakeEmail();
-								// $email->config('smtp');
-								// $email->to($user['User']['email'],$user['User']['firstname'].' '.$user['User']['lastname']);
-							 //    $email->subject('Signup Successfully');
-							     $message = "You have signup Successfully \n\n\n  Your password is :" .$password_random;
-							 //    if($email->send($message))
-								// {
+							    
+							    $message = "You have signup Successfully \n\n\n  Your password is :" .$password_random;
 								$useremail = array(
 					              			"templateid"=>1007661,
 					              			"name"=>$user['User']['firstname'].' '.$user['User']['lastname'],
 					              			"TemplateModel"=> array(
 											    "user_name"=> $user['User']['firstname'].' '.$user['User']['lastname'],
 											    "product_name"=>"Signup Successfully",
+											    "company"=>array("name"=>""),
 												"action_url"=>$message),
 											"InlineCss"=> true, 
 					              			"from"=> "support@puzel.co",
@@ -128,6 +126,9 @@ class  VisitorsController  extends AppController {
 					              			);	
 								if($this->sendemail($useremail))
 				    			{
+				    				$hasher = new SimplePasswordHasher();
+            						//$newpassword_random = $hasher->hash($password_random);
+
 									$update = array(
 										'id'=>$user['User']['id'],
 										'password'=>$password_random);
@@ -202,6 +203,7 @@ class  VisitorsController  extends AppController {
 		$this->layout = "visitor";
 		$this->set('title',$name);
 		$name = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.name'=>$name)));
+		// $this->set('comname',$companyname);
 		$this->set('PuzzleData',$name);
 		$image = $this->Image->find('all',array('conditions'=>array('Image.puzzle_id'=>$name['Puzzle']['id'])))	;
 		$this->set('image',$image);
