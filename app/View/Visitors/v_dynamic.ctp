@@ -54,8 +54,8 @@
                           }
                           else
                           {
-                            $("#success").after("<div style='background:rgba(169,68,66,0.5);color:#A94442;font-size:14px;padding:20px'>"+data.message+"</div>");
-                            $("#success").show().delay(3000).fadeOut(function(){ $(this).remove(); });
+                            $("#alert").after("<p style='background:rgba(169,68,66,0.5);color:#A94442;font-size:14px;padding:20px'>"+data.message+"</p>");
+                            $("p").show().delay(3000).fadeOut(function(){ $(this).remove(); });
                           }  
                        }
                      });
