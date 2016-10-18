@@ -42,7 +42,7 @@
 
                       <div class="actions" style="padding: 0px 20px;">
                      
-                        <?php  echo $this->html->link( '',array('action' => 'delete',$Conversation[0]['Support']['id']),array('class'=>'fa fa-trash-o','style'=>"color:white;"),' Do you want to delete this record?');?><button type="button" class="btn btn-default pull-right" style="margin-top: -53px;"></button>
+                        <?php  echo $this->html->link('<button type="button" class="btn btn-default pull-right" style="margin-top: -53px;"></button>',array('action' => 'delete',$Conversation[0]['Support']['id']),array('class'=>'fa fa-trash-o','style'=>"color:white;"),' Do you want to delete this record?');?>
 
                       </div>
                     </div>
