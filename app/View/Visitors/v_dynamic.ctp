@@ -47,12 +47,15 @@
                                  {
                                     $("#puzzle").html(data);
                                     $("#Imagedata")[0].reset();
+                                    $("#success").html("<div style='background:rgba(60,118,61,0.5);color:#3C763D;font-size:14px;padding:20px'> Register successfully.</div>");
+                                    $("#success").show().delay(3000).fadeOut();
                                  }
                             });
                           }
                           else
                           {
-                            $("#alert").after("<p>"+data.message+"</p>")
+                            $("#alert").after("<p style='background:rgba(169,68,66,0.5);color:#A94442;font-size:14px;padding:20px'>"+data.message+"</p>");
+                            $("p").show().delay(3000).fadeOut();
                           }  
                        }
                      });
@@ -220,7 +223,7 @@
         </div>
     </div>
     <div class="six columns" >
-        
+      <div id ="success"></div>  
       <form id="Imagedata">
           <div class="form-group" id="firsname">
             <input type="text" name="firstname" id="fname" class="form-control" placeholder="First Name"  required>
@@ -259,4 +262,3 @@ else
 
 });
 </script>
- 
