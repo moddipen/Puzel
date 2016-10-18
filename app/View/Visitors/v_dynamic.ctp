@@ -48,14 +48,14 @@
                                     $("#puzzle").html(data);
                                     $("#Imagedata")[0].reset();
                                     $("#success").html("<div style='background:rgba(60,118,61,0.5);color:#3C763D;font-size:14px;padding:20px'> Register successfully.</div>");
-                                    $("#success").show().delay(3000).fadeOut();
+                                    $("#success").show().delay(3000).fadeOut(function(){ $(this).remove(); });
                                  }
                             });
                           }
                           else
                           {
-                            $("#alert").after("<p style='background:rgba(169,68,66,0.5);color:#A94442;font-size:14px;padding:20px'>"+data.message+"</p>");
-                            $("p").show().delay(3000).fadeOut();
+                            $("#success").after("<div style='background:rgba(169,68,66,0.5);color:#A94442;font-size:14px;padding:20px'>"+data.message+"</div>");
+                            $("#success").show().delay(3000).fadeOut(function(){ $(this).remove(); });
                           }  
                        }
                      });
