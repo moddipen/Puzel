@@ -190,7 +190,7 @@ class AppController extends Controller
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($ch);
         $response = json_decode($response);
-        if($puzzle_id != NULL && $layout != NULL){$response->Id = 1;}
+        if($puzzle_id != NULL && $layout != NULL){$response->Id = $puzzle_id;}
         $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
         echo json_encode($response);
