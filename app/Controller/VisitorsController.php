@@ -123,7 +123,7 @@ class  VisitorsController  extends AppController {
 					              			'to'=>$user['User']['email'],
 					              			'reply_to'=>"support@puzel.co"
 					              			);	
-								if($this->sendemail($useremail,$update_puzzle['Image']['puzzle_id'],"Front"))
+								if($this->hostedemail($useremail,$update_puzzle['Image']['puzzle_id'],"Front"))
 				    			{
 				    				$update = array(
 										'id'=>$user['User']['id'],
