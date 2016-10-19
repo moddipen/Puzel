@@ -16,6 +16,11 @@ class User extends AppModel {
                 'rule' => array('notEmpty'),
                 'message' => 'Please enter your last name.'
             )),
+           'company_name' => array(
+                'required' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'Please enter your company name.'
+            )),
            'email'=>array(
                 'Valid email'=>array(
                 'rule'=>array('email'),
@@ -29,6 +34,13 @@ class User extends AppModel {
                 'length' => array(
                 'rule'      => array('notEmpty'),
                 'message'   => ' Please enter password',
+                'allowEmpty' => false
+                ),
+            ),
+            'confirm_password'=>array(
+                'length' => array(
+                'rule'      => array('notEmpty'),
+                'message'   => ' Please enter confirm password',
                 'allowEmpty' => false
                 ),
             ));

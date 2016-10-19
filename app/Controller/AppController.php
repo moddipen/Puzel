@@ -127,8 +127,10 @@ class AppController extends Controller
 
       }
 
-
-    // Send email with template
+/**
+      // Send email with template
+*/
+  
     public function sendemail($mail)
     {
         $json = json_encode(array(
@@ -162,6 +164,9 @@ class AppController extends Controller
         return json_encode($response);
     }
 
+/**
+    Host page email code
+*/
     public function hostedemail($mail,$puzzle_id = null,$layout = null)
     {
         $json = json_encode(array(

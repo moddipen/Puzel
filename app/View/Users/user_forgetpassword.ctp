@@ -7,6 +7,7 @@
        <div class="inside-block">
             <img src="<?php echo $this->webroot;?>img/logo.png" alt="" class="logo">
             
+             <?php echo $this->Session->flash();?>
             <!-- <form id="form-signin" class="form-signin" > -->
             <?php echo $this->form->create('User',array('action'=>'forgetpassword' , 'class'=>'form-signin','id'=>'form-signin'))?>
               <section>

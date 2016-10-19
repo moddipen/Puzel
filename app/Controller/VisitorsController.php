@@ -109,7 +109,7 @@ class  VisitorsController  extends AppController {
 							{
 								$password_random =$this->generateRandomString();
 							    
-							    $message = "You have signup Successfully \n\n\n  Your password is :" .$password_random;
+							    $message = "You have signup successfully \n\n\n  your password is :" .$password_random;
 								$useremail = array(
 					              			"templateid"=>1007661,
 					              			"name"=>$user['User']['firstname'].' '.$user['User']['lastname'],
@@ -123,13 +123,14 @@ class  VisitorsController  extends AppController {
 					              			'to'=>$user['User']['email'],
 					              			'reply_to'=>"support@puzel.co"
 					              			);	
-								if($this->hostedemail($useremail,$update_puzzle['Image']['puzzle_id'],"Front"))
-				    			{
-				    				$update = array(
+
+								$update = array(
 										'id'=>$user['User']['id'],
 										'password'=>$password_random);
-									$this->User->save($update);
-								}
+								if($this->User->save($update))
+								{
+									$this->hostedemail($useremail,$update_puzzle['Image']['puzzle_id'],"Front")	;
+								}	
 							}
 						}		
 					}	
@@ -208,16 +209,112 @@ class  VisitorsController  extends AppController {
 /**
 	Generate rndom string
 */			
-function generateRandomString($length = 10) {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $charactersLength = strlen($characters);
-    $randomString = '';
-    for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, $charactersLength - 1)];
-    }
-    return $randomString;
-}
+	public function generateRandomString($length = 10)
+	{
+	    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	    $charactersLength = strlen($characters);
+	    $randomString = '';
+	    for ($i = 0; $i < $length; $i++) {
+	        $randomString .= $characters[rand(0, $charactersLength - 1)];
+	    }
+	    return $randomString;
+	}
 			
+/**
+	Business Data Captured
+*/			
+	public function business_data()
+	{
+		$this->set('title',"Data Captured");
+		$this->layout = 'dashboard';
+		// Get Puzzle list 
+		$this->Puzzle->recursive = -1;
+		$puzzle_list = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));	
+   		
+   		foreach ($puzzle_list as $key =>  $puzzle)
+   		{
+   			// Get Visitor list
+   			$list = $this->Visitor->find('all',array('conditions'=>array('Visitor.puzzle_id'=>$puzzle['Puzzle']['id'])));
+   			$name = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$puzzle['Puzzle']['id'])));
+   			
+   			foreach($list as $key => $data)
+   			{
+   				// Get puzzle name 
+   				$list[$key]['Puzzle'] = $name['Puzzle']['name']; 	
+   			}	
+		}
+   		$this->set('Data',$list);
+	}
+
+	// public function business_csv()
+	// {
+	// 	$this->autoRender = false;
+	// 	header('Content-Type: text/csv; charset=utf-8');
+	// 	header('Content-Disposition: attachment; filename=data.csv');
+
+	// 	// create a file pointer connected to the output stream
+	// 	$output = fopen('php://output', 'w');
+
+	// 	// output the column headings
+	// 	fputcsv($output, array('FirstName','LastName','PuzleName','Email'));
+
+	// 	$this->Puzzle->recursive = -1;
+	// 	$puzzle_list = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));	
+   		
+ //   		foreach ($puzzle_list as $key =>  $puzzle)
+ //   		{
+ //   			// Get Visitor list
+ //   			$list = $this->Visitor->find('all',array('conditions'=>array('Visitor.puzzle_id'=>$puzzle['Puzzle']['id'])));
+ //   			$name = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$puzzle['Puzzle']['id'])));
+   			
+ //   			foreach($list as $key => $data)
+ //   			{
+ //   				// Get puzzle name 
+ //   				$data['Visitor']['puzzle_id'] = $name['Puzzle']['name']; 
+	// 			$data['Visitor']['firstname'];
+	// 			$data['Visitor']['lastname'];
+	// 			$data['Visitor']['email'];
+	// 		}	
+	// 	}
+	// 	fputcsv($output,$data);			
+
+	// 	// loop over the rows, outputting them
+		
+
+	// 	// Close the file
+	// 	fclose($output);
+	// }
+
+	// public function business_export()
+	// {
+
+	// 	$this->response->download("export.csv");
+
+	// 	$this->Puzzle->recursive = -1;
+	// 	$puzzle_list = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));	
+	// 	foreach ($puzzle_list as $key =>  $puzzle)
+ //   		{
+ //   			// Get Visitor list
+ //   			$list = $this->Visitor->find('all',array('conditions'=>array('Visitor.puzzle_id'=>$puzzle['Puzzle']['id'])));
+ //   			$name = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$puzzle['Puzzle']['id'])));
+   			
+ //   			foreach($list as $key => $data)
+ //   			{
+ //   				// Get puzzle name 
+ //   				$data['Visitor']['puzzle_id'] = $name['Puzzle']['name']; 
+	// 			// $data['Visitor']['firstname'];
+	// 			// $data['Visitor']['lastname'];
+	// 			// $data['Visitor']['email'];
+	// 		}	
+	// 	}
+	// 	$this->set(compact('data'));
+
+	// 	$this->layout = 'ajax';
+
+	// 	return;
+
+	// }
+
 
 
 

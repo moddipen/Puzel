@@ -46,13 +46,13 @@
                       <div class="form-group">
                         <label class="col-sm-1 control-label">Name</label>
                         <div class="col-sm-6">
-                          <label class="control-label">Tony Varghese</label>
+                          <label class="control-label"><?php echo $this->Session->read('ADMINDETAIL.User.firstname').' '.$this->Session->read('ADMINDETAIL.User.lastname');?></label>
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="col-sm-1 control-label">Company</label>
                         <div class="col-sm-6">
-                          <label class="control-label">N-Frames LLC</label>
+                          <label class="control-label"><?php echo $this->Session->read('ADMINDETAIL.User.company_name');?></label>
                         </div>
                       </div>
                       <div class="form-group">
@@ -61,8 +61,6 @@
                         <?php echo $this->Form->input('Support.subject',array('label'=>false,'div'=>false,'class'=>'form-control','placeholder'=>'Enter subject'));?>
                         </div>
                       </div>
-                      
-
                       <div class="form-group">
                         <label for="input05" class="col-sm-1 control-label">Message</label>
                         <div class="col-sm-6">
@@ -70,7 +68,7 @@
                           <?php echo $this->Form->input('Support.message',array('label'=>false,'div'=>false,'class'=>'form-control','rows'=>"6",'placeholder'=>'Enter Message'));?>
                         </div>
                       </div>
-
+                      <input type ="hidden" name = "data[Support][receiver_id]" value = <?php echo $this->Session->read('ADMINDETAIL.User.id');?>>
                       <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-6">
                           <button type="submit" class="btn btn-oranges">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;

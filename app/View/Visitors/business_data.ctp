@@ -1,7 +1,4 @@
-<style type="text/css">
-    textarea.note-codable{ display: none;}
-    .btn-toolbar{margin-left:0px !important; }
-</style>
+
 
       
                 
@@ -12,16 +9,18 @@
           <div class="main">
             <!-- cards -->
             <?php echo $this->element('business/header');?>
-               <!-- /cards -->
-            <?php echo $this->Session->flash();?> 
+            <!-- /cards -->
+            
+             <!-- /cards -->
+            
              <div class="pagesubheader">
             
 
-              <h2><i class="fa fa-puzel-icon-left-big"></i> Puzel</h2>
+              <h2><i class="fa fa-database"></i> Data Captured</h2>
 
             </div>
 
-            <div id="alert"></div>
+
             <!-- row -->
             <div class="row">
 
@@ -102,8 +101,8 @@
                       </form>
                     </div>
                     <div class="col-md-2">
-                      <div class="form-group">
-                          <input type="button" value="Create Puzel" onClick="location.href='<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/create';" class="btn btn-oranges pull-right">
+                      <div class="form-group iconwithtext">
+                        <i class="fa fa-downloads"></i> <span class="text">Download as CSV</span>
                         </div>
                     </div>
                   </div>
@@ -111,55 +110,26 @@
                       <table class="table nomargin text-center">
                         <thead>
                           <tr>
-                            <th class="text-center">Date</th>
+                            <th class="text-center">First Name</th>
+                            <th class="text-center">Last Name</th>
                             <th class="text-center">Puzel Name</th>
-                            <th class="text-center">Pieces Used</th>
-                            <th class="text-center">Balance Pieces</th>
-                            <th class="text-center">Data Captured</th>
-                            <th class="text-center">Options</th>
+                            <th class="text-center">Email Address</th>
                           </tr>
                         </thead>
-                        <tbody id="content1">
-                        <?php if(!empty($Puzzel))
-                        {
-                          foreach ($Puzzel as $puzel) {  
-                           
-
-                            ?>
-                          <tr>
-                            <td><?php echo date('m/d/Y',strtotime($puzel['Puzzle']['created']))?></td>
-                            <td><?php echo $puzel['Puzzle']['name']?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i></td>
-                            <td><?php echo $puzel['Puzzle']['pieces']?></td>
-                            <td><?php echo $puzel['Show']?></td>
-                            <td><?php echo $puzel['Hide']?>&nbsp;&nbsp; <i class="fa fa-download-16px"></i>&nbsp;&nbsp;<i class="fa fa-eye"></i></td>
-                            <td class="minipadding controls">
-                              <input type ="hidden" value = "<?php echo $puzel['Puzzle']['id'];?>" class ="puzelid" >
-                              <div class="col-xs-5 text-right"><i class="fa fa-pencil"></i></div>
-                              <div class="col-xs-7">
-                                <div class="onoffswitch green small">
-                                  <?php 
-                                    // check puzzle s activate or not
-                                    if($puzel['Puzzle']['status'] == 0)
-                                    {
-                                      $puzzle = "checked='checked'";
-                                    }
-                                    else
-                                     {
-                                       $puzzle = '';
-                                     } 
-
-                                  ?> 
-                                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="onoffswitch<?php echo $puzel['Puzzle']['id'];?>" <?php echo $puzzle;?> value = "<?php echo $puzel['Puzzle']['id'];?>">
-                                  <label class="onoffswitch-label" for="onoffswitch<?php echo $puzel['Puzzle']['id'];?>">
-                                    <span class="onoffswitch-inner"></span>
-                                    <span class="onoffswitch-switch"></span>
-                                  </label>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <?php }}?>
-                        </tbody>
+                        <tbody id="black">
+                          <?php if(!empty($Data))
+                           {
+                            foreach($Data as $list)
+                              {
+                                ?>
+                                <tr>
+                                  <td><?php echo $list['Visitor']['firstname'];?></td>
+                                  <td><?php echo $list['Visitor']['lastname'];?></td>
+                                  <td><?php echo $list['Puzzle'];?></td>
+                                  <td><?php echo $list['Visitor']['email'];?></td>
+                                </tr>
+                          <?php }} ?>
+                         </tbody>
                       </table>
                     </div>
                   </div>
@@ -168,9 +138,9 @@
 
                   <!-- tile footer -->
                   <div class="tile-footer text-center">
-                    <ul class="pagination pagination-sm nomargin pagination-custom" id="pagination">
-                    </ul>
-                  </div>
+                      <ul class="pagination pagination-sm nomargin pagination-custom" id="myPager">
+                      </ul>
+                    </div>
                   <!-- /tile footer -->
 
 
@@ -190,20 +160,32 @@
               
               
             </div>
-            <!-- /row -->
+
 
           </div>
           <!-- /content container -->
-     </div>
-     
+
+
+
+
+
+
+        </div>
+        <!-- Page content end -->
+
+
+
+
+ 
 <script type="text/javascript">
-          /* pagination plugin */
+
+/* pagination plugin */
 $.fn.pageMe = function(opts){
     var $this = this,
         defaults = {
-            perPage: 10,
+            perPage: 5,
             showPrevNext: true,
-            numbersPerPage: 2,
+            numbersPerPage: 1,
             hidePageNumbers: false
         },
         settings = $.extend(defaults, opts);
@@ -211,7 +193,7 @@ $.fn.pageMe = function(opts){
     var listElement = $this;
     var perPage = settings.perPage; 
     var children = listElement.children();
-    var pager = $('#pagination');
+    var pager = $('.pagination');
     
     if (typeof settings.childSelector!="undefined") {
         children = listElement.find(settings.childSelector);
@@ -311,52 +293,17 @@ $.fn.pageMe = function(opts){
     
     }
 };
-/* end plugin */
-
 $(document).ready(function(){
     
-  $('#content1').pageMe({pagerSelector:'#pagination',childSelector:'tr',showPrevNext:true,hidePageNumbers:false,perPage:10});
+  $('#black').pageMe({pagerSelector:'#myPager',childSelector:'tr',showPrevNext:true,hidePageNumbers:false,perPage:10});
     
 });
-       
-// On off   button code  
 
-    $('input[type="checkbox"]').click(function()
-    {
-      // if button activate
-      if (this.checked)
-      {
-        $.ajax(
-        {
-          url: "puzzles/active/"+this.value,
-          type: "post",
-          datatype:"json",
-          data: {'id':this.value} ,
-          success: function (data)
-          {
-              // Button message 
-              $("#alert").html("<div style='background:rgba(60,118,61,0.5);color:#3C763D;font-size:14px;padding:20px'>Puzzle activated</div>");
-              $("#alert").show().delay(3000).fadeOut();
-          },
-        }); 
-      }
-      // when button is deactivate
-      else
-      {
-        $.ajax(
-        {
-          url: "puzzles/deactive/"+this.value,
-          type: "post",
-          datatype:"json",
-          data: {'id':this.value} ,
-          success: function (data)
-          {
-            // button alert message 
-            $("#alert").html("<p style='background:rgba(169,68,66,0.5);color:#A94442;font-size:14px;padding:20px;margin-bottom:10px;'>Puzzle deactivate</p>");
-            $("#alert").show().delay(3000).fadeOut();
-          }
-        });   
-      } 
-    });
+</script>       
 
-</script>      
+
+
+
+
+
+      

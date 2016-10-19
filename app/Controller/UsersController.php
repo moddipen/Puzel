@@ -278,12 +278,13 @@ class UsersController extends AppController {
               			'to'=>$this->Auth->user('email'),
               			'reply_to'=>"support@puzel.co"
               			);	
-					if($this->Auth->user('User.usertype') == 2)
+
+					if($this->Auth->user('usertype') == 2)
 	              	{
 	              		$this->Session->setFlash(__('Signup Successfully!!....', true), 'default', array('class' => 'alert alert-success'));
 	              		return $this->redirect(array('controller'=>'puzzles','action'=>'index','admin'=>true));
 	              	}	
-	              	elseif($this->Auth->user('User.usertype') == 1)
+	              	elseif($this->Auth->user('usertype') == 1)
 	              	{
 	              		if($this->sendemail($email))
 	              		{	
@@ -371,11 +372,11 @@ class UsersController extends AppController {
 						if($this->sendemail($email))
 						{
 							$this->Session->setFlash(__('Please check your email ', true), 'default', array('class' => 'alert alert-success'));
-							return $this->redirect(array('controller'=>'users','action'=>'login'));
+							$this->redirect(array('controller'=>'users','action'=>'login'));
 						} 
 						else
 						{
-							$this->Session->setFlash('Problem during sending email','gmail',array('class'=>'alert alert-warning'));
+							$this->Session->setFlash('Problem during sending email','default',array('class'=>'alert alert-warning'));
 						}
 
 						//============EndEmail=============//
@@ -519,6 +520,44 @@ public function user_reset($token=null)
 		}
 	}			
 
+
+/**
+	Business Setting page 
+*/	
+	public function business_setting()
+	{
+		$this->layout = 'dashboard';
+		$this->set("title","Profile Page");
+		$user = $this->User->find('first',array('conditions'=>array('User.id'=>$this->Auth->user('id'))));
+		$this->set("User",$user);
+
+		if(!empty($this->request->data))
+		{
+			unset($this->User->validate['email']);
+			if($this->request->data['User']['newpassword'] == $this->request->data['User']['newpasswordrepeat'])
+			{
+				if($this->request->data['User']['newpassword'] == '')
+				{
+
+				}
+				else
+				{
+					$this->request->data['User']['password'] = $this->request->data['User']['newpassword'] ; 	
+				}	
+
+				$this->request->data['User']['id'] = $this->Auth->user('id');	 
+				if($this->User->save($this->request->data))
+				{
+					$this->Session->setFlash(__('Profile update successfully !!....', true), 'default', array('class' => 'alert alert-success'));		
+				}
+			}
+			else
+			{
+				$this->Session->setFlash(__('Password does not match !!....', true), 'default', array('class' => 'alert alert-danger'));
+			}	
+			
+		}
+	}			
 	
 
 

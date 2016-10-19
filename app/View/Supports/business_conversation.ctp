@@ -8,7 +8,7 @@
           <!-- content main container -->
           <div class="main">
             <!-- cards -->
-            <?php echo $this->element('user/header');?>
+            <?php echo $this->element('business/header');?>
 
                   <!-- /cards -->
             

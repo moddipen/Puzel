@@ -60,8 +60,8 @@ class  SupportsController  extends AppController {
 */	
 	public function business_index()
 	{
-		
 		$this->set("title","Support");
+		$this->set('Supports',$this->Support->find('all',array('conditions'=>array('OR'=>array('Support.receiver_id'=>$this->Auth->user('id'),'Support.sender_id'=>$this->Auth->user('id'))),'order'=>'Support.created desc')));
 	}
 
 /**
@@ -70,16 +70,60 @@ class  SupportsController  extends AppController {
 	public function business_add()
 	{
 		$this->set("title","Add Support");
+		$admin = $this->User->find('first',array('conditions'=>array('User.usertype'=>2)));
+		$this->Session->write("ADMINDETAIL",$admin);
 		if(!empty($this->request->data))
 		{
 			$user = $this->Auth->user();
-			$this->request->data['Support']['sender_id'] = $user['User']['id'];
+			$this->request->data['Support']['sender_id'] = $this->Auth->user('id');
 			$this->Support->create();
 			if($this->Support->save($this->request->data))
 			{
+				// Create a message and send it to admin 
+				$adminemail = array(
+              			"templateid"=>1007242,
+              			"name"=>$this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+              			"TemplateModel"=> array(
+						    "user_name"=> $this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+						    "company"=> array(
+						      	"name"=> $this->Auth->user('comapny_name')),
+							"product_name"=>$this->request->data['Support']['subject'],
+							"action_url"=>$this->request->data['Support']['message']),
+						"InlineCss"=> true, 
+              			"from"=> "support@puzel.co",
+              			'to'=>$admin['User']['email'],
+              			'reply_to'=>"support@puzel.co"
+              			);
+
+				// Create email to user self
+				if($this->sendemail($adminemail))
+				{	
+					$useremail = array(
+              			"templateid"=>1007245,
+              			"name"=>$this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+              			"TemplateModel"=> array(
+						    "user_name"=> $this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+						    "company"=> array(
+						      	"name"=> $this->Auth->user('comapny_name')),
+							"product_name"=>$this->request->data['Support']['subject'],
+							"action_url"=>$this->request->data['Support']['message']),
+						"InlineCss"=> true, 
+              			"from"=> "support@puzel.co",
+              			'to'=>$this->Auth->user('email'),
+              			'reply_to'=>"support@puzel.co"
+              			);	
 				
-				$this->Session->setFlash(__('Support Added!!....', true), 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('action'=>'index'));
+
+					if($this->sendemail($useremail))
+				    {
+						$this->Session->setFlash(__('Support Send to admin!!....', true), 'default', array('class' => 'alert alert-success'));
+						$this->redirect(array('action'=>'index','business'=>true));
+					}
+					else
+					{
+						$this->Session->setFlash(__('Error in Send email to admin!!....', true), 'default', array('class' => 'alert alert-danger'));
+					}
+				}			
 			}
 			else
 			{
@@ -87,8 +131,6 @@ class  SupportsController  extends AppController {
 			}	
 			
 		}
-		
-		
 	}	
 			
 /**
@@ -116,7 +158,7 @@ class  SupportsController  extends AppController {
 			{
 				
 				$this->Session->setFlash(__('Support Added!!....', true), 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('action'=>'index'));
+				$this->redirect(array('action'=>'index','admin'=>true));
 			}
 			else
 			{
@@ -136,7 +178,7 @@ class  SupportsController  extends AppController {
 			if($this->Support->delete($id))
 			{	
 				$this->Session->setFlash(__('Delete successfully!!....', true), 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('action'=>'index'));
+				$this->redirect(array('action'=>'index','admin'=>true));
 			}
 			else
 			{
@@ -211,7 +253,7 @@ class  SupportsController  extends AppController {
 					if($this->sendemail($useremail))
 				    {
 						$this->Session->setFlash(__('Support Send to admin!!....', true), 'default', array('class' => 'alert alert-success'));
-						$this->redirect(array('action'=>'index'));
+						$this->redirect(array('action'=>'index','user'=>true));
 					}
 					else
 					{
@@ -237,7 +279,7 @@ class  SupportsController  extends AppController {
 			if($this->Support->delete($id))
 			{	
 				$this->Session->setFlash(__('Delete successfully!!....', true), 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('action'=>'index'));
+				$this->redirect(array('action'=>'index','user'=>true));
 			}
 			else
 			{
@@ -299,7 +341,7 @@ class  SupportsController  extends AppController {
 				if($this->sendemail($mail))
 				{
 					$this->Session->setFlash(__('Support Send !!....', true), 'default', array('class' => 'alert alert-success'));
-					$this->redirect(array('action'=>'index'));
+					$this->redirect(array('action'=>'index','admin'=>true));
 				}	
 			}
 			else
@@ -329,13 +371,6 @@ class  SupportsController  extends AppController {
 			if($this->Support->save($this->request->data))
 			{
 				// Create a message and send it to admin 
-				// $email = array(
-	   //            			"from"=> "support@puzel.co",
-	   //            			'to'=>$support['Receiver']['email'],
-	   //            			'subject'=>$this->request->data['Support']['subject'],
-	   //            			'text_body'=>"User ".$this->Auth->user('firstname').' '.$this->Auth->user('lastname'). "reply support request  \n\n\n".$this->request->data['Support']['message'],
-	   //            			'reply_to'=>"support@puzel.co",
-	   //            			'html_body'=>"<p>User ".$this->Auth->user('firstname').' '.$this->Auth->user('lastname'). "reply support request  \n\n\n".$this->request->data['Support']['message']."</p>" );	
 				$email = array(
               			"templateid"=>1007227,
               			"name"=>$this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
@@ -354,7 +389,7 @@ class  SupportsController  extends AppController {
 				if($this->sendemail($email))
 				{
 					$this->Session->setFlash(__('Support Send !!....', true), 'default', array('class' => 'alert alert-success'));
-					$this->redirect(array('action'=>'index'));
+					$this->redirect(array('action'=>'index','user'=>true));
 				}	
 			}
 			else
@@ -365,9 +400,89 @@ class  SupportsController  extends AppController {
 		}
 	}			
 
+/**
+	Vise versa Support message in user page 
+*/	
+	public function business_conversation($id= Null)
+	{
+		$this->set('title',"Conversation");
+		if($id)
+		{
+			$viseversa  = $this->Support->find('all',array('conditions'=>array(array('OR'=>array('Support.receiver_id'=>$this->Auth->user('id'),'Support.sender_id'=>$this->Auth->user('id'),'Support.id'=>$id,'Support.reply_id'=>$id))),'order'=>'Support.created asc'));
+			$this->set("Conversation",$viseversa);
+		}
+	}
 
+/**
+	Business reply to Admin Support ticket 
+*/	
+	public function business_reply($reply_id = null)
+	{
+		$this->set("title","Reply Support");
+		
+		$support =$this->Support->find('first',array('conditions'=>array('Support.id'=>$reply_id)));
+		$this->Set("Support",$support);	
+		if(!empty($this->request->data))
+		{
+			$user = $this->Auth->user();
+			$this->request->data['Support']['sender_id'] = $this->Auth->user('id');
+			$this->request->data['Support']['receiver_id'] = $support['Support']['receiver_id'];
+			$this->request->data['Support']['subject'] = "RE :".$support['Support']['subject'];
+			$this->Support->create();
+			if($this->Support->save($this->request->data))
+			{
+				// Create a message and send it to admin 
+				$email = array(
+              			"templateid"=>1007227,
+              			"name"=>$this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+              			"TemplateModel"=> array(
+						    "user_name"=> $this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+						    "company"=> array(
+						      	"name"=> $this->Auth->user('company_name')),
+							"product_name"=>$support['Support']['subject'],
+							"action_url"=>$this->request->data['Support']['message']),
+						"InlineCss"=> true, 
+              			"from"=> "support@puzel.co",
+              			'to'=>$support['Receiver']['email'],
+              			'reply_to'=>"support@puzel.co"
+              			);	
 
+				if($this->sendemail($email))
+				{
+					$this->Session->setFlash(__('Support Send !!....', true), 'default', array('class' => 'alert alert-success'));
+					$this->redirect(array('action'=>'index','business'=>true));
+				}	
+			}
+			else
+			{
+				$this->Session->setFlash(__('Unable to add support!!....', true), 'default', array('class' => 'alert alert-danger'));
+			}	
+			
+		}
+	}			
 
+/**
+	Delete Support from business page 
+*/	
+	public function business_delete($id= Null)
+	{
+		if($id)
+		{
+			if($this->Support->delete($id))
+			{	
+				$this->Session->setFlash(__('Delete successfully!!....', true), 'default', array('class' => 'alert alert-success'));
+				$this->redirect(array('action'=>'index','business'=>true));
+			}
+			else
+			{
+				$this->Session->setFlash(__('Unable to Delete!!....', true), 'default', array('class' => 'alert alert-danger'));
+			}	
+		}
+		else
+		{
+			$this->Session->setFlash(__('No data found....', true), 'default', array('class' => 'alert alert-danger'));
+		}	
+	}		
 
 
 

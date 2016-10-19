@@ -3,7 +3,7 @@
 
           <!-- Branding -->
           <div class="navbar-header col-md-1">
-            <a class="navbar-brand" href="<?php echo Configure::read('SITE_USER_URL');?>/users/index">
+            <a class="navbar-brand" href="<?php echo Configure::read('SITE_USER_URL');?>/puzzles/index">
               
             </a>
             <div class="sidebar-collapse hidden-md hidden-lg">
@@ -28,7 +28,7 @@
                 <ul class="menu">
                   
                   <li>
-                    <a href="<?php echo Configure::read('SITE_USER_URL');?>/users/index">
+                    <a href="<?php echo Configure::read('SITE_USER_URL');?>/puzzles/index">
                       <i class="fa fa-home"></i> Dashboard
                       
                     </a>

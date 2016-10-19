@@ -72,7 +72,8 @@
                               <div class="row minipadding">
                                   <div class="col-sm-8">
                                       <div class="form-group">
-                                          <input type="text" class="form-control" value="http://puzel.stage.n-framescorp.com/<?php echo $this->Session->read('IMAGECAPTURE.Puzzel.name');?>" id="puzlename">
+                                        <?php $name = str_replace(' ','', $this->Session->read('IMAGECAPTURE.Puzzel.name'));?>
+                                          <input type="text" class="form-control" value="http://puzel.stage.n-framescorp.com/<?php echo $name;?>" id="puzlename">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
@@ -100,7 +101,7 @@
                   </div>
                   <input type ="hidden" value="<?php echo $this->Session->read('IMAGECAPTURE.Puzzel.base64');?>" name="data[Puzzle][image]">
                   <input type ="hidden" value="<?php echo $this->Session->read('IMAGECAPTURE.Puzzel.type');?>" name="data[Puzzle][type]">
-                  <input type ="hidden" value="<?php echo $this->Session->read('IMAGECAPTURE.Puzzel.name');?>" name="data[Puzzle][name]">
+                  <input type ="hidden" value="<?php echo $name;?>" name="data[Puzzle][name]">
                   <input type ="hidden" value="<?php echo $this->Session->read('IMAGECAPTURE.Puzzel.peice');?>" name="data[Puzzle][pieces]">
                   <input type ="hidden" value="<?php echo $this->Session->read('IMAGECAPTURE.Puzzel.transtion');?>" name="data[Puzzle][transtion]">
                   <input type ="hidden" value="<?php echo $this->Session->read('IMAGECAPTURE.Puzzel.source');?>" name="data[Puzzle][source]">

@@ -47,9 +47,9 @@ class  PuzzlesController  extends AppController {
  */
 	
 	function beforeFilter()
-	 {
+	{
 	 	parent::beforeFilter();
-	 }
+	}
 
 
 
@@ -132,60 +132,76 @@ class  PuzzlesController  extends AppController {
 	public function business_pieces()
 	{
 		$this->layout = '';
+		
 		if(!empty($this->request->data))
 		{
-			$multipleimagefolder = WWW_ROOT.'img/puzzel/'.$this->request->data['Puzzle']['name'];//WWW_ROOT."img\puzzel\";
-			$folder = mkdir($multipleimagefolder);
-			$URL = $_SERVER['DOCUMENT_ROOT'].'/app/webroot/img/puzzel/';
-			
-			$imageName = $this->request->data['Puzzle']['name'].".jpg";
-			$path = $URL.$imageName;
-			$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i','', $this->request->data['Puzzle']['image']));
-			$success = file_put_contents($path,$data);
-			
-			$get_image = Configure::read('SITE_URL').'img/puzzel/'.$imageName;
-			$read_image = exif_read_data($get_image) ;
-			
-			if(isset($read_image))
+			// check if name already existes 
+			$existname = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.name'=>$this->request->data['Puzzle']['name'])));
+			if(!empty($existname))
 			{
-			   $argv = $get_image;
+				$this->Session->setFlash(__('Puzzle name already exists, please choose another name', true), 'default', array('class' => 'alert alert-danger'));
+				$this->redirect(array('action'=>'index'));
 			}
+			else
+			{
+				// remove space from name 
+				$this->request->data['Puzzle']['name'] = str_replace(' ','', $this->request->data['Puzzle']['name']);
+				
+				// create image directory 
+				$multipleimagefolder = WWW_ROOT.'img/puzzel/'.$this->request->data['Puzzle']['name'];//WWW_ROOT."img\puzzel\";
+				$folder = mkdir($multipleimagefolder);
+				$URL = $_SERVER['DOCUMENT_ROOT'].'/app/webroot/img/puzzel/';
+				$imageName = $this->request->data['Puzzle']['name'].".jpg";
+				$path = $URL.$imageName;
+				$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i','', $this->request->data['Puzzle']['image']));
+				$success = file_put_contents($path,$data);
+				
+				$get_image = Configure::read('SITE_URL').'img/puzzel/'.$imageName;
+				$read_image = exif_read_data($get_image) ;
+				
+				if(isset($read_image))
+				{
+				   $argv = $get_image;
+				}
 
-			  $info = $read_image['FileName'];
+				  $info = $read_image['FileName'];
 
-			  $size = $read_image['FileSize'];
-			  $units = array( 'B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
-			  $power = $size > 0 ? floor(log($size, 1024)) : 0;
-			  $imgsize =  number_format($size / pow(1024, $power), 2, '.', ',') . ' ' . $units[$power];	
-			  $this->request->data['Puzzle']['user_id'] = $this->Auth->user('id');
-			  $this->Puzzle->create();
-			  if($this->Puzzle->save($this->request->data))
-			  {
-				  $width=$read_image['COMPUTED']['Width'];
-				  $height=$read_image['COMPUTED']['Height'];
-				  $image_type =$read_image['MimeType'];
-				  $peices = $this->request->data['Puzzle']['pieces'];
+				  $size = $read_image['FileSize'];
+				  $units = array( 'B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+				  $power = $size > 0 ? floor(log($size, 1024)) : 0;
+				  $imgsize =  number_format($size / pow(1024, $power), 2, '.', ',') . ' ' . $units[$power];	
+				  $this->request->data['Puzzle']['user_id'] = $this->Auth->user('id');
+				  
+				  // save single image in puzzle tabel
+				  $this->request->data['Puzzle']['status'] = 0;
+				  $this->Puzzle->create();
+				  if($this->Puzzle->save($this->request->data))
+				  {
+					  $width=$read_image['COMPUTED']['Width'];
+					  $height=$read_image['COMPUTED']['Height'];
+					  $image_type =$read_image['MimeType'];
+					  $peices = $this->request->data['Puzzle']['pieces'];
 
-				  if($peices == 25)
-				  {
-				    $cut_width = 5;
-				    $cut_height = 5;
-				  }
-				  elseif($peices == 50)
-				  {
-				    $cut_width = 10;
-				    $cut_height = 5; 
-				  }
-				  elseif($peices == 75)
-				  {
-				    $cut_width = 15;
-				    $cut_height = 5; 
-				  }
-				  else
-				  {
-				    $cut_width = 10;
-				    $cut_height = 10; 
-				  }
+					  if($peices == 25)
+					  {
+					    $cut_width = 5;
+					    $cut_height = 5;
+					  }
+					  elseif($peices == 50)
+					  {
+					    $cut_width = 10;
+					    $cut_height = 5; 
+					  }
+					  elseif($peices == 75)
+					  {
+					    $cut_width = 15;
+					    $cut_height = 5; 
+					  }
+					  else
+					  {
+					    $cut_width = 10;
+					    $cut_height = 10; 
+					  }
 
 
 
@@ -193,9 +209,7 @@ class  PuzzlesController  extends AppController {
 				    $storewidth = $width/$cut_width;
 				    $storeheight = $height/$cut_height;
 			    
-
-
-				    if($image_type == 'image/jpeg')
+					if($image_type == 'image/jpeg')
 				    {
 				      $orig = imagecreatefromjpeg($argv);
 				    }
@@ -235,8 +249,9 @@ class  PuzzlesController  extends AppController {
 					   
 				 	}
 				 	$this->redirect(array('action'=>'index'));
-			    }
-		}		
+			    }	
+			}	
+		}
 	}
 
 /**
@@ -247,17 +262,37 @@ class  PuzzlesController  extends AppController {
 		$this->layout = '';
 		$this->autoRender = false;
 		$this->request->data['Puzzle']['id'] = $id;
-		$this->request->data['Puzzle']['status'] = 1;
+		$this->request->data['Puzzle']['status'] = 0;
 		if($this->Puzzle->save($this->request->data))
 		{
-			if($this->Image->updateAll(array('Image.status'=>0,'Image.puzzle_active'=>1),array('Image.puzzle_id'=>$id)))
+			if($this->Image->updateAll(array('Image.puzzle_active'=>0),array('Image.puzzle_id'=>$id)))
 			{
 				$response = array("message" =>"Puzzle Active");	
 			}
 			
 		}
 		echo json_encode($response);
-	}	
+	}
+
+/**
+	Deactive image show in list with onoff switch
+*/	
+	public function business_deactive($id = Null)
+	{
+		$this->layout = '';
+		$this->autoRender = false;
+		$this->request->data['Puzzle']['id'] = $id;
+		$this->request->data['Puzzle']['status'] = 1;
+		if($this->Puzzle->save($this->request->data))
+		{
+			if($this->Image->updateAll(array('Image.puzzle_active'=>1),array('Image.puzzle_id'=>$id)))
+			{
+				$response = array("message" =>"Puzzle Deactive");	
+			}
+			
+		}
+		echo json_encode($response);
+	}		
 
 
 

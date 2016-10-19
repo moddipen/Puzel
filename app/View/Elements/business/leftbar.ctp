@@ -3,7 +3,7 @@
 
           <!-- Branding -->
           <div class="navbar-header col-md-1">
-            <a class="navbar-brand" href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/users/index">
+            <a class="navbar-brand" href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/puzzles/index">
               
             </a>
             <div class="sidebar-collapse hidden-md hidden-lg">
@@ -28,7 +28,7 @@
                 <ul class="menu">
                   
                   <li>
-                    <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/users/index">
+                    <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/puzzles/index">
                       <i class="fa fa-home"></i> Dashboard
                       
                     </a>
@@ -40,7 +40,7 @@
                     </a>
                   </li>
                   <li>
-                    <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/users/data">
+                    <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/visitors/data">
                       <i class="fa fa-database"></i> Data Captured
                       
                     </a>
@@ -72,7 +72,7 @@
                       echo $login_detail;?>!</li>
                       
                       <li>
-                        <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>">
+                        <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/users/setting">
                           <i class="fa fa-cog"></i> Settings
                         </a>
                       </li>
