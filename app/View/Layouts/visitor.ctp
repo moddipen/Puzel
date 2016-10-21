@@ -33,23 +33,27 @@ $cakeDescription = __d('cake_dev', 'Puzzel');
 		<?php echo  $title; ?>
 	</title>
 	 
+
   <?php
 		echo $this->Html->meta('icon');
-		// echo $this->Html->css('dashboard/vendor/bootstrap/bootstrap.min');
+		echo $this->Html->css('dashboard/vendor/bootstrap/bootstrap.min');
 		echo $this->Html->css('visitor/gumby.css');
 		echo $this->Html->css('visitor/styles.css');
 		echo $this->Html->css('visitor/add-oct-13-2016.css');
 		echo $this->Html->css('visitor/addons.css');
+		//echo $this->Html->css('dashboard/minimal.css');	
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		
 		echo $this->Html->script('jquery.min.js');
 		echo $this->Html->script('visitor/jquery-1.9.1.min.js');
+		echo $this->Html->script('dashboard/vendor/bootstrap/bootstrap.min.js');	
 		echo $this->Html->script('visitor/main.js');
 		echo $this->Html->script('visitor/plugins.js');
 		echo $this->Html->script('visitor/cbpScroller.js');
 		echo $this->Html->script('visitor/classie.js');
 		echo $this->Html->script('visitor/jquery.scrollto.js');
+		//echo $this->Html->script('dashboard/minimal.min.js');
 		echo $this->fetch('script');
 	?>
     

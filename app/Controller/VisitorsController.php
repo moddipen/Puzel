@@ -20,6 +20,7 @@
 
 App::uses('AppController', 'Controller');
 App::uses('CakeEmail', 'Network/Email');
+App::import('Vendor', 'Csv', array('file' => 'Csv.php'));
 
 /**
  * Static content controller
@@ -37,7 +38,8 @@ class  VisitorsController  extends AppController {
  * @var array
  */
 	public $uses = array('Visitor','Puzzle','User','Order','Support','Image');
-	 public $components = array('Session','RequestHandler');
+	public $components = array('Session','RequestHandler');
+	public $helpers = array('Html', 'Form','Session','Csv');
 	var $name = 'Visitors';
 /**
  * Displays a view
@@ -228,95 +230,40 @@ class  VisitorsController  extends AppController {
 		$this->set('title',"Data Captured");
 		$this->layout = 'dashboard';
 		// Get Puzzle list 
-		$this->Puzzle->recursive = -1;
 		$puzzle_list = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));	
-   		
-   		foreach ($puzzle_list as $key =>  $puzzle)
-   		{
-   			// Get Visitor list
-   			$list = $this->Visitor->find('all',array('conditions'=>array('Visitor.puzzle_id'=>$puzzle['Puzzle']['id'])));
-   			$name = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$puzzle['Puzzle']['id'])));
-   			
-   			foreach($list as $key => $data)
-   			{
-   				// Get puzzle name 
-   				$list[$key]['Puzzle'] = $name['Puzzle']['name']; 	
-   			}	
-		}
-   		$this->set('Data',$list);
+		$this->set('Data',$puzzle_list);
 	}
 
-	// public function business_csv()
-	// {
-	// 	$this->autoRender = false;
-	// 	header('Content-Type: text/csv; charset=utf-8');
-	// 	header('Content-Disposition: attachment; filename=data.csv');
-
-	// 	// create a file pointer connected to the output stream
-	// 	$output = fopen('php://output', 'w');
-
-	// 	// output the column headings
-	// 	fputcsv($output, array('FirstName','LastName','PuzleName','Email'));
-
-	// 	$this->Puzzle->recursive = -1;
-	// 	$puzzle_list = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));	
-   		
- //   		foreach ($puzzle_list as $key =>  $puzzle)
- //   		{
- //   			// Get Visitor list
- //   			$list = $this->Visitor->find('all',array('conditions'=>array('Visitor.puzzle_id'=>$puzzle['Puzzle']['id'])));
- //   			$name = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$puzzle['Puzzle']['id'])));
-   			
- //   			foreach($list as $key => $data)
- //   			{
- //   				// Get puzzle name 
- //   				$data['Visitor']['puzzle_id'] = $name['Puzzle']['name']; 
-	// 			$data['Visitor']['firstname'];
-	// 			$data['Visitor']['lastname'];
-	// 			$data['Visitor']['email'];
-	// 		}	
-	// 	}
-	// 	fputcsv($output,$data);			
-
-	// 	// loop over the rows, outputting them
-		
-
-	// 	// Close the file
-	// 	fclose($output);
-	// }
-
-	// public function business_export()
-	// {
-
-	// 	$this->response->download("export.csv");
-
-	// 	$this->Puzzle->recursive = -1;
-	// 	$puzzle_list = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));	
-	// 	foreach ($puzzle_list as $key =>  $puzzle)
- //   		{
- //   			// Get Visitor list
- //   			$list = $this->Visitor->find('all',array('conditions'=>array('Visitor.puzzle_id'=>$puzzle['Puzzle']['id'])));
- //   			$name = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$puzzle['Puzzle']['id'])));
-   			
- //   			foreach($list as $key => $data)
- //   			{
- //   				// Get puzzle name 
- //   				$data['Visitor']['puzzle_id'] = $name['Puzzle']['name']; 
-	// 			// $data['Visitor']['firstname'];
-	// 			// $data['Visitor']['lastname'];
-	// 			// $data['Visitor']['email'];
-	// 		}	
-	// 	}
-	// 	$this->set(compact('data'));
-
-	// 	$this->layout = 'ajax';
-
-	// 	return;
-
-	// }
-
-
-
+	
+/**
+	Business header content and count 
+*/	
+	public function business_export()
+	{
+	  
+		$this->Puzzle->unbindModel(array("belongsTo"=>array("Business")));
+	  $data =  $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id')),"fields"=>array("Puzzle.name")));
+	  	
+	  	$index = 0;
+		foreach($data as $visitor)
+		{
+			$i = 0;
+			foreach ($visitor['Visitor'] as  $user)
+            {
+				$date =  date('m/d/Y',strtotime($user['created']));
+				$data[$index]['Visitor'][$i]['Visitor Firstname'] = $user['firstname'];
+				$data[$index]['Visitor'][$i]['Visitor Lastname'] =  $user["lastname"];
+				$data[$index]['Visitor'][$i]['Company Name'] =  $user['company_name'];
+				$data[$index]['Visitor'][$i]['Visitor email'] =  $user["email"];
+				$data[$index]['Visitor'][$i]['Date'] = $date;
+				$data[$index]['Visitor'][$i]['Puzzle Name'] = $visitor['Puzzle']['name'];
+				$i++;
+			}	
+			$index++;
+		}
+	 	$this->set('Visitor',$data);
+		$this->layout = null;
+	}
 
 
 }

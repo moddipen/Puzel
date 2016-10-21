@@ -3,6 +3,8 @@ App::uses('AppModel', 'Model');
 class Visitor extends AppModel {
 	var $name = 'Visitor';
 
+  public $belongsTo = array('Puzzle');
+
    public $validate = array(
             
            'firstname' => array(

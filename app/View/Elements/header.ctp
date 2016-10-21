@@ -6,6 +6,7 @@
 						
 						 <li><a href="<?php echo Configure::read('SITE_URL');?>users/about">How It Works</a></li>
 						 <li><a href="<?php echo Configure::read('SITE_URL');?>users/business">Puzel for Business</a></li>
+						 <li><a href="<?php echo Configure::read('SITE_URL');?>subscriptions/package">Packages</a></li>
 						 <li><a href="<?php echo Configure::read('SITE_URL');?>users/contact">Contact</a></li>
 						 <li><a href="http://blog.puzel.co/">Blog</a></li>
                          <li><a href="<?php echo Configure::read('SITE_USER_URL');?>/users/register">Sign Up</a></li>
@@ -38,6 +39,7 @@
 				 	<li><a href="<?php echo Configure::read('SITE_USER_URL');?>/users/register" style="margin-right: 0px; padding-right: 0px;"><span class="button-sign">Sign Up</span></a></li>
 					<li><a href="http://blog.puzel.co/">Blog</a></li>
 					<li><a href="<?php echo Configure::read('SITE_URL');?>users/contact">Contact</a></li>
+					<li><a href="<?php echo Configure::read('SITE_URL');?>subscriptions/package">Packages</a></li>
 					<li><a href="<?php echo Configure::read('SITE_URL');?>users/business">Puzel for Business</a></li>
 					<li><a href="<?php echo Configure::read('SITE_URL');?>users/about">How It Works</a></li>
                     

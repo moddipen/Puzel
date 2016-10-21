@@ -109,7 +109,9 @@
          <div id="logo"><a href="index.php"><img src="<?php echo $this->webroot;?>img/visitor/img/logo.png"></a></div>
         
          <ul id="nav">
-                    <li class="no-right"><a href="#"><span class="button-sign">Grand Prize</span></a></li>                     
+            
+            <li class="no-right"><a href="#" data-toggle="modal" data-target="#modal1"><span class="button-sign">Terms / Descrption</span></a></li>                     
+            <li class="no-right"><a href="#" data-toggle="modal" data-target="#modal3"><span class="button-sign">Grand Prize</span></a></li>                     
          </ul>
        
       </nav>
@@ -131,7 +133,7 @@
 <!-- BEGIN CONTAINER ############################################### -->
 
 
-<div id="container" class="container page-hosted">
+<div id="container" class="page-hosted">
 <h2 class="text-center title-page">Smart Weigh May Giveaway</h2>
  <div class="row"> 
   <div class="col-md-12">
@@ -270,3 +272,48 @@ else
 
 });
 </script>
+
+
+
+
+
+<!--  Grand prize model -->
+    <div class="modal fade orange" id="modal3" tabindex="-1" role="dialog" aria-labelledby="modalDialogLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <a class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
+            <h3 class="modal-title" id="modalDialogLabel">Grand Prize</h3>
+          </div>
+          <div class="modal-body">
+            <form class="popup-form">
+              <div class="form-group">
+                <div > <?php echo $PuzzleData['Puzzle']['terms'];?></div>
+                <!-- <textarea name="textarea" id="textarea" class="form-control wysiwyg"></textarea> -->
+              </div>
+             </form>
+          </div>
+         </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!--Modal-->
+
+    <!--Modal Term -->
+     <div class="modal fade orange" id="modal1" tabindex="-1" role="dialog" aria-labelledby="modalDialogLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <a class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
+            <h3 class="modal-title" id="modalDialogLabel">Terms / Description</h3>
+          </div>
+         <div class="modal-body">
+          <form class="popup-form" id="terms" >
+            <div class="form-group">
+              <div > <?php echo $PuzzleData['Puzzle']['price'];?></div>
+              <!-- <textarea name="textarea" id="textarea" class="form-control wysiwyg"></textarea> -->
+            </div>
+        </form>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->

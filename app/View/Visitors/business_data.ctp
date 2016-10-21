@@ -102,7 +102,7 @@
                     </div>
                     <div class="col-md-2">
                       <div class="form-group iconwithtext">
-                        <i class="fa fa-downloads"></i> <span class="text">Download as CSV</span>
+                         <?php echo $this->html->link('',array('action' => 'export'),array('class'=>'fa fa-download','style'=>"color:white;"));?><!-- i class="fa fa-downloads"></i> --> <span class="text">Download as CSV</span>
                         </div>
                     </div>
                   </div>
@@ -119,16 +119,18 @@
                         <tbody id="black">
                           <?php if(!empty($Data))
                            {
-                            foreach($Data as $list)
+
+                            foreach($Data as  $list)
                               {
-                                ?>
+                                foreach ($list['Visitor'] as  $value)
+                                 {?>
                                 <tr>
-                                  <td><?php echo $list['Visitor']['firstname'];?></td>
-                                  <td><?php echo $list['Visitor']['lastname'];?></td>
-                                  <td><?php echo $list['Puzzle'];?></td>
-                                  <td><?php echo $list['Visitor']['email'];?></td>
+                                  <td><?php echo $value['firstname'];?></td>
+                                  <td><?php echo $value['lastname'];?></td>
+                                  <td><?php echo $list['Puzzle']['name'];?></td>
+                                  <td><?php echo $value['email'];?></td>
                                 </tr>
-                          <?php }} ?>
+                          <?php }} } ?>
                          </tbody>
                       </table>
                     </div>

@@ -20,7 +20,6 @@
 
             </div>
 
-
             <!-- row -->
             <div class="row">
 
@@ -58,7 +57,7 @@
                           <div class="row minipadding">
                             <div class="col-md-2">
                               <div class="form-group">
-                                    <select  class="form-control chosen-select" name="data[Puzzel][type]">
+                                    <select  class="form-control chosen-select" name="data[Puzzel][type]" id="puzzletype">
                                       <option style="display:none">Type of Puzel</option>
                                       <option value = "Open">Open</option>
                                       <option value = "Mystery">Mystery</option>
@@ -67,7 +66,7 @@
                             </div>
                             <div class="col-md-2">
                               <div class="form-group">
-                                    <input name="data[Puzzel][name]" class="form-control" type="text" placeholder="Puzel Name">
+                                    <input name="data[Puzzel][name]" class="form-control" type="text" placeholder="Puzel Name" id="puzzlename">
                                 </div> 
                             </div>
                             <div class="col-md-2">
@@ -107,15 +106,16 @@
                   </div>
                   </div>
                   <!-- /tile body -->
-
+                  <input type = "hidden" value="" id="clickterm"/>
+                  <input type = "hidden" value="" id="clickprize"/>
           
                   <!-- tile footer -->
                   <div class="tile-footer text-center" style="display:none">
                     <div class="form-group">
-                      <input type="button" class="btn btn-black-transparent changebutton" value="Terms / Description" data-toggle="modal" data-target="#modal1">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-black-transparent" value="Grand Prize" data-toggle="modal" data-target="#modal4">
+                      <input type="button" class="btn btn-black-transparent changebutton" value="Terms / Description" data-toggle="modal" data-target="#modal1" id="clickzone">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-black-transparent" value="Grand Prize" data-toggle="modal" data-target="#modal3" id="clickpricezone">
                     </div>
                     <div class="form-group">
-                      <button type="submit" class="btn btn-oranges">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <button type="submit" class="btn btn-oranges" id="validateform">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
                           <button type="reset" class="btn btn-black-transparent">Cancel</button>
                     </div>
                   </div>
@@ -142,178 +142,108 @@
 
           </div>
           <!-- /content container -->
-
-
-
-
-
-
-        </div>
+       </div>
         <!-- Page content end -->
- <!--Modal-->
+
+ <!--Modal Term -->
      <div class="modal fade orange" id="modal1" tabindex="-1" role="dialog" aria-labelledby="modalDialogLabel" aria-hidden="true">
-
       <div class="modal-dialog">
-
         <div class="modal-content">
-
           <div class="modal-header">
-
             <a class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
-
             <h3 class="modal-title" id="modalDialogLabel">Terms / Description</h3>
-
           </div>
-
-          <div class="modal-body">
-          <form class="popup-form">
+         <div class="modal-body">
+          <form class="popup-form" id="terms" >
             <div class="form-group">
-        <textarea name="textarea" id="textarea" class="form-control wysiwyg"></textarea>
+              <textarea name="textarea" id="textarea" class="form-control wysiwyg"></textarea>
             </div>
             <div class="form-group">
               <div class="row">
                   <div class="col-md-4">
-                        <select name="opton" class="form-control chosen-select">
-                            <option> Templates</option>
+                        <select name="opton" class="form-control chosen-select" id = "changetemplate">
+                            <?php 
+                            if(!empty($Name))
+                            {  
+                              foreach ($Name as $value)
+                                {?>
+                                <option value ="<?php echo $value['Puzzle']['id']; ?>"><?php echo $value['Puzzle']['name']; ?></option>
+                            <?php } }?>
                         </select>
                   </div>
                 </div>
             </div>
-            
             <div class="row minipadding">
-                <div class="col-md-3">
-                </div>
+                <div class="col-md-3"></div>
                 <div class="col-md-3">
                    <div class="form-group">
-                   <button type="submit" class="btn btn-oranges fullwidth">Submit</button>
+                    <button type="button" id="submitterms"class="btn btn-oranges fullwidth">Submit</button>
                    </div>
-               </div>
+                </div>
                <div class="col-md-3">
                    <div class="form-group">
                    <button type="reset" class="btn btn-black-transparent fullwidth" data-dismiss="modal">Cancel</button>
                    </div>
                </div>
             </div>
-                
-    </form>
-          </div>
+        </form>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 
-        </div><!-- /.modal-content -->
+  
 
-      </div><!-- /.modal-dialog -->
-
-    </div><!-- /.modal -->
-
-  <div class="modal fade orange" id="modal2" tabindex="-1" role="dialog" aria-labelledby="modalDialogLabel" aria-hidden="true">
-
-      <div class="modal-dialog">
-
-        <div class="modal-content">
-
-          <div class="modal-header">
-
-            <a class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
-
-            <h3 class="modal-title" id="modalDialogLabel">Sign Up Prize</h3>
-
-          </div>
-
-          <div class="modal-body">
-          <form class="popup-form">
-            <div class="form-group">
-        <textarea name="textarea" id="textarea" class="form-control wysiwyg"></textarea>
-            </div>
-            <div class="form-group">
-              <div class="row">
-                  <div class="col-md-4">
-                        <div class="btn btn-file imageupload">
-                            <input name="uploadfile" class="form-control" type="file">
-                        </div>
-                  </div>
-                </div>
-            </div>
-            
-            <div class="row minipadding">
-                <div class="col-md-3">
-                </div>
-                <div class="col-md-3">
-                   <div class="form-group">
-                   <button type="submit" class="btn btn-oranges fullwidth">Submit</button>
-                   </div>
-               </div>
-               <div class="col-md-3">
-                   <div class="form-group">
-                   <button type="reset" class="btn btn-black-transparent fullwidth" data-dismiss="modal">Cancel</button>
-                   </div>
-               </div>
-            </div>
-                
-    </form>
-          </div>
-
-        </div><!-- /.modal-content -->
-
-      </div><!-- /.modal-dialog -->
-
-    </div><!-- /.modal -->
+    <!--  Grand prize model -->
     <div class="modal fade orange" id="modal3" tabindex="-1" role="dialog" aria-labelledby="modalDialogLabel" aria-hidden="true">
-
       <div class="modal-dialog">
-
         <div class="modal-content">
-
           <div class="modal-header">
-
             <a class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
-
-            <h3 class="modal-title" id="modalDialogLabel">Milestone Prize</h3>
-
+            <h3 class="modal-title" id="modalDialogLabel">Grand Prize</h3>
           </div>
-
           <div class="modal-body">
-          <form class="popup-form">
-            <div class="form-group">
-        <textarea name="textarea" id="textarea" class="form-control wysiwyg"></textarea>
-            </div>
-            <div class="form-group">
+            <form class="popup-form">
+              <div class="form-group">
+                <textarea name="textarea" id="textarea" class="form-control wysiwyg"></textarea>
+              </div>
+              <div class="form-group">
+                <div class="row minipadding">
+                    <div class="col-md-4">
+                      <select name="opton"  class="form-control chosen-select">
+                          <option> Grand</option>
+                      </select>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="btn btn-file imageupload">
+                          <input name="uploadfile" class="form-control" type="file">
+                      </div>
+                    </div>
+                  </div>
+              </div>
               <div class="row minipadding">
-                  <div class="col-md-4">
-                        <select name="opton" class="form-control chosen-select">
-                            <option> Milestone</option>
-                        </select>
+                  <div class="col-md-3">
                   </div>
-                  <div class="col-md-4">
-                        <div class="btn btn-file imageupload">
-                            <input name="uploadfile" class="form-control" type="file">
-                        </div>
-                  </div>
-                </div>
-            </div>
-            
-            <div class="row minipadding">
-                <div class="col-md-3">
-                </div>
-                <div class="col-md-3">
-                   <div class="form-group">
-                   <button type="submit" class="btn btn-oranges fullwidth">Submit</button>
-                   </div>
-               </div>
-               <div class="col-md-3">
-                   <div class="form-group">
-                   <button type="reset" class="btn btn-black-transparent fullwidth" data-dismiss="modal">Cancel</button>
-                   </div>
-               </div>
-            </div>
-                
-    </form>
+                  <div class="col-md-3">
+                     <div class="form-group">
+                     <button type="button" class="btn btn-oranges fullwidth" id="grandprice">Submit</button>
+                     </div>
+                 </div>
+                 <div class="col-md-3">
+                     <div class="form-group">
+                     <button type="reset" class="btn btn-black-transparent fullwidth" data-dismiss="modal">Cancel</button>
+                     </div>
+                 </div>
+              </div>
+            </form>
           </div>
-
         </div><!-- /.modal-content -->
-
       </div><!-- /.modal-dialog -->
-
     </div><!-- /.modal -->
     <!--Modal-->
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 <!-- <script src="../assets/js/vendor/summernote/summernote.min.js"></script> -->
 <?php echo $this->Html->script('dashboard/vendor/summernote/summernote.min.js')?>
 <script type="text/javascript">
@@ -357,7 +287,110 @@
  //Do stuff here
 });
     })
-   
+
+
+   // Form submit term and description save 
+     
+    $('#submitterms').click(function()
+    {
+       var html = $('.note-editable').html(); 
+       if(html == "<p><br></p>")
+       {
+           $("#modal1" ).effect("shake");
+          //$('#modal1').shake("fast");  
+          return false; 
+       }
+       else
+       {
+          $.ajax(
+           {
+             type: "POST",
+             url: "terms",
+             data: {'content':html}, 
+            success: function(data)
+             {
+                $('#modal1').modal('hide');
+             }
+           });
+       } 
+    });  
+
+    // Save grand price of puzzle 
+
+    $('#grandprice').click(function()
+    {
+      
+      var html = $('.note-editable').html(); 
+       $.ajax(
+       {
+         type: "POST",
+         url: "price",
+         data: {'price':html}, 
+        success: function(data)
+         {
+            $('#modal3').modal('hide');
+         }
+       });
+    });  
+
+    // On change event in templete
+
+    $("#changetemplate").change(function()
+    {
+      $.ajax(
+       {
+         type: "POST",
+         url: "template/"+this.value,
+         data: {'id':this.value}, 
+         dataType: 'json', 
+         success: function(data)
+         {
+            $('.note-editable').html(data.Puzzle.terms);  
+          }
+       });
+      // alert();
+    })
+
+    // check user is click on term button or not 
+    $("#clickzone").click(function()
+    {
+      $("#clickterm").val("22");
+    });
+    // check if user click on price not 
+    $("#clickpricezone").click(function()
+    {
+      $("#clickprize").val("22");
+    });
+       
+    // validation form 
+
+    $("#PuzzleViewForm").submit(function(e)
+    {
+      if($('#clickterm').val()=='')
+      {
+        alert("Please click on Term and description");
+        e.preventDefault();  
+      }
+      if($('#clickprize').val() == '')
+      {
+        alert("Please click on Grandprize button");
+        e.preventDefault();   
+      }
+      if($("#puzzletype").val() == $("#puzzletype option:first").val())
+      {
+        alert("Please select on puzzle type");
+        e.preventDefault();    
+      }
+      if($("#puzzlename").val() =='')
+       {
+          alert("Please enter puzzle name");
+          e.preventDefault();      
+       } 
+      
+    });
+
+
+
 
 </script>
 

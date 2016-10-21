@@ -9,7 +9,7 @@ body.bg-1 {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cb817f', endColorstr='#9f4ed2', GradientType=1 );
 }
 .no-right a{margin-right:0px !important; padding-right:0px !important;}
-.page-hosted{margin-top:110px;}
+.page-hosted{margin-top:110px; background-color: #fff;}
 @media(max-width: 1024px)
 {
 	.page-hosted{margin-top:0px;}

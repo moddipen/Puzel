@@ -131,10 +131,14 @@
                             <td><?php echo $puzel['Puzzle']['name']?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i></td>
                             <td><?php echo $puzel['Puzzle']['pieces']?></td>
                             <td><?php echo $puzel['Show']?></td>
-                            <td><?php echo $puzel['Hide']?>&nbsp;&nbsp; <i class="fa fa-download-16px"></i>&nbsp;&nbsp;<i class="fa fa-eye"></i></td>
+                            <td><?php echo $puzel['Hide']?>&nbsp;&nbsp;
+                            <?php 
+                            echo $this->html->link('',array('action' => 'export',$puzel['Puzzle']['id']),array('class'=>'fa fa-download-16px','style'=>"color:white;"));?>
+                               <!-- <i class="fa fa-download-16px"></i> -->&nbsp;&nbsp;<i class="fa fa-eye"></i></td>
                             <td class="minipadding controls">
                               <input type ="hidden" value = "<?php echo $puzel['Puzzle']['id'];?>" class ="puzelid" >
-                              <div class="col-xs-5 text-right"><i class="fa fa-pencil"></i></div>
+                              <div class="col-xs-5 text-right"> <?php 
+                            echo $this->html->link('',array('action' => 'edit',$puzel['Puzzle']['id']),array('class'=>'fa fa-pencil','style'=>"color:white;"));?><!-- <i class="fa fa-pencil"></i> --></div>
                               <div class="col-xs-7">
                                 <div class="onoffswitch green small">
                                   <?php 

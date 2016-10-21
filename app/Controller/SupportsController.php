@@ -36,7 +36,7 @@ class  SupportsController  extends AppController {
  *
  * @var array
  */
-	public $uses = array('Puzzel','User','Order','Support');
+	public $uses = array('Puzzel','User','Order','Support','Image','Visitor');
 	 var $name = 'Supports';
 /**
  * Displays a view
@@ -50,7 +50,9 @@ class  SupportsController  extends AppController {
 	 	$signup = 0;
 		$this->set("Signup",$signup);
 		$this->layout = 'dashboard';
+
 		
+			
 	 }
 
 
