@@ -131,6 +131,26 @@ CakePlugin::load('Postmark');
 CakePlugin::load('Facebook');
 
 
+
+CakePlugin::load('Braintree');
+
+
+// BrainTree Deatil 
+Configure::write('BraintreeMerchan',"r2hhgdvm8ft8khbn");
+Configure::write('BraintreePublicKey',"rrw5mnfjmvh3shh8");
+Configure::write('BraintreePrivateKey',"33b44136781671b6cd9599b4c40d6fbc");
+
+Configure::write('Braintree', array(
+       	 'plan_id' => '',
+        'env' => 'sandbox',
+        'merchantId' => 'r2hhgdvm8ft8khbn',
+        'publicKey' => 'rrw5mnfjmvh3shh8',
+        'privateKey' => '33b44136781671b6cd9599b4c40d6fbc',
+
+    ));
+
+
+
 CakeLog::config('debug', array(
 	'engine' => 'File',
 	'types' => array('notice', 'info', 'debug'),

@@ -28,6 +28,21 @@
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
  */
+    Router::connect(
+           "/subscriptions/:action/*", array('plugin' => 'braintree', 'controller'=>'subscriptions')
+        );
+
+        Router::connect(
+           "/subscriptions/", array('plugin' => 'braintree', 'controller'=>'subscriptions', 'action'=>'orders')
+        );
+
+        Router::connect(
+           "/paymentmethods/:action/*", array('plugin' => 'braintree', 'controller'=>'paymentmethods')
+        );
+
+
+
+
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 	Router::connect('/user', array('controller' => 'users', 'action' => 'login', 'user' => true));
 	Router::connect(
@@ -40,6 +55,8 @@
         
     )
 );
+
+    Router::parseExtensions('csv');
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on
