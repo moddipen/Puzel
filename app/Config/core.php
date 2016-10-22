@@ -1,4 +1,5 @@
 <?php
+exit("fgdsfsf");
 /**
  * This is core configuration file.
  *
