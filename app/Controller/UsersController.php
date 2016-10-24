@@ -38,7 +38,7 @@ class UsersController extends AppController {
  */
  public $helpers = array('Html', 'Form','Session');
  public $components = array('Session','RequestHandler');
- public $uses = array('User');
+ public $uses = array('Puzzle','User','Image','Visitor','Support','Template');
  var $name = 'Users';
 
 /**
@@ -55,6 +55,50 @@ class UsersController extends AppController {
 	  	$signup = 0;
 		$this->set("Signup",$signup);
 	  	$this->Auth->allow(array('index','contact','user_register','user_login','about','business','user_forgetpassword','admin_login','user_reset'));
+	 	$data = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
+		$this->set('CountPuzzle',$data);
+
+		// Count active puzzle 
+
+		$active = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'),'Puzzle.status'=>0)));
+		$this->set('CountActivePuzzle',$active);
+
+		// Count total pieces
+		$list = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
+		$sum = 0;
+		$visitcount = 0;
+		foreach ($list as $key => $value)
+		{
+			$visitor  = $this->Visitor->find('count',array('conditions'=>array('Visitor.puzzle_id'=>$value['Puzzle']['id'])));	
+			if($visitor != NULL)
+			{
+				$list[$key]['Visitor'] = $visitor;
+			}
+			else
+			{
+				$list[$key]['Visitor'] = 0;	
+			}
+
+			$peices  = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$value['Puzzle']['id'])));	
+			if($peices != NULL)
+			{
+				$list[$key]['Peices'] = $peices;
+			
+			}
+			else
+			{
+				$list[$key]['Peices'] = 0;	
+			}
+		}
+		// First loop   for peices count
+		foreach($list as $value)
+			{
+				$sum+= $value['Peices'];
+				$visitcount+= $value['Visitor'];
+			}
+
+		$this->set('Visitor',$visitcount);
+		$this->set('Balancepeices',$sum);
 	 }
 
 	

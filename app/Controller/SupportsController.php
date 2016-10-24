@@ -36,7 +36,7 @@ class  SupportsController  extends AppController {
  *
  * @var array
  */
-	public $uses = array('Puzzel','User','Order','Support','Image','Visitor');
+	public $uses = array('Puzzle','User','Order','Support','Image','Visitor');
 	 var $name = 'Supports';
 /**
  * Displays a view
@@ -50,7 +50,51 @@ class  SupportsController  extends AppController {
 	 	$signup = 0;
 		$this->set("Signup",$signup);
 		$this->layout = 'dashboard';
+		// Count of total puzzle 
+	 	$data = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
+	 	$this->set('CountPuzzle',$data);
 
+		// Count active puzzle 
+
+		$active = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'),'Puzzle.status'=>0)));
+		$this->set('CountActivePuzzle',$active);
+
+		// Count total pieces
+		$list = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
+		$sum = 0;
+		$visitcount = 0;
+		foreach ($list as $key => $value)
+		{
+			$visitor  = $this->Visitor->find('count',array('conditions'=>array('Visitor.puzzle_id'=>$value['Puzzle']['id'])));	
+			if($visitor != NULL)
+			{
+				$list[$key]['Visitor'] = $visitor;
+			}
+			else
+			{
+				$list[$key]['Visitor'] = 0;	
+			}
+
+			$peices  = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$value['Puzzle']['id'])));	
+			if($peices != NULL)
+			{
+				$list[$key]['Peices'] = $peices;
+			
+			}
+			else
+			{
+				$list[$key]['Peices'] = 0;	
+			}
+		}
+		// First loop   for peices count
+		foreach($list as $value)
+			{
+				$sum+= $value['Peices'];
+				$visitcount+= $value['Visitor'];
+			}
+
+		$this->set('Visitor',$visitcount);
+		$this->set('Balancepeices',$sum);
 		
 			
 	 }
