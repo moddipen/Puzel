@@ -32,9 +32,21 @@ class SubscriptionsController extends PaymentsController {
     public function beforeRender(){
     	parent::beforeRender();
     	//Create is a defualt (checkout) action so do not check subscription status there
-    	if($this->action!='create')
-    		$this->hasSubscription();
+    	// if($this->action!='create')
+    	// 	$this->hasSubscription();
     }
+
+    // public function beforeFilter()
+    // {
+    // 	$this->Auth->allow(array('package'));
+    // }
+
+
+
+
+
+
+
 	/**
 	 * Webhook notify url
 	 * @see https://developers.braintreepayments.com/javascript+php/guides/webhooks/parse
@@ -339,4 +351,21 @@ class SubscriptionsController extends PaymentsController {
 		$this->set('customer', $customer);    	
 		
     }
+
+
+/**
+	Business plan
+*/	
+	public function package()
+	{	
+		$this->layout = 'default';
+		$signup = 0;
+		$this->set("Signup",$signup);
+		$this->set('title',"Packages");
+	}
+
+
+
+
+
 }
