@@ -38,7 +38,7 @@ class UsersController extends AppController {
  */
  public $helpers = array('Html', 'Form','Session');
  public $components = array('Session','RequestHandler');
- public $uses = array('Puzzle','User','Image','Visitor','Support','Template');
+ public $uses = array('Puzzle','User','Image','Visitor','Support','Order','Plan');
  var $name = 'Users';
 
 /**
@@ -55,50 +55,69 @@ class UsersController extends AppController {
 	  	$signup = 0;
 		$this->set("Signup",$signup);
 	  	$this->Auth->allow(array('index','contact','user_register','user_login','about','business','user_forgetpassword','admin_login','user_reset'));
-	 	$data = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
+	 // Count of total puzzle 
+	 	// Count of total puzzle 
+	 	
+	  	if($this->Auth->login())
+	  	{
+	  		$data = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
+		if(empty($data))
+		{
+			$data = 0 ;
+		}
 		$this->set('CountPuzzle',$data);
 
-		// Count active puzzle 
-
 		$active = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'),'Puzzle.status'=>0)));
+		if(empty($active))
+		{
+			$active = 0 ;
+		}
 		$this->set('CountActivePuzzle',$active);
 
 		// Count total pieces
 		$list = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
-		$sum = 0;
-		$visitcount = 0;
-		foreach ($list as $key => $value)
-		{
-			$visitor  = $this->Visitor->find('count',array('conditions'=>array('Visitor.puzzle_id'=>$value['Puzzle']['id'])));	
-			if($visitor != NULL)
-			{
-				$list[$key]['Visitor'] = $visitor;
-			}
-			else
-			{
-				$list[$key]['Visitor'] = 0;	
-			}
+		// foreach ($list as $key => $value)
+		// {
+		// 	$visitor  = $this->Visitor->find('count',array('conditions'=>array('Visitor.puzzle_id'=>$value['Puzzle']['id'])));	
+		// 	if($visitor != NULL)
+		// 	{
+		// 		$list[$key]['Visitor'] = $visitor;
+		// 	}
+		// 	else
+		// 	{
+		// 		$list[$key]['Visitor'] = 0;	
+		// 	}
 
-			$peices  = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$value['Puzzle']['id'])));	
-			if($peices != NULL)
-			{
-				$list[$key]['Peices'] = $peices;
+		// 	$peices  = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$value['Puzzle']['id'])));	
+		// 	if($peices != NULL)
+		// 	{
+		// 		$list[$key]['Peices'] = $peices;
 			
-			}
-			else
-			{
-				$list[$key]['Peices'] = 0;	
-			}
-		}
+		// 	}
+		// 	else
+		// 	{
+		// 		$list[$key]['Peices'] = 0;	
+		// 	}
+		// }
 		// First loop   for peices count
-		foreach($list as $value)
-			{
-				$sum+= $value['Peices'];
-				$visitcount+= $value['Visitor'];
-			}
+		// foreach($list as $value)
+		// 	{
+		// 		$visitcount+= $value['Visitor'];
+		// 	}
 
-		$this->set('Visitor',$visitcount);
-		$this->set('Balancepeices',$sum);
+			// if(empty($list))
+//			{	
+				$visitcount = 0;
+//			}	
+
+		// count balance pieces  
+			$order = $this->Order->find('first',array('conditions'=>array('Order.user_id'=>$this->Auth->user('id'))));	
+			$clas = $this->Plan->find('first',array('conditions'=>array('Plan.id'=>$order['Order']['plan_id'])));
+			$this->set('Visitor',$visitcount);
+			$this->set('Balancepeices',$clas['Plan']['pieces']);
+	  	}
+	 	
+			
 	 }
 
 	
@@ -601,7 +620,62 @@ public function user_reset($token=null)
 			}	
 			
 		}
-	}			
+	}	
+
+/**
+	Cancel User account
+*/
+	public function business_cancel()
+	{
+		$id = $this->Auth->user('id');
+		$array = array(
+			'id'=>$id,
+			'status'=>'1');
+		// Deactive User account
+		if($this->User->save($array))
+		{
+			//Deactive Puzzle of this user
+			if($this->Puzzle->updateAll(array('Puzzle.status'=>1),array('Puzzle.user_id'=>$id)))
+			{
+				$puzzle = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$id)));
+
+				// Deactive  number of all image block
+				foreach($puzzle as $image)
+				{
+					$update = $this->Image->updateAll(array('Image.puzzle_active'=>1),array('Image.puzzle_id'=>$image['Puzzle']['id']));	
+					
+					if($update)
+					{
+						// Send email to user that your has been deactivate 
+						$email = array(
+              			"templateid"=>1025061,
+              			"name"=>$this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+              			"TemplateModel"=> array(
+						    "user_name"=> $this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+						    "product_name"=>"Account cancel",
+							"action_url"=>"Your account has been cancel , if you want to activate your account please contact to admin"),
+						"InlineCss"=> true, 
+              			"from"=> "support@puzel.co",
+              			'to'=>$this->Auth->user('email'),
+              			'reply_to'=>"support@puzel.co"
+              			);	
+
+						if($this->sendemail($email))
+						{
+							$this->Session->setFlash(__('Your account has been cancel', true), 'default', array('class' => 'alert alert-success'));		
+							$this->redirect(array('controller'=>'puzzles','action'=>'index'));
+						}
+
+					}
+
+				}
+			}
+		}
+
+	}
+
+
+
 	
 
 

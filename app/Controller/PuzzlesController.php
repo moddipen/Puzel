@@ -37,7 +37,7 @@ class  PuzzlesController  extends AppController {
  *
  * @var array
  */
- public $uses = array('Puzzle','User','Image','Visitor','Support','Template');
+ public $uses = array('Puzzle','User','Image','Visitor','Support','Template','Order','Plan');
  public $helpers = array('Html', 'Form','Session','Csv');
 /**
  * Displays a view
@@ -56,46 +56,63 @@ class  PuzzlesController  extends AppController {
 		$this->set('CountPuzzle',$data);
 
 		// Count active puzzle 
+// Count of total puzzle 
+	 	// Count of total puzzle 
+	 	$data = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
+		if(empty($data))
+		{
+			$data = 0 ;
+		}
+		$this->set('CountPuzzle',$data);
 
 		$active = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'),'Puzzle.status'=>0)));
+		if(empty($active))
+		{
+			$active = 0 ;
+		}
 		$this->set('CountActivePuzzle',$active);
 
 		// Count total pieces
 		$list = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
-		$sum = 0;
-		$visitcount = 0;
-		foreach ($list as $key => $value)
-		{
-			$visitor  = $this->Visitor->find('count',array('conditions'=>array('Visitor.puzzle_id'=>$value['Puzzle']['id'])));	
-			if($visitor != NULL)
-			{
-				$list[$key]['Visitor'] = $visitor;
-			}
-			else
-			{
-				$list[$key]['Visitor'] = 0;	
-			}
+		// foreach ($list as $key => $value)
+		// {
+		// 	$visitor  = $this->Visitor->find('count',array('conditions'=>array('Visitor.puzzle_id'=>$value['Puzzle']['id'])));	
+		// 	if($visitor != NULL)
+		// 	{
+		// 		$list[$key]['Visitor'] = $visitor;
+		// 	}
+		// 	else
+		// 	{
+		// 		$list[$key]['Visitor'] = 0;	
+		// 	}
 
-			$peices  = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$value['Puzzle']['id'])));	
-			if($peices != NULL)
-			{
-				$list[$key]['Peices'] = $peices;
+		// 	$peices  = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$value['Puzzle']['id'])));	
+		// 	if($peices != NULL)
+		// 	{
+		// 		$list[$key]['Peices'] = $peices;
 			
-			}
-			else
-			{
-				$list[$key]['Peices'] = 0;	
-			}
-		}
+		// 	}
+		// 	else
+		// 	{
+		// 		$list[$key]['Peices'] = 0;	
+		// 	}
+		// }
 		// First loop   for peices count
-		foreach($list as $value)
-			{
-				$sum+= $value['Peices'];
-				$visitcount+= $value['Visitor'];
-			}
+		// foreach($list as $value)
+		// 	{
+		// 		$visitcount+= $value['Visitor'];
+		// 	}
 
-		$this->set('Visitor',$visitcount);
-		$this->set('Balancepeices',$sum);
+		// 	if(empty($list))
+		// 	{	
+				$visitcount = 0;
+			// }	
+
+		// count balance pieces  
+			$order = $this->Order->find('first',array('conditions'=>array('Order.user_id'=>$this->Auth->user('id'))));	
+			$list = $this->Plan->find('first',array('conditions'=>array('Plan.id'=>$order['Order']['plan_id'])));
+			$this->set('Visitor',$visitcount);
+			$this->set('Balancepeices',$list['Plan']['pieces']);
 	}
 
 
@@ -198,7 +215,7 @@ class  PuzzlesController  extends AppController {
 				// create image directory 
 				$multipleimagefolder = WWW_ROOT.'img/puzzel/'.$this->request->data['Puzzle']['name'];//WWW_ROOT."img\puzzel\";
 				$folder = mkdir($multipleimagefolder);
-				$URL = $_SERVER['DOCUMENT_ROOT'].'puzzel/app/webroot/img/puzzel/';
+				$URL = $_SERVER['DOCUMENT_ROOT'].'/app/webroot/img/puzzel/';
 				$imageName = $this->request->data['Puzzle']['name'].".jpg";
 				$path = $URL.$imageName;
 				$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i','', $this->request->data['Puzzle']['image']));
@@ -233,8 +250,7 @@ class  PuzzlesController  extends AppController {
 				  	 $this->request->data['Puzzle']['price'] =  $grandprice['price']; 		
 				  }
 				  $this->request->data['Puzzle']['status'] = 0;
-				  $this->request->data['Puzzle']['image_ext'] = $this->request->data['Puzzle']['name'].".jpg";
-				  
+				  $this->request->data['Puzzle']['image_ext'] = $imageName;
 				  $this->Puzzle->create();
 				  if($this->Puzzle->save($this->request->data))
 				  {
@@ -525,7 +541,21 @@ class  PuzzlesController  extends AppController {
 				}
 			$this->set("Puzzel",$puzel);					
 		}
-	}	
+	}
+
+
+/**
+	Puzzle preview in business panel
+*/
+	public function business_preview($id= Null)
+	{
+		if($id)
+		{
+			$puzel = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id))) ; 	
+			$this->set("Capturedata",$puzel);					
+		}
+	}
+
 
 
 

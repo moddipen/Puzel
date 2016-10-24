@@ -105,9 +105,19 @@
                           </div>
                       </form>
                     </div>
+
                     <div class="col-md-2">
                       <div class="form-group">
+                          <?php if(AuthComponent::user('status') == 1)
+                          {?>
+                          <input type="button" value="Account Deactivate" class="btn btn-oranges pull-right">
+                          <?php 
+                          }
+                          else{?>
                           <input type="button" value="Create Puzel" onClick="location.href='<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/create';" class="btn btn-oranges pull-right">
+                          <?php } ?>
+
+                          
                         </div>
                     </div>
                   </div>
@@ -126,13 +136,15 @@
                         <tbody id="content1">
                         <?php if(!empty($Puzzel))
                         {
+                          
                           foreach ($Puzzel as $puzel) {  
                            
 
                             ?>
                           <tr>
                             <td><?php echo date('m/d/Y',strtotime($puzel['Puzzle']['created']))?></td>
-                            <td><?php echo $puzel['Puzzle']['name']?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i></td>
+                            <td><?php echo $puzel['Puzzle']['name']?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $this->html->link('',array('action' => 'preview',$puzel['Puzzle']['id']),array('class'=>'fa fa-eye','style'=>"color:white;"));
+                              echo "&nbsp;&nbsp;"; ?></td>
                             <td><?php echo $puzel['Puzzle']['pieces']?></td>
                             <td><?php echo $puzel['Show']?></td>
                             <td><?php echo $puzel['Hide']?>&nbsp;&nbsp;

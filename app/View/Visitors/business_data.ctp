@@ -141,17 +141,19 @@
                           <?php }} }
                           else
                           {
-                             foreach ($List['Visitor'] as  $value)
-                                 {
-                                  ?>
-                                <tr>
-                                  <td><?php echo $value['firstname'];?></td>
-                                  <td><?php echo $value['lastname'];?></td>
-                                  <td><?php echo $List['Puzzle']['name'];?></td>
-                                  <td><?php echo $value['email'];?></td>
+                             if(!empty($List))
+                             {
+                               foreach ($List['Visitor'] as  $value)
+                                   {
+                                    ?>
+                                  <tr>
+                                    <td><?php echo $value['firstname'];?></td>
+                                    <td><?php echo $value['lastname'];?></td>
+                                    <td><?php echo $List['Puzzle']['name'];?></td>
+                                    <td><?php echo $value['email'];?></td>
                                 </tr>
                            
-                          <?php }}?>
+                          <?php }}}?>
                          </tbody>
                       </table>
                     </div>

@@ -55,7 +55,15 @@
                               <h4 class="title">Current Plan - Start Up &nbsp;&nbsp;&nbsp;&nbsp; <u>Upgrade</u></h4>
                             </div>
                             <div class="col-md-6">
-                              <h4 class="title">Renewal Date - 09/25/2016 &nbsp;&nbsp;&nbsp;&nbsp; <u>Cancel</u></h4>
+                              <h4 class="title">Renewal Date - <?php 
+                              if(!empty($Payment))
+                              {
+                                $add_days = 30;
+                                echo date('m/d/Y' ,strtotime($Payment[0]['Order']['created'])+(24*3600*$add_days));  
+                              }
+                              ?> &nbsp;&nbsp;&nbsp;&nbsp; 
+                              <?php echo $this->html->link('Cancel',array('controller'=>'users','action' => 'cancel'),array('style'=>"color:white;"),' Are you sure that you want to cancel your account?');?>
+                              </h4>
                             </div>
                         </div>
                       
@@ -69,76 +77,27 @@
                     <div class="table-responsive">
                       <table class="table nomargin text-center">
                         <thead>
+                          
                           <tr>
                             <th class="text-center">Date</th>
                             <th class="text-center">Plan</th>
                             <th class="text-center">Price</th>
                             <th class="text-center">Receipt</th>
                           </tr>
+                          
                         </thead>
                         <tbody>
+                          <?php 
+                            if(!empty($Payment)){
+                               foreach ($Payment as $value) {?>
                           <tr>
-                            <td>04/15/2016</td>
-                            <td>Start Up</td>
-                            <td>$19.95</td>
+                            <td><?php echo date('m/d/Y' , strtotime($value['Order']['created']))?></td>
+                            <td><?php echo $value['Plan']['name'];?></td>
+                            <td>$<?php echo $value['Order']['price'];?></td>
                             <td><i class="fa fa-file-pdf-o"></i></td>
                           </tr>
-                          <tr>
-                            <td>04/15/2016</td>
-                            <td>Start Up</td>
-                            <td>$19.95</td>
-                            <td><i class="fa fa-file-pdf-o"></i></td>
-                          </tr>
-                          <tr>
-                            <td>04/15/2016</td>
-                            <td>Start Up</td>
-                            <td>$19.95</td>
-                            <td><i class="fa fa-file-pdf-o"></i></td>
-                          </tr>
-                          <tr>
-                            <td>04/15/2016</td>
-                            <td>Start Up</td>
-                            <td>$19.95</td>
-                            <td><i class="fa fa-file-pdf-o"></i></td>
-                          </tr>
-                          <tr>
-                            <td>04/15/2016</td>
-                            <td>Start Up</td>
-                            <td>$19.95</td>
-                            <td><i class="fa fa-file-pdf-o"></i></td>
-                          </tr>
-                          <tr>
-                            <td>04/15/2016</td>
-                            <td>Start Up</td>
-                            <td>$19.95</td>
-                            <td><i class="fa fa-file-pdf-o"></i></td>
-                          </tr>
-                          <tr>
-                            <td>04/15/2016</td>
-                            <td>Start Up</td>
-                            <td>$19.95</td>
-                            <td><i class="fa fa-file-pdf-o"></i></td>
-                          </tr>
-                          <tr>
-                            <td>04/15/2016</td>
-                            <td>Start Up</td>
-                            <td>$19.95</td>
-                            <td><i class="fa fa-file-pdf-o"></i></td>
-                          </tr>
-                          <tr>
-                            <td>04/15/2016</td>
-                            <td>Start Up</td>
-                            <td>$19.95</td>
-                            <td><i class="fa fa-file-pdf-o"></i></td>
-                          </tr>
-                          <tr>
-                            <td>04/15/2016</td>
-                            <td>Start Up</td>
-                            <td>$19.95</td>
-                            <td><i class="fa fa-file-pdf-o"></i></td>
-                          </tr>
-                          
-                        </tbody>
+                            <?php } }?>
+                          </tbody>
                       </table>
                     </div>
                     </div>

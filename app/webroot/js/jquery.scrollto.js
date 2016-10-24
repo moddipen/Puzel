@@ -8,7 +8,7 @@
  **/
 $.scrollTo = $.fn.scrollTo = function(x, y, options){
     if (!(this instanceof $)) return $.fn.scrollTo.apply($('html, body'), arguments);
-
+    
     options = $.extend({}, {
         gap: {
             x: 0,

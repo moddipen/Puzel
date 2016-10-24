@@ -37,7 +37,7 @@ class  VisitorsController  extends AppController {
  *
  * @var array
  */
-	public $uses = array('Visitor','Puzzle','User','Order','Support','Image');
+	public $uses = array('Visitor','Puzzle','User','Order','Support','Image','Plan');
 	public $components = array('Session','RequestHandler');
 	public $helpers = array('Html', 'Form','Session','Csv');
 	var $name = 'Visitors';
@@ -55,50 +55,65 @@ class  VisitorsController  extends AppController {
 		$this->set("Signup",$signup);
 		// /$this->layout = 'default';
 	 	$this->Auth->allow('v_dynamic','process','fetchimage','generateRandomString');	 		
+	 // Count of total puzzle 
+	 	// Count of total puzzle 
 	 	$data = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
-	 	$this->set('CountPuzzle',$data);
-
-		// Count active puzzle 
+		if(empty($data))
+		{
+			$data = 0 ;
+		}
+		$this->set('CountPuzzle',$data);
 
 		$active = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'),'Puzzle.status'=>0)));
+		if(empty($active))
+		{
+			$active = 0 ;
+		}
 		$this->set('CountActivePuzzle',$active);
 
 		// Count total pieces
 		$list = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
-		$sum = 0;
-		$visitcount = 0;
-		foreach ($list as $key => $value)
-		{
-			$visitor  = $this->Visitor->find('count',array('conditions'=>array('Visitor.puzzle_id'=>$value['Puzzle']['id'])));	
-			if($visitor != NULL)
-			{
-				$list[$key]['Visitor'] = $visitor;
-			}
-			else
-			{
-				$list[$key]['Visitor'] = 0;	
-			}
+		// foreach ($list as $key => $value)
+		// {
+		// 	$visitor  = $this->Visitor->find('count',array('conditions'=>array('Visitor.puzzle_id'=>$value['Puzzle']['id'])));	
+		// 	if($visitor != NULL)
+		// 	{
+		// 		$list[$key]['Visitor'] = $visitor;
+		// 	}
+		// 	else
+		// 	{
+		// 		$list[$key]['Visitor'] = 0;	
+		// 	}
 
-			$peices  = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$value['Puzzle']['id'])));	
-			if($peices != NULL)
-			{
-				$list[$key]['Peices'] = $peices;
+		// 	$peices  = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$value['Puzzle']['id'])));	
+		// 	if($peices != NULL)
+		// 	{
+		// 		$list[$key]['Peices'] = $peices;
 			
-			}
-			else
-			{
-				$list[$key]['Peices'] = 0;	
-			}
-		}
+		// 	}
+		// 	else
+		// 	{
+		// 		$list[$key]['Peices'] = 0;	
+		// 	}
+		// }
 		// First loop   for peices count
-		foreach($list as $value)
-			{
-				$sum+= $value['Peices'];
-				$visitcount+= $value['Visitor'];
-			}
 
-		$this->set('Visitor',$visitcount);
-		$this->set('Balancepeices',$sum);
+		// foreach($list as $value)
+		// 	{
+		// 		$visitcount= $value['Visitor'];
+		// 	}
+		// 	debug($visitcount);exit;
+			
+			// if(empty($list))
+			// {	
+				$visitcount = 0;
+			// }	
+		// count balance pieces  
+			$order = $this->Order->find('first',array('conditions'=>array('Order.user_id'=>$this->Auth->user('id'))));	
+			$class = $this->Plan->find('first',array('conditions'=>array('Plan.id'=>$order['Order']['plan_id'])));
+			$this->set('Visitor',$visitcount);
+			$this->set('Balancepeices',$class['Plan']['pieces']);
+			
 		
 	 }
 
