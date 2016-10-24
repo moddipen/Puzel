@@ -18,7 +18,7 @@
             <li class="klaus_plancolor"><i class="fa fa-times-circle"></i> CSS3 &amp; jQuery Powered</li>
             </div>  
             
-            <div class="klaus_getaquote skinonegetquote"><li><a href="#">GET A QUOTE</a></li></div>
+           <div class="klaus_getaquote skinonegetquote"><li><a href="<?php echo Configure::read('SITE_URL')?>subscriptions/plan/1">GET A QUOTE</a></li></div>
         </div>
         <!--End Plan Basic!-->
         
@@ -40,7 +40,7 @@
             <li class="klaus_plancolor"><i class="fa fa-times-circle"></i> CSS3 &amp; jQuery Powered</li>
             </div>  
             
-            <div class="klaus_getaquote skinonegetquote"><li><a href="#">GET A QUOTE</a></li></div>
+            <div class="klaus_getaquote skinonegetquote"><li><a href="<?php echo Configure::read('SITE_URL')?>subscriptions/plan/2">GET A QUOTE</a></li></div>
         </div>
         <!--End Plan Personal!-->
         
@@ -62,7 +62,7 @@
             <li class="klaus_plancolor"><i class="fa fa-times-circle"></i> CSS3 &amp; jQuery Powered</li>
             </div>  
             
-            <div class="klaus_getaquote skinonegetquote"><li><a href="#">GET A QUOTE</a></li></div>
+            <div class="klaus_getaquote skinonegetquote"><li><a href="<?php echo Configure::read('SITE_URL')?>subscriptions/plan/3">GET A QUOTE</a></li></div>
         </div>
         <!--End Plan Business!-->
         
@@ -84,7 +84,7 @@
             <li class="klaus_plancolor"><i class="fa fa-times-circle"></i> CSS3 &amp; jQuery Powered</li>
             </div>  
             
-            <div class="klaus_getaquote skinonegetquote"><li><a href="#">GET A QUOTE</a></li></div>
+            <div class="klaus_getaquote skinonegetquote"><li><a href="<?php echo Configure::read('SITE_URL')?>subscriptions/plan/4">GET A QUOTE</a></li></div>
         </div>
         <!--End Plan Ultimate!-->
     </div>

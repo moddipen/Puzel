@@ -484,7 +484,20 @@ class  SupportsController  extends AppController {
 		{
 			$this->Session->setFlash(__('No data found....', true), 'default', array('class' => 'alert alert-danger'));
 		}	
-	}		
+	}	
+
+/**
+	Ajax calender filter in business panel
+*/
+	public function business_datefilter()
+	{
+		if(!empty($this->request->data))
+		{
+			$support = $this->Support->find('all',array('conditions'=>array('AND'=>array(array('DATE(Support.created) >='=>$this->request->data['startdate'],'DATE(Support.created) <='=>$this->request->data['enddate'])),'OR'=>array('Support.receiver_id'=>$this->Auth->user('id'),'Support.sender_id'=>$this->Auth->user('id'))))) ; 	
+			$this->set('Supports',$support);
+		}
+	}	
+
 
 
 

@@ -76,6 +76,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <input type ="hidden" value="" id="selectedstartdate">
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <div class="input-group">
@@ -85,10 +86,17 @@
                                      </div>
                                 </div>
                             </div>
+                            <input type ="hidden" value="" id="selectedenddate">
                             <div class="col-md-2">
                               <div class="form-group">
-                                    <select name="by" class="form-control chosen-select">
+                                    <select name="by" class="form-control chosen-select" id="emailfilter">
                                       <option value="">Email Address</option>
+                                      <?php 
+                                        foreach($ResultEmail as  $email)
+                                          {?>
+                                        <option value = "<?php echo $email['Visitor']['email'] ?>"><?php echo $email['Visitor']['email'] ?></option>
+                                        <?php }
+                                      ?>
                                     </select>
                                 </div>
                             </div>
@@ -130,7 +138,20 @@
                                   <td><?php echo $list['Puzzle']['name'];?></td>
                                   <td><?php echo $value['email'];?></td>
                                 </tr>
-                          <?php }} } ?>
+                          <?php }} }
+                          else
+                          {
+                             foreach ($List['Visitor'] as  $value)
+                                 {
+                                  ?>
+                                <tr>
+                                  <td><?php echo $value['firstname'];?></td>
+                                  <td><?php echo $value['lastname'];?></td>
+                                  <td><?php echo $List['Puzzle']['name'];?></td>
+                                  <td><?php echo $value['email'];?></td>
+                                </tr>
+                           
+                          <?php }}?>
                          </tbody>
                       </table>
                     </div>
@@ -300,6 +321,62 @@ $(document).ready(function(){
   $('#black').pageMe({pagerSelector:'#myPager',childSelector:'tr',showPrevNext:true,hidePageNumbers:false,perPage:10});
     
 });
+
+
+////    Filter Module ////////
+
+
+  // email on change event 
+
+  $("#emailfilter").change(function()
+  {
+    var email = this.value ;
+    var path = "<?php echo Configure::read('SITE_BUSINESS_URL')?>/visitors/export/"+email;
+    $.ajax(
+    {
+      type: "POST",
+      url: 'emailFilter/'+email,
+      data: {'email':email},
+      success: function(data)
+      {
+        $("#black").html(data);
+        $("a.fa-download").attr("href",path);  
+      }
+    });  
+ });
+
+ // Get calender filter 
+ $('#startdate').datepicker({ format: 'yyyy-mm-dd', autoclose: true}).on('changeDate',function(event){
+    var d = event.date; //Selected date in Timezone format
+    var curr_date = d.getDate(); // Seletced date
+    var curr_month = d.getMonth() + 1; // Selected date moth
+    var curr_year = d.getFullYear(); // Selected date year
+    var desired_date_fromat = curr_year+"-"+curr_month+"-"+curr_date; //Desired date format 
+    $("#selectedstartdate").val(desired_date_fromat);
+  });
+  
+  $('#enddate').datepicker({ format: 'yyyy-mm-dd', autoclose: true}).on('changeDate',function(event){
+    var d = event.date; //Selected date in Timezone format
+    var curr_date = d.getDate(); // Seletced date
+    var curr_month = d.getMonth()+ 1; // Selected date moth
+    var curr_year = d.getFullYear(); // Selected date year
+    var desired_date_fromat = curr_year+"-"+curr_month+"-"+curr_date; //Desired date format 
+    $("#selectedenddate").val(desired_date_fromat);
+
+    $.ajax(
+    {
+      type: "POST",
+      url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/visitors/datefilter",
+      data: {'startdate':$("#selectedstartdate").val(),'enddate':$("#selectedenddate").val()},
+      success: function(data)
+      {
+        $("#black").html(data);
+      }
+    });
+    });  
+
+   
+
 
 </script>       
 

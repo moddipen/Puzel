@@ -19,7 +19,7 @@
  */
 
 App::uses('AppController', 'Controller');
-
+App::import('Vendor', 'braintree-php-3.17.0', array('file' => 'braintree-php-3.17.0/lib/autoload.php'));
 
 /**
  * Static content controller
@@ -49,7 +49,7 @@ class  SubscriptionsController  extends AppController {
 	function beforeFilter()
 	{
 	 	parent::beforeFilter();
-	 	$this->Auth->allow(array('package'));
+	 	$this->Auth->allow(array('package','plan'));
 	}
 
 
@@ -60,6 +60,18 @@ class  SubscriptionsController  extends AppController {
 	Business plan
 */	
 	public function package()
+	{	
+		exit("fdfsdf");
+		$signup = 0;
+		$this->set("Signup",$signup);
+		$this->set('title',"Packages");
+	}	
+
+
+/**
+	Business plan suscribe
+*/	
+	public function plan($id=null)
 	{	
 		$signup = 0;
 		$this->set("Signup",$signup);

@@ -72,11 +72,12 @@
                               <div class="form-group">
                                   <div class="input-group">
                                       <span class="input-group-addon nobackground">From</span>
-                                        <input name="startdate" id="startdate" class="form-control date">
+                                        <input name="startdate" id="startdate" class="form-control filter_date">
                                         <span class="input-group-addon nobackground"><i class="fa fa-calendar fa-2x"></i></span>
                                     </div>
                                 </div>
                             </div>
+                            <input type ="hidden" value="" id="selectedstartdate">
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <div class="input-group">
@@ -86,10 +87,13 @@
                                      </div>
                                 </div>
                             </div>
+                            <input type ="hidden" value="" id="selectedenddate">
                             <div class="col-md-2">
                               <div class="form-group">
-                                    <select name="by" class="form-control chosen-select">
-                                      <option value="">Email Address</option>
+                                    <select name="by" class="form-control chosen-select" id="status">
+                                      <option style ="display:none;">Status</option>
+                                      <option value="0">Active</option>
+                                      <option value="1">Inactive</option>
                                     </select>
                                 </div>
                             </div>
@@ -133,8 +137,15 @@
                             <td><?php echo $puzel['Show']?></td>
                             <td><?php echo $puzel['Hide']?>&nbsp;&nbsp;
                             <?php 
-                            echo $this->html->link('',array('action' => 'export',$puzel['Puzzle']['id']),array('class'=>'fa fa-download-16px','style'=>"color:white;"));?>
-                               <!-- <i class="fa fa-download-16px"></i> -->&nbsp;&nbsp;<i class="fa fa-eye"></i></td>
+                            if($puzel['Hide'] != '')
+                            {
+                              echo $this->html->link('',array('action' => 'export',$puzel['Puzzle']['id']),array('class'=>'fa fa-download-16px','style'=>"color:white;"));
+                              echo "&nbsp;&nbsp;";
+                              echo $this->html->link('',array('controller'=>'visitors','action' => 'data',$puzel['Puzzle']['id']),array('class'=>'fa fa-eye','style'=>"color:white;"));
+                            
+                            }
+                            ?>
+                            </td>
                             <td class="minipadding controls">
                               <input type ="hidden" value = "<?php echo $puzel['Puzzle']['id'];?>" class ="puzelid" >
                               <div class="col-xs-5 text-right"> <?php 
@@ -321,7 +332,7 @@ $(document).ready(function(){
     
   $('#content1').pageMe({pagerSelector:'#pagination',childSelector:'tr',showPrevNext:true,hidePageNumbers:false,perPage:10});
     
-});
+
        
 // On off   button code  
 
@@ -362,5 +373,84 @@ $(document).ready(function(){
         });   
       } 
     });
+
+// Filter Module 
+
+
+  // Active puzzle filter
+
+  $("#status").change(function()
+  {
+    var status = this.value ;
+    $.ajax(
+    {
+      type: "POST",
+      url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/status",
+      data: {'status':status},
+      success: function(data)
+      {
+        $("#content1").html(data);
+      }
+    });  
+  })
+
+  // Calender Filter 
+  $('#startdate').datepicker({ format: 'yyyy-mm-dd', autoclose: true}).on('changeDate',function(event){
+      var d = event.date; //Selected date in Timezone format
+      var curr_date = d.getDate(); // Seletced date
+      var curr_month = d.getMonth() + 1; // Selected date moth
+      var curr_year = d.getFullYear(); // Selected date year
+      var desired_date_fromat = curr_year+"-"+curr_month+"-"+curr_date; //Desired date format 
+      $("#selectedstartdate").val(desired_date_fromat);
+    });
+      
+  $('#enddate').datepicker({ format: 'yyyy-mm-dd', autoclose: true}).on('changeDate',function(event){
+    var d = event.date; //Selected date in Timezone format
+    var curr_date = d.getDate(); // Seletced date
+    var curr_month = d.getMonth()+ 1; // Selected date moth
+    var curr_year = d.getFullYear(); // Selected date year
+    var desired_date_fromat = curr_year+"-"+curr_month+"-"+curr_date; //Desired date format 
+    $("#selectedenddate").val(desired_date_fromat);
+
+    $.ajax(
+    {
+      type: "POST",
+      url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/datefilter",
+      data: {'startdate':$("#selectedstartdate").val(),'enddate':$("#selectedenddate").val()},
+      success: function(data)
+      {
+        $("#content1").html(data);
+      }
+    });  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+});
 
 </script>      

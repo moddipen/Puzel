@@ -225,45 +225,139 @@ class  VisitorsController  extends AppController {
 /**
 	Business Data Captured
 */			
-	public function business_data()
+	public function business_data($id = null)
 	{
 		$this->set('title',"Data Captured");
 		$this->layout = 'dashboard';
 		// Get Puzzle list 
-		$puzzle_list = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));	
-		$this->set('Data',$puzzle_list);
+		if($id)
+		{
+			$list = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id)));				
+			$this->set('List',$list);
+		}	
+		else
+		{
+			$puzzle_list = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));		
+			$this->set('Data',$puzzle_list);
+			
+			$email_list = $this->Puzzle->Visitor->find('all', array(
+                'conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id')),
+                'fields' => array('Visitor.email'),
+                'group' => array('Visitor.email HAVING  1')));
+
+			$this->set('ResultEmail',$email_list);
+
+		}	
+
+		
+		
 	}
 
 	
 /**
 	Business header content and count 
 */	
-	public function business_export()
+	public function business_export($email = Null,$from = Null , $to = Null)
 	{
 	  
 		$this->Puzzle->unbindModel(array("belongsTo"=>array("Business")));
-	  $data =  $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id')),"fields"=>array("Puzzle.name")));
-	  	
-	  	$index = 0;
-		foreach($data as $visitor)
+		
+		if($email)
+		{
+			$data =  $this->Puzzle->Visitor->find('all',array('conditions'=>array('Visitor.email'=>$email)));
+		}
+		else
+		{
+			$data =  $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id')),"fields"=>array("Puzzle.name")));	
+		}	
+		$index = 0;
+		
+		if($email)
 		{
 			$i = 0;
-			foreach ($visitor['Visitor'] as  $user)
+			foreach ($data as  $user)
             {
-				$date =  date('m/d/Y',strtotime($user['created']));
-				$data[$index]['Visitor'][$i]['Visitor Firstname'] = $user['firstname'];
-				$data[$index]['Visitor'][$i]['Visitor Lastname'] =  $user["lastname"];
-				$data[$index]['Visitor'][$i]['Company Name'] =  $user['company_name'];
-				$data[$index]['Visitor'][$i]['Visitor email'] =  $user["email"];
-				$data[$index]['Visitor'][$i]['Date'] = $date;
-				$data[$index]['Visitor'][$i]['Puzzle Name'] = $visitor['Puzzle']['name'];
+
+				$date =  date('m/d/Y',strtotime($user['Visitor']['created']));
+				$data[$i]['Visitor']['Visitor Firstname'] = $user['Visitor']['firstname'];
+				$data[$i]['Visitor']['Visitor Lastname'] =  $user['Visitor']["lastname"];
+				$data[$i]['Visitor']['Company Name'] =  $user['Visitor']['company_name'];
+				$data[$i]['Visitor']['Visitor email'] =  $user['Visitor']["email"];
+				$data[$i]['Visitor']['Date'] = $date;
+				$data[$i]['Visitor']['Puzzle Name'] = $user['Puzzle']['name'];
 				$i++;
-			}	
-			$index++;
+			}
+			$var = "True";
 		}
+		else
+		{
+			foreach($data as $visitor)
+			{
+				$i = 0;
+				foreach ($visitor['Visitor'] as  $user)
+	            {
+					$date =  date('m/d/Y',strtotime($user['created']));
+					$data[$index]['Visitor'][$i]['Visitor Firstname'] = $user['firstname'];
+					$data[$index]['Visitor'][$i]['Visitor Lastname'] =  $user["lastname"];
+					$data[$index]['Visitor'][$i]['Company Name'] =  $user['company_name'];
+					$data[$index]['Visitor'][$i]['Visitor email'] =  $user["email"];
+					$data[$index]['Visitor'][$i]['Date'] = $date;
+					$data[$index]['Visitor'][$i]['Puzzle Name'] = $visitor['Puzzle']['name'];
+					$i++;
+				}	
+				$index++;
+			}
+			$var = "False";		
+		}	
+		
+		$this->set("Flag",$var);
 	 	$this->set('Visitor',$data);
 		$this->layout = null;
 	}
+
+
+/**
+	Business email filter
+*/	
+
+	public function business_emailFilter()
+	{	
+		$this->layout = null;
+		if(!empty($this->request->data))
+		{
+			if($this->request->data['email'])
+			{
+				$email = $this->Visitor->find('all',array('conditions'=>array('Visitor.email'=>$this->request->data['email'])));	
+			}
+			else
+			{
+				$email = $this->Visitor->find('all',array('conditions'=>array('Visitor.email'=>$this->request->data['email'])));		
+			}	
+			$this->set('Emaildata',$email);	
+		}
+		
+	}
+
+/**
+	Ajax calender filter in business panel
+*/
+	public function business_datefilter()
+	{
+		if(!empty($this->request->data))
+		{
+			$email = $this->Visitor->find('all',array('conditions'=>array('AND'=>array(array('DATE(Visitor.created) >='=>$this->request->data['startdate'],'DATE(Visitor.created) <='=>$this->request->data['enddate']))))) ; 	
+			$this->set('Emaildata',$email);	
+		}
+	}	
+
+
+
+
+
+
+
+
+
 
 
 }

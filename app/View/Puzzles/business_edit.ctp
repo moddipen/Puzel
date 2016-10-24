@@ -45,10 +45,10 @@
                   
                   <!-- /tile header -->
 
-                  
+                  <?php $id = $Capturedata['Puzzle']['id'] ;?>
                   <!-- tile body -->
                   <!-- <form role="form" class="custom-form" action ="puzzels/view" method="post"> -->
-                  <?php echo $this->form->create('Puzzle',array('action'=>'edit','method'=>'post','class'=>"custom-form"));?>
+                  <?php echo $this->form->create('Puzzle',array('action'=>'edit/'.$id,'method'=>'post','class'=>"custom-form"));?>
                   <div class="tile-body">
                   <div class="row">
                     <div class="col-md-10">
@@ -57,7 +57,7 @@
                           <div class="row minipadding">
                             <div class="col-md-2">
                               <div class="form-group">
-                                    <select  class="form-control chosen-select" name="data[Puzzel][type]" id="puzzletype">
+                                    <select  class="form-control chosen-select" name="data[Puzzle][type]" id="puzzletype">
                                     
                                       <option value = "<?php echo $Capturedata['Puzzle']['type'];?>"><?php echo $Capturedata['Puzzle']['type'];?></option>
                                       
@@ -66,9 +66,10 @@
                             </div>
                             <div class="col-md-2">
                               <div class="form-group">
-                                    <input name="data[Puzzel][name]" class="form-control" type="text" placeholder="Puzel Name" id="puzzlename" value ="<?php echo $Capturedata['Puzzle']['name'];?>">
+                                    <input name="data[Puzzle][name]" class="form-control" type="text" placeholder="Puzel Name" id="puzzlename" value ="<?php echo $Capturedata['Puzzle']['name'];?>">
                                 </div> 
                             </div>
+                             <input name="data[Puzzle][id]" class="form-control" type="hidden" placeholder="Puzel Name" id="puzzlename" value ="<?php echo $Capturedata['Puzzle']['id'];?>">
                             <!-- <div class="col-md-2">
                               <div class="form-group">
                                   <div class="btn btn-file imageupload" id="uploadimage">
@@ -78,7 +79,7 @@
                             </div> -->
                             <div class="col-md-2">
                               <div class="form-group">
-                                    <select name="data[Puzzel][peice]" class="form-control chosen-select">
+                                    <select name="data[Puzzle][peice]" class="form-control chosen-select">
                                       <!-- <option style="display:none">Number of Pieces</option> -->
                                       <option value="<?php echo $Capturedata['Puzzle']['pieces'];?>"><?php echo $Capturedata['Puzzle']['pieces'];?></option>
                                       <!-- <option value="50">50</option>
@@ -89,7 +90,7 @@
                             </div>
                             <div class="col-md-2">
                               <div class="form-group">
-                                    <select name="data[Puzzel][transtion]" class="form-control chosen-select">
+                                    <select name="data[Puzzle][transtion]" class="form-control chosen-select">
                                       <option value="Transition">Transition</option>
                                     </select>
                                 </div>
@@ -99,8 +100,8 @@
                       <?php //echo $this->Form->end();?>
                     </div>
                   </div>
-                  <input type = "hidden" name="data[Puzzel][base64]" id="base64image">
-                  <input type = "hidden" name="data[Puzzel][user_id]" value="<?php echo $this->Session->read('USERDETAIL.User.id');?>">
+                  
+                  <input type = "hidden" name="data[Puzzle][user_id]" value="<?php echo $this->Session->read('USERDETAIL.User.id');?>">
                  <div class="body" id="showimage">
                     <img src="<?php echo $this->webroot ?>img/puzzel/<?php echo $Capturedata['Puzzle']['name'].''.$Capturedata['Puzzle']['image_ext'];?>" class="img-responsive" id="img_preview" alt="Please upload your image" />
                   </div>
@@ -109,7 +110,7 @@
                   <input type = "hidden" value="" id="clickterm"/>
                   <input type = "hidden" value="" id="clickprize"/>
                   <!-- tile footer -->
-                  <div class="tile-footer text-center" style="display:none">
+                  <div class="tile-footer text-center" >
                     <div class="form-group">
                       <input type="button" class="btn btn-black-transparent changebutton" value="Terms / Description" data-toggle="modal" data-target="#modal1" id="clickzone">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-black-transparent" value="Grand Prize" data-toggle="modal" data-target="#modal3" id="clickpricezone">
                     </div>
@@ -155,7 +156,7 @@
          <div class="modal-body">
           <form class="popup-form" id="terms" >
             <div class="form-group">
-              <textarea name="textarea" id="textarea" class="form-control wysiwyg"></textarea>
+              <textarea name="textarea" id="textarea" class="form-control wysiwyg"><?php echo $Capturedata['Puzzle']['terms'];?></textarea>
             </div>
             <div class="form-group">
               <div class="row">
@@ -172,6 +173,7 @@
                   </div>
                 </div>
             </div>
+            <input type = "hidden" value = "<?php echo $Capturedata['Puzzle']['id'];?>" name="data[Puzzle][id]">
             <div class="row minipadding">
                 <div class="col-md-3"></div>
                 <div class="col-md-3">
@@ -204,8 +206,9 @@
           <div class="modal-body">
             <form class="popup-form">
               <div class="form-group">
-                <textarea name="textarea" id="textarea" class="form-control wysiwyg"></textarea>
+                <textarea name="textarea" id="textarea1" class="form-control wysiwyg"><?php echo $Capturedata['Puzzle']['price'];?></textarea>
               </div>
+              <input type = "hidden" value = "<?php echo $Capturedata['Puzzle']['id'];?>" name="data[Puzzle][id]">
               <div class="form-group">
                 <div class="row minipadding">
                     <div class="col-md-4">
@@ -220,6 +223,7 @@
                     </div>
                   </div>
               </div>
+              <div id = "contentdata" style ="display:none;"></div>
               <div class="row minipadding">
                   <div class="col-md-3">
                   </div>
@@ -304,8 +308,8 @@
           $.ajax(
            {
              type: "POST",
-             url: "terms",
-             data: {'content':html}, 
+             url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/terms/<?php echo $Capturedata['Puzzle']['id'];?>",
+             data: {'id':"<?php echo $Capturedata['Puzzle']['id'];?>",'content':html }, 
             success: function(data)
              {
                 $('#modal1').modal('hide');
@@ -319,12 +323,15 @@
     $('#grandprice').click(function()
     {
       
+
+
+
       var html = $('.note-editable').html(); 
        $.ajax(
        {
          type: "POST",
-         url: "price",
-         data: {'price':html}, 
+         url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/price/<?php echo $Capturedata['Puzzle']['id'];?>",
+         data: {'id':"<?php echo $Capturedata['Puzzle']['id'];?>",'price':html}, 
         success: function(data)
          {
             $('#modal3').modal('hide');
@@ -339,7 +346,7 @@
       $.ajax(
        {
          type: "POST",
-         url: "template/"+this.value,
+         url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/template/"+this.value,
          data: {'id':this.value}, 
          dataType: 'json', 
          success: function(data)
@@ -387,6 +394,10 @@
        } 
       
     });
+
+
+
+
 
 
 

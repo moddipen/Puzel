@@ -69,26 +69,26 @@ class  PuzzlesController  extends AppController {
 			$visitor  = $this->Visitor->find('count',array('conditions'=>array('Visitor.puzzle_id'=>$value['Puzzle']['id'])));	
 			if($visitor != NULL)
 			{
-				$content[$key]['Visitor'] = $visitor;
+				$list[$key]['Visitor'] = $visitor;
 			}
 			else
 			{
-				$content[$key]['Visitor'] = 0;	
+				$list[$key]['Visitor'] = 0;	
 			}
 
 			$peices  = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$value['Puzzle']['id'])));	
 			if($peices != NULL)
 			{
-				$content[$key]['Peices'] = $peices;
+				$list[$key]['Peices'] = $peices;
 			
 			}
 			else
 			{
-				$content[$key]['Peices'] = 0;	
+				$list[$key]['Peices'] = 0;	
 			}
 		}
 		// First loop   for peices count
-		foreach($content as $value)
+		foreach($list as $value)
 			{
 				$sum+= $value['Peices'];
 				$visitcount+= $value['Visitor'];
@@ -198,7 +198,7 @@ class  PuzzlesController  extends AppController {
 				// create image directory 
 				$multipleimagefolder = WWW_ROOT.'img/puzzel/'.$this->request->data['Puzzle']['name'];//WWW_ROOT."img\puzzel\";
 				$folder = mkdir($multipleimagefolder);
-				$URL = $_SERVER['DOCUMENT_ROOT'].'/app/webroot/img/puzzel/';
+				$URL = $_SERVER['DOCUMENT_ROOT'].'puzzel/app/webroot/img/puzzel/';
 				$imageName = $this->request->data['Puzzle']['name'].".jpg";
 				$path = $URL.$imageName;
 				$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i','', $this->request->data['Puzzle']['image']));
@@ -233,7 +233,7 @@ class  PuzzlesController  extends AppController {
 				  	 $this->request->data['Puzzle']['price'] =  $grandprice['price']; 		
 				  }
 				  $this->request->data['Puzzle']['status'] = 0;
-				  $this->request->data['Puzzle']['image_ext'] = ".jpg";
+				  $this->request->data['Puzzle']['image_ext'] = $this->request->data['Puzzle']['name'].".jpg";
 				  
 				  $this->Puzzle->create();
 				  if($this->Puzzle->save($this->request->data))
@@ -373,11 +373,18 @@ class  PuzzlesController  extends AppController {
 /**
 	Business terms ajax 
 */	
-	public function business_terms()
+	public function business_terms($id = Null)
 	{
 		$this->autoRender = false;
+
 		if(!empty($this->request->data))
 		{
+			if($id)
+			{
+				$this->request->data['Puzzle']['id'] = $this->request->data['id'];	
+				$this->request->data['Puzzle']['terms'] = $this->request->data['content'];
+				$this->Puzzle->save($this->request->data);	
+			}
 			$this->request->data['Puzzle']['terms'] = $this->request->data['content'];
 			$this->Session->write('IMAGETERMS',$this->request->data);
 		}
@@ -386,11 +393,18 @@ class  PuzzlesController  extends AppController {
 /**
 	Business price ajax
 */	
-	public function business_price()
+	public function business_price($id = Null)
 	{
 		$this->autoRender = false;
 		if(!empty($this->request->data))
 		{
+			
+			if($id)
+			{
+				$this->request->data['Puzzle']['id'] = $this->request->data['id'];	
+				$this->request->data['Puzzle']['price'] = $this->request->data['price'];
+				$this->Puzzle->save($this->request->data);	
+			}
 			$this->Session->write('IMAGEPRICE',$this->request->data);
 		}
 	}
@@ -455,15 +469,21 @@ class  PuzzlesController  extends AppController {
 	  		{
 
 	  			$this->request->data['Puzzle']['id'] = $id;
+	  			$this->request->data['Puzzle']['user_id'] = $this->Auth->user('id');
+	  			
+	  			// save data into table 
 	  			if($this->Puzzle->save($this->request->data))
 	  			{
-	  				$list = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id)));
-	  				debug($list);	
+	  				// $list = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id)));
+	  				$this->Session->setFlash(__('Puzzle updated.', true), 'default', array('class' => 'alert alert-success'));
+	  				$this->redirect(array('action'=>'index','business'=>true));
 	  			}
 	  		}
 	  		else
 	  		{
 	  			$this->set("Capturedata",$list);
+	  			$name = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id')),'fields'=>array('Puzzle.id','Puzzle.name')));
+				$this->set('Name',$name);
 	  		}	
 	  }
 	  else
@@ -472,7 +492,40 @@ class  PuzzlesController  extends AppController {
 	  }	
 	}
 
+/**
+	Ajax filter in business panel
+*/
+	public function business_status()
+	{
+		if(!empty($this->request->data))
+		{
+			$puzel = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.status'=>$this->request->data['status']))) ; 
+			foreach($puzel as $key => $psinglepuzle)
+				{
+					$puzel[$key]['Show'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$psinglepuzle['Puzzle']['id'],'Image.status'=>0))); 
+					$puzel[$key]['Hide'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$psinglepuzle['Puzzle']['id'],'Image.status'=>1))); 
+				}
+			$this->set("Puzzel",$puzel);					
+		}
+	}
 
+/**
+	Ajax calender filter in business panel
+*/
+	public function business_datefilter()
+	{
+		if(!empty($this->request->data))
+		{
+			$puzel = $this->Puzzle->find('all',array('conditions'=>array('AND'=>array(array('DATE(Puzzle.created) >='=>$this->request->data['startdate'],'DATE(Puzzle.created) <='=>$this->request->data['enddate']),'Puzzle.user_id'=>$this->Auth->user('id'))))) ; 	
+
+			foreach($puzel as $key => $psinglepuzle)
+				{
+					$puzel[$key]['Show'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$psinglepuzle['Puzzle']['id'],'Image.status'=>0))); 
+					$puzel[$key]['Hide'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$psinglepuzle['Puzzle']['id'],'Image.status'=>1))); 
+				}
+			$this->set("Puzzel",$puzel);					
+		}
+	}	
 
 
 
