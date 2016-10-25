@@ -52,7 +52,7 @@
                     <div class="col-md-7">
                       <div class="row">
                           <div class="col-md-6">
-                              <h4 class="title">Current Plan - Start Up &nbsp;&nbsp;&nbsp;&nbsp; <u>Upgrade</u></h4>
+                              <h4 class="title">Current Plan - <?php echo $get_current_plan['Plan']['name'];?> &nbsp;&nbsp;&nbsp;&nbsp; <!--<u>Upgrade</u>--></h4>
                             </div>
                             <div class="col-md-6">
                               <h4 class="title">Renewal Date - <?php 

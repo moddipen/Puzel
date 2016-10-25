@@ -36,7 +36,7 @@ class  OrdersController  extends AppController {
  *
  * @var array
  */
-	public $uses = array('Puzzle','User','Order','Support','Visitor','Image','Plan');
+	public $uses = array('Puzzle','User','Order','Support','Visitor','Image','Plan','UserSubscription');
 
 /**
  * Displays a view
@@ -125,6 +125,8 @@ class  OrdersController  extends AppController {
 		$this->set("title","Billing");
 		$order = $this->Order->find('all',array('conditions'=>array('Order.user_id'=>$this->Auth->user('id')),'order'=>'Order.id DESC'));
 		$this->set("Payment",$order);
+		$get_current_plan = $this->UserSubscription->find("first",array("conditions"=>array("UserSubscription.user_id"=>$this->Auth->user('id')),'order'=>array('UserSubscription.id DESC')));
+		$this->set("get_current_plan",$get_current_plan);//debug($get_current_plan);exit;
 	}
 		
 	public function receipt($id = null)
@@ -133,7 +135,8 @@ class  OrdersController  extends AppController {
 		$this->layout = null;
 		$this->printpdf($id);
 	}
-		public function printpdf($id=NULL) {
+
+	public function printpdf($id=NULL) {
     	$this->autoRender = false;
 		$this->layout = null;
 		
