@@ -103,8 +103,7 @@ class  OrdersController  extends AppController {
 //			}	
 
 		// count balance pieces
-echo "<pre>";
-print_r($this->Auth->user());exit;		
+	
 			$order = $this->Order->find('first',array('conditions'=>array('Order.user_id'=>$this->Auth->user('id'))));	
 			$list = $this->Plan->find('first',array('conditions'=>array('Plan.id'=>$order['Order']['plan_id'])));
 			$this->set('Visitor',$visitcount);
