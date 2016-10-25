@@ -20,6 +20,7 @@
 
 App::uses('AppController', 'Controller');
 App::import('Vendor', 'tcpdf', array('file' => 'tcpdf' . DS . 'mypdf.php'));
+App::import('Vendor', 'braintree/lib/Braintree');
 
 /**
  * Static content controller
@@ -121,12 +122,20 @@ class  OrdersController  extends AppController {
 */	
 	public function business_index()
 	{
+		Braintree_Configuration::environment('sandbox');
+		Braintree_Configuration::merchantId('dvgmgzszxf2qgmfh');
+		Braintree_Configuration::publicKey('2yhywhtr9583jhmh');
+		Braintree_Configuration::privateKey('2bcc2668e0766ce64a3d9f975d953f78');
+			
 		$this->layout = 'dashboard';
 		$this->set("title","Billing");
 		$order = $this->Order->find('all',array('conditions'=>array('Order.user_id'=>$this->Auth->user('id')),'order'=>'Order.id DESC'));
 		$this->set("Payment",$order);
 		$get_current_plan = $this->UserSubscription->find("first",array("conditions"=>array("UserSubscription.user_id"=>$this->Auth->user('id')),'order'=>array('UserSubscription.id DESC')));
 		$this->set("get_current_plan",$get_current_plan);//debug($get_current_plan);exit;
+		$paymentMethod = Braintree_Transaction::find($get_current_plan['Order']['transiction_id']);
+		//debug($paymentMethod);exit;
+		$this->set('cardDetail',$paymentMethod);
 	}
 		
 	public function receipt($id = null)

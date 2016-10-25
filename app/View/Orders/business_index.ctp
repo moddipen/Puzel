@@ -110,17 +110,26 @@
                       <div class="row">
                         <div class="col-md-12">
                           <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Card Number">
+						  <?php
+							$number = "************".$cardDetail->creditCard['last4'];
+						  ?>
+                                <input type="text" value="<?php echo $number;?>" class="form-control" placeholder="Card Number">
                               </div>
                         </div>
                         <div class="col-md-12">
                           <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Name">
+						  <?php
+							$name = $cardDetail->creditCard['cardholderName'];
+						  ?>
+                                <input type="text" value="<?php echo $name;?>" class="form-control" placeholder="Name">
                               </div>
                         </div>
                         <div class="col-md-6">
                           <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Expiry Date">
+							<?php
+							$date = $cardDetail->creditCard['expirationMonth']."/".$cardDetail->creditCard['expirationYear'];
+						  ?>
+                                <input type="text" class="form-control" value="<?php echo $date;?>" placeholder="Expiry Date">
                               </div>
                         </div>
                         <div class="col-md-6">
