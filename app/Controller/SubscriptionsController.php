@@ -68,6 +68,7 @@ class  SubscriptionsController  extends AppController {
 		$this->set('title',"Packages");
 
 		$plan = $this->Plan->find('all');
+		
 		$this->set('Plan',$plan);
 	}	
 

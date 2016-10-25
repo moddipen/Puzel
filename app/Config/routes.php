@@ -28,17 +28,17 @@
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
  */
-    Router::connect(
-           "/subscriptions/:action/*", array('plugin' => 'braintree', 'controller'=>'subscriptions')
-        );
+    // Router::connect(
+           // "/subscriptions/:action/*", array('plugin' => 'braintree', 'controller'=>'subscriptions')
+        // );
 
-        Router::connect(
-           "/subscriptions/", array('plugin' => 'braintree', 'controller'=>'subscriptions', 'action'=>'orders')
-        );
+        // Router::connect(
+           // "/subscriptions/", array('plugin' => 'braintree', 'controller'=>'subscriptions', 'action'=>'orders')
+        // );
 
-        Router::connect(
-           "/paymentmethods/:action/*", array('plugin' => 'braintree', 'controller'=>'paymentmethods')
-        );
+        // Router::connect(
+           // "/paymentmethods/:action/*", array('plugin' => 'braintree', 'controller'=>'paymentmethods')
+        // );
 
 
 
