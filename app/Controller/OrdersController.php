@@ -19,6 +19,7 @@
  */
 
 App::uses('AppController', 'Controller');
+App::import('Vendor', 'tcpdf', array('file' => 'tcpdf' . DS . 'mypdf.php'));
 
 /**
  * Static content controller
@@ -125,7 +126,123 @@ class  OrdersController  extends AppController {
 		$order = $this->Order->find('all',array('conditions'=>array('Order.user_id'=>$this->Auth->user('id')),'order'=>'Order.id DESC'));
 		$this->set("Payment",$order);
 	}
+		
+	public function receipt($id = null)
+	{
+		$this->autoRender = false;
+		$this->layout = null;
+		$this->printpdf($id);
+	}
+		public function printpdf($id=NULL) {
+    	$this->autoRender = false;
+		$this->layout = null;
+		
 			
+		$pdf = new MYPDF(PDF_PAGE_FORMAT, PDF_UNIT,array(150,150), true, 'UTF-8', false);
+		//$this->Order->recursive = -1;
+		$order = $this->Order->find("first",array("conditions"=>array("Order.id"=>$id)));
+		//debug($order);exit;
+		
+		// set default header data
+		$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH,PDF_HEADER_TITLE, PDF_HEADER_STRING, array(0,64,255), array(0,64,128));
+		$pdf->setFooterData(array(0,64,0), array(0,64,128));
+
+		// set header and footer fonts
+		$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+		$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+
+		// set default monospaced font
+		$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+
+		// set margins
+		$pdf->SetMargins(5, PDF_MARGIN_TOP, 5);
+		$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+		$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+
+		// set auto page breaks
+		$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+
+		// set image scale factor
+		$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+		// set some language-dependent strings (optional)
+		if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
+		    require_once(dirname(__FILE__).'/lang/eng.php');
+		    $pdf->setLanguageArray($l);
+		}
+
+		// ---------------------------------------------------------
+
+		// set default font subsetting mode
+		$pdf->setFontSubsetting(true);
+
+		
+		$pdf->SetFont('dejavusans', '', 9, '', true);
+
+		// Add a page
+		// This method has several options, check the source code documentation for more information.
+		$pdf->AddPage();
+
+		// set text shadow effect
+		//$pdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'color'=>array(196,196,196), 'opacity'=>1, 'blend_mode'=>'Normal'));
+
+		
+		$html =
+				 '
+				 <section class="invoice">
+					<div align="center">
+						Payment Receipt
+					</div>
+					<div>
+					</div>
+					';
+							
+						$html.= '
+				 		<table cellspacing="10" class="table table-striped" style="font-size:10px;">					 	
+							<tr>
+								<th>
+									Name : '.$order['User']['firstname'].' '.$order['User']['lastname'].'
+								</th>
+								<th>
+									Transaction Status: Successful
+								</th>								
+							</tr>
+							<tr>
+								<th>
+									Transaction Date : '.$order['Order']['created'].'
+								</th>
+								<th>
+									Amount Paid: '.$order['Order']['price'].'
+								</th>
+							</tr>
+							<tr>
+								<th>
+									Transaction ID : '.$order['Order']['transiction_id'].'
+								</th>
+								<th>
+									Plan Name: '.$order['Plan']['name'].'
+								</th>
+							</tr>
+							<tr>
+								<th>
+									Pieces : '.$order['Plan']['pieces'].'
+								</th>
+							</tr>
+							
+						</table> 
+						</section>
+					';
+
+		$pdf->writeHTML($html, true, false, false, false, '');
+
+		// ---------------------------------------------------------
+
+		// Close and output PDF document
+		// This method has several options, check the source code documentation for more information.
+		$pdf->Output('receipt.pdf', 'I');
+       	
+    
+    }
 
 
 

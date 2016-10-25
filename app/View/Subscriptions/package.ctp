@@ -31,7 +31,7 @@
                 <li class="klaus_plancolor"><i class="fa fa-times-circle"></i> CSS3 &amp; jQuery Powered</li>
                 </div>  
                 
-               <div class="klaus_getaquote skinonegetquote"><li><a href="<?php echo Configure::read('SITE_USER_URL')?>/subscriptions/plan/<?php echo $list['Plan']['id'] ;?>">GET A QUOTE</a></li></div>
+               <div class="klaus_getaquote skinonegetquote"><li><a href="<?php echo Configure::read('SITE_USER_URL');?>/subscriptions/plan/<?php echo $list['Plan']['id'] ;?>">GET A QUOTE</a></li></div>
             </div>
          <?php  }?>   
     
