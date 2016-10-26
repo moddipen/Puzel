@@ -8,9 +8,9 @@ class Order extends AppModel {
         'className' => 'User',
         'foreignKey' => 'user_id'            
     ),
-    'Plan' => array(
-        'className' =>'Plan',
-        'foreignKey'=>'plan_id'));
+    'Subscription' => array(
+        'className' =>'Subscription',
+        'foreignKey'=>'subscription_id'));
 
 
 }

@@ -37,7 +37,7 @@ class  PuzzlesController  extends AppController {
  *
  * @var array
  */
- public $uses = array('Puzzle','User','Image','Visitor','Support','Template','Order','Plan');
+ public $uses = array('Puzzle','User','Image','Visitor','Support','Template','Order','Plan','Subscription');
  public $helpers = array('Html', 'Form','Session','Csv');
 /**
  * Displays a view
@@ -51,68 +51,78 @@ class  PuzzlesController  extends AppController {
 	{
 	 	parent::beforeFilter();
 	 	$this->Auth->allow(array('sub'));
+	 // Count of total puzzle 
 	 	// Count of total puzzle 
-	 	$data = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
-		$this->set('CountPuzzle',$data);
+	 	
+	  	if($this->Auth->login())
+	  	{
+		  		$data = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
+			if(empty($data))
+			{
+				$data = 0 ;
+			}
+			$this->set('CountPuzzle',$data);
 
-		// Count active puzzle 
-// Count of total puzzle 
-	 	// Count of total puzzle 
-	 	$data = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
-		if(empty($data))
-		{
-			$data = 0 ;
-		}
-		$this->set('CountPuzzle',$data);
+			$active = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'),'Puzzle.status'=>0)));
+			if(empty($active))
+			{
+				$active = 0 ;
+			}
+			$this->set('CountActivePuzzle',$active);
 
-		$active = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'),'Puzzle.status'=>0)));
-		if(empty($active))
-		{
-			$active = 0 ;
-		}
-		$this->set('CountActivePuzzle',$active);
+			// Count total pieces
+			$list = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
+			// foreach ($list as $key => $value)
+			// {
+			// 	$visitor  = $this->Visitor->find('count',array('conditions'=>array('Visitor.puzzle_id'=>$value['Puzzle']['id'])));	
+			// 	if($visitor != NULL)
+			// 	{
+			// 		$list[$key]['Visitor'] = $visitor;
+			// 	}
+			// 	else
+			// 	{
+			// 		$list[$key]['Visitor'] = 0;	
+			// 	}
 
-		// Count total pieces
-		$list = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
-		// foreach ($list as $key => $value)
-		// {
-		// 	$visitor  = $this->Visitor->find('count',array('conditions'=>array('Visitor.puzzle_id'=>$value['Puzzle']['id'])));	
-		// 	if($visitor != NULL)
-		// 	{
-		// 		$list[$key]['Visitor'] = $visitor;
-		// 	}
-		// 	else
-		// 	{
-		// 		$list[$key]['Visitor'] = 0;	
-		// 	}
+			// 	$peices  = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$value['Puzzle']['id'])));	
+			// 	if($peices != NULL)
+			// 	{
+			// 		$list[$key]['Peices'] = $peices;
+				
+			// 	}
+			// 	else
+			// 	{
+			// 		$list[$key]['Peices'] = 0;	
+			// 	}
+			// }
+			// First loop   for peices count
+			// foreach($list as $value)
+			// 	{
+			// 		$visitcount+= $value['Visitor'];
+			// 	}
 
-		// 	$peices  = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$value['Puzzle']['id'])));	
-		// 	if($peices != NULL)
-		// 	{
-		// 		$list[$key]['Peices'] = $peices;
-			
-		// 	}
-		// 	else
-		// 	{
-		// 		$list[$key]['Peices'] = 0;	
-		// 	}
-		// }
-		// First loop   for peices count
-		// foreach($list as $value)
-		// 	{
-		// 		$visitcount+= $value['Visitor'];
-		// 	}
+				// if(empty($list))
+	//			{	
+					$visitcount = 0;
+	//			}	
 
-		// 	if(empty($list))
-		// 	{	
-				$visitcount = 0;
-			// }	
-
-		// count balance pieces  
-			$order = $this->Order->find('first',array('conditions'=>array('Order.user_id'=>$this->Auth->user('id'))));	
-			$list = $this->Plan->find('first',array('conditions'=>array('Plan.id'=>$order['Order']['plan_id'])));
-			$this->set('Visitor',$visitcount);
-			$this->set('Balancepeices',$list['Plan']['pieces']);
+			// count balance pieces  
+				$order = $this->Order->find('first',array('conditions'=>array('Order.user_id'=>$this->Auth->user('id'))));	
+				if(!empty($order))
+				{
+					$clas = $this->Subscription->find('first',array('conditions'=>array('Subscription.id'=>$order['Order']['subscription_id'])));	
+					$pic = $clas['Subscription']['pieces'] ;
+				}
+				else
+				{
+					$pic = 0;
+				}	
+				
+				$this->set('Visitor',$visitcount);
+				$this->set('Balancepeices',$pic);
+		  	}
+	 	
+	 	
 	}
 
 
@@ -219,6 +229,7 @@ class  PuzzlesController  extends AppController {
 				$imageName = $this->request->data['Puzzle']['name'].".jpg";
 				$path = $URL.$imageName;
 				$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i','', $this->request->data['Puzzle']['image']));
+				//echo $data;exit;
 				$success = file_put_contents($path,$data);
 				
 				$get_image = Configure::read('SITE_URL').'img/puzzel/'.$imageName;

@@ -52,7 +52,7 @@
                     <div class="col-md-7">
                       <div class="row">
                           <div class="col-md-6">
-                              <h4 class="title">Current Plan - <?php echo $get_current_plan['Plan']['name'];?> &nbsp;&nbsp;&nbsp;&nbsp; <!--<u>Upgrade</u>--></h4>
+                              <h4 class="title">Current Plan - <?php echo $get_current_plan['Subscription']['name'];?> &nbsp;&nbsp;&nbsp;&nbsp; <!--<u>Upgrade</u>--></h4>
                             </div>
                             <div class="col-md-6">
                               <h4 class="title">Renewal Date - <?php 
@@ -92,11 +92,12 @@
                                foreach ($Payment as $value) {?>
                           <tr>
                             <td><?php echo date('m/d/Y' , strtotime($value['Order']['created']))?></td>
-                            <td><?php echo $value['Plan']['name'];?></td>
+                            <td><?php echo $value['Subscription']['name'];?></td>
                             <td>$<?php echo $value['Order']['price'];?></td>
                             <td>
-								<a href="<?php echo Configure::read("SITE_URL");?>orders/receipt/<?php echo $value['Order']['id']?>">
-								<i class="fa fa-file-pdf-o"></i>
+								<a href="<?php echo Configure::read("SITE_URL");?>orders/receipt/<?php echo $value['Order']['id']?>" style="color:white;">
+								  <i class="fa fa-file-pdf-o"></i>
+                </a>
 							</td>
                           </tr>
                             <?php } }?>

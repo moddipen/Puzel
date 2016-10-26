@@ -113,14 +113,15 @@ class AppController extends Controller
         if (!$this->Auth->loggedIn() && $this->Cookie->read('remember_me_cookie'))
         {
 			$cookie = $this->Cookie->read('remember_me_cookie');
-
-            $user = $this->User->find('first', array(
-                'conditions' => array(
-                    'User.username' => $cookie['username'],
-                    'User.password' => $cookie['password']
-                )
-            ));
-
+			if(!empty($cookie))
+			{
+				$user = $this->User->find('first', array(
+					'conditions' => array(
+						'User.username' => $cookie['username'],
+						'User.password' => $cookie['password']
+					)
+				));
+			}
             if ($user && !$this->Auth->login($user['User'])) {
                 $this->redirect('/users/logout'); // destroy session & cookie
             }

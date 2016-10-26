@@ -37,7 +37,7 @@ class  SubscriptionsController  extends AppController {
  *
  * @var array
  */
- public $uses = array('Subscriptions','User','Image','Visitor','Support','Template','Order','Plan');
+ public $uses = array('Subscriptions','User','Image','Visitor','Support','Template','Order','Plan','Subscription','UserSubscription');
 
 /**
  * Displays a view
@@ -50,7 +50,7 @@ class  SubscriptionsController  extends AppController {
 	function beforeFilter()
 	{
 	 	parent::beforeFilter();
-	 	$this->Auth->allow(array('package','user_plan'));
+	 	$this->Auth->allow(array('package','user_plan','thankyou'));
 	 	
 	}
 
@@ -67,8 +67,7 @@ class  SubscriptionsController  extends AppController {
 		$this->set("Signup",$signup);
 		$this->set('title',"Packages");
 
-		$plan = $this->Plan->find('all');
-		
+		$plan = $this->Subscription->find('all');
 		$this->set('Plan',$plan);
 	}	
 
@@ -83,23 +82,28 @@ class  SubscriptionsController  extends AppController {
 		$this->set("Signup",$signup);
 		$this->set('title',"Packages");
 
-		$plan = $this->Plan->find('first',array('conditions'=>array('Plan.id'=>$id))); 
+		$plan = $this->Subscription->find('first',array('conditions'=>array('Subscription.id'=>$id))); 
 		$this->set('Rate',$plan);
 
 		if($this->request->data)
 		{
-			Braintree_Configuration::environment('sandbox');
-			Braintree_Configuration::merchantId('dvgmgzszxf2qgmfh');
-			Braintree_Configuration::publicKey('2yhywhtr9583jhmh');
-			Braintree_Configuration::privateKey('2bcc2668e0766ce64a3d9f975d953f78');
+			
+			// check if user select except free plan then in that case payment method call 
 
-			$result = Braintree_Transaction::sale(array(
+			if($plan['Subscription']['price'] != 'Free')
+			{
+				Braintree_Configuration::environment('sandbox');
+				Braintree_Configuration::merchantId('dvgmgzszxf2qgmfh');
+				Braintree_Configuration::publicKey('2yhywhtr9583jhmh');
+				Braintree_Configuration::privateKey('2bcc2668e0766ce64a3d9f975d953f78');
+
+				$result = Braintree_Transaction::sale(array(
 						'customer' => array(
 							'firstName' => $this->request->data['Subscription']['firstname'],
 							 'lastName' => $this->request->data['Subscription']['lastname'],
 							 'email' => $this->request->data['Subscription']['email'],
 							),
-							'amount' => $plan['Plan']['price'],
+							'amount' => $plan['Subscription']['price'],
 							'creditCard' => array(
 								'number' => trim($this->request->data['Subscription']['card_number']),
 								'expirationDate' => $this->request->data['Subscription']['ex_date_month']['month'].'/'.$this->request->data['Subscription']['ex_date_year']['year'],
@@ -108,76 +112,179 @@ class  SubscriptionsController  extends AppController {
 						));
 
 				if ($result->success) 
+				{
+					
+					$result1 = Braintree_Transaction::submitForSettlement($result->transaction->id);
+					
+						$data['Order']['transiction_id']=$result->transaction->id;
+						$data['Order']['price']=$plan['Subscription']['price'];
+						$data['Order']['created']=date('Y-m-d H:i:s',time());
+						$data['Order']['modified']=date('Y-m-d H:i:s',time());
+						$data['Order']['subscription_id'] = $id;
+						// check user is already exists or not 
+
+						$user = $this->User->find('first',array('conditions'=>array('User.email'=>$this->request->data['Subscription']['email'])));
+						if(!empty($user))
 						{
-							
-							$result1 = Braintree_Transaction::submitForSettlement($result->transaction->id);
-							
-								$data['Order']['transiction_id']=$result->transaction->id;
-								$data['Order']['price']=$plan['Plan']['price'];
-								$data['Order']['created']=date('Y-m-d H:i:s',time());
-								$data['Order']['modified']=date('Y-m-d H:i:s',time());
-								$data['Order']['plan_id'] = $id;
-								// check user is already exists or not 
-
-								$user = $this->User->find('first',array('conditions'=>array('User.email'=>$this->request->data['Subscription']['email'])));
-								if(!empty($user))
-								{
-									$data['Order']['user_id'] = $user['User']['id'];
-									$array = array(
-										'id'=>$user['User']['id'],
-										'password'=>$this->request->data['Subscription']['password'] );
-									$this->User->save($array);
-								}
-								else
-								{
-									// Create new Business account 
-
-									$this->request->data['User']['firstname'] = $this->request->data['Subscription']['firstname'] ;
-									$this->request->data['User']['lastname'] = $this->request->data['Subscription']['lastname'] ;
-									$this->request->data['User']['email'] = $this->request->data['Subscription']['email'] ;
-									$this->request->data['User']['password'] = $this->request->data['Subscription']['password'] ;
-									$this->request->data['User']['usertype'] = 1;
-									
-									$this->User->create();
-									if($this->User->save($this->request->data))
-									{
-										$data['Order']['user_id'] = $this->User->getLastInsertId();
-									}
-								}	
-								if($this->Order->save($data))
-								{
-									$invoice = $this->Order->find('first',array('conditions'=>array('Order.id'=>$this->Order->getLastInsertId())));
-									$email = array(
-			              			"templateid"=>1024802,
-			              			"name"=>$this->request->data['Subscription']['firstname'].' '.$this->request->data['Subscription']['lastname'],
-			              			"TemplateModel"=> array(
-									    "name"=> $this->request->data['Subscription']['firstname'].' '.$this->request->data['Subscription']['lastname'],
-									    "product_name"=>$plan['Plan']['price']."$",
-										"action_url"=>$invoice['Order']['id'],
-										"date"=>$invoice['Order']['created'],
-										"amount"=>$invoice['Order']['price']."$",
-										"description"=>"One month purchase plan",
-										'total'=>$invoice['Order']['price']."$"),
-									"InlineCss"=> true, 
-			              			"from"=> "support@puzel.co",
-			              			'to'=>$this->request->data['Subscription']['email'],
-			              			'reply_to'=>"support@puzel.co"
-			              			);	
-
-									$this->sendinvoice($email);
-									$this->Session->setFlash('<div class="alert alert-success"><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Success </b>: Offer saved for Approval. </p></div>');
-									$this->redirect(array('controller'=>'users','action'=>'index','user'=>false));	
-									
-								}
+							$data['Order']['user_id'] = $user['User']['id'];
+							$array = array(
+								'id'=>$user['User']['id'],
+								'password'=>$this->request->data['Subscription']['password'] );
+							$this->User->save($array);
 						}
 						else
 						{
-							$this->Session->setFlash('<div class="alert alert-danger"><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Failed </b>: Error processing transaction:</p><br>
-								<span>code: '.$result->transaction->processorResponseCode.'</span><br>
+							// Create new Business account 
 
-								<span>text: '.$result->transaction->processorResponseText.'</span><br></div>');
+							$this->request->data['User']['firstname'] = $this->request->data['Subscription']['firstname'] ;
+							$this->request->data['User']['lastname'] = $this->request->data['Subscription']['lastname'] ;
+							$this->request->data['User']['email'] = $this->request->data['Subscription']['email'] ;
+							$this->request->data['User']['password'] = $this->request->data['Subscription']['password'] ;
+							$this->request->data['User']['usertype'] = 1;
+							
+							$this->User->create();
+							if($this->User->save($this->request->data))
+							{
+								$data['Order']['user_id'] = $this->User->getLastInsertId();
+							}
 						}	
-			}	 
+						if($this->Order->save($data))
+						{
+							$invoice = $this->Order->find('first',array('conditions'=>array('Order.id'=>$this->Order->getLastInsertId())));
+							$email = array(
+	              			"templateid"=>1024802,
+	              			"name"=>$this->request->data['Subscription']['firstname'].' '.$this->request->data['Subscription']['lastname'],
+	              			"TemplateModel"=> array(
+							    "name"=> $this->request->data['Subscription']['firstname'].' '.$this->request->data['Subscription']['lastname'],
+							    "product_name"=>$plan['Subscription']['price']."$",
+								"action_url"=>$invoice['Order']['id'],
+								"date"=>$invoice['Order']['created'],
+								"amount"=>$invoice['Order']['price']."$",
+								"description"=>"One month purchase plan",
+								'total'=>$invoice['Order']['price']."$"),
+							"InlineCss"=> true, 
+	              			"from"=> "support@puzel.co",
+	              			'to'=>$this->request->data['Subscription']['email'],
+	              			'reply_to'=>"support@puzel.co"
+	              			);	
+
+							// Save data in user subscription table 
+
+							$insert = array(
+								'user_id'=>$data['Order']['user_id'],
+								'order_id'=>$this->Order->getLastInsertId(),
+								'subscription_id'=>$id,
+								'used_pieces'=>$plan['Subscription']['pieces']);
+
+							$this->UserSubscription->create();
+							if($this->UserSubscription->save($insert))
+							{
+								$this->sendinvoice($email);
+								//$this->Session->setFlash('<div class="alert alert-success"><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Success </b>: Offer saved for Approval. </p></div>');
+								$this->redirect(array('controller'=>'subscriptions','action'=>'thankyou','user'=>false));		
+							}
+						}
+				}
+				else
+				{
+					if($this->request->data['Subscription']['check'] == '')
+					{
+						$this->Session->setFlash(__('Invalid card detail.', true), 'default', array('class' => 'alert alert-danger'));						
+					}
+					else
+					{
+						$this->Session->setFlash('<div class="alert alert-danger"><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Failed </b>: Error processing transaction:</p><br>
+						</div>');	
+					}	
+				}	
+			}
+
+
+			// When user select free plan 
+			else
+			{
+				$data['Order']['transiction_id']=time();
+				$data['Order']['price']=$plan['Subscription']['price'];
+				$data['Order']['created']=date('Y-m-d H:i:s',time());
+				$data['Order']['modified']=date('Y-m-d H:i:s',time());
+				$data['Order']['subscription_id'] = $id;
+				// check user is already exists or not 
+
+				$user = $this->User->find('first',array('conditions'=>array('User.email'=>$this->request->data['Subscription']['email'])));
+				if(!empty($user))
+				{
+					$data['Order']['user_id'] = $user['User']['id'];
+					$array = array(
+						'id'=>$user['User']['id'],
+						'password'=>$this->request->data['Subscription']['password'] );
+					$this->User->save($array);
+				}
+				else
+				{
+					// Create new Business account 
+
+					$this->request->data['User']['firstname'] = $this->request->data['Subscription']['firstname'] ;
+					$this->request->data['User']['lastname'] = $this->request->data['Subscription']['lastname'] ;
+					$this->request->data['User']['email'] = $this->request->data['Subscription']['email'] ;
+					$this->request->data['User']['password'] = $this->request->data['Subscription']['password'] ;
+					$this->request->data['User']['usertype'] = 1;
+					
+					$this->User->create();
+					if($this->User->save($this->request->data))
+					{
+						$data['Order']['user_id'] = $this->User->getLastInsertId();
+					}
+				}	
+				if($this->Order->save($data))
+				{
+					$invoice = $this->Order->find('first',array('conditions'=>array('Order.id'=>$this->Order->getLastInsertId())));
+					$email = array(
+	      			"templateid"=>1024802,
+	      			"name"=>$this->request->data['Subscription']['firstname'].' '.$this->request->data['Subscription']['lastname'],
+	      			"TemplateModel"=> array(
+					    "name"=> $this->request->data['Subscription']['firstname'].' '.$this->request->data['Subscription']['lastname'],
+					    "product_name"=>$plan['Subscription']['price']."$",
+						"action_url"=>$invoice['Order']['id'],
+						"date"=>$invoice['Order']['created'],
+						"amount"=>$invoice['Order']['price']."$",
+						"description"=>"One month purchase plan",
+						'total'=>$invoice['Order']['price']."$"),
+					"InlineCss"=> true, 
+	      			"from"=> "support@puzel.co",
+	      			'to'=>$this->request->data['Subscription']['email'],
+	      			'reply_to'=>"support@puzel.co"
+	      			);	
+
+					// Save data in user subscription table 
+
+					$insert = array(
+						'user_id'=>$data['Order']['user_id'],
+						'order_id'=>$this->Order->getLastInsertId(),
+						'subscription_id'=>$id,
+						'used_pieces'=>$plan['Subscription']['pieces']);
+
+					$this->UserSubscription->create();
+					if($this->UserSubscription->save($insert))
+					{
+						$this->sendinvoice($email);
+						//$this->Session->setFlash('<div class="alert alert-success"><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Success </b>: Offer saved for Approval. </p></div>');
+						$this->redirect(array('controller'=>'subscriptions','action'=>'thankyou','user'=>false));		
+					}
+				}	
+	
+			}
+		}		 
+	}	
+
+
+/**
+	Thank you page
+*/	
+	public function thankyou()
+	{	
+		$signup = 0;
+		$this->set("Signup",$signup);
+		$this->set('title',"Thank You");
 	}	
 
 

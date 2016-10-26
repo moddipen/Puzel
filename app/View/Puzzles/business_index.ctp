@@ -161,7 +161,46 @@
                             <td class="minipadding controls">
                               <input type ="hidden" value = "<?php echo $puzel['Puzzle']['id'];?>" class ="puzelid" >
                               <div class="col-xs-5 text-right"> <?php 
-                            echo $this->html->link('',array('action' => 'edit',$puzel['Puzzle']['id']),array('class'=>'fa fa-pencil','style'=>"color:white;"));?><!-- <i class="fa fa-pencil"></i> --></div>
+
+                               if(AuthComponent::user('status') == 1)
+                               {?>
+                                 <i class ='fa fa-pencil'></i>
+                               <?php }
+                               else
+                               {
+                                echo $this->html->link('',array('action' => 'edit',$puzel['Puzzle']['id']),array('class'=>'fa fa-pencil','style'=>"color:white;"));     
+                               } 
+                            ?><!-- <i class="fa fa-pencil"></i> --></div>
+                              <?php 
+                              if(AuthComponent::user('status') == 1)
+                               {?>
+                                <div class="col-xs-7">
+                                <div class="onoffswitch green small">
+                                  <?php 
+                                    // check puzzle s activate or not
+                                    if($puzel['Puzzle']['status'] == 0)
+                                    {
+                                      $puzzle = "checked='checked'";
+                                    }
+                                    else
+                                     {
+                                       $puzzle = '';
+                                     } 
+
+                                  ?> 
+                                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="onoffswitch<?php echo $puzel['Puzzle']['id'];?>" <?php echo $puzzle;?> value = "<?php echo $puzel['Puzzle']['id'];?>" disabled="disabled">
+                                  <label class="onoffswitch-label" for="onoffswitch<?php echo $puzel['Puzzle']['id'];?>">
+                                    <span class="onoffswitch-inner"></span>
+                                    <span class="onoffswitch-switch"></span>
+                                  </label>
+                                </div>
+                              </div>
+
+
+                                <?php }
+                                else
+                                  {?>
+
                               <div class="col-xs-7">
                                 <div class="onoffswitch green small">
                                   <?php 
@@ -183,6 +222,7 @@
                                   </label>
                                 </div>
                               </div>
+                              <?php }?>
                             </td>
                           </tr>
                           <?php }}?>
@@ -355,7 +395,7 @@ $(document).ready(function(){
       {
         $.ajax(
         {
-          url: "puzzles/active/"+this.value,
+          url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/active/"+this.value,
           type: "post",
           datatype:"json",
           data: {'id':this.value} ,
@@ -372,7 +412,7 @@ $(document).ready(function(){
       {
         $.ajax(
         {
-          url: "puzzles/deactive/"+this.value,
+          url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/deactive/"+this.value,
           type: "post",
           datatype:"json",
           data: {'id':this.value} ,

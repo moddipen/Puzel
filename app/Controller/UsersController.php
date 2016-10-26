@@ -38,7 +38,7 @@ class UsersController extends AppController {
  */
  public $helpers = array('Html', 'Form','Session');
  public $components = array('Session','RequestHandler');
- public $uses = array('Puzzle','User','Image','Visitor','Support','Order','Plan');
+ public $uses = array('Puzzle','User','Image','Visitor','Support','Order','Plan','Subscription');
  var $name = 'Users';
 
 /**
@@ -60,62 +60,71 @@ class UsersController extends AppController {
 	 	
 	  	if($this->Auth->login())
 	  	{
-	  		$data = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
-		if(empty($data))
-		{
-			$data = 0 ;
-		}
-		$this->set('CountPuzzle',$data);
+		  		$data = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
+			if(empty($data))
+			{
+				$data = 0 ;
+			}
+			$this->set('CountPuzzle',$data);
 
-		$active = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'),'Puzzle.status'=>0)));
-		if(empty($active))
-		{
-			$active = 0 ;
-		}
-		$this->set('CountActivePuzzle',$active);
+			$active = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'),'Puzzle.status'=>0)));
+			if(empty($active))
+			{
+				$active = 0 ;
+			}
+			$this->set('CountActivePuzzle',$active);
 
-		// Count total pieces
-		$list = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
-		// foreach ($list as $key => $value)
-		// {
-		// 	$visitor  = $this->Visitor->find('count',array('conditions'=>array('Visitor.puzzle_id'=>$value['Puzzle']['id'])));	
-		// 	if($visitor != NULL)
-		// 	{
-		// 		$list[$key]['Visitor'] = $visitor;
-		// 	}
-		// 	else
-		// 	{
-		// 		$list[$key]['Visitor'] = 0;	
-		// 	}
+			// Count total pieces
+			$list = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
+			// foreach ($list as $key => $value)
+			// {
+			// 	$visitor  = $this->Visitor->find('count',array('conditions'=>array('Visitor.puzzle_id'=>$value['Puzzle']['id'])));	
+			// 	if($visitor != NULL)
+			// 	{
+			// 		$list[$key]['Visitor'] = $visitor;
+			// 	}
+			// 	else
+			// 	{
+			// 		$list[$key]['Visitor'] = 0;	
+			// 	}
 
-		// 	$peices  = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$value['Puzzle']['id'])));	
-		// 	if($peices != NULL)
-		// 	{
-		// 		$list[$key]['Peices'] = $peices;
-			
-		// 	}
-		// 	else
-		// 	{
-		// 		$list[$key]['Peices'] = 0;	
-		// 	}
-		// }
-		// First loop   for peices count
-		// foreach($list as $value)
-		// 	{
-		// 		$visitcount+= $value['Visitor'];
-		// 	}
+			// 	$peices  = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$value['Puzzle']['id'])));	
+			// 	if($peices != NULL)
+			// 	{
+			// 		$list[$key]['Peices'] = $peices;
+				
+			// 	}
+			// 	else
+			// 	{
+			// 		$list[$key]['Peices'] = 0;	
+			// 	}
+			// }
+			// First loop   for peices count
+			// foreach($list as $value)
+			// 	{
+			// 		$visitcount+= $value['Visitor'];
+			// 	}
 
-			// if(empty($list))
-//			{	
-				$visitcount = 0;
-//			}	
+				// if(empty($list))
+	//			{	
+					$visitcount = 0;
+	//			}	
 
-		// count balance pieces  
-			$order = $this->Order->find('first',array('conditions'=>array('Order.user_id'=>$this->Auth->user('id'))));	
-			$clas = $this->Plan->find('first',array('conditions'=>array('Plan.id'=>$order['Order']['plan_id'])));
-			$this->set('Visitor',$visitcount);
-			$this->set('Balancepeices',$clas['Plan']['pieces']);
-	  	}
+			// count balance pieces  
+				$order = $this->Order->find('first',array('conditions'=>array('Order.user_id'=>$this->Auth->user('id'))));	
+				if(!empty($order))
+				{
+					$clas = $this->Subscription->find('first',array('conditions'=>array('Subscription.id'=>$order['Order']['subscription_id'])));	
+					$pic = $clas['Subscription']['pieces'] ;
+				}
+				else
+				{
+					$pic = 0;
+				}	
+				
+				$this->set('Visitor',$visitcount);
+				$this->set('Balancepeices',$pic);
+		  	}
 	 	
 			
 	 }
@@ -238,7 +247,13 @@ class UsersController extends AppController {
           	  
             if ($this->Auth->login())
             {
-              	// if user click on remember me checkbox
+              	if($this->Auth->user('status') == 1)
+				{
+					$this->Auth->logout();
+					$this->Session->setFlash(__('<div class="alert alert-danger alert-dismissible"><p>Your subscription has been disabled, please contact support.</p></div>'));
+					$this->redirect(array('action'=>'login','user'=>true));
+				}
+				// if user click on remember me checkbox
               	if ($this->request->data['User']['remember_me'] == 1)
               	{
 	                // remove "remember me checkbox"
