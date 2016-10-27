@@ -351,7 +351,7 @@
        {
          type: "POST",
          url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/template",
-         data: {'id':this.value}, 
+         data: {'id':this.value,'type':'terms'}, 
          dataType: 'json', 
          success: function(data)
          {
@@ -368,8 +368,8 @@
       $.ajax(
        {
          type: "POST",
-         url: "pricetemplate/"+this.value,
-         data: {'id':this.value}, 
+        url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/template/"+this.value,
+         data: {'id':this.value,'type':'price'}, 
          dataType: 'json', 
          success: function(data)
          {

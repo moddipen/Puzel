@@ -204,12 +204,22 @@
             <h3 class="modal-title" id="modalDialogLabel">Grand Prize</h3>
           </div>
           <div class="modal-body">
-            <form class="popup-form">
+            <form class="popup-form" id="grand_price" action="" method="post" enctype="multipart/form-data">
               <div class="form-group">
                 <textarea name="textarea" id="textarea1" class="form-control wysiwyg"><?php echo $Capturedata['Puzzle']['price'];?></textarea>
               </div>
               <input type = "hidden" value = "<?php echo $Capturedata['Puzzle']['id'];?>" name="data[Puzzle][id]">
-              <div class="form-group">
+              <div id="image">
+				<?php 
+					if($Capturedata['Puzzle']['price_image'] != "")
+					{
+						$filepath  = Configure::read("SITE_URL").'app/webroot/img/grand_price/';
+						$filepath = $filepath.strtolower($Capturedata['Puzzle']['price_image']);
+						echo "<img src='$filepath' style='width:540px;'/>";
+					}
+				?>
+			  </div>
+			  <div class="form-group">
                 <div class="row minipadding">
                     <div class="col-md-4">
                       <select name="opton"  class="form-control chosen-select" id = "changeprice">
@@ -229,13 +239,14 @@
                     </div>
                   </div>
               </div>
+			  
               <div id = "contentdata" style ="display:none;"></div>
               <div class="row minipadding">
                   <div class="col-md-3">
                   </div>
                   <div class="col-md-3">
                      <div class="form-group">
-                     <button type="button" class="btn btn-oranges fullwidth" id="grandprice">Submit</button>
+                     <button type="submit" class="btn btn-oranges fullwidth" id="grandprice">Submit</button>
                      </div>
                  </div>
                  <div class="col-md-3">
@@ -326,24 +337,25 @@
 
     // Save grand price of puzzle 
 
-    $('#grandprice').click(function()
+    $("#grand_price").on('submit',(function(e) 
     {
-      
-
-
-
+      e.preventDefault();
       var html = $('.note-editable').html(); 
        $.ajax(
        {
          type: "POST",
-         url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/price/<?php echo $Capturedata['Puzzle']['id'];?>",
-         data: {'id':"<?php echo $Capturedata['Puzzle']['id'];?>",'price':html,'image':$("#userimage").val()}, 
+         url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/price",
+         data: new FormData(this),
+contentType: false,
+cache: false,
+processData:false,		 
         success: function(data)
          {
-            $('#modal3').modal('hide');
+            $("#image").html(data);
+			$('#modal3').modal('hide');
          }
        });
-    });  
+    }));  
 
     // On change event in templete
 
@@ -353,11 +365,11 @@
        {
          type: "POST",
          url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/template/"+this.value,
-         data: {'id':this.value}, 
+         data: {'id':this.value,'type':'terms'}, 
          dataType: 'json', 
          success: function(data)
          {
-            $('.note-editable').html(data.Puzzle.terms);  
+            $('#terms .note-editable').html(data.Puzzle.terms);  
           }
        });
       // alert();
@@ -368,12 +380,12 @@
       $.ajax(
        {
          type: "POST",
-         url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/price/"+this.value,
-         data: {'id':this.value}, 
+         url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/template/"+this.value,
+         data: {'id':this.value,'type':'price'}, 
          dataType: 'json', 
          success: function(data)
          {
-            $('.note-editable').html(data.Puzzle.price);  
+            $('#grand_price .note-editable').html(data.Puzzle.price);  
           }
        });
       // alert();

@@ -298,8 +298,17 @@ else
           <div class="modal-body">
             <form class="popup-form">
               <div class="form-group">
-                <div > <?php echo $PuzzleData['Puzzle']['price'];?></div>
-                <div><a href = "<?php echo $this->webroot ;?>img/puzzel/<?php echo $PuzzleData['Puzzle']['price_image'];?>" target="_blank"><img src = "<?php echo $this->webroot ;?>img/puzzel/<?php echo $PuzzleData['Puzzle']['price_image'];?>" height="80px" width="60px"/></a> </div>
+                <div> <?php echo $PuzzleData['Puzzle']['price'];?></div>
+                <div>
+					<?php
+						if($PuzzleData['Puzzle']['price_image'] != "")
+						{
+					?>
+					<a href = "<?php echo $this->webroot ;?>img/grand_price/<?php echo $PuzzleData['Puzzle']['price_image'];?>" target="_blank"><img src = "<?php echo $this->webroot ;?>img/grand_price/<?php echo $PuzzleData['Puzzle']['price_image'];?>"  width="540px"/></a> 
+					<?php
+						}
+					?>
+				</div>
                 <!-- <textarea name="textarea" id="textarea" class="form-control wysiwyg"></textarea> -->
               </div>
              </form>

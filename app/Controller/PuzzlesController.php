@@ -50,10 +50,10 @@ class  PuzzlesController  extends AppController {
 	function beforeFilter()
 	{
 	 	parent::beforeFilter();
-	 	$this->Auth->allow(array('sub'));
+	 	$this->Auth->allow('sub');
 	 // Count of total puzzle 
 	 	// Count of total puzzle 
-	 	
+
 	  	if($this->Auth->login())
 	  	{
 		  	$data = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
@@ -72,54 +72,14 @@ class  PuzzlesController  extends AppController {
 
 			// Count total pieces
 			$list = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
-			// foreach ($list as $key => $value)
-			// {
-			// 	$visitor  = $this->Visitor->find('count',array('conditions'=>array('Visitor.puzzle_id'=>$value['Puzzle']['id'])));	
-			// 	if($visitor != NULL)
-			// 	{
-			// 		$list[$key]['Visitor'] = $visitor;
-			// 	}
-			// 	else
-			// 	{
-			// 		$list[$key]['Visitor'] = 0;	
-			// 	}
-
-			// 	$peices  = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$value['Puzzle']['id'])));	
-			// 	if($peices != NULL)
-			// 	{
-			// 		$list[$key]['Peices'] = $peices;
-				
-			// 	}
-			// 	else
-			// 	{
-			// 		$list[$key]['Peices'] = 0;	
-			// 	}
-			// }
-			// First loop   for peices count
-			// foreach($list as $value)
-			// 	{
-			// 		$visitcount+= $value['Visitor'];
-			// 	}
-
-				// if(empty($list))
-	//			{	
-					$visitcount = 0;
-	//			}	
-
+			
+			$visitcount = 0;
+	
 			// count balance pieces  
-				$order = $this->Order->find('first',array('conditions'=>array('Order.user_id'=>$this->Auth->user('id'))));	
-				if(!empty($order))
-				{
-					$clas = $this->Subscription->find('first',array('conditions'=>array('Subscription.id'=>$order['Order']['subscription_id'])));	
-					$pic = $clas['Subscription']['pieces'] ;
-				}
-				else
-				{
-					$pic = 0;
-				}	
-				
+				$pic = $this->UserSubscription->find("first",array("conditions"=>array("UserSubscription.user_id"=>$this->Auth->user('id'))));
+				if(empty($pic)){$pic['UserSubscription']['used_pieces'] = 0;}
 				$this->set('Visitor',$visitcount);
-				$this->set('Balancepeices',$pic);
+				$this->set('Balancepeices',$pic['UserSubscription']['used_pieces']);
 
 			}
 	 	
@@ -207,15 +167,15 @@ class  PuzzlesController  extends AppController {
 */	
 	public function business_pieces()
 	{
-		$this->layout = '';
+		$this->autoRender = false;
 		
 		if(!empty($this->request->data))
 		{
 			// check how many pieces remain of login user	
+			$user_id = $this->Auth->user('id');
+			$number_of_pieces = $this->UserSubscription->find('first',array('conditions'=>array('UserSubscription.user_id'=>$this->Auth->user('id'))));
 
-			$number_of_pieces = $this->UserSubscription->find('first',array('conditions'=>array('UserSubscription.user_id'=>$this->Auth->login('id'))));
-
-	       
+	      
 	       		// check if name already existes 
 				$existname = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.name'=>$this->request->data['Puzzle']['name'])));
 				if(!empty($existname))
@@ -225,6 +185,7 @@ class  PuzzlesController  extends AppController {
 				}
 				else
 				{
+					$this->request->data['Puzzle']['user_id'] = $user_id;
 					// remove space from name 
 					$this->request->data['Puzzle']['name'] = str_replace(' ','', $this->request->data['Puzzle']['name']);
 					
@@ -238,20 +199,21 @@ class  PuzzlesController  extends AppController {
 					$success = file_put_contents($path,$data);
 					
 					$get_image = Configure::read('SITE_URL').'img/puzzel/'.$imageName;
-					$read_image = exif_read_data($get_image) ;
+					$read_image = getimagesize($get_image); 
 					
 					if(isset($read_image))
 					{
 					   $argv = $get_image;
 					}
+					
+					//$info = $read_image['FileName'];
 
-					  $info = $read_image['FileName'];
-
-					  $size = $read_image['FileSize'];
-					  $units = array( 'B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
-					  $power = $size > 0 ? floor(log($size, 1024)) : 0;
-					  $imgsize =  number_format($size / pow(1024, $power), 2, '.', ',') . ' ' . $units[$power];	
-					  $this->request->data['Puzzle']['user_id'] = $this->Auth->user('id');
+					  // $size = $read_image['FileSize'];
+					  // $units = array( 'B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+					  // $power = $size > 0 ? floor(log($size, 1024)) : 0;
+					  // $imgsize =  number_format($size / pow(1024, $power), 2, '.', ',') . ' ' . $units[$power];	
+					
+					
 					  
 					  // save single image in puzzle tabel
 					  $term = $this->Session->read('IMAGETERMS') ; 
@@ -267,12 +229,13 @@ class  PuzzlesController  extends AppController {
 					  }
 					  $this->request->data['Puzzle']['status'] = 0;
 					  $this->request->data['Puzzle']['image_ext'] = $imageName;
+					 
 					  $this->Puzzle->create();
 					  if($this->Puzzle->save($this->request->data))
 					  {
-						  $width=$read_image['COMPUTED']['Width'];
-						  $height=$read_image['COMPUTED']['Height'];
-						  $image_type =$read_image['MimeType'];
+						  $width=$read_image[0];
+						  $height=$read_image[1];
+						  $image_type =$read_image['mime'];
 						  $peices = $this->request->data['Puzzle']['pieces'];
 
 						  if($peices == 25)
@@ -335,30 +298,35 @@ class  PuzzlesController  extends AppController {
 					  		  $this->Image->create();
 					  		  $insert = $this->Image->save($image_pieces);
 					  		  imagejpeg($output,$multipleimagefolder.'/'.$this->request->data['Puzzle']['name'].'_'.$j.'_'.$i.'1.jpg');
-					  		  $Y = $Y + $width/$cut_width; 
-							  $remaining_pieces = $number_of_pieces['UserSubscription']['used_pieces'] - $pieces;
-							  $this->request->data['UserSubscription']['id'] = $number_of_pieces['UserSubscription']['id'];
-							  $this->request->data['UserSubscription']['used_pieces'] = $remaining_pieces;
-							  $this->UserSubscription->save($this->request->data);
+					  		  $Y = $Y + $width/$cut_width; 							  
 					  	  	}
 						   
 						   $X=$X+$height/$cut_height;
 						   
 					 	}
-
+						
 					 	$email = array(
 	              			"templateid"=>1017941,
 	              			"name"=>$this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
 	              			"TemplateModel"=> array(
 							    "user_name"=> $this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
 							    "product_name"=>$this->request->data['Puzzle']['name'],
+								"company"=> array(
+									"name"=> $this->Auth->user('company_name')),
 								"action_url"=>""),
 							"InlineCss"=> true, 
 	              			"from"=> "support@puzel.co",
 	              			'to'=>$this->Auth->user('email'),
 	              			'reply_to'=>"support@puzel.co"
 	              			);	
-
+						if(!empty($number_of_pieces))
+							  {
+								  $remaining_pieces = $number_of_pieces['UserSubscription']['used_pieces'] - $peices;
+								  $this->request->data['UserSubscription']['id'] = $number_of_pieces['UserSubscription']['id'];
+								  $this->request->data['UserSubscription']['used_pieces'] = $remaining_pieces;
+								  
+								  $this->UserSubscription->save($this->request->data);
+							  }
 						$this->sendemail($email);
 						$this->redirect(array('action'=>'index'));
 				    }	
@@ -435,21 +403,50 @@ class  PuzzlesController  extends AppController {
 /**
 	Business price ajax
 */	
-	public function business_price($id = Null)
+	public function business_price()
 	{
 		$this->autoRender = false;
 		if(!empty($this->request->data))
 		{
-			
-			if($id)
-			{
-				$this->request->data['Puzzle']['id'] = $this->request->data['id'];	
-				$this->request->data['Puzzle']['price'] = $this->request->data['price'];
-				$this->request->data['Puzzle']['price_image'] = $this->request->data['image'];
+				//debug($this->data);exit;
+				$valid_extensions = array('jpeg', 'jpg', 'png', 'gif', 'bmp');
+				$path = $_SERVER['DOCUMENT_ROOT'].'/puzzle/app/webroot/img/grand_price/';
+				$filepath  = Configure::read("SITE_URL").'app/webroot/img/grand_price/';
+				if(isset($_FILES['uploadfile']))
+				{
+
+				 $img = $_FILES['uploadfile']['name'];
+				 $tmp = $_FILES['uploadfile']['tmp_name'];
+				  
+				 // get uploaded file's extension
+				 $ext = strtolower(pathinfo($img, PATHINFO_EXTENSION));
+				 
+				 // can upload same image using rand function
+				 $final_image = rand(1000,1000000).$img;
+				 
+				 // check's valid format
+				 if(in_array($ext, $valid_extensions)) 
+				 {     
+				  $path = $path.strtolower($final_image); 
+				   
+				  if(move_uploaded_file($tmp,$path)) 
+				  {
+					$filepath = $filepath.strtolower($final_image); 
+					$this->request->data['Puzzle']['price_image'] = $final_image;
+					echo "<img src='$filepath' style='width:540px;'/>";
+				  }
+				 } 
+				 
+				}
+				if(isset($this->request->data['Puzzle']['id'])){
+				
+				$this->request->data['Puzzle']['id'] = $this->request->data['Puzzle']['id'];	
+				$this->request->data['Puzzle']['price'] = $this->request->data['textarea'];				
 				$this->Puzzle->save($this->request->data);	
+				}
 			}
 			$this->Session->write('IMAGEPRICE',$this->request->data);
-		}
+		
 	}
 
 /**
@@ -461,7 +458,8 @@ class  PuzzlesController  extends AppController {
 		if(!empty($this->request->data))
 		{
 			$this->Puzzle->recursive = -1;
-			$data = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$this->request->data['id']),'fields'=>array('Puzzle.terms')));
+			if($this->request->data['type'] == "terms"){$fields = array('Puzzle.terms');}else{$fields = array('Puzzle.price');}
+			$data = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$this->request->data['id']),'fields'=>$fields));
 			echo json_encode($data);
 		}
 	}

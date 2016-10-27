@@ -150,9 +150,12 @@ class  OrdersController  extends AppController {
 		$this->set("Payment",$order);
 		$get_current_plan = $this->UserSubscription->find("first",array("conditions"=>array("UserSubscription.user_id"=>$this->Auth->user('id')),'order'=>array('UserSubscription.id DESC')));
 		$this->set("get_current_plan",$get_current_plan);//debug($get_current_plan);exit;
-		$paymentMethod = Braintree_Transaction::find($get_current_plan['Order']['transiction_id']);
-		//debug($paymentMethod);exit;
-		$this->set('cardDetail',$paymentMethod);
+		if(!empty($get_current_plan) && $get_current_plan['Order']['transiction_id'] != "")
+		{
+			$paymentMethod = Braintree_Transaction::find($get_current_plan['Order']['transiction_id']);
+			//debug($paymentMethod);exit;
+			$this->set('cardDetail',$paymentMethod);
+		}
 	}
 		
 	public function receipt($id = null)
