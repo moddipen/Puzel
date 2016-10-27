@@ -80,6 +80,7 @@
     </script>
 <!-- NAVIGATION ############################################### -->
 
+<?php if(!empty($PuzzleData)) {?>
 
     <!-- Mobile Menu --> 
     <div class="mobile-menu" style="padding-bottom: 55px;">
@@ -254,6 +255,15 @@
     </div>
 </div>
 </div> <!-- end of container -->
+
+<?php } 
+  else
+    {?>
+
+        <h1> Puzzle has been deactivated </h1>
+
+
+  <?php   } ?>
  <script>
 $(document).ready(function()
 {
@@ -288,7 +298,8 @@ else
           <div class="modal-body">
             <form class="popup-form">
               <div class="form-group">
-                <div > <?php echo $PuzzleData['Puzzle']['terms'];?></div>
+                <div > <?php echo $PuzzleData['Puzzle']['price'];?></div>
+                <div><a href = "<?php echo $this->webroot ;?>img/puzzel/<?php echo $PuzzleData['Puzzle']['price_image'];?>" target="_blank"><img src = "<?php echo $this->webroot ;?>img/puzzel/<?php echo $PuzzleData['Puzzle']['price_image'];?>" height="80px" width="60px"/></a> </div>
                 <!-- <textarea name="textarea" id="textarea" class="form-control wysiwyg"></textarea> -->
               </div>
              </form>
@@ -309,7 +320,8 @@ else
          <div class="modal-body">
           <form class="popup-form" id="terms" >
             <div class="form-group">
-              <div > <?php echo $PuzzleData['Puzzle']['price'];?></div>
+              <div> <?php echo $PuzzleData['Puzzle']['terms'];?></div>
+
               <!-- <textarea name="textarea" id="textarea" class="form-control wysiwyg"></textarea> -->
             </div>
         </form>

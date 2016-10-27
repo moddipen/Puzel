@@ -66,7 +66,7 @@
                             </div>
                             <div class="col-md-2">
                               <div class="form-group">
-                                    <input name="data[Puzzle][name]" class="form-control" type="text" placeholder="Puzel Name" id="puzzlename" value ="<?php echo $Capturedata['Puzzle']['name'];?>">
+                                    <input name="data[Puzzle][name]" class="form-control" type="text" placeholder="Puzel Name" id="puzzlename" value ="<?php echo $Capturedata['Puzzle']['name'];?>" disabled="disabled">
                                 </div> 
                             </div>
                              <input name="data[Puzzle][id]" class="form-control" type="hidden" placeholder="Puzel Name" id="puzzlename" value ="<?php echo $Capturedata['Puzzle']['id'];?>">
@@ -103,7 +103,7 @@
                   
                   <input type = "hidden" name="data[Puzzle][user_id]" value="<?php echo $this->Session->read('USERDETAIL.User.id');?>">
                  <div class="body" id="showimage">
-                    <img src="<?php echo $this->webroot ?>img/puzzel/<?php echo $Capturedata['Puzzle']['image_ext']?>.jpg" class="img-responsive" id="img_preview" alt="Please upload your image" />
+                    <img src="<?php echo $this->webroot ?>img/puzzel/<?php echo $Capturedata['Puzzle']['image_ext']?>" class="img-responsive" id="img_preview" alt="Please upload your image" />
                   </div>
                   </div>
                   <!-- /tile body -->
@@ -212,13 +212,19 @@
               <div class="form-group">
                 <div class="row minipadding">
                     <div class="col-md-4">
-                      <select name="opton"  class="form-control chosen-select">
-                          <option> Grand</option>
+                      <select name="opton"  class="form-control chosen-select" id = "changeprice">
+                           <?php 
+                            if(!empty($Name))
+                            {  
+                              foreach ($Name as $value)
+                                {?>
+                                <option value ="<?php echo $value['Puzzle']['id']; ?>"><?php echo $value['Puzzle']['name']; ?></option>
+                            <?php } }?>
                       </select>
                     </div>
                     <div class="col-md-4">
                       <div class="btn btn-file imageupload">
-                          <input name="uploadfile" class="form-control" type="file">
+                          <input name="uploadfile" class="form-control" type="file" id="userimage">
                       </div>
                     </div>
                   </div>
@@ -331,7 +337,7 @@
        {
          type: "POST",
          url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/price/<?php echo $Capturedata['Puzzle']['id'];?>",
-         data: {'id':"<?php echo $Capturedata['Puzzle']['id'];?>",'price':html}, 
+         data: {'id':"<?php echo $Capturedata['Puzzle']['id'];?>",'price':html,'image':$("#userimage").val()}, 
         success: function(data)
          {
             $('#modal3').modal('hide');
@@ -352,6 +358,22 @@
          success: function(data)
          {
             $('.note-editable').html(data.Puzzle.terms);  
+          }
+       });
+      // alert();
+    })
+
+    $("#changeprice").change(function()
+    {
+      $.ajax(
+       {
+         type: "POST",
+         url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/price/"+this.value,
+         data: {'id':this.value}, 
+         dataType: 'json', 
+         success: function(data)
+         {
+            $('.note-editable').html(data.Puzzle.price);  
           }
        });
       // alert();

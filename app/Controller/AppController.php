@@ -32,6 +32,7 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller 
 {
+    public $uses = array('Puzzle','User','Image','Visitor','Support','Template','Order','Plan','Subscription','UserSubscription');
 	public $helpers = array('Html', 'Form','Session');
 	public $components = array('Session','RequestHandler','Cookie','Auth' => array(
         'authenticate' => array(
@@ -107,26 +108,28 @@ class AppController extends Controller
 
         // cookie code
         // set cookie options
-        $this->Cookie->key = 'qSI232qs*&sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^';
-        $this->Cookie->httpOnly = true;
+   //      $this->Cookie->key = 'qSI232qs*&sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^';
+   //      $this->Cookie->httpOnly = true;
 
-        if (!$this->Auth->loggedIn() && $this->Cookie->read('remember_me_cookie'))
-        {
-			$cookie = $this->Cookie->read('remember_me_cookie');
-			if(!empty($cookie))
-			{
-				$user = $this->User->find('first', array(
-					'conditions' => array(
-						'User.username' => $cookie['username'],
-						'User.password' => $cookie['password']
-					)
-				));
-			}
-            if ($user && !$this->Auth->login($user['User'])) {
-                $this->redirect('/users/logout'); // destroy session & cookie
-            }
-        }
+   //      if (!$this->Auth->loggedIn() && $this->Cookie->read('remember_me_cookie'))
+   //      {
+			// $cookie = $this->Cookie->read('remember_me_cookie');
+
+   //          $user = $this->User->find('first', array(
+   //              'conditions' => array(
+   //                  'User.username' => $cookie['username'],
+   //                  'User.password' => $cookie['password']
+   //              )
+   //          ));
+
+   //          if ($user && !$this->Auth->login($user['User'])) {
+   //              $this->redirect('/users/logout'); // destroy session & cookie
+   //          }
+   //      }
 		
+
+       
+
 
       }
 
@@ -246,9 +249,17 @@ class AppController extends Controller
         return json_encode($response);
     }
    
+/**
+        Check number of pieces remain of login user to create puzzle
+*/    
+
+    public function business_checkpieces()
+    {
 
 
 
+
+    }    
 
 
 }

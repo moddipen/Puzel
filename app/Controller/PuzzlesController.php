@@ -37,7 +37,7 @@ class  PuzzlesController  extends AppController {
  *
  * @var array
  */
- public $uses = array('Puzzle','User','Image','Visitor','Support','Template','Order','Plan','Subscription');
+ public $uses = array('Puzzle','User','Image','Visitor','Support','Template','Order','Plan','Subscription','UserSubscription');
  public $helpers = array('Html', 'Form','Session','Csv');
 /**
  * Displays a view
@@ -56,7 +56,7 @@ class  PuzzlesController  extends AppController {
 	 	
 	  	if($this->Auth->login())
 	  	{
-		  		$data = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
+		  	$data = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
 			if(empty($data))
 			{
 				$data = 0 ;
@@ -120,7 +120,8 @@ class  PuzzlesController  extends AppController {
 				
 				$this->set('Visitor',$visitcount);
 				$this->set('Balancepeices',$pic);
-		  	}
+
+			}
 	 	
 	 	
 	}
@@ -134,7 +135,7 @@ class  PuzzlesController  extends AppController {
 	public function business_index()
 	{
 		$this->set("title","Index");
-		$puzel = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id')))) ; 
+		$puzel = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id')),'order'=>'Puzzle.created Desc')) ; 
 		foreach($puzel as $key => $psinglepuzle)
 		{
 			$puzel[$key]['Show'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$psinglepuzle['Puzzle']['id'],'Image.status'=>0))); 
@@ -210,150 +211,164 @@ class  PuzzlesController  extends AppController {
 		
 		if(!empty($this->request->data))
 		{
-			// check if name already existes 
-			$existname = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.name'=>$this->request->data['Puzzle']['name'])));
-			if(!empty($existname))
-			{
-				$this->Session->setFlash(__('Puzzle name already exists, please choose another name', true), 'default', array('class' => 'alert alert-danger'));
-				$this->redirect(array('action'=>'index'));
-			}
-			else
-			{
-				// remove space from name 
-				$this->request->data['Puzzle']['name'] = str_replace(' ','', $this->request->data['Puzzle']['name']);
-				
-				// create image directory 
-				$multipleimagefolder = WWW_ROOT.'img/puzzel/'.$this->request->data['Puzzle']['name'];//WWW_ROOT."img\puzzel\";
-				$folder = mkdir($multipleimagefolder);
-				$URL = $_SERVER['DOCUMENT_ROOT'].'/app/webroot/img/puzzel/';
-				$imageName = $this->request->data['Puzzle']['name'].".jpg";
-				$path = $URL.$imageName;
-				$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i','', $this->request->data['Puzzle']['image']));
-				//echo $data;exit;
-				$success = file_put_contents($path,$data);
-				
-				$get_image = Configure::read('SITE_URL').'img/puzzel/'.$imageName;
-				$read_image = exif_read_data($get_image) ;
-				
-				if(isset($read_image))
+			// check how many pieces remain of login user	
+
+			$number_of_pieces = $this->UserSubscription->find('first',array('conditions'=>array('UserSubscription.user_id'=>$this->Auth->login('id'))));
+
+	       
+	       		// check if name already existes 
+				$existname = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.name'=>$this->request->data['Puzzle']['name'])));
+				if(!empty($existname))
 				{
-				   $argv = $get_image;
-				}
-
-				  $info = $read_image['FileName'];
-
-				  $size = $read_image['FileSize'];
-				  $units = array( 'B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
-				  $power = $size > 0 ? floor(log($size, 1024)) : 0;
-				  $imgsize =  number_format($size / pow(1024, $power), 2, '.', ',') . ' ' . $units[$power];	
-				  $this->request->data['Puzzle']['user_id'] = $this->Auth->user('id');
-				  
-				  // save single image in puzzle tabel
-				  $term = $this->Session->read('IMAGETERMS') ; 
-				  if(!empty($term))
-				  {
-				 	 $this->request->data['Puzzle']['terms'] =  $term['content']; 	
-				  }
-
-				  $grandprice = $this->Session->read('IMAGEPRICE');
-				  if(!empty($grandprice))
-				  {
-				  	 $this->request->data['Puzzle']['price'] =  $grandprice['price']; 		
-				  }
-				  $this->request->data['Puzzle']['status'] = 0;
-				  $this->request->data['Puzzle']['image_ext'] = $imageName;
-				  $this->Puzzle->create();
-				  if($this->Puzzle->save($this->request->data))
-				  {
-					  $width=$read_image['COMPUTED']['Width'];
-					  $height=$read_image['COMPUTED']['Height'];
-					  $image_type =$read_image['MimeType'];
-					  $peices = $this->request->data['Puzzle']['pieces'];
-
-					  if($peices == 25)
-					  {
-					    $cut_width = 5;
-					    $cut_height = 5;
-					  }
-					  elseif($peices == 50)
-					  {
-					    $cut_width = 10;
-					    $cut_height = 5; 
-					  }
-					  elseif($peices == 75)
-					  {
-					    $cut_width = 15;
-					    $cut_height = 5; 
-					  }
-					  else
-					  {
-					    $cut_width = 10;
-					    $cut_height = 10; 
-					  }
-
-
-
-					$output = imagecreatetruecolor($width/$cut_width, $height/$cut_height);
-				    $storewidth = $width/$cut_width;
-				    $storeheight = $height/$cut_height;
-			    
-					if($image_type == 'image/jpeg')
-				    {
-				      $orig = imagecreatefromjpeg($argv);
-				    }
-				    elseif($image_type == 'image/gif')
-				    {
-				       $orig = imagecreatefromgif($argv); 
-				    }  
-				    else
-				    {
-				      $orig = imagecreatefrompng($argv); 
-				    }  
-
-			  		// for height loop
-				   for($i=0,$X=0 ; $i<$cut_height ; $i++)
-				   {
-				     // for width loop
-					   for($j=0,$Y=0 ; $j<$cut_width ; $j++ )
-					    {
-					    	
-				  		  imagecopy($output, $orig,0,0,$Y,$X, $width/$cut_width, $height/$cut_height);
-				  		  $image_pieces = array(
-				  		  'puzzle_id'=>$this->Puzzle->getLastInsertID(),
-				  		  'user_id'=>$this->request->data['Puzzle']['user_id'],
-				  		  'name'=>$this->request->data['Puzzle']['name'].'_'.$j.'_'.$i.'1.jpg',
-				  		  'width'=>$storewidth,
-				  		  'height'=>$storeheight,
-				  		  'total_width'=>$width,
-				  		  'puzzle_active'=>0
-				  		  )	;		  
-				  		  $this->Image->create();
-				  		  $insert = $this->Image->save($image_pieces);
-				  		  imagejpeg($output,$multipleimagefolder.'/'.$this->request->data['Puzzle']['name'].'_'.$j.'_'.$i.'1.jpg');
-				  		  $Y = $Y + $width/$cut_width; 
-				  	  	}
-					   
-					   $X=$X+$height/$cut_height;
-					   
-				 	}
-
-				 	$email = array(
-              			"templateid"=>1017941,
-              			"name"=>$this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
-              			"TemplateModel"=> array(
-						    "user_name"=> $this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
-						    "product_name"=>$this->request->data['Puzzle']['name'],
-							"action_url"=>""),
-						"InlineCss"=> true, 
-              			"from"=> "support@puzel.co",
-              			'to'=>$this->Auth->user('email'),
-              			'reply_to'=>"support@puzel.co"
-              			);	
-
-					$this->sendemail($email);
+					$this->Session->setFlash(__('Puzzle name already exists, please choose another name', true), 'default', array('class' => 'alert alert-danger'));
 					$this->redirect(array('action'=>'index'));
-			    }	
-			}	
+				}
+				else
+				{
+					// remove space from name 
+					$this->request->data['Puzzle']['name'] = str_replace(' ','', $this->request->data['Puzzle']['name']);
+					
+					// create image directory 
+					$multipleimagefolder = WWW_ROOT.'img/puzzel/'.$this->request->data['Puzzle']['name'];//WWW_ROOT."img\puzzel\";
+					$folder = mkdir($multipleimagefolder);
+					$URL = $_SERVER['DOCUMENT_ROOT'].'/app/webroot/img/puzzel/';
+					$imageName = $this->request->data['Puzzle']['name'].".jpg";
+					$path = $URL.$imageName;
+					$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i','', $this->request->data['Puzzle']['image']));
+					$success = file_put_contents($path,$data);
+					
+					$get_image = Configure::read('SITE_URL').'img/puzzel/'.$imageName;
+					$read_image = exif_read_data($get_image) ;
+					
+					if(isset($read_image))
+					{
+					   $argv = $get_image;
+					}
+
+					  $info = $read_image['FileName'];
+
+					  $size = $read_image['FileSize'];
+					  $units = array( 'B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+					  $power = $size > 0 ? floor(log($size, 1024)) : 0;
+					  $imgsize =  number_format($size / pow(1024, $power), 2, '.', ',') . ' ' . $units[$power];	
+					  $this->request->data['Puzzle']['user_id'] = $this->Auth->user('id');
+					  
+					  // save single image in puzzle tabel
+					  $term = $this->Session->read('IMAGETERMS') ; 
+					  if(!empty($term))
+					  {
+					 	 $this->request->data['Puzzle']['terms'] =  $term['content']; 	
+					  }
+
+					  $grandprice = $this->Session->read('IMAGEPRICE');
+					  if(!empty($grandprice))
+					  {
+					  	 $this->request->data['Puzzle']['price'] =  $grandprice['price']; 		
+					  }
+					  $this->request->data['Puzzle']['status'] = 0;
+					  $this->request->data['Puzzle']['image_ext'] = $imageName;
+					  $this->Puzzle->create();
+					  if($this->Puzzle->save($this->request->data))
+					  {
+						  $width=$read_image['COMPUTED']['Width'];
+						  $height=$read_image['COMPUTED']['Height'];
+						  $image_type =$read_image['MimeType'];
+						  $peices = $this->request->data['Puzzle']['pieces'];
+
+						  if($peices == 25)
+						  {
+						    $cut_width = 5;
+						    $cut_height = 5;
+						  }
+						  elseif($peices == 50)
+						  {
+						    $cut_width = 10;
+						    $cut_height = 5; 
+						  }
+						  elseif($peices == 75)
+						  {
+						    $cut_width = 15;
+						    $cut_height = 5; 
+						  }
+						  else
+						  {
+						    $cut_width = 10;
+						    $cut_height = 10; 
+						  }
+
+
+
+							$output = imagecreatetruecolor($width/$cut_width, $height/$cut_height);
+						    $storewidth = $width/$cut_width;
+						    $storeheight = $height/$cut_height;
+					    
+							if($image_type == 'image/jpeg')
+						    {
+						      $orig = imagecreatefromjpeg($argv);
+						    }
+						    elseif($image_type == 'image/gif')
+						    {
+						       $orig = imagecreatefromgif($argv); 
+						    }  
+						    else
+						    {
+						      $orig = imagecreatefrompng($argv); 
+						    }  
+
+				  		// for height loop
+					   for($i=0,$X=0 ; $i<$cut_height ; $i++)
+					   {
+					     // for width loop
+						   for($j=0,$Y=0 ; $j<$cut_width ; $j++ )
+						    {
+						    	
+					  		  imagecopy($output, $orig,0,0,$Y,$X, $width/$cut_width, $height/$cut_height);
+					  		  $image_pieces = array(
+					  		  'puzzle_id'=>$this->Puzzle->getLastInsertID(),
+					  		  'user_id'=>$this->request->data['Puzzle']['user_id'],
+					  		  'name'=>$this->request->data['Puzzle']['name'].'_'.$j.'_'.$i.'1.jpg',
+					  		  'width'=>$storewidth,
+					  		  'height'=>$storeheight,
+					  		  'total_width'=>$width,
+					  		  'puzzle_active'=>0
+					  		  )	;		  
+					  		  $this->Image->create();
+					  		  $insert = $this->Image->save($image_pieces);
+					  		  imagejpeg($output,$multipleimagefolder.'/'.$this->request->data['Puzzle']['name'].'_'.$j.'_'.$i.'1.jpg');
+					  		  $Y = $Y + $width/$cut_width; 
+							  $remaining_pieces = $number_of_pieces['UserSubscription']['used_pieces'] - $pieces;
+							  $this->request->data['UserSubscription']['id'] = $number_of_pieces['UserSubscription']['id'];
+							  $this->request->data['UserSubscription']['used_pieces'] = $remaining_pieces;
+							  $this->UserSubscription->save($this->request->data);
+					  	  	}
+						   
+						   $X=$X+$height/$cut_height;
+						   
+					 	}
+
+					 	$email = array(
+	              			"templateid"=>1017941,
+	              			"name"=>$this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+	              			"TemplateModel"=> array(
+							    "user_name"=> $this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+							    "product_name"=>$this->request->data['Puzzle']['name'],
+								"action_url"=>""),
+							"InlineCss"=> true, 
+	              			"from"=> "support@puzel.co",
+	              			'to'=>$this->Auth->user('email'),
+	              			'reply_to'=>"support@puzel.co"
+	              			);	
+
+						$this->sendemail($email);
+						$this->redirect(array('action'=>'index'));
+				    }	
+				}	
+		   // }
+		  // else
+	       // {
+	       		// $this->Session->setFlash(__('Unable to create puzzle your puzzle remaing balance is lower then your required peices.', true), 'default', array('class' => 'alert alert-danger'));
+	  			// $this->redirect(array('controller'=>'puzzles','action'=>'index','business'=>true));
+	       // }	
 		}
 	}
 
@@ -430,6 +445,7 @@ class  PuzzlesController  extends AppController {
 			{
 				$this->request->data['Puzzle']['id'] = $this->request->data['id'];	
 				$this->request->data['Puzzle']['price'] = $this->request->data['price'];
+				$this->request->data['Puzzle']['price_image'] = $this->request->data['image'];
 				$this->Puzzle->save($this->request->data);	
 			}
 			$this->Session->write('IMAGEPRICE',$this->request->data);
@@ -449,6 +465,21 @@ class  PuzzlesController  extends AppController {
 			echo json_encode($data);
 		}
 	}
+
+/**
+	Business get price template ajax
+*/	
+	public function business_pricetemplate()
+	{
+		$this->autoRender = false;
+		if(!empty($this->request->data))
+		{
+			$this->Puzzle->recursive = -1;
+			$data = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$this->request->data['id']),'fields'=>array('Puzzle.price')));
+			echo json_encode($data);
+		}
+	}
+
 
 /**
 	Business header content and count 

@@ -105,6 +105,9 @@
                   <input type ="hidden" value="<?php echo $this->Session->read('IMAGECAPTURE.Puzzel.peice');?>" name="data[Puzzle][pieces]">
                   <input type ="hidden" value="<?php echo $this->Session->read('IMAGECAPTURE.Puzzel.transtion');?>" name="data[Puzzle][transtion]">
                   <input type ="hidden" value="<?php echo $this->Session->read('IMAGECAPTURE.Puzzel.source');?>" name="data[Puzzle][source]">
+                  <input type ="hidden" value="<?php echo $this->Session->read('IMAGECAPTURE.Puzzel.terms');?>" name="data[Puzzle][terms]">
+                  <input type ="hidden" value="<?php echo $this->Session->read('IMAGECAPTURE.Puzzel.price');?>" name="data[Puzzle][price]">
+                  <input type ="hidden" value="<?php echo $this->Session->read('IMAGECAPTURE.Puzzel.price_image');?>" name="data[Puzzle][price_image]">
                   <div class="body" id="showimage">
                     <img src="<?php echo $this->Session->read('IMAGECAPTURE.Puzzel.base64');?>" class="img-responsive">
                   </div>

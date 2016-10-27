@@ -101,6 +101,9 @@
                   </div>
                   <input type = "hidden" name="data[Puzzel][base64]" id="base64image">
                   <input type = "hidden" name="data[Puzzel][user_id]" value="<?php echo $this->Session->read('USERDETAIL.User.id');?>">
+                  <input type ="hidden" name="data[Puzzel][terms]" value="" id="puzzleterm">
+                  <input type ="hidden" name="data[Puzzel][price]" value="" id="puzzleprice">
+                  <input type ="hidden" name="data[Puzzel][price_image]" value="" id="pricepuzzle">
                  <div class="body" id="showimage">
                     <img src="#" class="img-responsive" id="img_preview" alt="Please upload your image" />
                   </div>
@@ -210,13 +213,19 @@
               <div class="form-group">
                 <div class="row minipadding">
                     <div class="col-md-4">
-                      <select name="opton"  class="form-control chosen-select">
-                          <option> Grand</option>
+                      <select name="opton"  class="form-control chosen-select" id = "changeprice">
+                           <?php 
+                            if(!empty($Name))
+                            {  
+                              foreach ($Name as $value)
+                                {?>
+                                <option value ="<?php echo $value['Puzzle']['id']; ?>"><?php echo $value['Puzzle']['name']; ?></option>
+                            <?php } }?>
                       </select>
                     </div>
                     <div class="col-md-4">
                       <div class="btn btn-file imageupload">
-                          <input name="uploadfile" class="form-control" type="file">
+                          <input name="data[Puzzle][uploadfile]" class="form-control" type="file" id="filecontent">
                       </div>
                     </div>
                   </div>
@@ -305,7 +314,7 @@
           $.ajax(
            {
              type: "POST",
-             url: "terms",
+             url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/terms",
              data: {'content':html}, 
             success: function(data)
              {
@@ -325,10 +334,11 @@
        {
          type: "POST",
          url: "price",
-         data: {'price':html}, 
+         data: {'price':html,'image':$('#filecontent').val()}, 
         success: function(data)
          {
             $('#modal3').modal('hide');
+            $('#pricepuzzle').val($('#filecontent').val());
          }
        });
     });  
@@ -340,12 +350,31 @@
       $.ajax(
        {
          type: "POST",
-         url: "template/"+this.value,
+         url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/template",
          data: {'id':this.value}, 
          dataType: 'json', 
          success: function(data)
          {
-            $('.note-editable').html(data.Puzzle.terms);  
+            $('.note-editable').html(data.Puzzle.terms);
+            $('#puzzleterm').val(data.Puzzle.terms);  
+          }
+       });
+      // alert();
+    })
+
+
+    $("#changeprice").change(function()
+    {
+      $.ajax(
+       {
+         type: "POST",
+         url: "pricetemplate/"+this.value,
+         data: {'id':this.value}, 
+         dataType: 'json', 
+         success: function(data)
+         {
+            $('.note-editable').html(data.Puzzle.price);
+            $('#puzzleprice').val(data.Puzzle.price);   
           }
        });
       // alert();
