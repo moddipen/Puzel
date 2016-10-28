@@ -184,6 +184,23 @@ class  SubscriptionsController  extends AppController {
 												$this->UserSubscription->create();
 												if($this->UserSubscription->save($this->request->data))
 												{
+													$email = array(
+													"templateid"=>1035483,
+													"name"=>$this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+													"TemplateModel"=> array(
+														"name"=> $this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+														"product_name"=>$plan['Subscription']['name'],
+														"action_url"=> $this->Order->getLastInsertId(),
+														"date"=>date('m-d-Y'),
+														"amount"=>$plan['Subscription']['price']."$",
+														"description"=>"Upgrade to One month purchase plan",
+														'total'=>$plan['Subscription']['price']."$"),
+													"InlineCss"=> true, 
+													"from"=> "support@puzel.co",
+													'to'=>$this->request->data['Subscription']['email'],
+													'reply_to'=>"support@puzel.co"
+													);	
+													$this->sendinvoice($email);
 													$this->Session->setFlash('<div class="alert alert-success"><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Success </b>: Your subscription upgraded </p></div>');
 													$this->redirect(array('controller'=>'orders','action'=>'index','business'=>true));		
 												}
@@ -268,6 +285,20 @@ class  SubscriptionsController  extends AppController {
 										$this->User->create();
 										if($this->User->save($this->request->data))
 										{
+											$this->Auth->login();
+											$email = array(
+												"templateid"=>1007701,
+												"name"=>$this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+												"TemplateModel"=> array(
+													"user_name"=> $this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+													"product_name"=>"You have signup Successfully",
+													"action_url"=>"Congratulation you have successfully sign up "),
+												"InlineCss"=> true, 
+												"from"=> "support@puzel.co",
+												'to'=>$this->Auth->user('email'),
+												'reply_to'=>"support@puzel.co"
+												);	
+												$this->sendmail($email);
 											$data['Order']['user_id'] = $this->User->getLastInsertId();
 										}
 									}	
@@ -303,8 +334,8 @@ class  SubscriptionsController  extends AppController {
 										if($this->UserSubscription->save($insert))
 										{
 											$this->sendinvoice($email);
-											//$this->Session->setFlash('<div class="alert alert-success"><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Success </b>: Offer saved for Approval. </p></div>');
-											$this->redirect(array('controller'=>'subscriptions','action'=>'thankyou','user'=>false));		
+											$this->Session->setFlash(__('Signup Successfully!!....', true), 'default', array('class' => 'alert alert-success'));
+											$this->redirect(array('controller'=>'orders','action'=>'index','business'=>true));	
 										}
 									}
 							}
