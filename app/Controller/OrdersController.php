@@ -20,7 +20,7 @@
 
 App::uses('AppController', 'Controller');
 App::import('Vendor', 'tcpdf', array('file' => 'tcpdf' . DS . 'mypdf.php'));
-App::import('Vendor', 'braintree/lib/Braintree');
+App::import('Vendor', 'Braintree', array('file' => 'Braintree' . DS . 'lib'. DS .'Braintree.php'));
 
 /**
  * Static content controller
