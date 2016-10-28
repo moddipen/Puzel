@@ -102,6 +102,7 @@ class  SubscriptionsController  extends AppController {
 				$this->set('cardDetail',$paymentMethod);
 			}			
 		}
+		exit("sD");
 		$plan = $this->Subscription->find('first',array('conditions'=>array('Subscription.id'=>$id))); 
 		$this->set('Rate',$plan);
 
