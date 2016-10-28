@@ -65,6 +65,12 @@ echo $this->Form->create('Subscription', array('action' => 'plan/'.$id));?>
   <label for="mce-LNAME">Card </label>
   <input type="text" value="" name="data[Subscription][card_number]" class="" id="card_number" placeholder="1234 5678 9012 3456" required>
 </div>
+
+<div class="mc-field-group">
+  <label for="mce-LNAME">Card Holder Name </label>
+  <input type="text" value="" name="data[Subscription][holder_name]" class="" id="card_number" placeholder="John Duo" required>
+</div>
+
 <div id="errorccard"></div>
 <input type ="hidden" value ="" name="data[Subscription][check]" id="validcard">
 <div class="mc-field-group">

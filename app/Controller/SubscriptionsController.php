@@ -107,6 +107,7 @@ class  SubscriptionsController  extends AppController {
 							'amount' => $plan['Subscription']['price'],
 							'creditCard' => array(
 								'number' => trim($this->request->data['Subscription']['card_number']),
+								'cardholderName' => trim($this->request->data['Subscription']['holder_name']),
 								'expirationDate' => $this->request->data['Subscription']['ex_date_month']['month'].'/'.$this->request->data['Subscription']['ex_date_year']['year'],
 								'cvv' => $this->request->data['Subscription']['cvv']
 							)
