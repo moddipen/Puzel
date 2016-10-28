@@ -35,6 +35,10 @@ echo $this->Form->create('Subscription', array('action' => 'plan/'.$id));?>
     <div id="mc_embed_signup_scroll">
   <h2>Sign up for Puzel</h2>
 <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+<?php
+	if(!$cardDetail)
+	{
+?>
 <div class="mc-field-group">
   <label for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
 </label>
@@ -56,40 +60,52 @@ echo $this->Form->create('Subscription', array('action' => 'plan/'.$id));?>
   <input type="password" value="" name="data[Subscription][password]" class="" id="password" required>
 </div>
 <div id="errorpassword"></div>
+	<?php }else{
+		
+		echo "<input type='hidden' name='data[Subscription][action]' value='upgrade'>";
+		
+	} ?>
 <div class="mc-field-group">
   <label for="mce-LNAME">Amount </label>
-  <input type="text" value="<?php echo $Rate['Subscription']['price'];?> $" name="data[Subscription][price]" disabled="disabled"  id="amount">
+  <input type="text" value="<?php echo $Rate['Subscription']['price'];?> $" name="data[Subscription][price]" readonly="readonly"  id="amount">
 </div>
 <?php if($Rate['Subscription']['price'] != "Free" ) {?>
 <div class="mc-field-group">
   <label for="mce-LNAME">Card </label>
-  <input type="text" value="" name="data[Subscription][card_number]" class="" id="card_number" placeholder="1234 5678 9012 3456" required>
+  <?php
+	$number = "************".$cardDetail->creditCard['last4'];
+  ?>
+  <input type="text" value="<?php echo $number;?>" name="data[Subscription][card_number]" class="" id="card_number" placeholder="1234 5678 9012 3456" required>
 </div>
 
 <div class="mc-field-group">
+ <?php
+							$name = $cardDetail->creditCard['cardholderName'];
+						  ?>
   <label for="mce-LNAME">Card Holder Name </label>
-  <input type="text" value="" name="data[Subscription][holder_name]" class="" id="card_number" placeholder="John Duo" required>
+  <input type="text" value="<?php echo $name;?>" name="data[Subscription][holder_name]" class="" id="card_number" placeholder="John Duo" required>
 </div>
 
 <div id="errorccard"></div>
 <input type ="hidden" value ="" name="data[Subscription][check]" id="validcard">
 <div class="mc-field-group">
   <label for="mce-LNAME">Month </label>
-  <!-- <input type="text" value="" name="data[Subscription][ex_date_month][month]" class="" > -->
-        <select required name="data[Subscription][ex_date_month][month]" id="month" >
-          <option value ="">Please select</option>
-          <option value = "1">Jan</option>
-          <option value = "2">Feb</option>
-          <option value = "3">March</option>
-          <option value = "4">April</option>
-          <option value = "5">May</option>
-          <option value = "6">June</option>
-          <option value = "7">July</option>
-          <option value = "8">Aug</option>
-          <option value = "9">Sep</option>
-          <option value = "10">Oct</option>
-          <option value = "11">Nov</option>
-          <option value = "12">Dec</option>
+     <select required name="data[Subscription][ex_date_month][month]" id="month" >
+          <?php
+		  
+		 
+  for ($i = 0; $i <= 12; ++$i) {
+	 $selected = "";
+    $time = strtotime(sprintf('+%d months', $i));
+    $value = date('m', $time);
+    $label = date('F', $time);
+	 if($value == $cardDetail->creditCard['expirationMonth']){printf('<option value="%s" selected>%s</option>', $value, $label);}
+    else{
+		printf('<option value="%s">%s</option>', $value, $label);
+	}
+  }
+  ?>
+		  
         </select>
 
 </div>
@@ -97,19 +113,16 @@ echo $this->Form->create('Subscription', array('action' => 'plan/'.$id));?>
   <label for="mce-LNAME">Year </label>
   
    <select required name="data[Subscription][ex_date_year][year]" id="year" >
-      <option value ="">Please select</option>
-      <option value = "2016">2016</option>
-      <option value = "2017">2017</option>
-      <option value = "2018">2018</option>
-      <option value = "2019">2019</option>
-      <option value = "2020">2020</option>
-      <option value = "2021">2021</option>
-      <option value = "2022">2022</option>
-      <option value = "2023">2023</option>
-      <option value = "2024">2024</option>
-      <option value = "2026">2025</option>
-      <option value = "2027">2027</option>
-      <option value = "2028">2028</option>
+      <?php
+	  
+		$year = date ('Y');
+		$years = range ($year, $year + 10);
+		foreach ($years as $value) {
+			if($value == $cardDetail->creditCard['expirationYear']){echo '<option value ="'.$value.'" selected>' . $value;}
+			else{echo '<option value ="'.$value.'">' . $value;}
+		}
+?>
+	  
   </select>
 
 </div>

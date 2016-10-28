@@ -9,7 +9,9 @@
           <div class="main">
             <!-- cards -->
             <?php echo $this->element('business/header');?>
-           
+           <?php 
+			 echo $this->Session->flash();
+		   ?>
                <!-- /cards -->
             
              <div class="pagesubheader">
@@ -52,7 +54,8 @@
                     <div class="col-md-7">
                       <div class="row">
                           <div class="col-md-6">
-                              <h4 class="title">Current Plan - <?php echo $get_current_plan['Subscription']['name'];?> &nbsp;&nbsp;&nbsp;&nbsp; <!--<u>Upgrade</u>--></h4>
+                              <h4 class="title">Current Plan - <?php echo $get_current_plan['Subscription']['name'];?> &nbsp;&nbsp;&nbsp;&nbsp; 
+							  <u><a href="<?php echo Configure::read("SITE_URL")."subscriptions/package/".$get_current_plan['Subscription']['id'];?>">Upgrade</a></u></h4>
                             </div>
                             <div class="col-md-6">
                               <h4 class="title">Renewal Date - <?php 

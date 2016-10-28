@@ -153,7 +153,6 @@ class  OrdersController  extends AppController {
 		if(!empty($get_current_plan) && $get_current_plan['Order']['transiction_id'] != "")
 		{
 			$paymentMethod = Braintree_Transaction::find($get_current_plan['Order']['transiction_id']);
-			//debug($paymentMethod);exit;
 			$this->set('cardDetail',$paymentMethod);
 		}
 	}

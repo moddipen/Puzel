@@ -159,7 +159,7 @@ class AppController extends Controller
 			$visitcount = 0;
 	
 			// count balance pieces  
-				$pic = $this->UserSubscription->find("first",array("conditions"=>array("UserSubscription.user_id"=>$this->Auth->user('id'))));
+				$pic = $this->UserSubscription->find("first",array("conditions"=>array("UserSubscription.user_id"=>$this->Auth->user('id'),"UserSubscription.status"=>0)));
 				if(empty($pic)){$pic['UserSubscription']['used_pieces'] = 0;}
 				$statistics['Visitor'] = $visitcount; 
 				$statistics['Balancepeices'] = $pic['UserSubscription']['used_pieces']; 
