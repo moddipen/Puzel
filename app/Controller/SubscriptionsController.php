@@ -89,6 +89,7 @@ class  SubscriptionsController  extends AppController {
 		$this->set('title',"Packages");
 		if($this->Auth->user())
 		{
+			exit("sas");
 			Braintree_Configuration::environment('sandbox');
 			Braintree_Configuration::merchantId('dvgmgzszxf2qgmfh');
 			Braintree_Configuration::publicKey('2yhywhtr9583jhmh');
