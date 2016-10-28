@@ -22,6 +22,7 @@
            <?php 
            // for blank image get 
            // while ($image_data)
+			   $index = 0;
             foreach($image as $image_data)
               {
                 
@@ -56,18 +57,18 @@
             
             if($i%$cut_width == 0)
             {
-              if($block == "1") {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }  
-                if($block == "2") {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
-                if($block == "3") {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
-                if($block == "4") {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
-                if($block == "5") {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
-                if($block == "6") {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
-                if($block == "7") {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
-                if($block == "8") {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
-                if($block == "9") {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
-                if($block == "10")  {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
+              if($block == "1") {?> <div class= "pt-page pt-page-<?php echo $index;?> <?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }  
+                if($block == "2") {?> <div class= "pt-page pt-page-<?php echo $index;?> <?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
+                if($block == "3") {?> <div class= "pt-page pt-page-<?php echo $index;?> <?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
+                if($block == "4") {?> <div class= "pt-page pt-page-<?php echo $index;?> <?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
+                if($block == "5") {?> <div class= "pt-page pt-page-<?php echo $index;?> <?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
+                if($block == "6") {?> <div class= "pt-page pt-page-<?php echo $index;?> <?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
+                if($block == "7") {?> <div class= "pt-page pt-page-<?php echo $index;?> <?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
+                if($block == "8") {?> <div class= "pt-page pt-page-<?php echo $index;?> <?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
+                if($block == "9") {?> <div class= "pt-page pt-page-<?php echo $index;?> <?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
+                if($block == "10")  {?> <div class= "pt-page pt-page-<?php echo $index;?> <?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
             }
-               
+              $index ++; 
           }
       echo "</div>";  
     }?>

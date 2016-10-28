@@ -1,4 +1,10 @@
+<?php
+echo $this->Html->css('animations.css');
+echo $this->Html->script('modernizr.custom.js');	
+?>
 <script type="text/javascript">
+var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
+
     $( document ).ready(function() {  
       $("#puzelacount").click(function()
       {
@@ -47,11 +53,27 @@
                             $.ajax
                               ({
                                  type: "POST",
-                                 url: "<?php echo Configure::read('SITE_URL');?>visitors/fetchimage/"+data.Id,
-                                 ///dataType: 'json', 
+                                 url: "<?php echo Configure::read('SITE_URL');?>visitors/fetchimage/"+data.image_id,
+                                 dataType: 'text', 
                                  success:function(data)
                                  {
-                                    $("#puzzle").html(data);
+                                    var obj = $.parseJSON(data);
+									obj = obj.name;
+									objs = obj.split('.');
+									var get_name = objs[0].split('_');
+									$('.'+objs[0]).css("background-image","url('<?php echo $this->webroot;?>img/puzzel/"+get_name[0]+"/"+obj+"')");  //background:url('<?php echo $this->webroot;?>'img/puzzel/"+objs[0]+"/"+obj+"')");
+									
+									if(transition  == "Newspaper"){var classes = 'pt-page-rotateOutNewspaper pt-page-rotateInNewspaper pt-page-delay500';}
+									if(transition  == "Cube to left"){var classes = 'pt-page-rotateCubeLeftOut pt-page-ontop pt-page-rotateCubeLeftIn';}
+									if(transition  == "Cube to right"){var classes = 'pt-page-rotateCubeRightOut pt-page-ontop pt-page-rotateCubeRightIn';}
+									if(transition  == "Cube to top"){var classes = 'pt-page-rotateCubeTopOut pt-page-ontop pt-page-rotateCubeTopIn';}
+									if(transition  == "Cube to bottom"){var classes = 'pt-page-rotateCubeBottomOut pt-page-ontop pt-page-rotateCubeBottomIn';}
+									if(transition  == "Flip right"){var classes = 'pt-page-flipOutRight pt-page-flipInLeft pt-page-delay500';}
+									if(transition  == "Flip left"){var classes = 'pt-page-flipOutLeft pt-page-flipInRight pt-page-delay500';}
+									if(transition  == "Flip top"){var classes = 'pt-page-flipOutTop pt-page-flipInBottom pt-page-delay500';}
+									if(transition  == "Flip bottom"){var classes = 'pt-page-flipOutBottom pt-page-flipInTop pt-page-delay500';}
+									$('.'+objs[0]).addClass(classes);
+									// $("#puzzle").html(data);
                                     $("#Imagedata")[0].reset();
                                     $("#success").html("<div style='background:rgba(60,118,61,0.5);color:#3C763D;font-size:14px;padding:20px'> Register successfully.</div>");
                                     $("#success").show().delay(3000).fadeOut(function(){ $(this).remove(); });
@@ -159,9 +181,10 @@
         elseif($peices == 75)  {   $cut_width = 15;   $cut_height = 5;  }
         else {   $cut_width = 10;  $cut_height = 10; }  ?>
     
-        <div class="merge" >
+        <div class="merge pt-perspective" id="psdt-main">
         
            <?php 
+		   $index = 0;
             foreach($image as $image_data)
               {
                 
@@ -196,18 +219,18 @@
             
             if($i%$cut_width == 0)
             {
-              if($block == "1") {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }  
-                if($block == "2") {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
-                if($block == "3") {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
-                if($block == "4") {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
-                if($block == "5") {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
-                if($block == "6") {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
-                if($block == "7") {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
-                if($block == "8") {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
-                if($block == "9") {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
-                if($block == "10")  {?> <div class= "<?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
+              if($block == "1") {?> <div class= "pt-page pt-page-<?php echo $index;?> <?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }  
+                if($block == "2") {?> <div class= "pt-page pt-page-<?php echo $index;?> <?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
+                if($block == "3") {?> <div class= "pt-page pt-page-<?php echo $index;?> <?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
+                if($block == "4") {?> <div class= "pt-page pt-page-<?php echo $index;?> <?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
+                if($block == "5") {?> <div class= "pt-page pt-page-<?php echo $index;?> <?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
+                if($block == "6") {?> <div class= "pt-page pt-page-<?php echo $index;?> <?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
+                if($block == "7") {?> <div class= "pt-page pt-page-<?php echo $index;?> <?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
+                if($block == "8") {?> <div class= "pt-page pt-page-<?php echo $index;?> <?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
+                if($block == "9") {?> <div class= "pt-page pt-page-<?php echo $index;?> <?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
+                if($block == "10")  {?> <div class= "pt-page pt-page-<?php echo $index;?> <?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div> <?php }
             }
-               
+               $index ++;
           }
       echo "</div>";  
     }?>
@@ -217,6 +240,12 @@
     </div>
     </div>
  </div> 
+ <button id="iterateEffects" class="pt-touch-button">Show next page transition</button>
+ <div id="pt-main" class="pt-perspective">
+			<div class="pt-page"><h1><span>A collection of</span><strong>Page</strong> Transitions</h1></div>
+			
+			
+		</div>
 <div class="row">
   <div class="six columns">
       <div class="share-social">
@@ -249,7 +278,7 @@
             <input type = "hidden" name ="puzzlename" value = "<?php echo substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>">
             <input type = "hidden" name ="signwithpuzzleaccount" id ="signwithpuzzleaccount" value = "">
             <div class="form-group text-center">
-              <button type="submit" class="btn button-sign" id="normalsign">Submit</button><button type="submit" class="btn button-sign" id="puzelacount" name="puzzle" value = "1">Signup with Puzel Account</button>
+              <button type="submit" data-animation="58" class="btn button-sign" id="normalsign">Submit</button><button type="submit" class="btn button-sign" id="puzelacount" name="puzzle" value = "1">Signup with Puzel Account</button>
             </div>
         </form>
     </div>
@@ -338,3 +367,8 @@ else
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
+  
+  <?php
+	echo $this->Html->script('jquery.dlmenu.js');	
+	echo $this->Html->script('pagetransitions.js');	
+  ?>

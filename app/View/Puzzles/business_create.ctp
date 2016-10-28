@@ -90,7 +90,15 @@
                             <div class="col-md-2">
                               <div class="form-group">
                                     <select name="data[Puzzel][transtion]" class="form-control chosen-select">
-                                      <option value="Transition">Transition</option>
+                                      <option value="Newspaper">Newspaper</option>
+                                      <option value="Cube to left">Cube to left</option>
+                                      <option value="Cube to right">Cube to right</option>
+                                      <option value="Cube to top">Cube to top</option>
+                                      <option value="Cube to bottom">Cube to bottom</option>
+                                      <option value="Flip right">Flip right</option>
+                                      <option value="Flip left">Flip left</option>
+                                      <option value="Flip top">Flip top</option>
+                                      <option value="Flip bottom">Flip bottom</option>
                                     </select>
                                 </div>
                             </div>

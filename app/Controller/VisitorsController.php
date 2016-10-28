@@ -242,7 +242,7 @@ class  VisitorsController  extends AppController {
 						$update_puzzle = $this->Image->find('first',array('conditions'=>array('Image.modified'=>$modified,'Image.puzzle_id'=>$puzle['Puzzle']['id'],'Image.user_id'=>$puzle['Puzzle']['user_id'])));
 						if($update_puzzle)
 						{
-							$response = array("message"=>"success","Id"=>$update_puzzle['Image']['puzzle_id']);
+							$response = array("message"=>"success","Id"=>$update_puzzle['Image']['puzzle_id'],"image_id"=>$update_puzzle['Image']['id']);
 		                    echo json_encode($response);
 						}
 					}	
@@ -257,11 +257,13 @@ class  VisitorsController  extends AppController {
 	public function fetchimage($id = Null)
 	{
 		$this->layout = '';
-		$image = $this->Image->find('all',array('conditions'=>array('Image.puzzle_id'=>$id)));
-		$this->set('image',$image);
-		$this->set('drawimage_s',count($image));
-		$puzzle = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id)));
-		$this->set('PuzzleData',$puzzle);
+		$this->autoRendar = false;
+		$image = $this->Image->find('first',array('conditions'=>array('Image.id'=>$id),'fields'=>array("Image.name"),'order' => 'rand()'));
+		echo json_encode($image['Image']);exit;
+		// $this->set('image',$image);
+		// $this->set('drawimage_s',count($image));
+		// $puzzle = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id)));
+		// $this->set('PuzzleData',$puzzle);
 	}
 
 /**
