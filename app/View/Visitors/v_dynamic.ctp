@@ -72,8 +72,6 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 									if(transition  == "Flip left"){var classes = 'pt-page-flipOutLeft pt-page-flipInRight pt-page-delay500';}
 									if(transition  == "Flip top"){var classes = 'pt-page-flipOutTop pt-page-flipInBottom pt-page-delay500';}
 									if(transition  == "Flip bottom"){var classes = 'pt-page-flipOutBottom pt-page-flipInTop pt-page-delay500';}
-									alert(transition);
-									alert(classes);
 									$('.'+objs[0]).addClass(classes);
 									// $("#puzzle").html(data);
                                     $("#Imagedata")[0].reset();
@@ -242,12 +240,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
     </div>
     </div>
  </div> 
- <button id="iterateEffects" class="pt-touch-button">Show next page transition</button>
- <div id="pt-main" class="pt-perspective">
-			<div class="pt-page"><h1><span>A collection of</span><strong>Page</strong> Transitions</h1></div>
-			
-			
-		</div>
+ 
 <div class="row">
   <div class="six columns">
       <div class="share-social">
