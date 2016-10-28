@@ -100,10 +100,11 @@
                     </div>
                   </div>
                   <input type = "hidden" name="data[Puzzel][base64]" id="base64image">
-                  <input type = "hidden" name="data[Puzzel][user_id]" value="<?php echo $this->Session->read('USERDETAIL.User.id');?>">
+                  <input type = "hidden" name="data[Puzzel][user_id]" value="<?php echo $this->Session->read('Auth.User.id');?>">
                   <input type ="hidden" name="data[Puzzel][terms]" value="" id="puzzleterm">
                   <input type ="hidden" name="data[Puzzel][price]" value="" id="puzzleprice">
                   <input type ="hidden" name="data[Puzzel][price_image]" value="" id="pricepuzzle">
+                  <input type ="hidden" name="data[Puzzel][compnay_name]" value="<?php echo $this->Session->read('Auth.User.company_name');?>" id="pricepuzzle">
                  <div class="body" id="showimage">
                     <img src="#" class="img-responsive" id="img_preview" alt="Please upload your image" />
                   </div>

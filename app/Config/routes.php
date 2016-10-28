@@ -46,12 +46,12 @@
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 	Router::connect('/user', array('controller' => 'users', 'action' => 'login', 'user' => true));
 	Router::connect(
-    '/:name', // E.g. /blog/3-CakePHP_Rocks
+    '/puzzle/:company_name/:name', // E.g. /blog/3-CakePHP_Rocks
     array('controller' => 'visitors', 'action' => 'dynamic','v'=>true),
     array(
         // order matters since this will simply map ":id" to
         // $articleId in your action
-        'pass' => array('name')
+        'pass' => array('company_name','name')
         
     )
 );

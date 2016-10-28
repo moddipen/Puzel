@@ -50,7 +50,7 @@ class  VisitorsController  extends AppController {
  */
 	function beforeFilter()
 	 {
-	 	//parent::beforeFilter();
+	 	parent::beforeFilter();
 	 	$signup = 0;
 		$this->set("Signup",$signup);
 		// /$this->layout = 'default';
@@ -268,7 +268,7 @@ class  VisitorsController  extends AppController {
 	Visitor dynamic form page 
 */			
 
-	public function v_dynamic($name = null)
+	public function v_dynamic($company_name = null,$name = null)
 	{
 		$this->layout = "visitor";
 		$this->set('title',$name);
