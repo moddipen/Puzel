@@ -11,7 +11,7 @@
 
                       <div class="media-body">
                         <strong>Balance Pieces</strong>
-                        <h2 class="media-heading animate-number" data-value="<?php echo $Balancepeices;?>" data-animation-duration="1500">0</h2>
+                        <h2 class="media-heading animate-number" data-value="<?php echo $statistics['Balancepeices'];?>" data-animation-duration="1500">0</h2>
                       </div>
                     </div> 
                   </div>
@@ -36,7 +36,7 @@
 
                       <div class="media-body">
                         <strong>User</strong>
-                        <h2 class="media-heading animate-number" data-value="<?php echo $Visitor;?>" data-animation-duration="1500">0</h2>
+                        <h2 class="media-heading animate-number" data-value="<?php echo $statistics['Visitor'];?>" data-animation-duration="1500">0</h2>
                       </div>
                     </div>                    
 
@@ -63,7 +63,7 @@
 
                       <div class="media-body">
                         <strong>Puzels Created</strong>
-                        <h2 class="media-heading animate-number" data-value="<?php echo $CountPuzzle;?>" data-animation-duration="1500">0</h2>
+                        <h2 class="media-heading animate-number" data-value="<?php echo $statistics['CountPuzzle'];?>" data-animation-duration="1500">0</h2>
                       </div>
                     </div>
 
@@ -89,7 +89,7 @@
 
                       <div class="media-body">
                         <strong>Active Puzels</strong>
-                        <h2 class="media-heading animate-number" data-value="<?php echo $CountActivePuzzle;?>" data-animation-duration="1500">0</h2>
+                        <h2 class="media-heading animate-number" data-value="<?php echo $statistics['CountActivePuzzle'];?>" data-animation-duration="1500">0</h2>
                       </div>
                     </div> 
                   </div>

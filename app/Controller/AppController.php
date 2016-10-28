@@ -32,7 +32,7 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller 
 {
-    public $uses = array('Puzzle','User','Image','Visitor','Support','Template','Order','Plan','Subscription','UserSubscription');
+    public $uses = array('Puzzle','UserSubscription','User','Image','Visitor','Support','Template','Order','Plan','Subscription','UserSubscription');
 	public $helpers = array('Html', 'Form','Session');
 	public $components = array('Session','RequestHandler','Cookie','Auth' => array(
         'authenticate' => array(
@@ -50,7 +50,9 @@ class AppController extends Controller
 	   $this->Auth->authenticate = array('Form');
         $this->Auth->autoRedirect = false;
         //Security::setHash("md5");
-
+		$statistics = $this->get_statistics();
+		$this->set("statistics",$statistics);
+		
     	    // Manage session 
             if($this->params['prefix'] == 'admin' && $this->Auth->user('usertype') != 2  && $this->params['login'] && $this->params['register'])
             {
@@ -132,6 +134,37 @@ class AppController extends Controller
 
 
       }
+	  
+	  public function get_statistics()
+	  {
+		 
+		  	$data = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
+			if(empty($data))
+			{
+				$data = 0 ;
+			}
+			$statistics['CountPuzzle'] = $data; 
+			
+
+			$active = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'),'Puzzle.status'=>0)));
+			if(empty($active))
+			{
+				$active = 0 ;
+			}
+		
+			$statistics['CountActivePuzzle'] = $active; 
+			// Count total pieces
+			$list = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
+			
+			$visitcount = 0;
+	
+			// count balance pieces  
+				$pic = $this->UserSubscription->find("first",array("conditions"=>array("UserSubscription.user_id"=>$this->Auth->user('id'))));
+				if(empty($pic)){$pic['UserSubscription']['used_pieces'] = 0;}
+				$statistics['Visitor'] = $visitcount; 
+				$statistics['Balancepeices'] = $pic['UserSubscription']['used_pieces']; 
+				return $statistics;
+	  }
 
 /**
       // Send email with template

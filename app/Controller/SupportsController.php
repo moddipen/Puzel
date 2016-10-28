@@ -47,7 +47,8 @@ class  SupportsController  extends AppController {
  */
 	function beforeFilter()
 	 {
-	 	$signup = 0;
+	 	parent::beforeFilter();
+		$signup = 0;
 		$this->set("Signup",$signup);
 		$this->layout = 'dashboard';
 		// Count of total puzzle 

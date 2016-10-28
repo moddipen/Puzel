@@ -52,38 +52,7 @@ class  PuzzlesController  extends AppController {
 	 	parent::beforeFilter();
 	 	$this->Auth->allow('sub');
 	 // Count of total puzzle 
-	 	// Count of total puzzle 
-
-	  	if($this->Auth->login())
-	  	{
-		  	$data = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
-			if(empty($data))
-			{
-				$data = 0 ;
-			}
-			$this->set('CountPuzzle',$data);
-
-			$active = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'),'Puzzle.status'=>0)));
-			if(empty($active))
-			{
-				$active = 0 ;
-			}
-			$this->set('CountActivePuzzle',$active);
-
-			// Count total pieces
-			$list = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
-			
-			$visitcount = 0;
-	
-			// count balance pieces  
-				$pic = $this->UserSubscription->find("first",array("conditions"=>array("UserSubscription.user_id"=>$this->Auth->user('id'))));
-				if(empty($pic)){$pic['UserSubscription']['used_pieces'] = 0;}
-				$this->set('Visitor',$visitcount);
-				$this->set('Balancepeices',$pic['UserSubscription']['used_pieces']);
-
-			}
-	 	
-	 	
+	 	// Count of total puzzle 	 	
 	}
 
 
@@ -408,7 +377,6 @@ class  PuzzlesController  extends AppController {
 		$this->autoRender = false;
 		if(!empty($this->request->data))
 		{
-				//debug($v);exit;
 				$valid_extensions = array('jpeg', 'jpg', 'png', 'gif', 'bmp');
 				$path = $_SERVER['DOCUMENT_ROOT'].'/app/webroot/img/grand_price/';
 				$filepath  = Configure::read("SITE_URL").'app/webroot/img/grand_price/';
