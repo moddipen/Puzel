@@ -72,6 +72,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 									if(transition  == "Flip left"){var classes = 'pt-page-flipOutLeft pt-page-flipInRight pt-page-delay500';}
 									if(transition  == "Flip top"){var classes = 'pt-page-flipOutTop pt-page-flipInBottom pt-page-delay500';}
 									if(transition  == "Flip bottom"){var classes = 'pt-page-flipOutBottom pt-page-flipInTop pt-page-delay500';}
+									alert(transition);
 									alert(classes);
 									$('.'+objs[0]).addClass(classes);
 									// $("#puzzle").html(data);
