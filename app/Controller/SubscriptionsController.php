@@ -89,7 +89,6 @@ class  SubscriptionsController  extends AppController {
 		$this->set('title',"Packages");
 		if($this->Auth->user())
 		{
-			exit("sas");
 			Braintree_Configuration::environment('sandbox');
 			Braintree_Configuration::merchantId('dvgmgzszxf2qgmfh');
 			Braintree_Configuration::publicKey('2yhywhtr9583jhmh');
@@ -102,7 +101,7 @@ class  SubscriptionsController  extends AppController {
 				$this->set('cardDetail',$paymentMethod);
 			}			
 		}
-		exit("sD");
+		
 		$plan = $this->Subscription->find('first',array('conditions'=>array('Subscription.id'=>$id))); 
 		$this->set('Rate',$plan);
 
