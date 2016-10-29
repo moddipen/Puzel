@@ -125,8 +125,8 @@ class  PuzzlesController  extends AppController {
 			{
 				$data = 1;
 			}	
-			
 			$this->set("IMAGEID",$data);
+			
 			$this->Session->write('IMAGECAPTURE',$this->request->data);
 		}		
 	}

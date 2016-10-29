@@ -54,7 +54,7 @@ class  VisitorsController  extends AppController {
 	 	$signup = 0;
 		$this->set("Signup",$signup);
 		// /$this->layout = 'default';
-	 	$this->Auth->allow('v_dynamic','process','fetchimage','generateRandomString');	 		
+	 	$this->Auth->allow('v_dynamic','process','fetchimage','generateRandomString','snipestimage');	 		
 	// Count of total puzzle 
 	 	// Count of total puzzle 
 	 	
@@ -264,6 +264,17 @@ class  VisitorsController  extends AppController {
 		// $this->set('drawimage_s',count($image));
 		// $puzzle = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id)));
 		// $this->set('PuzzleData',$puzzle);
+	}
+	
+	
+	public function snipestimage($id = Null)
+	{
+		$this->layout = '';
+		$image = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id)));	
+		$this->set('image',$image['Image']);
+		$this->set('drawimage_s',count($image['Image']));
+		$this->set('PuzzleData',$image);
+		$this->render('/visitors/fetchimage');
 	}
 
 /**

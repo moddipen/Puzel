@@ -4,7 +4,7 @@ class Puzzle extends AppModel {
 	
 	var $name = 'Puzzle';
 	
-    public $hasMany = array('Visitor');
+    public $hasMany = array('Visitor','Image');
 	
     public $belongsTo = array(
     'Business' => array(

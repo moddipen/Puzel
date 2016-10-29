@@ -52,9 +52,9 @@
                                   <div class="col-sm-8">
                                       <div class="form-group">
                                         <textarea class="form-control" style="height:87px; line-height:14pt;" id="script">
-                                            &lt;script>
-                                            <div id="paymentform_1"></div>
-                                            &lt;/script>
+                                            &lt;script type="text/javascript" src="<?php echo Configure::read("SITE_URL");?>app/webroot/js/custom.js">&lt;/script>
+                                            <div class="snipest" id="puzzle_<?php echo $IMAGEID; ?>"></div>
+                                            
                                             </textarea>
                                         </div>
                                     </div>

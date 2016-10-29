@@ -1,6 +1,5 @@
 <?php
 echo $this->Html->css('animations.css');
-echo $this->Html->script('modernizr.custom.js');	
 ?>
 <style>
  #blur{
@@ -282,7 +281,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
             <input type = "hidden" name ="puzzlename" value = "<?php echo substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>">
             <input type = "hidden" name ="signwithpuzzleaccount" id ="signwithpuzzleaccount" value = "">
             <div class="form-group text-center">
-              <button type="submit" data-animation="58" class="btn button-sign" id="normalsign">Submit</button><button type="submit" class="btn button-sign" id="puzelacount" name="puzzle" value = "1">Signup with Puzel Account</button>
+              <button type="submit" class="btn button-sign" id="normalsign">Submit</button><button type="submit" class="btn button-sign" id="puzelacount" name="puzzle" value = "1">Signup with Puzel Account</button>
             </div>
         </form>
     </div>
@@ -382,7 +381,3 @@ else
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
   
-  <?php
-	echo $this->Html->script('jquery.dlmenu.js');	
-	echo $this->Html->script('pagetransitions.js');	
-  ?>
