@@ -275,11 +275,12 @@ class  SubscriptionsController  extends AppController {
 									else
 									{
 										// Create new Business account 
-
+										
 										$this->request->data['User']['firstname'] = $this->request->data['Subscription']['firstname'] ;
 										$this->request->data['User']['lastname'] = $this->request->data['Subscription']['lastname'] ;
 										$this->request->data['User']['email'] = $this->request->data['Subscription']['email'] ;
 										$this->request->data['User']['password'] = $this->request->data['Subscription']['password'] ;
+										$this->request->data['User']['company_name'] = $this->request->data['Subscription']['company_name'];
 										$this->request->data['User']['usertype'] = 1;
 										
 										$this->User->create();
@@ -298,7 +299,7 @@ class  SubscriptionsController  extends AppController {
 												'to'=>$this->Auth->user('email'),
 												'reply_to'=>"support@puzel.co"
 												);	
-												$this->sendmail($email);
+											$this->sendemail($email);
 											$data['Order']['user_id'] = $this->User->getLastInsertId();
 										}
 									}	

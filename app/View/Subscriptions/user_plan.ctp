@@ -55,6 +55,14 @@ echo $this->Form->create('Subscription', array('action' => 'plan/'.$id));?>
   <input type="text" value="" name="data[Subscription][lastname]" class="" id="LNAME" required>
 </div>
 <div id="errorlname"></div>
+
+<div class="mc-field-group">
+  <label for="mce-LNAME">Company Name </label>
+  <input type="text" value="" name="data[Subscription][company_name]" class="" id="company_name" required>
+</div>
+<div id="errorcname"></div>
+
+
 <div class="mc-field-group">
   <label for="mce-LNAME">Password</label>
   <input type="password" value="" name="data[Subscription][password]" class="" id="password" required>
@@ -184,6 +192,11 @@ echo $this->Form->create('Subscription', array('action' => 'plan/'.$id));?>
         if($("#FNAME").val() == "")
         {
           $("#errorfname").html('<p style = "color:red">Please Enter first name.</p>')
+          return false; 
+        }
+		 if($("#company_name").val() == "")
+        {
+          $("#errorcname").html('<p style = "color:red">Please Enter company name.</p>')
           return false; 
         }
         if($("#LNAME").val() == "")
