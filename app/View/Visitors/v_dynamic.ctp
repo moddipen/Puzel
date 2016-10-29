@@ -2,6 +2,14 @@
 echo $this->Html->css('animations.css');
 echo $this->Html->script('modernizr.custom.js');	
 ?>
+<style>
+ #blur{
+	 -webkit-filter: blur(13px);
+    -moz-filter: blur(13px);
+    -o-filter: blur(13px);
+    -ms-filter: blur(13px);
+ filter: blur(13px);}
+</style>
 <script type="text/javascript">
 var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 
@@ -72,6 +80,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 									if(transition  == "Flip left"){var classes = 'pt-page-flipOutLeft pt-page-flipInRight pt-page-delay500';}
 									if(transition  == "Flip top"){var classes = 'pt-page-flipOutTop pt-page-flipInBottom pt-page-delay500';}
 									if(transition  == "Flip bottom"){var classes = 'pt-page-flipOutBottom pt-page-flipInTop pt-page-delay500';}
+									
 									$('.'+objs[0]).addClass(classes);
 									// $("#puzzle").html(data);
                                     $("#Imagedata")[0].reset();
@@ -181,7 +190,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
         elseif($peices == 75)  {   $cut_width = 15;   $cut_height = 5;  }
         else {   $cut_width = 10;  $cut_height = 10; }  ?>
     
-        <div class="merge pt-perspective" id="psdt-main">
+        <div class="merge pt-perspective">
         
            <?php 
 		   $index = 0;
@@ -322,17 +331,27 @@ else
           <div class="modal-body">
             <form class="popup-form">
               <div class="form-group">
+				<?php
+					if($PuzzleData['Puzzle']['type'] == "Mystery")
+					{
+						$blurr_class = "blur";
+					}
+					else
+					{
+						$blurr_class = "";
+					}
+				?>
                 <div> <?php echo $PuzzleData['Puzzle']['price'];?></div>
-                <div>
-					<?php
+				<?php
 						if($PuzzleData['Puzzle']['price_image'] != "")
 						{
 					?>
-					<a href = "<?php echo $this->webroot ;?>img/grand_price/<?php echo $PuzzleData['Puzzle']['price_image'];?>" target="_blank"><img src = "<?php echo $this->webroot ;?>img/grand_price/<?php echo $PuzzleData['Puzzle']['price_image'];?>"  width="540px"/></a> 
+						   <div id="<?php echo $blurr_class;?>" style="background:url('<?php echo $this->webroot ;?>img/grand_price/<?php echo $PuzzleData['Puzzle']['price_image'];?>')">
+								<a href = "<?php echo $this->webroot ;?>img/grand_price/<?php echo $PuzzleData['Puzzle']['price_image'];?>" target="_blank"><img src = "<?php echo $this->webroot ;?>img/grand_price/<?php echo $PuzzleData['Puzzle']['price_image'];?>"  width="540px"/></a> 
+							</div>
 					<?php
 						}
 					?>
-				</div>
                 <!-- <textarea name="textarea" id="textarea" class="form-control wysiwyg"></textarea> -->
               </div>
              </form>
