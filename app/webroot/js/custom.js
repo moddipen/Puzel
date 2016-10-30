@@ -11,14 +11,14 @@ $(document).ready(function()
         $("#signwithpuzzleaccount").val(0);
       }); 
 	
-	$('head').append('<link rel="stylesheet" type="text/css" href="http://localhost/puzzle/app/webroot/css/animations.css">');
+	$('head').append('<link rel="stylesheet" type="text/css" href="http://puzel.stage.n-framescorp.com/app/webroot/css/animations.css">');
 	var snipest_id =$('.snipest').attr('id');
 	var puzzle_id = snipest_id.replace("puzzle_", "");
 	
 	$.ajax
 	  ({
 		 type: "POST",
-		 url: "http://localhost/puzzle/visitors/snipestimage/"+puzzle_id,
+		 url: "http://puzel.stage.n-framescorp.com/visitors/snipestimage/"+puzzle_id,
 		 dataType: 'text', 
 		 success:function(data)
 		 {
@@ -48,7 +48,7 @@ $(document).ready(function()
          else 
          {
 
-            var url = "http://localhost/puzzle/visitors/process"; 
+            var url = "http://puzel.stage.n-framescorp.com/visitors/process"; 
              // Form Submit Ajax  
               $.ajax({
                        type: "POST",
@@ -62,7 +62,7 @@ $(document).ready(function()
                             $.ajax
                               ({
                                  type: "POST",
-                                 url: "http://localhost/puzzle/visitors/fetchimage/"+data.image_id,
+                                 url: "http://puzel.stage.n-framescorp.com/visitors/fetchimage/"+data.image_id,
                                  dataType: 'text', 
                                  success:function(data)
                                  {
@@ -71,7 +71,7 @@ $(document).ready(function()
 									obj = obj.name;
 									objs = obj.split('.');
 									var get_name = objs[0].split('_');
-									$('.'+objs[0]).css("background-image","url('http://localhost/puzzle/img/puzzel/"+get_name[0]+"/"+obj+"')");  //background:url('<?php echo $this->webroot;?>'img/puzzel/"+objs[0]+"/"+obj+"')");
+									$('.'+objs[0]).css("background-image","url('http://puzel.stage.n-framescorp.com/img/puzzel/"+get_name[0]+"/"+obj+"')");  //background:url('<?php echo $this->webroot;?>'img/puzzel/"+objs[0]+"/"+obj+"')");
 									
 									if(transition  == "Newspaper"){var classes = 'pt-page-rotateOutNewspaper pt-page-rotateInNewspaper pt-page-delay500';}
 									if(transition  == "Cube to left"){var classes = 'pt-page-rotateCubeLeftOut pt-page-ontop pt-page-rotateCubeLeftIn';}
