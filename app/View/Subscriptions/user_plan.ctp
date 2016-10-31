@@ -75,30 +75,52 @@ echo $this->Form->create('Subscription', array('action' => 'plan/'.$id));?>
 	} ?>
 <div class="mc-field-group">
   <label for="mce-LNAME">Amount </label>
-  <input type="text" value="<?php echo $Rate['Subscription']['price'];?> $" name="data[Subscription][price]" readonly="readonly"  id="amount">
+  <input type="text" value="<?php echo $Rate['Subscription']['price'];?>" name="data[Subscription][price]" readonly="readonly"  id="amount">
 </div>
 <?php if($Rate['Subscription']['price'] != "Free" ) {?>
 <div class="mc-field-group">
   <label for="mce-LNAME">Card </label>
   <?php
 	$number = "************".$cardDetail->creditCard['last4'];
+	if(!$cardDetail){
+		echo '<input type="text" value="'.$number.'"  name="data[Subscription][card_number]" class="" id="card_number" placeholder="1234 5678 9012 3456" required>';
+		
+	}else{
+		echo '<input type="text" value="'.$number.'" readonly name="data[Subscription][card_number]" class="" id="card_number" placeholder="1234 5678 9012 3456" required>';
+	}
   ?>
-  <input type="text" value="<?php echo $number;?>" readonly name="data[Subscription][card_number]" class="" id="card_number" placeholder="1234 5678 9012 3456" required>
+  
 </div>
 
 <div class="mc-field-group">
+ <label for="mce-LNAME">Card Holder Name </label>
  <?php
-							$name = $cardDetail->creditCard['cardholderName'];
-						  ?>
-  <label for="mce-LNAME">Card Holder Name </label>
-  <input type="text" value="<?php echo $name;?>" readonly name="data[Subscription][holder_name]" class="" id="card_number" placeholder="John Duo" required>
+	$name = $cardDetail->creditCard['cardholderName'];
+	if(!$cardDetail){
+		echo '<input type="text" value="'.$name.'"  name="data[Subscription][holder_name]" class="" id="card_number" placeholder="John Duo" required>';
+		
+	}else{
+		echo '<input type="text" value="'.$name.'" readonly name="data[Subscription][holder_name]" class="" id="card_number" placeholder="John Duo" required>';
+	}
+	?>
+ 
+  
 </div>
 
 <div id="errorccard"></div>
 <input type ="hidden" value ="" name="data[Subscription][check]" id="validcard">
 <div class="mc-field-group">
   <label for="mce-LNAME">Month </label>
-     <select required disabled name="data[Subscription][ex_date_month][month]" id="month" >
+  <?php
+	
+	if(!$cardDetail){
+		echo '<select required  name="data[Subscription][ex_date_month][month]" id="month" >';
+		
+	}else{
+		echo '<select required disabled name="data[Subscription][ex_date_month][month]" id="month" >';
+	}
+	?>
+     
           <?php
 		  
 		 
@@ -119,8 +141,17 @@ echo $this->Form->create('Subscription', array('action' => 'plan/'.$id));?>
 </div>
 <div class="mc-field-group">
   <label for="mce-LNAME">Year </label>
-  
-   <select required disabled name="data[Subscription][ex_date_year][year]" id="year" >
+  <?php
+	
+	if(!$cardDetail){
+		echo '<select required  name="data[Subscription][ex_date_year][year]" id="year" >';
+		
+	}else{
+		echo '<select required disabled name="data[Subscription][ex_date_year][year]" id="year" >';
+	}
+	?>
+     
+   
       <?php
 	  
 		$year = date ('Y');
