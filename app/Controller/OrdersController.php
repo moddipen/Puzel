@@ -149,12 +149,38 @@ class  OrdersController  extends AppController {
 		$order = $this->Order->find('all',array('conditions'=>array('Order.user_id'=>$this->Auth->user('id')),'order'=>'Order.id DESC'));
 		$this->set("Payment",$order);
 		$get_current_plan = $this->UserSubscription->find("first",array("conditions"=>array("UserSubscription.user_id"=>$this->Auth->user('id')),'order'=>array('UserSubscription.id DESC')));
+		if(!empty($this->data))
+		{
+			
+			$date = explode("/",$this->data['Order']['date']);
+			$result = Braintree_Customer::update(
+				  $get_current_plan['Order']['customer_id'],[
+					'creditCard' => [
+						"cardholderName" => $this->data['Order']['name'],
+						"cvv" => $this->data['Order']['cvv'],
+						"expirationMonth" => $date[0],//$this->data['Subscription']['ex_date_month']['month'],
+						"expirationYear" => $date[1],//this->data['Subscription']['ex_date_year']['year'],
+						"number" => $this->data['Order']['number']
+					]
+				  ]
+				);
+			
+			if($result->success)
+			{
+				$this->Session->setFlash('<div class="alert alert-success"><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Success </b>: Card details updated successfully. </p></div>');
+			}else{
+				foreach($refund->errors->deepAll() AS $error) {
+					$this->Session->setFlash(__($error->code . ": " . $error->message . "\n", true), 'default', array('class' => 'alert alert-danger'));						
+				}
+			}	
+		}
+		
 		$this->set("get_current_plan",$get_current_plan);//debug($get_current_plan);exit;
 		if(!empty($get_current_plan) && $get_current_plan['Order']['transiction_id'] != "")
 		{
-			$paymentMethod = Braintree_Transaction::find($get_current_plan['Order']['transiction_id']);
+			$paymentMethod = Braintree_Customer::find($get_current_plan['Order']['transiction_id']);
 			$this->set('cardDetail',$paymentMethod);
-		}
+		}		
 	}
 		
 	public function receipt($id = null)
