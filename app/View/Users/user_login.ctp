@@ -10,7 +10,7 @@
           </div>
         <div class=" col-md-6">
          <div class="inside-block">
-              <img src="<?php echo $this->webroot;?>img/dashboard/logo.png" alt="" class="logo">
+              <a href="<?php echo Configure::read("SITE_URL");?>"><img src="<?php echo $this->webroot;?>img/dashboard/logo.png" alt="" class="logo"></a>
                <?php echo $this->Session->flash();
               echo $this->Form->create('User', array('action' => 'login',"class"=>"Formsubmit","novalidate"=>true));?>
                 <section>
