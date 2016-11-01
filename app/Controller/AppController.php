@@ -163,6 +163,8 @@ class AppController extends Controller
 				if(empty($pic)){$pic['UserSubscription']['used_pieces'] = 0;}
 				$statistics['Visitor'] = $visitcount; 
 				$statistics['Balancepeices'] = $pic['UserSubscription']['used_pieces']; 
+				if($statistics['Balancepeices'] < 0){$statistics['Balancepeices'] = 0;}
+				
 				return $statistics;
 	  }
 

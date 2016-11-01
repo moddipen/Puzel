@@ -32,7 +32,7 @@
           to reach new customers.</h3>
          <div style="padding-top:30px;">
          <a href="<?php echo Configure::read('SITE_USER_URL');?>/users/register" style="margin-right:15px; padding-bottom:30px; display: inline-block;"><span class="button-sign">Sign Up</span></a>
-         <a href="<?php echo Configure::read('SITE_USER_URL');?>/users/register/business" style="display:inline-block;"><span class="button-join">Join as a Business</span></a>
+         <a href="<?php echo Configure::read('SITE_URL');?>/subscriptions/package" style="display:inline-block;"><span class="button-join">Join as a Business</span></a>
          </div> 
                 
     </div>

@@ -10,7 +10,7 @@
 						 <li><a href="<?php echo Configure::read('SITE_URL');?>users/contact">Contact</a></li>
 						 <li><a href="http://blog.puzel.co/">Blog</a></li>
                          <li><a href="<?php echo Configure::read('SITE_USER_URL');?>/users/register">Sign Up</a></li>
-						 <li><a href="<?php echo Configure::read('SITE_USER_URL');?>/users/register/business">Join as a Business</a></li>
+						 <li><a href="<?php echo Configure::read('SITE_URL');?>subscriptions/package">Join as a Business</a></li>
 						</ul>
 					</div>
 				</div>
@@ -35,7 +35,7 @@
 				 <div id="logo"><a href="<?php echo Configure::read('SITE_URL');?>users/index"><img src="<?php echo $this->webroot ;?>img/logo.png"></a></div>
 				
 				 <ul id="nav">
-                 	<li><a href="<?php echo Configure::read('SITE_USER_URL');?>/users/register/business"><span class="button-join">Join as a Business</span></a></li>
+                 	<li><a href="<?php echo Configure::read('SITE_URL');?>subscriptions/package"><span class="button-join">Join as a Business</span></a></li>
 				 	<li><a href="<?php echo Configure::read('SITE_USER_URL');?>/users/register" style="margin-right: 0px; padding-right: 0px;"><span class="button-sign">Sign Up</span></a></li>
 					<li><a href="http://blog.puzel.co/">Blog</a></li>
 					<li><a href="<?php echo Configure::read('SITE_URL');?>users/contact">Contact</a></li>
