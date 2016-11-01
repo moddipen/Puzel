@@ -98,7 +98,7 @@
                             <td><?php echo $value['Subscription']['name'];?></td>
                             <td>$<?php echo $value['Order']['price'];?></td>
                             <td>
-								<a href="<?php echo Configure::read("SITE_URL");?>orders/receipt/<?php echo $value['Order']['id']?>" style="color:white;">
+								<a href="<?php echo Configure::read("SITE_URL");?>orders/receipt/<?php echo $value['Order']['id']?>" target="_blank" style="color:white;">
 								  <i class="fa fa-file-pdf-o"></i>
                 </a>
 							</td>

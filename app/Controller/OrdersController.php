@@ -269,7 +269,7 @@ class  OrdersController  extends AppController {
 									Transaction Date : '.$order['Order']['created'].'
 								</th>
 								<th>
-									Amount Paid: '.$order['Order']['price'].'
+									Amount Paid: '.$order['Order']['price'].' $
 								</th>
 							</tr>
 							<tr>

@@ -88,11 +88,22 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+							
+							<div class="col-md-2">
                               <div class="form-group">
-                                    <select name="data[Puzzle][transtion]" class="form-control chosen-select">
-                                      <option value="Transition">Transition</option>
-                                    </select>
+							  <?php $transition = array(
+										"Newspaper" => "Newspaper",
+										"Cube to left" => "Cube to left",
+										"Cube to right" => "Cube to right",
+										"Cube to top" => "Cube to top",
+										"Cube to bottom" => "Cube to bottom",
+										"Flip right" => "Flip right",
+										"Flip left" => "Flip left",
+										"Flip top" => "Flip top",
+										"Flip bottom" => "Flip bottom",
+							);?>
+							  <?php echo $this->Form->input("Puzzle.transtion",array("label"=>false,"selected"=>$Capturedata['Puzzle']['transtion'],"type"=>"select","class"=>"form-control chosen-select","options"=>$transition));?>
+                                    
                                 </div>
                             </div>
                           </div>

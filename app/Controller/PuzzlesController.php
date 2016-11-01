@@ -378,7 +378,7 @@ class  PuzzlesController  extends AppController {
 		if(!empty($this->request->data))
 		{
 				$valid_extensions = array('jpeg', 'jpg', 'png', 'gif', 'bmp');
-				$path = $_SERVER['DOCUMENT_ROOT'].'/app/webroot/img/grand_price/';
+				$path = $_SERVER['DOCUMENT_ROOT'].'/puzzle/app/webroot/img/grand_price/';
 				$filepath  = Configure::read("SITE_URL").'app/webroot/img/grand_price/';
 				if(isset($_FILES['uploadfile']))
 				{
