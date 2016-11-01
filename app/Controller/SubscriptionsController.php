@@ -192,7 +192,7 @@ class  SubscriptionsController  extends AppController {
 													);	
 													$this->sendinvoice($email);
 													$this->Session->setFlash('<div class="alert alert-success"><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Success </b>: Your subscription upgraded </p></div>');
-													$this->redirect(array('controller'=>'orders','action'=>'index','business'=>true));		
+													$this->redirect(array('controller'=>'subscriptions','action'=>'thankyou','user'=>false));				
 												}
 												else{
 													$this->Session->setFlash(__("Error while subscription"), 'default', array('class' => 'alert alert-danger'));						
@@ -327,7 +327,7 @@ class  SubscriptionsController  extends AppController {
 												{
 													$this->sendinvoice($email);
 													$this->Session->setFlash(__('Signup Successfully!!....', true), 'default', array('class' => 'alert alert-success'));
-													$this->redirect(array('controller'=>'orders','action'=>'index','business'=>true));	
+													$this->redirect(array('controller'=>'subscriptions','action'=>'thankyou','user'=>false));		
 												}
 											}
 									}

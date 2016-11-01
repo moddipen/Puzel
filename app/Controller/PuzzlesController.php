@@ -131,6 +131,41 @@ class  PuzzlesController  extends AppController {
 		}		
 	}
 
+	/* Get loggedin user total remaining pieces*/
+	
+	public function checkpieces()
+	{
+		$this->autoRender = false;
+		$user_id = $this->Auth->user("id");
+		$check = $this->UserSubscription->find("first",array("conditions"=>array("UserSubscription.user_id"=>$user_id,"UserSubscription.status"=>0)));
+		
+		if(!empty($check))
+		{
+			if($check['UserSubscription']['used_pieces'] <= $this->data['pieces'])
+			{
+				$message = array(
+					"success" => 0,
+					"message" => "Remaining pieces are ".$check['UserSubscription']['used_pieces']."! Please upgrade."
+				);
+			}
+			else
+			{
+				$message = array(
+					"success" => 1,
+					"message" => "Success"
+				);
+			}
+		}
+		else
+		{
+			$message = array(
+					"success" => 0,
+					"message" => "Please upgrade subscription."
+				);
+		}
+		echo json_encode($message);
+	}
+	
 /**
 	Store image in session business view page 
 */	

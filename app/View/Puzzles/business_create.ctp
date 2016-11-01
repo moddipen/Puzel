@@ -78,13 +78,14 @@
                             </div>
                             <div class="col-md-2">
                               <div class="form-group">
-                                    <select name="data[Puzzel][peice]" class="form-control chosen-select">
-                                      <!-- <option style="display:none">Number of Pieces</option> -->
+                                    <select name="data[Puzzel][peice]" class="form-control chosen-select" id="validation-pieces">
+                                      <option>Number of Pieces</option>
                                       <option value="25">25</option>
                                       <option value="50">50</option>
                                       <option value="75">75</option>
                                       <option value="100">100</option>
                                     </select>
+									<p id="validate-pieces"></p>
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -284,6 +285,30 @@
   $("#imgpre").change(function()
   {
       readURL(this);
+  });
+  
+   $("#validation-pieces").change(function()
+  {
+		
+	 $.ajax(
+       {
+         type: "POST",
+         url: "<?php echo Configure::read("SITE_URL");?>puzzles/checkpieces",
+           data: {'pieces':$(this).val()}, 
+		   dataType : "json",
+        success: function(data)
+         {
+            if(data.message != "Success")
+			{
+				$("#validate-pieces").html(data.message);
+			}
+			else
+			{
+				$("#validate-pieces").html("");
+			}
+				
+         }
+       });
   });
 
   //

@@ -16,7 +16,7 @@
              <div class="pagesubheader">
             
 
-              <h2><i class="fa fa-database"></i> Data Captured</h2>
+              <h2><i class="fa fa-database"></i>Data Captured</h2>
 
             </div>
 
@@ -110,7 +110,7 @@
                     </div>
                     <div class="col-md-2">
                       <div class="form-group iconwithtext">
-                         <?php echo $this->html->link('',array('action' => 'export'),array('class'=>'fa fa-download','style'=>"color:white;"));?><!-- i class="fa fa-downloads"></i> --> <span class="text">Download as CSV</span>
+                         <?php echo $this->html->link(' Download as CSV',array('action' => 'export'),array('class'=>'fa fa-download','style'=>"color:white;"));?><!-- i class="fa fa-downloads"></i> --> 
                         </div>
                     </div>
                   </div>
