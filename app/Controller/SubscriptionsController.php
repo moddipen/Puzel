@@ -350,7 +350,7 @@ class  SubscriptionsController  extends AppController {
 						// When user select free plan 
 						else
 						{
-							$data['Order']['transiction_id']=time();
+							//$data['Order']['transiction_id']=time();
 							$data['Order']['price']=$plan['Subscription']['price'];
 							$data['Order']['created']=date('Y-m-d H:i:s',time());
 							$data['Order']['modified']=date('Y-m-d H:i:s',time());
@@ -393,9 +393,9 @@ class  SubscriptionsController  extends AppController {
 									"product_name"=>$plan['Subscription']['price']."$",
 									"action_url"=>$invoice['Order']['id'],
 									"date"=>$invoice['Order']['created'],
-									"amount"=>$invoice['Order']['price']."$",
+									"amount"=>$invoice['Order']['price'],
 									"description"=>"One month purchase plan",
-									'total'=>$invoice['Order']['price']."$"),
+									'total'=>$invoice['Order']['price']),
 								"InlineCss"=> true, 
 								"from"=> "support@puzel.co",
 								'to'=>$this->request->data['Subscription']['email'],

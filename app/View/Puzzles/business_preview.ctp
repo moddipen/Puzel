@@ -40,7 +40,7 @@
 
 
 
-                    debug($Puzzel);exit;
+                
                   <!-- tile header -->
                   
                   <!-- /tile header -->
@@ -102,7 +102,7 @@
                   
                   <input type = "hidden" name="data[Puzzle][user_id]" value="<?php echo $this->Session->read('USERDETAIL.User.id');?>">
                  <div class="body" id="showimage">
-                    <img src="<?php echo $this->webroot ?>img/puzzel/<?php echo $Capturedata['Puzzle']['image_ext']?>.jpg" class="img-responsive" id="img_preview" alt="Please upload your image" />
+                    <img src="<?php echo $this->webroot ?>img/puzzel/<?php echo $Capturedata['Puzzle']['image_ext']?>" class="img-responsive" id="img_preview" alt="Please upload your image" />
                   </div>
                   </div>
                   <!-- /tile body -->

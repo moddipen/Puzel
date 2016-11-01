@@ -253,7 +253,7 @@ class  OrdersController  extends AppController {
 					<div>
 					</div>
 					';
-							
+							if($order['Order']['price'] != "Free"){$order['Order']['price'] =  $order['Order']['price']."$";} 
 						$html.= '
 				 		<table cellspacing="10" class="table table-striped" style="font-size:10px;">					 	
 							<tr>
@@ -269,7 +269,7 @@ class  OrdersController  extends AppController {
 									Transaction Date : '.$order['Order']['created'].'
 								</th>
 								<th>
-									Amount Paid: '.$order['Order']['price'].' $
+									Amount Paid: '.$order['Order']['price'].'
 								</th>
 							</tr>
 							<tr>
