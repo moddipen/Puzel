@@ -655,6 +655,7 @@ public function user_reset($token=null)
 					
 					if($update)
 					{
+						$this->Session->write('Auth.User.status', 1);
 						// Send email to user that your has been deactivate 
 						$email = array(
               			"templateid"=>1025061,

@@ -130,7 +130,13 @@
                             <th class="text-center">Pieces Used</th>
                             <th class="text-center">Balance Pieces</th>
                             <th class="text-center">Data Captured</th>
-                            <th class="text-center">Options</th>
+                             <?php 
+							   if(AuthComponent::user('status') == 0)
+                               {?>
+										<th class="text-center">Options</th>
+								<?php
+							   }
+								?>
                           </tr>
                         </thead>
                         <tbody id="content1">
@@ -158,50 +164,21 @@
                             }
                             ?>
                             </td>
+							 <?php 
+                              if(AuthComponent::user('status') != 1)
+                               {?>
                             <td class="minipadding controls">
                               <input type ="hidden" value = "<?php echo $puzel['Puzzle']['id'];?>" class ="puzelid" >
-                              <div class="col-xs-5 text-right"> <?php 
+                              <div class="col-xs-5 text-right"> 
 
-                               if(AuthComponent::user('status') == 1)
-                               {?>
-                                 <i class ='fa fa-pencil'></i>
-                               <?php }
-                               else
-                               {
+                              
+                               <?php
+                               
                                 echo $this->html->link('',array('action' => 'edit',$puzel['Puzzle']['id']),array('class'=>'fa fa-pencil','style'=>"color:white;"));     
-                               } 
-                            ?><!-- <i class="fa fa-pencil"></i> --></div>
-                              <?php 
-                              if(AuthComponent::user('status') == 1)
-                               {?>
+                              
+                            ?></div>
+                             
                                 <div class="col-xs-7">
-                                <div class="onoffswitch green small">
-                                  <?php 
-                                    // check puzzle s activate or not
-                                    if($puzel['Puzzle']['status'] == 0)
-                                    {
-                                      $puzzle = "checked='checked'";
-                                    }
-                                    else
-                                     {
-                                       $puzzle = '';
-                                     } 
-
-                                  ?> 
-                                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="onoffswitch<?php echo $puzel['Puzzle']['id'];?>" <?php echo $puzzle;?> value = "<?php echo $puzel['Puzzle']['id'];?>" disabled="disabled">
-                                  <label class="onoffswitch-label" for="onoffswitch<?php echo $puzel['Puzzle']['id'];?>">
-                                    <span class="onoffswitch-inner"></span>
-                                    <span class="onoffswitch-switch"></span>
-                                  </label>
-                                </div>
-                              </div>
-
-
-                                <?php }
-                                else
-                                  {?>
-
-                              <div class="col-xs-7">
                                 <div class="onoffswitch green small">
                                   <?php 
                                     // check puzzle s activate or not
@@ -222,7 +199,10 @@
                                   </label>
                                 </div>
                               </div>
-                              <?php }?>
+
+
+                                <?php }
+                                ?>
                             </td>
                           </tr>
                           <?php }}?>
