@@ -72,7 +72,7 @@
                       
                     </div>
                     <div class="col-md-5">
-                      <h4 class="title dropdown">Payment Type - <i class="fa fa-cc-visa"></i> &nbsp;&nbsp;XX - 9872 &nbsp;&nbsp;&nbsp;&nbsp; <u style="cursor:pointer" onclick="showdiv('changecreditcard')">Change Credit Card</u></h4>
+                      <h4 class="title dropdown">Payment Type - <i class="fa fa-cc-visa"></i> &nbsp;&nbsp; <?php echo "XX-".$cardDetail->creditCard['last4'];?>&nbsp;&nbsp;&nbsp;&nbsp; <u style="cursor:pointer" onclick="showdiv('changecreditcard')">Change Credit Card</u></h4>
                     </div>
                   </div>
                   <div class="row">
