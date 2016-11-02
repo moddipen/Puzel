@@ -8,7 +8,7 @@
 <div class="row">
   
         <div class="twelve columns text-center fix-max-width">
-      <a href="index.php"><img src="<?php echo $this->webroot;?>img/logo.png"></a>
+      <a href="<?php echo Configure::read("SITE_URL");?>subscriptions/package"><img src="<?php echo $this->webroot;?>img/logo.png"></a>
         <h3 class="purple">Grow your customer base with Puzel.<br>
         Sign up to be first in line to take it for a test drive once it launches.</h3>
     </div>

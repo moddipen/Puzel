@@ -196,7 +196,7 @@ class  PuzzlesController  extends AppController {
 					// create image directory 
 					$multipleimagefolder = WWW_ROOT.'img/puzzel/'.$this->request->data['Puzzle']['name'];//WWW_ROOT."img\puzzel\";
 					$folder = mkdir($multipleimagefolder);
-					$URL = $_SERVER['DOCUMENT_ROOT'].'/puzzle/app/webroot/img/puzzel/';
+					$URL = $_SERVER['DOCUMENT_ROOT'].'/app/webroot/img/puzzel/';
 					$imageName = $this->request->data['Puzzle']['name'].".jpg";
 					$path = $URL.$imageName;
 					$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i','', $this->request->data['Puzzle']['image']));
@@ -413,7 +413,7 @@ class  PuzzlesController  extends AppController {
 		if(!empty($this->request->data))
 		{
 				$valid_extensions = array('jpeg', 'jpg', 'png', 'gif', 'bmp');
-				$path = $_SERVER['DOCUMENT_ROOT'].'/puzzle/app/webroot/img/grand_price/';
+				$path = $_SERVER['DOCUMENT_ROOT'].'/app/webroot/img/grand_price/';
 				$filepath  = Configure::read("SITE_URL").'app/webroot/img/grand_price/';
 				if(isset($_FILES['uploadfile']))
 				{
