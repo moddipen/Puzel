@@ -366,7 +366,7 @@ class  VisitorsController  extends AppController {
 				$date =  date('m/d/Y',strtotime($user['Visitor']['created']));
 				$data[$i]['Visitor']['Visitor Firstname'] = $user['Visitor']['firstname'];
 				$data[$i]['Visitor']['Visitor Lastname'] =  $user['Visitor']["lastname"];
-				$data[$i]['Visitor']['Company Name'] =  $user['Visitor']['company_name'];
+			//	$data[$i]['Visitor']['Company Name'] =  $user['Visitor']['company_name'];
 				$data[$i]['Visitor']['Visitor email'] =  $user['Visitor']["email"];
 				$data[$i]['Visitor']['Date'] = $date;
 				$data[$i]['Visitor']['Puzzle Name'] = $user['Puzzle']['name'];
@@ -384,7 +384,7 @@ class  VisitorsController  extends AppController {
 					$date =  date('m/d/Y',strtotime($user['created']));
 					$data[$index]['Visitor'][$i]['Visitor Firstname'] = $user['firstname'];
 					$data[$index]['Visitor'][$i]['Visitor Lastname'] =  $user["lastname"];
-					$data[$index]['Visitor'][$i]['Company Name'] =  $user['company_name'];
+				//	$data[$index]['Visitor'][$i]['Company Name'] =  $user['company_name'];
 					$data[$index]['Visitor'][$i]['Visitor email'] =  $user["email"];
 					$data[$index]['Visitor'][$i]['Date'] = $date;
 					$data[$index]['Visitor'][$i]['Puzzle Name'] = $visitor['Puzzle']['name'];

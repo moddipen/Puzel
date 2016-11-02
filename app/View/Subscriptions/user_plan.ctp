@@ -36,7 +36,7 @@ echo $this->Form->create('Subscription', array('action' => 'plan/'.$id));?>
   <h2>Sign up for Puzel</h2>
 <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
 <?php
-	if(!$cardDetail)
+	if(!$cardDetail && $get_current_plan['Order']['price'] != "Free")
 	{
 ?>
 <div class="mc-field-group">

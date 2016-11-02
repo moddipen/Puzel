@@ -110,7 +110,10 @@
                     </div>
                     <div class="col-md-2">
                       <div class="form-group iconwithtext">
-                         <?php echo $this->html->link(' Download as CSV',array('action' => 'export'),array('class'=>'fa fa-download','style'=>"color:white;"));?><!-- i class="fa fa-downloads"></i> --> 
+						<a href="<?php echo Configure::read("SITE_BUSINESS_URL");?>/visitors/export">
+						<i class="fa fa-downloads"></i>
+						<span class="text" style="color:#FFF;">Download as CSV</span></a>
+                         <?php //echo $this->html->link(' Download as CSV',array('action' => 'export'),array('class'=>'fa fa-download','style'=>"color:white;"));?><!-- i class="fa fa-downloads"></i> --> 
                         </div>
                     </div>
                   </div>
