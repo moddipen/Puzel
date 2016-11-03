@@ -1,4 +1,15 @@
-
+<script>
+$("form").validate({
+	rules: {
+		'data[User][newpassword]': {required: true,password: true},
+		'data[User][cnfrmpassword]': {required: true,password: true,equalTo: "#UserNewpassword" } 
+	},
+	messages: {
+		'data[User][newpassword]': {required: 'Please enter an 8 to 16 characters alpha-numeric password.'},
+		'data[User][cnfrmpassword]': {required: 'Please enter an 8 to 16 characters alpha-numeric password.',equalTo: 'Mismatch!'} 
+	}
+});
+</script>
 
       
                 

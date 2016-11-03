@@ -1,6 +1,16 @@
 
-
-      
+<script>
+$("form").validate({
+	rules: {
+		'data[User][email]': {required: true, email: true},
+		'data[User][password]': {required: true,password: true},
+	},
+	messages: {
+		'data[User][email]': {required: "Please enter a valid email address." },
+		'data[User][password]': {required: 'Please enter an 8 to 16 characters alpha-numeric password.'},
+	}
+});
+</script>   
                 
         <!-- Page content -->
         <div id="content" class="col-md-12 full-page login">
