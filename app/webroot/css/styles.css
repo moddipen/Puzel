@@ -975,3 +975,6 @@ label.error, span.error {
     font-weight: 400;
     z-index: 1;
 }
+input.error, select.error {
+    border-color: #FB5959;
+}
