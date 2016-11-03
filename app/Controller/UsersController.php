@@ -636,6 +636,7 @@ public function user_reset($token=null)
 */
 	public function business_cancel()
 	{
+		$this->autoRender = false;
 		$id = $this->Auth->user('id');
 		$array = array(
 			'id'=>$id,
