@@ -99,7 +99,7 @@
                             </div>
                             <div class="col-md-2">
                               <div class="form-group">
-                                  <input type="text" value="" name="search" class="form-control">
+                                  <input type="text" value="" name="search" id="search" class="form-control">
                                 </div>
                             </div>
                           </div>
@@ -425,6 +425,24 @@ $(document).ready(function(){
       }
     });  
   })
+  
+  $("#search").keyup(function()
+  {
+    var search = this.value ;
+    if(search != "")
+	{
+		$.ajax(
+		{
+		  type: "POST",
+		  url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/search",
+		  data: {'search':search},
+		  success: function(data)
+		  {
+			$("#content1").html(data);
+		  }
+		});  
+	}
+  });
 
   // Calender Filter 
   $('#startdate').datepicker({ format: 'yyyy-mm-dd', autoclose: true}).on('changeDate',function(event){

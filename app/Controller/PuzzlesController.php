@@ -567,6 +567,25 @@ class  PuzzlesController  extends AppController {
 			$this->set("Puzzel",$puzel);					
 		}
 	}
+	
+/**
+	filter based on search
+*/
+	public function business_search()
+	{
+		if(!empty($this->request->data))
+		{
+			$puzel = $this->Puzzle->find('all',array("conditions"=>array("OR"=>array("Business.firstname LIKE"=>'%'.$this->data['search'].'%',"Business.lastname LIKE"=>'%'.$this->data['search'].'%',"Business.email LIKE"=>'%'.$this->data['search'].'%'))));//,array('conditions'=>array('Puzzle.status'=>$this->request->data['status']))) ; 
+			
+			foreach($puzel as $key => $psinglepuzle)
+				{
+					$puzel[$key]['Show'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$psinglepuzle['Puzzle']['id'],'Image.status'=>0))); 
+					$puzel[$key]['Hide'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$psinglepuzle['Puzzle']['id'],'Image.status'=>1))); 
+				}
+			
+			$this->set("Puzzel",$puzel);					
+		}
+	}
 
 /**
 	Ajax calender filter in business panel
