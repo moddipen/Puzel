@@ -375,6 +375,7 @@ class  SubscriptionsController  extends AppController {
 								$this->request->data['User']['lastname'] = $this->request->data['Subscription']['lastname'] ;
 								$this->request->data['User']['email'] = $this->request->data['Subscription']['email'] ;
 								$this->request->data['User']['password'] = $this->request->data['Subscription']['password'] ;
+								$this->request->data['User']['company_name'] = $this->request->data['Subscription']['company_name'];
 								$this->request->data['User']['usertype'] = 1;
 								
 								$this->User->create();
