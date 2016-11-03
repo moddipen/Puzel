@@ -261,7 +261,6 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
       </div>
     </div>
     </div>
- </div> 
  
 <div class="row">
   <div class="six columns">
