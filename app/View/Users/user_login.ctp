@@ -1,6 +1,6 @@
 
 <script>
-$(".Formsubmit").validate({
+$("#UserLoginForm").validate({
 			rules: {
 				'data[User][password]': {
 					required: true,
