@@ -387,15 +387,17 @@ class  SubscriptionsController  extends AppController {
 							if($this->Order->save($data))
 							{
 								$invoice = $this->Order->find('first',array('conditions'=>array('Order.id'=>$this->Order->getLastInsertId())));
+								if($invoice['Order']['price'] != "Free"){$invoice['Order']['price'] = $$invoice['Order']['price']."$"; }
+								
 								$email = array(
 								"templateid"=>1024802,
 								"name"=>$this->request->data['Subscription']['firstname'].' '.$this->request->data['Subscription']['lastname'],
 								"TemplateModel"=> array(
 									"name"=> $this->request->data['Subscription']['firstname'].' '.$this->request->data['Subscription']['lastname'],
-									"product_name"=>$plan['Subscription']['price']."$",
+									"product_name"=>$plan['Subscription']['name'],
 									"action_url"=>$invoice['Order']['id'],
 									"date"=>$invoice['Order']['created'],
-									"amount"=>$invoice['Order']['price']."$",
+									"amount"=>$invoice['Order']['price'],
 									"description"=>"One month purchase plan",
 									'total'=>$invoice['Order']['price']."$"),
 								"InlineCss"=> true, 
