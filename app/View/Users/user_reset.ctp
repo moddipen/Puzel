@@ -1,4 +1,5 @@
-<script>
+<script type="text/javascript">
+$( document ).ready(function() {  
 $("form").validate({
 	rules: {
 		'data[User][newpassword]': {required: true,password: true},
@@ -8,6 +9,7 @@ $("form").validate({
 		'data[User][newpassword]': {required: 'Please enter an 8 to 16 characters alpha-numeric password.'},
 		'data[User][cnfrmpassword]': {required: 'Please enter an 8 to 16 characters alpha-numeric password.',equalTo: 'Mismatch!'} 
 	}
+});
 });
 </script>
 
