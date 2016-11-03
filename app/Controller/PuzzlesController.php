@@ -586,6 +586,37 @@ class  PuzzlesController  extends AppController {
 			$this->set("Puzzel",$puzel);					
 		}
 	}
+	
+	/**
+	filter based on search
+*/
+	public function business_filter()
+	{
+		if(!empty($this->request->data))
+		{
+			
+			if($this->request->data("endDate") != "" && $this->request->data("startDate") != "")
+			{
+				$puzel = $this->Puzzle->find('all',array('conditions'=>array('AND'=>array(array('DATE(Puzzle.created) >='=>$this->request->data['starDate'],'DATE(Puzzle.created) <='=>$this->request->data['endDate']),'Puzzle.user_id'=>$this->Auth->user('id'))))) ; 	
+			}
+			else if($this->request->data("endDate") != "")
+			{
+				$puzel = $this->Puzzle->find('all',array('conditions'=>array('AND'=>array(array('DATE(Puzzle.created) >='=>$this->request->data['starDate'],'DATE(Puzzle.created) <='=>$this->request->data['endDate']),'Puzzle.user_id'=>$this->Auth->user('id'))))) ; 	
+			}
+			else
+			{
+				$puzel = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id')))) ; 	
+			}
+			
+			foreach($puzel as $key => $psinglepuzle)
+				{
+					$puzel[$key]['Show'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$psinglepuzle['Puzzle']['id'],'Image.status'=>0))); 
+					$puzel[$key]['Hide'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$psinglepuzle['Puzzle']['id'],'Image.status'=>1))); 
+				}
+			
+			$this->set("Puzzel",$puzel);					
+		}
+	}
 
 /**
 	Ajax calender filter in business panel

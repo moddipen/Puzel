@@ -63,8 +63,13 @@
                             </div>
                             <div class="col-md-2">
                               <div class="form-group">
-                                    <select name="datetime" class="form-control chosen-select">
-                                      <option value="">Today</option>
+                                    <select name="datetime" id="datetime" class="form-control chosen-select">
+                                      <option value="">Select</option>
+                                      <option value="Today">Today</option>
+                                      <option value="Weeks">Weeks</option>
+                                      <option value="Month">Month</option>
+                                      <option value="Year">Year</option>
+                                      <option value="AllTime">All time</option>
                                     </select>
                                 </div>
                             </div>
@@ -368,7 +373,8 @@ $(document).ready(function(){
        
 // On off   button code  
 
-    $('input[type="checkbox"]').click(function()
+    
+	$( document ).delegate( "input[type='checkbox']", "click", function() 
     {
       // if button activate
       if (this.checked)
@@ -455,52 +461,68 @@ $(document).ready(function(){
     });
       
   $('#enddate').datepicker({ format: 'yyyy-mm-dd', autoclose: true}).on('changeDate',function(event){
-    var d = event.date; //Selected date in Timezone format
-    var curr_date = d.getDate(); // Seletced date
-    var curr_month = d.getMonth()+ 1; // Selected date moth
-    var curr_year = d.getFullYear(); // Selected date year
-    var desired_date_fromat = curr_year+"-"+curr_month+"-"+curr_date; //Desired date format 
-    $("#selectedenddate").val(desired_date_fromat);
+		var d = event.date; //Selected date in Timezone format
+		var curr_date = d.getDate(); // Seletced date
+		var curr_month = d.getMonth()+ 1; // Selected date moth
+		var curr_year = d.getFullYear(); // Selected date year
+		var desired_date_fromat = curr_year+"-"+curr_month+"-"+curr_date; //Desired date format 
+		$("#selectedenddate").val(desired_date_fromat);
 
-    $.ajax(
-    {
-      type: "POST",
-      url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/datefilter",
-      data: {'startdate':$("#selectedstartdate").val(),'enddate':$("#selectedenddate").val()},
-      success: function(data)
-      {
-        $("#content1").html(data);
-      }
-    });  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  });
-
-
-
-
-
-
-
-
-
-
-
-
+		$.ajax(
+		{
+		  type: "POST",
+		  url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/datefilter",
+		  data: {'startdate':$("#selectedstartdate").val(),'enddate':$("#selectedenddate").val()},
+		  success: function(data)
+		  {
+			$("#content1").html(data);
+		  }
+		});  
+	});
+	
+  $("#datetime").change(function()
+  {
+    var value = this.value;
+	var d = new Date();
+	var c_date = ((d.getDate())>=10)? (d.getDate()) : '0' + (d.getDate());
+	
+	var strDate = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + c_date;
+	
+	if(value == "Today"){ $("#startdate").val(strDate);}
+	if(value == "Weeks"){		
+		d.setDate(d.getDate() + 7);
+		var c_date = ((d.getDate())>=10)? (d.getDate()) : '0' + (d.getDate());
+		$("#startdate").val(strDate);
+		$("#enddate").val(d.getFullYear() + "-" + (d.getMonth()+1) + "-" + c_date);
+	}
+	if(value == "Month"){
+		d.setMonth(d.getMonth() + 1);
+		var c_date = ((d.getDate())>=10)? (d.getDate()) : '0' + (d.getDate());
+		$("#startdate").val(strDate);
+		$("#enddate").val(d.getFullYear() + "-" + (d.getMonth()+1) + "-" + c_date);
+	}
+	if(value == "Year"){
+		d.setYear(d.getFullYear() + 1);
+		var c_date = ((d.getDate())>=10)? (d.getDate()) : '0' + (d.getDate());
+		$("#startdate").val(strDate);
+		$("#enddate").val(d.getFullYear() + "-" + (d.getMonth()+1) + "-" + c_date);
+		
+	}
+	if(value == "AllTime")
+	{
+		$("#startdate").val("");
+		$("#enddate").val("");
+	}	
+	$.ajax(
+		{
+		  type: "POST",
+		  url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/filter",
+		  data: {'starDate':$("#startdate").val(),'endDate':$("#enddate").val()},
+		  success: function(data)
+		  {
+			$("#content1").html(data);
+		  }
+		});  
+  })
 });
-
 </script>      
