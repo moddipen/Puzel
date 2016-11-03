@@ -452,6 +452,10 @@ class  SubscriptionsController  extends AppController {
 											</div>');	
 										}	
 									}	
+								}else{
+									foreach($customer->errors->deepAll() AS $error) {
+										$this->Session->setFlash(__($error->code . ": " . $error->message . "\n", true), 'default', array('class' => 'alert alert-danger'));						
+									}
 								}
 						}
 
