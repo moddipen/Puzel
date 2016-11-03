@@ -1,4 +1,3 @@
-<?php echo $this->Session->flash();?>
 <style>
 .twelve {display:none;}
 .padding-row {display:none;}
