@@ -125,7 +125,7 @@ echo $this->Form->create('Subscription', array('action' => 'plan/'.$id));?>
           <?php
 		  
 		 
-  for ($i = 0; $i <= 12; ++$i) {
+  for ($i = 0; $i < 12; ++$i) {
 	 $selected = "";
     $time = strtotime(sprintf('+%d months', $i));
     $value = date('m', $time);
