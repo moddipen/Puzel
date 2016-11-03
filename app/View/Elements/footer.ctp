@@ -30,7 +30,7 @@
 	</div>
     <div class="row padding-row">
     <div class="six columns text-right">
-         <a href="<?php echo Configure::read('SITE_USER_URL');?>/users/register" style="margin-right:20px; padding-bottom:15px; display: inline-block;"><span class="button-sign">Sign Up</span></a>
+         <a href="<?php echo Configure::read('SITE_USER_URL');?>/users/login" style="margin-right:20px; padding-bottom:15px; display: inline-block;"><span class="button-sign">Sign In</span></a>
           
         </div>
         <div class="six columns">
