@@ -53,7 +53,7 @@ $cakeDescription = __d('cake_dev', 'Puzzel');
 		echo $this->Html->script('dashboard/vendor/chosen/chosen.jquery.min.js');	
 		echo $this->Html->script('dashboard/vendor/datepicker/bootstrap-datepicker.js');	
 		echo $this->Html->script('dashboard/minimal.min.js');	
-
+		echo $this->Html->script('jquery.validate.min.js');
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
