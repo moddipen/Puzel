@@ -277,7 +277,7 @@ class  SubscriptionsController  extends AppController {
 												$this->User->create();
 												if($this->User->save($this->request->data))
 												{
-													$this->Auth->login();
+													//$this->Auth->login();
 													$email = array(
 														"templateid"=>1007701,
 														"name"=>$this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
@@ -327,7 +327,8 @@ class  SubscriptionsController  extends AppController {
 												{
 													$this->sendinvoice($email);
 													$this->Session->setFlash(__('Signup Successfully!!....', true), 'default', array('class' => 'alert alert-success'));
-													$this->redirect(array('controller'=>'orders','action'=>'index','business'=>true));	
+													//$this->redirect(array('controller'=>'orders','action'=>'index','business'=>true));	
+													$this->redirect(array('controller'=>'subscriptions','action'=>'thankyou','user'=>false));		
 												}
 											}
 									}
