@@ -149,6 +149,7 @@ class  OrdersController  extends AppController {
 		$order = $this->Order->find('all',array('conditions'=>array('Order.user_id'=>$this->Auth->user('id')),'order'=>'Order.id DESC'));
 		$this->set("Payment",$order);
 		$get_current_plan = $this->UserSubscription->find("first",array("conditions"=>array("UserSubscription.user_id"=>$this->Auth->user('id')),'order'=>array('UserSubscription.id DESC')));
+	
 		if(!empty($this->data))
 		{
 			
@@ -167,19 +168,34 @@ class  OrdersController  extends AppController {
 			
 			if($result->success)
 			{
+				$this->request->data['Order']['id'] = $get_current_plan['Order']['id'];
+				$this->request->data['Order']['token'] = $result->customer->creditCards[0]->token;
+				$this->Order->save($this->request->data);
 				$this->Session->setFlash('<div class="alert alert-success"><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Success </b>: Card details updated successfully. </p></div>');
 			}else{
-				foreach($refund->errors->deepAll() AS $error) {
+				foreach($result->errors->deepAll() AS $error) {
 					$this->Session->setFlash(__($error->code . ": " . $error->message . "\n", true), 'default', array('class' => 'alert alert-danger'));						
 				}
 			}	
 		}
-		
+		$get_current_plan = $this->UserSubscription->find("first",array("conditions"=>array("UserSubscription.user_id"=>$this->Auth->user('id')),'order'=>array('UserSubscription.id DESC')));
 		$this->set("get_current_plan",$get_current_plan);//debug($get_current_plan);exit;
 		if(!empty($get_current_plan) && $get_current_plan['Order']['customer_id'] != 0 && $get_current_plan['Order']['price'] != "Free")
 		{
-			$paymentMethod = Braintree_Transaction::find($get_current_plan['Order']['transiction_id']);
-			$this->set('cardDetail',$paymentMethod);
+			if($get_current_plan['Order']['token'] != "")
+			{
+				$paymentMethod_s = Braintree_PaymentMethod::find($get_current_plan['Order']['token']);				
+				$paymentMethod->creditCard['last4'] = $paymentMethod_s->last4;
+				$paymentMethod->creditCard['cardholderName'] = $paymentMethod_s->cardholderName;
+				$paymentMethod->creditCard['expirationMonth'] = $paymentMethod_s->expirationMonth;
+				$paymentMethod->creditCard['expirationYear'] = $paymentMethod_s->expirationYear;
+				$this->set('cardDetail',$paymentMethod);
+			}
+			else{
+				$paymentMethod = Braintree_Transaction::find($get_current_plan['Order']['transiction_id']);
+				
+				$this->set('cardDetail',$paymentMethod);
+			}
 		}		
 	}
 		

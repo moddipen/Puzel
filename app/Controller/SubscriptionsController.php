@@ -98,8 +98,20 @@ class  SubscriptionsController  extends AppController {
 			
 			if(!empty($get_current_plan) && $get_current_plan['Order']['customer_id'] != 0)
 			{
-				$paymentMethod = Braintree_Transaction::find($get_current_plan['Order']['transiction_id']);
-				$this->set('cardDetail',$paymentMethod);
+				if($get_current_plan['Order']['token'] != "")
+				{
+					$paymentMethod_s = Braintree_PaymentMethod::find($get_current_plan['Order']['token']);				
+					$paymentMethod->creditCard['last4'] = $paymentMethod_s->last4;
+					$paymentMethod->creditCard['cardholderName'] = $paymentMethod_s->cardholderName;
+					$paymentMethod->creditCard['expirationMonth'] = $paymentMethod_s->expirationMonth;
+					$paymentMethod->creditCard['expirationYear'] = $paymentMethod_s->expirationYear;
+					$this->set('cardDetail',$paymentMethod);
+				}
+				else{
+					$paymentMethod = Braintree_Transaction::find($get_current_plan['Order']['transiction_id']);
+					
+					$this->set('cardDetail',$paymentMethod);
+				}
 			}			
 		}
 		
@@ -272,6 +284,7 @@ class  SubscriptionsController  extends AppController {
 												$this->request->data['Order']['transiction_id'] = $result->transaction->id;
 												$this->request->data['Order']['price'] = $plan['Subscription']['price'];
 												$this->request->data['Order']['subscription_id'] = $plan['Subscription']['id'];
+												$this->request->data['Order']['customer_id'] = $result->customer->id;
 												if($this->Order->save($this->request->data))
 												{
 													$this->request->data['UserSubscription']['user_id'] = $this->Auth->user('id');
@@ -294,7 +307,7 @@ class  SubscriptionsController  extends AppController {
 															'total'=>$plan['Subscription']['price']."$"),
 														"InlineCss"=> true, 
 														"from"=> "support@puzel.co",
-														'to'=>$this->request->data['Subscription']['email'],
+														'to'=>$this->Auth->user('email'),
 														'reply_to'=>"support@puzel.co"
 														);	
 														$this->sendinvoice($email);
