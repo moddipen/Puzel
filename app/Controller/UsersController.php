@@ -644,6 +644,7 @@ public function user_reset($token=null)
 		// Deactive User account
 		if($this->User->save($array))
 		{
+			$this->Session->write('Auth.User.status', 1);
 			//Deactive Puzzle of this user
 			if($this->Puzzle->updateAll(array('Puzzle.status'=>1),array('Puzzle.user_id'=>$id)))
 			{
@@ -657,7 +658,7 @@ public function user_reset($token=null)
 						
 						if($update)
 						{
-							$this->Session->write('Auth.User.status', 1);
+							
 							// Send email to user that your has been deactivate 
 							$email = array(
 							"templateid"=>1025061,
