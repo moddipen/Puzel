@@ -1,10 +1,7 @@
 <style type="text/css">
     textarea.note-codable{ display: none;}
     .btn-toolbar{margin-left:0px !important; }
-</style>
-
-      
-                
+</style>                
         <!-- Page content -->
         <div id="content" class="col-md-12">
 
@@ -63,7 +60,7 @@
                                           <button type="button" class="btn btn-oranges fullwidth" onclick="copyToClipboard('#script')" id="copyScript">Copy Script</button>
                                         </div>
                                         <div class="form-group">
-                                          <button type="button" class="btn btn-oranges fullwidth">Send to Developer</button>
+                                          <button type="button" id="sendTo" class="btn btn-oranges fullwidth">Send to Developer</button>
                                         </div>
                                     </div>
                                 </div>
@@ -83,15 +80,16 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row minipadding">
+                                <div class="row minipadding" style="display:none;">
                                     <div class="col-sm-8">
                                       <div class="form-group">
-                                          <input type="text" class="form-control" placeholder="Email Address">
+                                          <input type="text" class="form-control" id="send-snipest-email" placeholder="Email Address">
+										  <p id="snip-m"></p>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                       <div class="form-group">
-                                          <button type="button" class="btn btn-oranges fullwidth">Send</button>
+                                          <button type="button" id="send-snipest" class="btn btn-oranges fullwidth">Send</button>
                                         </div>
                                     </div>
                                 </div>
@@ -154,7 +152,36 @@
        copyToClipboard(document.getElementById("script"));
     });
 
-function copyToClipboard(elem) {
+	$("#sendTo").click(function(){		
+		$(".minipadding").css("display","block");
+	});
+	
+	$("#send-snipest").click(function(){		
+		if($("#send-snipest-email").val() !=  "")
+		{
+			$.ajax(
+			{
+			  url: "<?php echo Configure::read("SITE_BUSINESS_URL");?>/puzzles/send",
+			  type: "post",
+			  datatype:"json",
+			  data: {'email':$("#send-snipest-email").val(),'snipest':$('#script').val()} ,
+			  success: function (data)
+			  {
+				var obj = $.parseJSON(data);
+				if(obj.Message == "OK")
+				{
+					$("#snip-m").html("Snippest code emailed successfully");
+				}
+				else
+				{
+					$("#snip-m").html("Error while sending snipest code.");
+				}
+			  }
+			});   
+		}
+	});
+	
+	function copyToClipboard(elem) {
     // create hidden text element, if it doesn't already exist
     var targetId = "_hiddenCopyText_";
     var isInput = elem.tagName === "INPUT" || elem.tagName === "TEXTAREA";

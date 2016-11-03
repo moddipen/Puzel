@@ -648,10 +648,47 @@ class  PuzzlesController  extends AppController {
 			$this->set("Capturedata",$puzel);					
 		}
 	}
+	
+/*
+	Send puzzle short code to developer(Given email ID)
+*/
 
-
-
-
-
-
+	public function business_send()
+	{
+		$this->layout = null;
+		$this->autoRender = false;
+		if(!empty($this->data))
+		{
+			
+			$json = json_encode(array(
+				"templateid"=>1050202,
+				"TemplateModel"=> array(
+					"from_name"=> $this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+					"snipest_code"=>trim($this->request->data['snipest']),
+					),
+				"InlineCss"=> true, 
+				"from"=> "support@puzel.co",
+				'to'=>$this->Auth->user('email'),
+				'reply_to'=>"support@puzel.co"
+				));
+				//echo $json;exit;
+				 $ch = curl_init();
+				  curl_setopt($ch, CURLOPT_URL, 'http://api.postmarkapp.com/email/withTemplate');
+				  curl_setopt($ch, CURLOPT_POST, true);
+				  curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+						'Accept: application/json',
+						'Content-Type: application/json',
+						'X-Postmark-Server-Token: ' .Configure::read("POSTMARKSERVERTOKEN")
+						));
+				curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+				$response = curl_exec($ch);
+				$response = json_decode($response);
+				if($puzzle_id != NULL && $layout != NULL){$response->Id = $puzzle_id;}
+				$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+				curl_close($ch);
+				echo json_encode($response);
+				
+		}
+	}
 }
