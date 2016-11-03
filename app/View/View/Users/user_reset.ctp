@@ -1,5 +1,16 @@
 
-
+<script>
+$("form").validate({
+	rules: {
+		'data[User][newpassword]': {required: true,password: true},
+		'data[User][cnfrmpassword]': {required: true,password: true,equalTo: "#UserNewpassword" } 
+	},
+	messages: {
+		'data[User][newpassword]': {required: 'Please enter an 8 to 16 characters alpha-numeric password.'},
+		'data[User][cnfrmpassword]': {required: 'Please enter an 8 to 16 characters alpha-numeric password.',equalTo: 'Mismatch!'} 
+	}
+});
+</script>
       
                 
         <!-- Page content -->
@@ -24,7 +35,7 @@
                   </div>
                 </section>
                 <section class="log-in">
-                  <button class="btn btn-oranges"><b>Reset Password</b></button>
+                  <button class="btn btn-oranges" type="submit"><b>Reset Password</b></button>
                 </section>
              <?php   echo $this->Form->end();?>
             </div>
@@ -42,12 +53,12 @@
           
           if($("#UserNewpassword").val() == '')
           {
-            $("#fname").after("<p class='error'> Please enter first name .</p>");
+            //$("#fname").after("<p class='error'> Please enter first name .</p>");
             return false;
           }
           else if($("#UserCnfrmpassword").val() == '')
           {
-             $("#lname").after("<p class='error'> Please enter last name .</p>");
+             //$("#lname").after("<p class='error'> Please enter last name .</p>");
               return false; 
           }
           else

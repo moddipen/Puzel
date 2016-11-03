@@ -1,15 +1,12 @@
 <script>
-$("#form-signin").validate({
-			rules: {
-				'data[User][email]': {
-					required: true,
-					email: true
-				}
-			},
-			messages: {
-				'data[User][email]': "Please enter a valid email address.",
-			}
-		});
+$("form").validate({
+	rules: {
+		'data[User][email]': {required: true, email: true},
+	},
+	messages: {
+		'data[User][email]': {required: "Please enter a valid email address." },
+	}
+});
 </script>
 <!-- Page content -->
         <div id="content" class="col-md-12 full-page login">
