@@ -648,37 +648,44 @@ public function user_reset($token=null)
 			if($this->Puzzle->updateAll(array('Puzzle.status'=>1),array('Puzzle.user_id'=>$id)))
 			{
 				$puzzle = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$id)));
-
-				// Deactive  number of all image block
-				foreach($puzzle as $image)
-				{
-					$update = $this->Image->updateAll(array('Image.puzzle_active'=>1),array('Image.puzzle_id'=>$image['Puzzle']['id']));	
-					
-					if($update)
+				if(!empty($puzzle))
+				{	
+					// Deactive  number of all image block
+					foreach($puzzle as $image)
 					{
-						$this->Session->write('Auth.User.status', 1);
-						// Send email to user that your has been deactivate 
-						$email = array(
-              			"templateid"=>1025061,
-              			"name"=>$this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
-              			"TemplateModel"=> array(
-						    "user_name"=> $this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
-						    "product_name"=>"Account cancel",
-							"action_url"=>"Your account has been cancel , if you want to activate your account please contact to admin"),
-						"InlineCss"=> true, 
-              			"from"=> "support@puzel.co",
-              			'to'=>$this->Auth->user('email'),
-              			'reply_to'=>"support@puzel.co"
-              			);	
-
-						if($this->sendemail($email))
+						$update = $this->Image->updateAll(array('Image.puzzle_active'=>1),array('Image.puzzle_id'=>$image['Puzzle']['id']));	
+						
+						if($update)
 						{
-							$this->Session->setFlash(__('Your account has been cancel', true), 'default', array('class' => 'alert alert-success'));		
-							$this->redirect(array('controller'=>'puzzles','action'=>'index'));
+							$this->Session->write('Auth.User.status', 1);
+							// Send email to user that your has been deactivate 
+							$email = array(
+							"templateid"=>1025061,
+							"name"=>$this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+							"TemplateModel"=> array(
+								"user_name"=> $this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+								"product_name"=>"Account cancel",
+								"action_url"=>"Your account has been cancel , if you want to activate your account please contact to admin"),
+							"InlineCss"=> true, 
+							"from"=> "support@puzel.co",
+							'to'=>$this->Auth->user('email'),
+							'reply_to'=>"support@puzel.co"
+							);	
+
+							if($this->sendemail($email))
+							{
+								$this->Session->setFlash(__('Your account has been cancel', true), 'default', array('class' => 'alert alert-success'));		
+								$this->redirect(array('controller'=>'puzzles','action'=>'index'));
+							}
+
 						}
 
 					}
-
+				}
+				else
+				{
+					$this->Session->setFlash(__('Your account has been cancel', true), 'default', array('class' => 'alert alert-success'));		
+					$this->redirect(array('controller'=>'puzzles','action'=>'index'));
 				}
 			}
 		}
