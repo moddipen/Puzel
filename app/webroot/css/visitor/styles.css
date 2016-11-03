@@ -965,3 +965,4 @@ outline: none;
     transform-origin: 10% 90%;
 }
 .hi-icon-wrap img{max-width: 100%; width: auto;}
+.modal-open{overflow:inherit;}
