@@ -2938,8 +2938,9 @@ label.error, span.error {
     margin-top: -29px;
     font-weight: 400;
     z-index: 1;
-    top: 13px;
+    top: 10px;
 	position:absolute;
+	text-align:left;
 }
 input.error, select.error {
     border-color: #FB5959;
