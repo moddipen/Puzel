@@ -1,5 +1,22 @@
 
-
+<script>
+$(".Formsubmit").validate({
+			rules: {
+				'data[User][password]': {
+					required: true,
+					password: true
+				},
+				'data[User][email]': {
+					required: true,
+					email: true
+				}
+			},
+			messages: {
+				'data[User][password]': "Please enter an 8 to 16 characters alpha-numeric password.",
+				'data[User][email]': "Please enter a valid email address.",
+			}
+		});
+</script>
       
                 
         <!-- Page content -->

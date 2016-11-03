@@ -315,7 +315,7 @@ ul.chat-nav.side-nav > li .form-control:focus { background-color: white; }
 #content.full-page .inside-block h5 { font-family: "Roboto Condensed", sans-serif; font-weight: 300; margin: 0; font-size: 12px; margin-bottom: 5px; }
 #content.full-page .inside-block form { margin-top: 50px; margin-bottom: 40px; }
 #content.full-page .inside-block form.form-unlock { margin-top: 20px; }
-#content.full-page .inside-block form .input-group { margin-bottom: 10px; }
+#content.full-page .inside-block form .input-group { margin-bottom: 25px; }
 #content.full-page .inside-block form .input-group .input-group-addon { background-color: rgba(0, 0, 0, 0.2); -webkit-border-radius: 0 4px 4px 0 !important; -moz-border-radius: 0 4px 4px 0 !important; -ms-border-radius: 0 4px 4px 0 !important; -o-border-radius: 0 4px 4px 0 !important; border-radius: 0 4px 4px 0 !important; -webkit-transition: all 0.1s linear; -moz-transition: all 0.1s linear; transition: all 0.1s linear; border: 0; }
 #content.full-page .inside-block form .input-group .input-group-addon i { width: 18px; color: rgba(255, 255, 255, 0.6); }
 #content.full-page .inside-block form .input-group .input-group-addon i:after { content: ""; height: 50%; margin-left: -25px; position: absolute; top: 25%; }
