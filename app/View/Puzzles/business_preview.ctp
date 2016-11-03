@@ -90,7 +90,7 @@
                             <div class="col-md-2">
                               <div class="form-group">
                                     <select name="data[Puzzle][transtion]" class="form-control chosen-select">
-                                      <option value="Transition">Transition</option>
+                                      <option value=""><?php echo $Capturedata['Puzzle']['transtion']?></option>
                                     </select>
                                 </div>
                             </div>
