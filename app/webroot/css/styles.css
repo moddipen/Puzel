@@ -966,3 +966,13 @@ outline: none;
 }
 .hi-icon-wrap img{max-width: 100%; width: auto;}
 .modal-open{overflow:inherit;}
+label.error, span.error {
+    left: 0;
+    width: 100%;
+    color: #fb5959;
+    font-size: 14px;
+    margin-top: -29px;
+    font-weight: 400;
+    z-index: 1;
+    top: 7px;
+}

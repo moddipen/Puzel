@@ -42,18 +42,18 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
       {
          if($("#fname").val() == '')
          {
-            $("#firsname").after("<p>Please enter first name. </p>")
+            //$("#firsname").after("<p>Please enter first name. </p>")
             return false;
          } 
          else if($("#lname").val() == '')
          {
-            $("#laname").after("<p>Please enter last name. </p>")
+            //$("#laname").after("<p>Please enter last name. </p>")
             return false;
          }
          else if($("#useremail").val() == '')
          {
             // var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            $("#useemail").after("<p>Please enter an email. </p>")
+            //$("#useemail").after("<p>Please enter an email. </p>")
             return false;
 
          } 
