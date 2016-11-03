@@ -30,7 +30,7 @@ $("#form-signin").validate({
                 </div>
               </section>
               <section class="log-in">
-                <button class="btn btn-oranges"><b>Get New Password</b></button>
+                <button class="btn btn-oranges" type="submit"><b>Get New Password</b></button>
               </section>
             <?php echo $this->form->end();?>
           </div>
