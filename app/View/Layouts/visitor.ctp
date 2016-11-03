@@ -53,6 +53,7 @@ $cakeDescription = __d('cake_dev', 'Puzzel');
 		echo $this->Html->script('visitor/cbpScroller.js');
 		echo $this->Html->script('visitor/classie.js');
 		echo $this->Html->script('visitor/jquery.scrollto.js');
+		echo $this->Html->script('jquery.validate.min.js');
 		//echo $this->Html->script('dashboard/minimal.min.js');
 		echo $this->fetch('script');
 	?>

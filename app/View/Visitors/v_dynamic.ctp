@@ -21,7 +21,21 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
       {
         $("#signwithpuzzleaccount").val(0);
       }); 
-      
+      $("#Imagedata").validate({
+			rules: {
+				firstname: "required",
+				lastname: "required",
+				email: {
+					required: true,
+					email: true
+				}
+			},
+			messages: {
+				firstname: "Please enter first name.",
+				lastname: "Please enter last name.",
+				email: "Please enter a valid email address.",
+			}
+		});
 
 
       $("#Imagedata").submit(function(e)
