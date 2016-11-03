@@ -645,8 +645,7 @@ public function user_reset($token=null)
 		if($this->User->save($array))
 		{
 			$this->Session->write('Auth.User.status', 1);
-			echo "<pre>";
-			print_r($this->Session->read());exit;
+
 			//Deactive Puzzle of this user
 			if($this->Puzzle->updateAll(array('Puzzle.status'=>1),array('Puzzle.user_id'=>$id)))
 			{
