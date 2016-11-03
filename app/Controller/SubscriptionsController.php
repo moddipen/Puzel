@@ -94,8 +94,9 @@ class  SubscriptionsController  extends AppController {
 			Braintree_Configuration::publicKey('2yhywhtr9583jhmh');
 			Braintree_Configuration::privateKey('2bcc2668e0766ce64a3d9f975d953f78');
 			$get_current_plan = $this->UserSubscription->find("first",array("conditions"=>array("UserSubscription.user_id"=>$this->Auth->user('id')),'order'=>array('UserSubscription.id DESC')));
-			$this->set("get_current_plan",$get_current_plan);//debug($get_current_plan);exit;
-			if(!empty($get_current_plan) && $get_current_plan['Order']['transiction_id'] != "")
+			$this->set("get_current_plan",$get_current_plan);
+			
+			if(!empty($get_current_plan) && $get_current_plan['Order']['customer_id'] != 0)
 			{
 				$paymentMethod = Braintree_Transaction::find($get_current_plan['Order']['transiction_id']);
 				$this->set('cardDetail',$paymentMethod);
@@ -107,10 +108,8 @@ class  SubscriptionsController  extends AppController {
 
 		if($this->request->data)
 		{
-			
 			if($this->request->data['Subscription']['action'] && $this->request->data['Subscription']['action'] == "upgrade")
-			{
-				
+			{				
 				Braintree_Configuration::environment('sandbox');
 				Braintree_Configuration::merchantId('dvgmgzszxf2qgmfh');
 				Braintree_Configuration::publicKey('2yhywhtr9583jhmh');
@@ -119,21 +118,126 @@ class  SubscriptionsController  extends AppController {
 				
 				//Get previous plan detial
 				$order = $this->UserSubscription->find("first",array("conditions"=>array("UserSubscription.user_id"=>$this->Auth->user('id'),"UserSubscription.status"=>0)));
+				
 				if(!empty($order))
 				{
-					//Fetch total payment and deduct acording to month and refund
 					
-					$amount_to_refund = $order['Order']['price'] / 30;
-					//Count total days users has used subscription
-					$from=date_create(date('Y-m-d')); $to=date_create($order['Order']['created']); 
-					$diff=date_diff($to,$from); 
-					$days = $diff->format('%a');//Day plan used
-					$amount_to_refund = $amount_to_refund * $days;
-					$amount_to_refund = $order['Order']['price'] - $amount_to_refund; // Total refunded amount
-					$amount_to_refund = $amount_to_refund/5;
-					$refund = Braintree_Transaction::refund($order['Order']['transiction_id'],$amount_to_refund);
-					if($refund->success)
+					if($order['Order']['price'] == "Free")
 					{
+						
+						$customer = Braintree_Customer::create([
+									'creditCard' => array(
+										"cardholderName" => $this->data['Subscription']['holder_name'],
+										"cvv" => $this->data['Subscription']['cvv'],
+										"expirationMonth" => $this->data['Subscription']['ex_date_month']['month'],
+										"expirationYear" => $this->data['Subscription']['ex_date_year']['year'],
+										"number" => $this->data['Subscription']['card_number']
+									)
+								]);
+								if($customer->success)
+								{
+									$result = Braintree_Transaction::sale([
+										'customerId' => $customer->customer->id,
+										'amount' => $plan['Subscription']['price']
+									]);
+											//'customerId' => 
+																
+									if ($result->success == 1) 
+									{
+										
+										$result1 = Braintree_Transaction::submitForSettlement($result->transaction->id);
+										
+										//Expire current subscription
+											$this->request->data['UserSubscription']['id'] = $order['UserSubscription']['id'];
+											$this->request->data['UserSubscription']['status'] = 1;
+											$this->UserSubscription->save($this->request->data);
+										
+											$data['Order']['transiction_id']=$result->transaction->id;
+											$data['Order']['customer_id']=$customer->customer->id;
+											$data['Order']['price']=$plan['Subscription']['price'];
+											$data['Order']['created']=date('Y-m-d H:i:s',time());
+											$data['Order']['modified']=date('Y-m-d H:i:s',time());
+											$data['Order']['subscription_id'] = $id;
+											// check user is already exists or not 
+
+											$user = $this->User->find('first',array('conditions'=>array('User.email'=>$this->Auth->user('email'))));
+											
+											if(!empty($user))
+											{
+												
+												$data['Order']['user_id'] = $user['User']['id'];
+												$array = array(
+													'id'=>$user['User']['id'],
+													'password'=>$this->request->data['Subscription']['password'] );
+												$this->User->save($array);
+											}
+											
+											if($this->Order->save($data))
+											{
+												
+												$invoice = $this->Order->find('first',array('conditions'=>array('Order.id'=>$this->Order->getLastInsertId())));
+												$email = array(
+												"templateid"=>1024802,
+												"name"=>$this->request->data['Subscription']['firstname'].' '.$this->request->data['Subscription']['lastname'],
+												"TemplateModel"=> array(
+													"name"=> $this->request->data['Subscription']['firstname'].' '.$this->request->data['Subscription']['lastname'],
+													"product_name"=>$plan['Subscription']['price']."$",
+													"action_url"=>$invoice['Order']['id'],
+													"date"=>$invoice['Order']['created'],
+													"amount"=>$invoice['Order']['price']."$",
+													"description"=>"One month purchase plan",
+													'total'=>$invoice['Order']['price']."$"),
+												"InlineCss"=> true, 
+												"from"=> "support@puzel.co",
+												'to'=>$this->request->data['Subscription']['email'],
+												'reply_to'=>"support@puzel.co"
+												);	
+
+												// Save data in user subscription table 
+
+												$insert = array(
+													'user_id'=>$data['Order']['user_id'],
+													'order_id'=>$this->Order->getLastInsertId(),
+													'subscription_id'=>$id,
+													'used_pieces'=>$plan['Subscription']['pieces']);
+
+												$this->UserSubscription->create();
+												if($this->UserSubscription->save($insert))
+												{
+													$this->sendinvoice($email);
+													$this->Session->setFlash(__('Signup Successfully!!....', true), 'default', array('class' => 'alert alert-success'));
+													//$this->redirect(array('controller'=>'orders','action'=>'index','business'=>true));	
+													$this->redirect(array('controller'=>'subscriptions','action'=>'thankyou','user'=>false));		
+												}
+											}
+										
+									}
+									else
+									{
+										if($this->request->data['Subscription']['check'] == '')
+										{
+											$this->Session->setFlash(__('Invalid card detail.', true), 'default', array('class' => 'alert alert-danger'));						
+										}
+										else
+										{
+											$this->Session->setFlash('<div class="alert alert-danger"><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Failed </b>: Error processing transaction:</p><br>
+											</div>');	
+										}	
+									}	
+								}
+					}
+					else
+					{
+						//Fetch total payment and deduct acording to month and refund
+						
+						$amount_to_refund = $order['Order']['price'] / 30;
+						//Count total days users has used subscription
+						$from=date_create(date('Y-m-d')); $to=date_create($order['Order']['created']); 
+						$diff=date_diff($to,$from); 
+						$days = $diff->format('%a');//Day plan used
+						$amount_to_refund = $amount_to_refund * $days;
+						$amount_to_refund = $order['Order']['price'] - $amount_to_refund; // Total refunded amount
+						$amount_to_refund = $amount_to_refund/5;
 						$refund = Braintree_Transaction::refund($order['Order']['transiction_id'],$amount_to_refund);
 						if($refund->success)
 						{
@@ -146,73 +250,77 @@ class  SubscriptionsController  extends AppController {
 									$refund = Braintree_Transaction::refund($order['Order']['transiction_id'],$amount_to_refund);
 									if($refund->success)
 									{
-										//Expire current subscription
-										$this->request->data['UserSubscription']['id'] = $order['UserSubscription']['id'];
-										$this->request->data['UserSubscription']['status'] = 1;
-										$this->UserSubscription->save($this->request->data);
-										
-										
-										//Assign new subscription
-										$result = Braintree_Transaction::sale([
-											'customerId' => $order["Order"]['customer_id'],//->customer->id,
-											'amount' => $plan['Subscription']['price']
-										]);
-										
-										if($result->success)
+										$refund = Braintree_Transaction::refund($order['Order']['transiction_id'],$amount_to_refund);
+										if($refund->success)
 										{
-											$result1 = Braintree_Transaction::submitForSettlement($result->transaction->id);
-											$this->request->data['Order']['user_id'] = $this->Auth->user('id');
-											$this->request->data['Order']['transiction_id'] = $result->transaction->id;
-											$this->request->data['Order']['price'] = $plan['Subscription']['price'];
-											$this->request->data['Order']['subscription_id'] = $plan['Subscription']['id'];
-											if($this->Order->save($this->request->data))
+											//Expire current subscription
+											$this->request->data['UserSubscription']['id'] = $order['UserSubscription']['id'];
+											$this->request->data['UserSubscription']['status'] = 1;
+											$this->UserSubscription->save($this->request->data);
+											
+											
+											//Assign new subscription
+											$result = Braintree_Transaction::sale([
+												'customerId' => $order["Order"]['customer_id'],//->customer->id,
+												'amount' => $plan['Subscription']['price']
+											]);
+											
+											if($result->success)
 											{
-												$this->request->data['UserSubscription']['user_id'] = $this->Auth->user('id');
-												$this->request->data['UserSubscription']['order_id'] = $this->Order->getLastInsertId();
-												$this->request->data['UserSubscription']['subscription_id'] = $plan['Subscription']['id'];
-												$this->request->data['UserSubscription']['used_pieces'] = $plan['Subscription']['pieces'];
-												$this->UserSubscription->create();
-												if($this->UserSubscription->save($this->request->data))
+												$result1 = Braintree_Transaction::submitForSettlement($result->transaction->id);
+												$this->request->data['Order']['user_id'] = $this->Auth->user('id');
+												$this->request->data['Order']['transiction_id'] = $result->transaction->id;
+												$this->request->data['Order']['price'] = $plan['Subscription']['price'];
+												$this->request->data['Order']['subscription_id'] = $plan['Subscription']['id'];
+												if($this->Order->save($this->request->data))
 												{
-													$email = array(
-													"templateid"=>1035483,
-													"name"=>$this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
-													"TemplateModel"=> array(
-														"name"=> $this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
-														"product_name"=>$plan['Subscription']['name'],
-														"action_url"=> $this->Order->getLastInsertId(),
-														"date"=>date('m-d-Y'),
-														"amount"=>$plan['Subscription']['price']."$",
-														"description"=>"Upgrade to One month purchase plan",
-														'total'=>$plan['Subscription']['price']."$"),
-													"InlineCss"=> true, 
-													"from"=> "support@puzel.co",
-													'to'=>$this->request->data['Subscription']['email'],
-													'reply_to'=>"support@puzel.co"
-													);	
-													$this->sendinvoice($email);
-													$this->Session->setFlash('<div class="alert alert-success"><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Success </b>: Your subscription upgraded </p></div>');
-													$this->redirect(array('controller'=>'orders','action'=>'index','business'=>true));		
+													$this->request->data['UserSubscription']['user_id'] = $this->Auth->user('id');
+													$this->request->data['UserSubscription']['order_id'] = $this->Order->getLastInsertId();
+													$this->request->data['UserSubscription']['subscription_id'] = $plan['Subscription']['id'];
+													$this->request->data['UserSubscription']['used_pieces'] = $plan['Subscription']['pieces'];
+													$this->UserSubscription->create();
+													if($this->UserSubscription->save($this->request->data))
+													{
+														$email = array(
+														"templateid"=>1035483,
+														"name"=>$this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+														"TemplateModel"=> array(
+															"name"=> $this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+															"product_name"=>$plan['Subscription']['name'],
+															"action_url"=> $this->Order->getLastInsertId(),
+															"date"=>date('m-d-Y'),
+															"amount"=>$plan['Subscription']['price']."$",
+															"description"=>"Upgrade to One month purchase plan",
+															'total'=>$plan['Subscription']['price']."$"),
+														"InlineCss"=> true, 
+														"from"=> "support@puzel.co",
+														'to'=>$this->request->data['Subscription']['email'],
+														'reply_to'=>"support@puzel.co"
+														);	
+														$this->sendinvoice($email);
+														$this->Session->setFlash('<div class="alert alert-success"><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Success </b>: Your subscription upgraded </p></div>');
+														$this->redirect(array('controller'=>'orders','action'=>'index','business'=>true));		
+													}
+													else{
+														$this->Session->setFlash(__("Error while subscription"), 'default', array('class' => 'alert alert-danger'));						
+													}												
 												}
-												else{
-													$this->Session->setFlash(__("Error while subscription"), 'default', array('class' => 'alert alert-danger'));						
-												}												
-											}
-											else
-											{
-												$this->Session->setFlash(__("Error while making order"), 'default', array('class' => 'alert alert-danger'));						
+												else
+												{
+													$this->Session->setFlash(__("Error while making order"), 'default', array('class' => 'alert alert-danger'));						
+												}
 											}
 										}
 									}
 								}
 							}
-						}
-						
-					}else{
-						foreach($refund->errors->deepAll() AS $error) {
-							$this->Session->setFlash(__($error->code . ": " . $error->message . "\n", true), 'default', array('class' => 'alert alert-danger'));						
-						}
-					}		
+							
+						}else{
+							foreach($refund->errors->deepAll() AS $error) {
+								$this->Session->setFlash(__($error->code . ": " . $error->message . "\n", true), 'default', array('class' => 'alert alert-danger'));						
+							}
+						}	
+					}
 				}								
 			}
 			else
@@ -351,7 +459,7 @@ class  SubscriptionsController  extends AppController {
 						// When user select free plan 
 						else
 						{
-							$data['Order']['transiction_id']=time();
+							//$data['Order']['transiction_id']=time();
 							$data['Order']['price']=$plan['Subscription']['price'];
 							$data['Order']['created']=date('Y-m-d H:i:s',time());
 							$data['Order']['modified']=date('Y-m-d H:i:s',time());

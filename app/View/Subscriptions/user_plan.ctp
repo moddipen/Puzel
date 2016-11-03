@@ -36,7 +36,8 @@ echo $this->Form->create('Subscription', array('action' => 'plan/'.$id));?>
   <h2>Sign up for Puzel</h2>
 <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
 <?php
-	if(!$cardDetail && $get_current_plan['Order']['price'] != "Free")
+
+	if(!$cardDetail && $this->Session->read("Auth.User.id") == "")
 	{
 ?>
 <div class="mc-field-group">

@@ -51,6 +51,7 @@ class AppController extends Controller
         $this->Auth->autoRedirect = false;
         //Security::setHash("md5");
 		$statistics = $this->get_statistics();
+		
 		$this->set("statistics",$statistics);
 		
     	    // Manage session 

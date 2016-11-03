@@ -12,6 +12,6 @@
 <?php echo $this->Html->css('pricing');?>
 <script>
 window.setTimeout(function() {
-    window.location.href = '<?php echo Configure::read("SITE_USER_URL");?>/users/login';
+    window.location.href = '<?php echo Configure::read("SITE_BUSINESS_URL");?>/orders/index';
 }, 10000);
 </script>
