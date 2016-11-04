@@ -238,7 +238,7 @@ class UsersController extends AppController {
 */	
 	public function user_login()
 	{
-		$this->layout = 'dashboard';
+		$this->layout = 'insidebox';
 		$signup = 1 ;
     	$this->set('Signup',$signup);
 		$this->set("title","Login");
@@ -316,7 +316,7 @@ class UsersController extends AppController {
 */	
 	public function user_register($type = Null)
 	{
-		$this->layout = 'dashboard';
+		$this->layout = 'insidebox';
 		$signup = 2 ;
     	$this->set('Signup',$signup);
 		$this->set("title","Register");
@@ -400,7 +400,7 @@ class UsersController extends AppController {
 */	
 	public function user_forgetpassword()
 	{
-		$this->layout = 'dashboard';
+		$this->layout = 'insidebox';
 		$signup = 1 ;
     	$this->set('Signup',$signup);
 		$this->set("title","Forgot Password ");
@@ -478,7 +478,7 @@ class UsersController extends AppController {
 */
 public function user_reset($token=null)
 	{
-		$this->layout = 'dashboard';
+		$this->layout = 'insidebox';
 		$signup = 1 ;
     	$this->set('Signup',$signup);
 		$this->set("title","Reset Password ");
