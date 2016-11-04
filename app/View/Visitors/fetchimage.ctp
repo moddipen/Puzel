@@ -2,7 +2,7 @@
 <!-- <div id = 'puzzle1'> -->
 <?php 
       // Fetch Image From database 
-    $i = 0;
+    $i = 0; 
       
     if ($drawimage_s > 0) 
     {?>
