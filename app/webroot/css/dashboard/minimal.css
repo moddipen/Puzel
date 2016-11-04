@@ -777,7 +777,7 @@ body #content .feed-list .feed-post .feed-container footer .comments > li .new-c
   body .task-list > li .task-group > .task .panel-heading .task-controls .checkbox { text-align: left; } }
  @media (max-width: 768px)
   {
-	    body #content.full-page .inside-block, body #content.full-page.error .inside-block { width: 70%; height: 100%; padding:50px !important; margin-top:0px;}
+	    body #content.full-page .inside-block, body #content.full-page.error .inside-block { width: 70%; padding:50px !important; margin-top:5%;}
   }
 @media only screen and (max-width: 479px) { body { /* pageheader */ /* tiles */ /* recent activity */ /* timeline */ /* login page */ /* search results */ /* weather page */ }
   body .pageheader { text-align: left; }
