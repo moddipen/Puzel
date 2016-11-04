@@ -304,7 +304,7 @@ ul.chat-nav.side-nav > li .form-control:focus { background-color: white; }
 /************* LOGIN & LOCK PAGE *************/
 /*********************************************/
 #content.full-page { position: fixed; width: 100%; height: 100%; padding: 0 0 45px 0 !important; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; }
-#content.full-page .inside-block { display: block; margin: 0 auto; text-align: center;background-color: rgba(0, 0, 0, 0.2); height: auto; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; padding: 50px 100px; color: white; overflow: auto; margin-top:20%; min-height:400px;}
+#content.full-page .inside-block { display: block; margin: 0 auto; text-align: center;background-color: rgba(0, 0, 0, 0.2); height: auto; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; padding: 50px 100px; color: white; overflow: auto; margin-top:5%; min-height:400px; max-width:50%;}
 #content.full-page .inside-block img { margin-top: 0px; }
 #content.full-page .inside-block .user-photo img { margin: 0 0 20px 0; width: 100px; border: 5px solid rgba(0, 0, 0, 0.2); }
 #content.full-page .inside-block h1 { text-transform: uppercase; font-size: 26px; margin-bottom: 5px; }
@@ -788,7 +788,7 @@ body #content .feed-list .feed-post .feed-container footer .comments > li .new-c
   body .recent-activity .tab-content > ul > li .user:after { display: none; }
   body .timeline > li > .el-container .content span.time { display: block; float: none; margin-bottom: 4px; border-bottom: 1px solid; padding-bottom: 4px; text-align: center; }
   body .timeline > li > .el-container .content h1 { text-align: center; }
-  body #content.full-page .inside-block, body #content.full-page.error .inside-block { width: 70%; height: 100%; }
+  body #content.full-page .inside-block, body #content.full-page.error .inside-block { width: 100%; height: 100%; max-width:100%; padding:50px !important; }
   body #content.full-page .inside-block form, body #content.full-page.error .inside-block form { margin-bottom: 40px; }
   body #content.full-page .search, body #content.full-page.error .search { right: 25%; top: 10px; }
   body .search-results .media > a.pull-left, body .search-results .media > a.pull-right { float: none !important; }
@@ -1074,7 +1074,9 @@ section.invoice table tbody tr td.description p { margin: 0; }
   section.invoice .header { padding: 50px; margin: -50px; } }
 @media only screen and (max-width: 992px) { section.invoice .header .text-right { text-align: left; } }
 @media only screen and (max-width: 768px) { section.invoice { padding: 50px 20px; }
-  section.invoice .header { padding: 50px 20px; margin: -50px -20px; } }
+  section.invoice .header { padding: 50px 20px; margin: -50px -20px; }
+    body #content.full-page .inside-block, body #content.full-page.error .inside-block { width: 100%; height: 100%; max-width:80%; padding:50px !important; }
+   }
 @media print { section.invoice .header { -webkit-print-color-adjust: exact; background-color: #e2e2e2 !important; }
   section.invoice .header .total, section.invoice .footer .total { -webkit-print-color-adjust: exact; background-color: #d2d2d2 !important; }
   section.invoice .footer .summary { -webkit-print-color-adjust: exact; background-color: #e2e2e2 !important; }
