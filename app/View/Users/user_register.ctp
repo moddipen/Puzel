@@ -1,4 +1,25 @@
-    
+<script type="text/javascript">
+$( document ).ready(function() { 
+$("form").validate({
+	rules: {
+		'data[User][firstname]':{required:true},
+		'data[User][lastname]':{required:true},
+		'data[User][company_name]':{required:true},
+		'data[User][email]': {required: true, email: true},
+		'data[User][password]': {required: true, password: true},
+		'data[User][confirm_password]': {required: true,password: true, equalTo: "#UserPassword"},
+	},
+	messages: {
+		'data[User][firstname]':{required:'Please enter first name'},
+		'data[User][lastname]':{required:'Please enter last name'},
+		'data[User][company_name]':{required:'Please enter company name'},
+		'data[User][email]': {required: 'Please enter a valid email address.'},
+		'data[User][password]': {required: 'Please enter an 8 to 16 characters alpha-numeric password.'},
+		'data[User][confirm_password]': {required: 'Please enter an 8 to 16 characters alpha-numeric password.', equalTo: "Mismatch!"},
+	}
+});
+});
+</script>    
     <!-- Page content -->
         <div id="content" class="col-md-12 full-page login">
     <div class="row">
@@ -43,7 +64,7 @@
                 <div style ="display:none" id="errorrepass"> Please Enter Retype Password </div>
               </section>
               <section class="log-in">
-                <button class="btn btn-oranges"><b>Sign Up</b></button>
+                <button class="btn btn-oranges" type="submit"><b>Sign Up</b></button>
               </section>
             <?php   echo $this->Form->end();?>
           </div>
