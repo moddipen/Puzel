@@ -418,8 +418,8 @@ class  PuzzlesController  extends AppController {
 				if(isset($_FILES['uploadfile']))
 				{
 
-				 $img = $_FILES['uploadfile']['name'];
-				 $tmp = $_FILES['uploadfile']['tmp_name'];
+				 $img = trim($_FILES['uploadfile']['name']);
+				 $tmp = trim($_FILES['uploadfile']['tmp_name']);
 				  
 				 // get uploaded file's extension
 				 $ext = strtolower(pathinfo($img, PATHINFO_EXTENSION));
