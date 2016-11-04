@@ -20,7 +20,7 @@
 
 App::uses('AppController', 'Controller');
 App::uses('CakeEmail', 'Network/Email');
-//App::import('Vendor', 'Csv', array('file' => 'Csv.php'));
+App::import('Vendor', 'Csv', array('file' => 'Csv.php'));
 
 /**
  * Static content controller
@@ -39,7 +39,7 @@ class  VisitorsController  extends AppController {
  */
 	public $uses = array('Visitor','Puzzle','User','Order','Support','Image','Plan','Subscription');
 	public $components = array('Session','RequestHandler');
-	public $helpers = array('Html', 'Form','Session');
+	public $helpers = array('Html', 'Form','Session','Csv');
 	var $name = 'Visitors';
 /**
  * Displays a view
@@ -148,7 +148,6 @@ class  VisitorsController  extends AppController {
 */	
 	public function process()
 	{
-		header("Access-Control-Allow-Origin: *");
 		$this->autoRender = false;
 		if(!empty($this->request->data))
 		{
@@ -257,7 +256,6 @@ class  VisitorsController  extends AppController {
 */	
 	public function fetchimage($id = Null)
 	{
-		header("Access-Control-Allow-Origin: *");
 		$this->layout = '';
 		$this->autoRendar = false;
 		$image = $this->Image->find('first',array('conditions'=>array('Image.id'=>$id),'fields'=>array("Image.name"),'order' => 'rand()'));
@@ -271,14 +269,12 @@ class  VisitorsController  extends AppController {
 	
 	public function snipestimage($id = Null)
 	{
-		header("Access-Control-Allow-Origin: *");
 		$this->layout = '';
 		$image = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id)));	
 		$this->set('image',$image['Image']);
 		$this->set('drawimage_s',count($image['Image']));
 		$this->set('PuzzleData',$image);
-		
-		//$this->render('fetchimage');
+		$this->render('/visitors/fetchimage');
 	}
 
 /**
