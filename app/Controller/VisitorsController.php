@@ -269,6 +269,7 @@ class  VisitorsController  extends AppController {
 	
 	public function snipestimage($id = Null)
 	{
+		header("Access-Control-Allow-Origin: *");
 		$this->layout = '';
 		$image = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id)));	
 		$this->set('image',$image['Image']);
