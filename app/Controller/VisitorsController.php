@@ -148,6 +148,7 @@ class  VisitorsController  extends AppController {
 */	
 	public function process()
 	{
+		header("Access-Control-Allow-Origin: *");
 		$this->autoRender = false;
 		if(!empty($this->request->data))
 		{
@@ -256,6 +257,7 @@ class  VisitorsController  extends AppController {
 */	
 	public function fetchimage($id = Null)
 	{
+		header("Access-Control-Allow-Origin: *");
 		$this->layout = '';
 		$this->autoRendar = false;
 		$image = $this->Image->find('first',array('conditions'=>array('Image.id'=>$id),'fields'=>array("Image.name"),'order' => 'rand()'));

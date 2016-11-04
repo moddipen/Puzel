@@ -27,7 +27,7 @@
               {
                 
                 // Get Image path 
-              $path =  $this->webroot.'img/puzzel/'.$PuzzleData['Puzzle']['name'].'/'.$image_data['name'] ;
+              $path =  Configure::read("SITE_URL").'/img/puzzel/'.$PuzzleData['Puzzle']['name'].'/'.$image_data['name'] ;
               $split = substr($image_data['name'], strrpos($image_data['name'], '_') + 1);
                 
                 if    ($split == "01.jpg")  {   $block = "1";   }
