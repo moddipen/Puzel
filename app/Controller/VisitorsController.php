@@ -20,7 +20,7 @@
 
 App::uses('AppController', 'Controller');
 App::uses('CakeEmail', 'Network/Email');
-App::import('Vendor', 'Csv', array('file' => 'Csv.php'));
+//App::import('Vendor', 'Csv', array('file' => 'Csv.php'));
 
 /**
  * Static content controller
@@ -39,7 +39,7 @@ class  VisitorsController  extends AppController {
  */
 	public $uses = array('Visitor','Puzzle','User','Order','Support','Image','Plan','Subscription');
 	public $components = array('Session','RequestHandler');
-	public $helpers = array('Html', 'Form','Session','Csv');
+	public $helpers = array('Html', 'Form','Session');
 	var $name = 'Visitors';
 /**
  * Displays a view
