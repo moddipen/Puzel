@@ -17,10 +17,6 @@ $("form").validate({
         <!-- Page content -->
         <div id="content" class="col-md-12 full-page login">
 
-          <div class="row">
-            <div class="col-md-3">
-          </div>
-        <div class=" col-md-6">
          <div class="inside-block">
               <a href="<?php echo Configure::read("SITE_URL");?>"><img src="<?php echo $this->webroot;?>img/dashboard/logo.png" alt="" class="logo"></a>
                <?php echo $this->Session->flash();
@@ -47,8 +43,7 @@ $("form").validate({
                 </section>
              <?php   echo $this->Form->end();?>
             </div>
-            </div>
-        </div>
+
 
 
 
