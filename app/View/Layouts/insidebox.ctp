@@ -58,6 +58,13 @@ $cakeDescription = __d('cake_dev', 'Puzzel');
 
     <!-- Preloader -->
     <?php if($Signup != 1) {?>
+    <script type="text/javascript">
+	$(window).load(function() { 
+	  $("#loader").delay(500).fadeOut(300); 
+	  $(".mask").delay(800).fadeOut(300, function(){
+	  });
+	});
+	</script>
     	<div class="mask"><div id="loader"></div></div>
     	<?php } ?>
     <!--/Preloader -->
