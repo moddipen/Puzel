@@ -668,7 +668,7 @@ class  PuzzlesController  extends AppController {
 					),
 				"InlineCss"=> true, 
 				"from"=> "support@puzel.co",
-				'to'=>$this->Auth->user('email'),
+				'to'=>$this->request->data['email'],
 				'reply_to'=>"support@puzel.co"
 				));
 				//echo $json;exit;
