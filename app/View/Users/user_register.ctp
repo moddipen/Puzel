@@ -22,10 +22,6 @@ $("form").validate({
 </script>    
     <!-- Page content -->
         <div id="content" class="col-md-12 full-page login">
-    <div class="row">
-        <div class="col-md-3">
-        </div>
-        <div class=" col-md-6">
        <div class="inside-block">
             <img src="<?php echo $this->webroot;?>img/logo.png" alt="" class="logo">
             
@@ -68,8 +64,7 @@ $("form").validate({
               </section>
             <?php   echo $this->Form->end();?>
           </div>
-          </div>
-        </div>
+          
         </div>
         <!-- Page content end -->
 <script type="text/javascript">
