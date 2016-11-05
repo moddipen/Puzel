@@ -241,15 +241,14 @@ class  VisitorsController  extends AppController {
 						$modified = date('Y-m-d H:i:s');
 						$update = $this->Image->query("UPDATE images SET status = 1 ,modified = '".$modified."' WHERE status <> '1' AND user_id = '".$puzle['Puzzle']['user_id']."' AND puzzle_id = '".$puzle['Puzzle']['id']."' ORDER BY RAND() LIMIT 1 ");  
 						$update_puzzle = $this->Image->find('first',array('conditions'=>array('Image.modified'=>$modified,'Image.puzzle_id'=>$puzle['Puzzle']['id'],'Image.user_id'=>$puzle['Puzzle']['user_id'])));
-						echo "<pre>";
-						print_r($update_puzzle);exit;
+						
 						if($update_puzzle)
 						{
 							$response = array("message"=>"success","Id"=>$update_puzzle['Image']['puzzle_id'],"image_id"=>$update_puzzle['Image']['id']);
 		                    echo json_encode($response);
 						}
 					}
-exit("ddas312");					
+			
 				}	
 			}	
 		}
