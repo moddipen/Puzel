@@ -277,7 +277,7 @@ class  VisitorsController  extends AppController {
 		$this->set('image',$image['Image']);
 		$this->set('drawimage_s',count($image['Image']));
 		$this->set('PuzzleData',$image);
-		$this->render('/visitors/fetchimage');
+		$this->render('/Visitors/fetchimage');
 	}
 
 /**
