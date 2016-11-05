@@ -57,6 +57,7 @@ $(document).ready(function()
                        dataType: 'json', 
                        success: function(data)
                        {
+						   alert("dasd");
                           if(data.message != "That email address has already taken. Please use another email." || data.Message == "OK")
                           {
                             $.ajax
