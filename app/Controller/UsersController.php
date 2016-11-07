@@ -211,7 +211,13 @@ class UsersController extends AppController {
 	{
 		$this->layout = 'dashboard';
 		$this->set("title","Index");
-		$this->set("Business",$this->User->find('all',array('conditions'=>array('User.usertype' =>0),'order'=>'User.id Desc')));
+		$add = $this->User->find('all',array('conditions'=>array('User.usertype' =>0),'order'=>'User.id Desc')) ;
+
+		foreach($add as $key => $value)
+		{
+			$add[$key]['Visitor'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.email'=>$value['User']['email'])));	
+		}
+		$this->set("User",$add);
 	}			
 
 /**
@@ -235,7 +241,7 @@ class UsersController extends AppController {
 		$this->layout = 'dashboard';
 		$this->set("title","Data Captured");
 		// Get Puzzle list 
-		if($id)
+		if(isset($id))
 		{
 			$list = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id)));				
 			$this->set('List',$list);
@@ -269,17 +275,17 @@ class UsersController extends AppController {
             if ($this->Auth->login())
             {
               	// if user click on remember me checkbox
-              	if ($this->request->data['User']['remember_me'] == 1)
-              	{
-	                // remove "remember me checkbox"
-	                unset($this->request->data['User']['remember_me']);
+             //  	if ($this->request->data['User']['remember_me'] == 1)
+             //  	{
+	            //     // remove "remember me checkbox"
+	            //     unset($this->request->data['User']['remember_me']);
 
-	                // hash the user's password
-	                $this->request->data['User']['password'] = $this->Auth->password($this->request->data['User']['password']);
+	            //     // hash the user's password
+	            //     $this->request->data['User']['password'] = $this->Auth->password($this->request->data['User']['password']);
 
-	                // write the cookie
-	                $this->Cookie->write('remember_me_cookie', $this->Auth->user(), true, '2 weeks');
-            	}
+	            //     // write the cookie
+	            //     $this->Cookie->write('remember_me_cookie', $this->Auth->user(), true, '2 weeks');
+            	// }
 				
 				if($this->Auth->user('usertype') == 2)
               	{
@@ -302,32 +308,32 @@ class UsersController extends AppController {
         }
        
         // Auto login 
-        if (empty($this->data))
-        {
-			$cookie = $this->Cookie->read('remember_me_cookie');
-			if (!is_null($cookie))
-			{
-				//  Clear auth message, just in case we use it.
-				$this->Session->delete('Message.auth');
-				if ($this->Auth->login($cookie['usertype'] == 2))
-				{
-					return $this->redirect(array('controller'=>'puzzles','action'=>'index','admin'=>true));
-				}
-				else if($this->Auth->login($cookie['usertype'] == 1))
-				{
-					return $this->redirect(array('controller'=>'puzzles','action'=>'index','business'=>true));	
-				}
-				else if($this->Auth->login($cookie['usertype'] == 0))
-				{
-					return $this->redirect(array('controller'=>'puzzles','action'=>'index'));	
-				}	
-				else
-				{ 
-					// Delete invalid Cookie
-					$this->Cookie->delete('remember_me_cookie');
-				}
-			}		
-		} 
+  //       if (empty($this->data))
+  //       {
+		// 	$cookie = $this->Cookie->read('remember_me_cookie');
+		// 	if (!is_null($cookie))
+		// 	{
+		// 		//  Clear auth message, just in case we use it.
+		// 		$this->Session->delete('Message.auth');
+		// 		if ($this->Auth->login($cookie['usertype'] == 2))
+		// 		{
+		// 			return $this->redirect(array('controller'=>'puzzles','action'=>'index','admin'=>true));
+		// 		}
+		// 		else if($this->Auth->login($cookie['usertype'] == 1))
+		// 		{
+		// 			return $this->redirect(array('controller'=>'puzzles','action'=>'index','business'=>true));	
+		// 		}
+		// 		else if($this->Auth->login($cookie['usertype'] == 0))
+		// 		{
+		// 			return $this->redirect(array('controller'=>'puzzles','action'=>'index'));	
+		// 		}	
+		// 		else
+		// 		{ 
+		// 			// Delete invalid Cookie
+		// 			$this->Cookie->delete('remember_me_cookie');
+		// 		}
+		// 	}		
+		// } 
 
 
 	}					
@@ -552,7 +558,7 @@ public function user_reset($token=null)
 	public function user_logout()
 	{
 		 // clear the cookie (if it exists) when logging out
-    	$this->Cookie->delete('remember_me_cookie');
+    	//$this->Cookie->delete('remember_me_cookie');
 		
 		$this->Auth->logout();
 		$this->Session->setFlash(__('<div class="alert alert-success alert-dismissible"><p>Logout successfully.</p></div>'));
@@ -688,6 +694,8 @@ public function user_reset($token=null)
 							"TemplateModel"=> array(
 								"user_name"=> $this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
 								"product_name"=>"Account cancel",
+								'company'=>array(
+                					'name'=>''),
 								"action_url"=>"Your account has been cancel , if you want to activate your account please contact to admin"),
 							"InlineCss"=> true, 
 							"from"=> "support@puzel.co",
@@ -715,10 +723,249 @@ public function user_reset($token=null)
 
 	}
 
+/**
+	Cancel Business account admin
+*/
+	public function admin_deactive($id= null)
+	{
+		$this->autoRender = false;
+		
+		$array = array(
+			'id'=>$id,
+			'status'=>'1');
+		// Deactive Business account
+		if($this->User->save($array))
+		{
+			$user = $this->User->find('first',array('conditions'=>array('User.id'=>$id)));
+			//Deactive Puzzle of this user
+			if($this->Puzzle->updateAll(array('Puzzle.status'=>1),array('Puzzle.user_id'=>$id)))
+			{
+				$puzzle = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$id)));
+				if(!empty($puzzle))
+				{	
+					// Deactive  number of all image block
+					foreach($puzzle as $image)
+					{
+						$update = $this->Image->updateAll(array('Image.puzzle_active'=>1),array('Image.puzzle_id'=>$image['Puzzle']['id']));	
+						
+						if($update)
+						{
+							
+							// Send email to user that your has been deactivate 
+							$email = array(
+							"templateid"=>1025061,
+							"name"=>$user['User']['firstname'].' '.$user['User']['lastname'],
+							"TemplateModel"=> array(
+								"user_name"=> $user['User']['firstname'].' '.$user['User']['lastname'],
+								"product_name"=>"Account cancel by admin",
+								'company'=>array(
+                				'name'=>''),	
+								"action_url"=>"Your account has been cancel by administrative department, if you want to activate your account please contact to admin"),
+							"InlineCss"=> true, 
+							"from"=> "support@puzel.co",
+							'to'=>$user['User']['email'],
+							'reply_to'=>"support@puzel.co"
+							);	
 
+							if($this->sendemail($email))
+							{
+								$this->Session->setFlash(__('User account has been deactivated ', true), 'default', array('class' => 'alert alert-success'));		
+								$this->redirect(array('controller'=>'users','action'=>'business','admin' => true));
+							}
 
+						}
+
+					}
+				}
+				// if user can't create any puzzle then also send email  
+				else
+				{
+					$email = array(
+						"templateid"=>1025061,
+						"name"=>$user['User']['firstname'].' '.$user['User']['lastname'],
+						"TemplateModel"=> array(
+							"user_name"=> $user['User']['firstname'].' '.$user['User']['lastname'],
+							"product_name"=>"Account cancel by admin",
+							'company'=>array(
+                			'name'=>''),
+							"action_url"=>"Your account has been cancel by administrative department, if you want to activate your account please contact to admin"),
+						"InlineCss"=> true, 
+						"from"=> "support@puzel.co",
+						'to'=>$user['User']['email'],
+						'reply_to'=>"support@puzel.co"
+						);	
+
+						if($this->sendemail($email))
+						{
+							$this->Session->setFlash(__('User account has been deactivated ', true), 'default', array('class' => 'alert alert-success'));		
+							$this->redirect(array('controller'=>'users','action'=>'business','admin' => true));
+						}
+
+				}
+			}
+		}
+
+	}	
+
+/**
+	Active Business account admin
+*/
+	public function admin_active($id= null)
+	{
+		$this->autoRender = false;
+		
+		$array = array(
+			'id'=>$id,
+			'status'=>'0');
+		// Deactive Business account
+		if($this->User->save($array))
+		{
+			$user = $this->User->find('first',array('conditions'=>array('User.id'=>$id)));
+			//Deactive Puzzle of this user
+			if($this->Puzzle->updateAll(array('Puzzle.status'=>0),array('Puzzle.user_id'=>$id)))
+			{
+				$puzzle = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$id)));
+				if(!empty($puzzle))
+				{	
+					// Deactive  number of all image block
+					foreach($puzzle as $image)
+					{
+						$update = $this->Image->updateAll(array('Image.puzzle_active'=>0),array('Image.puzzle_id'=>$image['Puzzle']['id']));	
+						
+						if($update)
+						{
+							
+							// Send email to user that your has been deactivate 
+							$email = array(
+							"templateid"=>1059661,
+							"name"=>$user['User']['firstname'].' '.$user['User']['lastname'],
+							"TemplateModel"=> array(
+								"user_name"=> $user['User']['firstname'].' '.$user['User']['lastname'],
+								"product_name"=>"Account reactivate by administrative department",
+								'company'=>array(
+                				'name'=>''),
+								"action_url"=>"Your account has been reactivate by administrative department, please access your acount with previous functionality"),
+							"InlineCss"=> true, 
+							"from"=> "support@puzel.co",
+							'to'=>$user['User']['email'],
+							'reply_to'=>"support@puzel.co"
+							);	
+
+							$this->sendemail($email);
+						}
+
+					}
+				}
+				// if user can't create any puzzle then also send email  
+				else
+				{
+					$email = array(
+						"templateid"=>1059661,
+						"name"=>$user['User']['firstname'].' '.$user['User']['lastname'],
+						"TemplateModel"=> array(
+							"user_name"=> $user['User']['firstname'].' '.$user['User']['lastname'],
+							"product_name"=>"Account reactivate by administrative department",
+							'company'=>array(
+                			'name'=>''),
+							"action_url"=>"Your account has been reactivate by administrative department, please access your acount with previous functionality"),
+						"InlineCss"=> true, 
+						"from"=> "support@puzel.co",
+						'to'=>$user['User']['email'],
+						'reply_to'=>"support@puzel.co"
+						);	
+
+						$this->sendemail($email);
+				}
+			}
+		}
+
+	}	
+
+/**
+	Suspend User account admin
+*/
+	public function admin_userdeactive($id= null)
+	{
+		$this->autoRender = false;
+		
+		$array = array(
+			'id'=>$id,
+			'status'=>'1');
+		// Deactive User account
+		if($this->User->save($array))
+		{
+			$user = $this->User->find('first',array('conditions'=>array('User.id'=>$id)));
+			// Send email to user that your has been deactivate 
+			$email = array(
+			"templateid"=>1025061,
+			"name"=>$user['User']['firstname'].' '.$user['User']['lastname'],
+			"TemplateModel"=> array(
+				"user_name"=> $user['User']['firstname'].' '.$user['User']['lastname'],
+				"product_name"=>"Account suspended by admin",
+				'company'=>array(
+                'name'=>''),
+				"action_url"=>"Your account has been suspended by administrative department, if you want to activate your account please contact to admin"),
+			"InlineCss"=> true, 
+			"from"=> "support@puzel.co",
+			'to'=>$user['User']['email'],
+			'reply_to'=>"support@puzel.co"
+			);	
+			$this->sendemail($email);
+		}
+
+	}
 	
+/**
+	Active User account admin
+*/
+	public function admin_useractive($id= null)
+	{
+		$this->autoRender = false;
+		
+		$array = array(
+			'id'=>$id,
+			'status'=>'0');
+		// Deactive User account
+		if($this->User->save($array))
+		{
+			$user = $this->User->find('first',array('conditions'=>array('User.id'=>$id)));
+		
+			// Send email to user that your has been deactivate 
+			$email = array(
+			"templateid"=>1059661,
+			"name"=>$user['User']['firstname'].' '.$user['User']['lastname'],
+			"TemplateModel"=> array(
+				"user_name"=> $user['User']['firstname'].' '.$user['User']['lastname'],
+				"product_name"=>"Account reactivate by administrative department",
+				'company'=>array(
+                'name'=>''),
+				"action_url"=>"Your account has been reactivate by administrative department, please access your acount with previous functionality"),
+			"InlineCss"=> true, 
+			"from"=> "support@puzel.co",
+			'to'=>$user['User']['email'],
+			'reply_to'=>"support@puzel.co"
+			);	
 
+			$this->sendemail($email);
+		}
+
+	}
+	
+/**
+ 	Ajax active - inactive filter in admin panel
+ */
+	public function admin_status()
+	{
+		if(!empty($this->request->data))
+		{
+			$add = $this->User->find('all',array('conditions'=>array('User.usertype' =>0 ,'User.status'=>$this->request->data['status']),'order'=>'User.id Desc')) ;
+			foreach($add as $key => $value)
+			{
+				$add[$key]['Visitor'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.email'=>$value['User']['email'])));	
+			}
+			$this->set("User",$add);			
+		}
+	}
 
 
 

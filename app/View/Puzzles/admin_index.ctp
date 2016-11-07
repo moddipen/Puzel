@@ -112,14 +112,17 @@
                             <th class="text-center">Options</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="content1">
+                          <?php if(!empty($Puzzel))
+                            {
+                              foreach ($Puzzel as $list) { ?>
                           <tr>
-                            <td>04/15/2016</td>
-                            <td>New Company</td>
-                            <td>Puzel 1</td>
-                            <td>100</td>
-                            <td>60</td>
-                            <td>40</td>
+                            <td><?php echo date('m/d/Y',strtotime($list['Puzzle']['created']));?></td>
+                            <td><?php echo $list['Business']['company_name'];?></td>
+                            <td><?php echo $list['Puzzle']['name'];?></td>
+                            <td><?php echo $list['Puzzle']['pieces'];?></td>
+                            <td><?php echo $list['Show'];?></td>
+                            <td><?php echo $list['Hide'];?></td>
                             <td class="minipadding controls">
                               <div class="col-xs-5 text-right"><i class="fa fa-pencil"></i></div><div class="col-xs-7">
                             <div class="onoffswitch green small">
@@ -129,170 +132,9 @@
                                     <span class="onoffswitch-switch"></span>
                                   </label>
                                 </div></div>
-              </td>
+                            </td>
                           </tr>
-                          <tr>
-                            <td>04/15/2016</td>
-                            <td>New Company</td>
-                            <td>Puzel 1</td>
-                            <td>100</td>
-                            <td>60</td>
-                            <td>40</td>
-                            <td class="minipadding controls">
-                              <div class="col-xs-5 text-right"><i class="fa fa-pencil"></i></div><div class="col-xs-7">
-                            <div class="onoffswitch green small">
-                                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="onoffswitch" checked>
-                                  <label class="onoffswitch-label" for="onoffswitch">
-                                    <span class="onoffswitch-inner"></span>
-                                    <span class="onoffswitch-switch"></span>
-                                  </label>
-                                </div></div>
-              </td>
-                          </tr>
-                          <tr>
-                            <td>04/15/2016</td>
-                            <td>New Company</td>
-                            <td>Puzel 1</td>
-                            <td>100</td>
-                            <td>60</td>
-                            <td>40</td>
-                            <td class="minipadding controls">
-                              <div class="col-xs-5 text-right"><i class="fa fa-pencil"></i></div><div class="col-xs-7">
-                            <div class="onoffswitch green small">
-                                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="onoffswitch" checked>
-                                  <label class="onoffswitch-label" for="onoffswitch">
-                                    <span class="onoffswitch-inner"></span>
-                                    <span class="onoffswitch-switch"></span>
-                                  </label>
-                                </div></div>
-              </td>
-                          </tr>
-                          <tr>
-                            <td>04/15/2016</td>
-                            <td>New Company</td>
-                            <td>Puzel 1</td>
-                            <td>100</td>
-                            <td>60</td>
-                            <td>40</td>
-                            <td class="minipadding controls">
-                              <div class="col-xs-5 text-right"><i class="fa fa-pencil"></i></div><div class="col-xs-7">
-                            <div class="onoffswitch green small">
-                                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="onoffswitch" checked>
-                                  <label class="onoffswitch-label" for="onoffswitch">
-                                    <span class="onoffswitch-inner"></span>
-                                    <span class="onoffswitch-switch"></span>
-                                  </label>
-                                </div></div>
-              </td>
-                          </tr>
-                          <tr>
-                            <td>04/15/2016</td>
-                            <td>New Company</td>
-                            <td>Puzel 1</td>
-                            <td>100</td>
-                            <td>60</td>
-                            <td>40</td>
-                            <td class="minipadding controls">
-                              <div class="col-xs-5 text-right"><i class="fa fa-pencil"></i></div><div class="col-xs-7">
-                            <div class="onoffswitch green small">
-                                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="onoffswitch" checked>
-                                  <label class="onoffswitch-label" for="onoffswitch">
-                                    <span class="onoffswitch-inner"></span>
-                                    <span class="onoffswitch-switch"></span>
-                                  </label>
-                                </div></div>
-              </td>
-                          </tr>
-                          <tr>
-                            <td>04/15/2016</td>
-                            <td>New Company</td>
-                            <td>Puzel 1</td>
-                            <td>100</td>
-                            <td>60</td>
-                            <td>40</td>
-                            <td class="minipadding controls">
-                              <div class="col-xs-5 text-right"><i class="fa fa-pencil"></i></div><div class="col-xs-7">
-                            <div class="onoffswitch green small">
-                                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="onoffswitch" checked>
-                                  <label class="onoffswitch-label" for="onoffswitch">
-                                    <span class="onoffswitch-inner"></span>
-                                    <span class="onoffswitch-switch"></span>
-                                  </label>
-                                </div></div>
-              </td>
-                          </tr>
-                          <tr>
-                            <td>04/15/2016</td>
-                            <td>New Company</td>
-                            <td>Puzel 1</td>
-                            <td>100</td>
-                            <td>60</td>
-                            <td>40</td>
-                            <td class="minipadding controls">
-                              <div class="col-xs-5 text-right"><i class="fa fa-pencil"></i></div><div class="col-xs-7">
-                            <div class="onoffswitch green small">
-                                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="onoffswitch" checked>
-                                  <label class="onoffswitch-label" for="onoffswitch">
-                                    <span class="onoffswitch-inner"></span>
-                                    <span class="onoffswitch-switch"></span>
-                                  </label>
-                                </div></div>
-              </td>
-                          </tr>
-                          <tr>
-                            <td>04/15/2016</td>
-                            <td>New Company</td>
-                            <td>Puzel 1</td>
-                            <td>100</td>
-                            <td>60</td>
-                            <td>40</td>
-                            <td class="minipadding controls">
-                              <div class="col-xs-5 text-right"><i class="fa fa-pencil"></i></div><div class="col-xs-7">
-                            <div class="onoffswitch green small">
-                                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="onoffswitch" checked>
-                                  <label class="onoffswitch-label" for="onoffswitch">
-                                    <span class="onoffswitch-inner"></span>
-                                    <span class="onoffswitch-switch"></span>
-                                  </label>
-                                </div></div>
-              </td>
-                          </tr>
-                          <tr>
-                            <td>04/15/2016</td>
-                            <td>New Company</td>
-                            <td>Puzel 1</td>
-                            <td>100</td>
-                            <td>60</td>
-                            <td>40</td>
-                            <td class="minipadding controls">
-                              <div class="col-xs-5 text-right"><i class="fa fa-pencil"></i></div><div class="col-xs-7">
-                            <div class="onoffswitch green small">
-                                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="onoffswitch" checked>
-                                  <label class="onoffswitch-label" for="onoffswitch">
-                                    <span class="onoffswitch-inner"></span>
-                                    <span class="onoffswitch-switch"></span>
-                                  </label>
-                                </div></div>
-              </td>
-                          </tr>
-                          <tr>
-                            <td>04/15/2016</td>
-                            <td>New Company</td>
-                            <td>Puzel 1</td>
-                            <td>100</td>
-                            <td>60</td>
-                            <td>40</td>
-                            <td class="minipadding controls">
-                              <div class="col-xs-5 text-right"><i class="fa fa-pencil"></i></div><div class="col-xs-7">
-                            <div class="onoffswitch green small">
-                                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="onoffswitch" checked>
-                                  <label class="onoffswitch-label" for="onoffswitch">
-                                    <span class="onoffswitch-inner"></span>
-                                    <span class="onoffswitch-switch"></span>
-                                  </label>
-                                </div></div>
-              </td>
-                          </tr>
+                          <?php  } }?>
                         </tbody>
                       </table>
                     </div>
@@ -301,15 +143,8 @@
 
 
                   <!-- tile footer -->
-                  <div class="tile-footer text-center">
-                    <ul class="pagination pagination-sm nomargin pagination-custom">
-                      <li class="disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
-                      <li class="active"><a href="#">1</a></li>
-                      <li><a href="#">2</a></li>
-                      <li><a href="#">3</a></li>
-                      <li><a href="#">4</a></li>
-                      <li><a href="#">5</a></li>
-                      <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
+                 <div class="tile-footer text-center">
+                    <ul class="pagination pagination-sm nomargin pagination-custom" id="pagination">
                     </ul>
                   </div>
                   <!-- /tile footer -->
@@ -349,8 +184,130 @@
 
 
 
-        
+<script type="text/javascript">
+          /* pagination plugin */
+$.fn.pageMe = function(opts){
+    var $this = this,
+        defaults = {
+            perPage: 10,
+            showPrevNext: true,
+            numbersPerPage: 2,
+            hidePageNumbers: false
+        },
+        settings = $.extend(defaults, opts);
+    
+    var listElement = $this;
+    var perPage = settings.perPage; 
+    var children = listElement.children();
+    var pager = $('#pagination');
+    
+    if (typeof settings.childSelector!="undefined") {
+        children = listElement.find(settings.childSelector);
+    }
+    
+    if (typeof settings.pagerSelector!="undefined") {
+        pager = $(settings.pagerSelector);
+    }
+    
+    var numItems = children.size();
+    var numPages = Math.ceil(numItems/perPage);
 
+    var curr = 0;
+    pager.data("curr",curr);
+    
+    if (settings.showPrevNext){
+        $('<li><a href="#" class="prev_link">«</a></li>').appendTo(pager);
+    }
+    
+    while(numPages > curr && (settings.hidePageNumbers==false)){
+        $('<li><a href="#" class="page_link">'+(curr+1)+'</a></li>').appendTo(pager);
+        curr++;
+    }
+  
+    if (settings.numbersPerPage>1) {
+       $('.page_link').hide();
+       $('.page_link').slice(pager.data("curr"), settings.numbersPerPage).show();
+    }
+    
+    if (settings.showPrevNext){
+        $('<li><a href="#" class="next_link">»</a></li>').appendTo(pager);
+    }
+    
+    pager.find('.page_link:first').addClass('active');
+    pager.find('.prev_link').hide();
+    if (numPages<=1) {
+        pager.find('.next_link').hide();
+    }
+    pager.children().eq(0).addClass("active");
+    
+    children.hide();
+    children.slice(0, perPage).show();
+    
+    pager.find('li .page_link').click(function(){
+        var clickedPage = $(this).html().valueOf()-1;
+        goTo(clickedPage,perPage);
+        return false;
+    });
+    pager.find('li .prev_link').click(function(){
+        previous();
+        return false;
+    });
+    pager.find('li .next_link').click(function(){
+        next();
+        return false;
+    });
+    
+    function previous(){
+        var goToPage = parseInt(pager.data("curr")) - 1;
+        goTo(goToPage);
+    }
+     
+    function next(){
+        goToPage = parseInt(pager.data("curr")) + 1;
+        goTo(goToPage);
+    }
+    
+    function goTo(page){
+        var startAt = page * perPage,
+            endOn = startAt + perPage;
+        
+        children.css('display','none').slice(startAt, endOn).show();
+        
+        if (page>=1) {
+            pager.find('.prev_link').show();
+        }
+        else {
+            pager.find('.prev_link').hide();
+        }
+        
+        if (page<(numPages-1)) {
+            pager.find('.next_link').show();
+        }
+        else {
+            pager.find('.next_link').hide();
+        }
+        
+        pager.data("curr",page);
+       
+        if (settings.numbersPerPage>1) {
+          $('.page_link').hide();
+          $('.page_link').slice(page, settings.numbersPerPage+page).show();
+      }
+      
+        pager.children().removeClass("active");
+        pager.children().eq(page+1).addClass("active");
+    
+    }
+};
+  $(document).ready(function()
+  {
+      
+    $('#content1').pageMe({pagerSelector:'#pagination',childSelector:'tr',showPrevNext:true,hidePageNumbers:false,perPage:10});
+    
+    /* end plugin */
+  });  
+        
+</script>
 
 
 
