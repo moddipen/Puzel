@@ -88,6 +88,13 @@ class  PuzzlesController  extends AppController {
 	public function admin_index()
 	{
 		$this->set("title","Index");
+		$puzel = $this->Puzzle->find('all',array('order'=>'Puzzle.created Desc')) ; 
+		foreach($puzel as $key => $psinglepuzle)
+		{
+			$puzel[$key]['Show'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$psinglepuzle['Puzzle']['id'],'Image.status'=>0))); 
+			$puzel[$key]['Hide'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$psinglepuzle['Puzzle']['id'],'Image.status'=>1))); 
+		}
+		$this->set("Puzzel",$puzel);	
 
 	}	
 

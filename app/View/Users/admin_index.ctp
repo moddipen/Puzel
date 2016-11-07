@@ -62,7 +62,8 @@
                             <div class="col-md-2">
                               <div class="form-group">
                                     <select name="datetime" class="form-control chosen-select">
-                                      <option value="">Today</option>
+                                      <option value="active">Active</option>
+                                      <option value="inactive">Inactive</option>
                                     </select>
                                 </div>
                             </div>
@@ -83,19 +84,7 @@
                                         <span class="input-group-addon nobackground"><i class="fa fa-calendar fa-2x"></i></span>
                                      </div>
                                 </div>
-                            </div>
-                            <div class="col-md-2">
-                              <div class="form-group">
-                                    <select name="by" class="form-control chosen-select">
-                                      <option value="">Email Address</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                              <div class="form-group">
-                                  <input type="text" value="" name="search" class="form-control">
-                                </div>
-                            </div>
+                            </div>                            
                           </div>
                       </form>
                     </div>

@@ -211,7 +211,7 @@ class UsersController extends AppController {
 	{
 		$this->layout = 'dashboard';
 		$this->set("title","Index");
-		$this->set("Business",$this->User->find('all',array('conditions'=>array('User.usertype' =>1),'order'=>'User.id Desc')));
+		$this->set("Business",$this->User->find('all',array('conditions'=>array('User.usertype' =>0),'order'=>'User.id Desc')));
 	}			
 
 /**
@@ -221,7 +221,10 @@ class UsersController extends AppController {
 	{
 		$this->layout = 'dashboard';
 		$this->set("title","Business");
-		$this->set("Business",$this->User->find('all',array('conditions'=>array('User.usertype' =>1),'order'=>'User.id Desc')));
+		$this->User->recursive = 2;
+		$business = $this->User->find('all',array('conditions'=>array('User.usertype' =>1),'order'=>'User.id Desc'));
+		
+		$this->set("Business", $business);				
 	}				
 
 /**
@@ -231,6 +234,24 @@ class UsersController extends AppController {
 	{
 		$this->layout = 'dashboard';
 		$this->set("title","Data Captured");
+		// Get Puzzle list 
+		if($id)
+		{
+			$list = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id)));				
+			$this->set('List',$list);
+		}	
+		else
+		{
+			$puzzle_list = $this->Puzzle->find('all');//,array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));		
+			$this->set('Data',$puzzle_list);
+			
+			$email_list = $this->Puzzle->Visitor->find('all', array(
+                
+                'fields' => array('Visitor.email'),
+                'group' => array('Visitor.email HAVING  1')));
+
+			$this->set('ResultEmail',$email_list);
+		}
 	}				
 
 /**

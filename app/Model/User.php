@@ -3,7 +3,14 @@ App::uses('AppModel', 'Model');
 App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 class User extends AppModel {
 	var $name = 'User';
-
+	public $hasMany = array('Puzzle');
+	 public $hasOne = array(
+    'UserSubscription' => array(
+        'className' => 'UserSubscription',
+        'foreignKey' => 'user_id' ,
+		'dependent' => false,
+		'conditions' => array("UserSubscription.status = 0")
+    ));
    public $validate = array(
             
            'firstname' => array(

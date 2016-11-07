@@ -53,13 +53,6 @@
                           <div class="row minipadding">
                             <div class="col-md-2">
                               <div class="form-group">
-                                    <select name="user" class="form-control chosen-select">
-                                      <option value="">All Users</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                              <div class="form-group">
                                     <select name="datetime" class="form-control chosen-select">
                                       <option value="">Today</option>
                                     </select>
@@ -82,19 +75,7 @@
                                         <span class="input-group-addon nobackground"><i class="fa fa-calendar fa-2x"></i></span>
                                      </div>
                                 </div>
-                            </div>
-                            <div class="col-md-2">
-                              <div class="form-group">
-                                    <select name="by" class="form-control chosen-select">
-                                      <option value="">Email Address</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                              <div class="form-group">
-                                  <input type="text" value="" name="search" class="form-control">
-                                </div>
-                            </div>
+                            </div>                            
                           </div>
                       </form>
                     </div>
@@ -119,17 +100,30 @@
                           </tr>
                         </thead>
                         <tbody>
-
+						
                         <?php if(!empty($Business)) {
+								
                               foreach ($Business as $user) {?>
                           <tr>
                             <td><?php echo $user['User']['firstname'] ;?></td> 
                             <td><?php echo $user['User']['lastname'] ;?></td>
-                            <td><?php echo $user['User']['email'] ;?></td>
-                            <td>100</td>
-                            <td>50</td>
-                            <td>75</td>
-                            <td>Free</td>
+                            <td><?php echo $user['User']['company_name'] ;?></td>
+                            <td><?php echo count($user['Puzzle']); ;?></td>
+                            <td><?php
+								$index = 1;
+								$count = 0;
+								foreach($user['Puzzle'] as $puz)
+								{
+									if($puz['status'] == 0)
+									{
+										$count = $index;
+										$index ++;
+									}
+								}
+								echo $count;
+							?></td>
+                            <td><?php if($user['UserSubscription']['id'] != ""){echo $user['UserSubscription']['used_pieces'];}else{echo "0";}?></td>
+                            <td><?php if($user['UserSubscription']['id'] != ""){echo $user['UserSubscription']['Subscription']['name'];}else{echo "Inactive";}?></td>
                             <td class="minipadding controls"><div class="col-xs-5 text-right"><i class="fa fa-eye"></i></div><div class="col-xs-7">
                               <div class="onoffswitch green small">
                                     <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="onoffswitch" checked>
@@ -149,7 +143,7 @@
 
 
                   <!-- tile footer -->
-                  <div class="tile-footer text-center">
+                  <!--<div class="tile-footer text-center">
                     <ul class="pagination pagination-sm nomargin pagination-custom">
                       <li class="disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
                       <li class="active"><a href="#">1</a></li>
@@ -159,7 +153,7 @@
                       <li><a href="#">5</a></li>
                       <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
                     </ul>
-                  </div>
+                  </div>-->
                   <!-- /tile footer -->
 
 

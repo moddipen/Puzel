@@ -405,6 +405,68 @@ class  VisitorsController  extends AppController {
 		$this->layout = null;
 	}
 
+	
+	/**
+	Admin export data 
+*/	
+	public function admin_export($email = Null,$from = Null , $to = Null)
+	{
+	  
+		$this->Puzzle->unbindModel(array("belongsTo"=>array("Business")));
+		
+		if($email)
+		{
+			$data =  $this->Puzzle->Visitor->find('all',array('conditions'=>array('Visitor.email'=>$email)));
+		}
+		else
+		{
+			$data =  $this->Puzzle->find('all',array("fields"=>array("Puzzle.name")));	
+		}	
+		$index = 0;
+		
+		if($email)
+		{
+			$i = 0;
+			foreach ($data as  $user)
+            {
+
+				$date =  date('m/d/Y',strtotime($user['Visitor']['created']));
+				$data[$i]['Visitor']['Visitor Firstname'] = $user['Visitor']['firstname'];
+				$data[$i]['Visitor']['Visitor Lastname'] =  $user['Visitor']["lastname"];
+			//	$data[$i]['Visitor']['Company Name'] =  $user['Visitor']['company_name'];
+				$data[$i]['Visitor']['Visitor email'] =  $user['Visitor']["email"];
+				$data[$i]['Visitor']['Date'] = $date;
+				$data[$i]['Visitor']['Puzzle Name'] = $user['Puzzle']['name'];
+				$i++;
+			}
+			$var = "True";
+		}
+		else
+		{
+			foreach($data as $visitor)
+			{
+				$i = 0;
+				foreach ($visitor['Visitor'] as  $user)
+	            {
+					$date =  date('m/d/Y',strtotime($user['created']));
+					$data[$index]['Visitor'][$i]['Visitor Firstname'] = $user['firstname'];
+					$data[$index]['Visitor'][$i]['Visitor Lastname'] =  $user["lastname"];
+				//	$data[$index]['Visitor'][$i]['Company Name'] =  $user['company_name'];
+					$data[$index]['Visitor'][$i]['Visitor email'] =  $user["email"];
+					$data[$index]['Visitor'][$i]['Date'] = $date;
+					$data[$index]['Visitor'][$i]['Puzzle Name'] = $visitor['Puzzle']['name'];
+					$i++;
+				}	
+				$index++;
+			}
+			$var = "False";		
+		}	
+		
+		$this->set("Flag",$var);
+	 	$this->set('Visitor',$data);
+		$this->layout = null;
+	}
+
 
 /**
 	Business email filter

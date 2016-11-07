@@ -100,7 +100,10 @@
                     </div>
                     <div class="col-md-2">
                       <div class="form-group iconwithtext">
-                          <i class="fa fa-downloads"></i> <span class="text">Download as CSV</span>
+                          <a href="<?php echo Configure::read("SITE_ADMIN_URL");?>/visitors/export">
+							<i class="fa fa-downloads"></i>
+							<span class="text" style="color:#FFF;">Download as CSV</span>
+						  </a>
                         </div>
                     </div>
                   </div>
@@ -108,85 +111,43 @@
                       <table class="table nomargin text-center">
                         <thead>
                           <tr>
-                            <th class="text-center">Company Name</th>
-                            <th class="text-center">Puzel Name</th>
                             <th class="text-center">First Name</th>
                             <th class="text-center">Last Name</th>
+                            <th class="text-center">Puzel Name</th>
                             <th class="text-center">Email Address</th>
                           </tr>
                         </thead>
-                        <tbody>
-                          <tr>
-                            <td>New Company</td>
-                            <td>Puzel 1</td>
-                            <td>Tony</td>
-                            <td>Varghese</td>
-                            <td>tony@gmail.com</td>
-                          </tr>
-                          <tr>
-                            <td>New Company</td>
-                            <td>Puzel 1</td>
-                            <td>Tony</td>
-                            <td>Varghese</td>
-                            <td>tony@gmail.com</td>
-                          </tr>
-                          <tr>
-                            <td>New Company</td>
-                            <td>Puzel 1</td>
-                            <td>Tony</td>
-                            <td>Varghese</td>
-                            <td>tony@gmail.com</td>
-                          </tr>
-                          <tr>
-                            <td>New Company</td>
-                            <td>Puzel 1</td>
-                            <td>Tony</td>
-                            <td>Varghese</td>
-                            <td>tony@gmail.com</td>
-                          </tr>
-                          <tr>
-                            <td>New Company</td>
-                            <td>Puzel 1</td>
-                            <td>Tony</td>
-                            <td>Varghese</td>
-                            <td>tony@gmail.com</td>
-                          </tr>
-                          <tr>
-                            <td>New Company</td>
-                            <td>Puzel 1</td>
-                            <td>Tony</td>
-                            <td>Varghese</td>
-                            <td>tony@gmail.com</td>
-                          </tr>
-                          <tr>
-                            <td>New Company</td>
-                            <td>Puzel 1</td>
-                            <td>Tony</td>
-                            <td>Varghese</td>
-                            <td>tony@gmail.com</td>
-                          </tr>
-                          <tr>
-                            <td>New Company</td>
-                            <td>Puzel 1</td>
-                            <td>Tony</td>
-                            <td>Varghese</td>
-                            <td>tony@gmail.com</td>
-                          </tr>
-                          <tr>
-                            <td>New Company</td>
-                            <td>Puzel 1</td>
-                            <td>Tony</td>
-                            <td>Varghese</td>
-                            <td>tony@gmail.com</td>
-                          </tr>
-                          <tr>
-                            <td>New Company</td>
-                            <td>Puzel 1</td>
-                            <td>Tony</td>
-                            <td>Varghese</td>
-                            <td>tony@gmail.com</td>
-                          </tr>
-                        </tbody>
+                        <tbody id="black">
+                          <?php if(!empty($Data))
+                           {
+
+                            foreach($Data as  $list)
+                              {
+                                foreach ($list['Visitor'] as  $value)
+                                 {?>
+                                <tr>
+                                  <td><?php echo $value['firstname'];?></td>
+                                  <td><?php echo $value['lastname'];?></td>
+                                  <td><?php echo $list['Puzzle']['name'];?></td>
+                                  <td><?php echo $value['email'];?></td>
+                                </tr>
+                          <?php }} }
+                          else
+                          {
+                             if(!empty($List))
+                             {
+                               foreach ($List['Visitor'] as  $value)
+                                   {
+                                    ?>
+                                  <tr>
+                                    <td><?php echo $value['firstname'];?></td>
+                                    <td><?php echo $value['lastname'];?></td>
+                                    <td><?php echo $List['Puzzle']['name'];?></td>
+                                    <td><?php echo $value['email'];?></td>
+                                </tr>
+                           
+                          <?php }}}?>
+                         </tbody>
                       </table>
                     </div>
                   </div>
