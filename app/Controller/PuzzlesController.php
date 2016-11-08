@@ -699,23 +699,79 @@ class  PuzzlesController  extends AppController {
 		}
 	}
 
+/**
+	Active puzzle from admin side when click on  onoff switch
+*/	
+	public function admin_active($id = Null)
+	{
+		$this->layout = '';
+		$this->autoRender = false;
+		$this->request->data['Puzzle']['id'] = $id;
+		$this->request->data['Puzzle']['status'] = 0;
+		if($this->Puzzle->save($this->request->data))
+		{
+			if($this->Image->updateAll(array('Image.puzzle_active'=>0),array('Image.puzzle_id'=>$id)))
+			{
+				$response = array("message" =>"Puzzle Active");	
+			}
+			
+		}
+		echo json_encode($response);
+	}
 
-// /**
-// 	Ajax active - inactive filter in admin panel
-// */
-// 	public function admin_status()
-// 	{
-// 		if(!empty($this->request->data))
-// 		{
-// 			$puzel = $this->Puzzle->find('all',array('order'=>'Puzzle.created Desc')) ; 
-// 			foreach($puzel as $key => $psinglepuzle)
-// 			{
-// 				$puzel[$key]['Show'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$psinglepuzle['Puzzle']['id'],'Image.status'=>0))); 
-// 				$puzel[$key]['Hide'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$psinglepuzle['Puzzle']['id'],'Image.status'=>1))); 
-// 			}
-// 			$this->set("Puzzel",$puzel);	
-// 		}
-// 	}
+/**
+	Deactive puzzle in puzzle list when click on  onoff switch
+*/	
+	public function admin_deactive($id = Null)
+	{
+		$this->layout = '';
+		$this->autoRender = false;
+		$this->request->data['Puzzle']['id'] = $id;
+		$this->request->data['Puzzle']['status'] = 1;
+		if($this->Puzzle->save($this->request->data))
+		{
+			if($this->Image->updateAll(array('Image.puzzle_active'=>1),array('Image.puzzle_id'=>$id)))
+			{
+				$response = array("message" =>"Puzzle Deactive");	
+			}
+			
+		}
+		echo json_encode($response);
+	}
+
+/**
+	Admin side puzzle active or deactive filter get data with ajax
+*/	
+	public function admin_status()
+	{
+		
+		$puzel = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.status'=>$this->request->data['status']),'order'=>'Puzzle.created Desc')) ; 
+		foreach($puzel as $key => $psinglepuzle)
+		{
+			$puzel[$key]['Show'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$psinglepuzle['Puzzle']['id'],'Image.status'=>0))); 
+			$puzel[$key]['Hide'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$psinglepuzle['Puzzle']['id'],'Image.status'=>1))); 
+		}
+		$this->set("Puzzel",$puzel);	
+	}
+
+/**
+	Admin side puzzle date filter get data with ajax
+*/	
+	public function admin_datefilter()
+	{
+		if($this->request->data)
+		{
+			$puzel = $this->Puzzle->find('all',array('conditions'=>array('AND'=>array(array('DATE(Puzzle.created) >='=>$this->request->data['startdate'],'DATE(Puzzle.created) <='=>$this->request->data['enddate']))),'order'=>'Puzzle.created Desc')) ; 
+			foreach($puzel as $key => $psinglepuzle)
+			{
+				$puzel[$key]['Show'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$psinglepuzle['Puzzle']['id'],'Image.status'=>0))); 
+				$puzel[$key]['Hide'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$psinglepuzle['Puzzle']['id'],'Image.status'=>1))); 
+			}
+			$this->set("Puzzel",$puzel);		
+		}	
+		
+	}		
+	
 
 
 

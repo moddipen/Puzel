@@ -1,50 +1,24 @@
-
-
-      
-                
         <!-- Page content -->
         <div id="content" class="col-md-12">
-
           <!-- content main container -->
           <div class="main">
             <!-- cards -->
             <?php echo $this->element('admin/header');?>
             <!-- /cards -->
-            
-             <div class="pagesubheader">
-            
-
+            <div class="pagesubheader">
               <h2><i class="fa fa-briefcase"></i> Business</h2>
-
             </div>
             <div id="alert"></div>
-
             <!-- row -->
             <div class="row">
-
-
               <!-- col 8 -->
               <div class="col-lg-12 col-md-12">
-
-
-
-
                 <!-- tile -->
                 <!-- /tile -->
-
-
-
                 <!-- tile -->
                 <section class="tile color transparent-black padding10px">
-
-
-
-
                   <!-- tile header -->
-                  
                   <!-- /tile header -->
-
-
                   <!-- tile body -->
                   <div class="tile-body">
                   <div class="row">
@@ -67,6 +41,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <input type ="hidden" value="" id="selectedstartdate">
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <div class="input-group">
@@ -76,12 +51,15 @@
                                      </div>
                                 </div>
                             </div>                            
+                            <input type ="hidden" value="" id="selectedenddate">
                           </div>
                       </form>
                     </div>
                     <div class="col-md-2">
                       <div class="form-group iconwithtext">
-                          <i class="fa fa-downloads"></i> <span class="text">Download as CSV</span>
+                          <a href="<?php echo Configure::read("SITE_ADMIN_URL");?>/users/export" id="businessdownload">
+                          	<i class="fa fa-downloads"></i> <span class="text" style="color:#FFF;">Download as CSV</span>
+                          </a>	
                         </div>
                     </div>
                   </div>
@@ -109,19 +87,21 @@
                             <td><?php echo $user['User']['lastname'] ;?></td>
                             <td><?php echo $user['User']['company_name'] ;?></td>
                             <td><?php echo count($user['Puzzle']); ?></td>
-                            <td><?php
-                  								$index = 1;
-                  								$count = 0;
-                  								foreach($user['Puzzle'] as $puz)
-                  								{
-                  									if($puz['status'] == 0)
-                  									{
-                  										$count = $index;
-                  										$index ++;
-                  									}
-                  								}
-                  								echo $count;
-                  							?></td>
+                            <td>
+	                            <?php
+	  								$index = 1;
+	  								$count = 0;
+	  								foreach($user['Puzzle'] as $puz)
+	  								{
+	  									if($puz['status'] == 0)
+	  									{
+	  										$count = $index;
+	  										$index ++;
+	  									}
+	  								}
+	  								echo $count;
+	  							?>
+  							</td>
                             <td><?php if($user['UserSubscription']['id'] != ""){echo $user['UserSubscription']['used_pieces'];}else{echo "0";}?></td>
                             <td><?php if($user['UserSubscription']['id'] != ""){echo $user['UserSubscription']['Subscription']['name'];}else{echo "Inactive";}?></td>
                             <td class="minipadding controls"><div class="col-xs-5 text-right"><i class="fa fa-eye"></i></div><div class="col-xs-7">
@@ -153,45 +133,23 @@
                     </div>
                   </div>
                   <!-- /tile body -->
-
-
-                  <!-- tile footer -->
+				  <!-- tile footer -->
                   <div class="tile-footer text-center">
-                    <ul class="pagination pagination-sm nomargin pagination-custom" id="pagination">
-                    </ul>
+                    <ul class="pagination pagination-sm nomargin pagination-custom" id="pagination"></ul>
                   </div>
                   <!-- /tile footer -->
-
-
-
-                </section>
+				</section>
                 <!-- /tile -->
-
-
-              </div>
-              <!-- /col 8 -->
-
-
-
-              <!-- col 4 -->
-              
-              <!-- /col 4 -->
-              
-              
-            </div>
-            <!-- /row -->
-
-
-          </div>
-          <!-- /content container -->
-
-
-
-
-
-
+			</div>
+            <!-- /col 8 -->
+			<!-- col 4 -->
+            <!-- /col 4 -->
         </div>
-        <!-- Page content end -->
+        <!-- /row -->
+		</div>
+    <!-- /content container -->
+	</div>
+    <!-- Page content end -->
 
 
 
@@ -318,9 +276,7 @@ $.fn.pageMe = function(opts){
     /* end plugin */
 
 // On off   button code  
-
-    
-  $( document ).delegate( "input[type='checkbox']", "click", function() 
+	$( document ).delegate( "input[type='checkbox']", "click", function() 
     {
       // if button activate
       if (this.checked)
@@ -357,6 +313,44 @@ $.fn.pageMe = function(opts){
         });   
       } 
     });
+
+////////////////////////////////////// Date wise filter /--------------------------------
+	$('#startdate').datepicker({ format: 'yyyy-mm-dd', autoclose: true}).on('changeDate',function(event)
+	{
+		var d = event.date; //Selected date in Timezone format
+		var curr_date = d.getDate(); // Seletced date
+		var curr_month = d.getMonth() + 1; // Selected date moth
+		var curr_year = d.getFullYear(); // Selected date year
+		var desired_date_fromat = curr_year+"-"+curr_month+"-"+curr_date; //Desired date format 
+		$("#selectedstartdate").val(desired_date_fromat);
+	});
+	      
+	$('#enddate').datepicker({ format: 'yyyy-mm-dd', autoclose: true}).on('changeDate',function(event)
+	{
+		var d = event.date; //Selected date in Timezone format
+		var curr_date = d.getDate(); // Seletced date
+		var curr_month = d.getMonth()+ 1; // Selected date moth
+		var curr_year = d.getFullYear(); // Selected date year
+		var desired_date_fromat = curr_year+"-"+curr_month+"-"+curr_date; //Desired date format 
+		$("#selectedenddate").val(desired_date_fromat);
+		var path = "<?php echo Configure::read('SITE_ADMIN_URL')?>/users/export/"+$("#selectedstartdate").val()+"/"+$("#selectedenddate").val();
+		$.ajax(
+		{
+		  type: "POST",
+		  url: "<?php echo Configure::read('SITE_ADMIN_URL')?>/users/datefilter",
+		  data: {'startdate':$("#selectedstartdate").val(),'enddate':$("#selectedenddate").val(),'usertype':1,'flag':"Business"},
+		  success: function(data)
+		  {
+			$("#content1").html(data);
+			$("a#businessdownload").attr("href",path);  
+		  }
+		});  
+	});
+	
+
+
+
+
 
 
   });

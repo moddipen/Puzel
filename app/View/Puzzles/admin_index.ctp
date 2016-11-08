@@ -17,7 +17,7 @@
               <h2><i class="fa fa-puzel-icon-left-big"></i> Puzel</h2>
 
             </div>
-
+            <div id="alert"></div>
 
             <!-- row -->
             <div class="row">
@@ -51,17 +51,19 @@
                     <div class="col-md-10">
                       <form role="form" class="custom-form">
                           <div class="row minipadding">
-                            <div class="col-md-2">
+                            <!-- <div class="col-md-2">
                               <div class="form-group">
                                     <select name="user" class="form-control chosen-select">
                                       <option value="">All Users</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-md-2">
                               <div class="form-group">
-                                    <select name="datetime" class="form-control chosen-select">
-                                      <option value="">Today</option>
+                                    <select name="datetime" class="form-control chosen-select" id="status">
+                                      <option style="display:none">Please select</option>
+                                      <option value="0">Active</option>
+                                      <option value ="1">Deactive</option>
                                     </select>
                                 </div>
                             </div>
@@ -74,6 +76,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <input type ="hidden" value="" id="selectedstartdate">
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <div class="input-group">
@@ -83,7 +86,8 @@
                                      </div>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <input type ="hidden" value="" id="selectedenddate">                            
+                            <!-- <div class="col-md-2">
                               <div class="form-group">
                                     <select name="by" class="form-control chosen-select">
                                       <option value="">Email Address</option>
@@ -94,7 +98,7 @@
                               <div class="form-group">
                                   <input type="text" value="" name="search" class="form-control">
                                 </div>
-                            </div>
+                            </div> -->
                           </div>
                       </form>
                     </div>
@@ -126,8 +130,20 @@
                             <td class="minipadding controls">
                               <div class="col-xs-5 text-right"><i class="fa fa-pencil"></i></div><div class="col-xs-7">
                             <div class="onoffswitch green small">
-                                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="onoffswitch" checked>
-                                  <label class="onoffswitch-label" for="onoffswitch">
+                                  <?php 
+                                  // check puzzle s activate or not
+                                  if($list['Puzzle']['status'] == 0)
+                                  {
+                                    $status = "checked='checked'";
+                                  }
+                                  else
+                                   {
+                                     $status = '';
+                                   } 
+
+                                ?> 
+                                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="onoffswitch_<?php echo $list['Puzzle']['id']?>" <?php echo $status;?> value = "<?php echo $list['Puzzle']['id']?>" >
+                                  <label class="onoffswitch-label" for="onoffswitch_<?php echo $list['Puzzle']['id']?>">
                                     <span class="onoffswitch-inner"></span>
                                     <span class="onoffswitch-switch"></span>
                                   </label>
@@ -302,9 +318,106 @@ $.fn.pageMe = function(opts){
   $(document).ready(function()
   {
       
-    $('#content1').pageMe({pagerSelector:'#pagination',childSelector:'tr',showPrevNext:true,hidePageNumbers:false,perPage:10});
+    $('#content1').pageMe({pagerSelector:'#pagination',childSelector:'tr',showPrevNext:true,hidePageNumbers:false,perPage:25});
     
     /* end plugin */
+
+////////////////////////////////////////// Active , deactive puzzle code -----------------------------------
+
+
+  // On off   button code  
+  $( document ).delegate( "input[type='checkbox']", "click", function() 
+    {
+      // if button activate
+      if (this.checked)
+      {
+        $.ajax(
+        {
+          url: "<?php echo Configure::read('SITE_ADMIN_URL')?>/puzzles/active/"+this.value,
+          type: "post",
+          datatype:"json",
+          data: {'id':this.value} ,
+          success: function (data)
+          {
+              // Button message 
+              $("#alert").html("<div style='background:rgba(60,118,61,0.5);color:#A94442;font-size:14px;padding:20px'>Puzzle activated</div>");
+              $("#alert").show().delay(3000).fadeOut();
+          },
+        }); 
+      }
+      // when button is deactivate
+      else
+      {
+        $.ajax(
+        {
+          url: "<?php echo Configure::read('SITE_ADMIN_URL')?>/puzzles/deactive/"+this.value,
+          type: "post",
+          datatype:"json",
+          data: {'id':this.value} ,
+          success: function (data)
+          {
+            // button alert message 
+            $("#alert").html("<p style='background:rgba(169,68,66,0.5);color:#A94442;font-size:14px;padding:20px;margin-bottom:10px;'>Puzzle deactivate</p>");
+            $("#alert").show().delay(3000).fadeOut();
+          }
+        });   
+      } 
+    });
+
+// Active Puzzle  filter
+
+  $("#status").change(function()
+  {
+    var status = this.value ;
+    $.ajax(
+    {
+      type: "POST",
+      url: "<?php echo Configure::read('SITE_ADMIN_URL')?>/puzzles/status",
+      data: {'status':status},
+      success: function(data)
+      {
+        $("#content1").html(data);
+      }
+    });  
+  })
+
+////////////// Calender filter --------------------------------------  
+  
+    // Calender Filter 
+  $('#startdate').datepicker({ format: 'yyyy-mm-dd', autoclose: true}).on('changeDate',function(event){
+      var d = event.date; //Selected date in Timezone format
+      var curr_date = d.getDate(); // Seletced date
+      var curr_month = d.getMonth() + 1; // Selected date moth
+      var curr_year = d.getFullYear(); // Selected date year
+      var desired_date_fromat = curr_year+"-"+curr_month+"-"+curr_date; //Desired date format 
+      $("#selectedstartdate").val(desired_date_fromat);
+    });
+      
+  $('#enddate').datepicker({ format: 'yyyy-mm-dd', autoclose: true}).on('changeDate',function(event){
+    var d = event.date; //Selected date in Timezone format
+    var curr_date = d.getDate(); // Seletced date
+    var curr_month = d.getMonth()+ 1; // Selected date moth
+    var curr_year = d.getFullYear(); // Selected date year
+    var desired_date_fromat = curr_year+"-"+curr_month+"-"+curr_date; //Desired date format 
+    $("#selectedenddate").val(desired_date_fromat);
+    
+    $.ajax(
+    {
+      type: "POST",
+      url: "<?php echo Configure::read('SITE_ADMIN_URL')?>/puzzles/datefilter",
+      data: {'startdate':$("#selectedstartdate").val(),'enddate':$("#selectedenddate").val()},
+      success: function(data)
+      {
+        $("#content1").html(data);
+      }
+    });  
+  });
+
+
+
+
+
+
   });  
         
 </script>

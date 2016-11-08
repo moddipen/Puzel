@@ -411,57 +411,31 @@ class  VisitorsController  extends AppController {
 */	
 	public function admin_export($email = Null,$from = Null , $to = Null)
 	{
-	  
-		$this->Puzzle->unbindModel(array("belongsTo"=>array("Business")));
-		
 		if($email)
 		{
-			$data =  $this->Puzzle->Visitor->find('all',array('conditions'=>array('Visitor.email'=>$email)));
+			$data =  $this->Visitor->find('all',array('conditions'=>array('Visitor.email'=>$email)));
+		}
+		else if($email == 0 && $from  && $to)
+		{
+			$data = $this->Visitor->find('all',array('conditions'=>array('AND'=>array(array('DATE(Visitor.created) >='=>$from,'DATE(Visitor.created) <='=>$to))),'order'=>'Visitor.created Desc')) ; 
 		}
 		else
 		{
-			$data =  $this->Puzzle->find('all',array("fields"=>array("Puzzle.name")));	
+			$data =  $this->Visitor->find('all');	
 		}	
-		$index = 0;
 		
-		if($email)
-		{
-			$i = 0;
-			foreach ($data as  $user)
-            {
+		$i = 0;
+		foreach ($data as  $user)
+        {
 
-				$date =  date('m/d/Y',strtotime($user['Visitor']['created']));
-				$data[$i]['Visitor']['Visitor Firstname'] = $user['Visitor']['firstname'];
-				$data[$i]['Visitor']['Visitor Lastname'] =  $user['Visitor']["lastname"];
-			//	$data[$i]['Visitor']['Company Name'] =  $user['Visitor']['company_name'];
-				$data[$i]['Visitor']['Visitor email'] =  $user['Visitor']["email"];
-				$data[$i]['Visitor']['Date'] = $date;
-				$data[$i]['Visitor']['Puzzle Name'] = $user['Puzzle']['name'];
-				$i++;
-			}
-			$var = "True";
+			
+			$data[$i]['Visitor']['Visitor Firstname'] = $user['Visitor']['firstname'];
+			$data[$i]['Visitor']['Visitor Lastname'] =  $user['Visitor']["lastname"];
+			$data[$i]['Visitor']['Visitor email'] =  $user['Visitor']["email"];
+			$data[$i]['Visitor']['Puzzle Name'] = $user['Puzzle']['name'];
+			$i++;
 		}
-		else
-		{
-			foreach($data as $visitor)
-			{
-				$i = 0;
-				foreach ($visitor['Visitor'] as  $user)
-	            {
-					$date =  date('m/d/Y',strtotime($user['created']));
-					$data[$index]['Visitor'][$i]['Visitor Firstname'] = $user['firstname'];
-					$data[$index]['Visitor'][$i]['Visitor Lastname'] =  $user["lastname"];
-				//	$data[$index]['Visitor'][$i]['Company Name'] =  $user['company_name'];
-					$data[$index]['Visitor'][$i]['Visitor email'] =  $user["email"];
-					$data[$index]['Visitor'][$i]['Date'] = $date;
-					$data[$index]['Visitor'][$i]['Puzzle Name'] = $visitor['Puzzle']['name'];
-					$i++;
-				}	
-				$index++;
-			}
-			$var = "False";		
-		}	
-		
+		$var = "True";
 		$this->set("Flag",$var);
 	 	$this->set('Visitor',$data);
 		$this->layout = null;
@@ -502,6 +476,39 @@ class  VisitorsController  extends AppController {
 		}
 	}	
 
+/**
+	Admin email filter for data capture
+*/	
+
+	public function admin_emailFilter()
+	{	
+		$this->layout = null;
+		if(!empty($this->request->data))
+		{
+			if($this->request->data['email'])
+			{
+				$email = $this->Visitor->find('all',array('conditions'=>array('Visitor.email'=>$this->request->data['email'])));	
+			}
+			else
+			{
+				$email = $this->Visitor->find('all',array('conditions'=>array('Visitor.email'=>$this->request->data['email'])));		
+			}	
+			$this->set('Data',$email);	
+		}
+		
+	}
+
+
+
+/**
+	Admin visitor data cAlender filter 
+*/	
+	public function admin_datefilter()
+	{
+		
+		$puzel = $this->Puzzle->Visitor->find('all',array('conditions'=>array('AND'=>array(array('DATE(Visitor.created) >='=>$this->request->data['startdate'],'DATE(Visitor.created) <='=>$this->request->data['enddate']))),'order'=>'Visitor.created Desc')) ; 
+		$this->set('Data',$puzel);
+	}				
 
 
 

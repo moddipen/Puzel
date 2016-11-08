@@ -229,7 +229,6 @@ class UsersController extends AppController {
 		$this->set("title","Business");
 		$this->User->recursive = 2;
 		$business = $this->User->find('all',array('conditions'=>array('User.usertype' =>1),'order'=>'User.id Desc'));
-		
 		$this->set("Business", $business);				
 	}				
 
@@ -251,11 +250,11 @@ class UsersController extends AppController {
 			$puzzle_list = $this->Puzzle->find('all');//,array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));		
 			$this->set('Data',$puzzle_list);
 			
+			//debug($puzzle_list);exit;
 			$email_list = $this->Puzzle->Visitor->find('all', array(
                 
                 'fields' => array('Visitor.email'),
                 'group' => array('Visitor.email HAVING  1')));
-
 			$this->set('ResultEmail',$email_list);
 		}
 	}				
@@ -966,6 +965,139 @@ public function user_reset($token=null)
 			$this->set("User",$add);			
 		}
 	}
+
+/**
+	Admin Business calender ajax filter 
+*/	
+	public function admin_datefilter()
+	{
+		if($this->request->data)
+		{
+			$this->User->recursive = 2;
+			if($this->request->data['flag'] == "User")
+			{
+				$list = $this->User->find('all',array('conditions'=>array('AND'=>array(array('DATE(User.created) >='=>$this->request->data['startdate'],'DATE(User.created) <='=>$this->request->data['enddate'])), 'User.usertype' =>$this->request->data['usertype']),'order'=>'User.id Desc'));
+				foreach($list as $key => $value)
+				{
+					$list[$key]['Visitor'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.email'=>$value['User']['email'])));	
+				}
+			}
+			else
+			{
+				$list = $this->User->find('all',array('conditions'=>array('AND'=>array(array('DATE(User.created) >='=>$this->request->data['startdate'],'DATE(User.created) <='=>$this->request->data['enddate'])), 'User.usertype' =>$this->request->data['usertype']),'order'=>'User.id Desc'));
+			}	
+			$this->set("Flag",$this->request->data['flag']);
+			$this->set("Business", $list);					
+		}	
+	}
+
+/**
+	Business CSV download from admin side 
+*/	
+	public function admin_export($startdate = null , $enddate = null)
+	{
+	  
+
+	if($startdate && $enddate)
+	{
+		$data =  $this->User->find('all',array('conditions'=>array('AND'=>array(array('DATE(User.created) >='=>$startdate,'DATE(User.created) <='=>$enddate)),'User.usertype'=>1),'order'=>'User.firstname Asc','fields'=>array('User.firstname','User.lastname','User.email','User.website','User.usertype','User.company_name','User.tokenhash','UserSubscription.used_pieces','UserSubscription.subscription_id','UserSubscription.id')));		
+	}	
+	else
+	{
+		$data =  $this->User->find('all',array('conditions'=>array('User.usertype'=>1),'order'=>'User.firstname Asc','fields'=>array('User.firstname','User.lastname','User.email','User.website','User.usertype','User.company_name','User.tokenhash','UserSubscription.used_pieces','UserSubscription.subscription_id','UserSubscription.id')));	
+	}	
+	$index = 0;
+		foreach($data as $business)
+		{
+			$data[$index]['User']['firstname'] = $business['User']['firstname'];
+			$data[$index]['User']['lastname'] = $business['User']['lastname'];
+			$data[$index]['User']['company_name'] = $business['User']['company_name'];
+			$data[$index]['User']['email'] = count($business['Puzzle']);
+			
+			// Active puzzle 
+			$i = 1;
+			$count = 0;
+			foreach($business['Puzzle'] as $puz)
+			{
+				if($puz['status'] == 0)
+				{
+					$count = $i;
+					$i ++;
+				}
+			}
+	  		
+	  		$data[$index]['User']['website'] = $count;
+	  		
+	  		// Number of peices 
+	  		if($business['UserSubscription']['id'] != "")
+  			{
+  				$data[$index]['User']['usertype'] =  $business['UserSubscription']['used_pieces'];
+  			}
+	  		else
+  			{
+  				$data[$index]['User']['usertype']  =  "0";
+  			}					
+
+  			// Member ship plan name 
+  			if($business['UserSubscription']['id'] != "")
+  			{
+  				$name_of_plan = $this->Subscription->find('first',array('conditions'=>array('Subscription.id'=>$business['UserSubscription']['subscription_id']))) ;
+  				$data[$index]['User']['tokenhash'] =  $name_of_plan['Subscription']['name'];
+  			}
+  			else
+  			{
+  				$data[$index]['User']['tokenhash'] = "Inactive";
+  			}
+			$index ++;
+		}
+		$this->set('Business',$data);
+		$this->layout = null;
+	}
+
+
+/**
+	User CSV download from admin side 
+*/	
+	public function admin_userexport($startdate = null , $enddate = null)
+	{
+	  
+
+	if($startdate && $enddate)
+	{
+	 	$data =  $this->User->find('all',array('conditions'=>array('AND'=>array(array('DATE(User.created) >='=>$startdate,'DATE(User.created) <='=>$enddate)),'User.usertype'=>0),'order'=>'User.firstname Asc','fields'=>array('User.firstname','User.lastname','User.email','User.usertype')));		
+	}
+	// else if($status)
+	// {
+	// 	$data =  $this->User->find('all',array('conditions'=>array('User.usertype'=>0,'User.status'=>$status),'order'=>'User.firstname Asc','fields'=>array('User.firstname','User.lastname','User.email','User.usertype')));		
+	// }	
+	else
+	{
+		$data =  $this->User->find('all',array('conditions'=>array('User.usertype'=>0),'order'=>'User.firstname Asc','fields'=>array('User.firstname','User.lastname','User.email','User.usertype')));
+	}	
+		foreach($data as $key => $value)
+		{
+			$data[$key]['User']['usertype'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.email'=>$value['User']['email'])));	
+		}
+
+		$index = 0;
+		foreach($data as $user)
+		{
+			$data[$index]['User']['firstname'] = $user['User']['firstname'];
+			$data[$index]['User']['lastname'] = $user['User']['lastname'];
+			$data[$index]['User']['email'] = $user['User']['email'];
+			$data[$index]['User']['usertype'] = $user['User']['usertype'];
+			
+			$index ++;
+		}
+
+		$this->set('User',$data);
+		$this->layout = null;
+	}
+
+
+
+
+
 
 
 

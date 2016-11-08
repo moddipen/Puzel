@@ -19,7 +19,7 @@
 
             </div>
 
-
+            <div id="alert"></div>
             <!-- row -->
             <div class="row">
 
@@ -77,6 +77,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <input type ="hidden" value="" id="selectedstartdate">
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <div class="input-group">
@@ -85,13 +86,16 @@
                                         <span class="input-group-addon nobackground"><i class="fa fa-calendar fa-2x"></i></span>
                                      </div>
                                 </div>
-                            </div>                            
+                            </div>
+                            <input type ="hidden" value="" id="selectedenddate">                            
                           </div>
                       </form>
                     </div>
                     <div class="col-md-2">
                       <div class="form-group iconwithtext">
-                          <i class="fa fa-downloads"></i> <span class="text">Download as CSV</span>
+                          <a href="<?php echo Configure::read("SITE_ADMIN_URL");?>/users/userexport" id="userdownload">
+                            <i class="fa fa-downloads"></i> <span class="text" style="color:#FFF;">Download as CSV</span>
+                          </a>  
                         </div>
                     </div>
                   </div>
@@ -120,7 +124,7 @@
                             <td class="minipadding controls">
                             <div class="onoffswitch green small" style="margin:0px auto;">
                             <?php 
-                              // check puzzle s activate or not
+                              // check users activate or not
                               if($user['User']['status'] == 0)
                               {
                                 $status = "checked='checked'";
@@ -336,11 +340,12 @@ $(document).ready(function(){
   // Filter Module 
 
 
-  // Active puzzle filter
+  // Active User filter
 
   $("#status").change(function()
   {
     var status = this.value ;
+    var path = "<?php echo Configure::read('SITE_ADMIN_URL')?>/users/userexport/"+status;
     $.ajax(
     {
       type: "POST",
@@ -349,27 +354,12 @@ $(document).ready(function(){
       success: function(data)
       {
         $("#content1").html(data);
+        $("a#userdownload").attr("href",path);
       }
     });  
   })
   
-  $("#search").keyup(function()
-  {
-    var search = this.value ;
-    if(search != "")
-  {
-    $.ajax(
-    {
-      type: "POST",
-      url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/search",
-      data: {'search':search},
-      success: function(data)
-      {
-      $("#content1").html(data);
-      }
-    });  
-  }
-  });
+
 
   // Calender Filter 
   $('#startdate').datepicker({ format: 'yyyy-mm-dd', autoclose: true}).on('changeDate',function(event){
@@ -388,63 +378,21 @@ $(document).ready(function(){
     var curr_year = d.getFullYear(); // Selected date year
     var desired_date_fromat = curr_year+"-"+curr_month+"-"+curr_date; //Desired date format 
     $("#selectedenddate").val(desired_date_fromat);
-
+    var path = "<?php echo Configure::read('SITE_ADMIN_URL')?>/users/userexport/"+$("#selectedstartdate").val()+"/"+$("#selectedenddate").val();
     $.ajax(
     {
       type: "POST",
-      url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/datefilter",
-      data: {'startdate':$("#selectedstartdate").val(),'enddate':$("#selectedenddate").val()},
+      url: "<?php echo Configure::read('SITE_ADMIN_URL')?>/users/datefilter",
+      data: {'startdate':$("#selectedstartdate").val(),'enddate':$("#selectedenddate").val(),'usertype':0,'flag':"User"},
       success: function(data)
       {
-      $("#content1").html(data);
+        $("#content1").html(data);
+        $("a#userdownload").attr("href",path);
       }
     });  
   });
   
-  $("#datetime").change(function()
-  {
-    var value = this.value;
-  var d = new Date();
-  var c_date = ((d.getDate())>=10)? (d.getDate()) : '0' + (d.getDate());
   
-  var strDate = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + c_date;
-  
-  if(value == "Today"){ $("#startdate").val(strDate);}
-  if(value == "Weeks"){   
-    d.setDate(d.getDate() + 7);
-    var c_date = ((d.getDate())>=10)? (d.getDate()) : '0' + (d.getDate());
-    $("#startdate").val(strDate);
-    $("#enddate").val(d.getFullYear() + "-" + (d.getMonth()+1) + "-" + c_date);
-  }
-  if(value == "Month"){
-    d.setMonth(d.getMonth() + 1);
-    var c_date = ((d.getDate())>=10)? (d.getDate()) : '0' + (d.getDate());
-    $("#startdate").val(strDate);
-    $("#enddate").val(d.getFullYear() + "-" + (d.getMonth()+1) + "-" + c_date);
-  }
-  if(value == "Year"){
-    d.setYear(d.getFullYear() + 1);
-    var c_date = ((d.getDate())>=10)? (d.getDate()) : '0' + (d.getDate());
-    $("#startdate").val(strDate);
-    $("#enddate").val(d.getFullYear() + "-" + (d.getMonth()+1) + "-" + c_date);
-    
-  }
-  if(value == "AllTime")
-  {
-    $("#startdate").val("");
-    $("#enddate").val("");
-  } 
-  $.ajax(
-    {
-      type: "POST",
-      url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/filter",
-      data: {'starDate':$("#startdate").val(),'endDate':$("#enddate").val()},
-      success: function(data)
-      {
-      $("#content1").html(data);
-      }
-    });  
-  })
 
 
 

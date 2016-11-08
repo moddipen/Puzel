@@ -51,20 +51,20 @@
                     <div class="col-md-10">
                       <form role="form" class="custom-form">
                           <div class="row minipadding">
-                            <div class="col-md-2">
+                            <!-- <div class="col-md-2">
                               <div class="form-group">
                                     <select name="user" class="form-control chosen-select">
                                       <option value="">All Users</option>
                                     </select>
                                 </div>
-                            </div>
-                            <div class="col-md-2">
+                            </div> -->
+                            <!-- <div class="col-md-2">
                               <div class="form-group">
                                     <select name="datetime" class="form-control chosen-select">
                                       <option value="">Today</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-md-2">
                               <div class="form-group">
                                   <div class="input-group">
@@ -74,6 +74,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <input type ="hidden" value="" id="selectedstartdate">
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <div class="input-group">
@@ -83,24 +84,29 @@
                                      </div>
                                 </div>
                             </div>
+                            <input type ="hidden" value="" id="selectedenddate">   
                             <div class="col-md-2">
                               <div class="form-group">
-                                    <select name="by" class="form-control chosen-select">
-                                      <option value="">Email Address</option>
+                                    <select name="by" class="form-control chosen-select" id="emailfilter">
+                                      <option style="display:none;">Please select</option>
+                                      <?php if(!empty($ResultEmail)){
+                                          foreach($ResultEmail as $email) {?>  
+                                            <option value="<?php echo $email['Visitor']['email'];?>"><?php echo $email['Visitor']['email'];?></option>
+                                            <?php  }} ?>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                           <!--  <div class="col-md-2">
                               <div class="form-group">
                                   <input type="text" value="" name="search" class="form-control">
                                 </div>
-                            </div>
+                            </div> -->
                           </div>
                       </form>
                     </div>
                     <div class="col-md-2">
                       <div class="form-group iconwithtext">
-                          <a href="<?php echo Configure::read("SITE_ADMIN_URL");?>/visitors/export">
+                          <a href="<?php echo Configure::read("SITE_ADMIN_URL");?>/visitors/export" id="fadownload">
 							<i class="fa fa-downloads"></i>
 							<span class="text" style="color:#FFF;">Download as CSV</span>
 						  </a>
@@ -304,6 +310,67 @@ $.fn.pageMe = function(opts){
     $('#black').pageMe({pagerSelector:'#pagination',childSelector:'tr',showPrevNext:true,hidePageNumbers:false,perPage:10});
     
     /* end plugin */
+
+
+  ////    Filter Module ////////
+
+
+  // email on change event 
+
+  $("#emailfilter").change(function()
+  {
+    var email = this.value ;
+    var path = "<?php echo Configure::read('SITE_ADMIN_URL')?>/visitors/export/"+email;
+    $.ajax(
+    {
+      type: "POST",
+      url: "<?php echo Configure::read('SITE_ADMIN_URL')?>/visitors/emailFilter/"+email,
+      data: {'email':email},
+      success: function(data)
+      {
+        $("#black").html(data);
+        $("a#fadownload").attr("href",path);  
+      }
+    });  
+  });
+
+  ////////////// Calender filter --------------------------------
+
+    // Calender Filter 
+  $('#startdate').datepicker({ format: 'yyyy-mm-dd', autoclose: true}).on('changeDate',function(event){
+      var d = event.date; //Selected date in Timezone format
+      var curr_date = d.getDate(); // Seletced date
+      var curr_month = d.getMonth() + 1; // Selected date moth
+      var curr_year = d.getFullYear(); // Selected date year
+      var desired_date_fromat = curr_year+"-"+curr_month+"-"+curr_date; //Desired date format 
+      $("#selectedstartdate").val(desired_date_fromat);
+    });
+      
+  $('#enddate').datepicker({ format: 'yyyy-mm-dd', autoclose: true}).on('changeDate',function(event){
+    var d = event.date; //Selected date in Timezone format
+    var curr_date = d.getDate(); // Seletced date
+    var curr_month = d.getMonth()+ 1; // Selected date moth
+    var curr_year = d.getFullYear(); // Selected date year
+    var desired_date_fromat = curr_year+"-"+curr_month+"-"+curr_date; //Desired date format 
+    $("#selectedenddate").val(desired_date_fromat);
+    var path = "<?php echo Configure::read('SITE_ADMIN_URL')?>/visitors/export/0/"+$("#selectedstartdate").val()+"/"+$("#selectedenddate").val();
+    $.ajax(
+    {
+      type: "POST",
+      url: "<?php echo Configure::read('SITE_ADMIN_URL')?>/visitors/datefilter",
+      data: {'startdate':$("#selectedstartdate").val(),'enddate':$("#selectedenddate").val()},
+      success: function(data)
+      {
+        $("#black").html(data);
+        $("a#fadownload").attr("href",path);  
+      }
+    });  
+  });
+
+
+
+
+
   });  
         
 </script>
