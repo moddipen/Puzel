@@ -712,11 +712,26 @@ class  PuzzlesController  extends AppController {
 		{
 			if($this->Image->updateAll(array('Image.puzzle_active'=>0),array('Image.puzzle_id'=>$id)))
 			{
-				$response = array("message" =>"Puzzle Active");	
+				$user = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id)));
+				$email = array(
+	              			"templateid"=>1062363,
+	              			"name"=>$user['Business']['firstname'].' '.$user['Business']['lastname'],
+	              			"TemplateModel"=> array(
+							    "user_name"=> $user['Business']['firstname'].' '.$user['Business']['lastname'],
+							    "product_name"=>$user['Puzzle']['name'],
+								"company"=> array(
+									"name"=> $user['Business']['company_name']),
+								"action_url"=>"Puzzle had been active by administrative department"),
+							"InlineCss"=> true, 
+	              			"from"=> "support@puzel.co",
+	              			'to'=>$user['Business']['email'],
+	              			'reply_to'=>"support@puzel.co"
+	              			);	
+				$this->sendemail($email);
 			}
 			
 		}
-		echo json_encode($response);
+		
 	}
 
 /**
@@ -732,11 +747,26 @@ class  PuzzlesController  extends AppController {
 		{
 			if($this->Image->updateAll(array('Image.puzzle_active'=>1),array('Image.puzzle_id'=>$id)))
 			{
-				$response = array("message" =>"Puzzle Deactive");	
+				$user = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id)));
+				$email = array(
+	              			"templateid"=>1062344,
+	              			"name"=>$user['Business']['firstname'].' '.$user['Business']['lastname'],
+	              			"TemplateModel"=> array(
+							    "user_name"=> $user['Business']['firstname'].' '.$user['Business']['lastname'],
+							    "product_name"=>$user['Puzzle']['name'],
+								"company"=> array(
+									"name"=> $user['Business']['company_name']),
+								"action_url"=>"Puzzle had been deactive by administrative department"),
+							"InlineCss"=> true, 
+	              			"from"=> "support@puzel.co",
+	              			'to'=>$user['Business']['email'],
+	              			'reply_to'=>"support@puzel.co"
+	              			);	
+				$this->sendemail($email);
 			}
 			
 		}
-		echo json_encode($response);
+		
 	}
 
 /**
