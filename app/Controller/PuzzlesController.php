@@ -713,6 +713,8 @@ class  PuzzlesController  extends AppController {
 			if($this->Image->updateAll(array('Image.puzzle_active'=>0),array('Image.puzzle_id'=>$id)))
 			{
 				$user = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id)));
+				
+				// Send email to business acount 
 				$email = array(
 	              			"templateid"=>1062363,
 	              			"name"=>$user['Business']['firstname'].' '.$user['Business']['lastname'],
@@ -727,7 +729,28 @@ class  PuzzlesController  extends AppController {
 	              			'to'=>$user['Business']['email'],
 	              			'reply_to'=>"support@puzel.co"
 	              			);	
-				$this->sendemail($email);
+				if($this->sendemail($email))
+				{
+					// Send email to visitor  acount 
+					foreach($user['Visitor'] as $value)
+					{
+						$visitemail = array(
+		              			"templateid"=>1062363,
+		              			"name"=>$value['firstname'].' '.$value['lastname'],
+		              			"TemplateModel"=> array(
+								    "user_name"=> $value['firstname'].' '.$value['lastname'],
+								    "product_name"=>$user['Puzzle']['name'],
+									"company"=> array(
+										"name"=> $value['company_name']),
+									"action_url"=>"Puzzle had been active by administrative department"),
+								"InlineCss"=> true, 
+		              			"from"=> "support@puzel.co",
+		              			'to'=>$value['email'],
+		              			'reply_to'=>"support@puzel.co"
+		              			);	
+						$this->sendemail($visitemail);					
+					}	
+				}
 			}
 			
 		}
@@ -762,7 +785,27 @@ class  PuzzlesController  extends AppController {
 	              			'to'=>$user['Business']['email'],
 	              			'reply_to'=>"support@puzel.co"
 	              			);	
-				$this->sendemail($email);
+				if($this->sendemail($email))
+				{
+					foreach($user['Visitor'] as $value)
+					{
+						$visitoremail = array(
+	              			"templateid"=>1062344,
+	              			"name"=>$value['firstname'].' '.$value['lastname'],
+	              			"TemplateModel"=> array(
+							    "user_name"=> $value['firstname'].' '.$value['lastname'],
+							    "product_name"=>$user['Puzzle']['name'],
+								"company"=> array(
+									"name"=> $value['company_name']),
+								"action_url"=>"Puzzle had been deactive by administrative department"),
+							"InlineCss"=> true, 
+	              			"from"=> "support@puzel.co",
+	              			'to'=>$value['email'],
+	              			'reply_to'=>"support@puzel.co"
+	              			);	
+						$this->sendemail($visitoremail);
+					}
+				}	
 			}
 			
 		}

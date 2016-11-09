@@ -47,7 +47,7 @@
                     <div class="col-md-10">
                       <form role="form" class="custom-form">
                           <div class="row minipadding">
-                            <div class="col-md-2">
+                            <!-- <div class="col-md-2">
                               <div class="form-group">
                                     <select name="user" class="form-control chosen-select">
                                       <option value="">All Users</option>
@@ -61,7 +61,8 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                             -->
+                             <div class="col-md-2">
                               <div class="form-group">
                                   <div class="input-group">
                                       <span class="input-group-addon nobackground">From</span>
@@ -70,6 +71,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <input type ="hidden" value="" id="selectedstartdate">
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <div class="input-group">
@@ -79,18 +81,22 @@
                                      </div>
                                 </div>
                             </div>
+                            <input type ="hidden" value="" id="selectedenddate">   
                             <div class="col-md-2">
                               <div class="form-group">
-                                    <select name="by" class="form-control chosen-select">
-                                      <option value="">Email Address</option>
+                                    <select name="by" class="form-control chosen-select" id="emailfilter">
+                                      <option style="display:none;"> Please Select</option>
+                                       <?php if(!empty($Emailist)) { foreach($Emailist as $email) {?> 
+                                      <option value="<?php echo $email['User']['id']?>"><?php echo $email['User']['email']?></option>
+                                      <?php } } ?>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <!-- <div class="col-md-2">
                               <div class="form-group">
                                   <input type="text" value="" name="search" class="form-control">
                                 </div>
-                            </div>
+                            </div> -->
                           </div>
                       </form>
                     </div>
@@ -116,21 +122,60 @@
                           <?php 
                           if(!empty($Supports)) 
                             {
-                              foreach ($Supports as  $support){ ?>
-                            <tr>
-                            <td><?php echo $support['Sender']['firstname'];?></td>
-                            <td><?php echo $support['Sender']['lastname'];?></td>
-                            <td><?php echo $support['Sender']['company_name'];?></td>
-                            <td><?php echo $support['Support']['subject'];?></td>
-                            <td><?php 
-                              echo date('g:i A dS M Y',strtotime($support['Support']['created']));?></td>
-                            <td>
-                                <?php 
-                                echo $this->html->link( '',array('action' => 'reply',$support['Support']['id']),array('class'=>'fa fa-reply','style'=>"color:white;"));
-                                echo "&nbsp; &nbsp;";
-                                echo $this->html->link( '',array('action' => 'delete',$support['Support']['id']),array('class'=>'fa fa-trash-o','style'=>"color:white;"),' Do you want to delete this record?');
+                              foreach ($Supports as  $support)
+                              {  
+                                $user = AuthComponent::user();
                                 ?>
-                            </td>
+                            <tr>
+                              <td>
+                                <?php 
+                                    // check in list that list in first name is not a login user first name
+                                    if($support['Sender']['id'] != $user['id'])
+                                    {
+                                      $name = $support['Sender']['firstname'];
+                                    }
+                                    else
+                                    {
+                                      $name = $support['Receiver']['firstname']; 
+                                    }  
+                                    echo $name;?>
+                              </td>
+                              <td>
+                                  <?php 
+                                    // check in list that list in last name is not a login user last name
+                                    if($support['Receiver']['id'] != $user['id'])
+                                    {
+                                      $name = $support['Receiver']['lastname'];
+                                    }
+                                    else
+                                    {
+                                      $name = $support['Sender']['lastname']; 
+                                    }  
+                                    echo $name;?>
+                              </td>
+                              <td>
+                                  <?php 
+                                    // check in list that list in company name is not a login user company name
+                                    if($support['Receiver']['id'] != $user['id'])
+                                    {
+                                      $name = $support['Receiver']['company_name'];
+                                    }
+                                    else
+                                    {
+                                      $name = $support['Sender']['company_name']; 
+                                    }  
+                                    echo $name;?>
+                              </td>
+                              <td><?php echo $support['Support']['subject'];?></td>
+                              <td><?php 
+                                echo date('g:i A dS M Y',strtotime($support['Support']['created']));?></td>
+                              <td>
+                                  <?php 
+                                  echo $this->html->link( '',array('action' => 'conversation',$support['Support']['id']),array('class'=>'fa fa-comments','style'=>"color:white;"));
+                                  echo "&nbsp; &nbsp;";
+                                  echo $this->html->link( '',array('action' => 'delete',$support['Support']['id']),array('class'=>'fa fa-trash-o','style'=>"color:white;"),' Do you want to delete this record?');
+                                  ?>
+                              </td>
                           </tr>
                           <?php  } }?>
                           </tbody>
@@ -295,10 +340,74 @@ $.fn.pageMe = function(opts){
     
     }
 };
-$(document).ready(function(){
+$(document).ready(function()
+{
     
-  $('#black').pageMe({pagerSelector:'#myPager',childSelector:'tr',showPrevNext:true,hidePageNumbers:false,perPage:5});
+  $('#black').pageMe({pagerSelector:'#myPager',childSelector:'tr',showPrevNext:true,hidePageNumbers:false,perPage:10});
+   
+/////////////////////////////////////////////----------------------------------------------------------
+  
+
+  // email on change event 
+
+  $("#emailfilter").change(function()
+  {
+    var id = this.value ;
+    $.ajax(
+    {
+      type: "POST",
+      url: "<?php echo Configure::read('SITE_ADMIN_URL')?>/supports/emailfilter",
+      data: {'id':id},
+      success: function(data)
+      {
+        $("#black").html(data);
+      }
+    });  
+  });
+
+
+
+
+
+
+
+
+////////////// Calender filter --------------------------------------  
+  
+    // Calender Filter 
+  $('#startdate').datepicker({ format: 'yyyy-mm-dd', autoclose: true}).on('changeDate',function(event){
+      var d = event.date; //Selected date in Timezone format
+      var curr_date = d.getDate(); // Seletced date
+      var curr_month = d.getMonth() + 1; // Selected date moth
+      var curr_year = d.getFullYear(); // Selected date year
+      var desired_date_fromat = curr_year+"-"+curr_month+"-"+curr_date; //Desired date format 
+      $("#selectedstartdate").val(desired_date_fromat);
+    });
+      
+  $('#enddate').datepicker({ format: 'yyyy-mm-dd', autoclose: true}).on('changeDate',function(event){
+    var d = event.date; //Selected date in Timezone format
+    var curr_date = d.getDate(); // Seletced date
+    var curr_month = d.getMonth()+ 1; // Selected date moth
+    var curr_year = d.getFullYear(); // Selected date year
+    var desired_date_fromat = curr_year+"-"+curr_month+"-"+curr_date; //Desired date format 
+    $("#selectedenddate").val(desired_date_fromat);
     
+    $.ajax(
+    {
+      type: "POST",
+      url: "<?php echo Configure::read('SITE_ADMIN_URL')?>/supports/datefilter",
+      data: {'startdate':$("#selectedstartdate").val(),'enddate':$("#selectedenddate").val()},
+      success: function(data)
+      {
+        $("#black").html(data);
+      }
+    });  
+  });
+
+
+
+
+
 });
 
 </script>

@@ -158,7 +158,7 @@ class  SupportsController  extends AppController {
               			"TemplateModel"=> array(
 						    "user_name"=> $this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
 						    "company"=> array(
-						      	"name"=> $this->Auth->user('comapny_name')),
+						      	"name"=> $this->Auth->user('company_name')),
 							"product_name"=>$this->request->data['Support']['subject'],
 							"action_url"=>$this->request->data['Support']['message']),
 						"InlineCss"=> true, 
@@ -176,7 +176,7 @@ class  SupportsController  extends AppController {
               			"TemplateModel"=> array(
 						    "user_name"=> $this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
 						    "company"=> array(
-						      	"name"=> $this->Auth->user('comapny_name')),
+						      	"name"=> $this->Auth->user('company_name')),
 							"product_name"=>$this->request->data['Support']['subject'],
 							"action_url"=>$this->request->data['Support']['message']),
 						"InlineCss"=> true, 
@@ -211,26 +211,52 @@ class  SupportsController  extends AppController {
 	public function admin_index()
 	{
 		$this->set("title","Support");
-		$this->set('Supports',$this->Support->find('all',array('conditions'=>array('Support.receiver_id' =>$this->Auth->user('id')),'order'=>'Support.created desc')));
+		$this->set('Supports',$this->Support->find('all',array('conditions'=>array('OR'=>array('Support.receiver_id' =>$this->Auth->user('id'),'Support.sender_id' =>$this->Auth->user('id'))),'order'=>'Support.created desc')));
+		
+		$this->User->recursive = -2;
+		$email_list = $this->User->find('all',array('conditions'=>array('User.usertype'=>1),'fields'=>array('User.id','User.email')));
+		$this->set('Emailist',$email_list);
 	}
 
 /**
-	Admin Support index page 
+	Admin Support add page for business 
 */	
 	public function admin_add()
 	{
 		$this->set("title","Add Support");
+		
 		$this->set('CompanyName',$this->User->find('all',array('conditions'=>array('User.usertype'=>1),'order'=>'User.company_name asc')));
 		if(!empty($this->request->data))
 		{
 			$user = $this->Auth->user();
-			$this->request->data['Support']['sender_id'] = $user['User']['id'];
+			$this->request->data['Support']['sender_id'] = $user['id'];
 			$this->Support->create();
 			if($this->Support->save($this->request->data))
 			{
+				// send email to particular business account 
+
+				$receiver  = $this->User->find('first',array('conditions'=>array('User.id'=>$this->request->data['Support']['receiver_id'])));
+
+				$useremail = array(
+          			"templateid"=>1064102,
+          			"name"=>$receiver['User']['firstname'].' '.$receiver['User']['lastname'],
+          			"TemplateModel"=> array(
+					    "user_name"=> $receiver['User']['firstname'].' '.$receiver['User']['lastname'],
+					    "company"=> array(
+					      	"name"=> $receiver['User']['company_name']),
+						"product_name"=>$this->request->data['Support']['subject'],
+						"action_url"=>$this->request->data['Support']['message']),
+					"InlineCss"=> true, 
+          			"from"=> "support@puzel.co",
+          			'to'=>$receiver['User']['email'],
+          			'reply_to'=>"support@puzel.co"
+          			);	
 				
-				$this->Session->setFlash(__('Support Added!!....', true), 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('action'=>'index','admin'=>true));
+				if($this->sendemail($useremail))
+				{
+					$this->Session->setFlash(__('Support Added!!....', true), 'default', array('class' => 'alert alert-success'));
+					$this->redirect(array('action'=>'index','admin'=>true));	
+				}	
 			}
 			else
 			{
@@ -390,24 +416,39 @@ class  SupportsController  extends AppController {
 		{
 			$user = $this->Auth->user();
 			$this->request->data['Support']['sender_id'] = $this->Auth->user('id');
-			$this->request->data['Support']['receiver_id'] = $support['Support']['sender_id'];
+
+			// check if admin send reply multiple time without any reply by business 
+			if($support['Support']['sender_id'] != $this->Auth->user('id'))
+			{
+				$this->request->data['Support']['receiver_id'] = $support['Support']['sender_id'];	
+			}
+			else
+			{
+				$this->request->data['Support']['receiver_id'] = $support['Support']['receiver_id'];		
+			}	
+			
 			$this->request->data['Support']['subject'] = $support['Support']['subject'];
 			$this->Support->create();
 			if($this->Support->save($this->request->data))
 			{
+				// get last insert support data
+
+				$last_inserted_supported = $this->Support->find('first',array('conditions'=>array('Support.id'=>$this->Support->getLastInsertId())));
+
+
 				// // Create a message and send it to admin 
 				$mail = array(
-              			"templateid"=>1007226,
-              			"name"=>$support['Sender']['firstname'].' '.$support['Sender']['lastname'],
+              			"templateid"=>1064341,
+              			"name"=>$last_inserted_supported['Receiver']['firstname'].' '.$last_inserted_supported['Receiver']['lastname'],
               			"TemplateModel"=> array(
-						    "user_name"=> $support['Sender']['firstname'].' '.$support['Sender']['lastname'],
+						    "user_name"=> $last_inserted_supported['Receiver']['firstname'].' '.$last_inserted_supported['Receiver']['lastname'],
 						    "company"=> array(
-						      	"name"=> $support['Sender']['company_name']),
+						      	"name"=> $last_inserted_supported['Receiver']['company_name']),
 							"product_name"=>$this->request->data['Support']['subject'],
 							"action_url"=>$this->request->data['Support']['message']),
 						"InlineCss"=> true, 
               			"from"=> "support@puzel.co",
-              			'to'=>$support['Sender']['email'],
+              			'to'=>$last_inserted_supported['Receiver']['email'],
               			'reply_to'=>"support@puzel.co"
               			);	
 				if($this->sendemail($mail))
@@ -567,6 +608,50 @@ class  SupportsController  extends AppController {
 			$this->set('Supports',$support);
 		}
 	}	
+
+/**
+	Vise versa Support message in admin page 
+*/	
+	public function admin_conversation($id= Null)
+	{
+		$this->set('title',"Conversation");
+		if($id)
+		{
+			$viseversa  = $this->Support->find('all',array('conditions'=>array(array('OR'=>array('Support.receiver_id'=>$this->Auth->user('id'),'Support.sender_id'=>$this->Auth->user('id'),'Support.id'=>$id,'Support.reply_id'=>$id))),'order'=>'Support.created asc'));
+			$this->set("Conversation",$viseversa);
+		}
+	}
+
+
+/**
+	Admin Support email filter on index page 
+*/	
+	public function admin_emailfilter()
+	{
+		
+		if($this->request->data)
+		{
+			$list = $this->Support->find('all',array('conditions'=>array('OR'=>array('Support.receiver_id' =>$this->request->data['id'],'Support.sender_id' =>$this->request->data['id'])),'order'=>'Support.created desc'));
+		}	
+		
+		$this->set('Supports',$list);
+	}
+
+
+
+/**
+	Admin Support calender filter on index page 
+*/	
+	public function admin_datefilter()
+	{
+		
+		if($this->request->data)
+		{
+			$list = $this->Support->find('all',array('conditions'=>array('AND'=>array(array('DATE(Support.created) >='=>$this->request->data['startdate'],'DATE(Support.created) <='=>$this->request->data['enddate']))),'order'=>'Support.created desc'));
+		}	
+		$this->set('Supports',$list);
+	}	
+
 
 
 

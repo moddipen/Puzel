@@ -1095,6 +1095,43 @@ public function user_reset($token=null)
 	}
 
 
+/**
+	Admin Setting page 
+*/	
+	public function admin_setting()
+	{
+		$this->layout = 'dashboard';
+		$this->set("title","Profile Page");
+		$user = $this->User->find('first',array('conditions'=>array('User.id'=>$this->Auth->user('id'))));
+		$this->set("User",$user);
+
+		if(!empty($this->request->data))
+		{
+			unset($this->User->validate['email']);
+			if($this->request->data['User']['newpassword'] == $this->request->data['User']['newpasswordrepeat'])
+			{
+				if($this->request->data['User']['newpassword'] == '')
+				{
+
+				}
+				else
+				{
+					$this->request->data['User']['password'] = $this->request->data['User']['newpassword'] ; 	
+				}	
+
+				$this->request->data['User']['id'] = $this->Auth->user('id');	 
+				if($this->User->save($this->request->data))
+				{
+					$this->Session->setFlash(__('Profile update successfully !!....', true), 'default', array('class' => 'alert alert-success'));		
+				}
+			}
+			else
+			{
+				$this->Session->setFlash(__('Password does not match !!....', true), 'default', array('class' => 'alert alert-danger'));
+			}	
+			
+		}
+	}	
 
 
 

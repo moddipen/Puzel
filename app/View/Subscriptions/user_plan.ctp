@@ -92,49 +92,38 @@
     </div>
     <?php if($Rate['Subscription']['price'] != "Free" ) {?>
     <div class="input-group">
-      <!-- <label for="mce-LNAME">Card </label> -->
+     
       <?php
     	$number = "************".$cardDetail->creditCard['last4'];
     	if(!$cardDetail){
-    		echo '<input type="text" value="'.$number.'"  name="data[Subscription][card_number]" class="form-control" id="card_number" placeholder="1234 5678 9012 3456" required>';
-        echo '<div class="input-group-addon">
-          <i class="fa fa-credit-card"></i>
-        </div>';
+    		echo "<input type='text' class='form-control' value='".$number."'  name='data[Subscription][card_number]'  id='card_number1' placeholder='1234 5678 9012 3456' required>";
+        echo '<div class="input-group-addon"><i class="fa fa-credit-card"></i></div>';
     		
     	}else{
-    		echo '<input type="text" value="'.$number.'" readonly name="data[Subscription][card_number]" class="form-control" id="card_number" placeholder="1234 5678 9012 3456" required>';
-        echo '<div class="input-group-addon">
-          <i class="fa fa-credit-card"></i>
-        </div>';
+    		echo '<input type="text" value="'.$number.'" readonly name="data[Subscription][card_number]" id="card_number1" class="form-control"  placeholder="1234 5678 9012 56" required />';
+        echo '<div class="input-group-addon"><i class="fa fa-credit-card"></i></div>';
     	}
       ?>
       
     </div>
 
     <div class="input-group">
-     <!-- <label for="mce-LNAME">Card Holder Name </label> -->
      <?php
     	$name = $cardDetail->creditCard['cardholderName'];
     	if(!$cardDetail){
-    	 	echo '<input type="text" value="'.$name.'"  name="data[Subscription][holder_name]" class="form-control" id="card_number" placeholder="Cardholder name" required>';
-    	 echo '<div class="input-group-addon">
-          <i class="fa fa-user"></i>
-        </div>';	
+    	 	echo '<input type="text" value="'.$name.'"  name="data[Subscription][holder_name]" class="form-control" id="card_name" placeholder="Cardholder name" required>';
+    	 echo '<div class="input-group-addon"><i class="fa fa-user"></i></div>';	
     	}else{
-    		echo '<input type="text" value="'.$name.'" readonly name="data[Subscription][holder_name]" class="form-control" id="card_number" placeholder="Cardholder name" required>';
-        echo '<div class="input-group-addon">
-          <i class="fa fa-user"></i>
-        </div>';
+    		echo '<input type="text" value="'.$name.'" readonly name="data[Subscription][holder_name]" class="form-control"  id="card_name" placeholder="Cardholder name" required />';
+        echo '<div class="input-group-addon"><i class="fa fa-user"></i></div>';
     	}
-    	?>
-     
-      
+    	?>     
     </div>
 
     <div id="errorccard"></div>
     <input type ="hidden" value ="" name="data[Subscription][check]" id="validcard">
     <div class="input-group">
-      <!-- <label for="mce-LNAME">Month </label> -->
+     
       <?php
     	
     	if(!$cardDetail){
@@ -162,9 +151,7 @@
     		  
             </select>
 
-    <!-- </div>
-    <div class="mc-field-group"> -->
-      <!-- <label for="mce-LNAME">Year </label> -->
+    
       <?php
     	
     	if(!$cardDetail){
@@ -215,25 +202,26 @@
 <script>
   $(document ).ready(function()
   {
-      $('#card_number').validateCreditCard(function(result) {
+      $('#card_number1').validateCreditCard(function(result) {
             if(result.card_type == null)
             {
-                $('#card_number').removeClass();
+                $('#card_number1').removeClass();
+                $('#card_number1').addClass("form-control");
             }
             else
             {
-                $('#card_number').addClass(result.card_type.name);
+                $('#card_number1').addClass(result.card_type.name);
                 $('#validcard').val(result.card_type.name);
             }
             
             if(!result.valid)
             {
-                $('#card_number').removeClass("valid");
+                $('#card_number1').removeClass("valid");
             }
             else
             {
-                $('#card_number').addClass("valid");
-              }
+                $('#card_number1').addClass("valid");
+            }
         }); 
 
 

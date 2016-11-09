@@ -79,7 +79,7 @@
                       echo $login_detail;?>!</li>
                       
                       <li>
-                        <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>">
+                        <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/users/setting">
                           <i class="fa fa-cog"></i> Settings
                         </a>
                       </li>
