@@ -10,8 +10,8 @@
                       </span>
 
                       <div class="media-body">
-                        <strong>Balance Pieces</strong>
-                        <h2 class="media-heading animate-number" data-value="3659" data-animation-duration="1500">0</h2>
+                        <strong>Business</strong>
+                        <h2 class="media-heading animate-number" data-value="<?php echo $Businesscount;?>" data-animation-duration="1500">0</h2>
                       </div>
                     </div> 
                   </div>
@@ -36,7 +36,7 @@
 
                       <div class="media-body">
                         <strong>User</strong>
-                        <h2 class="media-heading animate-number" data-value="19214" data-animation-duration="1500">0</h2>
+                        <h2 class="media-heading animate-number" data-value="<?php echo $Usercount;?>" data-animation-duration="1500">0</h2>
                       </div>
                     </div>                    
 
@@ -63,7 +63,7 @@
 
                       <div class="media-body">
                         <strong>Puzels Created</strong>
-                        <h2 class="media-heading animate-number" data-value="169541" data-animation-duration="1500">0</h2>
+                        <h2 class="media-heading animate-number" data-value="<?php echo $Puzzle;?>" data-animation-duration="1500">0</h2>
                       </div>
                     </div>
 
@@ -89,7 +89,7 @@
 
                       <div class="media-body">
                         <strong>Active Puzels</strong>
-                        <h2 class="media-heading animate-number" data-value="9634" data-animation-duration="1500">0</h2>
+                        <h2 class="media-heading animate-number" data-value="<?php echo $ActivePuzzle;?>" data-animation-duration="1500">0</h2>
                       </div>
                     </div> 
                   </div>

@@ -122,6 +122,30 @@ class  OrdersController  extends AppController {
 				
 				$this->set('Visitor',$visitcount);
 				$this->set('Balancepeices',$pic);
+
+				// Admin header data
+				if ($this->params['prefix'] == 'admin')
+        		{
+        			// Business count 
+        			$list_ofbusiness = $this->User->find('count',array('conditions'=>array('User.usertype'=>1)));
+        			$this->set('Businesscount', $list_ofbusiness);
+
+        			// user count 
+					$user_ofcount = $this->User->find('count',array('conditions'=>array('User.usertype'=>0)));
+        			$this->set('Usercount', $user_ofcount); 
+
+					// Puzzle count 
+					$puzle = $this->Puzzle->find('count');
+        			$this->set('Puzzle', $puzle); 	        			       			
+
+        			// Active puzzle count 
+
+        			$active_puzle = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.status'=>0)));
+        			$this->set('ActivePuzzle', $active_puzle); 	        			       				
+
+        		}	
+
+
 		  	}
 	 	
 			

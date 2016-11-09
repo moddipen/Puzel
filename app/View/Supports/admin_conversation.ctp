@@ -42,7 +42,7 @@
 
                       <div class="actions" style="padding: 0px 20px;">
                      
-                        <button onclick="location.href='<?php echo Configure::read("SITE_USER_URL")?>/supports/delete/<?php echo $Conversation[0]['Support']['id'];?>'" type="button" class="btn btn-default pull-right" style="margin-top: -53px;">
+                        <button onclick="location.href='<?php echo Configure::read("SITE_ADMIN_URL")?>/supports/delete/<?php echo $Conversation[0]['Support']['id'];?>'" type="button" class="btn btn-default pull-right" style="margin-top: -53px;">
                         <i class="fa fa-trash-o"></i></button>
 
                       </div>

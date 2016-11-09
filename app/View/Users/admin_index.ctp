@@ -52,13 +52,14 @@
                     <div class="col-md-10">
                       <form role="form" class="custom-form">
                           <div class="row minipadding">
+                            <!--
                             <div class="col-md-2">
-                              <div class="form-group">
+                               <div class="form-group">
                                     <select name="user" class="form-control chosen-select">
                                       <option value="">All Users</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-md-2">
                               <div class="form-group">
                                     <select name="datetime" class="form-control chosen-select" id="status">

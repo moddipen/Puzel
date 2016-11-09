@@ -104,7 +104,7 @@
   							</td>
                             <td><?php if($user['UserSubscription']['id'] != ""){echo $user['UserSubscription']['used_pieces'];}else{echo "0";}?></td>
                             <td><?php if($user['UserSubscription']['id'] != ""){echo $user['UserSubscription']['Subscription']['name'];}else{echo "Inactive";}?></td>
-                            <td class="minipadding controls"><div class="col-xs-5 text-right"><i class="fa fa-eye"></i></div><div class="col-xs-7">
+                            <td class="minipadding controls"><!-- <div class="col-xs-5 text-right"><i class="fa fa-eye"></i></div> --><div class="col-xs-7">
                               <div class="onoffswitch green small">
                                  <?php 
                                     // check puzzle s activate or not
