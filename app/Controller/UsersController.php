@@ -1170,6 +1170,15 @@ public function user_reset($token=null)
 				if($this->request->data['flag'] == "Business")
 				{
 					$user = $this->User->find('all',array('conditions'=>array('AND'=>array(array('DATE(User.created) >='=>$this->request->data['startDate'],'DATE(User.created) <='=>$this->request->data['endDate'])),'User.usertype' =>1))) ; 		
+				}
+				else
+				{
+					$user = $this->User->find('all',array('conditions'=>array('AND'=>array(array('DATE(User.created) >='=>$this->request->data['startDate'],'DATE(User.created) <='=>$this->request->data['endDate'])), 'User.usertype' =>0)));
+					foreach($user as $key => $value)
+					{
+						$user[$key]['Visitor'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.email'=>$value['User']['email'])));	
+					}
+
 				}	
 				
 			}
@@ -1178,6 +1187,14 @@ public function user_reset($token=null)
 				if($this->request->data['flag'] == "Business")
 				{
 					$user = $this->User->find('all',array('conditions'=>array('User.usertype' =>1),'order'=>'User.id Desc')) ; 	
+				}
+				else
+				{
+					$user = $this->User->find('all',array('conditions'=>array('User.usertype' =>0),'order'=>'User.id Desc'));
+					foreach($user as $key => $value)
+					{
+						$user[$key]['Visitor'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.email'=>$value['User']['email'])));	
+					}					
 				}	
 			}
 		}	

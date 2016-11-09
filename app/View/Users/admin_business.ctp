@@ -365,24 +365,24 @@ $.fn.pageMe = function(opts){
     if(value == "Today"){ $("#startdate").val(strDate); $("#enddate").val(strDate)}
     if(value == "Weeks")
     {   
-      d.setDate(d.getDate() + 7);
+      d.setDate(d.getDate() - 7);
       var c_date = ((d.getDate())>=10)? (d.getDate()) : '0' + (d.getDate());
-      $("#startdate").val(strDate);
-      $("#enddate").val(d.getFullYear() + "-" + (d.getMonth()+1) + "-" + c_date);
+      $("#enddate").val(strDate);
+      $("#startdate").val(d.getFullYear() + "-" + (d.getMonth()+1) + "-" + c_date);
     }
     if(value == "Month")
     {
-      d.setMonth(d.getMonth() + 1);
+      d.setMonth(d.getMonth() - 1);
       var c_date = ((d.getDate())>=10)? (d.getDate()) : '0' + (d.getDate());
-      $("#startdate").val(strDate);
-      $("#enddate").val(d.getFullYear() + "-" + (d.getMonth()+1) + "-" + c_date);
+      $("#enddate").val(strDate);
+      $("#startdate").val(d.getFullYear() + "-" + (d.getMonth()+1) + "-" + c_date);
     }
     if(value == "Year")
     {
-      d.setYear(d.getFullYear() + 1);
+      d.setYear(d.getFullYear() - 1);
       var c_date = ((d.getDate())>=10)? (d.getDate()) : '0' + (d.getDate());
-      $("#startdate").val(strDate);
-      $("#enddate").val(d.getFullYear() + "-" + (d.getMonth()+1) + "-" + c_date);
+      $("#enddate").val(strDate);
+      $("#startdate").val(d.getFullYear() + "-" + (d.getMonth()+1) + "-" + c_date);
     }
     if(value == "AllTime")
     {
