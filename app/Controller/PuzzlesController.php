@@ -585,7 +585,7 @@ class  PuzzlesController  extends AppController {
 	{
 		if(!empty($this->request->data))
 		{
-			$puzel = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.status'=>$this->request->data['status']))) ; 
+			$puzel = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.status'=>$this->request->data['status'],'Puzzle.user_id'=>$this->Auth->user('id')))) ; 
 			foreach($puzel as $key => $psinglepuzle)
 				{
 					$puzel[$key]['Show'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$psinglepuzle['Puzzle']['id'],'Image.status'=>0))); 
@@ -865,7 +865,18 @@ class  PuzzlesController  extends AppController {
 		
 	}		
 	
-
+/**
+	Puzzle preview in admin panel
+*/
+	public function admin_preview($id= Null)
+	{
+		$this->set('title',"Preview");
+		if($id)
+		{
+			$puzel = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id))) ; 	
+			$this->set("Capturedata",$puzel);					
+		}
+	}
 
 
 

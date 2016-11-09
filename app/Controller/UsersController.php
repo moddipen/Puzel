@@ -1157,6 +1157,33 @@ public function user_reset($token=null)
 
 
 
+/**
+	Admin Business monthwise filter
+*/	
+	public function admin_monthwisefiltre()
+	{
+		if(!empty($this->request->data))
+		{
+			$this->User->recursive = 2;
+			if($this->request->data["startDate"] != ""  && $this->request->data["endDate"] != "" )
+			{
+				if($this->request->data['flag'] == "Business")
+				{
+					$user = $this->User->find('all',array('conditions'=>array('AND'=>array(array('DATE(User.created) >='=>$this->request->data['startDate'],'DATE(User.created) <='=>$this->request->data['endDate'])),'User.usertype' =>1))) ; 		
+				}	
+				
+			}
+			else
+			{
+				if($this->request->data['flag'] == "Business")
+				{
+					$user = $this->User->find('all',array('conditions'=>array('User.usertype' =>1),'order'=>'User.id Desc')) ; 	
+				}	
+			}
+		}	
+		$this->set('Flag',$this->request->data['flag']);
+		$this->set("Business", $user);				
+	}
 
 
 

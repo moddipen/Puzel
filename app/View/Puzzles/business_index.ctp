@@ -64,7 +64,7 @@
                             <div class="col-md-2">
                               <div class="form-group">
                                     <select name="datetime" id="datetime" class="form-control chosen-select">
-                                      <option value="">Select</option>
+                                      <option style="display:none;" >Select</option>
                                       <option value="Today">Today</option>
                                       <option value="Weeks">Weeks</option>
                                       <option value="Month">Month</option>

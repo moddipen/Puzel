@@ -128,8 +128,10 @@
                             <td><?php echo $list['Show'];?></td>
                             <td><?php echo $list['Hide'];?></td>
                             <td class="minipadding controls">
-                              <div class="col-xs-5 text-right"><i class="fa fa-pencil"></i></div><div class="col-xs-7">
-                            <div class="onoffswitch green small">
+                              <div class="col-xs-5 text-right">
+                                <?php 
+                                  echo $this->html->link( '',array('action' => 'preview',$list['Puzzle']['id']),array('class'=>'fa fa-eye','style'=>"color:white;"));?></div><div class="col-xs-7">
+                                  <div class="onoffswitch green small">
                                   <?php 
                                   // check puzzle s activate or not
                                   if($list['Puzzle']['status'] == 0)
