@@ -127,7 +127,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 
 
 <?php 
-  exit($_SERVER['PHP_SELF']);
+  
   if(!empty($PuzzleData)) {?>
 
     <!-- Mobile Menu --> 
