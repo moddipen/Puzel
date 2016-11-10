@@ -669,6 +669,7 @@ class  PuzzlesController  extends AppController {
 */
 	public function business_preview($id= Null)
 	{
+		$this->set('title',"Preview");
 		if($id)
 		{
 			$puzel = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id))) ; 	
@@ -877,6 +878,44 @@ class  PuzzlesController  extends AppController {
 			$this->set("Capturedata",$puzel);					
 		}
 	}
+
+/**
+	Admin monthwise filter
+*/	
+	public function admin_monthwisefiltre()
+	{
+		if($this->request->data)
+		{
+			if($this->request->data['startDate'] != "" && $this->request->data['endDate'] != "")
+			{
+				$puzel = $this->Puzzle->find('all',array('conditions'=>array('AND'=>array(array('DATE(Puzzle.created) >='=>$this->request->data['startDate'],'DATE(Puzzle.created) <='=>$this->request->data['endDate']))),'order'=>'Puzzle.created Desc')) ; 
+				foreach($puzel as $key => $psinglepuzle)
+				{
+					$puzel[$key]['Show'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$psinglepuzle['Puzzle']['id'],'Image.status'=>0))); 
+					$puzel[$key]['Hide'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$psinglepuzle['Puzzle']['id'],'Image.status'=>1))); 
+				}	
+			}	
+			else
+			{
+				$puzel = $this->Puzzle->find('all',array('order'=>'Puzzle.created Desc')) ; 
+				foreach($puzel as $key => $psinglepuzle)
+				{
+					$puzel[$key]['Show'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$psinglepuzle['Puzzle']['id'],'Image.status'=>0))); 
+					$puzel[$key]['Hide'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$psinglepuzle['Puzzle']['id'],'Image.status'=>1))); 
+				}				
+			}	
+		}	
+		$this->set("Puzzel",$puzel);	
+	}	
+
+
+
+
+
+
+
+
+
 
 
 

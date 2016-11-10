@@ -58,13 +58,18 @@
                                     </select>
                                 </div>
                             </div> -->
-                            <!-- <div class="col-md-2">
+                            <div class="col-md-2">
                               <div class="form-group">
-                                    <select name="datetime" class="form-control chosen-select">
-                                      <option value="">Today</option>
+                                    <select name="datetime" class="form-control chosen-select" id="datetime">
+                                      <option style="display:none;">Please select</option>
+                                      <option value="Today">Today</option>
+                                      <option value="Weeks">Weeks</option>
+                                      <option value="Month">Month</option>
+                                      <option value="Year">Year</option>
+                                      <option value="AllTime">All time</option>
                                     </select>
                                 </div>
-                            </div> -->
+                            </div>
                             <div class="col-md-2">
                               <div class="form-group">
                                   <div class="input-group">
@@ -368,6 +373,66 @@ $.fn.pageMe = function(opts){
   });
 
 
+  ///////////////////////// Month wise filter --------------------------- 
+
+   $("#datetime").change(function()
+  {
+    var value = this.value;
+    var d = new Date();
+    var c_date = ((d.getDate())>=10)? (d.getDate()) : '0' + (d.getDate());
+    
+    var strDate = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + c_date;
+    
+    if(value == "Today"){ $("#startdate").val(strDate); $("#enddate").val(strDate)}
+    if(value == "Weeks")
+    {   
+      d.setDate(d.getDate() - 7);
+      var c_date = ((d.getDate())>=10)? (d.getDate()) : '0' + (d.getDate());
+      $("#enddate").val(strDate);
+      $("#startdate").val(d.getFullYear() + "-" + (d.getMonth()+1) + "-" + c_date);
+    }
+    if(value == "Month")
+    {
+      d.setMonth(d.getMonth() - 1);
+      var c_date = ((d.getDate())>=10)? (d.getDate()) : '0' + (d.getDate());
+      $("#enddate").val(strDate);
+      $("#startdate").val(d.getFullYear() + "-" + (d.getMonth()+1) + "-" + c_date);
+    }
+    if(value == "Year")
+    {
+      d.setYear(d.getFullYear() - 1);
+      var c_date = ((d.getDate())>=10)? (d.getDate()) : '0' + (d.getDate());
+      $("#enddate").val(strDate);
+      $("#startdate").val(d.getFullYear() + "-" + (d.getMonth()+1) + "-" + c_date);
+    }
+    if(value == "AllTime")
+    {
+      $("#startdate").val("");
+      $("#enddate").val("");
+    } 
+
+    // change Download CSV url path  
+    if($("#startdate").val() == "" && $("#enddate").val() == "")
+    {
+      var path = "<?php echo Configure::read('SITE_ADMIN_URL')?>/visitors/export";
+    }
+    else
+    {
+      var path = "<?php echo Configure::read('SITE_ADMIN_URL')?>/visitors/export/0/"+$("#startdate").val()+"/"+$("#enddate").val();
+    }  
+
+    $.ajax(
+      {
+        type: "POST",
+        url: "<?php echo Configure::read('SITE_ADMIN_URL')?>/visitors/datefilter",
+        data: {'startdate':$("#startdate").val(),'enddate':$("#enddate").val()},
+        success: function(data)
+        {
+          $("#black").html(data);
+           $("a#fadownload").attr("href",path); 
+        }
+      });  
+  }) 
 
 
 

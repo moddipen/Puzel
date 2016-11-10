@@ -435,7 +435,19 @@ $(document).ready(function(){
     {
       $("#startdate").val("");
       $("#enddate").val("");
-    } 
+    }
+    
+    // change Download CSV url path  
+    if($("#startdate").val() == "" && $("#enddate").val() == "")
+    {
+      var path = "<?php echo Configure::read('SITE_ADMIN_URL')?>/users/userexport";
+    }
+    else
+    {
+      var path = "<?php echo Configure::read('SITE_ADMIN_URL')?>/users/userexport/"+$("#startdate").val()+"/"+$("#enddate").val();
+    }  
+
+
     $.ajax(
       {
         type: "POST",
@@ -443,7 +455,8 @@ $(document).ready(function(){
         data: {'startDate':$("#startdate").val(),'endDate':$("#enddate").val(),'flag':'User'},
         success: function(data)
         {
-        $("#content1").html(data);
+          $("#content1").html(data);
+          $("a#userdownload").attr("href",path);
         }
       });  
   }) 

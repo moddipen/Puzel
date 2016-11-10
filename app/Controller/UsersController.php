@@ -1202,6 +1202,16 @@ public function user_reset($token=null)
 		$this->set("Business", $user);				
 	}
 
+			
+
+
+
+
+
+
+
+
+
 
 
 

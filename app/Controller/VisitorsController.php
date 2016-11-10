@@ -354,8 +354,12 @@ class  VisitorsController  extends AppController {
 		
 		if($email)
 		{
-			$data =  $this->Puzzle->Visitor->find('all',array('conditions'=>array('Visitor.email'=>$email)));
+			$data =  $this->Puzzle->Visitor->find('all',array('conditions'=>array('Visitor.email'=>$email,'Puzzle.user_id'=>$this->Auth->user('id'))));
 		}
+		elseif($email == 0 && $from && $to)
+		{
+			$data =  $this->Puzzle->Visitor->find('all',array('conditions'=>array('AND'=>array(array('DATE(Visitor.created) >='=>$from,'DATE(Visitor.created) <='=>$to)),'Puzzle.user_id'=>$this->Auth->user('id')))) ; 		
+		}	
 		else
 		{
 			$data =  $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id')),"fields"=>array("Puzzle.name")));	
@@ -371,7 +375,7 @@ class  VisitorsController  extends AppController {
 				$date =  date('m/d/Y',strtotime($user['Visitor']['created']));
 				$data[$i]['Visitor']['Visitor Firstname'] = $user['Visitor']['firstname'];
 				$data[$i]['Visitor']['Visitor Lastname'] =  $user['Visitor']["lastname"];
-			//	$data[$i]['Visitor']['Company Name'] =  $user['Visitor']['company_name'];
+				$data[$i]['Visitor']['Company Name'] =  $user['Visitor']['company_name'];
 				$data[$i]['Visitor']['Visitor email'] =  $user['Visitor']["email"];
 				$data[$i]['Visitor']['Date'] = $date;
 				$data[$i]['Visitor']['Puzzle Name'] = $user['Puzzle']['name'];
@@ -379,6 +383,23 @@ class  VisitorsController  extends AppController {
 			}
 			$var = "True";
 		}
+		elseif($email == 0 && $from && $to)
+		{
+			$i = 0;
+			foreach ($data as  $user)
+            {
+            	$date =  date('m/d/Y',strtotime($user['Visitor']['created']));
+				$data[$i]['Visitor']['Visitor Firstname'] = $user['Visitor']['firstname'];
+				$data[$i]['Visitor']['Visitor Lastname'] =  $user['Visitor']["lastname"];
+				$data[$i]['Visitor']['Company Name'] =  $user['Visitor']['company_name'];
+				$data[$i]['Visitor']['Visitor email'] =  $user['Visitor']["email"];
+				$data[$i]['Visitor']['Date'] = $date;
+				$data[$i]['Visitor']['Puzzle Name'] = $user['Puzzle']['name'];
+				$i++;
+			}
+			$var = "True";
+
+		}	
 		else
 		{
 			foreach($data as $visitor)
@@ -389,7 +410,7 @@ class  VisitorsController  extends AppController {
 					$date =  date('m/d/Y',strtotime($user['created']));
 					$data[$index]['Visitor'][$i]['Visitor Firstname'] = $user['firstname'];
 					$data[$index]['Visitor'][$i]['Visitor Lastname'] =  $user["lastname"];
-				//	$data[$index]['Visitor'][$i]['Company Name'] =  $user['company_name'];
+					$data[$index]['Visitor'][$i]['Company Name'] =  $user['company_name'];
 					$data[$index]['Visitor'][$i]['Visitor email'] =  $user["email"];
 					$data[$index]['Visitor'][$i]['Date'] = $date;
 					$data[$index]['Visitor'][$i]['Puzzle Name'] = $visitor['Puzzle']['name'];
@@ -399,7 +420,6 @@ class  VisitorsController  extends AppController {
 			}
 			$var = "False";		
 		}	
-		
 		$this->set("Flag",$var);
 	 	$this->set('Visitor',$data);
 		$this->layout = null;
@@ -471,7 +491,17 @@ class  VisitorsController  extends AppController {
 	{
 		if(!empty($this->request->data))
 		{
-			$email = $this->Visitor->find('all',array('conditions'=>array('AND'=>array(array('DATE(Visitor.created) >='=>$this->request->data['startdate'],'DATE(Visitor.created) <='=>$this->request->data['enddate']))))) ; 	
+			if($this->request->data['startdate'] && $this->request->data['enddate'])
+			{
+				$email = $this->Puzzle->Visitor->find('all',array('conditions'=>array('AND'=>array(array('DATE(Visitor.created) >='=>$this->request->data['startdate'],'DATE(Visitor.created) <='=>$this->request->data['enddate'])),'Puzzle.user_id'=>$this->Auth->user('id')))) ; 	
+			}
+			else
+			{
+				$email = $this->Puzzle->Visitor->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id')))) ; 
+			}	
+
+
+			
 			$this->set('Emaildata',$email);	
 		}
 	}	
@@ -501,12 +531,22 @@ class  VisitorsController  extends AppController {
 
 
 /**
-	Admin visitor data cAlender filter 
+	Admin visitor data cAlender filter  and monthwise filter 
 */	
 	public function admin_datefilter()
 	{
+		if(!empty($this->request->data))
+		{
+			if($this->request->data['startdate'] != '' && $this->request->data['startdate'] != 'enddate')
+			{
+				$puzel = $this->Puzzle->Visitor->find('all',array('conditions'=>array('AND'=>array(array('DATE(Visitor.created) >='=>$this->request->data['startdate'],'DATE(Visitor.created) <='=>$this->request->data['enddate']))),'order'=>'Visitor.created Desc')) ; 
+			}			
+			else
+			{
+				$puzel = $this->Puzzle->Visitor->find('all',array('order'=>'Visitor.created Desc')) ; 
+			}	
+		}	
 		
-		$puzel = $this->Puzzle->Visitor->find('all',array('conditions'=>array('AND'=>array(array('DATE(Visitor.created) >='=>$this->request->data['startdate'],'DATE(Visitor.created) <='=>$this->request->data['enddate']))),'order'=>'Visitor.created Desc')) ; 
 		$this->set('Data',$puzel);
 	}				
 

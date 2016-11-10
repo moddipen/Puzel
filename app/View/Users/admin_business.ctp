@@ -388,7 +388,19 @@ $.fn.pageMe = function(opts){
     {
       $("#startdate").val("");
       $("#enddate").val("");
-    } 
+    }
+
+    // Change download csv url when monthwise filter 
+    if($("#startdate").val() == "" && $("#enddate").val() == "")
+    {
+      var path = "<?php echo Configure::read('SITE_ADMIN_URL')?>/users/export"; 
+    }
+    else
+    {
+      var path = "<?php echo Configure::read('SITE_ADMIN_URL')?>/users/export/"+$("#startdate").val()+"/"+$("#enddate").val();   
+    }  
+
+    
     $.ajax(
       {
         type: "POST",
@@ -396,7 +408,8 @@ $.fn.pageMe = function(opts){
         data: {'startDate':$("#startdate").val(),'endDate':$("#enddate").val(),'flag':'Business'},
         success: function(data)
         {
-        $("#content1").html(data);
+          $("#content1").html(data);
+          $("a#businessdownload").attr("href",path);  
         }
       });  
   }) 

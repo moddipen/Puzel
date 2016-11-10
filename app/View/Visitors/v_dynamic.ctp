@@ -124,7 +124,11 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
     </script>
 <!-- NAVIGATION ############################################### -->
 
-<?php if(!empty($PuzzleData)) {?>
+
+
+<?php 
+  exit($_SERVER['PHP_SELF']);
+  if(!empty($PuzzleData)) {?>
 
     <!-- Mobile Menu --> 
     <div class="mobile-menu" style="padding-bottom: 55px;">

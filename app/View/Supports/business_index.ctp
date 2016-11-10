@@ -52,17 +52,22 @@
                     <div class="col-md-10">
                       <form role="form" class="custom-form">
                           <div class="row minipadding">
-                            <div class="col-md-2">
+                            <!-- <div class="col-md-2">
                               <div class="form-group">
                                     <select name="user" class="form-control chosen-select">
                                       <option value="">All Users</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-md-2">
                               <div class="form-group">
-                                    <select name="datetime" class="form-control chosen-select">
-                                      <option value="">Today</option>
+                                    <select name="datetime" class="form-control chosen-select" id="datetime">
+                                      <option style="display:none;" >Please select</option>
+                                      <option value="Today">Today</option>
+                                      <option value="Weeks">Weeks</option>
+                                      <option value="Month">Month</option>
+                                      <option value="Year">Year</option>
+                                      <option value="AllTime">All time</option>
                                     </select>
                                 </div>
                             </div>
@@ -86,6 +91,7 @@
                                 </div>
                             </div>
                             <input type ="hidden" value="" id="selectedenddate">
+                            <!-- 
                             <div class="col-md-2">
                               <div class="form-group">
                                     <select name="by" class="form-control chosen-select">
@@ -97,7 +103,7 @@
                               <div class="form-group">
                                   <input type="text" value="" name="search" class="form-control">
                                 </div>
-                            </div>
+                            </div> -->
                           </div>
                       </form>
                     </div>
@@ -345,7 +351,8 @@ $(document).ready(function()
       $("#selectedstartdate").val(desired_date_fromat);
     });
       
-  $('#enddate').datepicker({ format: 'yyyy-mm-dd', autoclose: true}).on('changeDate',function(event){
+  $('#enddate').datepicker({ format: 'yyyy-mm-dd', autoclose: true}).on('changeDate',function(event)
+  {
     var d = event.date; //Selected date in Timezone format
     var curr_date = d.getDate(); // Seletced date
     var curr_month = d.getMonth()+ 1; // Selected date moth
@@ -363,9 +370,55 @@ $(document).ready(function()
         $("#black").html(data);
       }
     });
-    });  
+  });  
  
+  //////////////////////////////// Monthwise filter -----------------------------------------
+      
+      $("#datetime").change(function()
+      {
+        var value = this.value;
+        var d = new Date();
+        var c_date = ((d.getDate())>=10)? (d.getDate()) : '0' + (d.getDate());
+        
+        var strDate = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + c_date;
+        
+        if(value == "Today"){ $("#startdate").val(strDate); $("#enddate").val(strDate);}
+        if(value == "Weeks"){   
+          d.setDate(d.getDate() - 7);
+          var c_date = ((d.getDate())>=10)? (d.getDate()) : '0' + (d.getDate());
+          $("#enddate").val(strDate);
+          $("#startdate").val(d.getFullYear() + "-" + (d.getMonth()+1) + "-" + c_date);
+        }
+        if(value == "Month"){
+          d.setMonth(d.getMonth() - 1);
+          var c_date = ((d.getDate())>=10)? (d.getDate()) : '0' + (d.getDate());
+          $("#enddate").val(strDate);
+          $("#startdate").val(d.getFullYear() + "-" + (d.getMonth()+1) + "-" + c_date);
+        }
+        if(value == "Year"){
+          d.setYear(d.getFullYear() - 1);
+          var c_date = ((d.getDate())>=10)? (d.getDate()) : '0' + (d.getDate());
+          $("#enddate").val(strDate);
+          $("#startdate").val(d.getFullYear() + "-" + (d.getMonth()+1) + "-" + c_date);
+          
+        }
+        if(value == "AllTime")
+        {
+          $("#startdate").val("");
+          $("#enddate").val("");
+        } 
 
+        $.ajax(
+          {
+            type: "POST",
+             url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/supports/datefilter",
+            data: {'startdate':$("#startdate").val(),'enddate':$("#enddate").val()},
+            success: function(data)
+            {
+              $("#black").html(data);
+            }
+          });  
+        }); 
 
 
     

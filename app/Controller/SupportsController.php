@@ -211,8 +211,8 @@ class  SupportsController  extends AppController {
 	public function admin_index()
 	{
 		$this->set("title","Support");
-		$this->set('Supports',$this->Support->find('all',array('conditions'=>array('OR'=>array('Support.receiver_id' =>$this->Auth->user('id'),'Support.sender_id' =>$this->Auth->user('id'))),'order'=>'Support.created desc')));
-		
+		// $this->set('Supports',$this->Support->find('all',array('conditions'=>array('OR'=>array('Support.receiver_id' =>$this->Auth->user('id'),'Support.sender_id' =>$this->Auth->user('id'))),'order'=>'Support.created desc')));
+		$this->set('Supports',$this->Support->find('all',array('order'=>'Support.created desc')));		
 		$this->User->recursive = -2;
 		$email_list = $this->User->find('all',array('conditions'=>array('User.usertype'=>1),'fields'=>array('User.id','User.email')));
 		$this->set('Emailist',$email_list);
@@ -604,7 +604,20 @@ class  SupportsController  extends AppController {
 	{
 		if(!empty($this->request->data))
 		{
-			$support = $this->Support->find('all',array('conditions'=>array('AND'=>array(array('DATE(Support.created) >='=>$this->request->data['startdate'],'DATE(Support.created) <='=>$this->request->data['enddate'])),'OR'=>array('Support.receiver_id'=>$this->Auth->user('id'),'Support.sender_id'=>$this->Auth->user('id'))))) ; 	
+			if($this->request->data['startdate'] != "" && $this->request->data['enddate'] != "")
+			{
+				$support = $this->Support->find('all',array('conditions'=>array('AND'=>array(array('DATE(Support.created) >='=>$this->request->data['startdate'],'DATE(Support.created) <='=>$this->request->data['enddate'])),'OR'=>array('Support.receiver_id'=>$this->Auth->user('id'),'Support.sender_id'=>$this->Auth->user('id'))))) ; 					
+			}
+			else
+			{
+				$support = $this->Support->find('all',array('conditions'=>array('OR'=>array('Support.receiver_id'=>$this->Auth->user('id'),'Support.sender_id'=>$this->Auth->user('id'))))) ; 	
+			}	
+
+
+
+
+			
+			
 			$this->set('Supports',$support);
 		}
 	}	
@@ -644,12 +657,19 @@ class  SupportsController  extends AppController {
 */	
 	public function admin_datefilter()
 	{
-		
 		if($this->request->data)
 		{
-			$list = $this->Support->find('all',array('conditions'=>array('AND'=>array(array('DATE(Support.created) >='=>$this->request->data['startdate'],'DATE(Support.created) <='=>$this->request->data['enddate']))),'order'=>'Support.created desc'));
+			if($this->request->data['startdate'] != '' && $this->request->data['enddate'] != '')
+			{
+				$list = $this->Support->find('all',array('conditions'=>array('AND'=>array(array('DATE(Support.created) >='=>$this->request->data['startdate'],'DATE(Support.created) <='=>$this->request->data['enddate']))),'order'=>'Support.created desc'));				
+			}
+			else
+			{
+				$list = $this->Support->find('all',array('order'=>'Support.created desc'));
+			}	
+			$this->set('Supports',$list);
 		}	
-		$this->set('Supports',$list);
+		
 	}	
 
 
