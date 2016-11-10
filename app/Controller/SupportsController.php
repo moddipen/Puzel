@@ -211,8 +211,8 @@ class  SupportsController  extends AppController {
 	public function admin_index()
 	{
 		$this->set("title","Support");
-		// $this->set('Supports',$this->Support->find('all',array('conditions'=>array('OR'=>array('Support.receiver_id' =>$this->Auth->user('id'),'Support.sender_id' =>$this->Auth->user('id'))),'order'=>'Support.created desc')));
-		$this->set('Supports',$this->Support->find('all',array('order'=>'Support.created desc')));		
+		$support = $this->Support->find('all',array('conditions'=>array('OR'=>array('Support.receiver_id' =>$this->Auth->user('id'),'Support.sender_id' =>$this->Auth->user('id'))),'order'=>'Support.created desc','fields' => array('Support.subject','Sender.firstname','Receiver.firstname','Sender.lastname','Receiver.lastname','Sender.company_name','Receiver.company_name','Support.created','Sender.id','Receiver.id','Support.message','Support.id'),'group' => array('Support.subject HAVING  1')));
+		$this->set('Supports',$support);
 		$this->User->recursive = -2;
 		$email_list = $this->User->find('all',array('conditions'=>array('User.usertype'=>1),'fields'=>array('User.id','User.email')));
 		$this->set('Emailist',$email_list);
