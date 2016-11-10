@@ -479,7 +479,7 @@ class  SupportsController  extends AppController {
 			$user = $this->Auth->user();
 			$this->request->data['Support']['sender_id'] = $this->Auth->user('id');
 			$this->request->data['Support']['receiver_id'] = $support['Support']['receiver_id'];
-			$this->request->data['Support']['subject'] = "RE :".$support['Support']['subject'];
+			$this->request->data['Support']['subject'] = $support['Support']['subject'];
 			$this->Support->create();
 			if($this->Support->save($this->request->data))
 			{
@@ -540,7 +540,7 @@ class  SupportsController  extends AppController {
 			$user = $this->Auth->user();
 			$this->request->data['Support']['sender_id'] = $this->Auth->user('id');
 			$this->request->data['Support']['receiver_id'] = $support['Support']['receiver_id'];
-			$this->request->data['Support']['subject'] = "RE :".$support['Support']['subject'];
+			$this->request->data['Support']['subject'] = $support['Support']['subject'];
 			$this->Support->create();
 			if($this->Support->save($this->request->data))
 			{
@@ -630,7 +630,10 @@ class  SupportsController  extends AppController {
 		$this->set('title',"Conversation");
 		if($id)
 		{
-			$viseversa  = $this->Support->find('all',array('conditions'=>array(array('OR'=>array('Support.receiver_id'=>$this->Auth->user('id'),'Support.sender_id'=>$this->Auth->user('id'),'Support.id'=>$id,'Support.reply_id'=>$id))),'order'=>'Support.created asc'));
+			$get_data = $this->Support->find('first',array('conditions'=>array('Support.id'=>$id)));
+			 $viseversa  = $this->Support->find('all',array('conditions'=>array('Support.subject'=>$get_data['Support']['subject']),'order'=>'Support.created asc'));
+			// $viseversa = $this->Support->find('all',array('conditions'=>array('OR'=>array('Support.receiver_id' =>$this->Auth->user('id'),'Support.sender_id' =>$this->Auth->user('id'))),'order'=>'Support.created desc','fields' => array('Support.subject','Sender.firstname','Receiver.firstname','Sender.lastname','Receiver.lastname','Sender.company_name','Receiver.company_name','Support.created','Sender.id','Receiver.id','Support.message','Support.id'),'group' => array('Support.subject HAVING  1')));
+			
 			$this->set("Conversation",$viseversa);
 		}
 	}
