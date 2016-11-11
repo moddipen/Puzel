@@ -27,7 +27,7 @@
     <!-- <form action="<?php echo $Type;?>" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" novalidate> -->
       <section>
       <div id="mc_embed_signup_scroll">
-      <h2>Sign up for Puzel</h2>
+      <h2 style="margin-bottom:25px;">Sign up for Puzel</h2>
       <!-- <div class="indicates-required"><span class="asterisk">*</span> indicates required</div> -->
     <?php
 
