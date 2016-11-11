@@ -111,10 +111,10 @@
      <?php
     	$name = $cardDetail->creditCard['cardholderName'];
     	if(!$cardDetail){
-    	 	echo '<input type="text" value="'.$name.'"  name="data[Subscription][holder_name]" class="form-control" id="card_name" placeholder="Cardholder name" required>';
+    	 	echo '<input type="text" value="'.$name.'"  name="data[Subscription][holder_name]" class="chosen-select chosen-transparent form-control" id="card_name" placeholder="Cardholder name" required>';
     	 echo '<div class="input-group-addon"><i class="fa fa-user"></i></div>';	
     	}else{
-    		echo '<input type="text" value="'.$name.'" readonly name="data[Subscription][holder_name]" class="form-control"  id="card_name" placeholder="Cardholder name" required />';
+    		echo '<input type="text" value="'.$name.'" readonly name="data[Subscription][holder_name]" class="chosen-select chosen-transparent form-control"  id="card_name" placeholder="Cardholder name" required />';
         echo '<div class="input-group-addon"><i class="fa fa-user"></i></div>';
     	}
     	?>     
@@ -122,16 +122,16 @@
 
     <div id="errorccard"></div>
     <input type ="hidden" value ="" name="data[Subscription][check]" id="validcard">
-    <div class="input-group">
+    <div class="input-group" style="width:100%;">
      <div class="row">
-     <div class="col-sm-3">
+     <div class="col-sm-4 col-xs-6">
       <?php
     	
     	if(!$cardDetail){
-    		echo '<select required  name="data[Subscription][ex_date_month][month]" id="month" class="form-control" style="color:white;background-color: #643960;width: 125px;" >';
+    		echo '<select required  name="data[Subscription][ex_date_month][month]" id="month" class="chosen-select chosen-transparent form-control" style="color:white;background-color: #643960;width: 125px;" >';
     		
     	}else{
-    		echo '<select required disabled name="data[Subscription][ex_date_month][month]" class="form-control" id="month" style="color:white;background-color: #643960;width: 125px;">';
+    		echo '<select required disabled name="data[Subscription][ex_date_month][month]" class="chosen-select chosen-transparent form-control" id="month" style="color:white;background-color: #643960;width: 125px;">';
     	}
     	?>
          
@@ -152,7 +152,7 @@
     		  
             </select>
 </div>
-    <div class="col-sm-3">
+    <div class="col-sm-4 col-xs-6">
       <?php
     	
     	if(!$cardDetail){
@@ -180,7 +180,7 @@
 
     <div class="mc-field-group"> -->
       <!-- <label for="mce-LNAME">CVV </label> -->
-      <div class="col-sm-6">
+      <div class="col-sm-4 col-xs-12">
       <input type="text" value="" name="data[Subscription][cvv]"  id="cvv" maxlength="4"  placeholder ="CVV" class="form-control" required>
       </div>
       </div>
@@ -206,6 +206,7 @@
 <script>
   $(document ).ready(function()
   {
+	  $(".chosen-select").chosen({disable_search_threshold: 10});
       $('#card_number1').validateCreditCard(function(result) {
             if(result.card_type == null)
             {
