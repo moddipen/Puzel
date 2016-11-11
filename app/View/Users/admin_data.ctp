@@ -90,7 +90,7 @@
                                 </div>
                             </div>
                             <input type ="hidden" value="" id="selectedenddate">   
-                            <div class="col-md-2">
+                            <!-- <div class="col-md-2">
                               <div class="form-group">
                                     <select name="by" class="form-control chosen-select" id="emailfilter">
                                       <option style="display:none;">Please select</option>
@@ -100,12 +100,12 @@
                                             <?php  }} ?>
                                     </select>
                                 </div>
-                            </div>
-                           <!--  <div class="col-md-2">
-                              <div class="form-group">
-                                  <input type="text" value="" name="search" class="form-control">
-                                </div>
                             </div> -->
+                            <div class="col-md-2">
+                              <div class="form-group">
+                                  <input type="text" value="" name="search" class="form-control" id="search">
+                                </div>
+                            </div> 
                           </div>
                       </form>
                     </div>
@@ -312,7 +312,7 @@ $.fn.pageMe = function(opts){
   $(document).ready(function()
   {
       
-    $('#black').pageMe({pagerSelector:'#pagination',childSelector:'tr',showPrevNext:true,hidePageNumbers:false,perPage:10});
+    $('#black').pageMe({pagerSelector:'#pagination',childSelector:'tr',showPrevNext:true,hidePageNumbers:false,perPage:1000});
     
     /* end plugin */
 
@@ -322,22 +322,22 @@ $.fn.pageMe = function(opts){
 
   // email on change event 
 
-  $("#emailfilter").change(function()
-  {
-    var email = this.value ;
-    var path = "<?php echo Configure::read('SITE_ADMIN_URL')?>/visitors/export/"+email;
-    $.ajax(
-    {
-      type: "POST",
-      url: "<?php echo Configure::read('SITE_ADMIN_URL')?>/visitors/emailFilter/"+email,
-      data: {'email':email},
-      success: function(data)
-      {
-        $("#black").html(data);
-        $("a#fadownload").attr("href",path);  
-      }
-    });  
-  });
+  // $("#emailfilter").change(function()
+  // {
+  //   var email = this.value ;
+  //   var path = "<?php echo Configure::read('SITE_ADMIN_URL')?>/visitors/export/"+email;
+  //   $.ajax(
+  //   {
+  //     type: "POST",
+  //     url: "<?php echo Configure::read('SITE_ADMIN_URL')?>/visitors/emailFilter/"+email,
+  //     data: {'email':email},
+  //     success: function(data)
+  //     {
+  //       $("#black").html(data);
+  //       $("a#fadownload").attr("href",path);  
+  //     }
+  //   });  
+  // });
 
   ////////////// Calender filter --------------------------------
 
@@ -433,7 +433,29 @@ $.fn.pageMe = function(opts){
         }
       });  
   }) 
+      
+      ////////////////
 
+
+    $("#search").keyup(function()
+      {
+        var search = this.value ;
+        if(search != "")
+        {
+          var path = "<?php echo Configure::read('SITE_ADMIN_URL')?>/visitors/export/"+search;
+          $.ajax(
+            {
+              type: "POST",
+              url: "<?php echo Configure::read('SITE_ADMIN_URL')?>/visitors/emailFilter",
+              data: {'search':search},
+              success: function(data)
+              {
+                $("#black").html(data);
+                $("a#fadownload").attr("href",path); 
+              }
+            });  
+          }
+        });
 
 
   });  
