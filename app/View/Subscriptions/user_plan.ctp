@@ -111,10 +111,10 @@
      <?php
     	$name = $cardDetail->creditCard['cardholderName'];
     	if(!$cardDetail){
-    	 	echo '<input type="text" value="'.$name.'"  name="data[Subscription][holder_name]" class="chosen-select chosen-transparent form-control" id="card_name" placeholder="Cardholder name" required>';
+    	 	echo '<input type="text" value="'.$name.'"  name="data[Subscription][holder_name]" class="form-control" id="card_name" placeholder="Cardholder name" required>';
     	 echo '<div class="input-group-addon"><i class="fa fa-user"></i></div>';	
     	}else{
-    		echo '<input type="text" value="'.$name.'" readonly name="data[Subscription][holder_name]" class="chosen-select chosen-transparent form-control"  id="card_name" placeholder="Cardholder name" required />';
+    		echo '<input type="text" value="'.$name.'" readonly name="data[Subscription][holder_name]" class="form-control"  id="card_name" placeholder="Cardholder name" required />';
         echo '<div class="input-group-addon"><i class="fa fa-user"></i></div>';
     	}
     	?>     
@@ -128,10 +128,10 @@
       <?php
     	
     	if(!$cardDetail){
-    		echo '<select required  name="data[Subscription][ex_date_month][month]" id="month" class="chosen-select chosen-transparent form-control" style="color:white;background-color: #643960;width: 125px;" >';
+    		echo '<select required  name="data[Subscription][ex_date_month][month]" id="month" class="chosen-select chosen-transparent form-control" >';
     		
     	}else{
-    		echo '<select required disabled name="data[Subscription][ex_date_month][month]" class="chosen-select chosen-transparent form-control" id="month" style="color:white;background-color: #643960;width: 125px;">';
+    		echo '<select required disabled name="data[Subscription][ex_date_month][month]" class="chosen-select chosen-transparent form-control" id="month" >';
     	}
     	?>
          
@@ -156,10 +156,10 @@
       <?php
     	
     	if(!$cardDetail){
-    		echo '<select required  name="data[Subscription][ex_date_year][year]" id="year" class="form-control"  style="color:white;background-color: #643960;margin-left: 41px;width: 74px;">';
+    		echo '<select required  name="data[Subscription][ex_date_year][year]" id="year" class="chosen-select chosen-transparent form-control">';
     		
     	}else{
-    		echo '<select required disabled name="data[Subscription][ex_date_year][year]" id="year" class="form-control" style="color:white;background-color: #643960;margin-left: 41px;width: 74px;">';
+    		echo '<select required disabled name="data[Subscription][ex_date_year][year]" id="year" class="chosen-select chosen-transparent form-control">';
     	}
     	?>
          
