@@ -6,14 +6,13 @@
   // Make parition or url and get puzzle name 
   $explode = explode('/',$path);
   
-  
 
 
 echo $this->Html->css('animations.css');
 ?>
 <style>
  #blur{
-	 -webkit-filter: blur(13px);
+   -webkit-filter: blur(13px);
     -moz-filter: blur(13px);
     -o-filter: blur(13px);
     -ms-filter: blur(13px);
@@ -32,20 +31,20 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
         $("#signwithpuzzleaccount").val(0);
       }); 
       $("#Imagedata").validate({
-			rules: {
-				firstname: "required",
-				lastname: "required",
-				email: {
-					required: true,
-					email: true
-				}
-			},
-			messages: {
-				firstname: "Please enter first name.",
-				lastname: "Please enter last name.",
-				email: "Please enter a valid email address.",
-			}
-		});
+      rules: {
+        firstname: "required",
+        lastname: "required",
+        email: {
+          required: true,
+          email: true
+        }
+      },
+      messages: {
+        firstname: "Please enter first name.",
+        lastname: "Please enter last name.",
+        email: "Please enter a valid email address.",
+      }
+    });
 
 
       $("#Imagedata").submit(function(e)
@@ -70,7 +69,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
          else 
          {
 
-            var url = "<?php echo Configure::read('SITE_URL')?>visitors/process/<?php echo $explode[5];?>"; 
+            var url = "<?php echo Configure::read('SITE_URL')?>visitors/process/<?php echo $explode[6];?>"; 
              // Form Submit Ajax  
               $.ajax({
                        type: "POST",
@@ -89,23 +88,23 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
                                  success:function(data)
                                  {
                                     var obj = $.parseJSON(data);
-									obj = obj.name;
-									objs = obj.split('.');
-									var get_name = objs[0].split('_');
-									$('.'+objs[0]).css("background-image","url('<?php echo $this->webroot;?>img/puzzel/"+get_name[0]+"/"+obj+"')");  //background:url('<?php echo $this->webroot;?>'img/puzzel/"+objs[0]+"/"+obj+"')");
-									
-									if(transition  == "Newspaper"){var classes = 'pt-page-rotateOutNewspaper pt-page-rotateInNewspaper pt-page-delay500';}
-									if(transition  == "Cube to left"){var classes = 'pt-page-rotateCubeLeftOut pt-page-ontop pt-page-rotateCubeLeftIn';}
-									if(transition  == "Cube to right"){var classes = 'pt-page-rotateCubeRightOut pt-page-ontop pt-page-rotateCubeRightIn';}
-									if(transition  == "Cube to top"){var classes = 'pt-page-rotateCubeTopOut pt-page-ontop pt-page-rotateCubeTopIn';}
-									if(transition  == "Cube to bottom"){var classes = 'pt-page-rotateCubeBottomOut pt-page-ontop pt-page-rotateCubeBottomIn';}
-									if(transition  == "Flip right"){var classes = 'pt-page-flipOutRight pt-page-flipInLeft pt-page-delay500';}
-									if(transition  == "Flip left"){var classes = 'pt-page-flipOutLeft pt-page-flipInRight pt-page-delay500';}
-									if(transition  == "Flip top"){var classes = 'pt-page-flipOutTop pt-page-flipInBottom pt-page-delay500';}
-									if(transition  == "Flip bottom"){var classes = 'pt-page-flipOutBottom pt-page-flipInTop pt-page-delay500';}
-									
-									$('.'+objs[0]).addClass(classes);
-									// $("#puzzle").html(data);
+                  obj = obj.name;
+                  objs = obj.split('.');
+                  var get_name = objs[0].split('_');
+                  $('.'+objs[0]).css("background-image","url('<?php echo $this->webroot;?>img/puzzel/"+get_name[0]+"/"+obj+"')");  //background:url('<?php echo $this->webroot;?>'img/puzzel/"+objs[0]+"/"+obj+"')");
+                  
+                  if(transition  == "Newspaper"){var classes = 'pt-page-rotateOutNewspaper pt-page-rotateInNewspaper pt-page-delay500';}
+                  if(transition  == "Cube to left"){var classes = 'pt-page-rotateCubeLeftOut pt-page-ontop pt-page-rotateCubeLeftIn';}
+                  if(transition  == "Cube to right"){var classes = 'pt-page-rotateCubeRightOut pt-page-ontop pt-page-rotateCubeRightIn';}
+                  if(transition  == "Cube to top"){var classes = 'pt-page-rotateCubeTopOut pt-page-ontop pt-page-rotateCubeTopIn';}
+                  if(transition  == "Cube to bottom"){var classes = 'pt-page-rotateCubeBottomOut pt-page-ontop pt-page-rotateCubeBottomIn';}
+                  if(transition  == "Flip right"){var classes = 'pt-page-flipOutRight pt-page-flipInLeft pt-page-delay500';}
+                  if(transition  == "Flip left"){var classes = 'pt-page-flipOutLeft pt-page-flipInRight pt-page-delay500';}
+                  if(transition  == "Flip top"){var classes = 'pt-page-flipOutTop pt-page-flipInBottom pt-page-delay500';}
+                  if(transition  == "Flip bottom"){var classes = 'pt-page-flipOutBottom pt-page-flipInTop pt-page-delay500';}
+                  
+                  $('.'+objs[0]).addClass(classes);
+                  // $("#puzzle").html(data);
                                     $("#Imagedata")[0].reset();
                                     $("#success").html("<div style='background:rgba(60,118,61,0.5);color:#3C763D;font-size:14px;padding:20px'> Register successfully.</div>");
                                     $("#success").show().delay(3000).fadeOut(function(){ $(this).remove(); });
@@ -219,7 +218,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
         <div class="merge pt-perspective">
         
            <?php 
-		   $index = 0;
+       $index = 0;
             foreach($image as $image_data)
               {
                 
@@ -281,13 +280,13 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
           <h3>Share with your friends</h3>
               <?php if(isset($Refrel))
               { ?>
-                  <a class="share-btn" href="http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $Company.'/'.$explode[5].'/'.substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>&title=<?php echo $explode[5];?>&description=Price 33$" onclick="return !window.open(this.href, 'Facebook', 'width=640,height=580')"><i class="facebook">f</i></a>
+                  <a class="share-btn" href="http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $Company.'/'.$explode[6].'/'.substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>&title=<?php echo $explode[6];?>&description=Price 33$" onclick="return !window.open(this.href, 'Facebook', 'width=640,height=580')"><i class="facebook">f</i></a>
                   <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $Company.'/'.substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>" data-size="large" target = "_blank"><i class="twitter">l</i>
-                  <a href="http://mail.live.com/default.aspx?rru=compose&to=&subject=Share new puzzle <?php echo $explode[5];?>&body=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $Company.'/'.$explode[5].'/'.substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>" onclick="return !window.open(this.href, 'Outlook', 'width=640,height=580')"  target="_blank">
+                  <a href="http://mail.live.com/default.aspx?rru=compose&to=&subject=Share new puzzle <?php echo $explode[6];?>&body=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $Company.'/'.$explode[6].'/'.substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>" onclick="return !window.open(this.href, 'Outlook', 'width=640,height=580')"  target="_blank">
                   <i class="windows">w</i></a>
 
 
-                  <a class="icon-gplus" href ="https://mail.google.com/mail/?view=cm&fs=1&to=&su=Share new puzzle <?php echo $explode[5];?>&body=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $Company.'/'.$explode[5].'/'.substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>" onclick="return !window.open(this.href, 'Google', 'width=640,height=580')">
+                  <a class="icon-gplus" href ="https://mail.google.com/mail/?view=cm&fs=1&to=&su=Share new puzzle <?php echo $explode[6];?>&body=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $Company.'/'.$explode[6].'/'.substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>" onclick="return !window.open(this.href, 'Google', 'width=640,height=580')">
                   <i class="email">m</i></a> 
 
               <?php }
@@ -324,8 +323,9 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
             <?php if(isset($Refrel))
               {?>
                 <input type = "hidden" name ="refrel" value = "1">
+                <input type = "hidden" name ="refrel_id" value = "<?php echo $PuzzleData['Puzzle']['user_id']?>">
             <?php }?>
-            <input type = "hidden" name ="puzzlename" value = "<?php echo $explode[5];?>">
+            <input type = "hidden" name ="puzzlename" value = "<?php echo $explode[6];?>">
             <input type = "hidden" name ="signwithpuzzleaccount" id ="signwithpuzzleaccount" value = "">
             <div class="form-group text-center">
               <button type="submit" class="btn button-sign" id="normalsign">Submit</button><button type="submit" class="btn button-sign" id="puzelacount" name="puzzle" value = "1">Signup with Puzel Account</button>
@@ -377,27 +377,27 @@ else
           <div class="modal-body">
             <form class="popup-form">
               <div class="form-group">
-				<?php
-					if($PuzzleData['Puzzle']['type'] == "Mystery")
-					{
-						$blurr_class = "blur";
-					}
-					else
-					{
-						$blurr_class = "";
-					}
-				?>
+        <?php
+          if($PuzzleData['Puzzle']['type'] == "Mystery")
+          {
+            $blurr_class = "blur";
+          }
+          else
+          {
+            $blurr_class = "";
+          }
+        ?>
                 <div> <?php echo $PuzzleData['Puzzle']['price'];?></div>
-				<?php
-						if($PuzzleData['Puzzle']['price_image'] != "")
-						{
-					?>
-						   <div id="<?php echo $blurr_class;?>" style="background:url('<?php echo Configure::read("SITE_URL") ;?>app/webroot/img/grand_price/<?php echo $PuzzleData['Puzzle']['price_image'];?>')">
-								<a href = "<?php echo Configure::read("SITE_URL") ;?>app/webroot/img/grand_price/<?php echo $PuzzleData['Puzzle']['price_image'];?>" target="_blank"><img src = "<?php echo Configure::read("SITE_URL") ;?>app/webroot/img/grand_price/<?php echo $PuzzleData['Puzzle']['price_image'];?>"  width="540px"/></a> 
-							</div>
-					<?php
-						}
-					?>
+        <?php
+            if($PuzzleData['Puzzle']['price_image'] != "")
+            {
+          ?>
+               <div id="<?php echo $blurr_class;?>" style="background:url('<?php echo Configure::read("SITE_URL") ;?>app/webroot/img/grand_price/<?php echo $PuzzleData['Puzzle']['price_image'];?>')">
+                <a href = "<?php echo Configure::read("SITE_URL") ;?>app/webroot/img/grand_price/<?php echo $PuzzleData['Puzzle']['price_image'];?>" target="_blank"><img src = "<?php echo Configure::read("SITE_URL") ;?>app/webroot/img/grand_price/<?php echo $PuzzleData['Puzzle']['price_image'];?>"  width="540px"/></a> 
+              </div>
+          <?php
+            }
+          ?>
                 <!-- <textarea name="textarea" id="textarea" class="form-control wysiwyg"></textarea> -->
               </div>
              </form>
