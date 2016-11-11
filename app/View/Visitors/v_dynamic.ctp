@@ -325,7 +325,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
                 <input type = "hidden" name ="refrel" value = "1">
                 <input type = "hidden" name ="refrel_id" value = "<?php echo $PuzzleData['Puzzle']['user_id']?>">
             <?php }?>
-            <input type = "hidden" name ="puzzlename" value = "<?php echo $explode[6];?>">
+            <input type = "hidden" name ="puzzlename" value = "<?php echo $explode[5];?>">
             <input type = "hidden" name ="signwithpuzzleaccount" id ="signwithpuzzleaccount" value = "">
             <div class="form-group text-center">
               <button type="submit" class="btn button-sign" id="normalsign">Submit</button><button type="submit" class="btn button-sign" id="puzelacount" name="puzzle" value = "1">Signup with Puzel Account</button>
