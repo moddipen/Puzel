@@ -2954,3 +2954,8 @@ input.error, select.error {
     position: absolute;
     left: -9999px;
 }
+.dropup .chosen-container .chosen-drop {
+    border-bottom: 0;
+    top: auto;
+    bottom: 40px;
+}

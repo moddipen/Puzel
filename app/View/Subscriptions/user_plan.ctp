@@ -123,7 +123,7 @@
     <div id="errorccard"></div>
     <input type ="hidden" value ="" name="data[Subscription][check]" id="validcard">
     <div class="input-group" style="width:100%;">
-     <div class="row">
+     <div class="row dropup">
      <div class="col-sm-4 col-xs-6">
       <?php
     	
