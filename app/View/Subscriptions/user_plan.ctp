@@ -96,11 +96,11 @@
       <?php
     	$number = "************".$cardDetail->creditCard['last4'];
     	if(!$cardDetail){
-    		echo "<input type='text' class='form-control' value='".$number."'  name='data[Subscription][card_number]'  id='card_number1' placeholder='1234 5678 9012 3456' required>";
+    		echo "<input type='text' class='form-control' value='".$number."'  name='data[Subscription][card_number]'  id='card_number1' placeholder='&bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull;' required>";
         echo '<div class="input-group-addon"><i class="fa fa-credit-card"></i></div>';
     		
     	}else{
-    		echo '<input type="text" value="'.$number.'" readonly name="data[Subscription][card_number]" id="card_number1" class="form-control"  placeholder="1234 5678 9012 56" required />';
+    		echo '<input type="text" value="'.$number.'" readonly name="data[Subscription][card_number]" id="card_number1" class="form-control"  placeholder="&bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull;" required />';
         echo '<div class="input-group-addon"><i class="fa fa-credit-card"></i></div>';
     	}
       ?>
@@ -122,15 +122,16 @@
 
     <div id="errorccard"></div>
     <input type ="hidden" value ="" name="data[Subscription][check]" id="validcard">
-    <div class="input-group">
-     
+    <div class="input-group" style="width:100%;">
+     <div class="row dropup">
+     <div class="col-sm-4 col-xs-6">
       <?php
     	
     	if(!$cardDetail){
-    		echo '<select required  name="data[Subscription][ex_date_month][month]" id="month" style="color:white;background-color: #643960;width: 125px;" >';
+    		echo '<select required  name="data[Subscription][ex_date_month][month]" id="month" class="chosen-select chosen-transparent form-control" >';
     		
     	}else{
-    		echo '<select required disabled name="data[Subscription][ex_date_month][month]" id="month" style="color:white;background-color: #643960;width: 125px;">';
+    		echo '<select required disabled name="data[Subscription][ex_date_month][month]" class="chosen-select chosen-transparent form-control" id="month" >';
     	}
     	?>
          
@@ -150,15 +151,15 @@
       ?>
     		  
             </select>
-
-    
+</div>
+    <div class="col-sm-4 col-xs-6">
       <?php
     	
     	if(!$cardDetail){
-    		echo '<select required  name="data[Subscription][ex_date_year][year]" id="year"  style="color:white;background-color: #643960;margin-left: 41px;width: 74px;">';
+    		echo '<select required  name="data[Subscription][ex_date_year][year]" id="year" class="chosen-select chosen-transparent form-control">';
     		
     	}else{
-    		echo '<select required disabled name="data[Subscription][ex_date_year][year]" id="year" style="color:white;background-color: #643960;margin-left: 41px;width: 74px;">';
+    		echo '<select required disabled name="data[Subscription][ex_date_year][year]" id="year" class="chosen-select chosen-transparent form-control">';
     	}
     	?>
          
@@ -174,12 +175,15 @@
     ?>
     	  
       </select>
-
+	</div>
     <!-- </div>
 
     <div class="mc-field-group"> -->
       <!-- <label for="mce-LNAME">CVV </label> -->
-      <input type="text" value="" name="data[Subscription][cvv]"  id="cvv" maxlength="4"  placeholder ="CVV" required style =" margin-left: 63px;">
+      <div class="col-sm-4 col-xs-12">
+      <input type="text" value="" name="data[Subscription][cvv]"  id="cvv" maxlength="4"  placeholder ="CVV" class="form-control" required>
+      </div>
+      </div>
     </div>
     <div id="errorcvv"></div>
     <?php } ?>
@@ -187,7 +191,7 @@
         <div class="response" id="mce-error-response" style="display:none"></div>
         <div class="response" id="mce-success-response" style="display:none"></div>
       </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_07f1846d778e631822b8f85cf_e5b207e707" tabindex="-1" value=""></div>
+        <input type="hidden" name="b_07f1846d778e631822b8f85cf_e5b207e707" tabindex="-1" value="">
         <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-oranges"></div>
         </div>
       </section>
