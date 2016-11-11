@@ -645,9 +645,10 @@ class  SupportsController  extends AppController {
 	public function admin_emailfilter()
 	{
 		
-		if($this->request->data)
+		if($this->request->data['search'])
 		{
-			$list = $this->Support->find('all',array('conditions'=>array('OR'=>array('Support.receiver_id' =>$this->request->data['id'],'Support.sender_id' =>$this->request->data['id'])),'order'=>'Support.created desc'));
+			// $list = $this->Support->find('all',array('conditions'=>array('OR'=>array('Support.receiver_id' =>$this->request->data['id'],'Support.sender_id' =>$this->request->data['id'])),'order'=>'Support.created desc'));
+			$list = $this->Support->find('all',array('conditions'=>array('OR'=>array('Sender.firstname LIKE' =>'%'.$this->request->data['search'].'%','Receiver.firstname LIKE' =>'%'.$this->request->data['search'].'%','Sender.lastname LIKE'=>'%'.$this->request->data['search'].'%','Sender.company_name LIKE'=>'%'.$this->request->data['search'].'%','Receiver.company_name LIKE'=>'%'.$this->request->data['search'].'%','Support.subject LIKE'=>'%'.$this->request->data['search'].'%')),'order'=>'Support.created desc','group' => array('Support.subject HAVING  1')));
 		}	
 		
 		$this->set('Supports',$list);

@@ -21,7 +21,7 @@
 App::uses('AppController', 'Controller');
 App::uses('CakeEmail', 'Network/Email');
 App::import('Vendor', 'Csv', array('file' => 'Csv.php'));
- 
+
 /**
  * Static content controller
  *
@@ -447,11 +447,11 @@ class  VisitorsController  extends AppController {
 	/**
 	Admin export data 
 */	
-	public function admin_export($email = Null,$from = Null , $to = Null)
+	public function admin_export($search = Null,$from = Null , $to = Null)
 	{
-		if($email)
+		if($search)
 		{
-			$data =  $this->Visitor->find('all',array('conditions'=>array('Visitor.email'=>$email)));
+			$data = $this->Visitor->find('all',array("conditions"=>array("OR"=>array("Visitor.firstname LIKE"=>'%'.$search.'%',"Visitor.lastname LIKE"=>'%'.$search.'%',"Visitor.email LIKE"=>'%'.$search.'%',"Puzzle.name LIKE"=>'%'.$search.'%',"Puzzle.name LIKE"=>'%'.$search.'%'))));
 		}
 		else if($email == 0 && $from  && $to)
 		{
@@ -461,12 +461,9 @@ class  VisitorsController  extends AppController {
 		{
 			$data =  $this->Visitor->find('all');	
 		}	
-		
 		$i = 0;
 		foreach ($data as  $user)
         {
-
-			
 			$data[$i]['Visitor']['Visitor Firstname'] = $user['Visitor']['firstname'];
 			$data[$i]['Visitor']['Visitor Lastname'] =  $user['Visitor']["lastname"];
 			$data[$i]['Visitor']['Visitor email'] =  $user['Visitor']["email"];
@@ -533,14 +530,15 @@ class  VisitorsController  extends AppController {
 		$this->layout = null;
 		if(!empty($this->request->data))
 		{
-			if($this->request->data['email'])
+			if($this->request->data['search'])
 			{
-				$email = $this->Visitor->find('all',array('conditions'=>array('Visitor.email'=>$this->request->data['email'])));	
+				$email = $this->Visitor->find('all',array("conditions"=>array("OR"=>array("Visitor.firstname LIKE"=>'%'.$this->request->data['search'].'%',"Visitor.lastname LIKE"=>'%'.$this->request->data['search'].'%',"Visitor.email LIKE"=>'%'.$this->request->data['search'].'%',"Puzzle.name LIKE"=>'%'.$this->request->data['search'].'%'))));
 			}
 			else
 			{
 				$email = $this->Visitor->find('all',array('conditions'=>array('Visitor.email'=>$this->request->data['email'])));		
 			}	
+
 			$this->set('Data',$email);	
 		}
 		
