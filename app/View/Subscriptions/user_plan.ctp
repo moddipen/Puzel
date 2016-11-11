@@ -96,11 +96,11 @@
       <?php
     	$number = "************".$cardDetail->creditCard['last4'];
     	if(!$cardDetail){
-    		echo "<input type='text' class='form-control' value='".$number."'  name='data[Subscription][card_number]'  id='card_number1' placeholder='1234 5678 9012 3456' required>";
+    		echo "<input type='text' class='form-control' value='".$number."'  name='data[Subscription][card_number]'  id='card_number1' placeholder='•••• •••• •••• ••••' required>";
         echo '<div class="input-group-addon"><i class="fa fa-credit-card"></i></div>';
     		
     	}else{
-    		echo '<input type="text" value="'.$number.'" readonly name="data[Subscription][card_number]" id="card_number1" class="form-control"  placeholder="1234 5678 9012 56" required />';
+    		echo '<input type="text" value="'.$number.'" readonly name="data[Subscription][card_number]" id="card_number1" class="form-control"  placeholder="•••• •••• •••• ••••" required />';
         echo '<div class="input-group-addon"><i class="fa fa-credit-card"></i></div>';
     	}
       ?>
@@ -206,7 +206,6 @@
 <script>
   $(document ).ready(function()
   {
-	  $(".chosen-select").chosen({disable_search_threshold: 10});
       $('#card_number1').validateCreditCard(function(result) {
             if(result.card_type == null)
             {
