@@ -1,5 +1,5 @@
 <?php
-exit("ddfds");
+
   // Get current URl 
   $path = "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
   
