@@ -238,6 +238,7 @@ class UsersController extends AppController {
 		foreach($add as $key => $value)
 		{
 			$add[$key]['Visitor'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.email'=>$value['User']['email'])));	
+			$add[$key]['Refrel'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.email'=>$value['User']['email'],'Visitor.is_refrel'=>1)));	
 		}
 		$this->set("User",$add);
 	}			
@@ -1080,25 +1081,27 @@ public function user_reset($token=null)
 /**
 	User CSV download from admin side 
 */	
-	public function admin_userexport($startdate = null , $enddate = null)
+	public function admin_userexport($status =Null ,$startdate = null , $enddate = null)
 	{
 	  
 
-	if($startdate && $enddate)
+	if($status == 2 && $startdate && $enddate)
 	{
-	 	$data =  $this->User->find('all',array('conditions'=>array('AND'=>array(array('DATE(User.created) >='=>$startdate,'DATE(User.created) <='=>$enddate)),'User.usertype'=>0),'order'=>'User.firstname Asc','fields'=>array('User.firstname','User.lastname','User.email','User.usertype')));		
+	 	$data =  $this->User->find('all',array('conditions'=>array('AND'=>array(array('DATE(User.created) >='=>$startdate,'DATE(User.created) <='=>$enddate)),'User.usertype'=>0),'order'=>'User.firstname Asc','fields'=>array('User.firstname','User.lastname','User.email','User.usertype','User.website')));		
 	}
-	// else if($status)
-	// {
-	// 	$data =  $this->User->find('all',array('conditions'=>array('User.usertype'=>0,'User.status'=>$status),'order'=>'User.firstname Asc','fields'=>array('User.firstname','User.lastname','User.email','User.usertype')));		
-	// }	
+	else if($status !=2 && $startdate == 0  && $enddate == 0)
+	{
+		$data =  $this->User->find('all',array('conditions'=>array('User.usertype'=>0,'User.status'=>$status),'order'=>'User.firstname Asc','fields'=>array('User.firstname','User.lastname','User.email','User.usertype','User.website')));		
+	}	
 	else
 	{
-		$data =  $this->User->find('all',array('conditions'=>array('User.usertype'=>0),'order'=>'User.firstname Asc','fields'=>array('User.firstname','User.lastname','User.email','User.usertype')));
+		$data =  $this->User->find('all',array('conditions'=>array('User.usertype'=>0),'order'=>'User.firstname Asc','fields'=>array('User.firstname','User.lastname','User.email','User.usertype','User.website')));
 	}	
 		foreach($data as $key => $value)
 		{
 			$data[$key]['User']['usertype'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.email'=>$value['User']['email'])));	
+			$data[$key]['User']['website'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.email'=>$value['User']['email'],'Visitor.is_refrel'=>1)));	
+			
 		}
 
 		$index = 0;
@@ -1108,10 +1111,10 @@ public function user_reset($token=null)
 			$data[$index]['User']['lastname'] = $user['User']['lastname'];
 			$data[$index]['User']['email'] = $user['User']['email'];
 			$data[$index]['User']['usertype'] = $user['User']['usertype'];
+			$data[$index]['User']['website'] = $user['User']['website'];
 			
 			$index ++;
 		}
-
 		$this->set('User',$data);
 		$this->layout = null;
 	}

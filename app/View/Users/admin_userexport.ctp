@@ -10,7 +10,7 @@ foreach ($User as $value)
 	   $value['User']['lastname'],
 	   $value['User']['email'],
 	   $value['User']['usertype'],
-	   "10"
+	   $value['User']['website'],
 	   );
 	  $this->CSV->addRow($line);
 }

@@ -175,6 +175,12 @@ class  VisitorsController  extends AppController {
 					{	
 						$user = $this->User->find('first',array('conditions'=>array('User.id'=>$this->User->getLastInsertId())));
 						$this->request->data['user_id'] =  $user['User']['id'];
+						if(isset($this->request->data['refrel']))
+						{
+							$this->request->data['is_refrel'] = 1;
+						}		
+
+
 						$this->Visitor->create();
 						if($this->Visitor->save($this->request->data))
 						{
@@ -236,6 +242,11 @@ class  VisitorsController  extends AppController {
 				else
 				{
 					$this->Visitor->create();
+					if(isset($this->request->data['refrel']))
+						{
+							$this->request->data['is_refrel'] = 1;
+						}		
+
 					if($this->Visitor->save($this->request->data))
 					{
 						$modified = date('Y-m-d H:i:s');
@@ -286,7 +297,7 @@ class  VisitorsController  extends AppController {
 	Visitor dynamic form page 
 */			
 
-	public function v_dynamic($company_name = null,$name = null)
+	public function v_dynamic($company_name = null,$name = null,$refrel = null)
 	{
 		$this->layout = "visitor";
 		$this->set('title',$name);
@@ -294,7 +305,14 @@ class  VisitorsController  extends AppController {
 		$this->set('PuzzleData',$name);
 		$image = $this->Image->find('all',array('conditions'=>array('Image.puzzle_id'=>$name['Puzzle']['id'])));
 		$this->set('image',$image);
+		if($refrel)
+		{
+			$this->set('Refrel',$refrel);
+		}	
+
+
 		$this->set('drawimage_s',count($image));
+		$this->set("Company",$company_name);
 	}
 
 

@@ -126,7 +126,7 @@
                             <td><?php echo $user['User']['lastname'];?></td>
                             <td><?php echo $user['User']['email'];?></td>
                             <td><?php echo $user['Visitor'];?></td>
-                            <td>10</td>
+                            <td><?php echo $user['Refrel'];?></td>
                             <td class="minipadding controls">
                             <div class="onoffswitch green small" style="margin:0px auto;">
                             <?php 
@@ -351,7 +351,7 @@ $(document).ready(function(){
   $("#status").change(function()
   {
     var status = this.value ;
-    var path = "<?php echo Configure::read('SITE_ADMIN_URL')?>/users/userexport/"+status;
+    var path = "<?php echo Configure::read('SITE_ADMIN_URL')?>/users/userexport/"+status+"/0/0";
     $.ajax(
     {
       type: "POST",
@@ -384,7 +384,7 @@ $(document).ready(function(){
     var curr_year = d.getFullYear(); // Selected date year
     var desired_date_fromat = curr_year+"-"+curr_month+"-"+curr_date; //Desired date format 
     $("#selectedenddate").val(desired_date_fromat);
-    var path = "<?php echo Configure::read('SITE_ADMIN_URL')?>/users/userexport/"+$("#selectedstartdate").val()+"/"+$("#selectedenddate").val();
+    var path = "<?php echo Configure::read('SITE_ADMIN_URL')?>/users/userexport/2/"+$("#selectedstartdate").val()+"/"+$("#selectedenddate").val();
     $.ajax(
     {
       type: "POST",
@@ -444,7 +444,7 @@ $(document).ready(function(){
     }
     else
     {
-      var path = "<?php echo Configure::read('SITE_ADMIN_URL')?>/users/userexport/"+$("#startdate").val()+"/"+$("#enddate").val();
+      var path = "<?php echo Configure::read('SITE_ADMIN_URL')?>/users/userexport/2/"+$("#startdate").val()+"/"+$("#enddate").val();
     }  
 
 
