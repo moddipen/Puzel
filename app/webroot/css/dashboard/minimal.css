@@ -2950,3 +2950,7 @@ label.error, span.error {
 input.error, select.error {
     border-color: #FB5959;
 }
+.chosen-container-single .chosen-search {
+    position: absolute;
+    left: -9999px;
+}
