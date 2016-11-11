@@ -87,7 +87,7 @@
                                 </div>
                             </div>
                             <input type ="hidden" value="" id="selectedenddate">   
-                            <div class="col-md-2">
+                            <!-- <div class="col-md-2">
                               <div class="form-group">
                                     <select name="by" class="form-control chosen-select" id="emailfilter">
                                       <option style="display:none;"> Please Select</option>
@@ -96,12 +96,12 @@
                                       <?php } } ?>
                                     </select>
                                 </div>
-                            </div>
-                            <!-- <div class="col-md-2">
-                              <div class="form-group">
-                                  <input type="text" value="" name="search" class="form-control">
-                                </div>
                             </div> -->
+                             <div class="col-md-2">
+                              <div class="form-group">
+                                  <input type="text" value="" name="search" class="form-control" id="search">
+                                </div>
+                            </div>
                           </div>
                       </form>
                     </div>
@@ -451,6 +451,38 @@ $(document).ready(function()
         }
       });  
   }) 
+
+     //////////////// Search keyup
+
+
+    $("#search").keyup(function()
+      {
+        var search = this.value ;
+        if(search != "")
+        {
+          $.ajax(
+            {
+              type: "POST",
+               url: "<?php echo Configure::read('SITE_ADMIN_URL')?>/supports/emailfilter",
+              data: {'search':search},
+              success: function(data)
+              {
+                $("#black").html(data);
+                
+              }
+            });  
+          }
+        });
+
+      
+
+
+
+
+
+
+
+
 
 
 
