@@ -42,7 +42,7 @@
           <i class="fa fa-envelope"></i>
         </div>
     </div>
-    <div id="erroremail"></div>
+    <!--div id="erroremail"></div-->
     <div class="input-group">
       <!-- <label for="mce-FNAME">First Name </label> -->
       <input type="text" value="" name="data[Subscription][firstname]" class="form-control" id="FNAME" placeholder = "Please enter first name" required>
@@ -50,7 +50,7 @@
           <i class="fa fa-user"></i>
         </div>
     </div>
-    <div id="errorfname"></div>
+    <!--div id="errorfname"></div-->
     <div class="input-group">
       <!-- <label for="mce-LNAME">Last Name </label> -->
       <input type="text" value="" name="data[Subscription][lastname]" class="form-control" id="LNAME" placeholder = "Please enter last name" required>
@@ -58,7 +58,7 @@
           <i class="fa fa-user"></i>
         </div>
     </div>
-    <div id="errorlname"></div>
+    <!--div id="errorlname"></div-->
 
     <div class="input-group">
       <!-- <label for="mce-LNAME">Company Name </label> -->
@@ -67,7 +67,7 @@
           <i class="fa fa-user"></i>
         </div>
     </div>
-    <div id="errorcname"></div>
+    <!--div id="errorcname"></div-->
 
 
     <div class="input-group">
@@ -77,7 +77,7 @@
           <i class="fa fa-key"></i>
         </div>
     </div>
-    <div id="errorpassword"></div>
+    <!--div id="errorpassword"></div-->
     	<?php }else{
     		
     		echo "<input type='hidden' name='data[Subscription][action]' value='upgrade'>";
@@ -188,7 +188,7 @@
       </div>
       </div>
     </div>
-    <div id="errorcvv"></div>
+    <!--div id="errorcvv"></div-->
     <?php } ?>
       <div id="mce-responses" class="clear">
         <div class="response" id="mce-error-response" style="display:none"></div>
@@ -208,7 +208,7 @@
 
 <script>
 $(document ).ready(function(){
-	<?php if($Rate['Subscription']['price'] != "Free" ) {?>
+	<?php if($Rate['Subscription']['price'] == "Free" ) {?>
 	$("form").validate({
 		rules: {
 			'data[Subscription][email]': {required: true, email: true},
