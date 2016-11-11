@@ -45,45 +45,16 @@
 
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 	Router::connect('/user', array('controller' => 'users', 'action' => 'login', 'user' => true));
-
-     // Get current URl 
-  $path = "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
-  
-  // Make parition or url and use conditions
-  $explode = explode('/',$path);
-  
-
-  // refrel hosting page 
-  if(isset($explode[7]))
-  {
-        Router::connect(
-            '/puzzle/:company_name/:name/:refrel', // E.g. /blog/3-CakePHP_Rocks
-            array('controller' => 'visitors', 'action' => 'dynamic','v'=>true),
-            array(
-                // order matters since this will simply map ":id" to
-                // $articleId in your action
-                'pass' => array('company_name','name','refrel')
-                
-            )
-        );
-  }
-  // normal hosting page 
-  else
-  {
-     Router::connect(
-            '/puzzle/:company_name/:name', // E.g. /blog/3-CakePHP_Rocks
-            array('controller' => 'visitors', 'action' => 'dynamic','v'=>true),
-            array(
-                // order matters since this will simply map ":id" to
-                // $articleId in your action
-                'pass' => array('company_name','name')
-                
-            )
-        );   
-  }  
-
-
-	
+	Router::connect(
+    '/puzzle/:company_name/:name', // E.g. /blog/3-CakePHP_Rocks
+    array('controller' => 'visitors', 'action' => 'dynamic','v'=>true),
+    array(
+        // order matters since this will simply map ":id" to
+        // $articleId in your action
+        'pass' => array('company_name','name')
+        
+    )
+);
 
     Router::parseExtensions('csv');
 
