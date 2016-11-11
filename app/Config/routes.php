@@ -54,7 +54,7 @@
   
 
   // refrel hosting page 
-  if(isset($explode[7]))
+  if(isset($explode[6]))
   {
         Router::connect(
             '/puzzle/:company_name/:name/:refrel', // E.g. /blog/3-CakePHP_Rocks
