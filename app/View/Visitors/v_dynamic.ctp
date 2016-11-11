@@ -6,6 +6,7 @@
   // Make parition or url and get puzzle name 
   $explode = explode('/',$path);
   
+  debug($explode);exit;
 
 
 echo $this->Html->css('animations.css');
