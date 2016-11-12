@@ -1,5 +1,9 @@
 <style>
   body {overflow-y:scroll;}  
+  #content.full-page .inside-block form .input-group input#cvv {
+    border-bottom-right-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+}
 </style>
 
 
@@ -122,13 +126,13 @@
 
     <div id="errorccard"></div>
     <input type ="hidden" value ="" name="data[Subscription][check]" id="validcard">
-    <div class="input-group">
-    <div class="row">
+    <div class="form-group">
+    <div class="row dropup">
      <div class="col-sm-4 col-xs-12">
       <?php
     	
     	if(!$cardDetail){
-    		echo '<select required  name="data[Subscription][ex_date_month][month]" id="month" class="chosen-select chosen-transparent form-control" >';
+    		echo '<select required  name="data[Subscription][ex_date_month][month]" id="month" class="chosen-select chosen-transparent form-control " >';
     		
     	}else{
     		echo '<select required disabled name="data[Subscription][ex_date_month][month]" id="month" class="chosen-select chosen-transparent form-control">';
@@ -184,7 +188,6 @@
       <div class="col-sm-4 col-xs-12">
       <div class="input-group">
       <input type="text" value="" name="data[Subscription][cvv]"  id="cvv" maxlength="4"  placeholder ="CVV" class="form-control" required>
-      <div class="input-group-addon"></div>
       </div>
       </div>
       </div>
