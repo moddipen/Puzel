@@ -77,7 +77,7 @@ class AppController extends Controller
                 $this->redirect(array('controller'=>'users','action'=>'login','user'=>true));
             } 
 
-            // prefix setting 
+            // prefix setting  and header count
             if ($this->params['prefix'] == 'admin')
         	{
         		$signup = 0 ;
@@ -103,17 +103,91 @@ class AppController extends Controller
 
 
         	}
+            // Business prefix annd header count 
     	    elseif ($this->params['prefix'] == 'business')
     	     {
     	     	$signup = 0 ;
         		$this->set('Signup',$signup);
     	     	$this->layout = "dashboard";
-    	     }
+
+                $data = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
+                if(empty($data))
+                {
+                    $data = 0 ;
+                }
+                $this->set('CountPuzzle',$data);
+
+                $active = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'),'Puzzle.status'=>0)));
+                if(empty($active))
+                {
+                    $active = 0 ;
+                }
+                $this->set('CountActivePuzzle',$active);
+
+                // Count total pieces
+                $list = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
+             
+                // count balance pieces  
+                $order = $this->Order->find('first',array('conditions'=>array('Order.user_id'=>$this->Auth->user('id'))));  
+                if(!empty($order))
+                {
+                    $clas = $this->Subscription->find('first',array('conditions'=>array('Subscription.id'=>$order['Order']['subscription_id'])));   
+                    $pic = $clas['Subscription']['pieces'] ;
+                }
+                else
+                {
+                    $pic = 0;
+                }   
+                
+                $this->set('Balancepeices',$pic);
+
+    	    }
+
+            /// User header count and prefix 
     	    elseif ($this->params['prefix'] == 'user')
     	     {
     	     	$signup = 0 ;
         		$this->set('Signup',$signup);
     	     	$this->layout = "dashboard";
+
+                // Support count 
+                $support = $this->Support->find('count',array('conditions'=>array(array('OR'=>array('Support.sender_id'=>$this->Auth->user('id'),'Support.receiver_id'=>$this->Auth->user('id')))),'group' => array('Support.subject HAVING  1')));
+                if(!empty($support))
+                {
+                    $support = $support;
+                }
+                else
+                {
+                    $support = 0 ;
+                }    
+                $this->set('Support',$support);
+
+                // Participate in puzzle 
+
+                $visitor = $this->Visitor->find('count',array('conditions'=>array('Visitor.user_id'=>$this->Auth->user('id'))));
+                if(!empty($visitor))
+                {
+                    $visitor = $visitor ;
+                }
+                else
+                {
+                    $visitor = 0;
+                }       
+
+                $this->set('Visitor',$visitor);    
+
+                // Check participate puzzle is active 
+                $active_puzzle = $this->Visitor->find('count',array('conditions'=>array('Visitor.user_id'=>$this->Auth->user('id'),'Puzzle.status'=>0)));
+                if(!empty($active_puzzle))
+                {
+                    $active_puzzle = $active_puzzle ;
+                }
+                else
+                {
+                    $active_puzzle = 0;
+                }       
+
+                $this->set('Activepuzzle',$active_puzzle);    
     	     }
             elseif ($this->params['prefix'] == 'v')
              {

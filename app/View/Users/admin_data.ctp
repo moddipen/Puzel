@@ -434,7 +434,7 @@ $.fn.pageMe = function(opts){
       });  
   }) 
       
-      ////////////////
+      //////////////// Search keyup
 
 
     $("#search").keyup(function()

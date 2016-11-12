@@ -46,84 +46,12 @@ class  SupportsController  extends AppController {
  *	or MissingViewException in debug mode.
  */
 	function beforeFilter()
-	 {
+	{
 	 	parent::beforeFilter();
 		$signup = 0;
 		$this->set("Signup",$signup);
 		$this->layout = 'dashboard';
-		// Count of total puzzle 
-	 	// Count of total puzzle 
-	 	
-	  	if($this->Auth->login())
-	  	{
-		  		$data = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
-			if(empty($data))
-			{
-				$data = 0 ;
-			}
-			$this->set('CountPuzzle',$data);
-
-			$active = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'),'Puzzle.status'=>0)));
-			if(empty($active))
-			{
-				$active = 0 ;
-			}
-			$this->set('CountActivePuzzle',$active);
-
-			// Count total pieces
-			$list = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
-			// foreach ($list as $key => $value)
-			// {
-			// 	$visitor  = $this->Visitor->find('count',array('conditions'=>array('Visitor.puzzle_id'=>$value['Puzzle']['id'])));	
-			// 	if($visitor != NULL)
-			// 	{
-			// 		$list[$key]['Visitor'] = $visitor;
-			// 	}
-			// 	else
-			// 	{
-			// 		$list[$key]['Visitor'] = 0;	
-			// 	}
-
-			// 	$peices  = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$value['Puzzle']['id'])));	
-			// 	if($peices != NULL)
-			// 	{
-			// 		$list[$key]['Peices'] = $peices;
-				
-			// 	}
-			// 	else
-			// 	{
-			// 		$list[$key]['Peices'] = 0;	
-			// 	}
-			// }
-			// First loop   for peices count
-			// foreach($list as $value)
-			// 	{
-			// 		$visitcount+= $value['Visitor'];
-			// 	}
-
-				// if(empty($list))
-	//			{	
-					$visitcount = 0;
-	//			}	
-
-			// count balance pieces  
-				$order = $this->Order->find('first',array('conditions'=>array('Order.user_id'=>$this->Auth->user('id'))));	
-				if(!empty($order))
-				{
-					$clas = $this->Subscription->find('first',array('conditions'=>array('Subscription.id'=>$order['Order']['subscription_id'])));	
-					$pic = $clas['Subscription']['pieces'] ;
-				}
-				else
-				{
-					$pic = 0;
-				}	
-				
-				$this->set('Visitor',$visitcount);
-				$this->set('Balancepeices',$pic);
-		  	}
-	 	
-			
-	 }
+	}
 
 
 	
@@ -133,7 +61,9 @@ class  SupportsController  extends AppController {
 	public function business_index()
 	{
 		$this->set("title","Support");
-		$this->set('Supports',$this->Support->find('all',array('conditions'=>array('OR'=>array('Support.receiver_id'=>$this->Auth->user('id'),'Support.sender_id'=>$this->Auth->user('id'))),'order'=>'Support.created desc')));
+		$support = $this->Support->find('all',array('conditions'=>array('OR'=>array('Support.receiver_id' =>$this->Auth->user('id'),'Support.sender_id' =>$this->Auth->user('id'))),'order'=>'Support.created desc','group' => array('Support.subject HAVING  1')));
+
+		$this->set('Supports',$support);
 	}
 
 /**
@@ -295,7 +225,7 @@ class  SupportsController  extends AppController {
 	public function user_index()
 	{
 		$this->set("title","Support");
-		$this->set('Supports',$this->Support->find('all',array('conditions'=>array('OR'=>array('Support.receiver_id'=>$this->Auth->user('id'),'Support.sender_id'=>$this->Auth->user('id'))),'order'=>'Support.created desc')));
+		$this->set('Supports',$this->Support->find('all',array('conditions'=>array('OR'=>array('Support.receiver_id'=>$this->Auth->user('id'),'Support.sender_id'=>$this->Auth->user('id'))),'order'=>'Support.created desc','group' => array('Support.subject HAVING  1'))));
 	}
 
 /**
@@ -539,7 +469,15 @@ class  SupportsController  extends AppController {
 		{
 			$user = $this->Auth->user();
 			$this->request->data['Support']['sender_id'] = $this->Auth->user('id');
-			$this->request->data['Support']['receiver_id'] = $support['Support']['receiver_id'];
+			
+			if($support['Support']['sender_id'] != $this->Auth->user('id'))
+			{
+				$this->request->data['Support']['receiver_id'] = $support['Support']['sender_id'];
+			}
+			else
+			{
+				$this->request->data['Support']['receiver_id'] = $support['Support']['receiver_id'];	
+			}	
 			$this->request->data['Support']['subject'] = $support['Support']['subject'];
 			$this->Support->create();
 			if($this->Support->save($this->request->data))
@@ -606,7 +544,7 @@ class  SupportsController  extends AppController {
 		{
 			if($this->request->data['startdate'] != "" && $this->request->data['enddate'] != "")
 			{
-				$support = $this->Support->find('all',array('conditions'=>array('AND'=>array(array('DATE(Support.created) >='=>$this->request->data['startdate'],'DATE(Support.created) <='=>$this->request->data['enddate'])),'OR'=>array('Support.receiver_id'=>$this->Auth->user('id'),'Support.sender_id'=>$this->Auth->user('id'))))) ; 					
+				$support = $this->Support->find('all',array('conditions'=>array('AND'=>array(array('DATE(Support.created) >='=>$this->request->data['startdate'],'DATE(Support.created) <='=>$this->request->data['enddate'])),'OR'=>array('Support.receiver_id'=>$this->Auth->user('id'),'Support.sender_id'=>$this->Auth->user('id'))),'group' => array('Support.subject HAVING  1'))) ; 					
 			}
 			else
 			{
@@ -676,6 +614,24 @@ class  SupportsController  extends AppController {
 		
 	}	
 
+/**
+	User Support calender and monthwise filter  
+*/	
+	public function user_datefilter()
+	{
+		if(!empty($this->request->data))
+		{
+			if($this->request->data['startdate'] != "" && $this->request->data['enddate'] != "")
+			{
+				$this->set('Supports',$this->Support->find('all',array('conditions'=>array('AND'=>array(array('DATE(Support.created) >='=>$this->request->data['startdate'],'DATE(Support.created) <='=>$this->request->data['enddate'])),'OR'=>array('Support.receiver_id'=>$this->Auth->user('id'),'Support.sender_id'=>$this->Auth->user('id'))),'order'=>'Support.created desc','group' => array('Support.subject HAVING  1'))));	
+			}
+			else
+			{
+				$this->set('Supports',$this->Support->find('all',array('conditions'=>array('OR'=>array('Support.receiver_id'=>$this->Auth->user('id'),'Support.sender_id'=>$this->Auth->user('id'))),'order'=>'Support.created desc','group' => array('Support.subject HAVING  1'))));		
+			}	
+			
+		}	
+	}
 
 
 

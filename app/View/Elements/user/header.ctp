@@ -6,12 +6,12 @@
 
                     <div class="media">        
                       <span class="pull-right">
-                        <i class="fa fa-briefcase media-object"></i>
+                        <i class="fa fa-support media-object"></i>
                       </span>
 
                       <div class="media-body">
-                        <strong>Balance Pieces</strong>
-                        <h2 class="media-heading animate-number" data-value="3659" data-animation-duration="1500">0</h2>
+                        <strong>Support</strong>
+                        <h2 class="media-heading animate-number" data-value="<?php echo $Support;?>" data-animation-duration="1500">0</h2>
                       </div>
                     </div> 
                   </div>
@@ -24,7 +24,7 @@
                 </div>
               </div>
 
-
+<!-- 
               <div class="card-container col-lg-3 col-sm-6 col-sm-12">
                 <div class="card card-transparent hover">
                   <div class="front">        
@@ -49,7 +49,7 @@
                   </div>
                 </div>
               </div>
-
+ -->
 
 
               <div class="card-container col-lg-3 col-sm-6 col-sm-12">
@@ -62,8 +62,8 @@
                       </span>
 
                       <div class="media-body">
-                        <strong>Puzels Created</strong>
-                        <h2 class="media-heading animate-number" data-value="169541" data-animation-duration="1500">0</h2>
+                        <strong>Puzels participated</strong>
+                        <h2 class="media-heading animate-number" data-value="<?php echo $Visitor;?>" data-animation-duration="1500">0</h2>
                       </div>
                     </div>
 
@@ -89,7 +89,7 @@
 
                       <div class="media-body">
                         <strong>Active Puzels</strong>
-                        <h2 class="media-heading animate-number" data-value="9634" data-animation-duration="1500">0</h2>
+                        <h2 class="media-heading animate-number" data-value="<?php echo $Activepuzzle;?>" data-animation-duration="1500">0</h2>
                       </div>
                     </div> 
                   </div>

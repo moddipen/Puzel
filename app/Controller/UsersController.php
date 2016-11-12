@@ -55,12 +55,12 @@ class UsersController extends AppController {
 	  	$signup = 0;
 		$this->set("Signup",$signup);
 	  	$this->Auth->allow(array('index','contact','user_register','user_login','about','business','user_forgetpassword','admin_login','user_reset'));
-	 // Count of total puzzle 
+	 	// Count of total puzzle 
 	 	// Count of total puzzle 
 	 	
-	  	if($this->Auth->login())
+	  	if($this->params['prefix'] == 'business')
 	  	{
-		  		$data = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
+		  	$data = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
 			if(empty($data))
 			{
 				$data = 0 ;
@@ -76,80 +76,86 @@ class UsersController extends AppController {
 
 			// Count total pieces
 			$list = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
-			// foreach ($list as $key => $value)
-			// {
-			// 	$visitor  = $this->Visitor->find('count',array('conditions'=>array('Visitor.puzzle_id'=>$value['Puzzle']['id'])));	
-			// 	if($visitor != NULL)
-			// 	{
-			// 		$list[$key]['Visitor'] = $visitor;
-			// 	}
-			// 	else
-			// 	{
-			// 		$list[$key]['Visitor'] = 0;	
-			// 	}
 
-			// 	$peices  = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$value['Puzzle']['id'])));	
-			// 	if($peices != NULL)
-			// 	{
-			// 		$list[$key]['Peices'] = $peices;
-				
-			// 	}
-			// 	else
-			// 	{
-			// 		$list[$key]['Peices'] = 0;	
-			// 	}
-			// }
-			// First loop   for peices count
-			// foreach($list as $value)
-			// 	{
-			// 		$visitcount+= $value['Visitor'];
-			// 	}
-
-				// if(empty($list))
-	//			{	
-					$visitcount = 0;
-	//			}	
 
 			// count balance pieces  
-				$order = $this->Order->find('first',array('conditions'=>array('Order.user_id'=>$this->Auth->user('id'))));	
-				if(!empty($order))
-				{
-					$clas = $this->Subscription->find('first',array('conditions'=>array('Subscription.id'=>$order['Order']['subscription_id'])));	
-					$pic = $clas['Subscription']['pieces'] ;
-				}
-				else
-				{
-					$pic = 0;
-				}	
-				
-				$this->set('Visitor',$visitcount);
-				$this->set('Balancepeices',$pic);
-
-				// Admin header data
-				if ($this->params['prefix'] == 'admin')
-        		{
-        			// Business count 
-        			$list_ofbusiness = $this->User->find('count',array('conditions'=>array('User.usertype'=>1)));
-        			$this->set('Businesscount', $list_ofbusiness);
-
-        			// user count 
-					$user_ofcount = $this->User->find('count',array('conditions'=>array('User.usertype'=>0)));
-        			$this->set('Usercount', $user_ofcount); 
-
-					// Puzzle count 
-					$puzle = $this->Puzzle->find('count');
-        			$this->set('Puzzle', $puzle); 	        			       			
-
-        			// Active puzzle count 
-
-        			$active_puzle = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.status'=>0)));
-        			$this->set('ActivePuzzle', $active_puzle); 	        			       				
-
-        		}	
-	  	}
-	 	
+			$order = $this->Order->find('first',array('conditions'=>array('Order.user_id'=>$this->Auth->user('id'))));	
+			if(!empty($order))
+			{
+				$clas = $this->Subscription->find('first',array('conditions'=>array('Subscription.id'=>$order['Order']['subscription_id'])));	
+				$pic = $clas['Subscription']['pieces'] ;
+			}
+			else
+			{
+				$pic = 0;
+			}	
 			
-	 }
+			$this->set('Balancepeices',$pic);
+		}	
+		// Admin header data
+		if ($this->params['prefix'] == 'admin')
+		{
+			// Business count 
+			$list_ofbusiness = $this->User->find('count',array('conditions'=>array('User.usertype'=>1)));
+			$this->set('Businesscount', $list_ofbusiness);
+
+			// user count 
+			$user_ofcount = $this->User->find('count',array('conditions'=>array('User.usertype'=>0)));
+			$this->set('Usercount', $user_ofcount); 
+
+			// Puzzle count 
+			$puzle = $this->Puzzle->find('count');
+			$this->set('Puzzle', $puzle); 	        			       			
+
+			// Active puzzle count 
+
+			$active_puzle = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.status'=>0)));
+			$this->set('ActivePuzzle', $active_puzle); 	        			       				
+
+		}
+
+		if($this->params['prefix'] == 'user')
+		{
+		    // Support count 
+            $support = $this->Support->find('count',array('conditions'=>array(array('OR'=>array('Support.sender_id'=>$this->Auth->user('id'),'Support.receiver_id'=>$this->Auth->user('id')))),'group' => array('Support.subject HAVING  1')));
+            if(!empty($support))
+            {
+                $support = $support;
+            }
+            else
+            {
+                $support = 0 ;
+            }    
+            $this->set('Support',$support);
+
+            // Participate in puzzle 
+
+            $visitor = $this->Visitor->find('count',array('conditions'=>array('Visitor.user_id'=>$this->Auth->user('id'))));
+            if(!empty($visitor))
+            {
+                $visitor = $visitor ;
+            }
+            else
+            {
+                $visitor = 0;
+            }       
+
+            $this->set('Visitor',$visitor);    
+
+            // Check participate puzzle is active 
+            $active_puzzle = $this->Visitor->find('count',array('conditions'=>array('Visitor.user_id'=>$this->Auth->user('id'),'Puzzle.status'=>0)));
+            if(!empty($active_puzzle))
+            {
+                $active_puzzle = $active_puzzle ;
+            }
+            else
+            {
+                $active_puzzle = 0;
+            }       
+
+            $this->set('Activepuzzle',$active_puzzle);    
+		}	
+	}
 
 	
 	
@@ -237,8 +243,8 @@ class UsersController extends AppController {
 
 		foreach($add as $key => $value)
 		{
-			$add[$key]['Visitor'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.email'=>$value['User']['email'])));	
-			$add[$key]['Refrel'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.email'=>$value['User']['email'],'Visitor.is_refrel'=>1)));	
+			$add[$key]['Visitor'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.user_id'=>$value['User']['id'])));	
+			$add[$key]['Refrel'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.user_id'=>$value['User']['id'],'Visitor.is_refrel'=>1)));	
 		}
 		$this->set("User",$add);
 	}			

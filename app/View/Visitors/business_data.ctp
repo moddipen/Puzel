@@ -92,7 +92,7 @@
                                 </div>
                             </div>
                             <input type ="hidden" value="" id="selectedenddate">
-                            <div class="col-md-2">
+                            <!-- <div class="col-md-2">
                               <div class="form-group">
                                     <select name="by" class="form-control chosen-select" id="emailfilter">
                                       <option style="display:none">Email Address</option>
@@ -104,12 +104,12 @@
                                       ?>
                                     </select>
                                 </div>
-                            </div>
-                          <!--   <div class="col-md-2">
-                              <div class="form-group">
-                                  <input type="text" value="" name="search" class="form-control">
-                                </div>
                             </div> -->
+                            <div class="col-md-2">
+                              <div class="form-group">
+                                  <input type="text" value="" name="search" class="form-control" id="search">
+                                </div>
+                            </div> 
                           </div>
                       </form>
                     </div>
@@ -452,6 +452,32 @@ $(document).ready(function()
             }
           });  
         }); 
+
+    //////////////// Search keyup
+
+
+    $("#search").keyup(function()
+      {
+        var search = this.value ;
+        if(search != "")
+        {
+          var path = "<?php echo Configure::read('SITE_BUSINESS_URL')?>/visitors/export/"+search;
+          $.ajax(
+            {
+              type: "POST",
+              url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/visitors/emailFilter",
+              data: {'search':search},
+              success: function(data)
+              {
+                $("#black").html(data);
+                $("a#downloadcsv").attr("href",path);  
+              }
+            });  
+          }
+        });
+
+
+
 
   });   
 

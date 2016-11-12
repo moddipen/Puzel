@@ -47,17 +47,22 @@
                     <div class="col-md-10">
                       <form role="form" class="custom-form">
                           <div class="row minipadding">
-                            <div class="col-md-2">
+                            <!-- <div class="col-md-2">
                               <div class="form-group">
                                     <select name="user" class="form-control chosen-select">
                                       <option value="">All Puzels</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-md-2">
                               <div class="form-group">
-                                    <select name="datetime" class="form-control chosen-select">
-                                      <option value="">Today</option>
+                                    <select name="datetime" class="form-control chosen-select" id="datetime">
+                                      <option style="display:none;" >Pleasen select</option>
+                                      <option value="Today">Today</option>
+                                      <option value="Weeks">Weeks</option>
+                                      <option value="Month">Month</option>
+                                      <option value="Year">Year</option>
+                                      <option value="AllTime">All time</option>
                                     </select>
                                 </div>
                             </div>
@@ -70,6 +75,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <input type ="hidden" value="" id="selectedstartdate">
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <div class="input-group">
@@ -79,6 +85,7 @@
                                      </div>
                                 </div>
                             </div>
+                            <input type ="hidden" value="" id="selectedenddate">
                           </div>
                       </form>
                     </div>
@@ -116,10 +123,10 @@
                                   return false">
                                   <i class="fa fa-facebook"></i>
                               </a> -->
-                              <a class="share-btn" href="http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $value['Puzzle']['Business']['company_name'].'/'.$value['Puzzle']['Puzzle']['name'].'/'.$user['firstname'];?>&title=<?php echo $value['Puzzle']['Puzzle']['name'];?>&description=Price 33$" onclick="return !window.open(this.href, 'Facebook', 'width=640,height=580')"><i class="fa fa-facebook"></i></a>
+                              <a class="share-btn" href="http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $value['Puzzle']['Business']['company_name'].'/'.$value['Puzzle']['Puzzle']['name'].'/'.$value['Puzzle']['Business']['firstname'].'_'.$value['Puzzle']['Business']['id'];?>&title=<?php echo $value['Puzzle']['Puzzle']['name'];?>&description=Price 33$" onclick="return !window.open(this.href, 'Facebook', 'width=640,height=580')"><i class="fa fa-facebook"></i></a>
                                 &nbsp;&nbsp;
                                 <a class="twitter-share-button"
-                                    href="http://puzel.stage.n-framescorp.com/puzzle/<?php echo $value['Puzzle']['Business']['company_name'].'/'.$value['Puzzle']['Puzzle']['name'].'/'.$user['firstname'];?>"
+                                    href="http://puzel.stage.n-framescorp.com/puzzle/<?php echo $value['Puzzle']['Business']['company_name'].'/'.$value['Puzzle']['Puzzle']['name'].'/'.$value['Puzzle']['Business']['firstname'].'_'.$value['Puzzle']['Business']['id'];?>"
                                      data-size="large"
                                     target = "_blank">
                                 <i class="fa fa-twitter"></i></a>
@@ -137,9 +144,9 @@
                                 </a> -->
                                 <!-- <a class="icon-gplus" href ="https://plus.google.com/share?url=http://puzel.stage.n-framescorp.com/<?php echo $value['Puzzle']['Puzzle']['name'];?>&title=<?php echo $value['Puzzle']['Puzzle']['name'];?>" onclick="return !window.open(this.href, 'Google', 'width=640,height=580')"><i class="fa fa-envelope"></i></a>
                                &nbsp;&nbsp;<a href="https://login.live.com/login.srf" target="_blank" style="color:white;"><i class="fa fa-windows"></i></a> -->
-                               <a class="icon-gplus" href ="http://puzel.stage.n-framescorp.com/puzzle/<?php echo $value['Puzzle']['Business']['company_name'].'/'.$value['Puzzle']['Puzzle']['name'].'/'.$user['firstname'];?>" onclick="return !window.open(this.href, 'Google', 'width=640,height=580')"><i class="fa fa-envelope"></i></a>
+                               <a class="icon-gplus" href ="http://puzel.stage.n-framescorp.com/puzzle/<?php echo $value['Puzzle']['Business']['company_name'].'/'.$value['Puzzle']['Puzzle']['name'].'/'.$value['Puzzle']['Business']['firstname'].'_'.$value['Puzzle']['Business']['id'];?>" onclick="return !window.open(this.href, 'Google', 'width=640,height=580')"><i class="fa fa-envelope"></i></a>
                                &nbsp;&nbsp;
-                               <a href="http://mail.live.com/default.aspx?rru=compose&to=&subject=Share new puzzle <?php echo $value['Puzzle']['Puzzle']['name'];?>&body=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $value['Puzzle']['Business']['company_name'].'/'.$value['Puzzle']['Puzzle']['name'].'/'.$user['firstname'];?>" onclick="return !window.open(this.href, 'Outlook', 'width=640,height=580')" target="_blank" style="color:white;"><i class="fa fa-windows"></i></a>
+                               <a href="http://mail.live.com/default.aspx?rru=compose&to=&subject=Share new puzzle <?php echo $value['Puzzle']['Puzzle']['name'];?>&body=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $value['Puzzle']['Business']['company_name'].'/'.$value['Puzzle']['Puzzle']['name'].'/'.$value['Puzzle']['Business']['firstname'].'_'.$value['Puzzle']['Business']['id'];?>" onclick="return !window.open(this.href, 'Outlook', 'width=640,height=580')" target="_blank" style="color:white;"><i class="fa fa-windows"></i></a>
                             
                           </td>
                           </tr>
@@ -310,6 +317,95 @@ $.fn.pageMe = function(opts){
 $(document).ready(function(){
     
   $('#datafile').pageMe({pagerSelector:'#pagination',childSelector:'tr',showPrevNext:true,hidePageNumbers:false,perPage:10});
+
+///////////////////////////////////////////////////// Filter Module ---------------------------------------
+
+   // Calender Filter 
+  $('#startdate').datepicker({ format: 'yyyy-mm-dd', autoclose: true}).on('changeDate',function(event){
+      var d = event.date; //Selected date in Timezone format
+      var curr_date = d.getDate(); // Seletced date
+      var curr_month = d.getMonth() + 1; // Selected date moth
+      var curr_year = d.getFullYear(); // Selected date year
+      var desired_date_fromat = curr_year+"-"+curr_month+"-"+curr_date; //Desired date format 
+      $("#selectedstartdate").val(desired_date_fromat);
+    });
+      
+  $('#enddate').datepicker({ format: 'yyyy-mm-dd', autoclose: true}).on('changeDate',function(event){
+    var d = event.date; //Selected date in Timezone format
+    var curr_date = d.getDate(); // Seletced date
+    var curr_month = d.getMonth()+ 1; // Selected date moth
+    var curr_year = d.getFullYear(); // Selected date year
+    var desired_date_fromat = curr_year+"-"+curr_month+"-"+curr_date; //Desired date format 
+    $("#selectedenddate").val(desired_date_fromat);
+
+    $.ajax(
+    {
+      type: "POST",
+      url: "<?php echo Configure::read('SITE_USER_URL')?>/puzzles/datefilter",
+      data: {'startdate':$("#selectedstartdate").val(),'enddate':$("#selectedenddate").val()},
+      success: function(data)
+      {
+      $("#datafile").html(data);
+      }
+    });  
+  });  
+
+
+    //////////////////////////////// Monthwise filter -----------------------------------------
+  
+  $("#datetime").change(function()
+  {
+    var value = this.value;
+    var d = new Date();
+    var c_date = ((d.getDate())>=10)? (d.getDate()) : '0' + (d.getDate());
+    
+    var strDate = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + c_date;
+    
+    if(value == "Today"){ $("#startdate").val(strDate); $("#enddate").val(strDate);}
+    if(value == "Weeks"){   
+      d.setDate(d.getDate() - 7);
+      var c_date = ((d.getDate())>=10)? (d.getDate()) : '0' + (d.getDate());
+      $("#enddate").val(strDate);
+      $("#startdate").val(d.getFullYear() + "-" + (d.getMonth()+1) + "-" + c_date);
+    }
+    if(value == "Month"){
+      d.setMonth(d.getMonth() - 1);
+      var c_date = ((d.getDate())>=10)? (d.getDate()) : '0' + (d.getDate());
+      $("#enddate").val(strDate);
+      $("#startdate").val(d.getFullYear() + "-" + (d.getMonth()+1) + "-" + c_date);
+    }
+    if(value == "Year"){
+      d.setYear(d.getFullYear() - 1);
+      var c_date = ((d.getDate())>=10)? (d.getDate()) : '0' + (d.getDate());
+      $("#enddate").val(strDate);
+      $("#startdate").val(d.getFullYear() + "-" + (d.getMonth()+1) + "-" + c_date);
+      
+    }
+    if(value == "AllTime")
+    {
+      $("#startdate").val("");
+      $("#enddate").val("");
+    } 
+    $.ajax(
+      {
+        type: "POST",
+        url: "<?php echo Configure::read('SITE_USER_URL')?>/puzzles/datefilter",
+        data: {'startdate':$("#startdate").val(),'enddate':$("#enddate").val()},
+        success: function(data)
+        {
+        $("#datafile").html(data);
+        }
+      });  
+  })
+
+
+
+
+
+
+
+
+
     
 });
 

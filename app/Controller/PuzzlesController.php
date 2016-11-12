@@ -51,32 +51,7 @@ class  PuzzlesController  extends AppController {
 	{
 	 	parent::beforeFilter();
 	 	$this->Auth->allow('sub');
-	 	
-	 	// Admin header data
-		if ($this->params['prefix'] == 'admin')
-		{
-			// Business count 
-			$list_ofbusiness = $this->User->find('count',array('conditions'=>array('User.usertype'=>1)));
-			$this->set('Businesscount', $list_ofbusiness);
-
-			// user count 
-			$user_ofcount = $this->User->find('count',array('conditions'=>array('User.usertype'=>0)));
-			$this->set('Usercount', $user_ofcount); 
-
-			// Puzzle count 
-			$puzle = $this->Puzzle->find('count');
-			$this->set('Puzzle', $puzle); 	        			       			
-
-			// Active puzzle count 
-
-			$active_puzle = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.status'=>0)));
-			$this->set('ActivePuzzle', $active_puzle); 	        			       				
-
-		}	 	
 	}
-
-
-
 
 /**
 	Business index page 
@@ -907,6 +882,24 @@ class  PuzzlesController  extends AppController {
 		}	
 		$this->set("Puzzel",$puzel);	
 	}	
+
+/**
+	User calender and monthwise filter with ajax 
+*/	
+	public function user_datefilter()
+	{
+		if(!empty($this->request->data))
+		{
+			$list = $this->Visitor->find('all',array('conditions'=>array(array('AND'=>array(array('DATE(Visitor.created) >='=>$this->request->data['startdate'],'DATE(Visitor.created) <='=>$this->request->data['enddate']))),'Visitor.user_id'=>$this->Auth->user('id'))));
+			foreach ($list as $key =>  $puzzle)
+			{
+				$list[$key]['Puzzle'] = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$puzzle['Visitor']['puzzle_id'])));
+				$list[$key]['All'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$puzzle['Visitor']['puzzle_id'] )));	
+				$list[$key]['Open'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$puzzle['Visitor']['puzzle_id'] ,'Image.status'=>1)));
+			}
+			$this->set('List',$list);
+		}	
+	}		
 
 
 

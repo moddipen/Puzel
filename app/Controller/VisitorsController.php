@@ -55,79 +55,6 @@ class  VisitorsController  extends AppController {
 		$this->set("Signup",$signup);
 		// /$this->layout = 'default';
 	 	$this->Auth->allow('v_dynamic','process','fetchimage','generateRandomString','snipestimage');	 		
-	// Count of total puzzle 
-	 	// Count of total puzzle 
-	 	
-	  	if($this->Auth->login())
-	  	{
-		  		$data = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
-			if(empty($data))
-			{
-				$data = 0 ;
-			}
-			$this->set('CountPuzzle',$data);
-
-			$active = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'),'Puzzle.status'=>0)));
-			if(empty($active))
-			{
-				$active = 0 ;
-			}
-			$this->set('CountActivePuzzle',$active);
-
-			// Count total pieces
-			$list = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
-			// foreach ($list as $key => $value)
-			// {
-			// 	$visitor  = $this->Visitor->find('count',array('conditions'=>array('Visitor.puzzle_id'=>$value['Puzzle']['id'])));	
-			// 	if($visitor != NULL)
-			// 	{
-			// 		$list[$key]['Visitor'] = $visitor;
-			// 	}
-			// 	else
-			// 	{
-			// 		$list[$key]['Visitor'] = 0;	
-			// 	}
-
-			// 	$peices  = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$value['Puzzle']['id'])));	
-			// 	if($peices != NULL)
-			// 	{
-			// 		$list[$key]['Peices'] = $peices;
-				
-			// 	}
-			// 	else
-			// 	{
-			// 		$list[$key]['Peices'] = 0;	
-			// 	}
-			// }
-			// First loop   for peices count
-			// foreach($list as $value)
-			// 	{
-			// 		$visitcount+= $value['Visitor'];
-			// 	}
-
-				// if(empty($list))
-	//			{	
-					$visitcount = 0;
-	//			}	
-
-			// count balance pieces  
-				$order = $this->Order->find('first',array('conditions'=>array('Order.user_id'=>$this->Auth->user('id'))));	
-				if(!empty($order))
-				{
-					$clas = $this->Subscription->find('first',array('conditions'=>array('Subscription.id'=>$order['Order']['subscription_id'])));	
-					$pic = $clas['Subscription']['pieces'] ;
-				}
-				else
-				{
-					$pic = 0;
-				}	
-				
-				$this->set('Visitor',$visitcount);
-				$this->set('Balancepeices',$pic);
-		  	}
-	 	
-	 	
-		
 	 }
 
 
@@ -365,16 +292,16 @@ class  VisitorsController  extends AppController {
 /**
 	Business header content and count 
 */	
-	public function business_export($email = Null,$from = Null , $to = Null)
+	public function business_export($search = Null,$from = Null , $to = Null)
 	{
 	  
 		$this->Puzzle->unbindModel(array("belongsTo"=>array("Business")));
 		
-		if($email)
+		if($search)
 		{
-			$data =  $this->Puzzle->Visitor->find('all',array('conditions'=>array('Visitor.email'=>$email,'Puzzle.user_id'=>$this->Auth->user('id'))));
+			$data =  $this->Puzzle->Visitor->find('all',array('conditions'=>array(array('OR'=>array('Visitor.email LIKE'=>'%'.$search.'%','Visitor.firstname LIKE'=>'%'.$search.'%','Visitor.lastname LIKE'=>'%'.$search.'%','Puzzle.name LIKE'=>'%'.$search.'%')),'Puzzle.user_id'=>$this->Auth->user('id'))));
 		}
-		elseif($email == 0 && $from && $to)
+		elseif($search == 0 && $from && $to)
 		{
 			$data =  $this->Puzzle->Visitor->find('all',array('conditions'=>array('AND'=>array(array('DATE(Visitor.created) >='=>$from,'DATE(Visitor.created) <='=>$to)),'Puzzle.user_id'=>$this->Auth->user('id')))) ; 		
 		}	
@@ -384,7 +311,7 @@ class  VisitorsController  extends AppController {
 		}	
 		$index = 0;
 		
-		if($email)
+		if($search)
 		{
 			$i = 0;
 			foreach ($data as  $user)
@@ -401,7 +328,7 @@ class  VisitorsController  extends AppController {
 			}
 			$var = "True";
 		}
-		elseif($email == 0 && $from && $to)
+		elseif($search == 0 && $from && $to)
 		{
 			$i = 0;
 			foreach ($data as  $user)
@@ -486,14 +413,7 @@ class  VisitorsController  extends AppController {
 		$this->layout = null;
 		if(!empty($this->request->data))
 		{
-			if($this->request->data['email'])
-			{
-				$email = $this->Visitor->find('all',array('conditions'=>array('Visitor.email'=>$this->request->data['email'])));	
-			}
-			else
-			{
-				$email = $this->Visitor->find('all',array('conditions'=>array('Visitor.email'=>$this->request->data['email'])));		
-			}	
+			$email = $this->Visitor->find('all',array('conditions'=>array(array('OR'=>array('Visitor.firstname LIKE'=>'%'.$this->request->data['search'].'%','Visitor.lastname LIKE'=>'%'.$this->request->data['search'].'%','Visitor.email LIKE'=>'%'.$this->request->data['search'].'%','Puzzle.name LIKE'=>'%'.$this->request->data['search'].'%')),'Puzzle.user_id'=>$this->Auth->user('id'))));	
 			$this->set('Emaildata',$email);	
 		}
 		
