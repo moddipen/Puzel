@@ -167,7 +167,7 @@
                         </div>
                         <div class="col-md-4">
                           <div class="form-group">
-                              <button type="reset" class="btn btn-oranges fullwidth" id="reset" onclick="this.form.reset();">>Cancel</button>
+                              <button type="reset" class="btn btn-oranges fullwidth" id="reset" onclick="this.form.reset();">Cancel</button>
                             </div>
                         </div>
                       
