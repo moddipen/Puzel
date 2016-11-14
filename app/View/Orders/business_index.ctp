@@ -167,7 +167,7 @@
                         </div>
                         <div class="col-md-4">
                           <div class="form-group">
-                              <button type="submit" class="btn btn-oranges fullwidth">Cancel</button>
+                              <button type="reset" class="btn btn-oranges fullwidth">Cancel</button>
                             </div>
                         </div>
                       
