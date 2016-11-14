@@ -236,13 +236,10 @@
       document.getElementById(id).classList.toggle("show");
 
       // Reset credit card value and close toggle
-      if($("#reset").click('on',function()
-      {
-        alert($("#cardnumber").val('')) ;
-        $("#cardholdername").val('') ;
-        $("#cardexpiredate").val('');
-        $("#cardcvv").val('');
-      }));
+      // if($("#reset").click('on',function()
+      // {
+
+      // }));
 
 
     }
