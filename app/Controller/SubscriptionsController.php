@@ -110,7 +110,7 @@ class  SubscriptionsController  extends AppController {
 				}
 				else{
 					$paymentMethod = Braintree_Transaction::find($get_current_plan['Order']['transiction_id']);
-					
+					echo "<pre>";print_r($paymentMethod);exit;
 					$this->set('cardDetail',$paymentMethod);
 				}
 			}			
@@ -233,7 +233,6 @@ class  SubscriptionsController  extends AppController {
 										}
 										else
 										{
-											exit("dfgfg");
 											$this->Session->setFlash('<div class="alert alert-danger"><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Failed </b>: Error processing transaction:</p><br>
 											</div>');	
 										}	
