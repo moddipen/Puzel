@@ -136,7 +136,7 @@
 						  <?php
 							$number = "************".$cardDetail->creditCard['last4'];
 						  ?>
-                                <input type="text" name="data[Order][number]" value="<?php echo $number;?>" class="form-control" placeholder="Card Number" id="cardnumber">
+                                <input type="text" name="data[Order][number]" value="<?php if(isset($number)){ echo $number ;} ?>" class="form-control" placeholder="Card Number" id="cardnumber">
                               </div>
                         </div>
                         <div class="col-md-12">
@@ -238,7 +238,7 @@
       // Reset credit card value and close toggle
       if($("#reset").click('on',function()
       {
-        $('#cardnumber').trigger(':reset');
+        $('#cardnumber').val('');
       }));
 
 
