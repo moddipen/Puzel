@@ -282,10 +282,10 @@ class  SubscriptionsController  extends AppController {
 						// 					{
 												//$result1 = Braintree_Transaction::submitForSettlement($result->transaction->id);
 												$this->request->data['Order']['user_id'] = $this->Auth->user('id');
-												$this->request->data['Order']['transiction_id'] = $result->transaction->id;
+												$this->request->data['Order']['transiction_id'] = "nj79jej6";//$result->transaction->id;
 												$this->request->data['Order']['price'] = $plan['Subscription']['price'];
 												$this->request->data['Order']['subscription_id'] = $plan['Subscription']['id'];
-												$this->request->data['Order']['customer_id'] = $result->customer->id;
+												$this->request->data['Order']['customer_id'] = "30003172";//$result->customer->id;
 												if($this->Order->save($this->request->data))
 												{
 													$this->request->data['UserSubscription']['user_id'] = $this->Auth->user('id');
