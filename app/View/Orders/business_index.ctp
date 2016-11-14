@@ -238,7 +238,7 @@
       // Reset credit card value and close toggle
       if($("#reset").click('on',function()
       {
-        $("#OrderBusinessIndexForm").trigger('reset');
+        $('#OrderBusinessIndexForm').trigger(':reset');
       }));
 
 
