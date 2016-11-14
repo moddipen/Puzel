@@ -256,6 +256,7 @@ $(document ).ready(function(){
 			'data[Subscription][ex_date_year][year]':{required:true},
 			'data[Subscription][cvv]':{required:true},
 			'data[Subscription][password]': {required: true,password: true}
+      
 		},
 		messages: {
 			'data[Subscription][email]': {required: 'Please enter a valid email address.'},
