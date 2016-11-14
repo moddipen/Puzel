@@ -238,8 +238,8 @@
       // Reset credit card value and close toggle
       if($("#reset").click('on',function()
       {
-        $('#OrderBusinessIndexForm')[0].reset();
-
+        //$('#OrderBusinessIndexForm')[0].reset();
+        document.getElementById("OrderBusinessIndexForm").reset(); 
 
       }));
 
