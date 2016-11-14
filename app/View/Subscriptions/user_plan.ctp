@@ -1,6 +1,10 @@
   
 <style>
   body {overflow-y:scroll;}  
+  #content.full-page .inside-block form .input-group input#cvv {
+    border-bottom-right-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+}
 </style>
 
 
@@ -13,12 +17,12 @@
   
              
     <!-- Begin MailChimp Signup Form -->
-    <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+    <!--link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
     <style type="text/css">
       #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif;  max-width:600px; width: 100%; margin: 0px auto;}
       /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
          We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
-         #mc_embed_signup #mc-embedded-subscribe-form div.mce_inline_error{position:absolute; right:-10px; top:0px; background:none;}
+        #mc_embed_signup #mc-embedded-subscribe-form div.mce_inline_error{position:absolute; right:-10px; top:0px; background:none;}
     </style>
     <!-- <div id="mc_embed_signup"> -->
     <?php   
@@ -28,7 +32,7 @@
     <!-- <form action="<?php echo $Type;?>" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" novalidate> -->
       <section>
       <div id="mc_embed_signup_scroll">
-      <h2>Sign up for Puzel</h2>
+      <h2 style="padding-bottom:20px;">Sign up for Puzel</h2>
       <!-- <div class="indicates-required"><span class="asterisk">*</span> indicates required</div> -->
     <?php
 
@@ -43,7 +47,7 @@
           <i class="fa fa-envelope"></i>
         </div>
     </div>
-    <div id="erroremail"></div>
+    <!--div id="erroremail"></div-->
     <div class="input-group">
       <!-- <label for="mce-FNAME">First Name </label> -->
       <input type="text" value="" name="data[Subscription][firstname]" class="form-control" id="FNAME" placeholder = "Please enter first name" required>
@@ -51,7 +55,7 @@
           <i class="fa fa-user"></i>
         </div>
     </div>
-    <div id="errorfname"></div>
+    <!--div id="errorfname"></div-->
     <div class="input-group">
       <!-- <label for="mce-LNAME">Last Name </label> -->
       <input type="text" value="" name="data[Subscription][lastname]" class="form-control" id="LNAME" placeholder = "Please enter last name" required>
@@ -59,7 +63,7 @@
           <i class="fa fa-user"></i>
         </div>
     </div>
-    <div id="errorlname"></div>
+    <!--div id="errorlname"></div-->
 
     <div class="input-group">
       <!-- <label for="mce-LNAME">Company Name </label> -->
@@ -68,7 +72,7 @@
           <i class="fa fa-user"></i>
         </div>
     </div>
-    <div id="errorcname"></div>
+    <!--div id="errorcname"></div-->
 
 
     <div class="input-group">
@@ -78,6 +82,7 @@
           <i class="fa fa-key"></i>
         </div>
     </div>
+<<<<<<< HEAD
     <div id="errorpassword"></div>
     <div class="input-group">
       <!-- <label for="mce-LNAME">Password</label> -->
@@ -87,6 +92,9 @@
         </div>
     </div>
     <div id="errorcnfrmpassword"></div>
+=======
+    <!--div id="errorpassword"></div-->
+>>>>>>> e518f1f44c04b462e58fa013f960eb26a87a10ce
     	<?php }else{
     		
     		echo "<input type='hidden' name='data[Subscription][action]' value='upgrade'>";
@@ -131,15 +139,16 @@
 
     <div id="errorccard"></div>
     <input type ="hidden" value ="" name="data[Subscription][check]" id="validcard">
-    <div class="input-group">
-     
+    <div class="form-group">
+    <div class="row dropup">
+     <div class="col-sm-4 col-xs-12">
       <?php
     	
     	if(!$cardDetail){
-    		echo '<select required  name="data[Subscription][ex_date_month][month]" id="month" style="color:white;background-color: #643960;width: 125px;" >';
+    		echo '<select required  name="data[Subscription][ex_date_month][month]" id="month" class="chosen-select chosen-transparent form-control " >';
     		
     	}else{
-    		echo '<select required disabled name="data[Subscription][ex_date_month][month]" id="month" style="color:white;background-color: #643960;width: 125px;">';
+    		echo '<select required disabled name="data[Subscription][ex_date_month][month]" id="month" class="chosen-select chosen-transparent form-control">';
     	}
     	?>
          
@@ -159,15 +168,16 @@
       ?>
     		  
             </select>
-
+            </div>
+<div class="col-sm-4 col-xs-12">
     
       <?php
     	
     	if(!$cardDetail){
-    		echo '<select required  name="data[Subscription][ex_date_year][year]" id="year"  style="color:white;background-color: #643960;margin-left: 41px;width: 74px;">';
+    		echo '<select required  name="data[Subscription][ex_date_year][year]" id="year" class="chosen-select chosen-transparent form-control">';
     		
     	}else{
-    		echo '<select required disabled name="data[Subscription][ex_date_year][year]" id="year" style="color:white;background-color: #643960;margin-left: 41px;width: 74px;">';
+    		echo '<select required disabled name="data[Subscription][ex_date_year][year]" id="year" class="chosen-select chosen-transparent form-control">';
     	}
     	?>
          
@@ -183,21 +193,27 @@
     ?>
     	  
       </select>
-
+</div>
     <!-- </div>
 
     <div class="mc-field-group"> -->
       <!-- <label for="mce-LNAME">CVV </label> -->
-      <input type="text" value="" name="data[Subscription][cvv]"  id="cvv" maxlength="4"  placeholder ="CVV" required style =" margin-left: 63px;">
+      <div class="col-sm-4 col-xs-12">
+      <div class="input-group">
+      <input type="text" value="" name="data[Subscription][cvv]"  id="cvv" maxlength="4"  placeholder ="CVV" class="form-control" required>
+      </div>
+      </div>
+      </div>
     </div>
-    <div id="errorcvv"></div>
+    <!--div id="errorcvv"></div-->
     <?php } ?>
       <div id="mce-responses" class="clear">
         <div class="response" id="mce-error-response" style="display:none"></div>
         <div class="response" id="mce-success-response" style="display:none"></div>
       </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_07f1846d778e631822b8f85cf_e5b207e707" tabindex="-1" value=""></div>
-        <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-oranges"></div>
+
+        <input type="hidden" name="b_07f1846d778e631822b8f85cf_e5b207e707" tabindex="-1" value="">
+        <div class="clear text-center"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-oranges"></div>
         </div>
       </section>
     </form>
@@ -209,8 +225,52 @@
 <?php echo $this->Html->script('jquery.creditCardValidator');?>
 
 <script>
-  $(document ).ready(function()
-  {
+$(document ).ready(function(){
+	<?php if($Rate['Subscription']['price'] == "Free" ) {?>
+	$("form").validate({
+		rules: {
+			'data[Subscription][email]': {required: true, email: true},
+			'data[Subscription][firstname]':{required:true},
+			'data[Subscription][lastname]':{required:true},
+			'data[Subscription][company_name]':{required:true},
+			'data[Subscription][password]': {required: true,password: true}
+		},
+		messages: {
+			'data[Subscription][email]': {required: 'Please enter a valid email address.'},
+			'data[Subscription][firstname]':{required:'Please enter First name'},
+			'data[Subscription][lastname]':{required:'Please enter Last name'},
+			'data[Subscription][company_name]':{required:'Please enter Company name'},
+			'data[Subscription][password]': {required: 'Please enter an 8 to 16 characters alpha-numeric password.'}
+		}
+	});
+	<?php }else {?> 
+	$("form").validate({
+		rules: {
+			'data[Subscription][email]': {required: true, email: true},
+			'data[Subscription][firstname]':{required:true},
+			'data[Subscription][lastname]':{required:true},
+			'data[Subscription][company_name]':{required:true},
+			'data[Subscription][card_number]':{required:true},
+			'data[Subscription][holder_name]':{required:true},
+			'data[Subscription][ex_date_month][month]':{required:true},
+			'data[Subscription][ex_date_year][year]':{required:true},
+			'data[Subscription][cvv]':{required:true},
+			'data[Subscription][password]': {required: true,password: true}
+		},
+		messages: {
+			'data[Subscription][email]': {required: 'Please enter a valid email address.'},
+			'data[Subscription][firstname]':{required:'Please enter First name'},
+			'data[Subscription][lastname]':{required:'Please enter Last name'},
+			'data[Subscription][company_name]':{required:'Please enter Company name'},
+			'data[Subscription][card_number]':{required:'Please enter Credit Card Number'},
+			'data[Subscription][holder_name]':{required:'Please Enter Holder Name Card'},
+			'data[Subscription][ex_date_month][month]':{required:'Please choose month'},
+			'data[Subscription][ex_date_year][year]':{required:'Please choose year'},
+			'data[Subscription][cvv]':{required:'Please enter CVV'},
+			'data[Subscription][password]': {required: 'Please enter an 8 to 16 characters alpha-numeric password.'}
+		}
+	});
+	<?php }?> 
       $('#card_number1').validateCreditCard(function(result) {
             if(result.card_type == null)
             {
