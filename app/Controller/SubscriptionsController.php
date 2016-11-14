@@ -388,32 +388,44 @@ class  SubscriptionsController  extends AppController {
 											{
 												// Create new Business account 
 												
-												$this->request->data['User']['firstname'] = $this->request->data['Subscription']['firstname'] ;
-												$this->request->data['User']['lastname'] = $this->request->data['Subscription']['lastname'] ;
-												$this->request->data['User']['email'] = $this->request->data['Subscription']['email'] ;
-												$this->request->data['User']['password'] = $this->request->data['Subscription']['password'] ;
-												$this->request->data['User']['company_name'] = $this->request->data['Subscription']['company_name'];
-												$this->request->data['User']['usertype'] = 1;
-												
-												$this->User->create();
-												if($this->User->save($this->request->data))
+												// check confirm password and password match or not 
+
+												if($this->request->data['Subscription']['password'] == $this->request->data['Subscription']['confirm_password'])
 												{
-													//$this->Auth->login();
-													$email = array(
-														"templateid"=>1007701,
-														"name"=>$this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
-														"TemplateModel"=> array(
-															"user_name"=> $this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
-															"product_name"=>"You have signup Successfully",
-															"action_url"=>"Congratulation you have successfully sign up "),
-														"InlineCss"=> true, 
-														"from"=> "support@puzel.co",
-														'to'=>$this->Auth->user('email'),
-														'reply_to'=>"support@puzel.co"
-														);	
-													$this->sendemail($email);
-													$data['Order']['user_id'] = $this->User->getLastInsertId();
+													$this->request->data['User']['firstname'] = $this->request->data['Subscription']['firstname'] ;
+													$this->request->data['User']['lastname'] = $this->request->data['Subscription']['lastname'] ;
+													$this->request->data['User']['email'] = $this->request->data['Subscription']['email'] ;
+													$this->request->data['User']['password'] = $this->request->data['Subscription']['password'] ;
+													$this->request->data['User']['company_name'] = $this->request->data['Subscription']['company_name'];
+													$this->request->data['User']['usertype'] = 1;
+													
+													$this->User->create();
+													if($this->User->save($this->request->data))
+													{
+														//$this->Auth->login();
+														$email = array(
+															"templateid"=>1007701,
+															"name"=>$this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+															"TemplateModel"=> array(
+																"user_name"=> $this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+																"product_name"=>"You have signup Successfully",
+																"action_url"=>"Congratulation you have successfully sign up "),
+															"InlineCss"=> true, 
+															"from"=> "support@puzel.co",
+															'to'=>$this->Auth->user('email'),
+															'reply_to'=>"support@puzel.co"
+															);	
+														$this->sendemail($email);
+														$data['Order']['user_id'] = $this->User->getLastInsertId();
+													}	
 												}
+												else
+												{
+													$this->Session->setFlash(__('Password doesnot match' , true), 'default', array('class' => 'alert alert-danger'));	
+													$this->redirect($this->here);
+												}	
+
+												
 											}	
 											if($this->Order->save($data))
 											{
@@ -447,7 +459,7 @@ class  SubscriptionsController  extends AppController {
 												if($this->UserSubscription->save($insert))
 												{
 													$this->sendinvoice($email);
-													$this->Session->setFlash(__('Signup Successfully!!....', true), 'default', array('class' => 'alert alert-success'));
+													//$this->Session->setFlash(__('Signup Successfully!!....', true), 'default', array('class' => 'alert alert-success'));
 													//$this->redirect(array('controller'=>'orders','action'=>'index','business'=>true));	
 													$this->redirect(array('controller'=>'subscriptions','action'=>'thankyou','user'=>false));		
 												}

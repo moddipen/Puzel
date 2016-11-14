@@ -78,6 +78,14 @@
         </div>
     </div>
     <div id="errorpassword"></div>
+    <div class="input-group">
+      <!-- <label for="mce-LNAME">Password</label> -->
+      <input type="password" value="" name="data[Subscription][confirm_password]" class="form-control" id="cnfrmpassword" placeholder = "Please enter confirm password" required>
+      <div class="input-group-addon">
+          <i class="fa fa-key"></i>
+        </div>
+    </div>
+    <div id="errorcnfrmpassword"></div>
     	<?php }else{
     		
     		echo "<input type='hidden' name='data[Subscription][action]' value='upgrade'>";
@@ -232,37 +240,49 @@
        
       if($("#email").val() == "")
         {
-          $("#erroremail").html('<p style = "color:red">Please Enter email id</p>')
+          $("#erroremail").html('<p style = "color:red">Please enter email id</p>')
           return false;
         }
         if($("#FNAME").val() == "")
         {
-          $("#errorfname").html('<p style = "color:red">Please Enter first name.</p>')
+          $("#errorfname").html('<p style = "color:red">Please enter first name.</p>')
           return false; 
         }
 		 if($("#company_name").val() == "")
         {
-          $("#errorcname").html('<p style = "color:red">Please Enter company name.</p>')
+          $("#errorcname").html('<p style = "color:red">Please enter company name.</p>')
           return false; 
         }
         if($("#LNAME").val() == "")
         {
-          $("#errorlname").html('<p style = "color:red">Please Enter last name.</p>')
+          $("#errorlname").html('<p style = "color:red">Please enter last name.</p>')
           return false; 
         }
         if($("#password").val() == "")
         {
-           $("#errorpassword").html('<p style = "color:red">Please Enter last name.</p>')
+           $("#errorpassword").html('<p style = "color:red">Please enter password.</p>')
           return false; 
         }
+        if($("#cnfrmpassword").val() == "")
+        {
+           $("#errorcnfrmpassword").html('<p style = "color:red">Please enter confirm password.</p>')
+          return false; 
+        }
+
+        if($("#password").val() != $("#cnfrmpassword").val())
+         {
+            $("#errorpassword").html('<p style = "color:red">Password doesnot match.</p>')
+            $("#errorcnfrmpassword").html('<p style = "color:red">Password doesnot match.</p>')
+            return false;   
+         } 
         if($("#card_number").val() == "")
         {
-           $("#errorccard").html('<p style = "color:red">Please Enter card number.</p>')
+           $("#errorccard").html('<p style = "color:red">Please enter card number.</p>')
           return false; 
         }
         if($("#cvv").val() == "")
         {
-           $("#errorcvv").html('<p style = "color:red">Please Enter cvv number.</p>')
+           $("#errorcvv").html('<p style = "color:red">Please enter cvv number.</p>')
           return false; 
         }
 
