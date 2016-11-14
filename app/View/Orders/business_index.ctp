@@ -238,10 +238,10 @@
       // Reset credit card value and close toggle
       if($("#reset").click('on',function()
       {
-        $("#cardnumber").val() = '';
-        $("#cardholdername").val() = '';
-        $("#cardexpiredate").val() = '';
-        $("#cardcvv").val() = '';
+        $("#cardnumber").val('') ;
+        $("#cardholdername").val('') ;
+        $("#cardexpiredate").val('');
+        $("#cardcvv").val('');
       }));
 
 
