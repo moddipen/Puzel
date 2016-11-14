@@ -136,7 +136,7 @@
 						  <?php
 							$number = "************".$cardDetail->creditCard['last4'];
 						  ?>
-                                <input type="text" name="data[Order][number]" value="<?php echo $number;?>" class="form-control" placeholder="Card Number">
+                                <input type="text" name="data[Order][number]" value="<?php echo $number;?>" class="form-control" placeholder="Card Number" id="cardnumber">
                               </div>
                         </div>
                         <div class="col-md-12">
@@ -144,7 +144,7 @@
 						  <?php
 							$name = $cardDetail->creditCard['cardholderName'];
 						  ?>
-                                <input type="text" name="data[Order][name]" value="<?php echo $name;?>" class="form-control" placeholder="Name">
+                                <input type="text" name="data[Order][name]" value="<?php echo $name;?>" class="form-control" placeholder="Name" id="cardholdername">
                               </div>
                         </div>
                         <div class="col-md-6">
@@ -152,12 +152,12 @@
 							<?php
 							$date = $cardDetail->creditCard['expirationMonth']."/".$cardDetail->creditCard['expirationYear'];
 						  ?>
-                                <input type="text"  name="data[Order][date]" class="form-control" value="<?php echo $date;?>" placeholder="Expiry Date">
+                                <input type="text"  name="data[Order][date]" class="form-control" value="<?php echo $date;?>" placeholder="Expiry Date" id="cardexpiredate">
                               </div>
                         </div>
                         <div class="col-md-6">
                           <div class="form-group">
-                                <input type="text" class="form-control"  name="data[Order][cvv]" placeholder="CVV Number">
+                                <input type="text" class="form-control"  name="data[Order][cvv]" placeholder="CVV Number" id="cardcvv">
                               </div>
                         </div>
                         <div class="col-md-4">
@@ -238,9 +238,10 @@
       // Reset credit card value and close toggle
       if($("#reset").click('on',function()
       {
-        //$('#OrderBusinessIndexForm')[0].reset();
-        document.getElementById("OrderBusinessIndexForm").reset(); 
-
+        $("#cardnumber").val() = '';
+        $("#cardholdername").val() = '';
+        $("#cardexpiredate").val() = '';
+        $("#cardcvv").val() = '';
       }));
 
 
