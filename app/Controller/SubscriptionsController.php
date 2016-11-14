@@ -250,7 +250,7 @@ class  SubscriptionsController  extends AppController {
 						$amount_to_refund = $amount_to_refund * $days;
 						$amount_to_refund = $order['Order']['price'] - $amount_to_refund; // Total refunded amount
 						$amount_to_refund = $amount_to_refund/3;
-						$refund = Braintree_Transaction::refund($order['Order']['transiction_id'],31.1);
+						$refund = Braintree_Transaction::refund($order['Order']['transiction_id'],31.11);
 						echo "<pre>";print_r($refund);exit;
 						if($refund->success)
 						{
