@@ -251,35 +251,35 @@ class  SubscriptionsController  extends AppController {
 						$amount_to_refund = $order['Order']['price'] - $amount_to_refund; // Total refunded amount
 						echo $amount_to_refund = round($amount_to_refund/5);
 						$refund = Braintree_Transaction::refund($order['Order']['transiction_id'],$amount_to_refund);
-						echo "<pre>";print_r($refund);exit;
-						if($refund->success)
-						{
-							$refund = Braintree_Transaction::refund($order['Order']['transiction_id'],$amount_to_refund);
-							if($refund->success)
-							{
-								$refund = Braintree_Transaction::refund($order['Order']['transiction_id'],$amount_to_refund);
-								if($refund->success)
-								{
-									$refund = Braintree_Transaction::refund($order['Order']['transiction_id'],$amount_to_refund);
-									if($refund->success)
-									{
-										$refund = Braintree_Transaction::refund($order['Order']['transiction_id'],$amount_to_refund);
-										if($refund->success)
-										{
-											//Expire current subscription
-											$this->request->data['UserSubscription']['id'] = $order['UserSubscription']['id'];
-											$this->request->data['UserSubscription']['status'] = 1;
-											$this->UserSubscription->save($this->request->data);
+						// echo "<pre>";print_r($refund);exit;
+						// if($refund->success)
+						// {
+						// 	$refund = Braintree_Transaction::refund($order['Order']['transiction_id'],$amount_to_refund);
+						// 	if($refund->success)
+						// 	{
+						// 		$refund = Braintree_Transaction::refund($order['Order']['transiction_id'],$amount_to_refund);
+						// 		if($refund->success)
+						// 		{
+						// 			$refund = Braintree_Transaction::refund($order['Order']['transiction_id'],$amount_to_refund);
+						// 			if($refund->success)
+						// 			{
+						// 				$refund = Braintree_Transaction::refund($order['Order']['transiction_id'],$amount_to_refund);
+						// 				if($refund->success)
+						// 				{
+						// 					//Expire current subscription
+						// 					$this->request->data['UserSubscription']['id'] = $order['UserSubscription']['id'];
+						// 					$this->request->data['UserSubscription']['status'] = 1;
+						// 					$this->UserSubscription->save($this->request->data);
 											
 											
-											//Assign new subscription
-											$result = Braintree_Transaction::sale([
-												'customerId' => $order["Order"]['customer_id'],//->customer->id,
-												'amount' => $plan['Subscription']['price']
-											]);
+						// 					//Assign new subscription
+						// 					$result = Braintree_Transaction::sale([
+						// 						'customerId' => $order["Order"]['customer_id'],//->customer->id,
+						// 						'amount' => $plan['Subscription']['price']
+						// 					]);
 											
-											if($result->success)
-											{
+						// 					if($result->success)
+						// 					{
 												$result1 = Braintree_Transaction::submitForSettlement($result->transaction->id);
 												$this->request->data['Order']['user_id'] = $this->Auth->user('id');
 												$this->request->data['Order']['transiction_id'] = $result->transaction->id;
@@ -318,16 +318,16 @@ class  SubscriptionsController  extends AppController {
 													else{
 														$this->Session->setFlash(__("Error while subscription"), 'default', array('class' => 'alert alert-danger'));						
 													}												
-												}
-												else
-												{
-													$this->Session->setFlash(__("Error while making order"), 'default', array('class' => 'alert alert-danger'));						
-												}
-											}
-										}
-									}
-								}
-							}
+												// }
+												// else
+												// {
+												// 	$this->Session->setFlash(__("Error while making order"), 'default', array('class' => 'alert alert-danger'));						
+												// }
+							// 				}
+							// 			}
+							// 		}
+							// 	}
+							// }
 							
 						}else{
 							foreach($refund->errors->deepAll() AS $error) {
