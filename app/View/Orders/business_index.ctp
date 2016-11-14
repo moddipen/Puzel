@@ -239,7 +239,9 @@
       if($("#reset").click('on',function()
       {
         $('#cardnumber').attr('value', ''); 
-        // $('#cardnumber').val("");
+        $('#cardholdername').attr('value', ''); 
+        $('#cardexpiredate').attr('value', ''); 
+        $('#cardcvv').attr('value', ''); 
       }));
 
 
