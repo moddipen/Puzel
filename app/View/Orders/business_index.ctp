@@ -167,7 +167,7 @@
                         </div>
                         <div class="col-md-4">
                           <div class="form-group">
-                              <button type="reset" class="btn btn-oranges fullwidth">Cancel</button>
+                              <button type="reset" class="btn btn-oranges fullwidth" id="reset">Cancel</button>
                             </div>
                         </div>
                       
@@ -234,7 +234,23 @@
     })
     function showdiv(id) {
       document.getElementById(id).classList.toggle("show");
-  }
+
+      if($("#reset").click('on',function(){
+
+        alert("hello");
+
+      }));
+
+
+    }
+
+
+
+
+
+
+
+
     </script>
         
 
