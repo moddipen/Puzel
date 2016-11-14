@@ -236,10 +236,10 @@
       document.getElementById(id).classList.toggle("show");
 
       // Reset credit card value and close toggle
-      // if($("#reset").click('on',function()
-      // {
-
-      // }));
+      if($("#reset").click('on',function()
+      {
+        $("#OrderBusinessIndexForm").trigger('reset');
+      }));
 
 
     }
