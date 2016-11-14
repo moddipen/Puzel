@@ -82,7 +82,7 @@
           <i class="fa fa-key"></i>
         </div>
     </div>
-<<<<<<< HEAD
+
     <div id="errorpassword"></div>
     <div class="input-group">
       <!-- <label for="mce-LNAME">Password</label> -->
@@ -92,9 +92,9 @@
         </div>
     </div>
     <div id="errorcnfrmpassword"></div>
-=======
+
     <!--div id="errorpassword"></div-->
->>>>>>> e518f1f44c04b462e58fa013f960eb26a87a10ce
+
     	<?php }else{
     		
     		echo "<input type='hidden' name='data[Subscription][action]' value='upgrade'>";
