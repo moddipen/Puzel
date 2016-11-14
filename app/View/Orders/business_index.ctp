@@ -235,9 +235,11 @@
     function showdiv(id) {
       document.getElementById(id).classList.toggle("show");
 
-      if($("#reset").click('on',function(){
+      // Reset credit card value and close toggle
+      if($("#reset").click('on',function()
+      {
+        $('#OrderBusinessIndexForm')[0].reset();
 
-        alert("hello");
 
       }));
 
