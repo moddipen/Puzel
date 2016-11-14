@@ -233,6 +233,7 @@ class  SubscriptionsController  extends AppController {
 										}
 										else
 										{
+											exit("dfgfg");
 											$this->Session->setFlash('<div class="alert alert-danger"><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Failed </b>: Error processing transaction:</p><br>
 											</div>');	
 										}	
