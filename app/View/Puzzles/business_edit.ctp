@@ -235,7 +235,7 @@
           <form class="popup-form" id="terms" >
              <div class="form-group">
               <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-5">
                         <select name="opton" class="form-control chosen-select" id = "changetemplate">
                             <?php 
                             if(!empty($Name))
