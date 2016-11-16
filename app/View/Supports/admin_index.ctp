@@ -171,7 +171,7 @@
                                     }  
                                     echo $name;?>
                               </td>
-                              <td><?php echo $support['Support']['subject'];?></td>
+                              <td><a href = "<?php echo Configure::read('SITE_ADMIN_URL');?>/supports/conversation/<?php echo $support['Support']['id'];?>" style="color:white;"><?php echo $support['Support']['subject'];?></td>
                               <td><?php 
                                 echo date('g:i A dS M Y',strtotime($support['Support']['created']));?></td>
                               <td>

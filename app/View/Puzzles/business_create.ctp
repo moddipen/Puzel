@@ -169,12 +169,10 @@
          <div class="modal-body">
           <form class="popup-form" id="terms" >
             <div class="form-group">
-              <textarea name="textarea" id="textarea" class="form-control wysiwyg"></textarea>
-            </div>
-            <div class="form-group">
               <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-5">
                         <select name="opton" class="form-control chosen-select" id = "changetemplate">
+                            <option style="display:none">Select previous template</option>
                             <?php 
                             if(!empty($Name))
                             {  
@@ -186,6 +184,11 @@
                   </div>
                 </div>
             </div>
+
+            <div class="form-group">
+              <textarea name="textarea" id="textarea" class="form-control wysiwyg"></textarea>
+            </div>
+            
             <div class="row minipadding">
                 <div class="col-md-3"></div>
                 <div class="col-md-3">
@@ -222,17 +225,6 @@
               </div>
               <div class="form-group">
                 <div class="row minipadding">
-                    <div class="col-md-4">
-                      <select name="opton"  class="form-control chosen-select" id = "changeprice">
-                           <?php 
-                            if(!empty($Name))
-                            {  
-                              foreach ($Name as $value)
-                                {?>
-                                <option value ="<?php echo $value['Puzzle']['id']; ?>"><?php echo $value['Puzzle']['name']; ?></option>
-                            <?php } }?>
-                      </select>
-                    </div>
                     <div class="col-md-4">
                       <div class="btn btn-file imageupload">
                           <input name="data[Puzzle][uploadfile]" class="form-control" type="file" id="filecontent">
@@ -299,13 +291,13 @@
         success: function(data)
          {
             if(data.message != "Success")
-			{
-				$("#validate-pieces").html(data.message);
-			}
-			else
-			{
-				$("#validate-pieces").html("");
-			}
+      			{
+      				$("#validate-pieces").html(data.message);
+      			}
+      			else
+      			{
+      				$("#validate-pieces").html("");
+      			}
 				
          }
        });

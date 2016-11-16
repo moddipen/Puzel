@@ -198,7 +198,7 @@ class  PuzzlesController  extends AppController {
 					// create image directory 
 					$multipleimagefolder = WWW_ROOT.'img/puzzel/'.$this->request->data['Puzzle']['name'];//WWW_ROOT."img\puzzel\";
 					$folder = mkdir($multipleimagefolder);
-					$URL = $_SERVER['DOCUMENT_ROOT'].'/app/webroot/img/puzzel/'; 
+					$URL = $_SERVER['DOCUMENT_ROOT'].'app/webroot/img/puzzel/';
 					$imageName = $this->request->data['Puzzle']['name'].".jpg";
 					$path = $URL.$imageName;
 					$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i','', $this->request->data['Puzzle']['image']));
@@ -311,6 +311,13 @@ class  PuzzlesController  extends AppController {
 						   
 					 	}
 						
+						$name = str_replace(' ','',$this->request->data['Puzzle']['name']);
+						
+						$company_name = str_replace(' ','', $this->Session->read('IMAGECAPTURE.Puzzel.compnay_name'));
+						
+						$html = 'Snippest code is : <script type="text/javascript" src="'.Configure::read("SITE_URL").'app/webroot/js/custom.js"></script><div class="snipest" id="puzzle_'.$this->Puzzle->getLastInsertID().'"></div> Hosted Url is : <input type="text" class="form-control" value="'.Configure::read("SITE_URL").'puzzle/'.$company_name.'/'.$name.'"  id="puzlename">';
+
+
 					 	$email = array(
 	              			"templateid"=>1017941,
 	              			"name"=>$this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
@@ -319,7 +326,7 @@ class  PuzzlesController  extends AppController {
 							    "product_name"=>$this->request->data['Puzzle']['name'],
 								"company"=> array(
 									"name"=> $this->Auth->user('company_name')),
-								"action_url"=>""),
+								"action_url"=>$html),
 							"InlineCss"=> true, 
 	              			"from"=> "support@puzel.co",
 	              			'to'=>$this->Auth->user('email'),
@@ -422,7 +429,6 @@ class  PuzzlesController  extends AppController {
 
 				 $img = trim($_FILES['uploadfile']['name']);
 				 $tmp = trim($_FILES['uploadfile']['tmp_name']);
-				  
 				 // get uploaded file's extension
 				 $ext = strtolower(pathinfo($img, PATHINFO_EXTENSION));
 				 
@@ -443,13 +449,16 @@ class  PuzzlesController  extends AppController {
 				 } 
 				 
 				}
+				
 				if(isset($this->request->data['Puzzle']['id'])){
 				
 				$this->request->data['Puzzle']['id'] = $this->request->data['Puzzle']['id'];	
-				$this->request->data['Puzzle']['price'] = $this->request->data['textarea'];				
+				$this->request->data['Puzzle']['price'] = $this->request->data['textarea'];	
+				
 				$this->Puzzle->save($this->request->data);	
 				}
 			}
+				
 			$this->Session->write('IMAGEPRICE',$this->request->data);
 		
 	}

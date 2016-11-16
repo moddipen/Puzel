@@ -124,7 +124,7 @@
                               {?>
                                  <tr>
                                     <td><?php echo $support['Sender']['firstname'].' '.$support['Sender']['lastname'] ;?></td>
-                                    <td><?php echo $support['Support']['subject'];?></td>
+                                    <td><a href = "<?php echo Configure::read('SITE_USER_URL');?>/supports/conversation/<?php echo $support['Support']['id'];?>" style="color:white;"><?php echo $support['Support']['subject'];?></a></td>
                                     
 
                                     <td><?php 

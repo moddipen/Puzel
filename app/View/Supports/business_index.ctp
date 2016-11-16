@@ -142,7 +142,7 @@
                                     $name = $singlesupport['Receiver']['firstname']; 
                                   }  
                                   echo $name;?></td>
-                            <td><?php echo $singlesupport['Support']['subject'];?></td>
+                            <td><a href = "<?php echo Configure::read('SITE_BUSINESS_URL')?>/supports/conversation/<?php echo $singlesupport['Support']['id'];?>" style="color:white;"><?php echo $singlesupport['Support']['subject'];?></a></td>
                             <td><?php echo date('g:i A dS M Y',strtotime($singlesupport['Support']['created']));?></td>
                             <td>
                               <?php 

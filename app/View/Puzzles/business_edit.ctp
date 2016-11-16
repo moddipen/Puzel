@@ -50,21 +50,86 @@
                   <!-- <form role="form" class="custom-form" action ="puzzels/view" method="post"> -->
                   <?php echo $this->form->create('Puzzle',array('action'=>'edit/'.$id,'method'=>'post','class'=>"custom-form"));?>
                   <div class="tile-body">
+                 <!-- -------------------------------------- ---------------------------- --> 
+                    <div class="row">
+                    <div class="col-md-11">
+                      
+                        <div class="row">
+                          <div class="col-md-6">
+                              <div class="row minipadding">
+                                  <div class="col-sm-8">
+                                      <div class="form-group">
+                                        <textarea class="form-control" style="height:87px; line-height:14pt;" id="script">
+                                            &lt;script type="text/javascript" src="<?php echo Configure::read("SITE_URL");?>app/webroot/js/custom.js">&lt;/script>
+                                            <div class="snipest" id="puzzle_<?php echo $Capturedata['Puzzle']['id']; ?>"></div>
+                                            
+                                            </textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                      <div class="form-group">
+                                          <button type="button" class="btn btn-oranges fullwidth" onclick="copyToClipboard('#script')" id="copyScript">Copy Script</button>
+                                        </div>
+                                        <div class="form-group">
+                                          <button type="button" id="sendTo" class="btn btn-oranges fullwidth">Send to Developer</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="row minipadding">
+                                  <div class="col-sm-8">
+                                      <div class="form-group">
+                                        <?php $name = str_replace(' ','', $Capturedata['Puzzle']['name']);?>
+                                        <?php $company = str_replace(' ','', $Capturedata['Business']['company_name']);?>
+                                          <input type="text" class="form-control" value="<?php echo Configure::read("SITE_URL")."puzzle/".$Capturedata['Business']['company_name']."/".$Capturedata['Puzzle']['name'];?>" id="puzlename">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                      <div class="form-group">
+                                          <button type="button" class="btn btn-oranges fullwidth" onclick="copyToClipboard('#puzlename')" id="copyButton">Copy</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row minipadding" style="display:none;">
+                                    <div class="col-sm-8">
+                                      <div class="form-group">
+                                          <input type="text" class="form-control" id="send-snipest-email" placeholder="Email Address">
+                      <p id="snip-m"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                      <div class="form-group">
+                                          <button type="button" id="send-snipest" class="btn btn-oranges fullwidth">Send</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      
+                    </div>
+                  </div>    
+
+
+                    <!-- -------------------------------------- ---------------------------- --> 
+                    
                   <div class="row">
                     <div class="col-md-10">
                       <!-- <form role="form" class="custom-form" action ="business/puzzels/view"> -->
                       <?php //echo $this->Form->create('Puzzel',array('action'=>'view','role'=>"form" ,"class"=>"custom-form"));?>
                           <div class="row minipadding">
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                               <div class="form-group">
-                                    <select  class="form-control chosen-select" name="data[Puzzle][type]" id="puzzletype">
+                                    <input name="data[Puzzle][type]" class="form-control" type="text" placeholder="Puzel Type" value ="<?php echo $Capturedata['Puzzle']['type'];?>" disabled="disabled">
+
+                                    <!-- <select  class="form-control chosen-select" name="data[Puzzle][type]" id="puzzletype">
                                     
-                                      <option value = "<?php echo $Capturedata['Puzzle']['type'];?>"><?php echo $Capturedata['Puzzle']['type'];?></option>
+                                      <option value = "<?php //echo $Capturedata['Puzzle']['type'];?>"><?php // echo $Capturedata['Puzzle']['type'];?></option>
                                       
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                               <div class="form-group">
                                     <input name="data[Puzzle][name]" class="form-control" type="text" placeholder="Puzel Name" id="puzzlename" value ="<?php echo $Capturedata['Puzzle']['name'];?>" disabled="disabled">
                                 </div> 
@@ -77,11 +142,12 @@
                                     </div>
                                 </div> 
                             </div> -->
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                               <div class="form-group">
-                                    <select name="data[Puzzle][peice]" class="form-control chosen-select">
+                                    <input name="data[Puzzle][pieces]" class="form-control" type="text" placeholder="Puzel pieces" value ="<?php echo $Capturedata['Puzzle']['pieces'];?>" disabled="disabled">
+                                    <!-- <select name="data[Puzzle][peice]" class="form-control chosen-select"> -->
                                       <!-- <option style="display:none">Number of Pieces</option> -->
-                                      <option value="<?php echo $Capturedata['Puzzle']['pieces'];?>"><?php echo $Capturedata['Puzzle']['pieces'];?></option>
+                                      <!-- <option value="<?php //echo $Capturedata['Puzzle']['pieces'];?>"><?php //echo $Capturedata['Puzzle']['pieces'];?></option> -->
                                       <!-- <option value="50">50</option>
                                       <option value="75">75</option>
                                       <option value="100">100</option> -->
@@ -89,7 +155,7 @@
                                 </div>
                             </div>
 							
-							<div class="col-md-2">
+							<div class="col-md-3">
                               <div class="form-group">
 							  <?php $transition = array(
 										"Newspaper" => "Newspaper",
@@ -107,6 +173,7 @@
                                 </div>
                             </div>
                           </div>
+
                       <!-- </form> -->
                       <?php //echo $this->Form->end();?>
                     </div>
@@ -232,17 +299,17 @@
 			  </div>
 			  <div class="form-group">
                 <div class="row minipadding">
-                    <div class="col-md-4">
+                   <!--  <div class="col-md-4">
                       <select name="opton"  class="form-control chosen-select" id = "changeprice">
                            <?php 
-                            if(!empty($Name))
-                            {  
-                              foreach ($Name as $value)
-                                {?>
-                                <option value ="<?php echo $value['Puzzle']['id']; ?>"><?php echo $value['Puzzle']['name']; ?></option>
-                            <?php } }?>
+                            // if(!empty($Name))
+                            // {  
+                            //   foreach ($Name as $value)
+                            //    {?>
+                                <option value ="<?php //echo $value['Puzzle']['id']; ?>"><?php //echo $value['Puzzle']['name']; ?></option>
+                            <?php //} }?>
                       </select>
-                    </div>
+                    </div> -->
                     <div class="col-md-4">
                       <div class="btn btn-file imageupload">
                           <input name="uploadfile" class="form-control" type="file" id="userimage">
@@ -441,8 +508,94 @@ processData:false,
     });
 
 
+    //////////////////////
+    document.getElementById("copyButton").addEventListener("click", function()
+     {
+       copyToClipboard(document.getElementById("puzlename"));
+    });
+    document.getElementById("copyScript").addEventListener("click", function()
+     {
+       copyToClipboard(document.getElementById("script"));
+    });
 
-
+  $("#sendTo").click(function(){    
+    $(".minipadding").css("display","block");
+  });
+  
+  $("#send-snipest").click(function(){    
+    if($("#send-snipest-email").val() !=  "")
+    {
+      $.ajax(
+      {
+        url: "<?php echo Configure::read("SITE_BUSINESS_URL");?>/puzzles/send",
+        type: "post",
+        datatype:"json",
+        data: {'email':$("#send-snipest-email").val(),'snipest':$('#script').val()} ,
+        success: function (data)
+        {
+        var obj = $.parseJSON(data);
+        if(obj.Message == "OK")
+        {
+          $("#snip-m").html("Snippest code emailed successfully");
+        }
+        else
+        {
+          $("#snip-m").html("Error while sending snipest code.");
+        }
+        }
+      });   
+    }
+  });
+  
+  function copyToClipboard(elem) {
+    // create hidden text element, if it doesn't already exist
+    var targetId = "_hiddenCopyText_";
+    var isInput = elem.tagName === "INPUT" || elem.tagName === "TEXTAREA";
+    var origSelectionStart, origSelectionEnd;
+    if (isInput) {
+        // can just use the original source element for the selection and copy
+        target = elem;
+        origSelectionStart = elem.selectionStart;
+        origSelectionEnd = elem.selectionEnd;
+    } else {
+        // must use a temporary form element for the selection and copy
+        target = document.getElementById(targetId);
+        if (!target) {
+            var target = document.createElement("textarea");
+            target.style.position = "absolute";
+            target.style.left = "-9999px";
+            target.style.top = "0";
+            target.id = targetId;
+            document.body.appendChild(target);
+        }
+        target.textContent = elem.textContent;
+    }
+    // select the content
+    var currentFocus = document.activeElement;
+    target.focus();
+    target.setSelectionRange(0, target.value.length);
+    
+    // copy the selection
+    var succeed;
+    try {
+        succeed = document.execCommand("copy");
+    } catch(e) {
+        succeed = false;
+    }
+    // restore original focus
+    if (currentFocus && typeof currentFocus.focus === "function") {
+        currentFocus.focus();
+    }
+    
+    if (isInput) {
+        // restore prior selection
+        elem.setSelectionRange(origSelectionStart, origSelectionEnd);
+    } else {
+        // clear temporary content
+        target.textContent = "";
+    }
+    return succeed;
+}
 
 
 
