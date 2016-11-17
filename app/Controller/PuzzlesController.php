@@ -231,13 +231,13 @@ class  PuzzlesController  extends AppController {
 					  $grandprice = $this->Session->read('IMAGEPRICE');
 					  if(!empty($grandprice))
 					  {
-					  	 debug($grandprice);exit;
+					  	 
 					  	 $this->request->data['Puzzle']['price'] =  $grandprice['textarea']; 		
 					  	 $this->request->data['Puzzle']['price_image'] =  $grandprice['Puzzle']['price_image']; 		
 					  }
 					  $this->request->data['Puzzle']['status'] = 0;
 					  $this->request->data['Puzzle']['image_ext'] = $imageName;
-					 
+					 debug($this->request->data);exit;
 					  $this->Puzzle->create();
 					  if($this->Puzzle->save($this->request->data))
 					  {
