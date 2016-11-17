@@ -231,7 +231,9 @@ class  PuzzlesController  extends AppController {
 					  $grandprice = $this->Session->read('IMAGEPRICE');
 					  if(!empty($grandprice))
 					  {
-					  	 $this->request->data['Puzzle']['price'] =  $grandprice['price']; 		
+					  	//debug($grandprice);exit;
+					  	 $this->request->data['Puzzle']['price'] =  $grandprice['textarea']; 		
+					  	 $this->request->data['Puzzle']['price_image'] =  $grandprice['Puzzle']['price_image']; 		
 					  }
 					  $this->request->data['Puzzle']['status'] = 0;
 					  $this->request->data['Puzzle']['image_ext'] = $imageName;
@@ -422,13 +424,42 @@ class  PuzzlesController  extends AppController {
 		if(!empty($this->request->data))
 		{
 				$valid_extensions = array('jpeg', 'jpg', 'png', 'gif', 'bmp');
-				$path = $_SERVER['DOCUMENT_ROOT'].'/app/webroot/img/grand_price/';
+				$path = $_SERVER['DOCUMENT_ROOT'].'app/webroot/img/grand_price/';
 				$filepath  = Configure::read("SITE_URL").'app/webroot/img/grand_price/';
+				
+
+				// when user add grand prize puzzle create time
+				if(isset($this->request->data['Puzzle']['uploadfile']))
+				{
+					$img = trim($this->request->data['Puzzle']['uploadfile']['name']);
+					$tmp = trim($this->request->data['Puzzle']['uploadfile']['tmp_name']); 
+					 // get uploaded file's extension
+					 $ext = strtolower(pathinfo($img, PATHINFO_EXTENSION));
+					 
+					 // can upload same image using rand function
+					 $final_image = rand(1000,1000000).$img;
+					 
+					 // check's valid format
+					 if(in_array($ext, $valid_extensions)) 
+					 {     
+					  $path = $path.strtolower($final_image); 
+					   
+					  if(move_uploaded_file($tmp,$path)) 
+					  {
+						$filepath = $filepath.strtolower($final_image); 
+						$this->request->data['Puzzle']['price_image'] = $final_image;
+						echo "<img src='$filepath' style='width:540px;'/>";
+					  }
+					 }					
+				}	
+
+
+
 				if(isset($_FILES['uploadfile']))
 				{
 
-				 $img = trim($_FILES['uploadfile']['name']);
-				 $tmp = trim($_FILES['uploadfile']['tmp_name']);
+				$img = trim($_FILES['uploadfile']['name']);
+				$tmp = trim($_FILES['uploadfile']['tmp_name']); 
 				 // get uploaded file's extension
 				 $ext = strtolower(pathinfo($img, PATHINFO_EXTENSION));
 				 
@@ -450,15 +481,16 @@ class  PuzzlesController  extends AppController {
 				 
 				}
 				
-				if(isset($this->request->data['Puzzle']['id'])){
+				if(isset($this->request->data['Puzzle']['id']))
+				{
 				
-				$this->request->data['Puzzle']['id'] = $this->request->data['Puzzle']['id'];	
-				$this->request->data['Puzzle']['price'] = $this->request->data['textarea'];	
-				
-				$this->Puzzle->save($this->request->data);	
+					$this->request->data['Puzzle']['id'] = $this->request->data['Puzzle']['id'];	
+					$this->request->data['Puzzle']['price'] = $this->request->data['textarea'];	
+					
+					$this->Puzzle->save($this->request->data);	
 				}
 			}
-				
+			// debug($this->request->data);exit;	
 			$this->Session->write('IMAGEPRICE',$this->request->data);
 		
 	}
