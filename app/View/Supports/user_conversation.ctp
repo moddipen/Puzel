@@ -1,3 +1,30 @@
+<style type="text/css">
+    blockquote.reply {
+min-height: 60px;
+border-color: #717171;
+border-right: 5px solid rgba(0, 0, 0, 0.3) !important;
+border-left: none !important;
+background: #f8f8f8;
+padding: 10px;
+color: #717171;
+-webkit-border-radius: 0 0 4px 4px;
+-moz-border-radius: 0 0 4px 4px;
+-ms-border-radius: 0 0 4px 4px;
+-o-border-radius: 0 0 4px 4px;
+border-radius: 0 0 4px 4px;
+-webkit-box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
+box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
+}
+blockquote.reply.withoutHeader{
+margin-top: 0;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+-ms-border-radius: 4px;
+-o-border-radius: 4px;
+border-radius: 4px;
+}
+</style>
+
 
 
       
@@ -57,9 +84,9 @@
 
                         if($chat['Support']['sender_id'] == AuthComponent::user('id'))
                          {?>
-                          <p>
-                            <?php echo $chat['Support']['message'];?>
-                          </p>
+                          <blockquote class="reply withoutHeader">
+                              <p><?php echo $chat['Support']['message'];?></p>
+                            </blockquote>
                          <?php }
                          else { if($chat['Support']['receiver_id'] == AuthComponent::user('id')) { ?> 
                             <blockquote class="filled withoutHeader">
