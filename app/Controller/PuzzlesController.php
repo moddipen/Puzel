@@ -493,7 +493,7 @@ class  PuzzlesController  extends AppController {
 					$this->Puzzle->save($this->request->data);	
 				}
 			}
-			echo "<pre>";print_r($this->request->data);exit; 
+			//echo "<pre>";print_r($this->request->data);exit; 
 			$this->Session->write('IMAGEPRICE',$this->request->data);
 		
 	}
