@@ -230,6 +230,7 @@ class  PuzzlesController  extends AppController {
 					  }
 
 					  $grandprice = $this->Session->read('IMAGEPRICE');
+					   echo "<pre>";print_r($grandprice);	
 					  if(!empty($grandprice))
 					  {
 					  	 
