@@ -430,7 +430,7 @@ class  PuzzlesController  extends AppController {
 				$filepath  = Configure::read("SITE_URL").'app/webroot/img/grand_price/';
 				
 				
-
+				echo "<pre>";print_r($this->request->data);exit;
 				// when user add grand prize puzzle create time
 				if(isset($this->request->data['Puzzle']['uploadfile']))
 				{
