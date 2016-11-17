@@ -224,7 +224,8 @@
 
 <?php echo $this->Html->script('jquery.creditCardValidator');?>
 
-<script>
+ <script type="text/javascript">
+
 $(document ).ready(function(){
 	<?php if($Rate['Subscription']['price'] == "Free" ) {?>
 	$("form").validate({
