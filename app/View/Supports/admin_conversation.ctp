@@ -83,12 +83,12 @@ border-radius: 4px;
                         if($chat['Support']['sender_id'] == AuthComponent::user('id'))
                          {?>
                           <blockquote class="filled withoutHeader">
-                              <p><i class="fa fa-quote-left pull-left"><?php echo $chat['Support']['message'];?></p>
+                              <p><i class="fa fa-quote-left pull-left"></i><?php echo $chat['Support']['message'];?></p>
                             </blockquote>
                          <?php }
                          else { if($chat['Support']['receiver_id'] == AuthComponent::user('id')) { ?> 
                             <blockquote class="reply withoutHeader">
-                              <p></i><?php echo $chat['Support']['message'];?></p>
+                              <p><?php echo $chat['Support']['message'];?></p>
                             </blockquote>
 
                       <?php  } } }?>
