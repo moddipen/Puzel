@@ -366,10 +366,10 @@
         url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/price",
         // data: {'price':html,'image':$('#filecontent').val()}, 
         data: new FormData(this),
-		contentType: false,
-		cache: false,
-		processData:false,		 
-        success: function(data)
+    		contentType: false,
+    		cache: false,
+    		processData:false,		 
+            success: function(data)
          {
             //alert($('#filecontent').val());
             $('#modal3').modal('hide');

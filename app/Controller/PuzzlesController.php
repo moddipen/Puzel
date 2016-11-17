@@ -199,7 +199,7 @@ class  PuzzlesController  extends AppController {
 					// create image directory 
 					$multipleimagefolder = WWW_ROOT.'img/puzzel/'.$this->request->data['Puzzle']['name'];//WWW_ROOT."img\puzzel\";
 					$folder = mkdir($multipleimagefolder);
-					$URL = $_SERVER['DOCUMENT_ROOT'].'/app/webroot/img/puzzel/';
+					$URL = $_SERVER['DOCUMENT_ROOT'].'app/webroot/img/puzzel/';
 					$imageName = $this->request->data['Puzzle']['name'].".jpg";
 					$path = $URL.$imageName;
 					$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i','', $this->request->data['Puzzle']['image']));
@@ -429,7 +429,7 @@ class  PuzzlesController  extends AppController {
 				$path = $_SERVER['DOCUMENT_ROOT'].'app/webroot/img/grand_price/';
 				$filepath  = Configure::read("SITE_URL").'app/webroot/img/grand_price/';
 				
-
+				
 
 				// when user add grand prize puzzle create time
 				if(isset($this->request->data['Puzzle']['uploadfile']))
@@ -518,7 +518,7 @@ class  PuzzlesController  extends AppController {
 					$this->Puzzle->save($this->request->data);	
 				}
 			}
-			// debug($this->request->data);exit;	
+			//echo "<pre>"; print_r($this->request->data);exit;	
 			$this->Session->write('IMAGEPRICE',$this->request->data);
 		
 	}
