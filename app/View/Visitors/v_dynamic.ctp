@@ -387,7 +387,8 @@ else
 						$blurr_class = "";
 					}
 				?>
-                <div> <?php echo $PuzzleData['Puzzle']['price'];?></div>
+                <div style="margin-bottom:40px;"> <?php echo $PuzzleData['Puzzle']['price'];?></div>
+        <div>        
 				<?php
 						if($PuzzleData['Puzzle']['price_image'] != "")
 						{
@@ -398,6 +399,7 @@ else
 					<?php
 						}
 					?>
+          </div>
                 <!-- <textarea name="textarea" id="textarea" class="form-control wysiwyg"></textarea> -->
               </div>
              </form>
