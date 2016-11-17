@@ -434,6 +434,7 @@ class  PuzzlesController  extends AppController {
 				// when user add grand prize puzzle create time
 				if(isset($this->request->data['Puzzle']['uploadfile']))
 				{
+					exit("fvxcvxvc");
 					$img = trim($this->request->data['Puzzle']['uploadfile']['name']);
 					$tmp = trim($this->request->data['Puzzle']['uploadfile']['tmp_name']); 
 					 // get uploaded file's extension
