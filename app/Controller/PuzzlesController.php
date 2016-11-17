@@ -434,7 +434,7 @@ class  PuzzlesController  extends AppController {
 				// when user add grand prize puzzle create time
 				if(isset($this->request->data['Puzzle']['uploadfile']))
 				{
-					exit("fvxcvxvc");
+
 					$img = trim($this->request->data['Puzzle']['uploadfile']['name']);
 					$tmp = trim($this->request->data['Puzzle']['uploadfile']['tmp_name']); 
 					 // get uploaded file's extension
@@ -446,20 +446,21 @@ class  PuzzlesController  extends AppController {
 					 // check's valid format
 					 if(in_array($ext, $valid_extensions)) 
 					 {     
-					  $path = $path.strtolower($final_image); 
-					   
-					  if(move_uploaded_file($tmp,$path)) 
-					  {
-						$filepath = $filepath.strtolower($final_image); 
-						$this->request->data['Puzzle']['price_image'] = $final_image;
-						echo "<img src='$filepath' style='width:540px;'/>";
-					  }
+						$path = $path.strtolower($final_image); 
+						   echo "HEllo";
+						if(move_uploaded_file($tmp,$path)) 
+						  {
+							exit("dfdsfdf");
+							$filepath = $filepath.strtolower($final_image); 
+							$this->request->data['Puzzle']['price_image'] = $final_image;
+							echo "<img src='$filepath' style='width:540px;'/>";
+						  }
 					 }					
 				}	
 
 				
 
-
+				exit("classic");
 				if(isset($_FILES['uploadfile']))
 				{
 
