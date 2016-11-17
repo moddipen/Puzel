@@ -230,7 +230,6 @@ class  PuzzlesController  extends AppController {
 					  }
 
 					  $grandprice = $this->Session->read('IMAGEPRICE');
-					   echo "<pre>";print_r($grandprice);	
 					  if(!empty($grandprice))
 					  {
 					  	 
@@ -239,7 +238,6 @@ class  PuzzlesController  extends AppController {
 					  }
 					  $this->request->data['Puzzle']['status'] = 0;
 					  $this->request->data['Puzzle']['image_ext'] = $imageName;
-					 echo "<pre>";print_r($this->request->data);exit;
 					  $this->Puzzle->create();
 					  if($this->Puzzle->save($this->request->data))
 					  {
@@ -450,7 +448,6 @@ class  PuzzlesController  extends AppController {
 						  
 						if(move_uploaded_file($tmp,$path)) 
 						  {
-							exit("dfdsfdf");
 							$filepath = $filepath.strtolower($final_image); 
 							$this->request->data['Puzzle']['price_image'] = $final_image;
 							echo "<img src='$filepath' style='width:540px;'/>";
@@ -460,7 +457,7 @@ class  PuzzlesController  extends AppController {
 
 				
 
-				exit("classic");
+				
 				if(isset($_FILES['uploadfile']))
 				{
 
@@ -496,7 +493,6 @@ class  PuzzlesController  extends AppController {
 					$this->Puzzle->save($this->request->data);	
 				}
 			}
-			echo "<pre>"; print_r($this->request->data);exit;	
 			$this->Session->write('IMAGEPRICE',$this->request->data);
 		
 	}
