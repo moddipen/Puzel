@@ -446,7 +446,7 @@ class  PuzzlesController  extends AppController {
 					 // check's valid format
 					 if(in_array($ext, $valid_extensions)) 
 					 {     
-						echo $path = $path.strtolower($final_image); exit;
+						$path = $path.strtolower($final_image); 
 						  
 						if(move_uploaded_file($tmp,$path)) 
 						  {
