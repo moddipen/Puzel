@@ -237,7 +237,7 @@ class  PuzzlesController  extends AppController {
 					  }
 					  $this->request->data['Puzzle']['status'] = 0;
 					  $this->request->data['Puzzle']['image_ext'] = $imageName;
-					 debug($this->request->data);exit;
+					 echo "<pre>";print_r($this->request->data);exit;
 					  $this->Puzzle->create();
 					  if($this->Puzzle->save($this->request->data))
 					  {
