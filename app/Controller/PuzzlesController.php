@@ -428,6 +428,32 @@ class  PuzzlesController  extends AppController {
 				$filepath  = Configure::read("SITE_URL").'app/webroot/img/grand_price/';
 				
 
+
+				// when user add grand prize puzzle create time
+				if(isset($this->request->data['Puzzle']['uploadfile']))
+				{
+					$img = trim($this->request->data['Puzzle']['uploadfile']['name']);
+					$tmp = trim($this->request->data['Puzzle']['uploadfile']['tmp_name']); 
+					 // get uploaded file's extension
+					 $ext = strtolower(pathinfo($img, PATHINFO_EXTENSION));
+					 
+					 // can upload same image using rand function
+					 $final_image = rand(1000,1000000).$img;
+					 
+					 // check's valid format
+					 if(in_array($ext, $valid_extensions)) 
+					 {     
+					  $path = $path.strtolower($final_image); 
+					   
+					  if(move_uploaded_file($tmp,$path)) 
+					  {
+						$filepath = $filepath.strtolower($final_image); 
+						$this->request->data['Puzzle']['price_image'] = $final_image;
+						echo "<img src='$filepath' style='width:540px;'/>";
+					  }
+					 }					
+				}	
+
 				// when user add grand prize puzzle create time
 				if(isset($this->request->data['Puzzle']['uploadfile']))
 				{
