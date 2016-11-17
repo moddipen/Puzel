@@ -425,6 +425,7 @@ class  PuzzlesController  extends AppController {
 		$this->autoRender = false;
 		if(!empty($this->request->data))
 		{
+			echo "<pre>";print_r($this->request->data);exit;	
 				$valid_extensions = array('jpeg', 'jpg', 'png', 'gif', 'bmp');
 				$path = $_SERVER['DOCUMENT_ROOT'].'app/webroot/img/grand_price/';
 				$filepath  = Configure::read("SITE_URL").'app/webroot/img/grand_price/';
