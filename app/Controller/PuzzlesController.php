@@ -173,11 +173,12 @@ class  PuzzlesController  extends AppController {
 */	
 	public function business_pieces()
 	{
+		exit("fdsf");
 		$this->autoRender = false;
 		
 		if(!empty($this->request->data))
 		{
-			exit("fdsf");
+
 			// check how many pieces remain of login user	
 			$user_id = $this->Auth->user('id');
 			$number_of_pieces = $this->UserSubscription->find('first',array('conditions'=>array('UserSubscription.user_id'=>$this->Auth->user('id'))));
