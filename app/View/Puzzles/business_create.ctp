@@ -1,6 +1,9 @@
 <style type="text/css">
     textarea.note-codable{ display: none;}
     .btn-toolbar{margin-left:0px !important; }
+    .note-editable:focus {
+      outline: none;
+      }
 </style>
 
       
