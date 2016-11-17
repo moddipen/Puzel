@@ -231,7 +231,7 @@ class  PuzzlesController  extends AppController {
 					  $grandprice = $this->Session->read('IMAGEPRICE');
 					  if(!empty($grandprice))
 					  {
-					  	//debug($grandprice);exit;
+					  	debug($grandprice);exit;
 					  	 $this->request->data['Puzzle']['price'] =  $grandprice['textarea']; 		
 					  	 $this->request->data['Puzzle']['price_image'] =  $grandprice['Puzzle']['price_image']; 		
 					  }
