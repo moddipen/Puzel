@@ -173,7 +173,6 @@ class  PuzzlesController  extends AppController {
 */	
 	public function business_pieces()
 	{
-		exit("fdsf");
 		$this->autoRender = false;
 		
 		if(!empty($this->request->data))
