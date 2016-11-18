@@ -1,3 +1,8 @@
+<style type="text/css">
+  .no-right:focus, .no-right a:focus{
+    outline:none !important;
+}
+</style>
 <?php
  
   // Get current URl 
