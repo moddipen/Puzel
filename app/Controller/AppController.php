@@ -44,7 +44,7 @@ class AppController extends Controller
 
 
 
-	   function beforeFilter() 
+	function beforeFilter() 
 	 {
 
 	   $this->Auth->authenticate = array('Form');
