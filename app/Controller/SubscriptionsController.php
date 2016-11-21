@@ -147,6 +147,7 @@ class  SubscriptionsController  extends AppController {
 										"number" => $this->data['Subscription']['card_number']
 									)
 								]);
+						echo "<pre>";print_r($customer);exit;
 								if($customer->success)
 								{
 									$result = Braintree_Transaction::sale([
