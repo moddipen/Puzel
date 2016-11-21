@@ -123,6 +123,7 @@ class  SubscriptionsController  extends AppController {
 		{
 			if($this->request->data['Subscription']['action'] && $this->request->data['Subscription']['action'] == "upgrade")
 			{	
+
 				Braintree_Configuration::environment('sandbox');
 				Braintree_Configuration::merchantId('dvgmgzszxf2qgmfh');
 				Braintree_Configuration::publicKey('2yhywhtr9583jhmh');
@@ -134,7 +135,6 @@ class  SubscriptionsController  extends AppController {
 				
 				if(!empty($order))
 				{
-					echo "<pre>";print_r($order);exit; 
 					if($order['Order']['price'] == "Free")
 					{
 						
@@ -343,6 +343,7 @@ class  SubscriptionsController  extends AppController {
 			else
 			{
 			
+						exit("data");
 						// check if user select except free plan then in that case payment method call 
 						if($plan['Subscription']['price'] != 'Free')
 						{
