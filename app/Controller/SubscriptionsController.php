@@ -242,7 +242,7 @@ class  SubscriptionsController  extends AppController {
 					}
 					else
 					{
-						exit("hello");
+						exit("hello"); 
 						//Fetch total payment and deduct acording to month and refund
 						
 						$amount_to_refund = $order['Order']['price'] / 30;
