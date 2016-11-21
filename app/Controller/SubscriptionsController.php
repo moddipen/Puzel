@@ -123,7 +123,6 @@ class  SubscriptionsController  extends AppController {
 		{
 			if($this->request->data['Subscription']['action'] && $this->request->data['Subscription']['action'] == "upgrade")
 			{	
-				exit("hello");			
 				Braintree_Configuration::environment('sandbox');
 				Braintree_Configuration::merchantId('dvgmgzszxf2qgmfh');
 				Braintree_Configuration::publicKey('2yhywhtr9583jhmh');
@@ -148,7 +147,7 @@ class  SubscriptionsController  extends AppController {
 										"number" => $this->data['Subscription']['card_number']
 									)
 								]);
-						echo "<pre>";print_r($customer);exit;
+						
 								if($customer->success)
 								{
 									$result = Braintree_Transaction::sale([
@@ -254,7 +253,7 @@ class  SubscriptionsController  extends AppController {
 						$amount_to_refund = $order['Order']['price'] - $amount_to_refund; // Total refunded amount
 						$amount_to_refund = round($amount_to_refund/5);
 						$refund = Braintree_Transaction::refund($order['Order']['transiction_id'],$amount_to_refund);
-						//echo "<pre>";print_r($refund);exit;
+						echo "<pre>";print_r($refund);exit;
 						if($refund->success)
 						{
 							$refund = Braintree_Transaction::refund($order['Order']['transiction_id'],$amount_to_refund);
