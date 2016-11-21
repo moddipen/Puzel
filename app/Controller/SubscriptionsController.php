@@ -122,7 +122,8 @@ class  SubscriptionsController  extends AppController {
 		if($this->request->data)
 		{
 			if($this->request->data['Subscription']['action'] && $this->request->data['Subscription']['action'] == "upgrade")
-			{				
+			{	
+				exit("hello");			
 				Braintree_Configuration::environment('sandbox');
 				Braintree_Configuration::merchantId('dvgmgzszxf2qgmfh');
 				Braintree_Configuration::publicKey('2yhywhtr9583jhmh');
