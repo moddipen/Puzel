@@ -84,6 +84,7 @@ class  SubscriptionsController  extends AppController {
 */	
 	public function user_plan($id=null)
 	{	
+		exit("exit");
 		$this->layour = "dashboard";
 		$signup = 1;
 		$this->set("Signup",$signup);
