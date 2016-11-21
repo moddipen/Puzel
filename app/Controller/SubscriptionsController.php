@@ -106,7 +106,6 @@ class  SubscriptionsController  extends AppController {
 					$paymentMethod->creditCard['cardholderName'] = $paymentMethod_s->cardholderName;
 					$paymentMethod->creditCard['expirationMonth'] = $paymentMethod_s->expirationMonth;
 					$paymentMethod->creditCard['expirationYear'] = $paymentMethod_s->expirationYear;
-					echo "<pre>";print_r($paymentMethod);exit;
 					$this->set('cardDetail',$paymentMethod);
 
 				}
