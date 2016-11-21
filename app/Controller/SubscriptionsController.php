@@ -134,7 +134,7 @@ class  SubscriptionsController  extends AppController {
 				
 				if(!empty($order))
 				{
-					
+					echo "<pre>";print_r($order);exit; 
 					if($order['Order']['price'] == "Free")
 					{
 						
