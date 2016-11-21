@@ -132,6 +132,7 @@ class  SubscriptionsController  extends AppController {
 				//Get previous plan detial
 				$order = $this->UserSubscription->find("first",array("conditions"=>array("UserSubscription.user_id"=>$this->Auth->user('id'),"UserSubscription.status"=>0)));
 				
+				echo "<pre>";print_r($order);exit("Order detail");
 				if(!empty($order))
 				{
 					echo "<pre>";print_r($order);exit("Order detail");
