@@ -123,7 +123,6 @@ class  SubscriptionsController  extends AppController {
 		{
 			if($this->request->data['Subscription']['action'] && $this->request->data['Subscription']['action'] == "upgrade")
 			{	
-				exit("if");
 				Braintree_Configuration::environment('sandbox');
 				Braintree_Configuration::merchantId('dvgmgzszxf2qgmfh');
 				Braintree_Configuration::publicKey('2yhywhtr9583jhmh');
@@ -135,6 +134,7 @@ class  SubscriptionsController  extends AppController {
 				
 				if(!empty($order))
 				{
+					echo "<pre>";print_r($order);exit("Order detail");
 					if($order['Order']['price'] == "Free")
 					{
 						
