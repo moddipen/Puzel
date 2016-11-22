@@ -229,7 +229,6 @@ class  VisitorsController  extends AppController {
 		$this->layout = "visitor";
 		$this->set('title',$name);
 		$name = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.name'=>$name,'Puzzle.status'=>0)));
-		echo "<pre>";print_r($name);exit;
 		$this->set('PuzzleData',$name);
 		$image = $this->Image->find('all',array('conditions'=>array('Image.puzzle_id'=>$name['Puzzle']['id'])));
 		$this->set('image',$image);
