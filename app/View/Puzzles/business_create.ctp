@@ -82,11 +82,18 @@
                             <div class="col-md-2">
                               <div class="form-group">
                                     <select name="data[Puzzel][peice]" class="form-control chosen-select" id="validation-pieces">
-                                      <option>Number of Pieces</option>
-                                      <option value="25">25</option>
-                                      <option value="50">50</option>
-                                      <option value="75">75</option>
-                                      <option value="100">100</option>
+                                       <option style="display:none">Number of Pieces</option>
+                                      <?php 
+                                        
+                                        for($i=25;$i<=25;$i++)
+                                           {
+                                             $pieces =  $Userpieces['UserSubscription']['used_pieces'] / 25;
+                                            // exit($pieces);
+                                            for($table_counter=1;$table_counter<=$pieces;$table_counter++)
+                                               {?>
+                                                  <option value='<?php printf("%d",($i*$table_counter))?>'><?php printf("%d",($i*$table_counter)) ?> </option>;
+                                               <?php }
+                                          } ?>
                                     </select>
 									<p id="validate-pieces"></p>
                                 </div>

@@ -75,6 +75,9 @@ class  PuzzlesController  extends AppController {
 		$this->set("title","Create");
 		$list = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id')),'fields'=>array('Puzzle.id','Puzzle.name')));
 		$this->set('Name',$list);
+
+		$status = $this->UserSubscription->find('first',array('conditions'=>array('UserSubscription.user_id'=>$this->Auth->user('id'))));
+		$this->set('Userpieces',$status);
 	}	
 
 /**
