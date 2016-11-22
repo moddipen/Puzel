@@ -342,7 +342,7 @@ class  SubscriptionsController  extends AppController {
 			else
 			{
 			
-						exit("data");
+						
 						// check if user select except free plan then in that case payment method call 
 						if($plan['Subscription']['price'] != 'Free')
 						{
