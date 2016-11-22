@@ -102,7 +102,43 @@
                   
                   <input type = "hidden" name="data[Puzzle][user_id]" value="<?php echo $this->Session->read('USERDETAIL.User.id');?>">
                  <div class="body" id="showimage">
-                    <img src="<?php echo $this->webroot ?>img/puzzel/<?php echo $Capturedata['Puzzle']['image_ext']?>" class="img-responsive" id="img_preview" alt="Please upload your image" />
+                    <!-- <img src="<?php echo $this->webroot ?>img/puzzel/<?php echo $Capturedata['Puzzle']['image_ext']?>" class="img-responsive" id="img_preview" alt="Please upload your image" /> -->
+                             <style>
+            .merge div div{width:<?php echo $Capturedata['Image'][0]['width']."px";?>;height:<?php echo $Capturedata['Image'][0]['height']."px";?>;display:inline-block;margin-left:-5px;margin-bottom:-5px;-webkit-filter: brightness(0.55); filter: brightness(0.55);border:2px solid #FFF;border-left:none;border-top:none;}
+       .merge div div:last-child{border-right:none}
+            .merge{width:<?php echo $Capturedata['Image'][0]['total_width']."px";?>;}
+            </style>
+              <?php $peices = $Capturedata['Puzzle']['pieces'] ; ?>
+          
+              <div class="merge pt-perspective">
+              <div>
+                 <?php 
+             $index = 0;
+                  foreach($Capturedata['Image'] as $image_data)
+                    {
+                      
+                      // Get Image path 
+                    $path =  $this->webroot.'img/puzzel/'.$Capturedata['Puzzle']['name'].'/'.$image_data['name'] ;
+                 
+                    $getname = preg_replace('/\\.[^.\\s]{3,4}$/', '', $image_data['name']); 
+                    $class_name = $getname  ;
+                    $class_image = "background:url('$path')"; 
+                    
+                    $get_image_part = explode("_",$image_data['name']);
+                     if($get_image_part[1] == 0 && $index != 0)
+                       {
+                         echo "</div><div>";
+                       }  
+                      
+                  ?> 
+                    <div class= "pt-page pt-page-<?php echo $index;?> <?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div>  
+                         <?php
+                  
+                           $index ++;
+                      }
+                    echo "</div>";?>
+                 </div> 
+                  
                   </div>
                   </div>
                   <!-- /tile body -->
