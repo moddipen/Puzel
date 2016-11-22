@@ -210,8 +210,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
     if ($drawimage_s > 0) 
     {?>
         <style>
-      .merge div div{width:<?php echo $image[0]['Image']['width']."px";?>;height:<?php echo $image[0]['Image']['height']."px";?>;display:inline-block;margin-left:-5px;margin-bottom:-5px;-webkit-filter: brightness(0.55); filter: brightness(0.55);border:1px solid #FFF;border-left:none;border-top:none;}
- .merge div div:last-child{border-right:none}
+      .merge div div{width:<?php echo $image[0]['Image']['width']."px";?>;height:<?php echo $image[0]['Image']['height']."px";?>;display:inline-block;margin-left:-5px;margin-bottom:-5px;}
       .merge{width:<?php echo $image[0]['Image']['total_width']."px";?>;}
       </style>
         <?php $peices = $PuzzleData['Puzzle']['pieces'] ; 
