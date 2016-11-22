@@ -221,7 +221,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
         // else {   $cut_width = 10;  $cut_height = 10; }  ?>
     
         <div class="merge pt-perspective">
-        
+        <div>
            <?php 
 		   $index = 0;
             foreach($image as $image_data)
