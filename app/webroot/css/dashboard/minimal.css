@@ -2950,12 +2950,9 @@ label.error, span.error {
 input.error, select.error {
     border-color: #FB5959;
 }
-.chosen-container-single .chosen-search {
-    position: absolute;
-    left: -9999px;
-}
-.dropup .chosen-container .chosen-drop {
-    border-bottom: 0;
-    top: auto;
-    bottom: 40px;
-}
+textarea.note-codable{ display: none;}
+    .btn-toolbar{margin-left:0px !important; }
+    .note-editable:focus {
+      outline: none;
+      }
+    .note-editable{padding:5px;}  
