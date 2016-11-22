@@ -251,26 +251,16 @@ class  PuzzlesController  extends AppController {
 						  $image_type =$read_image['mime'];
 						  $peices = $this->request->data['Puzzle']['pieces'];
 
-						  if($peices == 25)
-						  {
-						    $cut_width = 5;
-						    $cut_height = 5;
-						  }
-						  elseif($peices == 50)
-						  {
-						    $cut_width = 10;
-						    $cut_height = 5; 
-						  }
-						  elseif($peices == 75)
-						  {
-						    $cut_width = 15;
-						    $cut_height = 5; 
-						  }
-						  else
-						  {
-						    $cut_width = 10;
-						    $cut_height = 10; 
-						  }
+						  if($peices > 0)
+					        {
+					          $cut_width = $peices/5;
+					          $cut_height = 5;
+					       if($peices > 500)
+					       {
+					        $cut_width = $peices/10;
+					        $cut_height = 10;
+					       }
+					        }
 
 
 
