@@ -253,7 +253,7 @@ class  SubscriptionsController  extends AppController {
 						$amount_to_refund = round($amount_to_refund/5);
 
 						$refund = Braintree_Transaction::refund($order['Order']['transiction_id'],$amount_to_refund);
-						//echo "<pre>";print_r($refund);exit;
+						echo "<pre>";print_r($refund);exit;
 						if($refund->success)
 						{
 							$refund = Braintree_Transaction::refund($order['Order']['transiction_id'],$amount_to_refund);
@@ -279,7 +279,7 @@ class  SubscriptionsController  extends AppController {
 												'customerId' => $order["Order"]['customer_id'],//->customer->id,
 												'amount' => $plan['Subscription']['price']
 											]);
-											
+											echo "<pre>";print_r($result);exit;
 											if($result->success)
 											{
 												$result1 = Braintree_Transaction::submitForSettlement($result->transaction->id,$plan['Subscription']['price']);
