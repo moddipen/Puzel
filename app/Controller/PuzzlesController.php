@@ -146,7 +146,7 @@ class  PuzzlesController  extends AppController {
 		
 		if(!empty($check))
 		{
-			if($check['UserSubscription']['used_pieces'] <= $this->data['pieces'])
+			if($check['UserSubscription']['used_pieces'] < $this->data['pieces'])
 			{
 				$message = array(
 					"success" => 0,
