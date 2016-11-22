@@ -390,5 +390,46 @@ class AppController extends Controller
 
     }    
 
+ /**
+      // Send email with template
+*/
+  
+    public function sendsnipestemail($mail)
+    {
+        $json = json_encode(array(
+        'TemplateId'=>$mail['templateid'],
+        'TemplateModel'=>array(
+            'name'=>$mail['name'],
+             'action_url' => $mail['TemplateModel']['action_url'],
+             'product_address_line1' => $mail['TemplateModel']['product_address_line1'],
+            'company'=>array(
+                'name'=>$mail['TemplateModel']['company']['name']),
+            'product_name'=>$mail['TemplateModel']['product_name'],
+            'sender_name'=>"Puzzle Team"),
+        'From' => $mail['from'],
+        'To' => $mail['to'],
+        'InlineCss'=>true,
+        'ReplyTo' => $mail['reply_to']
+        ));
+         $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, 'http://api.postmarkapp.com/email/withTemplate');
+          curl_setopt($ch, CURLOPT_POST, true);
+          curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Accept: application/json',
+                'Content-Type: application/json',
+                'X-Postmark-Server-Token: ' .Configure::read("POSTMARKSERVERTOKEN")
+                ));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+        $response = json_decode($response);
+        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        return json_encode($response);
+    }     
+
+
+    
+
 
 }

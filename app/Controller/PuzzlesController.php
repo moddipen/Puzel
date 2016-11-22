@@ -312,8 +312,8 @@ class  PuzzlesController  extends AppController {
 						
 						$company_name = str_replace(' ','', $this->Session->read('IMAGECAPTURE.Puzzel.compnay_name'));
 						
-						$html = 'Snippest code is : <script type="text/javascript" src="'.Configure::read("SITE_URL").'app/webroot/js/custom.js"></script><div class="snipest" id="puzzle_'.$this->Puzzle->getLastInsertID().'"></div> Hosted Url is : <input type="text" class="form-control" value="'.Configure::read("SITE_URL").'puzzle/'.$company_name.'/'.$name.'"  id="puzlename">';
-
+						$html = '<script type="text/javascript" src="'.Configure::read("SITE_URL").'app/webroot/js/custom.js"></script><div class="snipest" id="puzzle_'.$this->Puzzle->getLastInsertID().'"></div>';
+						$hosted = 'Hosted Url is : <input type="text" class="form-control" value="'.Configure::read("SITE_URL").'puzzle/'.$company_name.'/'.$name.'"  id="puzlename">';
 
 					 	$email = array(
 	              			"templateid"=>1017941,
@@ -323,7 +323,8 @@ class  PuzzlesController  extends AppController {
 							    "product_name"=>$this->request->data['Puzzle']['name'],
 								"company"=> array(
 									"name"=> $this->Auth->user('company_name')),
-								"action_url"=>$html),
+								"action_url"=>$html,
+								"product_address_line1" => $hosted),
 							"InlineCss"=> true, 
 	              			"from"=> "support@puzel.co",
 	              			'to'=>$this->Auth->user('email'),
@@ -337,7 +338,7 @@ class  PuzzlesController  extends AppController {
 								  
 								  $this->UserSubscription->save($this->request->data);
 							  }
-						$this->sendemail($email);
+						$this->sendsnipestemail($email);
 						$this->redirect(array('action'=>'index'));
 				    }	
 				}	
