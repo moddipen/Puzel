@@ -777,7 +777,7 @@ body #content .feed-list .feed-post .feed-container footer .comments > li .new-c
   body .task-list > li .task-group > .task .panel-heading .task-controls .checkbox { text-align: left; } }
  @media (max-width: 768px)
   {
-	    body #content.full-page .inside-block, body #content.full-page.error .inside-block { width: 70%; padding:50px !important; margin-top:5%;}
+	    body #content.full-page .inside-block, body #content.full-page.error .inside-block { width: 70%; padding:15% !important; margin-top:5%;}
   }
 @media only screen and (max-width: 479px) { body { /* pageheader */ /* tiles */ /* recent activity */ /* timeline */ /* login page */ /* search results */ /* weather page */ }
   body .pageheader { text-align: left; }
@@ -792,7 +792,7 @@ body #content .feed-list .feed-post .feed-container footer .comments > li .new-c
   body .recent-activity .tab-content > ul > li .user:after { display: none; }
   body .timeline > li > .el-container .content span.time { display: block; float: none; margin-bottom: 4px; border-bottom: 1px solid; padding-bottom: 4px; text-align: center; }
   body .timeline > li > .el-container .content h1 { text-align: center; }
-  body #content.full-page .inside-block, body #content.full-page.error .inside-block { width: 70%; height: 100%; padding:50px !important; margin-top:0px;}
+  body #content.full-page .inside-block, body #content.full-page.error .inside-block { width: 90%; height: 100%; padding:5% !important; margin-top:0px;}
   body #content.full-page .inside-block form, body #content.full-page.error .inside-block form { margin-bottom: 40px; }
   body #content.full-page .search, body #content.full-page.error .search { right: 25%; top: 10px; }
   body .search-results .media > a.pull-left, body .search-results .media > a.pull-right { float: none !important; }

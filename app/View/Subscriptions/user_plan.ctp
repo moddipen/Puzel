@@ -246,8 +246,8 @@ $(document ).ready(function(){
 			'data[Subscription][firstname]':{required:'Please enter First name'},
 			'data[Subscription][lastname]':{required:'Please enter Last name'},
 			'data[Subscription][company_name]':{required:'Please enter Company name'},
-			'data[Subscription][password]': {required: 'Please enter an 8 to 16 characters alpha-numeric password.'},
-      'data[Subscription][confirm_password]': {required: 'Please enter an 8 to 16 characters alpha-numeric password.'}
+			'data[Subscription][password]': {required: 'Please enter valid password.'},
+      'data[Subscription][confirm_password]': {required: 'Please enter valid password.'}
 		}
 	});
 	<?php }else {?> 
@@ -263,7 +263,7 @@ $(document ).ready(function(){
 			'data[Subscription][ex_date_year][year]':{required:true},
 			'data[Subscription][cvv]':{required:true},
 			'data[Subscription][password]': {required: true,password: true},
-      'data[Subscription][confirm_password]': {required: true,password: true}
+      		'data[Subscription][confirm_password]': {required: true,password: true}
       
 		},
 		messages: {
@@ -276,8 +276,8 @@ $(document ).ready(function(){
 			'data[Subscription][ex_date_month][month]':{required:'Please choose month'},
 			'data[Subscription][ex_date_year][year]':{required:'Please choose year'},
 			'data[Subscription][cvv]':{required:'Please enter CVV'},
-			'data[Subscription][password]': {required: 'Please enter an 8 to 16 characters alpha-numeric password.'},
-      'data[Subscription][confirm_password]': {required: 'Please enter an 8 to 16 characters alpha-numeric password.'}
+			'data[Subscription][password]': {required: 'Please enter valid password.'},
+      		'data[Subscription][confirm_password]': {required: 'Please enter valid password.'}
 		}
 	});
 	<?php }?> 
