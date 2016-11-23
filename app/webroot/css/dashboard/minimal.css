@@ -453,7 +453,7 @@ table tbody.files > tr > td .preview canvas, table tbody.files > tr > td .previe
 /********************************/
 /************* MAIL *************/
 /********************************/
-.vertical-mail > .row, .horizontal-mail > .row { display: table; }
+.vertical-mail > .row, .horizontal-mail > .row { display: table; } .horizontal-mail > .row{width:100%;}
 .vertical-mail > .row > div[class*='col-'], .horizontal-mail > .row > div[class*='col-'] { padding: 0; display: table-cell; float: none; vertical-align: top; }
 .vertical-mail > .row > div[class*='col-']:first-child, .horizontal-mail > .row > div[class*='col-']:first-child { padding-left: 15px; }
 .vertical-mail > .row > div[class*='col-']:last-child, .horizontal-mail > .row > div[class*='col-']:last-child { padding: 0 15px; }
