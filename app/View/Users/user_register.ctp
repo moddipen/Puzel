@@ -14,8 +14,8 @@ $("form").validate({
 		'data[User][lastname]':{required:'Please enter last name'},
 		'data[User][company_name]':{required:'Please enter company name'},
 		'data[User][email]': {required: 'Please enter a valid email address.'},
-		'data[User][password]': {required: 'Please enter an 8 to 16 characters alpha-numeric password.'},
-		'data[User][confirm_password]': {required: 'Please enter an 8 to 16 characters alpha-numeric password.', equalTo: "Mismatch!"},
+		'data[User][password]': {required: 'Please enter valid password.'},
+		'data[User][confirm_password]': {required: 'Please enter valid password.', equalTo: "Mismatch!"},
 	}
 });
 });

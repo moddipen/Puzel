@@ -7,7 +7,7 @@ $("form").validate({
 	},
 	messages: {
 		'data[User][email]': {required: "Please enter a valid email address." },
-		'data[User][password]': {required: 'Please enter an 8 to 16 characters alpha-numeric password.'},
+		'data[User][password]': {required: 'Please enter valid password.'},
 	}
 });
 });
