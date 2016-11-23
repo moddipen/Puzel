@@ -14,6 +14,7 @@ color: #717171;
 border-radius: 0 0 4px 4px;
 -webkit-box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
 box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
+word-wrap: break-word;
 }
 blockquote.reply.withoutHeader{
 margin-top: 0;
