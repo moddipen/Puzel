@@ -121,7 +121,30 @@ class  SubscriptionsController  extends AppController {
 
 		if($this->request->data)
 		{
-			if($this->request->data['Subscription']['action'] && $this->request->data['Subscription']['action'] == "upgrade")
+			// check email id already register or not 
+			
+			if($this->request->data['Subscription']['email'] && $this->request->data['Subscription']['company_name'])
+			{
+				$check_user  = $this->User->find('first',array('conditions'=>array('OR'=>array('User.email'=>$this->request->data['Subscription']['email'] ,'User.company_name'=>$this->request->data['Subscription']['company_name']))));
+
+				if(!empty($check_user))
+				{
+					if($check_user['User']['email'] == $this->request->data['Subscription']['email'])
+					{
+						$this->Session->setFlash(__('Email already exists please user another email.', true), 'default', array('class' => 'alert alert-danger'));		
+					}
+					else
+					{
+						$this->Session->setFlash(__('Company name already exists please user another name.', true), 'default', array('class' => 'alert alert-danger'));		
+					}	
+
+					
+				}  
+							
+			}
+			else
+			{
+				if($this->request->data['Subscription']['action'] && $this->request->data['Subscription']['action'] == "upgrade")
 			{	
 				Braintree_Configuration::environment('sandbox');
 				Braintree_Configuration::merchantId('dvgmgzszxf2qgmfh');
@@ -565,7 +588,11 @@ class  SubscriptionsController  extends AppController {
 							}	
 				
 						}
-					}		 
+					}		 	
+			}		
+
+
+			
 		}
 		
 	}	
