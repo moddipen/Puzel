@@ -125,7 +125,8 @@
                   <input type ="hidden" name="data[Puzzel][price_image]" value="" id="pricepuzzle">
                   <input type ="hidden" name="data[Puzzel][compnay_name]" value="<?php echo $this->Session->read('Auth.User.company_name');?>" id="pricepuzzle">
                  <div class="body" id="showimage">
-                    <img src="#" class="img-responsive" id="img_preview" alt="Please upload your image" />
+                    <!-- <img src="#" class="img-responsive" id="img_preview" alt="Please upload your image" /> -->
+                    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
                   </div>
                   </div>
                   <!-- /tile body -->
@@ -268,26 +269,27 @@
 <!-- <script src="../assets/js/vendor/summernote/summernote.min.js"></script> -->
 <?php echo $this->Html->script('dashboard/vendor/summernote/summernote.min.js')?>
 <script type="text/javascript">
-  // Image preview  function 
-  function readURL(input)
-    {
-      if (input.files && input.files[0])
-      {
+   $(function(){
+      // Initialize card flip
+    $('.imageupload :file').change(function(){
+      var addclass = makeid();
+       $(this).parent().addClass(addclass);
+      var fileName = $(this)[0].files[0].name;
+      $('body').append('<style>.'+addclass+':before{content: "' + fileName + '" !important;}</style>');
+      });
+      $('#uploadimage :file').change(function(){
+      if (this.files && this.files[0]) {
         var reader = new FileReader();
-        reader.onload = function (e)
-        {
-          $('#img_preview').attr('src', e.target.result);
-          $(".tile-footer").css("display", "block");
-          var img = document.getElementById('img_preview');
-          $("#base64image").val(img.src);   
+        reader.onload = function (e) {
+          $('#showimage').html('<img src="'+e.target.result+'" class="img-responsive" />');
         }
-        reader.readAsDataURL(input.files[0]);
+        reader.readAsDataURL(this.files[0]);
       }
-    }
-  $("#imgpre").change(function()
-  {
-      readURL(this);
-  });
+      
+      });
+    })
+      
+   
   
    $("#validation-pieces").change(function()
   {
