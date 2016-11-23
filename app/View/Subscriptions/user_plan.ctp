@@ -142,6 +142,7 @@
     <div class="form-group">
     <div class="row dropup">
      <div class="col-sm-4 col-xs-12">
+     	<div class="form-group">
       <?php
     	
     	if(!$cardDetail){
@@ -169,7 +170,9 @@
     		  
             </select>
             </div>
+            </div>
 <div class="col-sm-4 col-xs-12">
+<div class="form-group">
     
       <?php
     	
@@ -194,12 +197,13 @@
     	  
       </select>
 </div>
+</div>
     <!-- </div>
 
     <div class="mc-field-group"> -->
       <!-- <label for="mce-LNAME">CVV </label> -->
       <div class="col-sm-4 col-xs-12">
-      <div class="input-group">
+      <div class="input-group" style="width:100%;">
       <input type="text" value="" name="data[Subscription][cvv]"  id="cvv" maxlength="4"  placeholder ="CVV" class="form-control" required>
       </div>
       </div>
