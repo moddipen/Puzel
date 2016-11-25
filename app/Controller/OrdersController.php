@@ -171,7 +171,7 @@ class  OrdersController  extends AppController {
 		$this->layout = 'dashboard';
 		$this->set("title","Billing");
 		// $order = $this->Order->find('all',array('conditions'=>array('Order.user_id'=>$this->Auth->user('id')),'order'=>'Order.id DESC'));
-		$order = $this->UserSubscription->find('all',array('conditions'=>array('UserSubscription.user_id'=>$this->Auth->user('id'),'UserSubscription.status'=>0),'order'=>'UserSubscription.id DESC'));
+		$order = $this->UserSubscription->find('all',array('conditions'=>array('UserSubscription.user_id'=>$this->Auth->user('id')),'order'=>'UserSubscription.id DESC'));
 		$this->set("Payment",$order);
 		$get_current_plan = $this->UserSubscription->find("first",array("conditions"=>array("UserSubscription.user_id"=>$this->Auth->user('id'),"UserSubscription.status"=>0),'order'=>array('UserSubscription.id DESC')));
 	
