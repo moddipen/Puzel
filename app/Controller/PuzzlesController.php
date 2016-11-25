@@ -183,7 +183,7 @@ class  PuzzlesController  extends AppController {
 
 			// check how many pieces remain of login user	
 			$user_id = $this->Auth->user('id');
-			$number_of_pieces = $this->UserSubscription->find('first',array('conditions'=>array('UserSubscription.user_id'=>$this->Auth->user('id'))));
+			$number_of_pieces = $this->UserSubscription->find('first',array('conditions'=>array('UserSubscription.user_id'=>$this->Auth->user('id'),"UserSubscription.status"=>0)));
 
 	      
 	       		// check if name already existes 
