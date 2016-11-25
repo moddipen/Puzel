@@ -335,9 +335,6 @@ class  PuzzlesController  extends AppController {
 								  $remaining_pieces = $number_of_pieces['UserSubscription']['used_pieces'] - $peices;
 								  $this->request->data['UserSubscription']['id'] = $number_of_pieces['UserSubscription']['id'];
 								  $this->request->data['UserSubscription']['used_pieces'] = $remaining_pieces;
-								  echo "<pre>";print_r($number_of_pieces);
-								  echo "<pre>";print_r($pieces);
-								  echo "<pre>";print_r($this->request->data);
 								  $this->UserSubscription->save($this->request->data);
 							  }
 						$this->sendsnipestemail($email);
