@@ -14,7 +14,7 @@
               <h2><i class="fa fa-puzel-icon-left-big"></i> Puzel</h2>
 
             </div>
-
+             <div id="errorpoint"></div> 
             <!-- row -->
             <div class="row">
 
@@ -93,7 +93,7 @@
                             </div>
                             <div class="col-md-2">
                               <div class="form-group">
-                                    <select name="data[Puzzel][transtion]" class="form-control chosen-select">
+                                    <select name="data[Puzzel][transtion]" class="form-control chosen-select" id="transition">
                                       <option value="Newspaper">Newspaper</option>
                                       <option value="Cube to left">Cube to left</option>
                                       <option value="Cube to right">Cube to right</option>
@@ -125,7 +125,7 @@
                   <!-- /tile body -->
                   <input type = "hidden" value="" id="clickterm"/>
                   <input type = "hidden" value="" id="clickprize"/>
-          
+                  <input type = "hidden" value = "<?php echo $statistics['Balancepeices']?>" id="checkbalance">
                   <!-- tile footer -->
                   <div class="tile-footer text-center" style="display:none" id="filedimage">
                     <div class="form-group">
@@ -304,7 +304,20 @@
       });
     })
       
-    
+    // alert($("#checkbalance").val());    
+
+    if($("#checkbalance").val() == "0")
+    {
+      $("#puzzletype").prop("disabled", true);
+      document.getElementById("puzzlename").disabled = true;
+      document.getElementById("imgpre").disabled = true;
+      $("#validation-pieces").prop("disabled", true);
+      $("#transition").prop("disabled", true);
+
+      $("#errorpoint").html("<p style='background:rgba(169,68,66,0.5);color:#fff;font-size:14px;padding:20px;margin-bottom:10px;'>Please upgrade your plan </p>");
+      
+    }
+
   
    $("#validation-pieces").change(function()
   {
@@ -313,20 +326,27 @@
        {
          type: "POST",
          url: "<?php echo Configure::read("SITE_URL");?>puzzles/checkpieces",
-           data: {'pieces':$(this).val()}, 
-       dataType : "json",
-        success: function(data)
-         {
-            if(data.message != "Success")
-            {
-              $("#validate-pieces").html(data.message);
-            }
-            else
-            {
-              $("#validate-pieces").html("");
-            }
-        
-         }
+         data: {'pieces':$(this).val()}, 
+         dataType : "json",
+          success: function(data)
+           {
+              if(data.success != 0)
+               {
+                  if(data.message != "Success")
+                    {
+                      $("#validate-pieces").html(data.message);
+                    }
+                    else
+                    {
+                      $("#validate-pieces").html("");
+                    }   
+               }
+               else
+               {
+                  $("#errorpoint").html("<p style='background:rgba(169,68,66,0.5);color:#A94442;font-size:14px;padding:20px;margin-bottom:10px;'>Please upgrade your plan </p>");
+                  $("#filedimage").css("display", "none");
+               } 
+          }
        });
   });
 
@@ -432,7 +452,7 @@
          dataType: 'json', 
          success: function(data)
          {
-            $('.note-editable').html(data.Puzzle.price);
+           $('.note-editable').html(data.Puzzle.price);
             $('#puzzleprice').val(data.Puzzle.price);   
           }
        });
@@ -473,7 +493,15 @@
        {
           alert("Please enter puzzle name");
           e.preventDefault();      
-       } 
+       }
+       if($("#validation-pieces").val() == $("#validation-pieces option:first").val())
+      {
+        alert("Please select number of pieces of puzzel");
+        e.preventDefault();    
+      }
+
+        
+
       
     });
 
