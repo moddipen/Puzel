@@ -202,7 +202,7 @@ class  OrdersController  extends AppController {
 				}
 			}	
 		}
-		$get_current_plan = $this->UserSubscription->find("first",array("conditions"=>array("UserSubscription.user_id"=>$this->Auth->user('id'),'status'=>0),'order'=>array('UserSubscription.id DESC')));
+		$get_current_plan = $this->UserSubscription->find("first",array("conditions"=>array("UserSubscription.user_id"=>$this->Auth->user('id'),"UserSubscription.status"=>0),'order'=>array('UserSubscription.id DESC')));
 		$this->set("get_current_plan",$get_current_plan);//debug($get_current_plan);exit;
 		if(!empty($get_current_plan) && $get_current_plan['Order']['customer_id'] != 0 && $get_current_plan['Order']['price'] != "Free")
 		{
