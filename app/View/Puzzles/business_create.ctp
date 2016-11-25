@@ -1,12 +1,4 @@
-<style type="text/css">
-    textarea.note-codable{ display: none;}
-    .btn-toolbar{margin-left:0px !important; }
-    .note-editable:focus {
-      outline: none;
-      }
-</style>
 
-      
                 
         <!-- Page content -->
         <div id="content" class="col-md-12">
@@ -79,10 +71,11 @@
                                     </div>
                                 </div> 
                             </div>
+
                             <div class="col-md-2">
                               <div class="form-group">
                                     <select name="data[Puzzel][peice]" class="form-control chosen-select" id="validation-pieces">
-                                       <option style="display:none">Number of Pieces</option>
+                                      <option style="display:none">Number of Pieces</option>
                                       <?php 
                                         
                                         for($i=25;$i<=25;$i++)
@@ -94,8 +87,8 @@
                                                   <option value='<?php printf("%d",($i*$table_counter))?>'><?php printf("%d",($i*$table_counter)) ?> </option>;
                                                <?php }
                                           } ?>
-                                    </select>
-									<p id="validate-pieces"></p>
+                                      </select>
+                  <p id="validate-pieces"></p>
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -269,7 +262,27 @@
 <!-- <script src="../assets/js/vendor/summernote/summernote.min.js"></script> -->
 <?php echo $this->Html->script('dashboard/vendor/summernote/summernote.min.js')?>
 <script type="text/javascript">
-   $(function(){
+  // Image preview  function 
+  // function readURL(input)
+  //   {
+  //     if (input.files && input.files[0])
+  //     {
+  //       var reader = new FileReader();
+  //       reader.onload = function (e)
+  //       {
+  //         $('#img_preview').attr('src', e.target.result);
+  //         $(".tile-footer").css("display", "block");
+  //         var img = document.getElementById('img_preview');
+  //         $("#base64image").val(img.src);   
+  //       }
+  //       reader.readAsDataURL(input.files[0]);
+  //     }
+  //   }
+  // $("#imgpre").change(function()
+  // {
+  //     readURL(this);
+  // });
+    $(function(){
       // Initialize card flip
     $('.imageupload :file').change(function(){
       var addclass = makeid();
@@ -281,7 +294,8 @@
       if (this.files && this.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-          $('#showimage').html('<img src="'+e.target.result+'" class="img-responsive" />');
+          $("#base64image").val(e.target.result);   
+          $('#showimage').html('<img src="'+e.target.result+'" id="img_preview" class="img-responsive" />');
           $("#filedimage").css("display", "block");
         }
         reader.readAsDataURL(this.files[0]);
@@ -290,28 +304,28 @@
       });
     })
       
-   
+    
   
    $("#validation-pieces").change(function()
   {
-		
-	 $.ajax(
+    
+   $.ajax(
        {
          type: "POST",
          url: "<?php echo Configure::read("SITE_URL");?>puzzles/checkpieces",
            data: {'pieces':$(this).val()}, 
-		   dataType : "json",
+       dataType : "json",
         success: function(data)
          {
             if(data.message != "Success")
-      			{
-      				$("#validate-pieces").html(data.message);
-      			}
-      			else
-      			{
-      				$("#validate-pieces").html("");
-      			}
-				
+            {
+              $("#validate-pieces").html(data.message);
+            }
+            else
+            {
+              $("#validate-pieces").html("");
+            }
+        
          }
        });
   });
@@ -376,9 +390,9 @@
         url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/price",
         // data: {'price':html,'image':$('#filecontent').val()}, 
         data: new FormData(this),
-    		contentType: false,
-    		cache: false,
-    		processData:false,		 
+        contentType: false,
+        cache: false,
+        processData:false,     
             success: function(data)
          {
             //alert($('#filecontent').val());
