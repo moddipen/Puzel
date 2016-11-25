@@ -134,7 +134,7 @@
                   <input type = "hidden" value="" id="clickprize"/>
           
                   <!-- tile footer -->
-                  <div class="tile-footer text-center" style="display:none">
+                  <div class="tile-footer text-center" style="display:none" id="filedimage">
                     <div class="form-group">
                       <input type="button" class="btn btn-black-transparent changebutton" value="Terms / Description" data-toggle="modal" data-target="#modal1" id="clickzone">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-black-transparent" value="Grand Prize" data-toggle="modal" data-target="#modal3" id="clickpricezone">
                     </div>
@@ -282,6 +282,7 @@
         var reader = new FileReader();
         reader.onload = function (e) {
           $('#showimage').html('<img src="'+e.target.result+'" class="img-responsive" />');
+          $("#filedimage").css("display", "block");
         }
         reader.readAsDataURL(this.files[0]);
       }
