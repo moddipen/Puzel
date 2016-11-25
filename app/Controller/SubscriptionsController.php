@@ -342,7 +342,8 @@ class  SubscriptionsController  extends AppController {
 									  'paymentMethodToken' => $customer->customer->paymentMethods[0]->token,
 									  'planId' => $plan['Subscription']['id']
 									]);									
-									
+									echo "<pre>";
+									print_r($result);exit;
 									if ($result->success) 
 									{
 															
