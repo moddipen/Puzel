@@ -52,6 +52,9 @@ class UsersController extends AppController {
 	 function beforeFilter()
 	 {
 	  	//parent::beforeFilter();
+	  	$statistics = $this->get_statistics();
+		
+		$this->set("statistics",$statistics);
 	  	$signup = 0;
 		$this->set("Signup",$signup);
 	  	$this->Auth->allow(array('index','contact','user_register','user_login','about','business','user_forgetpassword','admin_login','user_reset'));
@@ -157,6 +160,39 @@ class UsersController extends AppController {
 		}	
 	}
 
+
+public function get_statistics()
+	  {
+		 
+		  	$data = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
+			if(empty($data))
+			{
+				$data = 0 ;
+			}
+			$statistics['CountPuzzle'] = $data; 
+			
+
+			$active = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'),'Puzzle.status'=>0)));
+			if(empty($active))
+			{
+				$active = 0 ;
+			}
+		
+			$statistics['CountActivePuzzle'] = $active; 
+			// Count total pieces
+			$list = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
+			
+			$visitcount = 0;
+	
+			// count balance pieces  
+				$pic = $this->UserSubscription->find("first",array("conditions"=>array("UserSubscription.user_id"=>$this->Auth->user('id'),"UserSubscription.status"=>0)));
+				if(empty($pic)){$pic['UserSubscription']['used_pieces'] = 0;}
+				$statistics['Visitor'] = $visitcount; 
+				$statistics['Balancepeices'] = $pic['UserSubscription']['used_pieces']; 
+				if($statistics['Balancepeices'] < 0){$statistics['Balancepeices'] = 0;}
+				
+				return $statistics;
+	  }
 	
 	
 
