@@ -51,7 +51,7 @@ class UsersController extends AppController {
 
 	 function beforeFilter()
 	 {
-	  	parent::beforeFilter();
+	  	//parent::beforeFilter();
 	  	$signup = 0;
 		$this->set("Signup",$signup);
 	  	$this->Auth->allow(array('index','contact','user_register','user_login','about','business','user_forgetpassword','admin_login','user_reset'));
