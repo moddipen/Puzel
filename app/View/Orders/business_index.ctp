@@ -10,8 +10,8 @@
             <!-- cards -->
             <?php echo $this->element('business/header');?>
            <?php 
-			 echo $this->Session->flash();
-		   ?>
+       echo $this->Session->flash();
+       ?>
                <!-- /cards -->
             
              <div class="pagesubheader">
@@ -54,8 +54,9 @@
                     <div class="col-md-7">
                       <div class="row">
                           <div class="col-md-6">
+                            
                               <h4 class="title">Current Plan - <?php echo $get_current_plan['Subscription']['name'];?> &nbsp;&nbsp;&nbsp;&nbsp; 
-							  <u><a href="<?php echo Configure::read("SITE_URL")."subscriptions/package/".$get_current_plan['Subscription']['id'];?>">Upgrade</a></u></h4>
+                             <?php if($get_current_plan['UserSubscription']['subscription_id'] != 4){ ?><u><a href="<?php echo Configure::read("SITE_URL")."subscriptions/package/".$get_current_plan['Subscription']['id'];?>">Upgrade</a></u><?php }?></h4>
                             </div>
                             <div class="col-md-6">
                               <h4 class="title">Renewal Date - <?php 
@@ -65,23 +66,26 @@
                                 echo date('m/d/Y' ,strtotime($Payment[0]['Order']['created'])+(24*3600*$add_days));  
                               }
                               ?> &nbsp;&nbsp;&nbsp;&nbsp; 
-                              <?php echo $this->html->link('Cancel',array('controller'=>'users','action' => 'cancel'),array('style'=>"color:white;"),' Are you sure that you want to cancel your account?');?>
+                              <?php 
+                                if(AuthComponent::user('status') != 1 )
+                                {
+                              echo $this->html->link('Cancel',array('controller'=>'users','action' => 'cancel'),array('style'=>"color:white;"),' Are you sure that you want to cancel your account?'); }?>
                               </h4>
                             </div>
                         </div>
                       
                     </div>
                     <div class="col-md-5">
-					<?php
-						if($cardDetail && $cardDetail->creditCard['last4'] != "")
-						{
-					?>
+          <?php
+            if($cardDetail && $cardDetail->creditCard['last4'] != "")
+            {
+          ?>
                       <h4 class="title dropdown">Payment Type - <i class="fa fa-cc-visa"></i> &nbsp;&nbsp; <?php echo "XX-".$cardDetail->creditCard['last4'];?>&nbsp;&nbsp;&nbsp;&nbsp; <u style="cursor:pointer" onclick="showdiv('changecreditcard')">Change Credit Card</u></h4>
                     <?php
-						}
-					?>
-					
-					</div>
+            }
+          ?>
+          
+          </div>
                   </div>
                   <div class="row">
                     <div class="col-md-7">
@@ -105,22 +109,22 @@
                             <td><?php echo date('m/d/Y' , strtotime($value['Order']['created']))?></td>
                             <td><?php echo $value['Subscription']['name'];?></td>
                             <td>
-									<?php
-										if($value['Order']['price'] == "Free")
-										{
-											echo "Free";
-										}
-										else
-										{
-											echo "$".$value['Order']['price'];
-										}
-									?>
-							</td>
+                  <?php
+                    if($value['Order']['price'] == "Free")
+                    {
+                      echo "Free";
+                    }
+                    else
+                    {
+                      echo "$".$value['Order']['price'];
+                    }
+                  ?>
+              </td>
                             <td>
-								<a href="<?php echo Configure::read("SITE_URL");?>orders/receipt/<?php echo $value['Order']['id']?>" target="_blank" style="color:white;">
-								  <i class="fa fa-file-pdf-o"></i>
+                <a href="<?php echo Configure::read("SITE_URL");?>orders/receipt/<?php echo $value['Order']['id']?>" target="_blank" style="color:white;">
+                  <i class="fa fa-file-pdf-o"></i>
                 </a>
-							</td>
+              </td>
                           </tr>
                             <?php } }?>
                           </tbody>
@@ -133,25 +137,25 @@
                       <div class="row">
                         <div class="col-md-12">
                           <div class="form-group">
-						  <?php
-							$number = "************".$cardDetail->creditCard['last4'];
-						  ?>
+              <?php
+              $number = "************".$cardDetail->creditCard['last4'];
+              ?>
                                 <input type="text" name="data[Order][number]" value="<?php if(isset($number)){ echo $number ;} ?>" class="form-control" placeholder="Card Number" id="cardnumber">
                               </div>
                         </div>
                         <div class="col-md-12">
                           <div class="form-group">
-						  <?php
-							$name = $cardDetail->creditCard['cardholderName'];
-						  ?>
+              <?php
+              $name = $cardDetail->creditCard['cardholderName'];
+              ?>
                                 <input type="text" name="data[Order][name]" value="<?php echo $name;?>" class="form-control" placeholder="Name" id="cardholdername">
                               </div>
                         </div>
                         <div class="col-md-6">
                           <div class="form-group">
-							<?php
-							$date = $cardDetail->creditCard['expirationMonth']."/".$cardDetail->creditCard['expirationYear'];
-						  ?>
+              <?php
+              $date = $cardDetail->creditCard['expirationMonth']."/".$cardDetail->creditCard['expirationYear'];
+              ?>
                                 <input type="text"  name="data[Order][date]" class="form-control" value="<?php echo $date;?>" placeholder="Expiry Date" id="cardexpiredate">
                               </div>
                         </div>
