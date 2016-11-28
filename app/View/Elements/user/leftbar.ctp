@@ -27,12 +27,12 @@
               <li class="navigation" id="navigation">                
                 <ul class="menu">
                   
-                  <li>
+                  <!-- <li>
                     <a href="<?php echo Configure::read('SITE_USER_URL');?>/puzzles/index">
                       <i class="fa fa-home"></i> Dashboard
                       
                     </a>
-                  </li>
+                  </li> -->
                   
                   <li class="active">
                     <a href="<?php echo Configure::read('SITE_USER_URL');?>/puzzles/index">

@@ -27,12 +27,12 @@
               <li class="navigation" id="navigation">                
                 <ul class="menu">
                   
-                  <li>
+                  <!-- <li>
                     <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/users/index">
                       <i class="fa fa-home"></i> Dashboard
                       
                     </a>
-                  </li>
+                  </li> -->
                   <li class="active">
                     <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/users/business">
                       <i class="fa fa-briefcase"></i> Business
