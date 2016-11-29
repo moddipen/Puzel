@@ -82,9 +82,9 @@ class  SubscriptionsController  extends AppController {
 /**
 	Business plan suscribe
 */	
+	
 	public function user_plan($id=null)
 	{	
-		
 		$this->layour = "dashboard";
 		$signup = 1;
 		$this->set("Signup",$signup);
@@ -150,28 +150,27 @@ class  SubscriptionsController  extends AppController {
 								
 								if($customer->success)
 								{
-									$result = Braintree_Transaction::sale([
-										'customerId' => $customer->customer->id,
-										'amount' => $plan['Subscription']['price']
+									$result = Braintree_Subscription::create([
+									  'paymentMethodToken' => $customer->customer->paymentMethods[0]->token,
+									  'planId' => $plan['Subscription']['id']
 									]);
-											//'customerId' => 
 																
 									if ($result->success == 1) 
 									{
-										
-										$result1 = Braintree_Transaction::submitForSettlement($result->transaction->id);
 										
 										//Expire current subscription
 											$this->request->data['UserSubscription']['id'] = $order['UserSubscription']['id'];
 											$this->request->data['UserSubscription']['status'] = 1;
 											$this->UserSubscription->save($this->request->data);
-										
-											$data['Order']['transiction_id']=$result->transaction->id;
+											$data['Order']['transiction_id'] = $result->subscription->transactions[0]->id;
+											$data['Order']['subscriptions_id']=$result->subscription->id;
+											$data['Order']['token']=$result->subscription->paymentMethodToken;
 											$data['Order']['customer_id']=$customer->customer->id;
 											$data['Order']['price']=$plan['Subscription']['price'];
 											$data['Order']['created']=date('Y-m-d H:i:s',time());
 											$data['Order']['modified']=date('Y-m-d H:i:s',time());
 											$data['Order']['subscription_id'] = $id;
+
 											// check user is already exists or not 
 
 											$user = $this->User->find('first',array('conditions'=>array('User.email'=>$this->Auth->user('email'))));
@@ -209,11 +208,13 @@ class  SubscriptionsController  extends AppController {
 
 												// Save data in user subscription table 
 
+												$merge_pieces = $order['UserSubscription']['used_pieces'] + $plan['Subscription']['pieces'];	
+
 												$insert = array(
 													'user_id'=>$data['Order']['user_id'],
 													'order_id'=>$this->Order->getLastInsertId(),
 													'subscription_id'=>$id,
-													'used_pieces'=>$plan['Subscription']['pieces']);
+													'used_pieces'=>$merge_pieces);    //$plan['Subscription']['pieces']);
 
 												$this->UserSubscription->create();
 												if($this->UserSubscription->save($insert))
@@ -262,10 +263,11 @@ class  SubscriptionsController  extends AppController {
 							$this->request->data['Order']['customer_id']=$result->subscription->transactions[0]->customer['id'];
 							if($this->Order->save($this->request->data))
 							{
+								$merge_pieces = $order['UserSubscription']['used_pieces'] + $plan['Subscription']['pieces'];
 								$this->request->data['UserSubscription']['user_id'] = $this->Auth->user('id');
 								$this->request->data['UserSubscription']['order_id'] = $this->Order->getLastInsertId();
 								$this->request->data['UserSubscription']['subscription_id'] = $plan['Subscription']['id'];
-								$this->request->data['UserSubscription']['used_pieces'] = $plan['Subscription']['pieces'];
+								$this->request->data['UserSubscription']['used_pieces'] = $merge_pieces;//$plan['Subscription']['pieces'];
 								$this->UserSubscription->create();
 								if($this->UserSubscription->save($this->request->data))
 								{
@@ -306,7 +308,6 @@ class  SubscriptionsController  extends AppController {
 						}
 						else
 						{
-							exit("dasdmna");
 							foreach($result->errors->deepAll() AS $error) {
 										$this->Session->setFlash(__($error->code . ": " . $error->message . "\n", true), 'default', array('class' => 'alert alert-danger'));						
 									}
@@ -342,6 +343,7 @@ class  SubscriptionsController  extends AppController {
 									  'paymentMethodToken' => $customer->customer->paymentMethods[0]->token,
 									  'planId' => $plan['Subscription']['id']
 									]);									
+									
 									if ($result->success) 
 									{
 															
@@ -543,6 +545,7 @@ class  SubscriptionsController  extends AppController {
 						}
 					}		 
 		}
+		
 	}	
 
 
