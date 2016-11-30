@@ -769,7 +769,7 @@ public function user_reset($token=null)
 
 							if($this->sendemail($email))
 							{
-								$this->Session->setFlash(__('Your account has been cancel', true), 'default', array('class' => 'alert alert-success'));		
+								$this->Session->setFlash(__('Your account has been cancelled', true), 'default', array('class' => 'alert alert-success'));		
 								$this->redirect(array('controller'=>'puzzles','action'=>'index'));
 							}
 
