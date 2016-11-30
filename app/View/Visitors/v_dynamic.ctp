@@ -331,15 +331,13 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
             <input type = "hidden" name ="puzzlename" value = "<?php echo $explode[5];?>">
             <input type = "hidden" name ="signwithpuzzleaccount" id ="signwithpuzzleaccount" value = "">
             <div class="text-center">
-            	<div class="row">
                 <div class="six columns">
                 <div class="form-group ">
-              <button type="submit" class="btn button-sign" id="normalsign">Submit</button>
+              <button type="submit" class="btn button-sign" id="normalsign" style="width:100%;">Submit</button>
               </div>
               </div>
               <div class="six columns">
-              <div class="form-group "><button type="submit" class="btn button-sign" id="puzelacount" name="puzzle" value = "1">Signup with Puzel Account</button>
-              </div>
+              <div class="form-group "><button type="submit" class="btn button-sign" id="puzelacount" name="puzzle" style="width:100%;" value = "1">Signup with Puzel Account</button>
               </div>
               </div>
             </div>
