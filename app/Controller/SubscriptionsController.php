@@ -181,8 +181,14 @@ class  SubscriptionsController  extends AppController {
 												$data['Order']['user_id'] = $user['User']['id'];
 												$array = array(
 													'id'=>$user['User']['id'],
-													'password'=>$this->request->data['Subscription']['password'] );
-												$this->User->save($array);
+													'status'=>0 );
+												if($this->User->save($array))
+													{
+														if($this->Puzzle->updateAll(array('Puzzle.status'=>0),array('Puzzle.user_id'=>$user['User']['id'])))
+															{
+																$this->Image->updateAll(array('Image.puzzle_active'=>0),array('Image.user_id'=>$user['User']['id']));
+															}	
+													}	
 											}
 											
 											if($this->Order->save($data))
@@ -244,8 +250,6 @@ class  SubscriptionsController  extends AppController {
 					else
 					{
 						
-									
-						
 						//Assign new subscription
 						$result = Braintree_Subscription::update($order['Order']['subscriptions_id'], array(												
 							'paymentMethodToken' => $order['Order']['token'],
@@ -254,6 +258,23 @@ class  SubscriptionsController  extends AppController {
 						
 						if($result->success)
 						{
+							$user = $this->User->find('first',array('conditions'=>array('User.id'=>$this->Auth->user('id'))));
+							if(!empty($user))
+							{
+								$array = array(
+									'id'=>$user['User']['id'],
+									'status'=>0 );
+								if($this->User->save($array))
+								{
+									if($this->Puzzle->updateAll(array('Puzzle.status'=>0),array('Puzzle.user_id'=>$user['User']['id'])))
+										{
+											$this->Image->updateAll(array('Image.puzzle_active'=>0),array('Image.user_id'=>$user['User']['id']));
+										}	
+								}	
+
+								//echo "<pre>";print_r($array);exit;
+							}
+
 							$this->request->data['Order']['user_id'] = $this->Auth->user('id');
 							$this->request->data['Order']['transiction_id'] = $result->subscription->transactions[0]->id;
 							$this->request->data['Order']['subscriptions_id']=$result->subscription->id;
@@ -364,8 +385,14 @@ class  SubscriptionsController  extends AppController {
 												$data['Order']['user_id'] = $user['User']['id'];
 												$array = array(
 													'id'=>$user['User']['id'],
-													'password'=>$this->request->data['Subscription']['password'] );
-												$this->User->save($array);
+													'status'=>0 );
+												if($this->User->save($array))
+													{
+														if($this->Puzzle->updateAll(array('Puzzle.status'=>0),array('Puzzle.user_id'=>$user['User']['id'])))
+															{
+																$this->Image->updateAll(array('Image.puzzle_active'=>0),array('Image.user_id'=>$user['User']['id']));
+															}	
+													}	
 											}
 											else
 											{
@@ -483,8 +510,15 @@ class  SubscriptionsController  extends AppController {
 								$data['Order']['user_id'] = $user['User']['id'];
 								$array = array(
 									'id'=>$user['User']['id'],
-									'password'=>$this->request->data['Subscription']['password'] );
-								$this->User->save($array);
+									'password'=>$this->request->data['Subscription']['password'],
+									'status'=>0 );
+								if($this->User->save($array))
+								{
+									if($this->Puzzle->updateAll(array('Puzzle.status'=>0),array('Puzzle.user_id'=>$user['User']['id'])))
+										{
+											$this->Image->updateAll(array('Image.puzzle_active'=>0),array('Image.user_id'=>$user['User']['id']));
+										}	
+								}	
 							}
 							else
 							{
