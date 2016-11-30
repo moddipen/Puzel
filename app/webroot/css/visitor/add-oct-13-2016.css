@@ -7,6 +7,7 @@ body.bg-1 {
     background: -ms-linear-gradient(left, rgba(203,129,127,1) 0%, rgba(159,78,210,1) 100%);
     background: linear-gradient(to right, rgba(203,129,127,1) 0%, rgba(159,78,210,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cb817f', endColorstr='#9f4ed2', GradientType=1 );
+	padding-right:0px !important;
 }
 .no-right a{margin-right:0px !important; padding-right:0px !important;}
 .page-hosted{margin-top:110px; background-color: #fff;}
