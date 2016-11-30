@@ -678,7 +678,6 @@ text-transform: uppercase;
 	cursor: pointer;
 	margin-top: 2%;
 	background-color: #fFF;
-	padding: 6px 20px 5px;
 	-webkit-transition: all 0.2s ease-in-out;
 	-moz-transition: all 0.2s ease-in-out;
 	-ms-transition: all 0.2s ease-in-out;
@@ -703,7 +702,9 @@ text-transform: uppercase;
 	-moz-transition: all 0.2s ease-in-out;
 	-ms-transition: all 0.2s ease-in-out;
 	-o-transition: all 0.2s ease-in-out;
-	transition: all 0.2s ease-in-out;	}
+	transition: all 0.2s ease-in-out;	
+	padding: 6px 20px 5px;
+	}
 	
 
 #collapse {
