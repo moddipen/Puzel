@@ -278,7 +278,7 @@ nav {
 	left: 0;
 	width: 100%;
 	background: rgba(0,0,0,0.22);
-	z-index: 999999;
+	z-index: 9;
 	height: 110px;
 	border-bottom: 0px solid #e5e5e5;
 	overflow: hidden;
@@ -324,7 +324,7 @@ nav {
 	/*height:600px;*/
 	color:#FFF;
 	/*background:url('../img/zilra-ref-5.jpg')  #363f48 fixed; */
-    z-index: 999998;
+    z-index: 1;
     position: relative;
     background-size: 100%;}
 .about-page{background:url(../img/banner-about.png) #363f48 fixed; height: 500px;}
@@ -381,7 +381,7 @@ nav {
 /* Container  */
 
 .container {	
-	z-index: 99999; /* IMPORTANT */
+	z-index: 1; /* IMPORTANT */
 	position: relative;
 	background: #FFF;}
 
@@ -660,7 +660,7 @@ text-transform: uppercase;
 	background: #222;
 	width:100%;
 	text-align: center;
-	z-index: 99999999;
+	z-index: 9;
 	position: absolute;
 	top:0;}
 	
