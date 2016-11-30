@@ -227,14 +227,14 @@
 
 
 
-                          <div class="form-group col-sm-6">
+<!--                           <div class="form-group col-sm-6">
 
                             <label for="password">Current Password</label>
 
                             <input type="password" class="form-control" id="password" value="<?php echo $User['User']['password']?>" readonly>
 
                           </div>
-
+ -->
 
 
                         </div>
