@@ -110,5 +110,7 @@ $cakeDescription = __d('cake_dev', 'Puzzel');
     js = d.createElement(s); js.id = id;
     js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
     fjs.parentNode.insertBefore(js, fjs);
+
+    $('#flashMessage').delay(10000).fadeOut('slow');
   }(document, 'script', 'facebook-jssdk'));
   </script>
