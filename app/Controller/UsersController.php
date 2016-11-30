@@ -368,7 +368,7 @@ public function get_statistics()
               	}	
                 
             }
-            $this->Session->setFlash(__('Invalid username or password, try again', true), 'default', array('class' => 'alert alert-danger'));
+            $this->Session->setFlash(__('Looks like you entered an incorrect username or password', true), 'default', array('class' => 'alert alert-danger'));
         }
        
         // Auto login 
@@ -558,7 +558,7 @@ public function get_statistics()
 			else
 			{
 				
-				$this->Session->setFlash(__(' Email does Not Exist !!....', true), 'default', array('class' => 'alert alert-danger'));
+				$this->Session->setFlash(__(' We do not have an account with this email address, you can sign up now.', true), 'default', array('class' => 'alert alert-danger'));
 			}
 			
 		}
