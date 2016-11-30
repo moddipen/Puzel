@@ -123,6 +123,7 @@ $cakeDescription = __d('cake_dev', 'Puzzel');
       },function(){
         $(this).removeClass('flip');
       });  
+      $('#flashMessage').delay(10000).fadeOut('slow');
       
     })
       

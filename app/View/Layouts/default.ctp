@@ -61,3 +61,7 @@ $cakeDescription = __d('cake_dev', 'Puzzel');
 	 ?>
 </body>
 </html>
+
+<script type="text/javascript">
+	$('#flashMessage').delay(10000).fadeOut('slow');
+</script>
