@@ -278,7 +278,7 @@ nav {
 	left: 0;
 	width: 100%;
 	background: rgba(0,0,0,0.22);
-	z-index: 999999;
+	z-index: 9;
 	height: 110px;
 	border-bottom: 0px solid #e5e5e5;
 	overflow: hidden;
@@ -660,7 +660,7 @@ text-transform: uppercase;
 	background: #222;
 	width:100%;
 	text-align: center;
-	z-index: 99999999;
+	z-index: 9;
 	position: absolute;
 	top:0;}
 	
