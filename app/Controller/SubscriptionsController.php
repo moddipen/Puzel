@@ -180,13 +180,14 @@ class  SubscriptionsController  extends AppController {
 												
 												$data['Order']['user_id'] = $user['User']['id'];
 												$array = array(
-													'id'=>$user['User']['id'],
+													'id'=>$this->Auth->user('id'),
 													'status'=>0 );
 												if($this->User->save($array))
 													{
 														if($this->Puzzle->updateAll(array('Puzzle.status'=>0),array('Puzzle.user_id'=>$user['User']['id'])))
 															{
 																$this->Image->updateAll(array('Image.puzzle_active'=>0),array('Image.user_id'=>$user['User']['id']));
+																$this->Session->write('Auth', $this->User->read(null, $this->Auth->user('id')));
 															}	
 													}	
 											}
@@ -262,13 +263,14 @@ class  SubscriptionsController  extends AppController {
 							if(!empty($user))
 							{
 								$array = array(
-									'id'=>$user['User']['id'],
+									'id'=>$this->Auth->user('id'),
 									'status'=>0 );
 								if($this->User->save($array))
 								{
 									if($this->Puzzle->updateAll(array('Puzzle.status'=>0),array('Puzzle.user_id'=>$user['User']['id'])))
 										{
 											$this->Image->updateAll(array('Image.puzzle_active'=>0),array('Image.user_id'=>$user['User']['id']));
+											$this->Session->write('Auth', $this->User->read(null, $this->Auth->user('id')));
 										}	
 								}	
 
@@ -384,13 +386,14 @@ class  SubscriptionsController  extends AppController {
 											{
 												$data['Order']['user_id'] = $user['User']['id'];
 												$array = array(
-													'id'=>$user['User']['id'],
+													'id'=>$this->Auth->user('id'),
 													'status'=>0 );
 												if($this->User->save($array))
 													{
 														if($this->Puzzle->updateAll(array('Puzzle.status'=>0),array('Puzzle.user_id'=>$user['User']['id'])))
 															{
 																$this->Image->updateAll(array('Image.puzzle_active'=>0),array('Image.user_id'=>$user['User']['id']));
+																$this->Session->write('Auth', $this->User->read(null, $this->Auth->user('id')));
 															}	
 													}	
 											}
@@ -509,7 +512,7 @@ class  SubscriptionsController  extends AppController {
 							{
 								$data['Order']['user_id'] = $user['User']['id'];
 								$array = array(
-									'id'=>$user['User']['id'],
+									'id'=>$this->Auth->user('id'),
 									'password'=>$this->request->data['Subscription']['password'],
 									'status'=>0 );
 								if($this->User->save($array))
@@ -517,6 +520,7 @@ class  SubscriptionsController  extends AppController {
 									if($this->Puzzle->updateAll(array('Puzzle.status'=>0),array('Puzzle.user_id'=>$user['User']['id'])))
 										{
 											$this->Image->updateAll(array('Image.puzzle_active'=>0),array('Image.user_id'=>$user['User']['id']));
+											$this->Session->write('Auth', $this->User->read(null, $this->Auth->User('id')));
 										}	
 								}	
 							}
