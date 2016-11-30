@@ -215,7 +215,7 @@
 
 
 
-                          <div class="form-group col-sm-6">
+                          <div class="form-group col-sm-12">
 
                             <label for="emailaddress">Email Address</label>
 
