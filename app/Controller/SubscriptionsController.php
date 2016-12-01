@@ -52,7 +52,7 @@ class  SubscriptionsController  extends AppController {
 	function beforeFilter()
 	{
 	 	parent::beforeFilter();
-	 	$this->Auth->allow(array('package','user_plan','thankyou'));
+	 	$this->Auth->allow(array('package','user_plan','thankyou','failure'));
 	 	
 	}
 
@@ -633,6 +633,44 @@ class  SubscriptionsController  extends AppController {
 		$this->set('title',"Thank You");
 	}	
 
+
+/**
+	Failure detail of braintree
+*/
+
+	public function failure()
+	{
+		//$this->layout = '';
+		$this->autoRender = false;
+		// $this->log('Develpore test');		
+			Braintree_Configuration::environment('sandbox');
+			Braintree_Configuration::merchantId('dvgmgzszxf2qgmfh');
+			Braintree_Configuration::publicKey('2yhywhtr9583jhmh');
+			Braintree_Configuration::privateKey('2bcc2668e0766ce64a3d9f975d953f78');
+
+			$collection = Braintree_Subscription::search([
+							  Braintree_SubscriptionSearch::status()->in(
+							    [Braintree_Subscription::PENDING]
+							  )
+							]);
+				
+			echo "<pre>";print_r($collection);exit;		
+
+		// 		if(
+		//     isset($_POST["bt_signature"]) &&
+		//     isset($_POST["bt_payload"])
+		// ) {
+		//     $webhookNotification = Braintree_WebhookNotification::parse(
+		//         $_POST["bt_signature"], $_POST["bt_payload"]
+		//     );
+
+		//     $message =
+		//         "[Webhook Received " . $webhookNotification->timestamp->format('Y-m-d H:i:s') . "] "
+		//         . "Kind: " . $webhookNotification->kind . " | ";
+
+		//     file_put_contents("/tmp/webhook.log", $message, FILE_APPEND);
+		// }
+	}
 
 
 
