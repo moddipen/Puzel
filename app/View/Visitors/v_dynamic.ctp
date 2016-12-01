@@ -22,6 +22,7 @@ echo $this->Html->css('animations.css');
     -o-filter: blur(13px);
     -ms-filter: blur(13px);
  filter: blur(13px);}
+
 </style>
 <script type="text/javascript">
 var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
