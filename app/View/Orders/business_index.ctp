@@ -56,8 +56,8 @@
                           <div class="col-md-6">
                               <h4 class="title">Current Plan - <?php echo $get_current_plan['Subscription']['name'];?> &nbsp;&nbsp;&nbsp;&nbsp; 
                              <?php 
-                                  if(AuthComponent::user('status') != 1)
-                                  {
+                                  // if(AuthComponent::user('status') != 1)
+                                  // {
                                     if($get_current_plan['UserSubscription']['subscription_id'] != 4)
                                     { ?>
                                       <u>
@@ -66,14 +66,14 @@
                                       </u>
                                     <?php 
                                     }  
-                                  }  
-                                  else
-                                  {?>
-                                    <u>
-                                      <a href="<?php echo Configure::read("SITE_URL")."subscriptions/package/1"?>">Upgrade
+                                  // }  
+                                  // else
+                                  // {?>
+                                    <!-- <u>
+                                      <a href="<?php //echo Configure::read("SITE_URL")."subscriptions/package/1"?>">Upgrade
                                       </a>
-                                    </u>  
-                                 <?php }?>
+                                    </u>   -->
+                                 <?php //}?>
 
 
                               </h4>
