@@ -89,11 +89,7 @@ class  SubscriptionsController  extends AppController {
 		$signup = 1;
 		$this->set("Signup",$signup);
 		$this->set('title',"Packages");
-		$tomorrow = new DateTime("now + 1 day");
-		$tomorrow->setTime(0,0,0);
-
-
-
+		
 		if($this->Auth->user())
 		{
 			Braintree_Configuration::environment('sandbox');
@@ -155,10 +151,26 @@ class  SubscriptionsController  extends AppController {
 								
 								if($customer->success)
 								{
-									$result = Braintree_Subscription::create([
+									if($plan['Subscription']['id'] != 2)
+									{
+										$result = Braintree_Subscription::create([
 									  'paymentMethodToken' => $customer->customer->paymentMethods[0]->token,
 									  'planId' => $plan['Subscription']['id']
-									]);
+										]);	
+									} 
+									else
+									{
+										$tomorrow = new DateTime("now + 1 day");
+										$tomorrow->setTime(0,0,0);
+
+										$result = Braintree_Subscription::create([
+									  'paymentMethodToken' => $customer->customer->paymentMethods[0]->token,
+									  'planId' => $plan['Subscription']['id'],
+									  'firstBillingDate' => $tomorrow,
+									  'price'=>"2500"
+										]);
+									}	
+									
 																
 									if ($result->success == 1) 
 									{
@@ -257,21 +269,10 @@ class  SubscriptionsController  extends AppController {
 					{
 						
 						//Assign new subscription
-						if($this->Auth->user('status') != 1)
-						{
-							$result = Braintree_Subscription::update($order['Order']['subscriptions_id'], array(												
+						$result = Braintree_Subscription::update($order['Order']['subscriptions_id'], array(												
 							'paymentMethodToken' => $order['Order']['token'],
 							'planId' => $plan['Subscription']['id']												
-							));
-						}
-						else
-						{
-
-							$result = Braintree_Subscription::create([
-									  'paymentMethodToken' => $order['Order']['token'],
-									  'planId' => $plan['Subscription']['id']
-									]);
-						}	
+						));
 						
 						if($result->success)
 						{
@@ -378,10 +379,29 @@ class  SubscriptionsController  extends AppController {
 								if($customer->success)
 								{
 									
-									$result = Braintree_Subscription::create([
+									// $result = Braintree_Subscription::create([
+									//   'paymentMethodToken' => $customer->customer->paymentMethods[0]->token,
+									//   'planId' => $plan['Subscription']['id']
+									// ]);
+									if($plan['Subscription']['id'] != 2)
+									{
+										$result = Braintree_Subscription::create([
 									  'paymentMethodToken' => $customer->customer->paymentMethods[0]->token,
 									  'planId' => $plan['Subscription']['id']
-									]);									
+										]);	
+									}
+									else
+									{
+										$tomorrow = new DateTime("now + 1 day");
+										$tomorrow->setTime(0,0,0);
+
+										$result = Braintree_Subscription::create([
+									  'paymentMethodToken' => $customer->customer->paymentMethods[0]->token,
+									  'planId' => $plan['Subscription']['id'],
+									  'firstBillingDate' => $tomorrow,
+									  'price'=>"2500"
+										]);
+									}	 									
 									
 									if ($result->success) 
 									{
@@ -613,15 +633,19 @@ class  SubscriptionsController  extends AppController {
 		$this->set('title',"Thank You");
 	}	
 
+
+/**
+	Failure detail of braintree
+*/
+
 	public function failure()
 	{
 		//$this->layout = '';
 		$this->autoRender = false;
-		// $this->log('Develpore test');		
-			Braintree_Configuration::environment('sandbox');
-			Braintree_Configuration::merchantId('dvgmgzszxf2qgmfh');
-			Braintree_Configuration::publicKey('2yhywhtr9583jhmh');
-			Braintree_Configuration::privateKey('2bcc2668e0766ce64a3d9f975d953f78');
+		Braintree_Configuration::environment('sandbox');
+		Braintree_Configuration::merchantId('dvgmgzszxf2qgmfh');
+		Braintree_Configuration::publicKey('2yhywhtr9583jhmh');
+		Braintree_Configuration::privateKey('2bcc2668e0766ce64a3d9f975d953f78');
 
 			
 		if(isset($_POST["bt_signature"]) && isset($_POST["bt_payload"])) 
@@ -643,6 +667,8 @@ class  SubscriptionsController  extends AppController {
 
 		 	
 	}
+
+
 
 
 
