@@ -156,7 +156,7 @@ class  SubscriptionsController  extends AppController {
 									  'paymentMethodToken' => $customer->customer->paymentMethods[0]->token,
 									  'planId' => $plan['Subscription']['id']
 										]);	
-									}
+									} 
 									else
 									{
 										$tomorrow = new DateTime("now + 1 day");
