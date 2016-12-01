@@ -669,7 +669,6 @@ class  SubscriptionsController  extends AppController {
 		        . "Kind: " . $webhookNotification->kind . " | ";
 
 		    file_put_contents("/tmp/webhook.log", $message, FILE_APPEND);
-		}
 	}
 
 
