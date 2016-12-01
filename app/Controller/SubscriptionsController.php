@@ -654,7 +654,7 @@ class  SubscriptionsController  extends AppController {
 							  )
 							]);
 				
-			//echo "<pre>";print_r($collection);exit;		
+			echo "<pre>";print_r($collection);exit;		
 
 		// 		if(
 		//     isset($_POST["bt_signature"]) &&
