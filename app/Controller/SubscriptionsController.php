@@ -654,22 +654,22 @@ class  SubscriptionsController  extends AppController {
 							  )
 							]);
 				
-			echo "<pre>";print_r($collection);exit;		
+			//echo "<pre>";print_r($collection);exit;		
 
 		// 		if(
 		//     isset($_POST["bt_signature"]) &&
 		//     isset($_POST["bt_payload"])
 		// ) {
-		//     $webhookNotification = Braintree_WebhookNotification::parse(
-		//         $_POST["bt_signature"], $_POST["bt_payload"]
-		//     );
+		    $webhookNotification = Braintree_WebhookNotification::parse(
+		        $collection
+		    );
 
-		//     $message =
-		//         "[Webhook Received " . $webhookNotification->timestamp->format('Y-m-d H:i:s') . "] "
-		//         . "Kind: " . $webhookNotification->kind . " | ";
+		    $message =
+		        "[Webhook Received " . $webhookNotification->timestamp->format('Y-m-d H:i:s') . "] "
+		        . "Kind: " . $webhookNotification->kind . " | ";
 
-		//     file_put_contents("/tmp/webhook.log", $message, FILE_APPEND);
-		// }
+		    file_put_contents("/tmp/webhook.log", $message, FILE_APPEND);
+		}
 	}
 
 
