@@ -729,6 +729,8 @@ public function user_reset($token=null)
 	{
 		$this->autoRender = false;
 		$id = $this->Auth->user('id');
+		$get_last_order = $this->Order->find('first',array('conditions'=>array('Order.user_id'=>$id),'order'=>'Order.id Desc','limit'=>1));	
+
 		$array = array(
 			'id'=>$id,
 			'status'=>'1');
@@ -736,6 +738,16 @@ public function user_reset($token=null)
 		if($this->User->save($array))
 		{
 			$this->Session->write('Auth.User.status', 1);
+
+			// Cancel subscription package from brain tree 
+			if($get_last_order['Order']['subscriptions_id'] != "")
+			{
+				Braintree_Configuration::environment('sandbox');
+				Braintree_Configuration::merchantId('dvgmgzszxf2qgmfh');
+				Braintree_Configuration::publicKey('2yhywhtr9583jhmh');
+				Braintree_Configuration::privateKey('2bcc2668e0766ce64a3d9f975d953f78');	
+				Braintree_Subscription::cancel($get_last_order['Order']['subscriptions_id']);
+			}
 
 			//Deactive Puzzle of this user
 			if($this->Puzzle->updateAll(array('Puzzle.status'=>1),array('Puzzle.user_id'=>$id)))
@@ -750,7 +762,6 @@ public function user_reset($token=null)
 						
 						if($update)
 						{
-							
 							// Send email to user that your has been deactivate 
 							$email = array(
 							"templateid"=>1025061,
@@ -779,8 +790,27 @@ public function user_reset($token=null)
 				}
 				else
 				{
-					$this->Session->setFlash(__('Your account has been cancel', true), 'default', array('class' => 'alert alert-success'));		
-					$this->redirect(array('controller'=>'puzzles','action'=>'index'));
+					
+					$email = array(
+						"templateid"=>1025061,
+						"name"=>$this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+						"TemplateModel"=> array(
+							"user_name"=> $this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+							"product_name"=>"Account Cancelled",
+							'company'=>array(
+            					'name'=>''),
+							"action_url"=>"Your account has been cancelled. Please get in touch with our support team for further instructions."),
+						"InlineCss"=> true, 
+						"from"=> "support@puzel.co",
+						'to'=>$this->Auth->user('email'),
+						'reply_to'=>"support@puzel.co"
+						);	
+
+						if($this->sendemail($email))
+						{
+							$this->Session->setFlash(__('Your account has been cancelled', true), 'default', array('class' => 'alert alert-success'));		
+							$this->redirect(array('controller'=>'puzzles','action'=>'index'));
+						}
 				}
 			}
 		}
