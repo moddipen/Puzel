@@ -740,14 +740,14 @@ public function user_reset($token=null)
 			$this->Session->write('Auth.User.status', 1);
 
 			// Cancel subscription package from brain tree 
-			if($get_last_order['Order']['subscriptions_id'] != "")
-			{
-				Braintree_Configuration::environment('sandbox');
-				Braintree_Configuration::merchantId('dvgmgzszxf2qgmfh');
-				Braintree_Configuration::publicKey('2yhywhtr9583jhmh');
-				Braintree_Configuration::privateKey('2bcc2668e0766ce64a3d9f975d953f78');	
-				Braintree_Subscription::cancel($get_last_order['Order']['subscriptions_id']);
-			}
+			// if($get_last_order['Order']['subscriptions_id'] != "")
+			// {
+			// 	Braintree_Configuration::environment('sandbox');
+			// 	Braintree_Configuration::merchantId('dvgmgzszxf2qgmfh');
+			// 	Braintree_Configuration::publicKey('2yhywhtr9583jhmh');
+			// 	Braintree_Configuration::privateKey('2bcc2668e0766ce64a3d9f975d953f78');	
+			// 	Braintree_Subscription::cancel($get_last_order['Order']['subscriptions_id']);
+			// }
 
 			//Deactive Puzzle of this user
 			if($this->Puzzle->updateAll(array('Puzzle.status'=>1),array('Puzzle.user_id'=>$id)))
