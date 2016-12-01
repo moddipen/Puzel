@@ -398,7 +398,7 @@ class  SubscriptionsController  extends AppController {
 									  'planId' => $plan['Subscription']['id'],
 									  'firstBillingDate' => $tomorrow
 										]);
-									}										
+									}	 									
 									
 									if ($result->success) 
 									{
