@@ -150,10 +150,25 @@ class  SubscriptionsController  extends AppController {
 								
 								if($customer->success)
 								{
-									$result = Braintree_Subscription::create([
+									if($plan['Subscription']['id'] != 2)
+									{
+										$result = Braintree_Subscription::create([
 									  'paymentMethodToken' => $customer->customer->paymentMethods[0]->token,
 									  'planId' => $plan['Subscription']['id']
-									]);
+										]);	
+									}
+									else
+									{
+										$tomorrow = new DateTime("now + 1 day");
+										$tomorrow->setTime(0,0,0);
+
+										$result = Braintree_Subscription::create([
+									  'paymentMethodToken' => $customer->customer->paymentMethods[0]->token,
+									  'planId' => $plan['Subscription']['id'],
+									  'firstBillingDate' => $tomorrow
+										]);
+									}	
+									
 																
 									if ($result->success == 1) 
 									{
@@ -362,10 +377,28 @@ class  SubscriptionsController  extends AppController {
 								if($customer->success)
 								{
 									
-									$result = Braintree_Subscription::create([
+									// $result = Braintree_Subscription::create([
+									//   'paymentMethodToken' => $customer->customer->paymentMethods[0]->token,
+									//   'planId' => $plan['Subscription']['id']
+									// ]);
+									if($plan['Subscription']['id'] != 2)
+									{
+										$result = Braintree_Subscription::create([
 									  'paymentMethodToken' => $customer->customer->paymentMethods[0]->token,
 									  'planId' => $plan['Subscription']['id']
-									]);									
+										]);	
+									}
+									else
+									{
+										$tomorrow = new DateTime("now + 1 day");
+										$tomorrow->setTime(0,0,0);
+
+										$result = Braintree_Subscription::create([
+									  'paymentMethodToken' => $customer->customer->paymentMethods[0]->token,
+									  'planId' => $plan['Subscription']['id'],
+									  'firstBillingDate' => $tomorrow
+										]);
+									}										
 									
 									if ($result->success) 
 									{
