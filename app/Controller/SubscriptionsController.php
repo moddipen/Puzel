@@ -89,6 +89,7 @@ class  SubscriptionsController  extends AppController {
 		$signup = 1;
 		$this->set("Signup",$signup);
 		$this->set('title',"Packages");
+		
 		if($this->Auth->user())
 		{
 			Braintree_Configuration::environment('sandbox');
@@ -165,7 +166,8 @@ class  SubscriptionsController  extends AppController {
 										$result = Braintree_Subscription::create([
 									  'paymentMethodToken' => $customer->customer->paymentMethods[0]->token,
 									  'planId' => $plan['Subscription']['id'],
-									  'firstBillingDate' => $tomorrow
+									  'firstBillingDate' => $tomorrow,
+									  'price'=>"2500"
 										]);
 									}	
 									
@@ -396,7 +398,8 @@ class  SubscriptionsController  extends AppController {
 										$result = Braintree_Subscription::create([
 									  'paymentMethodToken' => $customer->customer->paymentMethods[0]->token,
 									  'planId' => $plan['Subscription']['id'],
-									  'firstBillingDate' => $tomorrow
+									  'firstBillingDate' => $tomorrow,
+									  'price'=>"2500"
 										]);
 									}	 									
 									
