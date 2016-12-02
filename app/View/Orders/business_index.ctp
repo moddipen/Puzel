@@ -56,8 +56,8 @@
                           <div class="col-md-6">
                               <h4 class="title">Current Plan - <?php echo $get_current_plan['Subscription']['name'];?> &nbsp;&nbsp;&nbsp;&nbsp; 
                              <?php 
-                                  // if(AuthComponent::user('status') != 1)
-                                  // {
+                                  if(AuthComponent::user('status') != 1)
+                                  {
                                     if($get_current_plan['UserSubscription']['subscription_id'] != 4)
                                     { ?>
                                       <u>
@@ -66,14 +66,14 @@
                                       </u>
                                     <?php 
                                     }  
-                                  // }  
-                                  // else
-                                  // {?>
-                                    <!-- <u>
-                                      <a href="<?php //echo Configure::read("SITE_URL")."subscriptions/package/1"?>">Upgrade
+                                  }  
+                                  else
+                                  {?>
+                                    <u>
+                                      <a href="<?php echo Configure::read("SITE_URL")."subscriptions/package/1"?>">Upgrade
                                       </a>
-                                    </u>   -->
-                                 <?php //}?>
+                                    </u>  
+                                 <?php }?>
 
 
                               </h4>
@@ -194,6 +194,11 @@
                               <button type="reset" class="btn btn-oranges fullwidth" id="reset" >Cancel</button>
                             </div>
                         </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                              <button type="button" class="btn btn-oranges fullwidth" id="close" >Cancel</button>
+                            </div>
+                        </div>
                       
                       </div>
                       <?php echo $this->Form->end();?>
@@ -267,9 +272,17 @@
         $('#cardexpiredate').attr('value', ''); 
         $('#cardcvv').attr('value', ''); 
       }));
+         }
+   
+      $("#close").click('on',function()
+      {
+         document.getElementById("changecreditcard").classList.toggle("show");
+      });
+        
+
+       
 
 
-    }
 
 
 
