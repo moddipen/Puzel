@@ -56,16 +56,18 @@
                           <div class="row minipadding">
                             <div class="col-md-2">
                               <div class="form-group">
-                                    <select  class="form-control chosen-select" name="data[Puzzle][type]" id="puzzletype">
+                                    <!-- <select  class="form-control chosen-select" name="data[Puzzle][type]" id="puzzletype">
                                     
                                       <option value = "<?php echo $Capturedata['Puzzle']['type'];?>"><?php echo $Capturedata['Puzzle']['type'];?></option>
                                       
-                                    </select>
+                                    </select> -->
+                                    <label class = "form-control"><?php echo $Capturedata['Puzzle']['type'];?></label>
                                 </div>
                             </div>
                             <div class="col-md-2">
                               <div class="form-group">
-                                    <input name="data[Puzzle][name]" class="form-control" type="text" placeholder="Puzel Name" id="puzzlename" value ="<?php echo $Capturedata['Puzzle']['name'];?>">
+                                    <!-- <input name="data[Puzzle][name]" class="form-control" type="text" placeholder="Puzel Name" id="puzzlename" value ="<?php echo $Capturedata['Puzzle']['name'];?>"> -->
+                                    <label class = "form-control"><?php echo $Capturedata['Puzzle']['name'];?></label>
                                 </div> 
                             </div>
                              <input name="data[Puzzle][id]" class="form-control" type="hidden" placeholder="Puzel Name" id="puzzlename" value ="<?php echo $Capturedata['Puzzle']['id'];?>">
@@ -78,20 +80,22 @@
                             </div> -->
                             <div class="col-md-2">
                               <div class="form-group">
-                                    <select name="data[Puzzle][peice]" class="form-control chosen-select">
+                                    <!-- <select name="data[Puzzle][peice]" class="form-control chosen-select"> -->
                                       <!-- <option style="display:none">Number of Pieces</option> -->
-                                      <option value="<?php echo $Capturedata['Puzzle']['pieces'];?>"><?php echo $Capturedata['Puzzle']['pieces'];?></option>
+                                      <!-- <option value="<?php echo $Capturedata['Puzzle']['pieces'];?>"><?php echo $Capturedata['Puzzle']['pieces'];?></option> -->
                                       <!-- <option value="50">50</option>
                                       <option value="75">75</option>
                                       <option value="100">100</option> -->
-                                    </select>
+                                    <!-- </select> -->
+                                    <label class = "form-control"><?php echo $Capturedata['Puzzle']['pieces'];?></label>
                                 </div>
                             </div>
                             <div class="col-md-2">
                               <div class="form-group">
-                                    <select name="data[Puzzle][transtion]" class="form-control chosen-select">
+                                    <!-- <select name="data[Puzzle][transtion]" class="form-control chosen-select">
                                       <option value=""><?php echo $Capturedata['Puzzle']['transtion']?></option>
-                                    </select>
+                                    </select> -->
+                                    <label class = "form-control"><?php echo $Capturedata['Puzzle']['transtion'];?></label>
                                 </div>
                             </div>
                           </div>
@@ -102,7 +106,6 @@
                   
                  <input type = "hidden" name="data[Puzzle][user_id]" value="<?php echo $this->Session->read('USERDETAIL.User.id');?>">
                  <div class="body" id="showimage">
-                    <!-- <img src="<?php echo $this->webroot ?>img/puzzel/<?php echo $Capturedata['Puzzle']['image_ext']?>" class="img-responsive" id="img_preview" alt="Please upload your image" /> -->
                     <style>
       .merge div div{width:<?php echo $Capturedata['Image'][0]['width']."px";?>;height:<?php echo $Capturedata['Image'][0]['height']."px";?>;display:inline-block;margin-left:-5px;margin-bottom:-5px;-webkit-filter: brightness(0.55); filter: brightness(0.55);border:2px solid #FFF;border-left:none;border-top:none;}
  .merge div div:last-child{border-right:none}
