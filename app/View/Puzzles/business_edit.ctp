@@ -62,11 +62,7 @@
                               <div class="row minipadding">
                                   <div class="col-sm-8">
                                       <div class="form-group">
-                                        <textarea class="form-control" style="height:87px; line-height:14pt;" id="script">
-                                            &lt;script type="text/javascript" src="<?php echo Configure::read("SITE_URL");?>app/webroot/js/custom.js">&lt;/script>
-                                            <div class="snipest" id="puzzle_<?php echo $Capturedata['Puzzle']['id']; ?>"></div>
-                                            
-                                            </textarea>
+                                        <textarea class="form-control" style="height:87px; line-height:14pt;" id="script"><script type="text/javascript" src="<?php echo Configure::read("SITE_URL");?>app/webroot/js/custom.js"></script><div class="snipest" id="puzzle_<?php echo $Capturedata['Puzzle']['id']; ?>"></div> </textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
@@ -123,7 +119,8 @@
                           <div class="row minipadding">
                             <div class="col-md-3">
                               <div class="form-group">
-                                    <input name="data[Puzzle][type]" class="form-control" type="text" placeholder="Puzel Type" value ="<?php echo $Capturedata['Puzzle']['type'];?>" disabled="disabled">
+                                    <!-- <input name="data[Puzzle][type]" class="form-control" type="text" placeholder="Puzel Type" value ="<?php echo $Capturedata['Puzzle']['type'];?>" disabled="disabled"> -->
+                                    <label class="form-control"><?php echo $Capturedata['Puzzle']['type'];?></label>
 
                                     <!-- <select  class="form-control chosen-select" name="data[Puzzle][type]" id="puzzletype">
                                     
@@ -134,7 +131,8 @@
                             </div>
                             <div class="col-md-3">
                               <div class="form-group">
-                                    <input name="data[Puzzle][name]" class="form-control" type="text" placeholder="Puzel Name" id="puzzlename" value ="<?php echo $Capturedata['Puzzle']['name'];?>" disabled="disabled">
+                                    <!-- <input name="data[Puzzle][name]" class="form-control" type="text" placeholder="Puzel Name" id="puzzlename" value ="<?php echo $Capturedata['Puzzle']['name'];?>" disabled="disabled"> -->
+                                    <label class="form-control"><?php echo $Capturedata['Puzzle']['name'];?></label>
                                 </div> 
                             </div>
                              <input name="data[Puzzle][id]" class="form-control" type="hidden" placeholder="Puzel Name" id="puzzlename" value ="<?php echo $Capturedata['Puzzle']['id'];?>">
@@ -147,7 +145,8 @@
                             </div> -->
                             <div class="col-md-3">
                               <div class="form-group">
-                                    <input name="data[Puzzle][pieces]" class="form-control" type="text" placeholder="Puzel pieces" value ="<?php echo $Capturedata['Puzzle']['pieces'];?>" disabled="disabled">
+                                    <label class = "form-control"><?php echo $Capturedata['Puzzle']['pieces'];?></label>
+                                    <!-- <input name="data[Puzzle][pieces]" class="form-control" type="text" placeholder="Puzel pieces" value ="<?php echo $Capturedata['Puzzle']['pieces'];?>" disabled="disabled"> -->
                                     <!-- <select name="data[Puzzle][peice]" class="form-control chosen-select"> -->
                                       <!-- <option style="display:none">Number of Pieces</option> -->
                                       <!-- <option value="<?php //echo $Capturedata['Puzzle']['pieces'];?>"><?php //echo $Capturedata['Puzzle']['pieces'];?></option> -->
@@ -157,21 +156,21 @@
                                     </select>
                                 </div>
                             </div>
-							
-							<div class="col-md-3">
+              
+              <div class="col-md-3">
                               <div class="form-group">
-							  <?php $transition = array(
-										"Newspaper" => "Newspaper",
-										"Cube to left" => "Cube to left",
-										"Cube to right" => "Cube to right",
-										"Cube to top" => "Cube to top",
-										"Cube to bottom" => "Cube to bottom",
-										"Flip right" => "Flip right",
-										"Flip left" => "Flip left",
-										"Flip top" => "Flip top",
-										"Flip bottom" => "Flip bottom",
-							);?>
-							  <?php echo $this->Form->input("Puzzle.transtion",array("label"=>false,"selected"=>$Capturedata['Puzzle']['transtion'],"type"=>"select","class"=>"form-control chosen-select","options"=>$transition));?>
+                <?php $transition = array(
+                    "Newspaper" => "Newspaper",
+                    "Cube to left" => "Cube to left",
+                    "Cube to right" => "Cube to right",
+                    "Cube to top" => "Cube to top",
+                    "Cube to bottom" => "Cube to bottom",
+                    "Flip right" => "Flip right",
+                    "Flip left" => "Flip left",
+                    "Flip top" => "Flip top",
+                    "Flip bottom" => "Flip bottom",
+              );?>
+                <?php echo $this->Form->input("Puzzle.transtion",array("label"=>false,"selected"=>$Capturedata['Puzzle']['transtion'],"type"=>"select","class"=>"form-control chosen-select","options"=>$transition));?>
                                     
                                 </div>
                             </div>
@@ -183,9 +182,57 @@
                   </div>
                   
                   <input type = "hidden" name="data[Puzzle][user_id]" value="<?php echo $this->Session->read('USERDETAIL.User.id');?>">
-                 <div class="body" id="showimage">
-                    <img src="<?php echo $this->webroot ?>img/puzzel/<?php echo $Capturedata['Puzzle']['image_ext']?>" class="img-responsive" id="img_preview" alt="Please upload your image" />
+                  <div class="body" id="showimage">
+                  <style>
+                  .merge div div{width:<?php echo $Capturedata['Image'][0]['width']."px";?>;height:<?php echo $Capturedata['Image'][0]['height']."px";?>;display:inline-block;margin-left:-5px;margin-bottom:-5px;-webkit-filter: brightness(0.55); filter: brightness(0.55);border:2px solid #FFF;border-left:none;border-top:none;}
+                  .merge div div:last-child{border-right:none}
+                  .merge{width:<?php echo $Capturedata['Image'][0]['total_width']."px";?>;}
+                  </style>
+                  <?php $peices = $Capturedata['Puzzle']['pieces'] ; ?>
+
+                  <div class="merge pt-perspective">
+                  <div>
+                  <?php 
+                  $index = 0;
+                  foreach($Capturedata['Image'] as $image_data)
+                  {
+
+                  // Get Image path 
+                  $path =  $this->webroot.'img/puzzel/'.$Capturedata['Puzzle']['name'].'/'.$image_data['name'] ;
+
+                  $getname = preg_replace('/\\.[^.\\s]{3,4}$/', '', $image_data['name']); 
+                  $class_name = $getname  ;
+                  $class_image = "background:url('$path')"; 
+
+                  $get_image_part = explode("_",$image_data['name']);
+                  if($get_image_part[1] == 0 && $index != 0)
+                  {
+                  echo "</div><div>";
+                  }  
+
+                  ?> 
+                  <div class= "pt-page pt-page-<?php echo $index;?> <?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div>  
+                  <?php
+
+                  $index ++;
+                  }
+                  echo "</div>";?>
+                  </div> 
+                  <!-- </div> -->
                   </div>
+                  <?php ?>
+
+
+                  </div>
+                  </div>
+
+
+
+
+
+
+
+
                   </div>
                   <!-- /tile body -->
                   <input type = "hidden" value="" id="clickterm"/>
@@ -193,7 +240,7 @@
                   <!-- tile footer -->
                   <div class="tile-footer text-center" >
                     <div class="form-group">
-                      <input type="button" class="btn btn-black-transparent changebutton" value="Terms / Description" data-toggle="modal" data-target="#modal1" id="clickzone">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-black-transparent" value="Grand Prize" data-toggle="modal" data-target="#modal3" id="clickpricezone">
+                      <input type="button" class="btn btn-black-orange" value="Terms / Description" data-toggle="modal" data-target="#modal1" id="clickzone">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-black-orange" value="Grand Prize" data-toggle="modal" data-target="#modal3" id="clickpricezone">
                     </div>
                     <div class="form-group">
                       <button type="submit" class="btn btn-oranges" id="validateform">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -291,16 +338,16 @@
               </div>
               <input type = "hidden" value = "<?php echo $Capturedata['Puzzle']['id'];?>" name="data[Puzzle][id]">
               <div id="image">
-				<?php 
-					if($Capturedata['Puzzle']['price_image'] != "")
-					{
-						$filepath  = Configure::read("SITE_URL").'app/webroot/img/grand_price/';
-						$filepath = $filepath.strtolower($Capturedata['Puzzle']['price_image']);
-						echo "<img src='$filepath' style='width:540px;'/>";
-					}
-				?>
-			  </div>
-			  <div class="form-group">
+        <?php 
+          if($Capturedata['Puzzle']['price_image'] != "")
+          {
+            $filepath  = Configure::read("SITE_URL").'app/webroot/img/grand_price/';
+            $filepath = $filepath.strtolower($Capturedata['Puzzle']['price_image']);
+            echo "<img src='$filepath' style='width:540px;'/>";
+          }
+        ?>
+        </div>
+        <div class="form-group">
                 <div class="row minipadding">
                    <!--  <div class="col-md-4">
                       <select name="opton"  class="form-control chosen-select" id = "changeprice">
@@ -320,7 +367,7 @@
                     </div>
                   </div>
               </div>
-			  
+        
               <div id = "contentdata" style ="display:none;"></div>
               <div class="row minipadding">
                   <div class="col-md-3">
@@ -429,11 +476,11 @@
          data: new FormData(this),
 contentType: false,
 cache: false,
-processData:false,		 
+processData:false,     
         success: function(data)
          {
             $("#image").html(data);
-			$('#modal3').modal('hide');
+      $('#modal3').modal('hide');
          }
        });
     }));  
