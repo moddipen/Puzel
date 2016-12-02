@@ -20,6 +20,7 @@
  */
 
 App::uses('AppController', 'Controller');
+App::uses('CakeLog', 'Log');
 App::import('Vendor', 'Braintree', array('file' => 'Braintree' . DS . 'lib'. DS .'Braintree.php'));
 //App::import('Vendor', 'braintree/lib/Braintree');
 
@@ -661,7 +662,9 @@ class  SubscriptionsController  extends AppController {
         						. "Subscription: " . $webhookNotification->subscription->id . "\n";
 
 
-        		Braintree_Subscription::cancel($webhookNotification->subscription->id);
+        		$cancel = Braintree_Subscription::cancel($webhookNotification->subscription->id);
+
+        		$this->log($cancel);
 
         		$get_order = $this->Order->find('first',array('conditions'=>array('Order.subscriptions_id'=>$webhookNotification->subscription->id),'order'=>'Order.id Desc'));
 
@@ -741,12 +744,13 @@ class  SubscriptionsController  extends AppController {
 		}
 		else
 		{
-			Log::config('error', [
-				    'className' => 'Cake\Log\Engine\FileLog',
-				    'path' => LOGS,
-				    'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
-				    'file' => 'error',
-				]);
+			$this->log('Order not updated or save and if flow is not working');
+
+			CakeLog::config('error', array(
+			    'engine' => 'File',
+			    'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
+			    'file' => 'error',
+			)); 
 		}	
 
 
