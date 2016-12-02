@@ -48,11 +48,7 @@
                               <div class="row minipadding">
                                   <div class="col-sm-8">
                                       <div class="form-group">
-                                        <textarea class="form-control" style="height:87px; line-height:14pt;" id="script">
-                                            &lt;script type="text/javascript" src="<?php echo Configure::read("SITE_URL");?>app/webroot/js/custom.js">&lt;/script>
-                                            <div class="snipest" id="puzzle_<?php echo $IMAGEID; ?>"></div>
-                                            
-                                            </textarea>
+                                        <textarea class="form-control" style="height:87px; line-height:14pt;" id="script"><script type="text/javascript" src="<?php echo Configure::read("SITE_URL");?>app/webroot/js/custom.js"></script><div class="snipest" id="puzzle_<?php echo $IMAGEID; ?>"></div></textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
@@ -81,17 +77,24 @@
                                     </div>
                                 </div>
                                 <div class="row minipadding" style="display:none;">
-                                    <div class="col-sm-8">
-                                      <div class="form-group">
-                                          <input type="text" class="form-control" id="send-snipest-email" placeholder="Email Address">
-										  <p id="snip-m"></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                      <div class="form-group">
-                                          <button type="button" id="send-snipest" class="btn btn-oranges fullwidth">Send</button>
-                                        </div>
-                                    </div>
+                                    <div class="col-sm-8"  id="newalert" style="display:none;">
+                                        <div class="form-group">
+                                          <p id="snip-m" ></p>
+                                        </div> 
+                                    </div>     
+                                    <div id="emailfield">
+                                      <div class="col-sm-8" >
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="send-snipest-email" placeholder="Email Address">
+                                          </div>
+                                      </div>
+                                      
+                                      <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <button type="button" id="send-snipest" class="btn btn-oranges fullwidth">Send</button>
+                                          </div>
+                                      </div>
+                                    </div>  
                                 </div>
                             </div>
                         </div>
@@ -152,36 +155,39 @@
        copyToClipboard(document.getElementById("script"));
     });
 
-	$("#sendTo").click(function(){		
-		$(".minipadding").css("display","block");
-	});
-	
-	$("#send-snipest").click(function(){		
-		if($("#send-snipest-email").val() !=  "")
-		{
-			$.ajax(
-			{
-			  url: "<?php echo Configure::read("SITE_BUSINESS_URL");?>/puzzles/send",
-			  type: "post",
-			  datatype:"json",
-			  data: {'email':$("#send-snipest-email").val(),'snipest':$('#script').val()} ,
-			  success: function (data)
-			  {
-				var obj = $.parseJSON(data);
-				if(obj.Message == "OK")
-				{
-					$("#snip-m").html("Snippest code emailed successfully");
-				}
-				else
-				{
-					$("#snip-m").html("Error while sending snipest code.");
-				}
-			  }
-			});   
-		}
-	});
-	
-	function copyToClipboard(elem) {
+  $("#sendTo").click(function(){    
+    $(".minipadding").css("display","block");
+  });
+  
+  $("#send-snipest").click(function(){    
+    if($("#send-snipest-email").val() !=  "")
+    {
+      $.ajax(
+      {
+        url: "<?php echo Configure::read("SITE_BUSINESS_URL");?>/puzzles/send",
+        type: "post",
+        datatype:"json",
+        data: {'email':$("#send-snipest-email").val(),'snipest':$('#script').val()} ,
+        success: function (data)
+        {
+        var obj = $.parseJSON(data);
+        if(obj.Message == "OK")
+        {
+          $("#emailfield").remove();
+          
+          $("#newalert").css("display", "block");
+          $("#snip-m").html("Snippest code emailed successfully");
+        }
+        else
+        {
+          $("#snip-m").html("Error while sending snipest code.");
+        }
+        }
+      });   
+    }
+  });
+  
+  function copyToClipboard(elem) {
     // create hidden text element, if it doesn't already exist
     var targetId = "_hiddenCopyText_";
     var isInput = elem.tagName === "INPUT" || elem.tagName === "TEXTAREA";
