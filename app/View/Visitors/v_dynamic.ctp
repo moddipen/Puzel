@@ -197,7 +197,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 
 
 <div id="container" class="page-hosted">
-<h2 class="text-center title-page">Smart Weigh May Giveaway</h2>
+<h2 class="text-center title-page"><?php echo $explode[5];?></h2>
  <div class="row"> 
   <div class="col-md-12">
     <div id="puzzle">
