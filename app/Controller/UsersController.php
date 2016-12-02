@@ -205,7 +205,7 @@ public function get_statistics()
 		$signup = 0;
 		$this->set("Signup",$signup);
 		$this->set("title","Home");
-
+		$this->log("hello");
 	}
 
 /**
