@@ -679,9 +679,10 @@ class  SubscriptionsController  extends AppController {
         		$array = array(
 					'id'=>$get_order['Order']['id'],
 					'reason'=>"Unsuc");
-        		//$this->log($array);
+        		
         		if($this->Order->save($array))
         		{	
+        			$this->log($array);
         			$user = array(
         				'id'=>$get_order['Order']['user_id'],
         				'status'=>1);
