@@ -52,6 +52,12 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 			}
 		});
 
+       // Check email is valid or not 
+      function validateEmail($email)
+      {
+        var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+        return emailReg.test( $email );
+      }
 
       $("#Imagedata").submit(function(e)
       {
@@ -65,7 +71,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
             //$("#laname").after("<p>Please enter last name. </p>")
             return false;
          }
-         else if($("#useremail").val() == '')
+         else if( !validateEmail($("#useremail").val()) || $("#useremail").val() == '') 
          {
             // var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             //$("#useemail").after("<p>Please enter an email. </p>")
