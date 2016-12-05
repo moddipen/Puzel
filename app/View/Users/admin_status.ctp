@@ -31,4 +31,14 @@
       </td>
 </tr>
   <?php
-    } }?>
+    } }
+    else
+    { ?>
+
+      <tr>
+        <td>No record found</td>
+      </tr>  
+
+
+
+   <?php  } ?>
