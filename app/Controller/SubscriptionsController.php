@@ -672,7 +672,7 @@ class  SubscriptionsController  extends AppController {
 
         					//$expire = Braintree_Subscription::cancel("cx4b4w");
         		// $this->log($unsuccess);	
-        		// $this->log($expire);
+        		$this->log($webhookNotification);
         		
         		$get_order = $this->Order->find('first',array('conditions'=>array('Order.subscriptions_id'=>"8p69yb"),'order'=>'Order.id Desc'));
 
