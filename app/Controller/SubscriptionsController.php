@@ -653,22 +653,20 @@ class  SubscriptionsController  extends AppController {
 		// $this->log($check);
 		if(isset($_POST["bt_signature"]) && isset($_POST["bt_payload"])) 
 		{
-			    $this->log($_POST);
 			    $webhookNotification = Braintree_WebhookNotification::parse(
 			        $_POST["bt_signature"], $_POST["bt_payload"]
 			    );
-
 			     
-        		 $message =
+        		$message =
         		 	        "[Webhook Received " . $webhookNotification->timestamp->format('Y-m-d H:i:s') . "] "
         						. "Kind: " . $webhookNotification->kind . " | "
         						. "Subscription: " . $webhookNotification->subscription->id . "\n";
-				$get_order = $this->Order->find('first',array('conditions'=>array('Order.subscriptions_id'=>"8p69yb"),'order'=>'Order.id Desc'));
+				$get_order = $this->Order->find('first',array('conditions'=>array('Order.subscriptions_id'=> $webhookNotification->subscription->id),'order'=>'Order.id Desc'));
 
-$this->log($webhookNotification);
+
         		$array = array(
 					'id'=>$get_order['Order']['id'],
-					'reason'=>"Unsuc");
+					'reason'=> $webhookNotification->kind);
         		
         		if($this->Order->save($array))
         		{	
