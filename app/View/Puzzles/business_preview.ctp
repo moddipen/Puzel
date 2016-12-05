@@ -49,6 +49,67 @@
                   <!-- tile body -->
                   <!-- <form role="form" class="custom-form" action ="puzzels/view" method="post"> -->
                   <div class="tile-body">
+                   <div class="row">
+                    <div class="col-md-11">
+                      
+                        <div class="row">
+                          <div class="col-md-6">
+                              <div class="row minipadding">
+                                  <div class="col-sm-8">
+                                      <div class="form-group">
+                                        <textarea class="form-control" style="height:87px;line-height:14pt;background-color:#fff;color:black;" id="script"><script type="text/javascript" src="<?php echo Configure::read("SITE_URL");?>app/webroot/js/custom.js"></script><div class="snipest" id="puzzle_<?php echo $Capturedata['Puzzle']['id']; ?>"></div> </textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                      <div class="form-group">
+                                          <button type="button" class="btn btn-oranges fullwidth" onclick="copyToClipboard('#script')" id="copyScript">Copy Script</button>
+                                        </div>
+                                         <div class="form-group">
+                                          <button type="button" id="sendTo" class="btn btn-oranges fullwidth">Send to Developer</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="row minipadding">
+                                  <div class="col-sm-8">
+                                      <div class="form-group">
+                                        <?php $name = str_replace(' ','', $Capturedata['Puzzle']['name']);?>
+                                        <?php $company = str_replace(' ','', $Capturedata['Business']['company_name']);?>
+                                          <input type="text" class="form-control" style="background-color:#fff;color:black;" value="<?php echo Configure::read("SITE_URL")."puzzle/".$Capturedata['Business']['company_name']."/".$Capturedata['Puzzle']['name'];?>" id="puzlename">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                      <div class="form-group">
+                                          <button type="button" class="btn btn-oranges fullwidth" onclick="copyToClipboard('#puzlename')" id="copyButton">Copy</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row minipadding" style="display:none;">
+                                    <div class="col-sm-8"  id="newalert" style="display:none;">
+                                        <div class="form-group">
+                                          <p id="snip-m" ></p>
+                                        </div> 
+                                    </div>     
+                                    <div id="emailfield">
+                                      <div class="col-sm-8" >
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="send-snipest-email" placeholder="Email Address">
+                                          </div>
+                                      </div>
+                                      
+                                      <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <button type="button" id="send-snipest" class="btn btn-oranges fullwidth">Send</button>
+                                          </div>
+                                      </div>
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+                      
+                    </div>
+                  </div> 
                   <div class="row">
                     <div class="col-md-10">
                       <!-- <form role="form" class="custom-form" action ="business/puzzels/view"> -->
@@ -107,7 +168,7 @@
                  <input type = "hidden" name="data[Puzzle][user_id]" value="<?php echo $this->Session->read('USERDETAIL.User.id');?>">
                  <div class="body" id="showimage">
                     <style>
-      .merge div div{width:<?php echo $Capturedata['Image'][0]['width']."px";?>;height:<?php echo $Capturedata['Image'][0]['height']."px";?>;display:inline-block;margin-left:-5px;margin-bottom:-5px;-webkit-filter: brightness(0.55); filter: brightness(0.55);border:2px solid #FFF;border-left:none;border-top:none;}
+      .merge div div{width:<?php echo $Capturedata['Image'][0]['width']."px";?>;height:<?php echo $Capturedata['Image'][0]['height']."px";?>;display:inline-block;margin-left:-5px;margin-bottom:-6px;-webkit-filter: brightness(0.55); filter: brightness(0.55);border:2px solid #FFF;border-left:none;border-top:none;}
  .merge div div:last-child{border-right:none}
       .merge{width:<?php echo $Capturedata['Image'][0]['total_width']."px";?>;}
       </style>
@@ -175,3 +236,98 @@
           <!-- /content container -->
        </div>
         <!-- Page content end -->
+<script type="text/javascript">
+  document.getElementById("copyButton").addEventListener("click", function()
+     {
+       copyToClipboard(document.getElementById("puzlename"));
+    });
+    document.getElementById("copyScript").addEventListener("click", function()
+     {
+       copyToClipboard(document.getElementById("script"));
+    });
+
+
+    
+  $("#sendTo").click(function(){    
+    $(".minipadding").css("display","block");
+  });
+  
+  $("#send-snipest").click(function(){    
+    if($("#send-snipest-email").val() !=  "")
+    {
+      $.ajax(
+      {
+        url: "<?php echo Configure::read("SITE_BUSINESS_URL");?>/puzzles/send",
+        type: "post",
+        datatype:"json",
+        data: {'email':$("#send-snipest-email").val(),'snipest':$('#script').val()} ,
+        success: function (data)
+        {
+        var obj = $.parseJSON(data);
+        if(obj.Message == "OK")
+        {
+          $("#emailfield").remove();
+          
+          $("#newalert").css("display", "block");
+          $("#snip-m").html("Snippest code emailed successfully");
+        }
+        else
+        {
+          $("#snip-m").html("Error while sending snipest code.");
+        }
+        }
+      });   
+    }
+  });
+    
+    function copyToClipboard(elem) {
+    // create hidden text element, if it doesn't already exist
+    var targetId = "_hiddenCopyText_";
+    var isInput = elem.tagName === "INPUT" || elem.tagName === "TEXTAREA";
+    var origSelectionStart, origSelectionEnd;
+    if (isInput) {
+        // can just use the original source element for the selection and copy
+        target = elem;
+        origSelectionStart = elem.selectionStart;
+        origSelectionEnd = elem.selectionEnd;
+    } else {
+        // must use a temporary form element for the selection and copy
+        target = document.getElementById(targetId);
+        if (!target) {
+            var target = document.createElement("textarea");
+            target.style.position = "absolute";
+            target.style.left = "-9999px";
+            target.style.top = "0";
+            target.id = targetId;
+            document.body.appendChild(target);
+        }
+        target.textContent = elem.textContent;
+    }
+    // select the content
+    var currentFocus = document.activeElement;
+    target.focus();
+    target.setSelectionRange(0, target.value.length);
+    
+    // copy the selection
+    var succeed;
+    try {
+        succeed = document.execCommand("copy");
+    } catch(e) {
+        succeed = false;
+    }
+    // restore original focus
+    if (currentFocus && typeof currentFocus.focus === "function") {
+        currentFocus.focus();
+    }
+    
+    if (isInput) {
+        // restore prior selection
+        elem.setSelectionRange(origSelectionStart, origSelectionEnd);
+    } else {
+        // clear temporary content
+        target.textContent = "";
+    }
+    return succeed;
+}
+
+</script>
