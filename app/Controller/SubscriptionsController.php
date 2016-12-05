@@ -678,7 +678,7 @@ class  SubscriptionsController  extends AppController {
         		$array = array(
 					'id'=>$get_order['Order']['id'],
 					'reason'=>$webhookNotification->kind);
-        		$this->log($array);
+        		//$this->log($array);
         		if($this->Order->save($array))
         		{	
         			$user = array(
@@ -710,7 +710,7 @@ class  SubscriptionsController  extends AppController {
 											"action_url"=>"Your account has been cancelled. Please get in touch with our support team for further instructions."),
 										"InlineCss"=> true, 
 										"from"=> "support@puzel.co",
-										'to'=>$get_order['User']['email'],
+										'to'=>"moddipen@gmail.com",
 										'reply_to'=>"support@puzel.co"
 										);	
 
@@ -743,9 +743,9 @@ class  SubscriptionsController  extends AppController {
 					}
 
 
-		        		$this->log($message);					
+		        		//$this->log($message);					
 					        
-					   	$this->log($webhookNotification);	
+					   	//$this->log($webhookNotification);	
 
 					    //file_put_contents("/tmp/webhook.log", $message, FILE_APPEND);
 				}
