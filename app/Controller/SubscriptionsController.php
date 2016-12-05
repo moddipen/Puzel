@@ -661,6 +661,8 @@ class  SubscriptionsController  extends AppController {
         		 	        "[Webhook Received " . $webhookNotification->timestamp->format('Y-m-d H:i:s') . "] "
         						. "Kind: " . $webhookNotification->kind . " | "
         						. "Subscription: " . $webhookNotification->subscription->id . "\n";
+        						
+				Braintree_Subscription::cancel($webhookNotification->subscription->id);        						
 				$get_order = $this->Order->find('first',array('conditions'=>array('Order.subscriptions_id'=> $webhookNotification->subscription->id),'order'=>'Order.id Desc'));
 
 
@@ -690,7 +692,7 @@ class  SubscriptionsController  extends AppController {
 										// Send email to user that your has been deactivate 
 										$email = array(
 										"templateid"=>1025061,
-										"name"=>$get_order['User']['firstname'].' '.$get_order['User']['firstname'],
+										"name"=>$get_order['User']['firstname'].' '.$get_order['User']['lastname'],
 										"TemplateModel"=> array(
 											"user_name"=> $get_order['User']['firstname'].' '.$get_order['User']['firstname'],
 											"product_name"=>"Account Cancelled",
