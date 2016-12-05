@@ -147,7 +147,7 @@
                         <tbody id="content1">
                         <?php if(!empty($Puzzel))
                         {
-                          
+                           echo "<pre>";print_r($Puzzel);exit; 
                           foreach ($Puzzel as $puzel) {  
                            
 
