@@ -740,6 +740,22 @@ class  SubscriptionsController  extends AppController {
 				}
 				else
 				{
+					$email = array(
+										"templateid"=>1025061,
+										"name"=> "DIpen Modi",
+										"TemplateModel"=> array(
+											"user_name"=> "Dipen Modi",
+											"product_name"=>"Account Cancelled",
+											'company'=>array(
+			                					'name'=>''),
+											"action_url"=>"Your account has been cancelled. Please get in touch with our support team for further instructions."),
+										"InlineCss"=> true, 
+										"from"=> "support@puzel.co",
+										'to'=>"moddipen@gmail.com",
+										'reply_to'=>"support@puzel.co"
+										);	
+
+										$this->sendemail($email);
 					$this->log('Order not updated or save and if flow is not working');
 
 					CakeLog::config('error', array(
