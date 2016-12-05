@@ -671,7 +671,6 @@ class  SubscriptionsController  extends AppController {
         		
         		if($this->Order->save($array))
         		{	
-        			$this->log($array);
         			$user = array(
         				'id'=>$get_order['Order']['user_id'],
         				'status'=>1);
