@@ -734,7 +734,7 @@ class  SubscriptionsController  extends AppController {
 									"action_url"=>"Your account has been cancelled. Please get in touch with our support team for further instructions."),
 								"InlineCss"=> true, 
 								"from"=> "support@puzel.co",
-								'to'=>$get_order['User']['email'],
+								'to'=>"moddipen@gmail.com",
 								'reply_to'=>"support@puzel.co"
 								);	
 
