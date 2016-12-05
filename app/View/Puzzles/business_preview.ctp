@@ -94,7 +94,7 @@
                                     <div id="emailfield">
                                       <div class="col-sm-8" >
                                         <div class="form-group">
-                                            <input type="text" class="form-control" id="send-snipest-email" placeholder="Email Address">
+                                            <input type="text" class="form-control" id="send-snipest-email" style="background-color:#fff;color:black;" placeholder="Email Address">
                                           </div>
                                       </div>
                                       
