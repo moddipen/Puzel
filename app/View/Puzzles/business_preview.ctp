@@ -160,10 +160,71 @@
                                 </div>
                             </div>
                           </div>
+                          <!-- /tile body -->
+                      
                       <!-- </form> -->
                       <?php //echo $this->Form->end();?>
                     </div>
+
                   </div>
+
+
+
+
+
+                  <!--Modal Term -->
+     <div class="modal fade orange" id="modal1" tabindex="-1" role="dialog" aria-labelledby="modalDialogLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <a class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
+            <h3 class="modal-title" id="modalDialogLabel">Terms / Description</h3>
+          </div>
+         <div class="modal-body">
+          <form class="popup-form" id="terms" >
+             <div class="form-group">
+              <textarea name="textarea" id="textarea" class="form-control wysiwyg"><?php echo $Capturedata['Puzzle']['terms'];?></textarea>
+            </div>
+            
+        </form>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  
+
+    <!--  Grand prize model -->
+    <div class="modal fade orange" id="modal3" tabindex="-1" role="dialog" aria-labelledby="modalDialogLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <a class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
+            <h3 class="modal-title" id="modalDialogLabel">Grand Prize</h3>
+          </div>
+          <div class="modal-body">
+            <form class="popup-form" id="grand_price" action="" method="post" enctype="multipart/form-data">
+              <div class="form-group">
+                <textarea name="textarea" id="textarea1" class="form-control wysiwyg"><?php echo $Capturedata['Puzzle']['price'];?></textarea>
+              </div>
+              <div id="image">
+                <?php 
+                  if($Capturedata['Puzzle']['price_image'] != "")
+                  {
+                    $filepath  = Configure::read("SITE_URL").'app/webroot/img/grand_price/';
+                    $filepath = $filepath.strtolower($Capturedata['Puzzle']['price_image']);
+                    echo "<img src='$filepath' style='width:540px;'/>";
+                  }
+                ?>
+            </div>
+        
+              </form>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!--Modal-->
+
                   
                  <input type = "hidden" name="data[Puzzle][user_id]" value="<?php echo $this->Session->read('USERDETAIL.User.id');?>">
                  <div class="body" id="showimage">
@@ -214,7 +275,13 @@
                   <input type = "hidden" value="" id="clickprize"/>
                   <!-- tile footer -->
                   <!-- /tile footer -->
-                
+                  <!-- tile footer -->
+                  <div class="tile-footer text-center" >
+                    <div class="form-group">
+                      <input type="button" class="btn btn-black-orange" value="Terms / Description" data-toggle="modal" data-target="#modal1" id="clickzone">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-black-orange" value="Grand Prize" data-toggle="modal" data-target="#modal3" id="clickpricezone">
+                    </div>
+                  </div>
+                  
                 </section>
                 <!-- /tile -->
 
@@ -236,6 +303,7 @@
           <!-- /content container -->
        </div>
         <!-- Page content end -->
+        <?php echo $this->Html->script('dashboard/vendor/summernote/summernote.min.js')?>
 <script type="text/javascript">
   document.getElementById("copyButton").addEventListener("click", function()
      {
@@ -246,8 +314,25 @@
        copyToClipboard(document.getElementById("script"));
     });
 
+ $('.wysiwyg').summernote({
+        toolbar: [
+          ['style', ['bold', 'italic', 'underline']],
+      ['para', ['ul', 'ol']],
+        ],
 
-    
+        height: 300,   //set editable area's height
+    disableResizeEditor: true
+      });
+    $('.note-statusbar').hide()
+    $('.changebutton').click(function(){
+    $(this).addClass('btn-oranges');  
+    $(document).on('hide.bs.modal','.modal', function () {
+       $('.changebutton').removeClass('btn-oranges');
+ //Do stuff here
+});
+    })
+
+
   $("#sendTo").click(function(){    
     $(".minipadding").css("display","block");
   });
@@ -279,7 +364,7 @@
       });   
     }
   });
-    
+
     function copyToClipboard(elem) {
     // create hidden text element, if it doesn't already exist
     var targetId = "_hiddenCopyText_";
