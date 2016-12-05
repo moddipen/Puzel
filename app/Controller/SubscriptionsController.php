@@ -655,7 +655,10 @@ class  SubscriptionsController  extends AppController {
 		{
 			   
 			     
-        		 
+        		 $message =
+        		 	        "[Webhook Received " . $webhookNotification->timestamp->format('Y-m-d H:i:s') . "] "
+        						. "Kind: " . $webhookNotification->kind . " | "
+        						. "Subscription: " . $webhookNotification->subscription->id . "\n";
 
 
         		$cancel = Braintree_WebhookTesting::sampleNotification(Braintree_WebhookNotification::SUBSCRIPTION_CHARGED_UNSUCCESSFULLY,"5chdyw");
@@ -672,92 +675,92 @@ class  SubscriptionsController  extends AppController {
         		// $this->log($expire);
         		$this->log($webhookNotification);
 
-    //     		$get_order = $this->Order->find('first',array('conditions'=>array('Order.subscriptions_id'=>$webhookNotification->subscription->id),'order'=>'Order.id Desc'));
+        		$get_order = $this->Order->find('first',array('conditions'=>array('Order.subscriptions_id'=>$webhookNotification->subscription->id),'order'=>'Order.id Desc'));
 
-    //     		$array = array(
-				// 	'id'=>$get_order['Order']['id'],
-				// 	'reason'=>$webhookNotification->kind);
-    //     		//$this->log($array);
-    //     		if($this->Order->save($array))
-    //     		{	
-    //     			$user = array(
-    //     				'id'=>$get_order['Order']['user_id'],
-    //     				'status'=>1);
-    //     			if($this->User->save($user))
-    //     			{
-    //     				if($this->Puzzle->updateAll(array('Puzzle.status'=>1),array('Puzzle.user_id'=>$get_order['Order']['user_id'])))
-				// 		{
-				// 			$puzzle = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$get_order['Order']['user_id'])));
-				// 			if(!empty($puzzle))
-				// 			{	
-				// 				// Deactive  number of all image block
-				// 				foreach($puzzle as $image)
-				// 				{
-				// 					$update = $this->Image->updateAll(array('Image.puzzle_active'=>1),array('Image.puzzle_id'=>$image['Puzzle']['id']));	
+        		$array = array(
+					'id'=>$get_order['Order']['id'],
+					'reason'=>$webhookNotification->kind);
+        		//$this->log($array);
+        		if($this->Order->save($array))
+        		{	
+        			$user = array(
+        				'id'=>$get_order['Order']['user_id'],
+        				'status'=>1);
+        			if($this->User->save($user))
+        			{
+        				if($this->Puzzle->updateAll(array('Puzzle.status'=>1),array('Puzzle.user_id'=>$get_order['Order']['user_id'])))
+						{
+							$puzzle = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$get_order['Order']['user_id'])));
+							if(!empty($puzzle))
+							{	
+								// Deactive  number of all image block
+								foreach($puzzle as $image)
+								{
+									$update = $this->Image->updateAll(array('Image.puzzle_active'=>1),array('Image.puzzle_id'=>$image['Puzzle']['id']));	
 									
-				// 					if($update)
-				// 					{
-				// 						// Send email to user that your has been deactivate 
-				// 						$email = array(
-				// 						"templateid"=>1025061,
-				// 						"name"=>$get_order['User']['firstname'].' '.$get_order['User']['firstname'],
-				// 						"TemplateModel"=> array(
-				// 							"user_name"=> $get_order['User']['firstname'].' '.$get_order['User']['firstname'],
-				// 							"product_name"=>"Account Cancelled",
-				// 							'company'=>array(
-			 //                					'name'=>''),
-				// 							"action_url"=>"Your account has been cancelled. Please get in touch with our support team for further instructions."),
-				// 						"InlineCss"=> true, 
-				// 						"from"=> "support@puzel.co",
-				// 						'to'=>"moddipen@gmail.com",
-				// 						'reply_to'=>"support@puzel.co"
-				// 						);	
+									if($update)
+									{
+										// Send email to user that your has been deactivate 
+										$email = array(
+										"templateid"=>1025061,
+										"name"=>$get_order['User']['firstname'].' '.$get_order['User']['firstname'],
+										"TemplateModel"=> array(
+											"user_name"=> $get_order['User']['firstname'].' '.$get_order['User']['firstname'],
+											"product_name"=>"Account Cancelled",
+											'company'=>array(
+			                					'name'=>''),
+											"action_url"=>"Your account has been cancelled. Please get in touch with our support team for further instructions."),
+										"InlineCss"=> true, 
+										"from"=> "support@puzel.co",
+										'to'=>"moddipen@gmail.com",
+										'reply_to'=>"support@puzel.co"
+										);	
 
-				// 						$this->sendemail($email);
+										$this->sendemail($email);
 										
-				// 					}
+									}
 
-				// 				}
-				// 			}
-    //     				}
-    //     				else
-    //     				{
-    //     					$email = array(
-				// 				"templateid"=>1025061,
-				// 				"name"=>$get_order['User']['firstname'].' '.$get_order['User']['firstname'],
-				// 				"TemplateModel"=> array(
-				// 					"user_name"=> $get_order['User']['firstname'].' '.$get_order['User']['firstname'],
-				// 					"product_name"=>"Account Cancelled",
-				// 					'company'=>array(
-	   //              					'name'=>''),
-				// 					"action_url"=>"Your account has been cancelled. Please get in touch with our support team for further instructions."),
-				// 				"InlineCss"=> true, 
-				// 				"from"=> "support@puzel.co",
-				// 				'to'=>"moddipen@gmail.com",
-				// 				'reply_to'=>"support@puzel.co"
-				// 				);	
+								}
+							}
+        				}
+        				else
+        				{
+        					$email = array(
+								"templateid"=>1025061,
+								"name"=>$get_order['User']['firstname'].' '.$get_order['User']['firstname'],
+								"TemplateModel"=> array(
+									"user_name"=> $get_order['User']['firstname'].' '.$get_order['User']['firstname'],
+									"product_name"=>"Account Cancelled",
+									'company'=>array(
+	                					'name'=>''),
+									"action_url"=>"Your account has been cancelled. Please get in touch with our support team for further instructions."),
+								"InlineCss"=> true, 
+								"from"=> "support@puzel.co",
+								'to'=>"moddipen@gmail.com",
+								'reply_to'=>"support@puzel.co"
+								);	
 
-				// 				$this->sendemail($email);
-				// 		}	
-				// 	}
+								$this->sendemail($email);
+						}	
+					}
 
 
-		  //       		//$this->log($message);					
+		        		//$this->log($message);					
 					        
-				// 	   	//$this->log($webhookNotification);	
+					   	//$this->log($webhookNotification);	
 
-				// 	    //file_put_contents("/tmp/webhook.log", $message, FILE_APPEND);
-				// }
-				// else
-				// {
-				// 	$this->log('Order not updated or save and if flow is not working');
+					    //file_put_contents("/tmp/webhook.log", $message, FILE_APPEND);
+				}
+				else
+				{
+					$this->log('Order not updated or save and if flow is not working');
 
-				// 	CakeLog::config('error', array(
-				// 	    'engine' => 'File',
-				// 	    'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
-				// 	    'file' => 'error',
-				// 	)); 
-				// }	
+					CakeLog::config('error', array(
+					    'engine' => 'File',
+					    'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
+					    'file' => 'error',
+					)); 
+				}	
 
 
 	}
