@@ -434,7 +434,7 @@
          dataType: 'json', 
          success: function(data)
          {
-            $('.note-editable').html(data.Puzzle.terms);
+            $('#modal1 .note-editable').html(data.Puzzle.terms);
             $('#puzzleterm').val(data.Puzzle.terms);  
           }
        });
