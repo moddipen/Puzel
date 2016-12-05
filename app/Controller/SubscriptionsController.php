@@ -668,7 +668,7 @@ class  SubscriptionsController  extends AppController {
         		// $unsuccess = Braintree_WebhookNotification::SUBSCRIPTION_CHARGED_UNSUCCESSFULLY($webhookNotification->subscription->id);
         		// $expire = Braintree_WebhookNotification::SUBSCRIPTION_EXPIRED($webhookNotification->subscription->id);	
 
-        						Braintree_Subscription::cancel("dpfdh6");
+        					$expire = Braintree_Subscription::cancel("dpfdh6");
         		$this->log($unsuccess);	
         		$this->log($expire);
         		$this->log($cancel);
