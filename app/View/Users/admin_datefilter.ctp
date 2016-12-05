@@ -54,6 +54,12 @@
           <?php
         }
       }
+      else
+       {?>
+           <tr>
+              <td>No record found</td> 
+            </tr> 
+      <?php } 
     }
     else
     {
@@ -91,5 +97,11 @@
           </tr>
           <?php
             } 
-          } 
+          }
+           else
+             {?>
+                 <tr>
+                    <td>No record found</td> 
+                  </tr> 
+            <?php }  
         }?>
