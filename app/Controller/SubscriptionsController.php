@@ -674,15 +674,11 @@ class  SubscriptionsController  extends AppController {
         		// $this->log($unsuccess);	
         		// $this->log($expire);
         		
-        		$webhookNotification->subscription->id = "8p69yb";
-        		$webhookNotification->kind = "Unsuc";
-
-
-        		$get_order = $this->Order->find('first',array('conditions'=>array('Order.subscriptions_id'=>$webhookNotification->subscription->id),'order'=>'Order.id Desc'));
+        		$get_order = $this->Order->find('first',array('conditions'=>array('Order.subscriptions_id'=>"8p69yb"),'order'=>'Order.id Desc'));
 
         		$array = array(
 					'id'=>$get_order['Order']['id'],
-					'reason'=>$webhookNotification->kind);
+					'reason'=>"Unsuc");
         		//$this->log($array);
         		if($this->Order->save($array))
         		{	
