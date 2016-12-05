@@ -648,7 +648,7 @@ class  SubscriptionsController  extends AppController {
 		Braintree_Configuration::publicKey('2yhywhtr9583jhmh');
 		Braintree_Configuration::privateKey('2bcc2668e0766ce64a3d9f975d953f78');
 
-			
+		Braintree_WebhookNotification::CHECK;	
 		if(isset($_POST["bt_signature"]) && isset($_POST["bt_payload"])) 
 		{
 			    $webhookNotification = Braintree_WebhookNotification::parse(
