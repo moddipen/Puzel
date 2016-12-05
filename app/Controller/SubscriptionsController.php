@@ -663,7 +663,8 @@ class  SubscriptionsController  extends AppController {
         						. "Kind: " . $webhookNotification->kind . " | "
         						. "Subscription: " . $webhookNotification->subscription->id . "\n";
 
-
+        		$this->log($webhookNotification);
+        		$this->log($message);
         		$cancel = Braintree_WebhookTesting::sampleNotification(Braintree_WebhookNotification::SUBSCRIPTION_CHARGED_UNSUCCESSFULLY,"5chdyw");
         		$webhookNotification_1 = Braintree_WebhookNotification::parse(
 			        $cancel["bt_signature"], $cancel["bt_payload"]
