@@ -653,6 +653,7 @@ class  SubscriptionsController  extends AppController {
 		// $this->log($check);
 		if(isset($_POST["bt_signature"]) && isset($_POST["bt_payload"])) 
 		{
+			    $this->log($_POST);
 			    $webhookNotification = Braintree_WebhookNotification::parse(
 			        $_POST["bt_signature"], $_POST["bt_payload"]
 			    );
@@ -672,7 +673,7 @@ class  SubscriptionsController  extends AppController {
 
         					//$expire = Braintree_Subscription::cancel("cx4b4w");
         		// $this->log($unsuccess);	
-        		$this->log($webhookNotification);
+        		
         		
         		$get_order = $this->Order->find('first',array('conditions'=>array('Order.subscriptions_id'=>"8p69yb"),'order'=>'Order.id Desc'));
 
