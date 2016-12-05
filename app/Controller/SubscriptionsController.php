@@ -653,7 +653,10 @@ class  SubscriptionsController  extends AppController {
 		// $this->log($check);
 		if(isset($_POST["bt_signature"]) && isset($_POST["bt_payload"])) 
 		{
-			   
+			    $webhookNotification = Braintree_WebhookNotification::parse(
+			        $_POST["bt_signature"], $_POST["bt_payload"]
+			    );
+
 			     
         		 $message =
         		 	        "[Webhook Received " . $webhookNotification->timestamp->format('Y-m-d H:i:s') . "] "
@@ -662,18 +665,16 @@ class  SubscriptionsController  extends AppController {
 
 
         		$cancel = Braintree_WebhookTesting::sampleNotification(Braintree_WebhookNotification::SUBSCRIPTION_CHARGED_UNSUCCESSFULLY,"5chdyw");
-				 $webhookNotification = Braintree_WebhookNotification::parse(
-							        $cancel['bt_signature'],
-									$cancel['bt_payload']
-							    );
-
+        		$webhookNotification_1 = Braintree_WebhookNotification::parse(
+			        $cancel["bt_signature"], $cancel["bt_payload"]
+			    );
         		// $unsuccess = Braintree_WebhookNotification::SUBSCRIPTION_CHARGED_UNSUCCESSFULLY($webhookNotification->subscription->id);
         		// $expire = Braintree_WebhookNotification::SUBSCRIPTION_EXPIRED($webhookNotification->subscription->id);	
 
         					//$expire = Braintree_Subscription::cancel("cx4b4w");
         		// $this->log($unsuccess);	
         		// $this->log($expire);
-        		$this->log($webhookNotification);
+        		$this->log($webhookNotification_1);
 
         		$get_order = $this->Order->find('first',array('conditions'=>array('Order.subscriptions_id'=>$webhookNotification->subscription->id),'order'=>'Order.id Desc'));
 
