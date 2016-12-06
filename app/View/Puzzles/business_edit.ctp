@@ -91,17 +91,24 @@
                                     </div>
                                 </div>
                                 <div class="row minipadding" style="display:none;">
-                                    <div class="col-sm-8">
-                                      <div class="form-group">
-                                          <input type="text" class="form-control" id="send-snipest-email" placeholder="Email Address">
-                      <p id="snip-m"></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                      <div class="form-group">
-                                          <button type="button" id="send-snipest" class="btn btn-oranges fullwidth">Send</button>
-                                        </div>
-                                    </div>
+                                    <div class="col-sm-8"  id="newalert" style="display:none;">
+                                        <div class="form-group">
+                                          <p id="snip-m" ></p>
+                                        </div> 
+                                    </div>     
+                                    <div id="emailfield">
+                                      <div class="col-sm-8" >
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="send-snipest-email" placeholder="Email Address">
+                                          </div>
+                                      </div>
+                                      
+                                      <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <button type="button" id="send-snipest" class="btn btn-oranges fullwidth">Send</button>
+                                          </div>
+                                      </div>
+                                    </div>  
                                 </div>
                             </div>
                         </div>
@@ -184,7 +191,7 @@
                   <input type = "hidden" name="data[Puzzle][user_id]" value="<?php echo $this->Session->read('USERDETAIL.User.id');?>">
                   <div class="body" id="showimage">
                   <style>
-                  .merge div div{width:<?php echo $Capturedata['Image'][0]['width']."px";?>;height:<?php echo $Capturedata['Image'][0]['height']."px";?>;display:inline-block;margin-left:-5px;margin-bottom:-5px;-webkit-filter: brightness(0.55); filter: brightness(0.55);border:2px solid #FFF;border-left:none;border-top:none;}
+                  .merge div div{width:<?php echo $Capturedata['Image'][0]['width']."px";?>;height:<?php echo $Capturedata['Image'][0]['height']."px";?>;display:inline-block;margin-left:-5px;margin-bottom:-6px;-webkit-filter: brightness(0.55); filter: brightness(0.55);border:2px solid #FFF;border-left:none;border-top:none;}
                   .merge div div:last-child{border-right:none}
                   .merge{width:<?php echo $Capturedata['Image'][0]['total_width']."px";?>;}
                   </style>
@@ -586,6 +593,9 @@ processData:false,
         var obj = $.parseJSON(data);
         if(obj.Message == "OK")
         {
+          $("#emailfield").remove();
+          
+          $("#newalert").css("display", "block");
           $("#snip-m").html("Snippest code emailed successfully");
         }
         else

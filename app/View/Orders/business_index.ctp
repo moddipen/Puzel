@@ -196,7 +196,7 @@
                         </div>
                         <div class="col-md-4">
                           <div class="form-group">
-                              <button type="button" class="btn btn-oranges fullwidth" id="close" >Cancel</button>
+                              <button type="button" class="btn btn-oranges fullwidth" id="close" >Close</button>
                             </div>
                         </div>
                       

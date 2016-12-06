@@ -70,7 +70,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                               <div class="form-group">
                                   <div class="input-group">
                                         <input name="startdate" id="startdate" class="form-control date">
@@ -79,7 +79,7 @@
                                 </div>
                             </div>
                             <input type ="hidden" value="" id="selectedstartdate">
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon nobackground newposition">To</span>

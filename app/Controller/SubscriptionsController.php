@@ -648,30 +648,32 @@ class  SubscriptionsController  extends AppController {
 		Braintree_Configuration::publicKey('2yhywhtr9583jhmh');
 		Braintree_Configuration::privateKey('2bcc2668e0766ce64a3d9f975d953f78');
 
-			
+		// $check  = Braintree_WebhookNotification::CHECK;	
+
+		// $this->log($check);
 		if(isset($_POST["bt_signature"]) && isset($_POST["bt_payload"])) 
 		{
 			    $webhookNotification = Braintree_WebhookNotification::parse(
 			        $_POST["bt_signature"], $_POST["bt_payload"]
 			    );
-
 			     
-        		 $message =
+        		$message =
         		 	        "[Webhook Received " . $webhookNotification->timestamp->format('Y-m-d H:i:s') . "] "
         						. "Kind: " . $webhookNotification->kind . " | "
         						. "Subscription: " . $webhookNotification->subscription->id . "\n";
+        		
 
+        		$this->log($webhookNotification);
+        		$this->log($message);
 
-        		$cancel = Braintree_Subscription::cancel($webhookNotification->subscription->id);
+				Braintree_Subscription::cancel($webhookNotification->subscription->id);        						
+				$get_order = $this->Order->find('first',array('conditions'=>array('Order.subscriptions_id'=> $webhookNotification->subscription->id),'order'=>'Order.id Desc'));
 
-        		$this->log($cancel);
-
-        		$get_order = $this->Order->find('first',array('conditions'=>array('Order.subscriptions_id'=>$webhookNotification->subscription->id),'order'=>'Order.id Desc'));
 
         		$array = array(
 					'id'=>$get_order['Order']['id'],
-					'reason'=>$webhookNotification->kind);
-        		$this->log($array);
+					'reason'=> $webhookNotification->kind);
+        		
         		if($this->Order->save($array))
         		{	
         			$user = array(
@@ -694,7 +696,7 @@ class  SubscriptionsController  extends AppController {
 										// Send email to user that your has been deactivate 
 										$email = array(
 										"templateid"=>1025061,
-										"name"=>$get_order['User']['firstname'].' '.$get_order['User']['firstname'],
+										"name"=>$get_order['User']['firstname'].' '.$get_order['User']['lastname'],
 										"TemplateModel"=> array(
 											"user_name"=> $get_order['User']['firstname'].' '.$get_order['User']['firstname'],
 											"product_name"=>"Account Cancelled",
@@ -703,7 +705,7 @@ class  SubscriptionsController  extends AppController {
 											"action_url"=>"Your account has been cancelled. Please get in touch with our support team for further instructions."),
 										"InlineCss"=> true, 
 										"from"=> "support@puzel.co",
-										'to'=>$get_order['User']['email'],
+										'to'=>"moddipen@gmail.com",
 										'reply_to'=>"support@puzel.co"
 										);	
 
@@ -727,7 +729,7 @@ class  SubscriptionsController  extends AppController {
 									"action_url"=>"Your account has been cancelled. Please get in touch with our support team for further instructions."),
 								"InlineCss"=> true, 
 								"from"=> "support@puzel.co",
-								'to'=>$get_order['User']['email'],
+								'to'=>"moddipen@gmail.com",
 								'reply_to'=>"support@puzel.co"
 								);	
 
@@ -736,25 +738,42 @@ class  SubscriptionsController  extends AppController {
 					}
 
 
-        		$this->log($message);					
-			        
-			   	$this->log($webhookNotification);	
+		        		//$this->log($message);					
+					        
+					   	//$this->log($webhookNotification);	
 
-			    //file_put_contents("/tmp/webhook.log", $message, FILE_APPEND);
-		}
-		else
-		{
-			$this->log('Order not updated or save and if flow is not working');
+					    //file_put_contents("/tmp/webhook.log", $message, FILE_APPEND);
+				}
+				else
+				{
+					$email = array(
+										"templateid"=>1025061,
+										"name"=> "DIpen Modi",
+										"TemplateModel"=> array(
+											"user_name"=> "Dipen Modi",
+											"product_name"=>"Account Cancelled",
+											'company'=>array(
+			                					'name'=>''),
+											"action_url"=>"Your account has been cancelled. Please get in touch with our support team for further instructions."),
+										"InlineCss"=> true, 
+										"from"=> "support@puzel.co",
+										'to'=>"moddipen@gmail.com",
+										'reply_to'=>"support@puzel.co"
+										);	
 
-			CakeLog::config('error', array(
-			    'engine' => 'File',
-			    'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
-			    'file' => 'error',
-			)); 
-		}	
+										$this->sendemail($email);
+					$this->log('Order not updated or save and if flow is not working');
+
+					CakeLog::config('error', array(
+					    'engine' => 'File',
+					    'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
+					    'file' => 'error',
+					)); 
+				}	
 
 
 	}
+}	
 
 
 

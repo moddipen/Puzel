@@ -257,8 +257,8 @@ class  PuzzlesController  extends AppController {
 					          $cut_height = 5;
 					       if($peices > 500)
 					       {
-					        $cut_width = $peices/10;
-					        $cut_height = 10;
+					        $cut_width = $peices/25;
+					        $cut_height = 25;
 					       }
 					        }
 
