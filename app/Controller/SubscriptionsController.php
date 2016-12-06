@@ -661,7 +661,11 @@ class  SubscriptionsController  extends AppController {
         		 	        "[Webhook Received " . $webhookNotification->timestamp->format('Y-m-d H:i:s') . "] "
         						. "Kind: " . $webhookNotification->kind . " | "
         						. "Subscription: " . $webhookNotification->subscription->id . "\n";
-        						
+        		
+
+        		$this->log($webhookNotification);
+        		$this->log($message);
+
 				Braintree_Subscription::cancel($webhookNotification->subscription->id);        						
 				$get_order = $this->Order->find('first',array('conditions'=>array('Order.subscriptions_id'=> $webhookNotification->subscription->id),'order'=>'Order.id Desc'));
 
