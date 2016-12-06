@@ -243,8 +243,8 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
           <div class="mobile-menu-inner">
             <ul class="nav-mobile">
             
-             <li><a href="#">Grand Prize</a></li>
-             <li><a href="#">Terms / Description</a></li>
+             <li><a href="#" data-toggle="modal" data-target="#modal1">Grand Prize</a></li>
+             <li><a href="#" data-toggle="modal" data-target="#modal3">Terms / Description</a></li>
             </ul>
           </div>
         </div>
