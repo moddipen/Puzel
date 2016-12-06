@@ -75,7 +75,6 @@
                             <div class="col-md-2">
                               <div class="form-group">
                                   <div class="input-group">
-                                      <span class="input-group-addon nobackground">From</span>
                                         <input name="startdate" id="startdate" class="form-control date">
                                         <span class="input-group-addon nobackground"><i class="fa fa-calendar fa-2x"></i></span>
                                     </div>
@@ -85,7 +84,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <span class="input-group-addon nobackground">To</span>
+                                        <span class="input-group-addon nobackground newposition">To</span>
                                         <input name="enddate" id="enddate" class="form-control date">
                                         <span class="input-group-addon nobackground"><i class="fa fa-calendar fa-2x"></i></span>
                                      </div>

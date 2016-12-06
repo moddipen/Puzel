@@ -2895,7 +2895,7 @@ a.submit:hover { text-decoration: none; }
 .welcome{padding-left:15px; padding-top:100px; color:#fff; font-weight:700;}
 .padding10px{padding:10px;}
 .minipadding [class^="col-"]:first-child{padding-left: 15px;}
-.minipadding [class^="col-"]{padding-left: 7px; padding-right:7px;}
+.minipadding [class^="col-"]{padding-left: 9px; padding-right:9px;}
 .nobackground{background:none; color:#fff; border:0px;}
 .custom-form select, .custom-form input, .custom-form select.form-control + .chosen-container.chosen-container-single .chosen-single, .custom-form textarea{border-radius: 0px; background-color:#fff !important; color:#000 !important; border: 1px solid #7d576e !important;}
 .minipadding .input-group .input-group-addon:first-child{padding-left:0px; padding-right:6px;}
