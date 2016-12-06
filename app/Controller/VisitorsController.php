@@ -116,7 +116,7 @@ class  VisitorsController  extends AppController {
 							$update_puzzle = $this->Image->find('first',array('conditions'=>array('Image.modified'=>$modified,'Image.puzzle_id'=>$puzle['Puzzle']['id'],'Image.user_id'=>$puzle['Puzzle']['user_id'])));
 							if($update_puzzle)
 							{
-								$password_random =$this->generateRandomString();
+								$password_random = $this->generateRandomString();
 							    
 							    $message = "You have signup successfully \n\n\n  your password is :" .$password_random;
 								$useremail = array(
@@ -138,7 +138,7 @@ class  VisitorsController  extends AppController {
 										'password'=>$password_random);
 								if($this->User->save($update))
 								{
-									$this->hostedemail($useremail,$update_puzzle['Image']['puzzle_id'],"Front")	;
+									$this->hostedemail($useremail,$update_puzzle['Image']['puzzle_id'],$update_puzzle['Image']['id'],"Front")	;
 								}	
 							}
 						}		
@@ -150,44 +150,49 @@ class  VisitorsController  extends AppController {
 			// Normal sign up process 
 			else
 			{
-				$visitor = $this->Visitor->find('first',array('conditions'=>array('Visitor.email'=>$this->request->data['email'],'Visitor.puzzle_id'=>$puzle['Puzzle']['id'])));
-				$user = $this->User->find('first',array('conditions'=>array('User.email'=>$this->request->data['email'])));
+				$user = $this->User->find('first',array('conditions'=>array('User.email'=>$this->request->data['email'],'User.password'=>AuthComponent::password($this->request->data['password']))));	
+					
 				if(!empty($user))
 				{
 					$this->request->data['user_id'] = $user['User']['id'];
-				}
-				else
-				{
-					$this->request->data['id'] = 0;	
-				}	
+					$this->request->data['firstname'] = $user['User']['firstname'];
+					$this->request->data['lastname'] = $user['User']['lastname'];
+					$this->request->data['company_name'] = $user['User']['company_name'];
+					$visitor = $this->Visitor->find('first',array('conditions'=>array('Visitor.email'=>$this->request->data['email'],'Visitor.puzzle_id'=>$puzle['Puzzle']['id'])));	
 
-				if(!empty($visitor))
-				{
-					$response = array("message"=>"That email address has already taken. Please use another email.");
-                    echo json_encode($response);
-				}
-				else
-				{
-					$this->Visitor->create();
-					if(isset($this->request->data['refrel']))
-						{
-							$this->request->data['is_refrel'] = 1;
-						}		
-
-					if($this->Visitor->save($this->request->data))
+					if(!empty($visitor))
 					{
-						$modified = date('Y-m-d H:i:s');
-						$update = $this->Image->query("UPDATE images SET status = 1 ,modified = '".$modified."' WHERE status <> '1' AND user_id = '".$puzle['Puzzle']['user_id']."' AND puzzle_id = '".$puzle['Puzzle']['id']."' ORDER BY RAND() LIMIT 1 ");  
-						$update_puzzle = $this->Image->find('first',array('conditions'=>array('Image.modified'=>$modified,'Image.puzzle_id'=>$puzle['Puzzle']['id'],'Image.user_id'=>$puzle['Puzzle']['user_id'])));
-						
-						if($update_puzzle)
-						{
-							$response = array("message"=>"success","Id"=>$update_puzzle['Image']['puzzle_id'],"image_id"=>$update_puzzle['Image']['id']);
-		                    echo json_encode($response);
-						}
+						$response = array("message"=>"That email address has already taken. Please use another email.");
+	                    echo json_encode($response);
 					}
-			
-				}	
+					else
+					{
+						$this->Visitor->create();
+						if(isset($this->request->data['refrel']))
+							{
+								$this->request->data['is_refrel'] = 1;
+							}		
+
+						if($this->Visitor->save($this->request->data))
+						{
+							$modified = date('Y-m-d H:i:s');
+							$update = $this->Image->query("UPDATE images SET status = 1 ,modified = '".$modified."' WHERE status <> '1' AND user_id = '".$puzle['Puzzle']['user_id']."' AND puzzle_id = '".$puzle['Puzzle']['id']."' ORDER BY RAND() LIMIT 1 ");  
+							$update_puzzle = $this->Image->find('first',array('conditions'=>array('Image.modified'=>$modified,'Image.puzzle_id'=>$puzle['Puzzle']['id'],'Image.user_id'=>$puzle['Puzzle']['user_id'])));
+							
+							if($update_puzzle)
+							{
+								$response = array("message"=>"success","Id"=>$update_puzzle['Image']['puzzle_id'],"ImageId"=>$update_puzzle['Image']['id']);
+			                    echo json_encode($response);
+							}
+						}
+				
+					}
+				}
+				else
+				{
+					$response = array("message"=>"Invalid email or password.");
+	                echo json_encode($response);
+				}		
 			}	
 		}
 	}
