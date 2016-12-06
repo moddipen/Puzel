@@ -244,6 +244,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
             <ul class="nav-mobile">
             
              <li><a href="#">Grand Prize</a></li>
+             <li><a href="#">Terms / Description</a></li>
             </ul>
           </div>
         </div>
