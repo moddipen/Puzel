@@ -2957,3 +2957,4 @@ textarea.note-codable{ display: none;}
       }
     .note-editable{padding:5px;}  
 blockquote.reply, blockquote.filled{ word-wrap:break-word;}
+.newposition{position:absolute; left:-16px; top:6px;}
