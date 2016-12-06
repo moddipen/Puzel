@@ -1,8 +1,3 @@
-<style type="text/css">
-  .no-right:focus, .no-right a:focus{
-    outline:none !important;
-}
-</style>
 <?php
  
   // Get current URl 
@@ -10,19 +5,15 @@
   
   // Make parition or url and get puzzle name 
   $explode = explode('/',$path);
-  
-
-
-echo $this->Html->css('animations.css');
+  echo $this->Html->css('animations.css');
 ?>
 <style>
  #blur{
-	 -webkit-filter: blur(13px);
+   -webkit-filter: blur(13px);
     -moz-filter: blur(13px);
     -o-filter: blur(13px);
     -ms-filter: blur(13px);
  filter: blur(13px);}
-
 </style>
 <script type="text/javascript">
 var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
@@ -34,49 +25,143 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
       });
       $("#normalsign").click(function()
       {
-        $("#signwithpuzzleaccount").val(0);
+        $("#enrollwithpuzzleaccount").val(2);
       }); 
       $("#Imagedata").validate({
-			rules: {
-				firstname: "required",
-				lastname: "required",
-				email: {
-					required: true,
-					email: true
-				}
-			},
-			messages: {
-				firstname: "Please enter first name.",
-				lastname: "Please enter last name.",
-				email: "Please enter a valid email address.",
-			}
-		});
+      rules: {
+        firstname: "required",
+        lastname: "required",
+        email: {
+          required: true,
+          email: true
+        }
+      },
+      messages: {
+        firstname: "Please enter first name.",
+        lastname: "Please enter last name.",
+        email: "Please enter a valid email address.",
+      }
+    });
 
-       // Check email is valid or not 
+    $("#Imageenroll").validate({
+      rules: {
+        email: {
+          required: true,
+          email: true
+        },
+        password: "required"
+      },
+      messages: {
+        email: "Please enter a valid email address.",
+        password: "Please enter a valid password.",
+      }
+    }); 
+
+      
+      // Check email is valid or not 
       function validateEmail($email)
       {
         var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
         return emailReg.test( $email );
       }
 
+      $("#Imageenroll").submit(function(e)
+      {
+
+         if($("#password").val() == '')
+         {
+            return false;
+         } 
+         else if( !validateEmail($("#userenrollemail").val()) || $("#userenrollemail").val() == '') 
+         {
+            return false;
+         } 
+         else 
+         {
+
+            var url = "<?php echo Configure::read('SITE_URL')?>visitors/process/<?php echo $explode[5];?>"; 
+             // Form Submit Ajax  
+              $.ajax({
+                       type: "POST",
+                       url: url,
+                       data: $("#Imageenroll").serialize(), // serializes the form's elements.
+                       dataType: 'json', 
+                       success: function(data)
+                       {
+
+                        if(data.message == "success" )
+                          {
+                            $.ajax
+                              ({
+                                 type: "POST",
+                                 url: "<?php echo Configure::read('SITE_URL');?>visitors/fetchimage/"+data.ImageId,
+                                 dataType: 'text', 
+                                 success:function(data)
+                                 {
+                                    var obj = $.parseJSON(data);
+                                    obj = obj.name;
+                                    objs = obj.split('.');
+                                    var get_name = objs[0].split('_');
+                                    $('.'+objs[0]).css("background-image","url('<?php echo $this->webroot;?>img/puzzel/"+get_name[0]+"/"+obj+"')");  //background:url('<?php echo $this->webroot;?>'img/puzzel/"+objs[0]+"/"+obj+"')");
+                                    
+                                    if(transition  == "Newspaper"){var classes = 'pt-page-rotateOutNewspaper pt-page-rotateInNewspaper pt-page-delay500';}
+                                    if(transition  == "Cube to left"){var classes = 'pt-page-rotateCubeLeftOut pt-page-ontop pt-page-rotateCubeLeftIn';}
+                                    if(transition  == "Cube to right"){var classes = 'pt-page-rotateCubeRightOut pt-page-ontop pt-page-rotateCubeRightIn';}
+                                    if(transition  == "Cube to top"){var classes = 'pt-page-rotateCubeTopOut pt-page-ontop pt-page-rotateCubeTopIn';}
+                                    if(transition  == "Cube to bottom"){var classes = 'pt-page-rotateCubeBottomOut pt-page-ontop pt-page-rotateCubeBottomIn';}
+                                    if(transition  == "Flip right"){var classes = 'pt-page-flipOutRight pt-page-flipInLeft pt-page-delay500';}
+                                    if(transition  == "Flip left"){var classes = 'pt-page-flipOutLeft pt-page-flipInRight pt-page-delay500';}
+                                    if(transition  == "Flip top"){var classes = 'pt-page-flipOutTop pt-page-flipInBottom pt-page-delay500';}
+                                    if(transition  == "Flip bottom"){var classes = 'pt-page-flipOutBottom pt-page-flipInTop pt-page-delay500';}
+                                    
+                                    $('.'+objs[0]).addClass(classes);
+                                    // $("#puzzle").html(data);
+                                    $("#Imageenroll")[0].reset();
+                                    // $("#success").html("<div style='background:rgba(60,118,61,0.5);color:#3C763D;font-size:14px;padding:20px'> Register successfully.</div>");
+                                    // $("#success").show().delay(3000).fadeOut(function(){ $(this).remove(); });
+                                    $("#alert").html("<p style='background:rgba(60,118,61,0.5);color:#3C763D;font-size:14px;padding:20px'>Register successfully.</p>");
+                                    $("p").show().delay(3000).fadeOut(function(){ $(this).remove(); });
+                                   }
+                              });
+                          }
+                          else
+                          {
+                            $("#alert").html("<p style='background:rgba(169,68,66,0.5);color:#A94442;font-size:14px;padding:20px;margin-bottom:10px;'>"+data.message+"</p>");
+                            $("p").show().delay(3000).fadeOut(function(){ $(this).remove(); });
+                          }
+                       }
+                     });
+
+                e.preventDefault(); // avoid to execute the actual submit of the form.
+            } 
+          });  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       $("#Imagedata").submit(function(e)
       {
          if($("#fname").val() == '')
          {
-            //$("#firsname").after("<p>Please enter first name. </p>")
             return false;
          } 
          else if($("#lname").val() == '')
          {
-            //$("#laname").after("<p>Please enter last name. </p>")
             return false;
          }
          else if( !validateEmail($("#useremail").val()) || $("#useremail").val() == '') 
          {
-            // var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            //$("#useemail").after("<p>Please enter an email. </p>")
             return false;
-
          } 
          else 
          {
@@ -95,32 +180,33 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
                             $.ajax
                               ({
                                  type: "POST",
-                                 url: "<?php echo Configure::read('SITE_URL');?>visitors/fetchimage/"+data.image_id,
+                                 url: "<?php echo Configure::read('SITE_URL');?>visitors/fetchimage/"+data.ImageId,
                                  dataType: 'text', 
                                  success:function(data)
                                  {
                                     var obj = $.parseJSON(data);
-									obj = obj.name;
-									objs = obj.split('.');
-									var get_name = objs[0].split('_');
-									$('.'+objs[0]).css("background-image","url('<?php echo $this->webroot;?>img/puzzel/"+get_name[0]+"/"+obj+"')");  //background:url('<?php echo $this->webroot;?>'img/puzzel/"+objs[0]+"/"+obj+"')");
-									
-									if(transition  == "Newspaper"){var classes = 'pt-page-rotateOutNewspaper pt-page-rotateInNewspaper pt-page-delay500';}
-									if(transition  == "Cube to left"){var classes = 'pt-page-rotateCubeLeftOut pt-page-ontop pt-page-rotateCubeLeftIn';}
-									if(transition  == "Cube to right"){var classes = 'pt-page-rotateCubeRightOut pt-page-ontop pt-page-rotateCubeRightIn';}
-									if(transition  == "Cube to top"){var classes = 'pt-page-rotateCubeTopOut pt-page-ontop pt-page-rotateCubeTopIn';}
-									if(transition  == "Cube to bottom"){var classes = 'pt-page-rotateCubeBottomOut pt-page-ontop pt-page-rotateCubeBottomIn';}
-									if(transition  == "Flip right"){var classes = 'pt-page-flipOutRight pt-page-flipInLeft pt-page-delay500';}
-									if(transition  == "Flip left"){var classes = 'pt-page-flipOutLeft pt-page-flipInRight pt-page-delay500';}
-									if(transition  == "Flip top"){var classes = 'pt-page-flipOutTop pt-page-flipInBottom pt-page-delay500';}
-									if(transition  == "Flip bottom"){var classes = 'pt-page-flipOutBottom pt-page-flipInTop pt-page-delay500';}
-									
-									$('.'+objs[0]).addClass(classes);
-									// $("#puzzle").html(data);
+                                    obj = obj.name;
+                                    objs = obj.split('.');
+                                    var get_name = objs[0].split('_');
+                                    $('.'+objs[0]).css("background-image","url('<?php echo $this->webroot;?>img/puzzel/"+get_name[0]+"/"+obj+"')");  //background:url('<?php echo $this->webroot;?>'img/puzzel/"+objs[0]+"/"+obj+"')");
+                                    
+                                    if(transition  == "Newspaper"){var classes = 'pt-page-rotateOutNewspaper pt-page-rotateInNewspaper pt-page-delay500';}
+                                    if(transition  == "Cube to left"){var classes = 'pt-page-rotateCubeLeftOut pt-page-ontop pt-page-rotateCubeLeftIn';}
+                                    if(transition  == "Cube to right"){var classes = 'pt-page-rotateCubeRightOut pt-page-ontop pt-page-rotateCubeRightIn';}
+                                    if(transition  == "Cube to top"){var classes = 'pt-page-rotateCubeTopOut pt-page-ontop pt-page-rotateCubeTopIn';}
+                                    if(transition  == "Cube to bottom"){var classes = 'pt-page-rotateCubeBottomOut pt-page-ontop pt-page-rotateCubeBottomIn';}
+                                    if(transition  == "Flip right"){var classes = 'pt-page-flipOutRight pt-page-flipInLeft pt-page-delay500';}
+                                    if(transition  == "Flip left"){var classes = 'pt-page-flipOutLeft pt-page-flipInRight pt-page-delay500';}
+                                    if(transition  == "Flip top"){var classes = 'pt-page-flipOutTop pt-page-flipInBottom pt-page-delay500';}
+                                    if(transition  == "Flip bottom"){var classes = 'pt-page-flipOutBottom pt-page-flipInTop pt-page-delay500';}
+                                    
+                                    $('.'+objs[0]).addClass(classes);
                                     $("#Imagedata")[0].reset();
-                                    $("#success").html("<div style='background:rgba(60,118,61,0.5);color:#3C763D;font-size:14px;padding:20px'> Register successfully.</div>");
-                                    $("#success").show().delay(3000).fadeOut(function(){ $(this).remove(); });
-                                 }
+                                    // $("#success").html("<div style='background:rgba(60,118,61,0.5);color:#3C763D;font-size:14px;padding:20px'> Register successfully.</div>");
+                                    // $("#success").show().delay(3000).fadeOut(function(){ $(this).remove(); });
+                                    $("#alert").html("<p style='background:rgba(60,118,61,0.5);color:#3C763D;font-size:14px;padding:20px'>Register successfully.</p>");
+                                    $("p").show().delay(3000).fadeOut(function(){ $(this).remove(); });
+                                  }
                             });
                           }
                           else
@@ -156,8 +242,8 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
         <div class="row">
           <div class="mobile-menu-inner">
             <ul class="nav-mobile">
-             <li><a href="#" data-toggle="modal" data-target="#modal1">Terms / Descrption</a></li>  
-             <li><a href="#" data-toggle="modal" data-target="#modal3">Grand Prize</a></li>
+            
+             <li><a href="#">Grand Prize</a></li>
             </ul>
           </div>
         </div>
@@ -203,7 +289,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 
 
 <div id="container" class="page-hosted">
-<h2 class="text-center title-page"><?php echo $explode[5];?></h2>
+<h2 class="text-center title-page"><?php echo $explode[6];?></h2>
  <div class="row"> 
   <div class="col-md-12">
     <div id="puzzle">
@@ -228,18 +314,17 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
         // else {   $cut_width = 10;  $cut_height = 10; }  ?>
     
         <div class="merge pt-perspective">
-        <div>
+      <div>
            <?php 
-		   $index = 0;
+       $index = 0;
             foreach($image as $image_data)
               {
                 
                 // Get Image path 
               $path =  $this->webroot.'img/puzzel/'.$PuzzleData['Puzzle']['name'].'/'.$image_data['Image']['name'] ;
-              
               // $split = substr($image_data['Image']['name'], strrpos($image_data['Image']['name'], '_') + 1);
                 
-              //   if    ($split == "01.jpg")  {   $block = "1";   }
+                // if    ($split == "01.jpg")  {   $block = "1";   }
               // elseif($split == "11.jpg")  {   $block = "2";   }
               // elseif($split == "21.jpg")  {   $block = "3";   }
               // elseif($split == "31.jpg")  {   $block = "4";   }
@@ -263,20 +348,19 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
                 $class_name = $getname  ;
                 $class_image = "background:url('$path')"; 
               }
-             $get_image_part = explode("_",$image_data['Image']['name']);
-             if($get_image_part[1] == 0 && $index != 0)
-               {
-                 echo "</div><div>";
-               }  
-              
-            ?> 
-              <div class= "pt-page pt-page-<?php echo $index;?> <?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div>  
-                   <?php
-            
-                     $index ++;
-                }
-              echo "</div>";
+        $get_image_part = explode("_",$image_data['Image']['name']);
+       if($get_image_part[1] == 0 && $index != 0)
+         {
+           echo "</div><div>";
+         }  
+        
+      ?> 
+        <div class= "pt-page pt-page-<?php echo $index;?> <?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div>  
+             <?php
       
+               $index ++;
+          }
+        echo "</div>";
     }?>
   </div> 
   <!-- </div> -->
@@ -337,16 +421,29 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
             <?php }?>
             <input type = "hidden" name ="puzzlename" value = "<?php echo $explode[5];?>">
             <input type = "hidden" name ="signwithpuzzleaccount" id ="signwithpuzzleaccount" value = "">
-            <div class="text-center">
-                <div class="six columns">
-                <div class="form-group ">
-              <button type="submit" class="btn button-sign" id="normalsign" style="width:100%;">Submit</button>
-              </div>
-              </div>
-              <div class="six columns">
-              <div class="form-group "><button type="submit" class="btn button-sign" id="puzelacount" name="puzzle" style="width:100%;" value = "1">Signup with Puzel Account</button>
-              </div>
-              </div>
+            <div class="form-group text-center">
+              <button type="submit" class="btn button-sign" id="puzelacount" name="puzzle" value = "1">Submit</button>
+              <button type="button" class="btn button-sign" id="enrollformshow">Enroll Now</button>
+            </div>
+        </form>
+        <form id="Imageenroll" style="display:none;">
+          <div class="form-group" id="useenrollemail">
+             <input type="email" name="email"  id="userenrollemail"  class="form-control" placeholder="Email" required>
+          </div>
+          <div class="form-group" id="pasword">
+            <input type="password" name="password"   id="password"  class="form-control" placeholder="Password" required>
+          </div>
+          
+            <?php if(isset($Refrel))
+              {?>
+                <input type = "hidden" name ="refrel" value = "1">
+                <input type = "hidden" name ="refrel_id" value = "<?php echo $PuzzleData['Puzzle']['user_id']?>">
+            <?php }?>
+            <input type = "hidden" name ="puzzlename" value = "<?php echo $explode[5];?>">
+            <input type = "hidden" name ="enrollwithpuzzleaccount" id ="enrollwithpuzzleaccount" value = "">
+            <div class="form-group text-center">
+              <button type="button" class="btn button-sign" id="puzelasubmit" name="puzzle" >Submit</button>
+              <button type="submit" class="btn button-sign" id="normalsign" value = "2" >Enroll Now</button>
             </div>
         </form>
     </div>
@@ -364,16 +461,32 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
  <script>
 $(document).ready(function()
 {
-$('#collapse-menu').on('click', function(){
-if($(this).hasClass('active'))
-{
-   $(this).removeClass('active');
-}
-else
-{
-   $(this).addClass('active');
-}
-});
+    $('#collapse-menu').on('click', function(){
+    if($(this).hasClass('active'))
+    {
+       $(this).removeClass('active');
+    }
+    else
+    {
+       $(this).addClass('active');
+    }
+    });
+
+    // hide submit form when click on enroll button
+
+    $("#enrollformshow").on("click",function()
+    {
+        $("#Imagedata").css('display','none');
+        $("#Imageenroll").css('display','block');
+    });
+    
+    // hide enroll form when click on submit button    
+    $("#puzelasubmit").on("click",function()
+    {
+        $("#Imageenroll").css('display','none');
+        $("#Imagedata").css('display','block');
+    });
+
 
 
 
@@ -395,28 +508,28 @@ else
           <div class="modal-body">
             <form class="popup-form">
               <div class="form-group">
-				<?php
-					if($PuzzleData['Puzzle']['type'] == "Mystery")
-					{
-						$blurr_class = "blur";
-					}
-					else
-					{
-						$blurr_class = "";
-					}
-				?>
+        <?php
+          if($PuzzleData['Puzzle']['type'] == "Mystery")
+          {
+            $blurr_class = "blur";
+          }
+          else
+          {
+            $blurr_class = "";
+          }
+        ?>
                 <div style="margin-bottom:40px;"> <?php echo $PuzzleData['Puzzle']['price'];?></div>
         <div>        
-				<?php
-						if($PuzzleData['Puzzle']['price_image'] != "")
-						{
-					?>
-						   <div id="<?php echo $blurr_class;?>" style="background:url('<?php echo Configure::read("SITE_URL") ;?>app/webroot/img/grand_price/<?php echo $PuzzleData['Puzzle']['price_image'];?>')">
-								<!-- <a href = "<?php echo Configure::read("SITE_URL") ;?>app/webroot/img/grand_price/<?php echo $PuzzleData['Puzzle']['price_image'];?>" target="_blank"> --><img src = "<?php echo Configure::read("SITE_URL") ;?>app/webroot/img/grand_price/<?php echo $PuzzleData['Puzzle']['price_image'];?>"  width="540px"/><!-- </a> --> 
-							</div>
-					<?php
-						}
-					?>
+        <?php
+            if($PuzzleData['Puzzle']['price_image'] != "")
+            {
+          ?>
+               <div id="<?php echo $blurr_class;?>" style="background:url('<?php echo Configure::read("SITE_URL") ;?>app/webroot/img/grand_price/<?php echo $PuzzleData['Puzzle']['price_image'];?>')">
+                <!-- <a href = "<?php echo Configure::read("SITE_URL") ;?>app/webroot/img/grand_price/<?php echo $PuzzleData['Puzzle']['price_image'];?>" target="_blank"> --><img src = "<?php echo Configure::read("SITE_URL") ;?>app/webroot/img/grand_price/<?php echo $PuzzleData['Puzzle']['price_image'];?>"  width="540px"/><!-- </a> --> 
+              </div>
+          <?php
+            }
+          ?>
           </div>
                 <!-- <textarea name="textarea" id="textarea" class="form-control wysiwyg"></textarea> -->
               </div>

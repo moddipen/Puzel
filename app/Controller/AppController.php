@@ -302,7 +302,7 @@ class AppController extends Controller
 /**
     Host page email code
 */
-    public function hostedemail($mail,$puzzle_id = null,$layout = null)
+    public function hostedemail($mail,$puzzle_id = null,$image_id=null,$layout = null)
     {
         $json = json_encode(array(
         'TemplateId'=>$mail['templateid'],
@@ -331,6 +331,7 @@ class AppController extends Controller
         $response = curl_exec($ch);
         $response = json_decode($response);
         if($puzzle_id != NULL && $layout != NULL){$response->Id = $puzzle_id;}
+        if($image_id != NULL && $layout != NULL){$response->ImageId = $image_id;}
         $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
         echo json_encode($response);
