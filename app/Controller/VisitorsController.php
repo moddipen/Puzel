@@ -152,7 +152,6 @@ class  VisitorsController  extends AppController {
 			{
 				$user = $this->User->find('first',array('conditions'=>array('User.email'=>$this->request->data['email1'],'User.password'=>AuthComponent::password($this->request->data['password']))));	
 				
-				//echo "<pre>";print_r($user);exit;	
 				if(!empty($user))
 				{
 					$this->request->data['user_id'] = $user['User']['id'];
