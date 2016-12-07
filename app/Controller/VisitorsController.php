@@ -88,7 +88,7 @@ class  VisitorsController  extends AppController {
 				$visitor = $this->User->find('first',array('conditions'=>array('User.email'=>$this->request->data['email'])));
 				if(!empty($visitor))
 				{
-					$response = array("message"=>"That email address has already taken. Please use another email.");
+					$response = array("message"=>"You have already enrolled");
                     echo json_encode($response);
 				}
 				else
@@ -162,7 +162,7 @@ class  VisitorsController  extends AppController {
 
 					if(!empty($visitor))
 					{
-						$response = array("message"=>"That email address has already taken. Please use another email.");
+						$response = array("message"=>"You have already enrolled");
 	                    echo json_encode($response);
 					}
 					else
