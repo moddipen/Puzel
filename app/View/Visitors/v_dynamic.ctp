@@ -45,14 +45,14 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 
     $("#Imageenroll").validate({
       rules: {
-        email: {
+        email1: {
           required: true,
           email: true
         },
         password: "required"
       },
       messages: {
-        email: "Please enter a valid email address.",
+        email1: "Please enter a valid email address.",
         password: "Please enter a valid password.",
       }
     }); 
@@ -404,7 +404,12 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
     </div>
     <div class="six columns" >
       <div id="alert"></div>
-      <div id ="success"></div>  
+      <div id ="success"></div>
+      <div class="form-group">
+        <button type="button" class="btn button-sign" id="puzelasubmit" name="puzzle" style="width:47%">Submit</button>
+        <button type="button" class="btn button-sign" id="enrollformshow" style="width:47%">Enroll Now</button>
+        
+      </div>  
       <form id="Imagedata">
           <div class="form-group" id="firsname">
             <input type="text" name="firstname" id="fname" class="form-control" placeholder="First Name"  required>
@@ -423,13 +428,13 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
             <input type = "hidden" name ="puzzlename" value = "<?php echo $explode[5];?>">
             <input type = "hidden" name ="signwithpuzzleaccount" id ="signwithpuzzleaccount" value = "">
             <div class="form-group text-center">
-              <button type="submit" class="btn button-sign" id="puzelacount" name="puzzle" value = "1">Submit</button>
-              <button type="button" class="btn button-sign" id="enrollformshow">Enroll Now</button>
+              <button type="submit" class="btn button-sign" id="puzelacount" name="puzzle" value = "1" style="width:100%">Submit</button>
+              
             </div>
         </form>
         <form id="Imageenroll" style="display:none;">
           <div class="form-group" id="useenrollemail">
-             <input type="email" name="email"  id="userenrollemail"  class="form-control" placeholder="Email" required>
+             <input type="email" name="email1"  id="userenrollemail"  class="form-control" placeholder="Email" required>
           </div>
           <div class="form-group" id="pasword">
             <input type="password" name="password"   id="password"  class="form-control" placeholder="Password" required>
@@ -443,8 +448,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
             <input type = "hidden" name ="puzzlename" value = "<?php echo $explode[5];?>">
             <input type = "hidden" name ="enrollwithpuzzleaccount" id ="enrollwithpuzzleaccount" value = "">
             <div class="form-group text-center">
-              <button type="button" class="btn button-sign" id="puzelasubmit" name="puzzle" >Submit</button>
-              <button type="submit" class="btn button-sign" id="normalsign" value = "2" >Enroll Now</button>
+              <button type="submit" class="btn button-sign" id="normalsign" value = "2" style="width:100%">Enroll Now</button>
             </div>
         </form>
     </div>
