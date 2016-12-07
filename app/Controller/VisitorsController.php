@@ -150,7 +150,7 @@ class  VisitorsController  extends AppController {
 			// Normal sign up process 
 			else
 			{
-				$user = $this->User->find('first',array('conditions'=>array('User.email'=>$this->request->data['email'],'User.password'=>AuthComponent::password($this->request->data['password']))));	
+				$user = $this->User->find('first',array('conditions'=>array('User.email'=>$this->request->data['email1'],'User.password'=>AuthComponent::password($this->request->data['password']))));	
 					
 				if(!empty($user))
 				{
