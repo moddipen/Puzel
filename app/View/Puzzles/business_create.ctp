@@ -490,6 +490,11 @@
         alert("Please select on puzzle type");
         e.preventDefault();    
       }
+      if($("#transition").val() == $("#transition option:first").val())
+      {
+        alert("Please select on transition effect");
+        e.preventDefault();    
+      }
       if($("#puzzlename").val() =='')
        {
           alert("Please enter puzzle name");
