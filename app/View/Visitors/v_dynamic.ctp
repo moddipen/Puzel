@@ -481,15 +481,19 @@ $(document).ready(function()
 
     $("#enrollformshow").on("click",function()
     {
+        $(this).siblings().removeClass('active')
         $("#Imagedata").css('display','none');
         $("#Imageenroll").css('display','block');
+        $(this).addClass('active');
     });
     
     // hide enroll form when click on submit button    
     $("#puzelasubmit").on("click",function()
-    {
+    { 
+        $(this).siblings().removeClass('active')
         $("#Imageenroll").css('display','none');
         $("#Imagedata").css('display','block');
+        $(this).addClass('active');
     });
 
 
