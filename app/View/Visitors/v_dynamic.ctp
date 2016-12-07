@@ -14,6 +14,16 @@
     -o-filter: blur(13px);
     -ms-filter: blur(13px);
  filter: blur(13px);}
+ .btn-tab{width:47% !important;}
+ @media (max-width:992px){
+  .btn-tab{width:46% !important;}
+
+ }
+ .columns .active{
+     background: #fff;
+    color: #e58b16;
+    border:2px solid #e58b16;
+  }
 </style>
 <script type="text/javascript">
 var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
