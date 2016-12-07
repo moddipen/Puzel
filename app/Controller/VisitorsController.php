@@ -151,14 +151,15 @@ class  VisitorsController  extends AppController {
 			else
 			{
 				$user = $this->User->find('first',array('conditions'=>array('User.email'=>$this->request->data['email1'],'User.password'=>AuthComponent::password($this->request->data['password']))));	
-					
+				
+				echo "<pre>";print_r($user);exit;	
 				if(!empty($user))
 				{
 					$this->request->data['user_id'] = $user['User']['id'];
 					$this->request->data['firstname'] = $user['User']['firstname'];
 					$this->request->data['lastname'] = $user['User']['lastname'];
 					$this->request->data['company_name'] = $user['User']['company_name'];
-					$visitor = $this->Visitor->find('first',array('conditions'=>array('Visitor.email'=>$this->request->data['email1'],'Visitor.puzzle_id'=>$puzle['Puzzle']['id'])));	
+					$visitor = $this->Visitor->find('first',array('conditions'=>array('Visitor.email'=>$this->request->data['email1	'],'Visitor.puzzle_id'=>$puzle['Puzzle']['id'])));	
 
 					if(!empty($visitor))
 					{
