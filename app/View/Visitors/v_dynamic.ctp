@@ -416,7 +416,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
       <div id="alert"></div>
       <div id ="success"></div>
       <div class="form-group">
-        <button type="button" class="btn button-sign" id="puzelasubmit" name="puzzle" style="width:47%">Signup for Puzel</button>
+        <button type="button" class="btn button-sign active" id="puzelasubmit" name="puzzle" style="width:47%">Signup for Puzel</button>
         <button type="button" class="btn button-sign" id="enrollformshow" style="width:47%">Enroll Now</button>
         
       </div>  
