@@ -94,6 +94,7 @@
                             <div class="col-md-2">
                               <div class="form-group">
                                     <select name="data[Puzzel][transtion]" class="form-control chosen-select" id="transition">
+                                      <option style ="display:none">Please select</option>
                                       <option value="Newspaper">Newspaper</option>
                                       <option value="Cube to left">Cube to left</option>
                                       <option value="Cube to right">Cube to right</option>
