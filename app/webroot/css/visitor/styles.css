@@ -982,7 +982,7 @@ label.error, span.error {
 input.error, select.error {
     border-color: #FB5959;
 }
-#Imagedata .form-group {
+#Imagedata .form-group, #Imageenroll .form-group {
   margin-bottom: 25px;
   position:relative;
 }
