@@ -2889,6 +2889,7 @@ a.submit:hover { text-decoration: none; }
 .fa-puzel-icon-left{background: url(../../img/dashboard/puzel-icon-left.png);  background-repeat:no-repeat; background-position:center; width:20px !important; margin-right:10px !important;}
 .fa-billing{background:url(../../img/dashboard/billing.svg); background-repeat:no-repeat; background-position:center; width:25px !important; margin-right:6px !important;}
 .fa-eye{background: url(../../img/dashboard/eye.svg);  background-repeat:no-repeat; background-position:center; width:20px; height:14px;}
+..fa-eye:before{content:'';}
 .fa-billing-big{background: url(../../img/dashboard/billing-big.svg);  background-repeat:no-repeat; background-position:center;}
 .fa-puzel-icon-left-big{background: url(../../img/dashboard/puzel-icon-left-big.png);  background-repeat:no-repeat; background-position:center;}
 .fa-support-16{background: url(../../img/dashboard/support-16px.svg); background-repeat:no-repeat; background-position:center; width:20px !important; margin-right:11px !important;}
