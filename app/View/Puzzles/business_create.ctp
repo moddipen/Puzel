@@ -130,7 +130,7 @@
                   <!-- tile footer -->
                   <div class="tile-footer text-center" style="display:none" id="filedimage">
                     <div class="form-group">
-                      <input type="button" class="btn btn-black-transparent changebutton" value="Terms / Description" data-toggle="modal" data-target="#modal1" id="clickzone">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-black-transparent" value="Grand Prize" data-toggle="modal" data-target="#modal3" id="clickpricezone">
+                      <input type="button" class="btn btn-black-orange changebutton" value="Terms / Description" data-toggle="modal" data-target="#modal1" id="clickzone">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-black-orange" value="Grand Prize" data-toggle="modal" data-target="#modal3" id="clickpricezone">
                     </div>
                     <div class="form-group">
                       <button type="submit" class="btn btn-oranges" id="validateform">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;

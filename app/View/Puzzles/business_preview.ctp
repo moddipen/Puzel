@@ -218,7 +218,7 @@
                 ?>
             </div>
         
-              </form>
+              <form>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
@@ -281,10 +281,11 @@
                   <!-- tile footer -->
                   <div class="tile-footer text-center" >
                     <div class="form-group">
+                    <form class="custom-form">
                       <input type="button" class="btn btn-black-orange" value="Terms / Description" data-toggle="modal" data-target="#modal1" id="clickzone">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-black-orange" value="Grand Prize" data-toggle="modal" data-target="#modal3" id="clickpricezone">
+                      </form>
                     </div>
                   </div>
-                  
                 </section>
                 <!-- /tile -->
 
