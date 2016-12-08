@@ -2887,7 +2887,7 @@ a.submit:hover { text-decoration: none; }
 .fa-puzel-icon-left, .fa-support-16, .fa-billing{display:block; margin-top:10px; float:left;}
 .fa-puzel-icon-left{background: url(../../img/dashboard/puzel-icon-left.png);  background-repeat:no-repeat; background-position:center; width:20px !important; margin-right:10px !important;}
 .fa-billing{background:url(../../img/dashboard/billing.svg); background-repeat:no-repeat; background-position:top center; width:25px !important; margin-right:6px !important;}
-.fa-eye{background: url(../../img/dashboard/eye.svg);  background-repeat:no-repeat; background-position:center; width:20px; height:14px; margin-bottom:-2px;}
+.fa-eye{background: url(../../img/dashboard/eye.svg);  background-repeat:no-repeat; background-position:center; width:21px; height:15px; margin-bottom:-2px;}
 .fa-eye:before{content:'' !important;}
 .fa-billing-big{background: url(../../img/dashboard/billing-big.svg);  background-repeat:no-repeat; background-position:center;}
 .fa-puzel-icon-left-big{background: url(../../img/dashboard/puzel-icon-left-big.png);  background-repeat:no-repeat; background-position:center;}
