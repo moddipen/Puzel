@@ -133,7 +133,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
                                     $("#Imageenroll")[0].reset();
                                     // $("#success").html("<div style='background:rgba(60,118,61,0.5);color:#3C763D;font-size:14px;padding:20px'> Register successfully.</div>");
                                     // $("#success").show().delay(3000).fadeOut(function(){ $(this).remove(); });
-                                    $("#alert").html("<p style='font-size:14px;padding:20px'>Puzzle created successfully.</p>");
+                                    $("#alert").html("<p style='font-size:14px;padding:20px 0px 0px 0px'>Puzzle created successfully.</p>");
                                     $("p").show().delay(3000).fadeOut(function(){ $(this).remove(); });
                                    }
                               });
