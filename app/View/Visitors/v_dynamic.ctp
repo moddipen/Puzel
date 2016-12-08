@@ -218,14 +218,14 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
                                     $("#Imagedata")[0].reset();
                                     // $("#success").html("<div style='background:rgba(60,118,61,0.5);color:#3C763D;font-size:14px;padding:20px'> Register successfully.</div>");
                                     // $("#success").show().delay(3000).fadeOut(function(){ $(this).remove(); });
-                                    $("#alert").html("<p style='font-size:14px;padding:20px'>You have been enrolled.</p>");
+                                    $("#alert").html("<p style='font-size:14px;padding:20px 0px 0px 0px;'>You have been enrolled.</p>");
                                     $("p").show().delay(3000).fadeOut(function(){ $(this).remove(); });
                                   }
                             });
                           }
                           else
                           {
-                            $("#alert").html("<p style='font-size:14px;padding:20px;margin-bottom:10px;'>"+data.message+"</p>");
+                            $("#alert").html("<p style='font-size:14px;padding:20px 0px 0px 0px;margin-bottom:0px;'>"+data.message+"</p>");
                             $("p").show().delay(3000).fadeOut(function(){ $(this).remove(); });
                           }
                           //$("#Imagedata")[0].reset();  
