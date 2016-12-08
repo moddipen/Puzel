@@ -2880,18 +2880,18 @@ a.submit:hover { text-decoration: none; }
 	margin-top:-5px;
 }
 .fa-265x{font-size:2.65em;}
-.fa-puzel-double:before{ content:url(../../img/dashboard/puzel-icon-double.png)}
-.fa-puzel-icon:before{content: url(../../img/dashboard/puzel-icon-one.png)}
-.fa-downloads:before{content: url(../../img/dashboard/download.png);}
-.fa-download-16px:before{content: url(../../img/dashboard/download-16px.png);}
+.fa-puzel-double{ background:url(../../img/dashboard/puzel-icon-double.png); background-repeat:no-repeat; background-position:center;}
+.fa-puzel-icon{background: url(../../img/dashboard/puzel-icon-one.png);  background-repeat:no-repeat; background-position:center;}
+.fa-downloads{background: url(../../img/dashboard/download.png);  background-repeat:no-repeat; background-position:center;}
+.fa-download-16px{background: url(../../img/dashboard/download-16px.png); background-repeat:no-repeat; background-position:center;}
 .fa-puzel-icon-left, .fa-support-16, .fa-billing{display:block; margin-top:10px; float:left; width:19px !important;}
-.fa-puzel-icon-left:before{content: url(../../img/dashboard/puzel-icon-left.png)}
-.fa-billing{background:url(../../img/dashboard/billing.svg);}
-.fa-eye:before{content: url(../../img/dashboard/eye.svg)}
-.fa-billing-big:before{content: url(../../img/dashboard/billing-big.svg)}
-.fa-puzel-icon-left-big:before{content: url(../../img/dashboard/puzel-icon-left-big.png)}
-.fa-support-16:before{content: url(../../img/dashboard/support-16px.svg)}
-.fa-support-32:before{content: url(../../img/dashboard/support-32px.svg)}
+.fa-puzel-icon-left{background: url(../../img/dashboard/puzel-icon-left.png);  background-repeat:no-repeat; background-position:center;}
+.fa-billing{background:url(../../img/dashboard/billing.svg); background-repeat:no-repeat; background-position:center;}
+.fa-eye{background: url(../../img/dashboard/eye.svg);  background-repeat:no-repeat; background-position:center;}
+.fa-billing-big{background: url(../../img/dashboard/billing-big.svg);  background-repeat:no-repeat; background-position:center;}
+.fa-puzel-icon-left-big{background: url(../../img/dashboard/puzel-icon-left-big.png);  background-repeat:no-repeat; background-position:center;}
+.fa-support-16{background: url(../../img/dashboard/support-16px.svg); background-repeat:no-repeat; background-position:center;}
+.fa-support-32{background: url(../../img/dashboard/support-32px.svg); background-repeat:no-repeat; background-position:center;}
 .welcome{padding-left:15px; padding-top:100px; color:#fff; font-weight:700;}
 .padding10px{padding:10px;}
 .minipadding [class^="col-"]:first-child{padding-left: 15px;}
