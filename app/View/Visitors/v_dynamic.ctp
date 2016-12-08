@@ -9,7 +9,7 @@
 ?>
 <style>
 
-ul.nav li:focus{outline: none;}
+ul.nav li a:focus,ul.nav li:focus{outline: none !important;}
  #blur{
    -webkit-filter: blur(13px);
     -moz-filter: blur(13px);
