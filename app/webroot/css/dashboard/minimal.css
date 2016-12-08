@@ -1318,7 +1318,7 @@ menu button .fa, menu .btn .fa { margin-right: 3px; }
 .navbar-nav.side-nav > li > a.sidebar-toggle.underline { border-bottom: 1px solid rgba(0, 0, 0, 0.2); padding: 0; margin: 0 15px; }
 .navbar-nav.side-nav > li.navigation .menu { list-style-type: none; padding: 0; margin: 0; }
 .navbar-nav.side-nav > li.navigation .menu > li > a, .navbar-nav.side-nav > li.navigation .menu > li > .dropdown-menu .dropdown > a { display: inline-block; line-height: 40px; padding: 0 15px; -webkit-transition: all 0.2s linear; -moz-transition: all 0.2s linear; transition: all 0.2s linear; font-size: 10pt; color: rgba(255, 255, 255, 0.9); text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1); width: 100%; position: relative; z-index: 2; font-weight: 700; }
-.navbar-nav.side-nav > li.navigation .menu > li > a > i, .navbar-nav.side-nav > li.navigation .menu > li > .dropdown-menu .dropdown > a > i { font-size: 16px; margin-right: 8px; width: 15px; display: inline-block; text-align: center; }
+.navbar-nav.side-nav > li.navigation .menu > li > a > i, .navbar-nav.side-nav > li.navigation .menu > li > .dropdown-menu .dropdown > a > i { font-size: 16px; margin-right: 8px; width: 19px; display: inline-block; text-align: center; height:27px; }
 .navbar-nav.side-nav > li.navigation .menu > li > a > b.dropdown-plus, .navbar-nav.side-nav > li.navigation .menu > li > .dropdown-menu .dropdown > a > b.dropdown-plus { float: right; line-height: 40px; color: rgba(0, 0, 0, 0.2); }
 .navbar-nav.side-nav > li.navigation .menu > li > a:after, .navbar-nav.side-nav > li.navigation .menu > li > .dropdown-menu .dropdown > a:after { content: ""; display: inline-block; width: 3px; height: 39px; background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%); background: linear-gradient(to right, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%); position: absolute; top: 0; left: 0; z-index: -1; -webkit-transition: all 0.2s linear; -moz-transition: all 0.2s linear; transition: all 0.2s linear; }
 .navbar-nav.side-nav > li.navigation .menu > li > a:hover, .navbar-nav.side-nav > li.navigation .menu > li > .dropdown-menu .dropdown > a:hover { text-decoration: none; color: white; }
@@ -2886,7 +2886,7 @@ a.submit:hover { text-decoration: none; }
 .fa-download-16px:before{content: url(../../img/dashboard/download-16px.png);}
 .fa-puzel-icon-left, .fa-support-16, .fa-billing{display:block; margin-top:10px; float:left; width:19px !important;}
 .fa-puzel-icon-left:before{content: url(../../img/dashboard/puzel-icon-left.png)}
-.fa-billing:before{content: url(../../img/dashboard/billing.svg)}
+.fa-billing:before{content: ''; background:url(../../img/dashboard/billing.svg);}
 .fa-eye:before{content: url(../../img/dashboard/eye.svg)}
 .fa-billing-big:before{content: url(../../img/dashboard/billing-big.svg)}
 .fa-puzel-icon-left-big:before{content: url(../../img/dashboard/puzel-icon-left-big.png)}
