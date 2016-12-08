@@ -2921,7 +2921,7 @@ input::-moz-placeholder { color: rgba(0, 0, 0, .3) !important; }
 input:-ms-input-placeholder { color: rgba(0, 0, 0, .3) !important; }
 .modal-header a.close{background:none; font-weight:200 !important; color:#fff; opacity:1;}
 .modal.orange .modal-header{background:#e78932; color:#fff !important;}
-.modal.orange .modal-content .modal-header h3{ color:#fff !important; font-size:12pt; border-bottom:0px;}
+.modal.orange .modal-content .modal-header h3{ color:#fff !important; font-size:12pt; border-bottom:0px; font-family:Arial, Helvetica, sans-serif !important;}
 .btn-sm, .btn-group-sm>.btn{padding: 4px 8px !important; border: 0;}
 .note-editor .note-toolbar>.btn-group{margin-right: 0px; border-right:1px solid #ccc; margin-top:0;}
 .note-editor .note-toolbar>.btn-group:last-child{border-right:0px;}
