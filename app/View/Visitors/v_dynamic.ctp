@@ -140,7 +140,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
                           }
                           else
                           {
-                            $("#alert").html("<p style='font-size:14px;padding:20px;margin-bottom:10px;'>"+data.message+"</p>");
+                            $("#alert").html("<p style='font-size:14px;padding:20px 0px 0px 0px;margin-bottom:0px;'>"+data.message+"</p>");
                             $("p").show().delay(3000).fadeOut(function(){ $(this).remove(); });
                           }
                        }
