@@ -1,4 +1,4 @@
-
+<?php echo $this->Html->css('animations.css'); ?>
                 
         <!-- Page content -->
         <div id="content" class="col-md-12">
@@ -94,6 +94,7 @@
                             <div class="col-md-2">
                               <div class="form-group">
                                     <select name="data[Puzzel][transtion]" class="form-control chosen-select" id="transition">
+                                      <option style ="display:none">Please select</option>
                                       <option value="Newspaper">Newspaper</option>
                                       <option value="Cube to left">Cube to left</option>
                                       <option value="Cube to right">Cube to right</option>
@@ -489,6 +490,11 @@
         alert("Please select on puzzle type");
         e.preventDefault();    
       }
+      if($("#transition").val() == $("#transition option:first").val())
+      {
+        alert("Please select on transition effect");
+        e.preventDefault();    
+      }
       if($("#puzzlename").val() =='')
        {
           alert("Please enter puzzle name");
@@ -499,11 +505,74 @@
         alert("Please select number of pieces of puzzel");
         e.preventDefault();    
       }
+ });
 
-        
+    $("#transition").on("change",function(){
+
+      var transition = this.value ;
+      if(transition  == "Newspaper")
+        {
+          $("#img_preview").removeClass();  
+          var classes = 'pt-page-rotateOutNewspaper pt-page-rotateInNewspaper pt-page-delay500';
+          $("#img_preview").addClass(classes);
+        }
+      else if(transition  == "Cube to left")
+        {
+          $("#img_preview").removeClass();  
+          var classes = 'pt-page-rotateCubeLeftOut pt-page-ontop pt-page-rotateCubeLeftIn';
+          $("#img_preview").addClass(classes);
+        }
+      else if(transition  == "Cube to right")
+        {
+          $("#img_preview").removeClass();  
+          var classes = 'pt-page-rotateCubeRightOut pt-page-ontop pt-page-rotateCubeRightIn';
+          $("#img_preview").addClass(classes);
+        }
+      else if(transition  == "Cube to top")
+        {
+          $("#img_preview").removeClass();  
+          var classes = 'pt-page-rotateCubeTopOut pt-page-ontop pt-page-rotateCubeTopIn';
+          $("#img_preview").addClass(classes);
+        }
+      else if(transition  == "Cube to bottom")
+        {
+          $("#img_preview").removeClass();  
+          var classes = 'pt-page-rotateCubeBottomOut pt-page-ontop pt-page-rotateCubeBottomIn';
+          $("#img_preview").addClass(classes);
+        }
+      else if(transition  == "Flip right")
+        {
+          $("#img_preview").removeClass();  
+          var classes = 'pt-page-flipOutRight pt-page-flipInLeft pt-page-delay500';
+          $("#img_preview").addClass(classes);
+        }
+      else if(transition  == "Flip left")
+        { 
+          $("#img_preview").removeClass();  
+          var classes = 'pt-page-flipOutLeft pt-page-flipInRight pt-page-delay500';
+          $("#img_preview").addClass(classes);
+        }
+      else if(transition  == "Flip top")
+        {
+          $("#img_preview").removeClass();  
+          var classes = 'pt-page-flipOutTop pt-page-flipInBottom pt-page-delay500';
+          $("#img_preview").addClass(classes);
+        }
+      // if(transition  == "Flip bottom"){var classes = 'pt-page-flipOutBottom pt-page-flipInTop pt-page-delay500';}
+      else
+      {
+        $("#img_preview").removeClass();  
+        var classes = 'pt-page-flipOutBottom pt-page-flipInTop pt-page-delay500';
+        $("#img_preview").addClass(classes);
+      }
 
       
-    });
+
+
+
+
+   }); 
+   
 
 
 
