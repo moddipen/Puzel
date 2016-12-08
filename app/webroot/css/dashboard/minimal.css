@@ -2880,10 +2880,9 @@ a.submit:hover { text-decoration: none; }
 	margin-top:-5px;
 }
 .fa-265x{font-size:2.65em;}
-.fa-puzel-double{ background:url(../../img/dashboard/puzel-icon-double.png); background-repeat:no-repeat; background-position:center;}
-.fa-puzel-icon{background: url(../../img/dashboard/puzel-icon-one.png);  background-repeat:no-repeat; background-position:center;}
-.fa-downloads{background: url(../../img/dashboard/download.png);  background-repeat:no-repeat; background-position:center;}
-.fa-downloads{width:32px; height:34px;}
+.fa-puzel-double{ background:url(../../img/dashboard/puzel-icon-double.png); background-repeat:no-repeat; background-position:center; width:100px; height:44px;}
+.fa-puzel-icon{background: url(../../img/dashboard/puzel-icon-one.png);  background-repeat:no-repeat; background-position:center; width:57px; height:44px;}
+.fa-downloads{background: url(../../img/dashboard/download.png);  background-repeat:no-repeat; background-position:center; width:32px; height:34px;}
 .fa-download-16px{background: url(../../img/dashboard/download-16px.png); background-repeat:no-repeat; background-position:center; width:16px; height:18px;}
 .fa-puzel-icon-left, .fa-support-16, .fa-billing{display:block; margin-top:10px; float:left;}
 .fa-puzel-icon-left{background: url(../../img/dashboard/puzel-icon-left.png);  background-repeat:no-repeat; background-position:center; width:20px !important; margin-right:10px !important;}
