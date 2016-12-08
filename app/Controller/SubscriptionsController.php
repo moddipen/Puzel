@@ -256,11 +256,11 @@ class  SubscriptionsController  extends AppController {
 									{
 										if($this->request->data['Subscription']['check'] == '')
 										{
-											$this->Session->setFlash(__('Invalid card detail.', true), 'default', array('class' => 'alert alert-danger'));						
+											$this->Session->setFlash(__('Invalid card detail.', true), 'default');						
 										}
 										else
 										{
-											$this->Session->setFlash('<div class="alert alert-danger"><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Failed </b>: Error processing transaction:</p><br>
+											$this->Session->setFlash('<div><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Failed </b>: Error processing transaction:</p><br>
 											</div>');	
 										}	
 									}	
@@ -335,22 +335,22 @@ class  SubscriptionsController  extends AppController {
 									'reply_to'=>"support@puzel.co"
 									);	
 									$this->sendinvoice($email);
-									$this->Session->setFlash('<div class="alert alert-success"><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Success </b>: Your subscription upgraded </p></div>');
+									$this->Session->setFlash('<div><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Success </b>: Your subscription upgraded </p></div>');
 									$this->redirect(array('controller'=>'orders','action'=>'index','business'=>true));		
 								}
 								else{
-									$this->Session->setFlash(__("Error while subscription"), 'default', array('class' => 'alert alert-danger'));						
+									$this->Session->setFlash(__("Error while subscription"), 'default');						
 								}												
 							}
 							else
 							{
-								$this->Session->setFlash(__("Error while making order"), 'default', array('class' => 'alert alert-danger'));						
+								$this->Session->setFlash(__("Error while making order"), 'default');						
 							}
 						}
 						else
 						{
 							foreach($result->errors->deepAll() AS $error) {
-										$this->Session->setFlash(__($error->code . ": " . $error->message . "\n", true), 'default', array('class' => 'alert alert-danger'));						
+										$this->Session->setFlash(__($error->code . ": " . $error->message . "\n", true), 'default');						
 									}
 						}
 					}
@@ -471,7 +471,7 @@ class  SubscriptionsController  extends AppController {
 												}
 												else
 												{
-													$this->Session->setFlash(__('Password doesnot match' , true), 'default', array('class' => 'alert alert-danger'));	
+													$this->Session->setFlash(__('Password doesnot match' , true), 'default');	
 													$this->redirect($this->here);
 												}	
 
@@ -518,17 +518,17 @@ class  SubscriptionsController  extends AppController {
 									{
 										if($this->request->data['Subscription']['check'] == '')
 										{
-											$this->Session->setFlash(__('Invalid card detail.', true), 'default', array('class' => 'alert alert-danger'));						
+											$this->Session->setFlash(__('Invalid card detail.', true), 'default');						
 										}
 										else
 										{
-											$this->Session->setFlash('<div class="alert alert-danger"><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Failed </b>: Error processing transaction:</p><br>
+											$this->Session->setFlash('<div><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Failed </b>: Error processing transaction:</p><br>
 											</div>');	
 										}	
 									}	
 								}else{
 									foreach($customer->errors->deepAll() AS $error) {
-										$this->Session->setFlash(__($error->code . ": " . $error->message . "\n", true), 'default', array('class' => 'alert alert-danger'));						
+										$this->Session->setFlash(__($error->code . ": " . $error->message . "\n", true), 'default');						
 									}
 								}
 						}

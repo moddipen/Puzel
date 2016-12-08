@@ -118,18 +118,18 @@ class  SupportsController  extends AppController {
 
 					if($this->sendemail($useremail))
 				    {
-						$this->Session->setFlash(__('Support Send to admin!!....', true), 'default', array('class' => 'alert alert-success'));
+						$this->Session->setFlash(__('Support Send to admin!!....', true), 'default');
 						$this->redirect(array('action'=>'index','business'=>true));
 					}
 					else
 					{
-						$this->Session->setFlash(__('Error in Send email to admin!!....', true), 'default', array('class' => 'alert alert-danger'));
+						$this->Session->setFlash(__('Error in Send email to admin!!....', true), 'default');
 					}
 				}			
 			}
 			else
 			{
-				$this->Session->setFlash(__('Unable to add support!!....', true), 'default', array('class' => 'alert alert-danger'));
+				$this->Session->setFlash(__('Unable to add support!!....', true), 'default');
 			}	
 			
 		}
@@ -184,13 +184,13 @@ class  SupportsController  extends AppController {
 				
 				if($this->sendemail($useremail))
 				{
-					$this->Session->setFlash(__('Support Added!!....', true), 'default', array('class' => 'alert alert-success'));
+					$this->Session->setFlash(__('Support Added!!....', true), 'default');
 					$this->redirect(array('action'=>'index','admin'=>true));	
 				}	
 			}
 			else
 			{
-				$this->Session->setFlash(__('Unable to add support!!....', true), 'default', array('class' => 'alert alert-danger'));
+				$this->Session->setFlash(__('Unable to add support!!....', true), 'default');
 			}	
 			
 		}
@@ -205,17 +205,17 @@ class  SupportsController  extends AppController {
 		{
 			if($this->Support->delete($id))
 			{	
-				$this->Session->setFlash(__('Delete successfully!!....', true), 'default', array('class' => 'alert alert-success'));
+				$this->Session->setFlash(__('Delete successfully!!....', true), 'default');
 				$this->redirect(array('action'=>'index','admin'=>true));
 			}
 			else
 			{
-				$this->Session->setFlash(__('Unable to Delete!!....', true), 'default', array('class' => 'alert alert-danger'));
+				$this->Session->setFlash(__('Unable to Delete!!....', true), 'default');
 			}	
 		}
 		else
 		{
-			$this->Session->setFlash(__('No data found....', true), 'default', array('class' => 'alert alert-danger'));
+			$this->Session->setFlash(__('No data found....', true), 'default');
 		}	
 	}		
 
@@ -280,18 +280,18 @@ class  SupportsController  extends AppController {
 
 					if($this->sendemail($useremail))
 				    {
-						$this->Session->setFlash(__('Support Send to admin!!....', true), 'default', array('class' => 'alert alert-success'));
+						$this->Session->setFlash(__('Support Send to admin!!....', true), 'default');
 						$this->redirect(array('action'=>'index','user'=>true));
 					}
 					else
 					{
-						$this->Session->setFlash(__('Error in Send email to admin!!....', true), 'default', array('class' => 'alert alert-danger'));
+						$this->Session->setFlash(__('Error in Send email to admin!!....', true), 'default');
 					}
 				}			
 			}
 			else
 			{
-				$this->Session->setFlash(__('Unable to add support!!....', true), 'default', array('class' => 'alert alert-danger'));
+				$this->Session->setFlash(__('Unable to add support!!....', true), 'default');
 			}	
 			
 		}
@@ -306,17 +306,17 @@ class  SupportsController  extends AppController {
 		{
 			if($this->Support->delete($id))
 			{	
-				$this->Session->setFlash(__('Delete successfully!!....', true), 'default', array('class' => 'alert alert-success'));
+				$this->Session->setFlash(__('Delete successfully!!....', true), 'default');
 				$this->redirect(array('action'=>'index','user'=>true));
 			}
 			else
 			{
-				$this->Session->setFlash(__('Unable to Delete!!....', true), 'default', array('class' => 'alert alert-danger'));
+				$this->Session->setFlash(__('Unable to Delete!!....', true), 'default');
 			}	
 		}
 		else
 		{
-			$this->Session->setFlash(__('No data found....', true), 'default', array('class' => 'alert alert-danger'));
+			$this->Session->setFlash(__('No data found....', true), 'default');
 		}	
 	}		
 
@@ -383,13 +383,13 @@ class  SupportsController  extends AppController {
               			);	
 				if($this->sendemail($mail))
 				{
-					$this->Session->setFlash(__('Support Send !!....', true), 'default', array('class' => 'alert alert-success'));
+					$this->Session->setFlash(__('Support Send !!....', true), 'default');
 					$this->redirect(array('action'=>'index','admin'=>true));
 				}	
 			}
 			else
 			{
-				$this->Session->setFlash(__('Unable to add support!!....', true), 'default', array('class' => 'alert alert-danger'));
+				$this->Session->setFlash(__('Unable to add support!!....', true), 'default');
 			}	
 			
 		}
@@ -431,13 +431,13 @@ class  SupportsController  extends AppController {
 
 				if($this->sendemail($email))
 				{
-					$this->Session->setFlash(__('Support Send !!....', true), 'default', array('class' => 'alert alert-success'));
+					$this->Session->setFlash(__('Support Send !!....', true), 'default');
 					$this->redirect(array('action'=>'index','user'=>true));
 				}	
 			}
 			else
 			{
-				$this->Session->setFlash(__('Unable to add support!!....', true), 'default', array('class' => 'alert alert-danger'));
+				$this->Session->setFlash(__('Unable to add support!!....', true), 'default');
 			}	
 			
 		}
@@ -500,13 +500,13 @@ class  SupportsController  extends AppController {
 
 				if($this->sendemail($email))
 				{
-					$this->Session->setFlash(__('Support Send !!....', true), 'default', array('class' => 'alert alert-success'));
+					$this->Session->setFlash(__('Support Send !!....', true), 'default');
 					$this->redirect(array('action'=>'index','business'=>true));
 				}	
 			}
 			else
 			{
-				$this->Session->setFlash(__('Unable to add support!!....', true), 'default', array('class' => 'alert alert-danger'));
+				$this->Session->setFlash(__('Unable to add support!!....', true), 'default');
 			}	
 			
 		}
@@ -521,17 +521,17 @@ class  SupportsController  extends AppController {
 		{
 			if($this->Support->delete($id))
 			{	
-				$this->Session->setFlash(__('Delete successfully!!....', true), 'default', array('class' => 'alert alert-success'));
+				$this->Session->setFlash(__('Delete successfully!!....', true), 'default');
 				$this->redirect(array('action'=>'index','business'=>true));
 			}
 			else
 			{
-				$this->Session->setFlash(__('Unable to Delete!!....', true), 'default', array('class' => 'alert alert-danger'));
+				$this->Session->setFlash(__('Unable to Delete!!....', true), 'default');
 			}	
 		}
 		else
 		{
-			$this->Session->setFlash(__('No data found....', true), 'default', array('class' => 'alert alert-danger'));
+			$this->Session->setFlash(__('No data found....', true), 'default');
 		}	
 	}	
 
