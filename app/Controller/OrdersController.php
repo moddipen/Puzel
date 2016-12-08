@@ -196,10 +196,10 @@ class  OrdersController  extends AppController {
 				$this->request->data['Order']['id'] = $get_current_plan['Order']['id'];
 				$this->request->data['Order']['token'] = $result->customer->creditCards[0]->token;
 				$this->Order->save($this->request->data);
-				$this->Session->setFlash('<div class="alert alert-success"><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Success </b>: Card details updated successfully. </p></div>');
+				$this->Session->setFlash('<div><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Success </b>: Card details updated successfully. </p></div>');
 			}else{
 				foreach($result->errors->deepAll() AS $error) {
-					$this->Session->setFlash(__($error->code . ": " . $error->message . "\n", true), 'default', array('class' => 'alert alert-danger'));						
+					$this->Session->setFlash(__($error->code . ": " . $error->message . "\n", true), 'default');						
 				}
 			}	
 		}

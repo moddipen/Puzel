@@ -575,7 +575,7 @@ class  PuzzlesController  extends AppController {
 	  			if($this->Puzzle->save($this->request->data))
 	  			{
 	  				// $list = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id)));
-	  				$this->Session->setFlash(__('Puzzle updated.', true), 'default', array('class' => 'alert alert-success'));
+	  				$this->Session->setFlash(__('Puzzle updated.', true), 'default');
 	  				$this->redirect(array('action'=>'index','business'=>true));
 	  			}
 	  		}

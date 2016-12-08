@@ -352,22 +352,22 @@ public function get_statistics()
 				
 				if($this->Auth->user('usertype') == 2)
               	{
-              		$this->Session->setFlash(__('Login successfully!!....', true), 'default', array('class' => 'alert alert-success'));
+              		$this->Session->setFlash(__('Login successfully!!....', true), 'default');
               		return $this->redirect(array('controller'=>'puzzles','action'=>'index','admin'=>true));
               	}	
               	elseif($this->Auth->user('usertype') == 1)
               	{
-              		$this->Session->setFlash(__('Login successfully!!....', true), 'default', array('class' => 'alert alert-success'));
+              		$this->Session->setFlash(__('Login successfully!!....', true), 'default');
               		return $this->redirect(array('controller'=>'puzzles','action'=>'index','business'=>true));
               	}
               	else
               	{
-              		$this->Session->setFlash(__('Login successfully!!....', true), 'default', array('class' => 'alert alert-success'));
+              		$this->Session->setFlash(__('Login successfully!!....', true), 'default');
               		return $this->redirect(array('controller'=>'puzzles','action'=>'index','user'=>true));	
               	}	
                 
             }
-            $this->Session->setFlash(__('Looks like you entered an incorrect username or password', true), 'default', array('class' => 'alert alert-danger'));
+            $this->Session->setFlash(__('Looks like you entered an incorrect username or password', true), 'default');
         }
        
         // Auto login 
@@ -443,19 +443,19 @@ public function get_statistics()
 
 					if($this->Auth->user('usertype') == 2)
 	              	{
-	              		$this->Session->setFlash(__('Signup Successfully!!....', true), 'default', array('class' => 'alert alert-success'));
+	              		$this->Session->setFlash(__('Signup Successfully!!....', true), 'default');
 	              		return $this->redirect(array('controller'=>'puzzles','action'=>'index','admin'=>true));
 	              	}	
 	              	elseif($this->Auth->user('usertype') == 1)
 	              	{
 	              		if($this->sendemail($email))
 	              		{	
-		              		$this->Session->setFlash(__('Signup Successfully!!....', true), 'default', array('class' => 'alert alert-success'));
+		              		$this->Session->setFlash(__('Signup Successfully!!....', true), 'default');
 		              		return $this->redirect(array('controller'=>'puzzles','action'=>'index','business'=>true));
 	              		}
 	              		else
 	              		{
-	              			$this->Session->setFlash(__('Email not sent !!....', true), 'default', array('class' => 'alert alert-danger'));
+	              			$this->Session->setFlash(__('Email not sent !!....', true), 'default');
 		              		return $this->redirect(array('controller'=>'puzzles','action'=>'index','business'=>true));	
 	              		}	
 	              	}
@@ -463,12 +463,12 @@ public function get_statistics()
 	              	{
 	     	         	if($this->sendemail($email))
 						{
-							$this->Session->setFlash(__('Signup Successfully!!....', true), 'default', array('class' => 'alert alert-success'));
+							$this->Session->setFlash(__('Signup Successfully!!....', true), 'default');
 	              			return $this->redirect(array('controller'=>'puzzles','action'=>'index','user'=>true));		
 						}
 						else
 						{
-							$this->Session->setFlash(__('Email not sent !!....', true), 'default', array('class' => 'alert alert-danger'));
+							$this->Session->setFlash(__('Email not sent !!....', true), 'default');
 	              			return $this->redirect(array('controller'=>'puzzles','action'=>'index','user'=>true));			
 						}		    
 						
@@ -478,7 +478,7 @@ public function get_statistics()
 			}	
 			else
 			{	
-				$this->Session->setFlash(__('<div class="alert alert-danger alert-dismissible"><p>Password does not match</p></div>'));	
+				$this->Session->setFlash(__('<div><p>Password does not match</p></div>'));	
 			}	
 		}
 
@@ -533,31 +533,31 @@ public function get_statistics()
 
 						if($this->sendemail($email))
 						{
-							$this->Session->setFlash(__('Please check your email ', true), 'default', array('class' => 'alert alert-success'));
+							$this->Session->setFlash(__('Please check your email ', true), 'default');
 							$this->redirect(array('controller'=>'users','action'=>'login'));
 						} 
 						else
 						{
-							$this->Session->setFlash('Problem during sending email','default',array('class'=>'alert alert-warning'));
+							$this->Session->setFlash('Problem during sending email','default');
 						}
 
 						//============EndEmail=============//
 					}
 					else{
 						
-						$this->Session->setFlash(__(' Error Generating Reset link !!....', true), 'default', array('class' => 'alert alert-danger'));
+						$this->Session->setFlash(__(' Error Generating Reset link !!....', true), 'default');
 					}
 				}
 				else
 				{
 					
-					$this->Session->setFlash(__(' This Account is not Active yet.Check Your mail to activate it !!....', true), 'default', array('class' => 'alert alert-danger'));
+					$this->Session->setFlash(__(' This Account is not Active yet.Check Your mail to activate it !!....', true), 'default');
 				}
 			}
 			else
 			{
 				
-				$this->Session->setFlash(__(' We do not have an account with this email address, you can sign up now.', true), 'default', array('class' => 'alert alert-danger'));
+				$this->Session->setFlash(__(' We do not have an account with this email address, you can sign up now.', true), 'default');
 			}
 			
 		}
@@ -592,13 +592,13 @@ public function user_reset($token=null)
 										$this->request->data['User']['password'] = $this->data['User']['newpassword'];
 										if($this->User->save($this->request->data))
 											{
-												$this->Session->setFlash(__(' Your New Password Has Been Reset !!....', true), 'default', array('class' => 'alert alert-success'));
+												$this->Session->setFlash(__(' Your New Password Has Been Reset !!....', true), 'default');
 												$this->redirect(array('controller'=>'users','action'=>'login','user'=>true));
 											}
 									}
 									else
 									{
-										$this->Session->setFlash(__('Password does not match .', true), 'default', array('class' => 'alert alert-danger'));	
+										$this->Session->setFlash(__('Password does not match .', true), 'default');	
 									}	
 									
 								}
@@ -606,7 +606,7 @@ public function user_reset($token=null)
 					}
 			else
 				{
-					$this->Session->setFlash('Token Corrupted,,Please Retry.the reset link work only for once.',array('class'=>'alert alert-warning'));
+					$this->Session->setFlash('Token Corrupted,,Please Retry.the reset link work only for once.');
 				}
 		}
 		else
@@ -624,7 +624,7 @@ public function user_reset($token=null)
     	//$this->Cookie->delete('remember_me_cookie');
 		
 		$this->Auth->logout();
-		$this->Session->setFlash(__('<div class="alert alert-success alert-dismissible"><p>Logout successfully.</p></div>'));
+		$this->Session->setFlash(__('<div><p>Logout successfully.</p></div>'));
 		$this->redirect(array('action'=>'login','user'=>true));
 	}	
 
@@ -671,12 +671,12 @@ public function user_reset($token=null)
 				$this->request->data['User']['id'] = $this->Auth->user('id');	 
 				if($this->User->save($this->request->data))
 				{
-					$this->Session->setFlash(__('profile update successfully !!....', true), 'default', array('class' => 'alert alert-success'));		
+					$this->Session->setFlash(__('profile update successfully !!....', true), 'default');		
 				}
 			}
 			else
 			{
-				$this->Session->setFlash(__('Password does not match !!....', true), 'default', array('class' => 'alert alert-danger'));
+				$this->Session->setFlash(__('Password does not match !!....', true), 'default');
 			}	
 			
 		}
@@ -710,12 +710,12 @@ public function user_reset($token=null)
 				$this->request->data['User']['id'] = $this->Auth->user('id');	 
 				if($this->User->save($this->request->data))
 				{
-					$this->Session->setFlash(__('Profile update successfully !!....', true), 'default', array('class' => 'alert alert-success'));		
+					$this->Session->setFlash(__('Profile update successfully !!....', true), 'default');		
 				}
 			}
 			else
 			{
-				$this->Session->setFlash(__('Password does not match !!....', true), 'default', array('class' => 'alert alert-danger'));
+				$this->Session->setFlash(__('Password does not match !!....', true), 'default');
 			}	
 			
 		}
@@ -779,7 +779,7 @@ public function user_reset($token=null)
 
 							if($this->sendemail($email))
 							{
-								$this->Session->setFlash(__('Your account has been cancelled', true), 'default', array('class' => 'alert alert-success'));		
+								$this->Session->setFlash(__('Your account has been cancelled', true), 'default');		
 								$this->redirect(array('controller'=>'puzzles','action'=>'index'));
 							}
 
@@ -807,7 +807,7 @@ public function user_reset($token=null)
 
 						if($this->sendemail($email))
 						{
-							$this->Session->setFlash(__('Your account has been cancelled', true), 'default', array('class' => 'alert alert-success'));		
+							$this->Session->setFlash(__('Your account has been cancelled', true), 'default');		
 							$this->redirect(array('controller'=>'puzzles','action'=>'index'));
 						}
 				}
@@ -862,7 +862,7 @@ public function user_reset($token=null)
 
 							if($this->sendemail($email))
 							{
-								$this->Session->setFlash(__('User account has been deactivated ', true), 'default', array('class' => 'alert alert-success'));		
+								$this->Session->setFlash(__('User account has been deactivated ', true), 'default');		
 								$this->redirect(array('controller'=>'users','action'=>'business','admin' => true));
 							}
 
@@ -890,7 +890,7 @@ public function user_reset($token=null)
 
 						if($this->sendemail($email))
 						{
-							$this->Session->setFlash(__('User account has been deactivated ', true), 'default', array('class' => 'alert alert-success'));		
+							$this->Session->setFlash(__('User account has been deactivated ', true), 'default');		
 							$this->redirect(array('controller'=>'users','action'=>'business','admin' => true));
 						}
 
@@ -1218,12 +1218,12 @@ public function user_reset($token=null)
 				$this->request->data['User']['id'] = $this->Auth->user('id');	 
 				if($this->User->save($this->request->data))
 				{
-					$this->Session->setFlash(__('Profile update successfully !!....', true), 'default', array('class' => 'alert alert-success'));		
+					$this->Session->setFlash(__('Profile update successfully !!....', true), 'default');		
 				}
 			}
 			else
 			{
-				$this->Session->setFlash(__('Password does not match !!....', true), 'default', array('class' => 'alert alert-danger'));
+				$this->Session->setFlash(__('Password does not match !!....', true), 'default');
 			}	
 			
 		}

@@ -59,21 +59,21 @@ class AppController extends Controller
             {
                 $this->Cookie->delete('remember_me_cookie');
                 $this->Auth->logout();
-                $this->Session->setFlash(__('<div class="alert alert-danger alert-dismissible"><p>Unable access this panel.</p></div>'));
+                $this->Session->setFlash(__('<div><p>Unable access this panel.</p></div>'));
                 $this->redirect(array('controller'=>'users','action'=>'login','user'=>true));
             }
             elseif($this->params['prefix'] == 'business' && $this->Auth->user('usertype') != 1 &&  $this->params['login'] && $this->params['register'])
             {
                 $this->Cookie->delete('remember_me_cookie');
                 $this->Auth->logout();   
-                $this->Session->setFlash(__('<div class="alert alert-danger alert-dismissible"><p>Unable access this panel.</p></div>'));
+                $this->Session->setFlash(__('<div><p>Unable access this panel.</p></div>'));
                 $this->redirect(array('controller'=>'users','action'=>'login','user'=>true));
             }
             elseif($this->params['prefix'] == 'user' && $this->Auth->user('usertype') != 0 && $this->params['login'] && $this->params['register'])
             {
                 $this->Cookie->delete('remember_me_cookie');
                 $this->Auth->logout();   
-                $this->Session->setFlash(__('<div class="alert alert-danger alert-dismissible"><p>Unable access this panel.</p></div>'));
+                $this->Session->setFlash(__('<div><p>Unable access this panel.</p></div>'));
                 $this->redirect(array('controller'=>'users','action'=>'login','user'=>true));
             } 
 
