@@ -8,6 +8,8 @@
   echo $this->Html->css('animations.css');
 ?>
 <style>
+
+ul.nav li:focus{outline: none;}
  #blur{
    -webkit-filter: blur(13px);
     -moz-filter: blur(13px);
