@@ -59,6 +59,7 @@ class  PuzzlesController  extends AppController {
 */	
 	public function business_index()
 	{
+		$this->set('sub_action','index');
 		$this->set("title","Index");
 		$puzel = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id')),'order'=>'Puzzle.created Desc')) ; 
 		foreach($puzel as $key => $psinglepuzle)
