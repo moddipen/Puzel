@@ -485,7 +485,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
  <script>
 	 //setup before functions
 	var typingTimer;                //timer identifier
-	var doneTypingInterval = 5000;  //time in ms, 5 second for example
+	var doneTypingInterval = 500;  //time in ms, 5 second for example
 	var $input = $('#userenrollemail');
 	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 	
@@ -502,7 +502,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 	
 	//user is "finished typing," do something
 	function doneTyping () {
-		if($input.val().match(mailormat))
+		if($input.val().match(mailformat))
 		{
 			return true;
 		}
