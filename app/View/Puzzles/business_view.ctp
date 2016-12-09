@@ -99,7 +99,7 @@
                             </div>
                         </div>
                       <div>
-                        Please insert jquery library to use snippest code.  <a href = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" target="_blank">Download library </a>
+                        Please insert jquery library to use snippest code.  <a href = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" target="_blank">Download jquery library </a>
                     </div> 
                     </br>
                     </div>
