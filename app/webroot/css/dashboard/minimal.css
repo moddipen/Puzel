@@ -2963,6 +2963,6 @@ blockquote.reply, blockquote.filled{ word-wrap:break-word;}
 .profile-settings h4{font-family:Arial, Helvetica, sans-serif;}
 .input-group input.date{margin-left:3px;}
 .chosen-container-single .chosen-single div{right:8px !important;}
-.input-group-addon{padding:4px 12px !important;}
+.input-group-addon{padding-top:4px; padding-bottom:4px;}
 .tile-footer .btn{background:#fff !important;}
 select.form-control.chosen-transparent + .chosen-container.chosen-container-single .chosen-single div{ right:2px !important;}
