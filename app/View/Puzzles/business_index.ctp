@@ -1,6 +1,9 @@
 <style type="text/css">
     textarea.note-codable{ display: none;}
     .btn-toolbar{margin-left:0px !important; }
+    .pagesubheader .title, .pagesubheader .alert{float: left;}
+    .alert{margin-left: 20px;margin-top: 25px;font-size: 16px;}
+    .title {margin-bottom: 15px;}
 </style>
 
       
@@ -18,8 +21,6 @@
               <h2 class="title"><i class="fa fa-puzel-icon-left-big"></i> Puzel</h2><div id="alert" class="alert"><?php echo $this->Session->flash();?> </div>
 
             </div>
-
-            <div id="alert"></div>
             <!-- row -->
             <div class="row">
 
