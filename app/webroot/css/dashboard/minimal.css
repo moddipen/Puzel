@@ -2964,5 +2964,5 @@ blockquote.reply, blockquote.filled{ word-wrap:break-word;}
 .input-group input.date{margin-left:3px;}
 .chosen-container-single .chosen-single div{right:8px !important;}
 .input-group-addon{padding-top:4px; padding-bottom:4px;}
-.tile-footer .btn{background:#fff !important;}
+.tile-footer .btn.btn-black-orange{background:#fff !important;}
 select.form-control.chosen-transparent + .chosen-container.chosen-container-single .chosen-single div{ right:2px !important;}
