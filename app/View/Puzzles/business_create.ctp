@@ -315,7 +315,7 @@
       $("#validation-pieces").prop("disabled", true);
       $("#transition").prop("disabled", true);
 
-      $("#errorpoint").html("<p style='color:#fff;font-size:14px;padding:20px;margin-bottom:10px;'>Please upgrade your plan </p>");
+      $("#errorpoint").html("<p style='font-size:14px;padding:20px;margin-bottom:10px;'>Please upgrade your plan </p>");
       
     }
 
