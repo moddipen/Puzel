@@ -88,7 +88,7 @@
                                                <?php }
                                           } ?>
                                       </select>
-                  <p id="validate-pieces"></p>
+                                      <p id="validate-pieces"></p>
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -315,7 +315,7 @@
       $("#validation-pieces").prop("disabled", true);
       $("#transition").prop("disabled", true);
 
-      $("#errorpoint").html("<p style='background:rgba(169,68,66,0.5);color:#fff;font-size:14px;padding:20px;margin-bottom:10px;'>Please upgrade your plan </p>");
+      $("#errorpoint").html("<p style='color:#fff;font-size:14px;padding:20px;margin-bottom:10px;'>Please upgrade your plan </p>");
       
     }
 
@@ -344,7 +344,7 @@
                }
                else
                {
-                  $("#errorpoint").html("<p style='background:rgba(169,68,66,0.5);color:#A94442;font-size:14px;padding:20px;margin-bottom:10px;'>Please upgrade your plan </p>");
+                  $("#errorpoint").html("<p style='font-size:14px;padding:20px;margin-bottom:10px;'>Please upgrade your plan </p>");
                   $("#filedimage").css("display", "none");
                } 
           }

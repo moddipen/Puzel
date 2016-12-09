@@ -280,7 +280,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
     <!--  Menu --> 
     <div class="cbp-af-header">
       <nav class="row">
-         <div id="logo"><a href="index.php"><img src="<?php echo $this->webroot;?>img/visitor/img/logo.png"></a></div>
+         <div id="logo"><a href="<?php echo Configure::read('SITE_URL');?>"><img src="<?php echo $this->webroot;?>img/visitor/img/logo.png"></a></div>
         
          <ul id="nav">
             
