@@ -13,11 +13,9 @@
             <!-- cards -->
             <?php echo $this->element('business/header');?>
                <!-- /cards -->
-            <?php echo $this->Session->flash();?> 
-             <div class="pagesubheader">
             
-
-              <h2><i class="fa fa-puzel-icon-left-big"></i> Puzel</h2>
+             <div class="pagesubheader">
+              <h2 class="title"><i class="fa fa-puzel-icon-left-big"></i> Puzel</h2><div id="alert" class="alert"><?php echo $this->Session->flash();?> </div>
 
             </div>
 
