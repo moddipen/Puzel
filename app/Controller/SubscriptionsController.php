@@ -54,6 +54,7 @@ class  SubscriptionsController  extends AppController {
 	{
 	 	parent::beforeFilter();
 	 	$this->Auth->allow(array('package','user_plan','thankyou','failure'));
+	 	$this->set('main_action','Subscription');
 	 	
 	}
 

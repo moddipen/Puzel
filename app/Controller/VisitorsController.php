@@ -55,6 +55,7 @@ class  VisitorsController  extends AppController {
 		$this->set("Signup",$signup);
 		// /$this->layout = 'default';
 	 	$this->Auth->allow('v_dynamic','process','fetchimage','generateRandomString','snipestimage');	 		
+	 	$this->set('main_action','Visitor');
 	 }
 
 

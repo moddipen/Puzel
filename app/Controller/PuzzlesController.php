@@ -51,6 +51,7 @@ class  PuzzlesController  extends AppController {
 	{
 	 	parent::beforeFilter();
 	 	$this->Auth->allow('sub');
+	 	$this->set('main_action','Puzzle');
 	}
 
 /**

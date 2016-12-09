@@ -49,6 +49,7 @@ class  OrdersController  extends AppController {
 
 	function beforeFilter()
 	{
+		$this->set('main_action','Order');
 	 	parent::beforeFilter();
 	 		 // Count of total puzzle 
 	 	// Count of total puzzle 

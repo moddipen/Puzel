@@ -51,6 +51,7 @@ class  SupportsController  extends AppController {
 		$signup = 0;
 		$this->set("Signup",$signup);
 		$this->layout = 'dashboard';
+		$this->set('main_action','Support');
 	}
 
 
