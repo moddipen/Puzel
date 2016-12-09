@@ -1,3 +1,10 @@
+<style type="text/css">
+    .pagesubheader .title, .pagesubheader .alert{float: left;}
+    .alert{margin-left: 20px;margin-top: 25px;font-size: 16px;}
+    .title {margin-bottom: 15px;}
+</style>
+
+
         <!-- Page content -->
         <div id="content" class="col-md-12">
           <!-- content main container -->
@@ -6,9 +13,11 @@
             <?php echo $this->element('admin/header');?>
             <!-- /cards -->
             <div class="pagesubheader">
-              <h2><i class="fa fa-briefcase"></i> Business</h2>
+              <!-- <h2> -->
+            <h2 class="title"><i class="fa fa-briefcase"></i> Business</h2><div id="alert" class="alert"><?php echo $this->Session->flash();?> </div>
+
             </div>
-            <div id="alert"></div>
+            
             <!-- row -->
             <div class="row">
               <!-- col 8 -->
@@ -294,7 +303,7 @@ $.fn.pageMe = function(opts){
           success: function (data)
           {
               // Button message 
-              $("#alert").html("<div style='font-size:14px;padding:20px'>User activated</div>");
+              $("#alert").html("<p>User activated</p>");
               $("#alert").show().delay(3000).fadeOut();
           },
         }); 
@@ -311,7 +320,7 @@ $.fn.pageMe = function(opts){
           success: function (data)
           {
             // button alert message 
-            $("#alert").html("<p style='font-size:14px;padding:20px;margin-bottom:10px;'>User deactivate</p>");
+            $("#alert").html("<p>User deactivate</p>");
             $("#alert").show().delay(3000).fadeOut();
           }
         });   
