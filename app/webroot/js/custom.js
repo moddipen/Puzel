@@ -87,14 +87,14 @@ $(document).ready(function()
 									$('.'+objs[0]).addClass(classes);
 									// $("#puzzle").html(data);
                                     $("#Imagedata")[0].reset();
-                                    $("#success").html("<div style='background:rgba(60,118,61,0.5);color:#3C763D;font-size:14px;padding:20px'> Register successfully.</div>");
+                                    $("#success").html("<p style='font-size:14px;padding:20px'> You have been enrolled.</p>");
                                     $("#success").show().delay(3000).fadeOut(function(){ $(this).remove(); });
                                  }
                             });
                           }
                           else
                           {
-                            $("#alert").html("<p style='background:rgba(169,68,66,0.5);color:#A94442;font-size:14px;padding:20px;margin-bottom:10px;'>"+data.message+"</p>");
+                            $("#alert").html("<p style='font-size:14px;padding:20px;margin-bottom:10px;'>"+data.message+"</p>");
                             $("p").show().delay(3000).fadeOut(function(){ $(this).remove(); });
                           }
                           //$("#Imagedata")[0].reset();  
