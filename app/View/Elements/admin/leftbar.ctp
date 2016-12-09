@@ -33,7 +33,22 @@
                       
                     </a>
                   </li> -->
-                  <?php if($main == "User"){$mainClass = "active";}else{$mainClass = "";} ?>
+                  <?php 
+                    if($main == "Puzzle")
+                      {
+                        if($sub == "business") 
+                        {
+                          $mainClass = "active";  
+                        }
+                        else
+                        {
+                          $mainClass = "";
+                        }  
+                      }
+                      else
+                        {
+                          $mainClass = "";
+                        } ?>
                   <li class="<?php echo $mainClass;?>">
                     <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/users/business">
                       <i class="fa fa-briefcase"></i> Business
