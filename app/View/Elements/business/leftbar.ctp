@@ -155,7 +155,7 @@
                           <i class="fa fa-cog"></i> Settings
                         </a>
                       </li>
-                      <li class="<?php echo $mainClass;?>">
+                      <li>
                         <a href="<?php echo Configure::read('SITE_USER_URL');?>/users/logout">
                           <i class="fa fa-power-off"></i> Logout
                         </a>
