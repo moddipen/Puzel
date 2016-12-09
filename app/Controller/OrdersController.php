@@ -164,6 +164,7 @@ class  OrdersController  extends AppController {
 */	
 	public function business_index()
 	{
+		$this->set('main_action','index');
 		Braintree_Configuration::environment('sandbox');
 		Braintree_Configuration::merchantId('dvgmgzszxf2qgmfh');
 		Braintree_Configuration::publicKey('2yhywhtr9583jhmh');

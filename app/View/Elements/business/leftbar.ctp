@@ -47,7 +47,22 @@
                       
                     </a>
                   </li>
-                  <?php if($main == "Order"){$mainClass = "active";}else{$mainClass = "";} ?>
+                  <?php 
+                    if($main == "Order")
+                      {
+                        if($sub == "index")
+                        {
+                          $mainClass = "active";  
+                        }
+                        else
+                        {
+                          $mainClass = "";
+                        }  
+                      }
+                      else
+                        {
+                          $mainClass = "";
+                        } ?>
                   <li class="<?php echo $mainClass;?>">
                     <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/orders/index">
                       <i class="fa fa-billing"></i> Billing
