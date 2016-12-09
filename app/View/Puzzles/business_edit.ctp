@@ -177,7 +177,7 @@
                     "Flip top" => "Flip top",
                     "Flip bottom" => "Flip bottom",
               );?>
-                <?php echo $this->Form->input("Puzzle.transtion",array("label"=>false,"selected"=>$Capturedata['Puzzle']['transtion'],"type"=>"select","class"=>"form-control chosen-select","options"=>$transition));?>
+                <?php echo $this->Form->input("Puzzle.transtion",array("label"=>false,"selected"=>$Capturedata['Puzzle']['transtion'],"type"=>"select","class"=>"form-control chosen-select chosen-transparent","options"=>$transition));?>
                                     
                                 </div>
                             </div>
