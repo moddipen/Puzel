@@ -1,3 +1,8 @@
+<style type="text/css">
+    .pagesubheader .title, .pagesubheader .alert{float: left;}
+    .alert{margin-left: 20px;margin-top: 25px;font-size: 16px;}
+    .title {margin-bottom: 15px;}
+</style>
 
 
       
@@ -10,14 +15,10 @@
             <!-- cards -->
             <?php echo $this->element('admin/header');?>
                <!-- /cards -->
-            <?php echo $this->Session->flash();?> 
              <div class="pagesubheader">
             
-
-              <h2><i class="fa fa-puzel-icon-left-big"></i> Puzel</h2>
-
-            </div>
-            <div id="alert"></div>
+              <h2 class="title"><i class="fa fa-puzel-icon-left-big"></i> Puzel</h2><div id="alert" class="alert"><?php echo $this->Session->flash();?></div>
+            
 
             <!-- row -->
             <div class="row">
@@ -346,7 +347,7 @@ $.fn.pageMe = function(opts){
           success: function (data)
           {
               // Button message 
-              $("#alert").html("<div style='background:rgba(60,118,61,0.5);color:#A94442;font-size:14px;padding:20px'>Puzzle activated</div>");
+              $("#alert").html("<p>Puzzle activated</p>");
               $("#alert").show().delay(3000).fadeOut();
           },
         }); 
@@ -363,7 +364,7 @@ $.fn.pageMe = function(opts){
           success: function (data)
           {
             // button alert message 
-            $("#alert").html("<p style='background:rgba(169,68,66,0.5);color:#A94442;font-size:14px;padding:20px;margin-bottom:10px;'>Puzzle deactivate</p>");
+            $("#alert").html("<p>Puzzle deactivate</p>");
             $("#alert").show().delay(3000).fadeOut();
           }
         });   

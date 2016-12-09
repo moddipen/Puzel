@@ -354,7 +354,7 @@
           }
         ?>
         </div>
-        <div class="form-group">
+        <div class="form-group" style='margin-top:10px;'>
                 <div class="row minipadding">
                    <!--  <div class="col-md-4">
                       <select name="opton"  class="form-control chosen-select" id = "changeprice">

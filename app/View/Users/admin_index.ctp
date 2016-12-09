@@ -1,4 +1,8 @@
-
+<style type="text/css">
+    .pagesubheader .title, .pagesubheader .alert{float: left;}
+    .alert{margin-left: 20px;margin-top: 25px;font-size: 16px;}
+    .title {margin-bottom: 15px;}
+</style>
 
       
                 
@@ -13,14 +17,9 @@
                 <!-- /cards -->
             
              <div class="pagesubheader">
-            
-
-              <h2><i class="fa fa-users"></i> Users</h2>
-
-            </div>
-
-            <div id="alert"></div>
-            <!-- row -->
+              <h2 class="title"><i class="fa fa-users"></i> Users</h2><div id="alert" class="alert"><?php echo $this->Session->flash();?> </div>
+             </div>
+             <!-- row -->
             <div class="row">
 
 
@@ -321,7 +320,7 @@ $(document).ready(function(){
           success: function (data)
           {
               // Button message 
-              $("#alert").html("<div style='background:rgba(60,118,61,0.5);color:#A94442;font-size:14px;padding:20px'>User activated</div>");
+              $("#alert").html("<p>User activated</p>");
               $("#alert").show().delay(3000).fadeOut();
           },
         }); 
@@ -338,7 +337,7 @@ $(document).ready(function(){
           success: function (data)
           {
             // button alert message 
-            $("#alert").html("<p style='background:rgba(169,68,66,0.5);color:#A94442;font-size:14px;padding:20px;margin-bottom:10px;'>User deactivate</p>");
+            $("#alert").html("<p>User deactivate</p>");
             $("#alert").show().delay(3000).fadeOut();
           }
         });   

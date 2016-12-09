@@ -183,7 +183,8 @@
          <div class="modal-body">
           <form class="popup-form" id="terms" >
              <div class="form-group">
-              <textarea name="textarea" id="textarea" class="form-control wysiwyg"><?php echo $Capturedata['Puzzle']['terms'];?></textarea>
+              <!-- <textarea name="textarea" id="textarea" class="form-control wysiwyg"><?php echo $Capturedata['Puzzle']['terms'];?></textarea> -->
+              <div><?php echo $Capturedata['Puzzle']['terms'];?></div>
             </div>
             
         </form>
@@ -205,7 +206,8 @@
           <div class="modal-body">
             <form class="popup-form" id="grand_price" action="" method="post" enctype="multipart/form-data">
               <div class="form-group">
-                <textarea name="textarea" id="textarea1" class="form-control wysiwyg"><?php echo $Capturedata['Puzzle']['price'];?></textarea>
+                <!-- <textarea name="textarea" id="textarea1" class="form-control wysiwyg"><?php echo $Capturedata['Puzzle']['price'];?></textarea> -->
+                <div><?php echo $Capturedata['Puzzle']['price'];?></div>
               </div>
               <div id="image">
                 <?php 
@@ -368,6 +370,8 @@
       });   
     }
   });
+  // Remove toolbar 
+  $(".btn-toolbar").remove();
 
     function copyToClipboard(elem) {
     // create hidden text element, if it doesn't already exist

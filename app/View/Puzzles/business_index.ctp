@@ -1,6 +1,9 @@
 <style type="text/css">
     textarea.note-codable{ display: none;}
     .btn-toolbar{margin-left:0px !important; }
+    .pagesubheader .title, .pagesubheader .alert{float: left;}
+    .alert{margin-left: 20px;margin-top: 25px;font-size: 16px;}
+    .title {margin-bottom: 15px;}
 </style>
 
       
@@ -13,15 +16,11 @@
             <!-- cards -->
             <?php echo $this->element('business/header');?>
                <!-- /cards -->
-            <?php echo $this->Session->flash();?> 
-             <div class="pagesubheader">
             
-
-              <h2><i class="fa fa-puzel-icon-left-big"></i> Puzel</h2>
+             <div class="pagesubheader">
+              <h2 class="title"><i class="fa fa-puzel-icon-left-big"></i> Puzel</h2><div id="alert" class="alert"><?php echo $this->Session->flash();?> </div>
 
             </div>
-
-            <div id="alert"></div>
             <!-- row -->
             <div class="row">
 
@@ -380,14 +379,14 @@ $(document).ready(function(){
       {
         $.ajax(
         {
-          url: "puzzles/active/"+this.value,
+          url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/active/"+this.value,
           type: "post",
           datatype:"json",
           data: {'id':this.value} ,
           success: function (data)
           {
               // Button message 
-              $("#alert").html("<div style='background:rgba(60,118,61,0.5);color:#3C763D;font-size:14px;padding:20px'>Puzzle activated</div>");
+              $("#alert").html("<div style='font-size:14px;padding:20px'>Puzzle activated</div>");
               $("#alert").show().delay(3000).fadeOut();
           },
         }); 
@@ -397,14 +396,14 @@ $(document).ready(function(){
       {
         $.ajax(
         {
-          url: "puzzles/deactive/"+this.value,
+          url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/deactive/"+this.value,
           type: "post",
           datatype:"json",
           data: {'id':this.value} ,
           success: function (data)
           {
             // button alert message 
-            $("#alert").html("<p style='background:rgba(169,68,66,0.5);color:#A94442;font-size:14px;padding:20px;margin-bottom:10px;'>Puzzle deactivate</p>");
+            $("#alert").html("<p style='font-size:14px;padding:20px;margin-bottom:10px;'>Puzzle deactivate</p>");
             $("#alert").show().delay(3000).fadeOut();
           }
         });   
