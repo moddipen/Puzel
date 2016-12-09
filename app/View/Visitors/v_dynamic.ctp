@@ -452,7 +452,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
         </form>
         <form id="Imageenroll" style="display:none;padding-top: 25px;">
           <div class="form-group" id="useenrollemail">
-             <input type="email" name="email1"  id="userenrollemail"  class="form-control" onkeypress="ValidateEmail(this.value)" placeholder="Email" required>
+             <input type="email" name="email1"  id="userenrollemail"  class="form-control" onkeypress="ValidateEmail(this)" placeholder="Email" required>
           </div>
           <div class="form-group" id="pasword">
             <input type="password" name="password"   id="password"  class="form-control" placeholder="Password" required>
@@ -491,13 +491,13 @@ $(document).ready(function()
 		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;  
 		if(inputText.value.match(mailformat))  
 		{  
-			jQuery('#userenrollemail').focus();  
+			jQuery(this).focus();  
 			return true;  
 		}  
 		else  
 		{  
 			console.log("You have entered an invalid email address!");  
-			jQuery('#userenrollemail').focus(); 
+			jQuery(this).focus(); 
 			return false;  
 		}  
 	}
