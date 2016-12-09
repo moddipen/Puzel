@@ -240,6 +240,9 @@ class  VisitorsController  extends AppController {
 		$this->set('PuzzleData',$name);
 		$image = $this->Image->find('all',array('conditions'=>array('Image.puzzle_id'=>$name['Puzzle']['id'])));
 		$this->set('image',$image);
+
+		$puzel['Show'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$name['Puzzle']['id'],'Image.status'=>0))); 
+		$this->set("ShowPuzzel",$puzel);
 		if($refrel)
 		{
 			$this->set('Refrel',$refrel);
