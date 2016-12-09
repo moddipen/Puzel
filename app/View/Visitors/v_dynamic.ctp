@@ -494,12 +494,12 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 		  var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 			if($('#userenrollemail').val().match(mailformat))
 			{
-				$("label for=userenrollemail").hide()
+				$("label[for=userenrollemail]").hide()
 				return true;
 			}
 			else
 			{
-				$("label for=userenrollemail").show()
+				$("label[for=userenrollemail]").show()
 				return false;
 			}
 	  }, doneTypingInterval);
@@ -510,12 +510,12 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 		  var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 			if($('#useremail').val().match(mailformat))
 			{
-				$("label for=useremail").hide()
+				$("label[for=useremail]").hide()
 				return true;
 			}
 			else
 			{
-				$("label for=useremail").show()
+				$("label[for=useremail]").show()
 				return false;
 			}
 	  }, doneTypingInterval);
