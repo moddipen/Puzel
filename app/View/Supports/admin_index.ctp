@@ -15,7 +15,6 @@
             <!-- cards -->
             <?php echo $this->element('admin/header');?>  <!-- /cards -->
             
-             <?php echo $this->Session->flash(); ?> 
              <div class="pagesubheader">
                <h2 class="title"><i class="fa fa-support-32"></i>Support</h2><div id="alert" class="alert"><?php echo $this->Session->flash();?> </div> 
              </div>
