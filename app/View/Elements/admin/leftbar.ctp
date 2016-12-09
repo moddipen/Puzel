@@ -34,7 +34,7 @@
                     </a>
                   </li> -->
                   <?php 
-                    if($main == "Puzzle")
+                    if($main == "User")
                       {
                         if($sub == "business") 
                         {
@@ -55,28 +55,88 @@
                       
                     </a>
                   </li>
-                  <?php if($main == "User"){$mainClass = "active";}else{$mainClass = "";} ?>
+                  <?php 
+                    if($main == "User")
+                      {
+                        if($sub == "index") 
+                        {
+                          $mainClass = "active";  
+                        }
+                        else
+                        {
+                          $mainClass = "";
+                        }  
+                      }
+                      else
+                        {
+                          $mainClass = "";
+                        } ?>
                   <li class="<?php echo $mainClass;?>">
                     <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/users/index">
                       <i class="fa fa-users"></i> Users
                       
                     </a>
                   </li>
-                  <?php if($main == "Puzzle"){$mainClass = "active";}else{$mainClass = "";} ?>
+                  <?php 
+                    if($main == "Puzzle")
+                      {
+                        if($sub == "index") 
+                        {
+                          $mainClass = "active";  
+                        }
+                        else
+                        {
+                          $mainClass = "";
+                        }  
+                      }
+                      else
+                        {
+                          $mainClass = "";
+                        } ?>
                   <li class="<?php echo $mainClass;?>">
                     <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/puzzles/index">
                       <i class="fa fa-puzel-icon-left"></i> Puzel
                       
                     </a>
                   </li>
-                  <?php if($main == "User"){$mainClass = "active";}else{$mainClass = "";} ?>
+                  <?php 
+                    if($main == "User")
+                      {
+                        if($sub == "data") 
+                        {
+                          $mainClass = "active";  
+                        }
+                        else
+                        {
+                          $mainClass = "";
+                        }  
+                      }
+                      else
+                        {
+                          $mainClass = "";
+                        } ?>
                   <li class="<?php echo $mainClass;?>">
                     <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/users/data">
                       <i class="fa fa-database"></i> Data Captured
                       
                     </a>
                   </li>
-                  <?php if($main == "Support"){$mainClass = "active";}else{$mainClass = "";} ?>
+                  <?php 
+                    if($main == "Support")
+                      {
+                        if($sub == "index" || $sub == "add" || $sub == "conversation")
+                        {
+                          $mainClass = "active";  
+                        }
+                        else
+                        {
+                          $mainClass = "";
+                        }  
+                      }
+                      else
+                        {
+                          $mainClass = "";
+                        } ?>
                   <li class="<?php echo $mainClass;?>">
                     <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/supports/index">
                       <i class="fa fa-support-16"></i> Support
