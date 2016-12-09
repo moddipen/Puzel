@@ -420,6 +420,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
             
         </div>
     </div>
+    <?php if($ShowPuzzel['Show'] != 0) {?>
     <div class="six columns" >
      
       <div class="form-group">
@@ -469,6 +470,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
             </div>
         </form>
     </div>
+    <?php } ?>
 </div>
 </div> <!-- end of container -->
 
