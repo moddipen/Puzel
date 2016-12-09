@@ -111,6 +111,7 @@ $cakeDescription = __d('cake_dev', 'Puzzel');
 </body>
 </html>
 <script>
+$("textarea#script").focus(function() { $(this).select(); } );
     $(function(){
 		$(".chosen-select").chosen({disable_search_threshold: 10});
 		$('.date').datepicker({ format: 'yyyy-mm-dd', autoclose: true});
