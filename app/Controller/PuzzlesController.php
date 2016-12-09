@@ -74,6 +74,7 @@ class  PuzzlesController  extends AppController {
 */	
 	public function business_create()
 	{
+		$this->set('sub_action','create');
 		$this->set("title","Create");
 		$list = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id')),'fields'=>array('Puzzle.id','Puzzle.name')));
 		$this->set('Name',$list);
@@ -87,6 +88,7 @@ class  PuzzlesController  extends AppController {
 */	
 	public function admin_index()
 	{
+		$this->set('sub_action','index');
 		$this->set("title","Index");
 		$puzel = $this->Puzzle->find('all',array('order'=>'Puzzle.created Desc')) ; 
 		foreach($puzel as $key => $psinglepuzle)
@@ -103,6 +105,7 @@ class  PuzzlesController  extends AppController {
 */	
 	public function user_index()
 	{
+		$this->set('sub_action','index');
 		$this->set("title","Index");
 		$list = $this->Visitor->find('all',array('conditions'=>array('Visitor.user_id'=>$this->Auth->user('id'))));
 		foreach ($list as $key =>  $puzzle)
@@ -119,6 +122,7 @@ class  PuzzlesController  extends AppController {
 */	
 	public function business_view()
 	{
+		$this->set('sub_action','view');
 		$this->set("title","View");
 		
 		if(!empty($this->request->data))
@@ -562,6 +566,7 @@ class  PuzzlesController  extends AppController {
 */	
 	public function business_edit($id = null)
 	{
+		$this->set('sub_action','edit');
 	  
 	  if($id)
 	  {
@@ -687,6 +692,7 @@ class  PuzzlesController  extends AppController {
 */
 	public function business_preview($id= Null)
 	{
+		$this->set('sub_action','preview');
 		$this->set('title',"Preview");
 		if($id)
 		{
@@ -889,6 +895,7 @@ class  PuzzlesController  extends AppController {
 */
 	public function admin_preview($id= Null)
 	{
+		$this->set('sub_action','preview');
 		$this->set('title',"Preview");
 		if($id)
 		{

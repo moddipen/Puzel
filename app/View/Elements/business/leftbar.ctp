@@ -36,7 +36,7 @@
                   <?php 
                     if($main == "Puzzle")
                       {
-                        if($sub == "index")
+                        if($sub == "index" || $sub == "create" || $sub == "edit" || $sub == "view" || $sub == "preview")
                         {
                           $mainClass = "active";  
                         }
