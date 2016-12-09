@@ -10,6 +10,11 @@ $("form").validate({
 });});
 </script>
 <!-- Page content -->
+<style>
+div#flashMessage{
+	margin-bottom:-20px;
+}
+</style>
         <div id="content" class="col-md-12 full-page login">
 			<div class="inside-block">
                 <img src="<?php echo $this->webroot;?>img/logo.png" alt="" class="logo">

@@ -16,7 +16,11 @@ $("form").validate({
                 
         <!-- Page content -->
         <div id="content" class="col-md-12 full-page login">
-
+<style>
+div#flashMessage{
+	margin-bottom:-20px;
+}
+</style>
          <div class="inside-block">
               <a href="<?php echo Configure::read("SITE_URL");?>"><img src="<?php echo $this->webroot;?>img/dashboard/logo.png" alt="" class="logo"></a>
                <?php echo $this->Session->flash();
