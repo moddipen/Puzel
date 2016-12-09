@@ -384,7 +384,7 @@ $(document).ready(function(){
           datatype:"json",
           data: {'id':this.value} ,
           success: function (data)
-          {
+          { 
               // Button message 
               $("#alert").html("<p>Puzzle activated</p>");
               $("#alert").show().delay(3000).fadeOut();
