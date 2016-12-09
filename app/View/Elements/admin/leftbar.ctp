@@ -159,9 +159,9 @@
                       <?php 
                     if($main == "User")
                       {
-                        if($sub == "index") 
+                        if($sub == "setting") 
                         {
-                          $mainClass = "setting";  
+                          $mainClass = "active";  
                         }
                         else
                         {
