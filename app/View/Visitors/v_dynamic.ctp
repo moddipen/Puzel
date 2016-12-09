@@ -520,7 +520,9 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 			}
 	  }, doneTypingInterval);
 	});
-	
+	$('#useremail, #userenrollemail').on("keydown", function(){
+    clearTimeout(typingTimer);
+});
   
 $(document).ready(function()
 {
