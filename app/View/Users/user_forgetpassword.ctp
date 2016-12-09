@@ -12,7 +12,8 @@ $("form").validate({
 <!-- Page content -->
 <style>
 div#flashMessage{
-	margin-bottom:-20px;
+	margin-bottom:-35px;
+	margin-top:15px;
 }
 </style>
         <div id="content" class="col-md-12 full-page login">
