@@ -452,7 +452,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
         </form>
         <form id="Imageenroll" style="display:none;padding-top: 25px;">
           <div class="form-group" id="useenrollemail">
-             <input type="email" name="email1"  id="userenrollemail"  class="form-control" onkeypress="ValidateEmail(this)" placeholder="Email" required>
+             <input type="email" name="email1"  id="userenrollemail"  class="form-control" onkeypress="checkemail(this);" placeholder="Email" required>
           </div>
           <div class="form-group" id="pasword">
             <input type="password" name="password"   id="password"  class="form-control" placeholder="Password" required>
@@ -483,10 +483,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 
   <?php   } ?>
  <script>
-  
-$(document).ready(function()
-{
-	function ValidateEmail(inputText)  
+  function checkemail(inputText)  
 	{  
 		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;  
 		if(inputText.value.match(mailformat))  
@@ -501,6 +498,9 @@ $(document).ready(function()
 			return false;  
 		}  
 	}
+$(document).ready(function()
+{
+	
     $('#collapse-menu').on('click', function(){
     if($(this).hasClass('active'))
     {
