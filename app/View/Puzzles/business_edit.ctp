@@ -298,7 +298,7 @@
                             if(!empty($Name))
                             {  ?>
                               <option value ="<?php echo $Capturedata['Template']['Puzzle']['id']; ?>"><?php echo $Capturedata['Template']['Puzzle']['name']; ?></option>
-                              <?php 
+                              <?php  
                               foreach ($Name as $value)
                                 {
                                   if($Capturedata['Template']['Puzzle']['id'] != $value['Puzzle']['id']) {
