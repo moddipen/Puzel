@@ -156,13 +156,28 @@
                         $login_detail = $user['firstname'].' '.$user['lastname']; 
                       }  
                       echo $login_detail;?>!</li>
-                      <?php if($main == "User"){$mainClass = "active";}else{$mainClass = "";} ?>
+                      <?php 
+                    if($main == "User")
+                      {
+                        if($sub == "index") 
+                        {
+                          $mainClass = "setting";  
+                        }
+                        else
+                        {
+                          $mainClass = "";
+                        }  
+                      }
+                      else
+                        {
+                          $mainClass = "";
+                        } ?>
                       <li class="<?php echo $mainClass;?>">
                         <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/users/setting">
                           <i class="fa fa-cog"></i> Settings
                         </a>
                       </li>
-                      <li class="<?php echo $mainClass;?>">
+                      <li>
                         <a href="<?php echo Configure::read('SITE_USER_URL');?>/users/logout">
                           <i class="fa fa-power-off"></i> Logout
                         </a>
