@@ -184,4 +184,3 @@ function validateEmail(email) {
 		});
 	
 });
-$("textarea#script").focus(function() { $(this).select(); } );
