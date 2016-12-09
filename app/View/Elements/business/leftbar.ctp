@@ -56,7 +56,7 @@
                     </a>
                   </li>
                   <?php 
-                    if($main == "Puzzle")
+                    if($main == "Visitor")
                       {
                         if($sub == "data" )
                         {
