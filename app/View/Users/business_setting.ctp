@@ -185,7 +185,7 @@
 
                             <input type="text" class="form-control" name="data[User][phone]" id="phone" value="<?php echo $User['User']['phone']?>">
                             <span class="help-block">+(421) 999 999 999</span>
-                            <span style="display:none" id="errorphone" class = 'alert alert-danger'>Please Enter Valid number</span>
+                            <span style="display:none" id="errorphone" style="color:#fff;">Please Enter Valid number</span>
                           </div>
                           <div class="form-group col-sm-6">
 
@@ -327,7 +327,8 @@
     if (mob.test($.trim($("#phone").val())) == false)
     {
         $("#phone").focus();
-        $("#errorphone").css("display","block");    
+        $("#errorphone").css("display","block");   
+        $("#errorphone").show().delay(3000).fadeOut(function(){ $(this).hide(); });   
         return false;
     }
     else
