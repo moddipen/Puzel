@@ -34,13 +34,15 @@
                     </a>
                   </li> -->
                   
-                  <li class="active">
+                  <?php if($main == "Puzzle"){$mainClass = "active";}else{$mainClass = "";} ?>
+                  <li class="<?php echo $mainClass;?>">
                     <a href="<?php echo Configure::read('SITE_USER_URL');?>/puzzles/index">
                       <i class="fa fa-puzel-icon-left"></i> Puzel
                       
                     </a>
                   </li>
-                  <li>
+                  <?php if($main == "Support"){$mainClass = "active";}else{$mainClass = "";} ?>
+                  <li class="<?php echo $mainClass;?>">
                     <a href="<?php echo Configure::read('SITE_USER_URL');?>/supports/index">
                       <i class="fa fa-support-16"></i> Support
                       
@@ -59,12 +61,13 @@
                         $login_detail = $user['firstname'].' '.$user['lastname']; 
                       }  
                       echo $login_detail;?>!</li>
-                      <li>
+                      <?php if($main == "User"){$mainClass = "active";}else{$mainClass = "";} ?>
+                       <li class="<?php echo $mainClass;?>">
                         <a href="<?php echo Configure::read('SITE_USER_URL');?>/users/setting">
                           <i class="fa fa-cog"></i> Settings
                         </a>
                       </li>
-                      <li>
+                      <li class="<?php echo $mainClass;?>">
                         <a href="<?php echo Configure::read('SITE_USER_URL');?>/users/logout">
                           <i class="fa fa-power-off"></i> Logout
                         </a>
