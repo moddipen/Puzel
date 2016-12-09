@@ -1,3 +1,10 @@
+<style type="text/css">
+    .pagesubheader .title, .pagesubheader .alert{float: left;}
+    .alert{margin-left: 20px;margin-top: 25px;font-size: 16px;}
+    .title {margin-bottom: 15px;}
+</style>
+
+
 
      <!-- Page content -->
         <div id="content" class="col-md-12">
@@ -10,11 +17,8 @@
                 <!-- /cards -->
             <?php echo $this->Session->flash(); ?>
              <div class="pagesubheader">
-            
-
-              <h2><i class="fa fa-support-32"></i> Support</h2>
-
-            </div>
+              <h2 class="title"><i class="fa fa-support-32"></i> Support</h2><div id="alert" class="alert"><?php echo $this->Session->flash();?> </div>
+              </div>
 
 
             <!-- row -->
