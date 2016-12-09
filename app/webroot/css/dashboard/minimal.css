@@ -1443,7 +1443,7 @@ div.radio.radio-transparent input[type=radio].parsley-success + label::after { c
 
 .chosen-container { width: 100% !important; }
 
-select.form-control + .chosen-container.chosen-container-single .chosen-single { -webkit-appearance: none !important; color: #717171; outline: 0; height: 16px; padding: 6px 11px; line-height: 18px; font-size: 13px; vertical-align: top; background-color: #fff; min-height: 37px; filter: none !important; -webkit-box-shadow: none !important; box-shadow: none !important; -webkit-border-radius: 4px; -moz-border-radius: 4px; -ms-border-radius: 4px; -o-border-radius: 4px; border-radius: 4px; border: 1px solid #e2e2e2; -webkit-transition: all 0.2s linear; -moz-transition: all 0.2s linear; transition: all 0.2s linear; }
+select.form-control + .chosen-container.chosen-container-single .chosen-single { -webkit-appearance: none !important; color: #717171; outline: 0; height: 16px; padding: 6px 11px; line-height: 18px; font-size: 13px; vertical-align: top; background-color: #fff; min-height: 36px; filter: none !important; -webkit-box-shadow: none !important; box-shadow: none !important; -webkit-border-radius: 4px; -moz-border-radius: 4px; -ms-border-radius: 4px; -o-border-radius: 4px; border-radius: 4px; border: 1px solid #e2e2e2; -webkit-transition: all 0.2s linear; -moz-transition: all 0.2s linear; transition: all 0.2s linear; }
 select.form-control + .chosen-container.chosen-container-single .chosen-single span { line-height: 24px; }
 select.form-control + .chosen-container.chosen-container-single .chosen-single div { top: 7px; }
 select.form-control + .chosen-container.chosen-container-single.chosen-container-active .chosen-single { outline: none; border: 1px solid #b2b2b2; -webkit-box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.1) !important; box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.1) !important; }
@@ -2959,7 +2959,8 @@ textarea.note-codable{ display: none;}
       }
     .note-editable{padding:5px;}  
 blockquote.reply, blockquote.filled{ word-wrap:break-word;}
-.newposition{position:absolute; left:-15px; top:6px;}
+.newposition{position:absolute; left:-15px; top:7px;}
 .profile-settings h4{font-family:Arial, Helvetica, sans-serif;}
 .input-group input.date{margin-left:3px;}
 .chosen-container-single .chosen-single div{right:8px !important;}
+.input-group-addon{padding:4px 12px !important;}
