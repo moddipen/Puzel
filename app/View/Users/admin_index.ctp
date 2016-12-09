@@ -321,7 +321,7 @@ $(document).ready(function(){
           success: function (data)
           {
               // Button message 
-              $("#alert").html("<div style='background:rgba(60,118,61,0.5);color:#A94442;font-size:14px;padding:20px'>User activated</div>");
+              $("#alert").html("<div style='font-size:14px;padding:20px'>User activated</div>");
               $("#alert").show().delay(3000).fadeOut();
           },
         }); 
@@ -338,7 +338,7 @@ $(document).ready(function(){
           success: function (data)
           {
             // button alert message 
-            $("#alert").html("<p style='background:rgba(169,68,66,0.5);color:#A94442;font-size:14px;padding:20px;margin-bottom:10px;'>User deactivate</p>");
+            $("#alert").html("<p style='font-size:14px;padding:20px;margin-bottom:10px;'>User deactivate</p>");
             $("#alert").show().delay(3000).fadeOut();
           }
         });   
