@@ -386,7 +386,7 @@ $(document).ready(function(){
           success: function (data)
           {
               // Button message 
-              $("#alert").html("<div style='font-size:14px;padding:20px'>Puzzle activated</div>");
+              $("#alert").html("<p>Puzzle activated</p>");
               $("#alert").show().delay(3000).fadeOut();
           },
         }); 
@@ -403,7 +403,7 @@ $(document).ready(function(){
           success: function (data)
           {
             // button alert message 
-            $("#alert").html("<p style='font-size:14px;padding:20px;margin-bottom:10px;'>Puzzle deactivate</p>");
+            $("#alert").html("<p>Puzzle deactivate</p>");
             $("#alert").show().delay(3000).fadeOut();
           }
         });   
