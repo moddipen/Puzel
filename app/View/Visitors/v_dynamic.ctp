@@ -436,7 +436,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
             <input type="text" name="lastname"   id="lname"  class="form-control" placeholder="Last Name" required>
           </div>
           <div class="form-group" id="useemail">
-             <input type="email" name="email"  id="useremail"  class="form-control" placeholder="Email" required>
+             <input type="email" name="email"  id="useremail"  class="form-control" placeholder="Email"  onkeypress="checkemail(this.id)" required>
           </div>
             <?php if(isset($Refrel))
               {?>
@@ -452,7 +452,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
         </form>
         <form id="Imageenroll" style="display:none;padding-top: 25px;">
           <div class="form-group" id="useenrollemail">
-             <input type="email" name="email1"  id="userenrollemail"  class="form-control" placeholder="Email" required>
+             <input type="email" name="email1"  id="userenrollemail"  class="form-control" placeholder="Email" onkeypress="checkemail(this.id)" required>
           </div>
           <div class="form-group" id="pasword">
             <input type="password" name="password"   id="password"  class="form-control" placeholder="Password" required>
@@ -484,31 +484,35 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
   <?php   } ?>
  <script>
 	 //setup before functions
-	var typingTimer;                //timer identifier
-	var doneTypingInterval = 500;  //time in ms, 5 second for example
+	
 	var $input = $('#userenrollemail');
-	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+	
 	
 	//on keyup, start the countdown
-	$input.on('keyup', function () {
-	  clearTimeout(typingTimer);
-	  typingTimer = setTimeout(doneTyping, doneTypingInterval);
-	});
-	
-	//on keydown, clear the countdown 
-	$input.on('keydown', function () {
-	  clearTimeout(typingTimer);
-	});
-	
+	function checkemail(id){
+		var typingTimer;                //timer identifier
+		var doneTypingInterval = 500;  //time in ms, 5 second for example
+		$('#'+id).on('keyup', function () {
+		  clearTimeout(typingTimer);
+		  typingTimer = setTimeout(doneTyping(id), doneTypingInterval);
+		});
+		
+		//on keydown, clear the countdown 
+		$('#'+id).on('keydown', function () {
+		  clearTimeout(typingTimer);
+		});
+	}
 	//user is "finished typing," do something
-	function doneTyping () {
-		if($input.val().match(mailformat))
+	function doneTyping (id) {
+		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+		if($("#"+id).val().match(mailformat))
 		{
+			$("label for='"+id+"'").hide()
 			return true;
 		}
 		else
 		{
-			alert("You have entered an invalid email address!");
+			$("label for='"+id+"'").show()
 			return false;
 		}
 	  //do something
