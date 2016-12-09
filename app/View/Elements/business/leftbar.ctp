@@ -99,7 +99,22 @@
                       
                     </a>
                   </li>
-                  <?php if($main == "Support"){$mainClass = "active";}else{$mainClass = "";} ?>
+                  <?php 
+                    if($main == "Support")
+                      {
+                        if($sub == "index" || $sub == "add" || $sub == "conversation")
+                        {
+                          $mainClass = "active";  
+                        }
+                        else
+                        {
+                          $mainClass = "";
+                        }  
+                      }
+                      else
+                        {
+                          $mainClass = "";
+                        } ?>
                   <li class="<?php echo $mainClass;?>">
                     <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/supports/index">
                       <i class="fa fa-support-16"></i> Support
