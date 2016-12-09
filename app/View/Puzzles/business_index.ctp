@@ -380,7 +380,7 @@ $(document).ready(function(){
       {
         $.ajax(
         {
-          url: "puzzles/active/"+this.value,
+          url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/active/"+this.value,
           type: "post",
           datatype:"json",
           data: {'id':this.value} ,
@@ -397,7 +397,7 @@ $(document).ready(function(){
       {
         $.ajax(
         {
-          url: "puzzles/deactive/"+this.value,
+          url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/deactive/"+this.value,
           type: "post",
           datatype:"json",
           data: {'id':this.value} ,
