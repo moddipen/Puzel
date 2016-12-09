@@ -146,7 +146,7 @@
                             $mainClass = "";
                           }  
                         }
-                      else
+                      else 
                         {
                           $mainClass = "";
                         } ?>
