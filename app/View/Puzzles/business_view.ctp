@@ -98,7 +98,10 @@
                                 </div>
                             </div>
                         </div>
-                      
+                      <div>
+                        Please insert jquery library to use snippest code.  <a href = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" target="_blank">Download library </a>
+                    </div> 
+                    </br>
                     </div>
                   </div>
                   <input type ="hidden" value="<?php echo $this->Session->read('IMAGECAPTURE.Puzzel.base64');?>" name="data[Puzzle][image]">
