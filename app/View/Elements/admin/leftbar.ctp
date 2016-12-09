@@ -80,7 +80,7 @@
                   <?php 
                     if($main == "Puzzle")
                       {
-                        if($sub == "index") 
+                        if($sub == "index" || $sub == "preview") 
                         {
                           $mainClass = "active";  
                         }
