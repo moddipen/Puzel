@@ -2,7 +2,7 @@
     textarea.note-codable{ display: none;}
     .btn-toolbar{margin-left:0px !important; }
     .pagesubheader .title, .pagesubheader .alert{float: left;}
-    .alert{margin-left: 20px;margin-top: 25px;font-size: 16px;}
+    .alert{margin-left: 20px;margin-top: 25px;font-size: 16px;color:#FFF;}
     .title {margin-bottom: 15px;}
 </style>
 
@@ -384,9 +384,9 @@ $(document).ready(function(){
           datatype:"json",
           data: {'id':this.value} ,
           success: function (data)
-          {
+          { 
               // Button message 
-              $("#alert").html("<div style='font-size:14px;padding:20px'>Puzzle activated</div>");
+              $("#alert").html("<p>Puzzle activated</p>");
               $("#alert").show().delay(3000).fadeOut();
           },
         }); 
@@ -403,7 +403,7 @@ $(document).ready(function(){
           success: function (data)
           {
             // button alert message 
-            $("#alert").html("<p style='font-size:14px;padding:20px;margin-bottom:10px;'>Puzzle deactivate</p>");
+            $("#alert").html("<p>Puzzle deactivate</p>");
             $("#alert").show().delay(3000).fadeOut();
           }
         });   

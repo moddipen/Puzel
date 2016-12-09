@@ -296,11 +296,16 @@
                         <select name="opton" class="form-control chosen-select" id = "changetemplate">
                             <?php 
                             if(!empty($Name))
-                            {  
+                            {  ?>
+                              <option value ="<?php echo $Capturedata['Template']['Puzzle']['id']; ?>"><?php echo $Capturedata['Template']['Puzzle']['name']; ?></option>
+                              <?php  
                               foreach ($Name as $value)
-                                {?>
+                                {
+                                  if($Capturedata['Template']['Puzzle']['id'] != $value['Puzzle']['id']) {
+                                  ?>
+
                                 <option value ="<?php echo $value['Puzzle']['id']; ?>"><?php echo $value['Puzzle']['name']; ?></option>
-                            <?php } }?>
+                            <?php } } }?>
                         </select>
                   </div>
                 </div>

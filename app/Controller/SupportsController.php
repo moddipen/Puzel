@@ -51,6 +51,7 @@ class  SupportsController  extends AppController {
 		$signup = 0;
 		$this->set("Signup",$signup);
 		$this->layout = 'dashboard';
+		$this->set('main_action','Support');
 	}
 
 
@@ -60,6 +61,7 @@ class  SupportsController  extends AppController {
 */	
 	public function business_index()
 	{
+		$this->set('sub_action','index');
 		$this->set("title","Support");
 		$support = $this->Support->find('all',array('conditions'=>array('OR'=>array('Support.receiver_id' =>$this->Auth->user('id'),'Support.sender_id' =>$this->Auth->user('id'))),'order'=>'Support.created desc','group' => array('Support.subject HAVING  1')));
 
@@ -71,6 +73,7 @@ class  SupportsController  extends AppController {
 */	
 	public function business_add()
 	{
+		$this->set('sub_action','add');
 		$this->set("title","Add Support");
 		$admin = $this->User->find('first',array('conditions'=>array('User.usertype'=>2)));
 		$this->Session->write("ADMINDETAIL",$admin);
@@ -140,6 +143,7 @@ class  SupportsController  extends AppController {
 */	
 	public function admin_index()
 	{
+		$this->set('sub_action','index');
 		$this->set("title","Support");
 		$support = $this->Support->find('all',array('conditions'=>array('OR'=>array('Support.receiver_id' =>$this->Auth->user('id'),'Support.sender_id' =>$this->Auth->user('id'))),'order'=>'Support.created desc','fields' => array('Support.subject','Sender.firstname','Receiver.firstname','Sender.lastname','Receiver.lastname','Sender.company_name','Receiver.company_name','Support.created','Sender.id','Receiver.id','Support.message','Support.id'),'group' => array('Support.subject HAVING  1')));
 		$this->set('Supports',$support);
@@ -153,6 +157,7 @@ class  SupportsController  extends AppController {
 */	
 	public function admin_add()
 	{
+		$this->set('sub_action','add');
 		$this->set("title","Add Support");
 		
 		$this->set('CompanyName',$this->User->find('all',array('conditions'=>array('User.usertype'=>1),'order'=>'User.company_name asc')));
@@ -224,6 +229,7 @@ class  SupportsController  extends AppController {
 */	
 	public function user_index()
 	{
+		$this->set('sub_action','index');
 		$this->set("title","Support");
 		$this->set('Supports',$this->Support->find('all',array('conditions'=>array('OR'=>array('Support.receiver_id'=>$this->Auth->user('id'),'Support.sender_id'=>$this->Auth->user('id'))),'order'=>'Support.created desc','group' => array('Support.subject HAVING  1'))));
 	}
@@ -233,6 +239,7 @@ class  SupportsController  extends AppController {
 */	
 	public function user_add()
 	{
+		$this->set('sub_action','add');
 		$this->set("title","Add Support");
 		$admin = $this->User->find('first',array('conditions'=>array('User.usertype'=>2)));
 		$this->Session->write("ADMINDETAIL",$admin);
@@ -325,6 +332,7 @@ class  SupportsController  extends AppController {
 */	
 	public function user_conversation($id= Null)
 	{
+		$this->set('sub_action','conversation');
 		$this->set('title',"Conversation");
 		if($id)
 		{
@@ -448,6 +456,7 @@ class  SupportsController  extends AppController {
 */	
 	public function business_conversation($id= Null)
 	{
+		$this->set('sub_action','conversation');
 		$this->set('title',"Conversation");
 		if($id)
 		{
@@ -565,6 +574,7 @@ class  SupportsController  extends AppController {
 */	
 	public function admin_conversation($id= Null)
 	{
+		$this->set('sub_action','conversation');
 		$this->set('title',"Conversation");
 		if($id)
 		{

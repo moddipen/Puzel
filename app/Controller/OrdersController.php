@@ -49,6 +49,7 @@ class  OrdersController  extends AppController {
 
 	function beforeFilter()
 	{
+		$this->set('main_action','Order');
 	 	parent::beforeFilter();
 	 		 // Count of total puzzle 
 	 	// Count of total puzzle 
@@ -163,6 +164,7 @@ class  OrdersController  extends AppController {
 */	
 	public function business_index()
 	{
+		$this->set('sub_action','index');
 		Braintree_Configuration::environment('sandbox');
 		Braintree_Configuration::merchantId('dvgmgzszxf2qgmfh');
 		Braintree_Configuration::publicKey('2yhywhtr9583jhmh');

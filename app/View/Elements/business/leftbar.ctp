@@ -33,25 +33,89 @@
                       
                     </a>
                   </li> -->
-                  <li class="active">
+                  <?php 
+                    if($main == "Puzzle")
+                      {
+                        if($sub == "index" || $sub == "create" || $sub == "edit" || $sub == "view" || $sub == "preview")
+                        {
+                          $mainClass = "active";  
+                        }
+                        else
+                        {
+                          $mainClass = "";
+                        }  
+                      }
+                      else
+                        {
+                          $mainClass = "";
+                        } ?>
+                  <li class="<?php echo $mainClass;?>">
                     <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/puzzles/index">
                       <i class="fa fa-puzel-icon-left"></i> Puzel
                       
                     </a>
                   </li>
-                  <li>
+                  <?php 
+                    if($main == "Visitor")
+                      {
+                        if($sub == "data" )
+                        {
+                          $mainClass = "active";  
+                        }
+                        else
+                        {
+                          $mainClass = "";
+                        }  
+                      }
+                      else
+                        {
+                          $mainClass = "";
+                        } ?>
+                  <li class="<?php echo $mainClass;?>">
                     <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/visitors/data">
                       <i class="fa fa-database"></i> Data Captured
                       
                     </a>
                   </li>
-                  <li>
+                  <?php 
+                    if($main == "Order")
+                      {
+                        if($sub == "index")
+                        {
+                          $mainClass = "active";  
+                        }
+                        else
+                        {
+                          $mainClass = "";
+                        }  
+                      }
+                      else
+                        {
+                          $mainClass = "";
+                        } ?>
+                  <li class="<?php echo $mainClass;?>">
                     <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/orders/index">
                       <i class="fa fa-billing"></i> Billing
                       
                     </a>
                   </li>
-                  <li>
+                  <?php 
+                    if($main == "Support")
+                      {
+                        if($sub == "index" || $sub == "add" || $sub == "conversation")
+                        {
+                          $mainClass = "active";  
+                        }
+                        else
+                        {
+                          $mainClass = "";
+                        }  
+                      }
+                      else
+                        {
+                          $mainClass = "";
+                        } ?>
+                  <li class="<?php echo $mainClass;?>">
                     <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/supports/index">
                       <i class="fa fa-support-16"></i> Support
                       
@@ -70,8 +134,23 @@
                         $login_detail = $user['firstname'].' '.$user['lastname']; 
                       }  
                       echo $login_detail;?>!</li>
-                      
-                      <li>
+                       <?php 
+                      if($main == "User")
+                        {
+                          if($sub == "setting")
+                          {
+                            $mainClass = "active";  
+                          }
+                          else
+                          {
+                            $mainClass = "";
+                          }  
+                        }
+                      else 
+                        {
+                          $mainClass = "";
+                        } ?>
+                      <li class="<?php echo $mainClass;?>">
                         <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/users/setting">
                           <i class="fa fa-cog"></i> Settings
                         </a>
@@ -93,25 +172,3 @@
 
         </div>
         <!-- Fixed navbar end -->
-
-        <script type="text/javascript">
-
-    $(function(){
-        var current_page_URL = location.href;
-        var menu = window.location.href;
-        $( "a" ).each(function() {
-            if($(this).attr("href") !== "#") 
-            {
-                var target_URL = $(this).prop("href");
-                if (target_URL == current_page_URL) 
-                {
-                  $('.nav li.active').removeClass('active');
-                  $('a[href^="'+document.location+'"]').parent('li').addClass('active');
-                  return false;
-                }
-            }
-        });
-    }); 
-
-
-    </script>   

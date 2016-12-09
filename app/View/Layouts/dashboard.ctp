@@ -85,7 +85,7 @@ $cakeDescription = __d('cake_dev', 'Puzzel');
     	{
     		if($Signup  == 0)
     		{
-    			echo $this->element('admin/leftbar');	
+    			echo $this->element('admin/leftbar',array('main'=>$main_action,'sub'=>$sub_action));	
     		}
     		
     	}
@@ -93,14 +93,14 @@ $cakeDescription = __d('cake_dev', 'Puzzel');
 	     {
 	     	if($Signup  == 0)
     		{
-	     		echo $this->element('business/leftbar');
+	     		echo $this->element('business/leftbar',array('main'=>$main_action,'sub'=>$sub_action));	
 	     	}	
 	     }
 	    else
     	{
     		if($Signup  == 0)
     		{
-    			echo $this->element('user/leftbar');
+    			echo $this->element('user/leftbar',array('main'=>$main_action,'sub'=>$sub_action));		
     		}	
     	}
     	 ?>

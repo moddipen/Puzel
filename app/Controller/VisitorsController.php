@@ -55,6 +55,7 @@ class  VisitorsController  extends AppController {
 		$this->set("Signup",$signup);
 		// /$this->layout = 'default';
 	 	$this->Auth->allow('v_dynamic','process','fetchimage','generateRandomString','snipestimage');	 		
+	 	$this->set('main_action','Visitor');
 	 }
 
 
@@ -269,6 +270,7 @@ class  VisitorsController  extends AppController {
 */			
 	public function business_data($id = null)
 	{
+		$this->set('sub_action','data');
 		$this->set('title',"Data Captured");
 		$this->layout = 'dashboard';
 		// Get Puzzle list 

@@ -58,6 +58,7 @@ class UsersController extends AppController {
 	  	$signup = 0;
 		$this->set("Signup",$signup);
 	  	$this->Auth->allow(array('index','contact','user_register','user_login','about','business','user_forgetpassword','admin_login','user_reset'));
+	  	$this->set('main_action','User');
 	 	// Count of total puzzle 
 	 	// Count of total puzzle 
 	 	
@@ -272,6 +273,7 @@ public function get_statistics()
 */	
 	public function admin_index()
 	{
+		$this->set('sub_action','index');
 		$this->layout = 'dashboard';
 		$this->set("title","Index");
 		$add = $this->User->find('all',array('conditions'=>array('User.usertype' =>0),'order'=>'User.id Desc')) ;
@@ -289,6 +291,7 @@ public function get_statistics()
 */	
 	public function admin_business()
 	{
+		$this->set('sub_action','business');
 		$this->layout = 'dashboard';
 		$this->set("title","Business");
 		$this->User->recursive = 2;
@@ -301,6 +304,7 @@ public function get_statistics()
 */	
 	public function admin_data()
 	{
+		$this->set('sub_action','data');
 		$this->layout = 'dashboard';
 		$this->set("title","Data Captured");
 		// Get Puzzle list 
@@ -649,6 +653,7 @@ public function user_reset($token=null)
 */	
 	public function user_setting()
 	{
+		$this->set('sub_action','setting');
 		$this->layout = 'dashboard';
 		$this->set("title","Profile Page");
 		$user = $this->User->find('first',array('conditions'=>array('User.id'=>$this->Auth->user('id'))));
@@ -688,6 +693,7 @@ public function user_reset($token=null)
 */	
 	public function business_setting()
 	{
+		$this->set('sub_action','setting');
 		$this->layout = 'dashboard';
 		$this->set("title","Profile Page");
 		$user = $this->User->find('first',array('conditions'=>array('User.id'=>$this->Auth->user('id'))));
@@ -1196,6 +1202,7 @@ public function user_reset($token=null)
 */	
 	public function admin_setting()
 	{
+		$this->set('sub_action','setting');
 		$this->layout = 'dashboard';
 		$this->set("title","Profile Page");
 		$user = $this->User->find('first',array('conditions'=>array('User.id'=>$this->Auth->user('id'))));
