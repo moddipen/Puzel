@@ -28,6 +28,10 @@
     color: #e58b16;
     border:2px solid #e58b16;
   }
+  #Imageenroll .form-group {
+    margin-bottom: 25px;
+    position: relative;
+}
 </style>
 <script type="text/javascript">
 var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
@@ -445,7 +449,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
               
             </div>
         </form>
-        <form id="Imageenroll" style="display:none;">
+        <form id="Imageenroll" style="display:none;padding-top: 25px;">
           <div class="form-group" id="useenrollemail">
              <input type="email" name="email1"  id="userenrollemail"  class="form-control" placeholder="Email" required>
           </div>
