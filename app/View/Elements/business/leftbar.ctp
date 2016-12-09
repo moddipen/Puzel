@@ -55,7 +55,22 @@
                       
                     </a>
                   </li>
-                  <?php if($main == "Visitor"){$mainClass = "active";}else{$mainClass = "";} ?>
+                  <?php 
+                    if($main == "Puzzle")
+                      {
+                        if($sub == "data" )
+                        {
+                          $mainClass = "active";  
+                        }
+                        else
+                        {
+                          $mainClass = "";
+                        }  
+                      }
+                      else
+                        {
+                          $mainClass = "";
+                        } ?>
                   <li class="<?php echo $mainClass;?>">
                     <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/visitors/data">
                       <i class="fa fa-database"></i> Data Captured

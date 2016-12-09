@@ -270,6 +270,7 @@ class  VisitorsController  extends AppController {
 */			
 	public function business_data($id = null)
 	{
+		$this->set('sub_action','data');
 		$this->set('title',"Data Captured");
 		$this->layout = 'dashboard';
 		// Get Puzzle list 
