@@ -368,6 +368,8 @@
       });   
     }
   });
+  // Remove toolbar 
+  $(".btn-toolbar").remove();
 
     function copyToClipboard(elem) {
     // create hidden text element, if it doesn't already exist
