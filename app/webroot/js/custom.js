@@ -104,35 +104,7 @@ $(document).ready(function()
  //                e.preventDefault(); // avoid to execute the actual submit of the form.
  //            } 
  //          });
-	   $("#Imagedata").validate({
-      rules: {
-        firstname: "required",
-        lastname: "required",
-        email: {
-          required: true,
-          email: true
-        }
-      },
-      messages: {
-        firstname: "Please enter first name.",
-        lastname: "Please enter last name.",
-        email: "Please enter a valid email address.",
-      }
-    });
-
-    $("#Imageenroll").validate({
-      rules: {
-        email1: {
-          required: true,
-          email: true
-        },
-        password: "required"
-      },
-      messages: {
-        email1: "Please enter a valid email address.",
-        password: "Please enter a valid password.",
-      }
-    }); 
+	  
 
       
       // Check email is valid or not 
