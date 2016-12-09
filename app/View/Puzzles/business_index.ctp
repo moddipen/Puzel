@@ -2,7 +2,7 @@
     textarea.note-codable{ display: none;}
     .btn-toolbar{margin-left:0px !important; }
     .pagesubheader .title, .pagesubheader .alert{float: left;}
-    .alert{margin-left: 20px;margin-top: 25px;font-size: 16px;}
+    .alert{margin-left: 20px;margin-top: 25px;font-size: 16px;color:#FFF;}
     .title {margin-bottom: 15px;}
 </style>
 
