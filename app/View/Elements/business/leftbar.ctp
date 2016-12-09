@@ -33,25 +33,29 @@
                       
                     </a>
                   </li> -->
-                  <li class="active">
+                  <?php if($main == "Puzzle"){$mainClass = "active";}else{$mainClass = "";} ?>
+                  <li class="<?php echo $mainClass;?>">
                     <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/puzzles/index">
                       <i class="fa fa-puzel-icon-left"></i> Puzel
                       
                     </a>
                   </li>
-                  <li>
+                  <?php if($main == "Visitor"){$mainClass = "active";}else{$mainClass = "";} ?>
+                  <li class="<?php echo $mainClass;?>">
                     <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/visitors/data">
                       <i class="fa fa-database"></i> Data Captured
                       
                     </a>
                   </li>
-                  <li>
+                  <?php if($main == "Order"){$mainClass = "active";}else{$mainClass = "";} ?>
+                  <li class="<?php echo $mainClass;?>">
                     <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/orders/index">
                       <i class="fa fa-billing"></i> Billing
                       
                     </a>
                   </li>
-                  <li>
+                  <?php if($main == "Support"){$mainClass = "active";}else{$mainClass = "";} ?>
+                  <li class="<?php echo $mainClass;?>">
                     <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/supports/index">
                       <i class="fa fa-support-16"></i> Support
                       
@@ -70,13 +74,13 @@
                         $login_detail = $user['firstname'].' '.$user['lastname']; 
                       }  
                       echo $login_detail;?>!</li>
-                      
-                      <li>
+                      <?php if($main == "User"){$mainClass = "active";}else{$mainClass = "";} ?>
+                      <li class="<?php echo $mainClass;?>">
                         <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/users/setting">
                           <i class="fa fa-cog"></i> Settings
                         </a>
                       </li>
-                      <li>
+                      <li class="<?php echo $mainClass;?>">
                         <a href="<?php echo Configure::read('SITE_USER_URL');?>/users/logout">
                           <i class="fa fa-power-off"></i> Logout
                         </a>
@@ -93,25 +97,3 @@
 
         </div>
         <!-- Fixed navbar end -->
-
-        <script type="text/javascript">
-
-    $(function(){
-        var current_page_URL = location.href;
-        var menu = window.location.href;
-        $( "a" ).each(function() {
-            if($(this).attr("href") !== "#") 
-            {
-                var target_URL = $(this).prop("href");
-                if (target_URL == current_page_URL) 
-                {
-                  $('.nav li.active').removeClass('active');
-                  $('a[href^="'+document.location+'"]').parent('li').addClass('active');
-                  return false;
-                }
-            }
-        });
-    }); 
-
-
-    </script>   
