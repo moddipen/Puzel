@@ -62,7 +62,7 @@ $(document).ready(function()
                             $.ajax
                               ({
                                  type: "POST",
-                                 url: "http://localhost/puzzel/visitors/fetchimage/"+data.ImageId,
+                                 url: "http://puzel.stage.n-framescorp.com/visitors/fetchimage/"+data.ImageId,
                                  dataType: 'text', 
                                  success:function(data)
                                  {
