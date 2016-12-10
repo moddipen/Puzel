@@ -301,6 +301,7 @@ $(document).ready(function()
 
     $(document).on('click', "#enrollformshow", function() 
     {
+        alert("enroll");
         $("#puzelasubmit").removeClass('active')
         $("#Imagedata").css('display','none');
         $("#Imageenroll").css('display','block');
@@ -310,6 +311,7 @@ $(document).ready(function()
     // hide enroll form when click on submit button    
     $(document).on('click', "#puzelasubmit", function() 
     {
+        alert("submit");
         $('#enrollformshow').removeClass('active')
         $("#Imageenroll").css('display','none');
         $("#Imagedata").css('display','block');
