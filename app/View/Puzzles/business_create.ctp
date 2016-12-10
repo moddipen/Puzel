@@ -1,5 +1,17 @@
 <?php echo $this->Html->css('animations.css'); ?>
-                
+<style type="text/css">
+#tictactoe td {
+    border: 1px solid #fff;
+}
+#tictactoe > table {
+    position: absolute;
+    top: 67px;
+ 
+}
+</style>
+
+
+
         <!-- Page content -->
         <div id="content" class="col-md-12">
 
@@ -88,13 +100,13 @@
                                                <?php }
                                           } ?>
                                       </select>
-                                      <p id="validate-pieces"></p>
+                                         <p id="validate-pieces"></p>
                                 </div>
                             </div>
                             <div class="col-md-2">
                               <div class="form-group">
                                     <select name="data[Puzzel][transtion]" class="form-control chosen-select" id="transition">
-                                      <option style ="display:none">Please select</option>
+                                      <option style="display:none;">Please select</option>
                                       <option value="Newspaper">Newspaper</option>
                                       <option value="Cube to left">Cube to left</option>
                                       <option value="Cube to right">Cube to right</option>
@@ -122,6 +134,8 @@
                     <!-- <img src="#" class="img-responsive" id="img_preview" alt="Please upload your image" /> -->
                     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
                   </div>
+                  <!--  <div id="tictactoe"></div>  -->
+                  <canvas id="myCanvas" width="200" height="100"></canvas>
                   </div>
                   <!-- /tile body -->
                   <input type = "hidden" value="" id="clickterm"/>
@@ -130,13 +144,14 @@
                   <!-- tile footer -->
                   <div class="tile-footer text-center" style="display:none" id="filedimage">
                     <div class="form-group">
-                      <input type="button" class="btn btn-black-orange changebutton" value="Terms / Description" data-toggle="modal" data-target="#modal1" id="clickzone">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-black-orange" value="Grand Prize" data-toggle="modal" data-target="#modal3" id="clickpricezone">
+                      <input type="button" class="btn btn-black-transparent changebutton" value="Terms / Description" data-toggle="modal" data-target="#modal1" id="clickzone">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-black-transparent" value="Grand Prize" data-toggle="modal" data-target="#modal3" id="clickpricezone">
                     </div>
                     <div class="form-group">
                       <button type="submit" class="btn btn-oranges" id="validateform">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
                           <button type="reset" class="btn btn-black-transparent">Cancel</button>
                     </div>
                   </div>
+                  <input type ="hidden" id="hiddenpieces" value=""/>
                   <!-- /tile footer -->
                    <?php echo $this->form->end();?>
 
@@ -262,6 +277,7 @@
   <script src="//code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 <!-- <script src="../assets/js/vendor/summernote/summernote.min.js"></script> -->
 <?php echo $this->Html->script('dashboard/vendor/summernote/summernote.min.js')?>
+
 <script type="text/javascript">
   // Image preview  function 
   // function readURL(input)
@@ -295,15 +311,20 @@
       if (this.files && this.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-          $("#base64image").val(e.target.result);   
-          $('#showimage').html('<img src="'+e.target.result+'" id="img_preview" class="img-responsive" />');
+
+          $("#base64image").val(e.target.result);
+          $('#showimage').html('<div id ="tictactoe"><img src="'+e.target.result+'" id="img_preview" class="img-responsive" /></div>');
           $("#filedimage").css("display", "block");
         }
         reader.readAsDataURL(this.files[0]);
       }
       
       });
+
+
+      
     })
+
       
     // alert($("#checkbalance").val());    
 
@@ -315,40 +336,137 @@
       $("#validation-pieces").prop("disabled", true);
       $("#transition").prop("disabled", true);
 
-      $("#errorpoint").html("<p style='font-size:14px;padding:20px;margin-bottom:10px;'>Please upgrade your plan </p>");
+      $("#errorpoint").html("<p>Please upgrade your plan </p>");
       
     }
+
 
   
    $("#validation-pieces").change(function()
   {
-    
-   $.ajax(
-       {
-         type: "POST",
-         url: "<?php echo Configure::read("SITE_URL");?>puzzles/checkpieces",
-         data: {'pieces':$(this).val()}, 
-         dataType : "json",
-          success: function(data)
-           {
-              if(data.success != 0)
-               {
-                  if(data.message != "Success")
-                    {
-                      $("#validate-pieces").html(data.message);
-                    }
-                    else
-                    {
-                      $("#validate-pieces").html("");
-                    }   
-               }
-               else
-               {
-                  $("#errorpoint").html("<p style='font-size:14px;padding:20px;margin-bottom:10px;'>Please upgrade your plan </p>");
-                  $("#filedimage").css("display", "none");
-               } 
-          }
-       });
+
+
+     $('table').remove(); 
+     $("#hiddenpieces").val(this.value);
+     var peices =  $("#hiddenpieces").val();
+     if(peices > 0)
+      {
+        cut_width = peices/5;
+        cut_height = 5;
+        var width = $('#img_preview').width() / cut_width;
+        var height = $('#img_preview').height() / cut_height;  
+        
+
+        // width = width.toFixed(3);
+        // height = height.toFixed(3);
+        width = width.toFixed(2);
+        height = height.toFixed(2);
+
+        if(peices > 500)
+         {
+          cut_width = peices/25;
+          cut_height = 25;
+          var width = $('#img_preview').width() / cut_width;
+          var height = $('#img_preview').height() / cut_height;  
+          // width = Math.round(width);
+          // height = Math.round(height);
+          width = width.toFixed(2);
+          height = height.toFixed(2);
+         }
+      }
+      
+        
+        var squares = [], 
+        SIZE = cut_width,
+        HEIGHT = cut_height,
+        EMPTY = "&nbsp;",
+       
+
+        
+    /*
+     * Sets the clicked-on square to the current player's mark,
+     * then checks for a win or cats game.  Also changes the
+     * current player.
+     */
+    set = function () {
+        
+        if ($(this).html() !== EMPTY) {
+            return;
+        }
+        $(this).html(turn);
+        console.log($(this));
+        moves += 1;
+        score[turn] += $(this)[0].indicator;
+        console.log(score[turn]);
+        if (win(score[turn])) {
+            alert(turn + " wins!");
+            startNewGame();
+        } else if (moves === SIZE * HEIGHT) {
+            alert("Cat\u2019s game!");
+            startNewGame();
+        } else {
+            turn = turn === "X" ? "O" : "X";
+        }
+    },
+
+    /*
+     * Creates and attaches the DOM elements for the board as an
+     * HTML table, assigns the indicators for each cell, and starts
+     * a new game.
+     */
+    play = function () {
+        var board = $("<table style=width:"+$('#img_preview').width()+"px;height:"+$('#img_preview').height()+"px;>"), indicator = 1;
+        for (var i = 0; i < HEIGHT; i += 1) {
+            var row = $("<tr>");
+            board.append(row);
+            for (var j = 0; j < SIZE; j += 1) {
+                // var cell = $("<td height="+height+" width="+width+" align=center valign=center></td>");
+                var cell = $("<td height="+height+" width="+width+"></td>");
+                cell[0].indicator = indicator;
+                cell.click(set);
+                row.append(cell);
+                squares.push(cell);
+                indicator += indicator;
+            }
+        }
+
+        // Attach under tictactoe if present, otherwise to body.
+        $(document.getElementById("tictactoe") || document.body).append(board);
+        
+    };
+
+    play(); 
+
+
+
+    //
+
+    $.ajax(
+         {
+           type: "POST",
+           url: "<?php echo Configure::read("SITE_URL");?>puzzles/checkpieces",
+           data: {'pieces':$(this).val()}, 
+           dataType : "json",
+            success: function(data)
+             {
+                if(data.success != 0)
+                 {
+                    if(data.message != "Success")
+                      {
+                        $("#validate-pieces").html(data.message);
+                      }
+                      else
+                      {
+                        $("#validate-pieces").html("");
+                      }   
+                 }
+                 else
+                 {
+                    $("#errorpoint").html("<p>Please upgrade your plan </p>");
+                    $("#filedimage").css("display", "none");
+                 } 
+            }
+         });
   });
 
   //
@@ -393,13 +511,13 @@
             success: function(data)
              {
                 $('#modal1').modal('hide');
+                // $('.note-editable').html(''); 
              }
            });
        } 
     });  
 
     // Save grand price of puzzle 
-
    $("#grand_price").on('submit',(function(e) 
     {
       e.preventDefault();
@@ -505,9 +623,9 @@
         alert("Please select number of pieces of puzzel");
         e.preventDefault();    
       }
- });
+  });
 
-    $("#transition").on("change",function(){
+   $("#transition").on("change",function(){
 
       var transition = this.value ;
       if(transition  == "Newspaper")
@@ -565,14 +683,160 @@
         var classes = 'pt-page-flipOutBottom pt-page-flipInTop pt-page-delay500';
         $("#img_preview").addClass(classes);
       }
+   });
 
-      
+ 
+
+
+
+  /*
+ * A complete tic-tac-toe widget, using JQuery.  Just include this 
+ * script in a browser page and play.  A tic-tac-toe game will be 
+ * included as a child element of the element with id "tictactoe".  
+ * If the page has no such element, it will just be added at the end 
+ * of the body.
+ */
+$(function () {
+
+    //   var peices =  $("#hiddenpieces").val();
+
+    //  if(peices > 0)
+    //   {
+    //     cut_width = peices/5;
+    //     cut_height = 5;
+    //     if(peices > 500)
+    //      {
+    //       cut_width = peices/25;
+    //       cut_height = 25;
+    //      }
+    //   }
 
 
 
 
-   }); 
-   
+
+    // var squares = [], 
+    //     SIZE = cut_width,
+    //     HEIGHT = cut_height,
+    //     EMPTY = "&nbsp;",
+    //     score,
+    //     moves,
+    //     turn = "X",
+
+    // /*
+    //  * To determine a win condition, each square is "tagged" from left
+    //  * to right, top to bottom, with successive powers of 2.  Each cell
+    //  * thus represents an individual bit in a 9-bit string, and a
+    //  * player's squares at any given time can be represented as a
+    //  * unique 9-bit value. A winner can thus be easily determined by
+    //  * checking whether the player's current 9 bits have covered any
+    //  * of the eight "three-in-a-row" combinations.
+    //  *
+    //  *     273                 84
+    //  *        \               /
+    //  *          1 |   2 |   4  = 7
+    //  *       -----+-----+-----
+    //  *          8 |  16 |  32  = 56
+    //  *       -----+-----+-----
+    //  *         64 | 128 | 256  = 448
+    //  *       =================
+    //  *         73   146   292
+    //  *
+    //  */
+    // wins = [7, 56, 448, 73, 146, 292, 273, 84],
+
+    // /*
+    //  * Clears the score and move count, erases the board, and makes it
+    //  * X's turn.
+    //  */
+    // startNewGame = function () {
+    //     turn = "X";
+    //     score = {"X": 0, "O": 0};
+    //     moves = 0;
+    //     squares.forEach(function (square) {square.html(EMPTY);});
+    // },
+
+    // /*
+    //  * Returns whether the given score is a winning score.
+    //  */
+    // win = function (score) {
+    //     for (var i = 0; i < wins.length; i += 1) {
+    //         if ((wins[i] & score) === wins[i]) {
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // },
+
+    // /*
+    //  * Sets the clicked-on square to the current player's mark,
+    //  * then checks for a win or cats game.  Also changes the
+    //  * current player.
+    //  */
+    // set = function () {
+        
+    //     if ($(this).html() !== EMPTY) {
+    //         return;
+    //     }
+    //     $(this).html(turn);
+    //     console.log($(this));
+    //     moves += 1;
+    //     score[turn] += $(this)[0].indicator;
+    //     console.log(score[turn]);
+    //     if (win(score[turn])) {
+    //         alert(turn + " wins!");
+    //         startNewGame();
+    //     } else if (moves === SIZE * HEIGHT) {
+    //         alert("Cat\u2019s game!");
+    //         startNewGame();
+    //     } else {
+    //         turn = turn === "X" ? "O" : "X";
+    //     }
+    // },
+
+    // /*
+    //  * Creates and attaches the DOM elements for the board as an
+    //  * HTML table, assigns the indicators for each cell, and starts
+    //  * a new game.
+    //  */
+    // play = function () {
+    //     var board = $("<table border=1 cellspacing=0>"), indicator = 1;
+    //     for (var i = 0; i < HEIGHT; i += 1) {
+    //         var row = $("<tr>");
+    //         board.append(row);
+    //         for (var j = 0; j < SIZE; j += 1) {
+    //             var cell = $("<td height=50 width=50 align=center valign=center></td>");
+    //             cell[0].indicator = indicator;
+    //             cell.click(set);
+    //             row.append(cell);
+    //             squares.push(cell);
+    //             indicator += indicator;
+    //         }
+    //     }
+
+    //     // Attach under tictactoe if present, otherwise to body.
+    //     $(document.getElementById("tictactoe") || document.body).append(board);
+    //     startNewGame();
+    // };
+
+    // play();
+});
+
+function detectBrowser()
+{
+  var N= navigator.appName;
+  var UA= navigator.userAgent;
+  var temp;
+  var browserVersion= UA.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
+  if(browserVersion && (temp= UA.match(/version\/([\.\d]+)/i))!= null)
+  browserVersion[2]= temp[1];
+  browserVersion= browserVersion? [browserVersion[1], browserVersion[2]]: [N, navigator.appVersion,'-?'];
+  return browserVersion;
+};
+
+
+
+
 
 
 
