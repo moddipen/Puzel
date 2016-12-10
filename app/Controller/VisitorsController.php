@@ -225,6 +225,10 @@ class  VisitorsController  extends AppController {
 		$this->set('image',$image['Image']);
 		$this->set('drawimage_s',count($image['Image']));
 		$this->set('PuzzleData',$image);
+		$puzel['Show'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$id,'Image.status'=>0))); 
+		$puzel['Hide'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$id,'Image.status'=>1))); 
+		$this->set("ShowPuzzel",$puzel);
+		
 		$this->render('/Visitors/fetchimage');
 	}
 
