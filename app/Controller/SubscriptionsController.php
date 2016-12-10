@@ -153,25 +153,29 @@ class  SubscriptionsController  extends AppController {
 								
 								if($customer->success)
 								{
-									if($plan['Subscription']['id'] != 2)
-									{
-										$result = Braintree_Subscription::create([
-									  'paymentMethodToken' => $customer->customer->paymentMethods[0]->token,
-									  'planId' => $plan['Subscription']['id']
-										]);	
-									} 
-									else
-									{
-										$tomorrow = new DateTime("now + 1 day");
-										$tomorrow->setTime(0,0,0);
-
+									$tomorrow = new DateTime("now + 1 day");
+									$tomorrow->setTime(0,0,0);
+									// 	$tomorrow->setTime(0,0,0);
+									// if($plan['Subscription']['id'] != 2)
+									// {
 										$result = Braintree_Subscription::create([
 									  'paymentMethodToken' => $customer->customer->paymentMethods[0]->token,
 									  'planId' => $plan['Subscription']['id'],
-									  'firstBillingDate' => $tomorrow,
-									  'price'=>"2500"
-										]);
-									}	
+									  'firstBillingDate' => $tomorrow
+										]);	
+									// } 
+									// else
+									// {
+									// 	$tomorrow = new DateTime("now + 1 day");
+									// 	$tomorrow->setTime(0,0,0);
+
+									// 	$result = Braintree_Subscription::create([
+									//   'paymentMethodToken' => $customer->customer->paymentMethods[0]->token,
+									//   'planId' => $plan['Subscription']['id'],
+									//   'firstBillingDate' => $tomorrow,
+									//   'price'=>"2500"
+									// 	]);
+									// }	
 									
 																
 									if ($result->success == 1) 
@@ -380,30 +384,32 @@ class  SubscriptionsController  extends AppController {
 								
 								if($customer->success)
 								{
-									
-									// $result = Braintree_Subscription::create([
-									//   'paymentMethodToken' => $customer->customer->paymentMethods[0]->token,
-									//   'planId' => $plan['Subscription']['id']
-									// ]);
-									if($plan['Subscription']['id'] != 2)
-									{
-										$result = Braintree_Subscription::create([
-									  'paymentMethodToken' => $customer->customer->paymentMethods[0]->token,
-									  'planId' => $plan['Subscription']['id']
-										]);	
-									}
-									else
-									{
-										$tomorrow = new DateTime("now + 1 day");
-										$tomorrow->setTime(0,0,0);
-
-										$result = Braintree_Subscription::create([
+									$tomorrow = new DateTime("now + 1 day");
+									$tomorrow->setTime(0,0,0);	
+									$result = Braintree_Subscription::create([
 									  'paymentMethodToken' => $customer->customer->paymentMethods[0]->token,
 									  'planId' => $plan['Subscription']['id'],
-									  'firstBillingDate' => $tomorrow,
-									  'price'=>"2500"
-										]);
-									}	 									
+									  'firstBillingDate' => $tomorrow
+									]);
+									// if($plan['Subscription']['id'] != 2)
+									// {
+									// 	$result = Braintree_Subscription::create([
+									//   'paymentMethodToken' => $customer->customer->paymentMethods[0]->token,
+									//   'planId' => $plan['Subscription']['id']
+									// 	]);	
+									// }
+									// else
+									// {
+									// 	$tomorrow = new DateTime("now + 1 day");
+									// 	$tomorrow->setTime(0,0,0);
+
+									// 	$result = Braintree_Subscription::create([
+									//   'paymentMethodToken' => $customer->customer->paymentMethods[0]->token,
+									//   'planId' => $plan['Subscription']['id'],
+									//   'firstBillingDate' => $tomorrow,
+									//   'price'=>"2500"
+									// 	]);
+									// }	 									
 									
 									if ($result->success) 
 									{
@@ -664,116 +670,148 @@ class  SubscriptionsController  extends AppController {
         						. "Subscription: " . $webhookNotification->subscription->id . "\n";
         		
 
-        		$this->log($webhookNotification);
-        		$this->log($message);
-
-				Braintree_Subscription::cancel($webhookNotification->subscription->id);        						
-				$get_order = $this->Order->find('first',array('conditions'=>array('Order.subscriptions_id'=> $webhookNotification->subscription->id),'order'=>'Order.id Desc'));
-
-
-        		$array = array(
-					'id'=>$get_order['Order']['id'],
-					'reason'=> $webhookNotification->kind);
-        		
-        		if($this->Order->save($array))
-        		{	
-        			$user = array(
-        				'id'=>$get_order['Order']['user_id'],
-        				'status'=>1);
-        			if($this->User->save($user))
-        			{
-        				if($this->Puzzle->updateAll(array('Puzzle.status'=>1),array('Puzzle.user_id'=>$get_order['Order']['user_id'])))
+        		if($webhookNotification->kind == "subscription_charged_successfully")
+        		{
+        			$get_order = $this->Order->find('first',array('conditions'=>array('Order.subscriptions_id'=> $webhookNotification->subscription->id),'order'=>'Order.id Desc'));
+        			$plan = $this->Subscription->find('first',array('conditions'=>array('Subscription.id'=>$get_order['Order']['subscription_id']))); 
+        			
+					$user = $this->User->find('first',array('conditions'=>array('User.id'=>$get_order['Order']['user_id'])));
+					if(!empty($user))
+					{
+						$array = array(
+							'id'=>$get_order['Order']['user_id'],
+							'status'=>0 );
+						if($this->User->save($array))
 						{
-							$puzzle = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$get_order['Order']['user_id'])));
-							if(!empty($puzzle))
-							{	
-								// Deactive  number of all image block
-								foreach($puzzle as $image)
+							if($this->Puzzle->updateAll(array('Puzzle.status'=>0),array('Puzzle.user_id'=>$user['User']['id'])))
 								{
-									$update = $this->Image->updateAll(array('Image.puzzle_active'=>1),array('Image.puzzle_id'=>$image['Puzzle']['id']));	
-									
-									if($update)
-									{
-										// Send email to user that your has been deactivate 
-										$email = array(
-										"templateid"=>1025061,
-										"name"=>$get_order['User']['firstname'].' '.$get_order['User']['lastname'],
-										"TemplateModel"=> array(
-											"user_name"=> $get_order['User']['firstname'].' '.$get_order['User']['firstname'],
-											"product_name"=>"Account Cancelled",
-											'company'=>array(
-			                					'name'=>''),
-											"action_url"=>"Your account has been cancelled. Please get in touch with our support team for further instructions."),
-										"InlineCss"=> true, 
-										"from"=> "support@puzel.co",
-										'to'=>"moddipen@gmail.com",
-										'reply_to'=>"support@puzel.co"
-										);	
-
-										$this->sendemail($email);
-										
-									}
-
-								}
-							}
-        				}
-        				else
-        				{
-        					$email = array(
-								"templateid"=>1025061,
-								"name"=>$get_order['User']['firstname'].' '.$get_order['User']['firstname'],
-								"TemplateModel"=> array(
-									"user_name"=> $get_order['User']['firstname'].' '.$get_order['User']['firstname'],
-									"product_name"=>"Account Cancelled",
-									'company'=>array(
-	                					'name'=>''),
-									"action_url"=>"Your account has been cancelled. Please get in touch with our support team for further instructions."),
-								"InlineCss"=> true, 
-								"from"=> "support@puzel.co",
-								'to'=>"moddipen@gmail.com",
-								'reply_to'=>"support@puzel.co"
-								);	
-
-								$this->sendemail($email);
+									$this->Image->updateAll(array('Image.puzzle_active'=>0),array('Image.user_id'=>$user['User']['id']));
+								}	
 						}	
+
+						//echo "<pre>";print_r($array);exit;
 					}
 
-
-		        		//$this->log($message);					
-					        
-					   	//$this->log($webhookNotification);	
-
-					    //file_put_contents("/tmp/webhook.log", $message, FILE_APPEND);
+					$this->request->data['Order']['user_id'] = $get_order['Order']['user_id'];
+					$this->request->data['Order']['transiction_id'] = $result->subscription->transactions[0]->id;
+					$this->request->data['Order']['subscriptions_id']=$result->subscription->id;
+					$this->request->data['Order']['price'] = $plan['Subscription']['price'];
+					$this->request->data['Order']['subscription_id'] = $plan['Subscription']['id'];
+					$this->request->data['Order']['token']=$result->subscription->paymentMethodToken;
+					$this->request->data['Order']['customer_id']=$result->subscription->transactions[0]->customer['id'];
+					if($this->Order->save($this->request->data))
+					{
+						$merge_pieces = $plan['Subscription']['pieces'];
+						$this->request->data['UserSubscription']['user_id'] = $user['User']['id'];
+						$this->request->data['UserSubscription']['order_id'] = $this->Order->getLastInsertId();
+						$this->request->data['UserSubscription']['subscription_id'] = $plan['Subscription']['id'];
+						$this->request->data['UserSubscription']['used_pieces'] = $merge_pieces;
+						$this->UserSubscription->create();
+						if($this->UserSubscription->save($this->request->data))
+						{
+							//Expire current subscription
+							$this->request->data = array();
+							$this->request->data['UserSubscription']['id'] = $order['UserSubscription']['id'];
+							$this->request->data['UserSubscription']['status'] = 1;
+							$this->UserSubscription->save($this->request->data);
+				
+							$email = array(
+							"templateid"=>1035483,
+							"name"=>$user['User']['firstname'].' '.$user['User']['lastname'],
+							"TemplateModel"=> array(
+								"name"=> $user['User']['firstname'].' '.$user['User']['lastname'],
+								"product_name"=>$plan['Subscription']['name'],
+								"action_url"=> $this->Order->getLastInsertId(),
+								"date"=>date('m-d-Y'),
+								"amount"=>$plan['Subscription']['price']."$",
+								"description"=>"Upgrade to One month purchase plan",
+								'total'=>$plan['Subscription']['price']."$"),
+							"InlineCss"=> true, 
+							"from"=> "support@puzel.co",
+							'to'=>$user['User']['email'],
+							'reply_to'=>"support@puzel.co"
+							);	
+							$this->sendinvoice($email);
+						}
+					}
 				}
-				else
-				{
-					$email = array(
-										"templateid"=>1025061,
-										"name"=> "DIpen Modi",
-										"TemplateModel"=> array(
-											"user_name"=> "Dipen Modi",
-											"product_name"=>"Account Cancelled",
-											'company'=>array(
-			                					'name'=>''),
-											"action_url"=>"Your account has been cancelled. Please get in touch with our support team for further instructions."),
-										"InlineCss"=> true, 
-										"from"=> "support@puzel.co",
-										'to'=>"moddipen@gmail.com",
-										'reply_to'=>"support@puzel.co"
-										);	
-
-										$this->sendemail($email);
-					$this->log('Order not updated or save and if flow is not working');
-
-					CakeLog::config('error', array(
-					    'engine' => 'File',
-					    'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
-					    'file' => 'error',
-					)); 
-				}	
+				// Subscription not successfull
+        		else
+        		{
+        			Braintree_Subscription::cancel($webhookNotification->subscription->id);        						
+					$get_order = $this->Order->find('first',array('conditions'=>array('Order.subscriptions_id'=> $webhookNotification->subscription->id),'order'=>'Order.id Desc'));
 
 
-	}
+	        		$array = array(
+						'id'=>$get_order['Order']['id'],
+						'reason'=> $webhookNotification->kind);
+	        		
+	        		if($this->Order->save($array))
+	        		{	
+	        			$user = array(
+	        				'id'=>$get_order['Order']['user_id'],
+	        				'status'=>1);
+	        			if($this->User->save($user))
+	        			{
+	        				if($this->Puzzle->updateAll(array('Puzzle.status'=>1),array('Puzzle.user_id'=>$get_order['Order']['user_id'])))
+							{
+								$puzzle = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.user_id'=>$get_order['Order']['user_id'])));
+								if(!empty($puzzle))
+								{	
+									// Deactive  number of all image block
+									foreach($puzzle as $image)
+									{
+										$update = $this->Image->updateAll(array('Image.puzzle_active'=>1),array('Image.puzzle_id'=>$image['Puzzle']['id']));	
+										
+										if($update)
+										{
+											// Send email to user that your has been deactivate 
+											$email = array(
+											"templateid"=>1025061,
+											"name"=>$get_order['User']['firstname'].' '.$get_order['User']['lastname'],
+											"TemplateModel"=> array(
+												"user_name"=> $get_order['User']['firstname'].' '.$get_order['User']['firstname'],
+												"product_name"=>"Account Cancelled",
+												'company'=>array(
+				                					'name'=>''),
+												"action_url"=>"Your account has been cancelled. Please get in touch with our support team for further instructions."),
+											"InlineCss"=> true, 
+											"from"=> "support@puzel.co",
+											'to'=>"moddipen@gmail.com",
+											'reply_to'=>"support@puzel.co"
+											);	
+
+											$this->sendemail($email);
+											
+										}
+
+									}
+								}
+	        				}
+	        				else
+	        				{
+	        					$email = array(
+									"templateid"=>1025061,
+									"name"=>$get_order['User']['firstname'].' '.$get_order['User']['firstname'],
+									"TemplateModel"=> array(
+										"user_name"=> $get_order['User']['firstname'].' '.$get_order['User']['firstname'],
+										"product_name"=>"Account Cancelled",
+										'company'=>array(
+		                					'name'=>''),
+										"action_url"=>"Your account has been cancelled. Please get in touch with our support team for further instructions."),
+									"InlineCss"=> true, 
+									"from"=> "support@puzel.co",
+									'to'=>"moddipen@gmail.com",
+									'reply_to'=>"support@puzel.co"
+									);	
+
+									$this->sendemail($email);
+							}	
+					}
+        		}				
+
+			}
+		}
 }	
 
 
