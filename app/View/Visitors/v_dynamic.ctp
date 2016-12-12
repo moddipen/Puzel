@@ -20,7 +20,7 @@
  filter: blur(13px);}
  .btn-tab{width:47% !important;}
  @media (max-width:992px){
-  .btn-tab{width:46% !important;}
+  .btn-tab{width:46% !important;word-wrap: break-word !important;white-space: pre-wrap;}
 
  }
  .columns .active{
