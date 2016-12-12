@@ -520,6 +520,38 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 			}
 	  }, doneTypingInterval);
 	});
+	$('#useremail').focusout(function(){
+		clearTimeout(typingTimer);
+	  typingTimer = setTimeout(function(){
+		  var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+			if($('#useremail').val().match(mailformat))
+			{
+				$("label[for=useremail]").hide()
+				return true;
+			}
+			else
+			{
+				$("label[for=useremail]").show()
+				return false;
+			}
+	  }, doneTypingInterval);
+	});
+	$('#userenrollemail').focusout(function(){
+		clearTimeout(typingTimer);
+	  typingTimer = setTimeout(function(){
+		  var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+			if($('#userenrollemail').val().match(mailformat))
+			{
+				$("label[for=userenrollemail]").hide()
+				return true;
+			}
+			else
+			{
+				$("label[for=userenrollemail]").show()
+				return false;
+			}
+	  }, doneTypingInterval);
+	});
 	$('#useremail, #userenrollemail').on("keydown", function(){
     clearTimeout(typingTimer);
 });
