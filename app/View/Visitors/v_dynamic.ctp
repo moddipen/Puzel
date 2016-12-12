@@ -489,13 +489,8 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
   <?php   } ?>
  <script>
 	 //setup before functions
-	
-	
-	
-  
 $(document).ready(function()
 {
-	
     $('#collapse-menu').on('click', function(){
     if($(this).hasClass('active'))
     {
