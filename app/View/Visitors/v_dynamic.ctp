@@ -35,7 +35,10 @@
 </style>
 <script type="text/javascript">
 var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
-
+	jQuery.validator.addMethod("validateemail", function(value, element) {
+  // allow any non-whitespace characters as the host part
+  return this.optional( element ) || value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
+}, 'Please enter a valid email address.');
     $( document ).ready(function() {  
       $("#puzelacount").click(function()
       {
@@ -51,7 +54,8 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
         lastname: "required",
         email: {
           required: true,
-          email: true
+          email: true,
+		  validateemail:true
         }
       },
       messages: {
@@ -65,7 +69,8 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
       rules: {
         email1: {
           required: true,
-          email: true
+          email: true,
+		  validateemail:true
         },
         password: "required"
       },
@@ -496,49 +501,8 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
   <?php   } ?>
  <script>
 	 //setup before functions
-	
-	
-	var typingTimer;                //timer identifier
-	var doneTypingInterval = 500;  //time in ms, 5 second for example
-	$('#userenrollemail').on('keyup', function () {
-	  clearTimeout(typingTimer);
-	  typingTimer = setTimeout(function(){
-		  var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-			if($('#userenrollemail').val().match(mailformat))
-			{
-				$("label[for=userenrollemail]").hide()
-				return true;
-			}
-			else
-			{
-				$("label[for=userenrollemail]").show()
-				return false;
-			}
-	  }, doneTypingInterval);
-	});
-	$('#useremail').on('keyup', function () {
-	  clearTimeout(typingTimer);
-	  typingTimer = setTimeout(function(){
-		  var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-			if($('#useremail').val().match(mailformat))
-			{
-				$("label[for=useremail]").hide()
-				return true;
-			}
-			else
-			{
-				$("label[for=useremail]").show()
-				return false;
-			}
-	  }, doneTypingInterval);
-	});
-	$('#useremail, #userenrollemail').on("keydown", function(){
-    clearTimeout(typingTimer);
-});
-  
 $(document).ready(function()
 {
-	
     $('#collapse-menu').on('click', function(){
     if($(this).hasClass('active'))
     {
