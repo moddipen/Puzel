@@ -135,7 +135,7 @@
                     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
                   </div>
                   <!--  <div id="tictactoe"></div>  -->
-                  <canvas id="myCanvas" width="200" height="100"></canvas>
+                  
                   </div>
                   <!-- /tile body -->
                   <input type = "hidden" value="" id="clickterm"/>
