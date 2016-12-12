@@ -35,14 +35,15 @@
        <style>
       /*.merge div div{width:;height:;display:inline-block;margin-left:-5px;margin-bottom:-5px;}
       .merge{width:<?php echo $image[0]['total_width']."px";?>;}*/
-      body{line-height: inherit;}
+body{line-height: inherit;}
       .merge div div{width:<?php echo $image[0]['width']."px";?>;height:<?php echo $image[0]['height']."px";?>;display:inline-block;margin-left:-5px;margin-bottom:-5px;}
       .merge{width:<?php echo $image[0]['total_width']."px";?>;margin:50px auto;}
-      .button-puzzle{background:#e58b16;font-size: 18px;text-align:center;font-weight: 300;padding: 5px 20px;color: #fff;width:100%;margin-bottom:50px;}
+      .button-puzzle,.button-confirm{background:#e58b16;font-size: 18px;text-align:center;font-weight: 300;padding: 5px 20px;color: #fff;width:100%;margin-bottom:50px;border-radius: none !important;}
+      .form-control{border-radius: none !important;}
       .puzle-form .active, .button-puzzle:hover{background:none;color: #e58b16;border:1px solid #e58b16;box-shadow:none;}
-      #alert{left: 30px;
-    position: absolute;
-    top: 52px;}
+      #alert{left: 30px;position: absolute;top: 52px;}
+      .button-puzzle{background:#e58b16;font-size: 18px;text-align:center;font-weight: 300;padding: 5px 20px;color: #fff;width:100%;margin-bottom:50px;}
+      @media (max-width:433px){.button-puzzle,.button-confirm{font-size:12px}}
       </style>
         <?php $peices = $PuzzleData['Puzzle']['pieces'] ; ?>
         <div class="merge">
