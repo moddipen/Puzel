@@ -77,11 +77,23 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 
       
       // Check email is valid or not 
+      // Check email is valid or not 
       function validateEmail($email)
       {
-        var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-        return emailReg.test( $email );
+            var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+          if (filter.test($email))
+        {
+          return true;
+        }
+        else
+        {
+          $("#useremail").removeClass('valid');
+          $("#useremail").addClass('error');
+          $("#useremail").after('<label class="error" for="useremail">Please enter a valid email address.</label>');
+          return false;
+        }
       }
+
 
       $("#Imageenroll").submit(function(e)
       {
