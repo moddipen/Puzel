@@ -23,7 +23,7 @@
   .btn-tab{width:46% !important;word-wrap: break-word !important;white-space: pre-wrap;}
 }
 @media (max-width:433px){
-.btn-tab{font-size:12px}
+.btn-tab, .btn-confirm{font-size:12px}
 }
  .columns .active{
      background: #fff;
@@ -465,7 +465,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
             <input type = "hidden" name ="puzzlename" value = "<?php echo $explode[5];?>">
             <input type = "hidden" name ="signwithpuzzleaccount" id ="signwithpuzzleaccount" value = "">
             <div class="form-group text-center">
-              <button type="submit" class="btn button-sign btn-tab" id="puzelacount" name="puzzle" value = "1" style="width:100%">Submit</button>
+              <button type="submit" class="btn button-sign btn-confirm" id="puzelacount" name="puzzle" value = "1" style="width:100%">Submit</button>
               
             </div>
         </form>
@@ -485,7 +485,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
             <input type = "hidden" name ="puzzlename" value = "<?php echo $explode[5];?>">
             <input type = "hidden" name ="enrollwithpuzzleaccount" id ="enrollwithpuzzleaccount" value = "">
             <div class="form-group text-center">
-              <button type="submit" class="btn button-sign btn-tab" id="normalsign" value = "2" style="width:100%">Enroll Now</button>
+              <button type="submit" class="btn button-sign btn-confirm" id="normalsign" value = "2" style="width:100%">Enroll Now</button>
             </div>
         </form>
     </div>
