@@ -1,7 +1,7 @@
 <?php echo $this->Html->css('animations.css'); ?>
 <style type="text/css">
 #tictactoe td {
-    border: 1px solid #333;
+    border: 1px solid #717171;
 }
 #tictactoe > table {
     position: absolute;
