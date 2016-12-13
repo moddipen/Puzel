@@ -388,8 +388,8 @@ class  SubscriptionsController  extends AppController {
 									$tomorrow->setTime(0,0,0);	
 									$result = Braintree_Subscription::create([
 									  'paymentMethodToken' => $customer->customer->paymentMethods[0]->token,
-									  'planId' => $plan['Subscription']['id'],
-									   'firstBillingDate' => $tomorrow
+									  'planId' => $plan['Subscription']['id']
+									   // 'firstBillingDate' => $tomorrow
 									]);
 									// if($plan['Subscription']['id'] != 2)
 									// {
