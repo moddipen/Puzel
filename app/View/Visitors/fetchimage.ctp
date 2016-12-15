@@ -20,6 +20,9 @@ http://puzel.stage.n-framescorp.com/css/visitor/styles.css"> -->
     position: relative;
     top: -17px;
 }
+.windows, .email {
+    font-family: "SocialicoPlus";
+}
 </style>
  
  
