@@ -124,7 +124,7 @@
         </div>
       </div>
     </div>
-  
+	</div>
   
     <?php //if($ShowPuzzel['Show'] != 0) {?>
     <div class="col-md-6 col-md-offset-6">
