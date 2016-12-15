@@ -89,7 +89,7 @@
 <div class="puzle-form">   
 <div class="row">
 	<div class="col-md-12">
-	<div class="col-md-6">
+	<div class="col-md-3">
 		<div class="share-social">
           <h3>Share with your friends</h3>
              
@@ -106,7 +106,7 @@
         </div>
 	</div>
 	<?php //if($ShowPuzzel['Show'] != 0) {?>
-	<div class="col-md-6">
+	<div class="col-md-9">
     <div class="col-md-6 col-md-offset-6">
       <div class="col-md-12">
 	  <div class="six columns">
