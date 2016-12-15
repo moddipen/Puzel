@@ -667,8 +667,8 @@ select[multiple].input-lg {
 .btn.focus,
 .btn:active.focus,
 .btn.active.focus {
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px;
+  outline: 0px auto -webkit-focus-ring-color;
+  outline-offset: 0px;
 }
 .btn:hover,
 .btn:focus,
@@ -678,7 +678,7 @@ select[multiple].input-lg {
   outline: none !important;
 }
 .btn:active,
-.btn.active{
+.btn.active, .btn.active:focus{
   outline: none !important;
   background-image: none;
   -webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.125);
@@ -1551,3 +1551,4 @@ a.label:focus {
 .affix {
   position: fixed;
 }
+.modal-body{word-wrap:break-word;}
