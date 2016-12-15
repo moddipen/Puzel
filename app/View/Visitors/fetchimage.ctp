@@ -1,5 +1,6 @@
-<link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/css/visitor/add-oct-13-2016.css">
 <!--
+<link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/css/visitor/add-oct-13-2016.css">
+
 <link rel="stylesheet" href="
 http://puzel.stage.n-framescorp.com/css/visitor/styles.css"> -->
  <link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/css/bootstrap.css">
