@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="
 http://puzel.stage.n-framescorp.com/css/visitor/styles.css"> -->
  <link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/css/bootstrap.css">
+ <link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/css/visitor/styles.css">
 <style>
 .share-social i {
     color: #333333;
@@ -118,7 +119,7 @@ http://puzel.stage.n-framescorp.com/css/visitor/styles.css"> -->
 		<div class="share-social">
           <h3>Share with your friends</h3>
              
-                  <a class="share-btn" href="http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $Company ;?>.'/'.<?php echo $PuzzleData['Puzzle']['name'];?>&title=<?php echo $PuzzleData['Puzzle']['name'];?>&description=Price 33$" onclick="return !window.open(this.href, 'Facebook', 'width=640,height=580')"><i class="facebook">f</i></a>
+                  <a class="share-btn" href="http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $Company ;?>/<?php echo $PuzzleData['Puzzle']['name'];?>&title=<?php echo $PuzzleData['Puzzle']['name'];?>&description=Price 33$" onclick="return !window.open(this.href, 'Facebook', 'width=640,height=580')"><i class="facebook">f</i></a>
                    <a class="twitter-share-button"
                     href="https://twitter.com/intent/tweet?text=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $Company ?>.'/'.<?php echo $PuzzleData['Puzzle']['name'];?>" data-size="large" target = "_blank"><i class="twitter">l</i>
                   <a href="http://mail.live.com/default.aspx?rru=compose&to=&subject=Share new puzzle <?php echo $PuzzleData['Puzzle']['name'];?>&body=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $Company ?>.'/'.<?php echo $PuzzleData['Puzzle']['name'];?>" onclick="return !window.open(this.href, 'Outlook', 'width=640,height=580')"  target="_blank">
