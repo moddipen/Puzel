@@ -90,14 +90,7 @@
 <div class="row">
 	<div class="col-md-12">
 	<div class="col-md-6">
-	aasd
-	</div>
-	<?php //if($ShowPuzzel['Show'] != 0) {?>
-	<div class="col-md-6">
-    <div class="col-md-6 col-md-offset-6">
-      <div class="col-md-12">
-	  <div class="six columns">
-      <div class="share-social">
+		<div class="share-social">
           <h3>Share with your friends</h3>
              
                   <a class="share-btn" href="http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $Company ;?>.'/'.<?php echo $PuzzleData['Puzzle']['name'];?>&title=<?php echo $PuzzleData['Puzzle']['name'];?>&description=Price 33$" onclick="return !window.open(this.href, 'Facebook', 'width=640,height=580')"><i class="facebook">f</i></a>
@@ -111,6 +104,13 @@
                   <i class="email">m</i></a>
              
         </div>
+	</div>
+	<?php //if($ShowPuzzel['Show'] != 0) {?>
+	<div class="col-md-6">
+    <div class="col-md-6 col-md-offset-6">
+      <div class="col-md-12">
+	  <div class="six columns">
+      
       </div>
     </div>
 	</div>
