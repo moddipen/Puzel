@@ -1,5 +1,5 @@
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
- -->
+<link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/css/visitor/add-oct-13-2016.css">
+
  <link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/css/bootstrap.css">
 <?php 
   if(!empty($PuzzleData)) {   
