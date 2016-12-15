@@ -2,26 +2,6 @@
 <link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/css/visitor/add-oct-13-2016.css">
 <link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/css/bootstrap.css">
  <link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/css/visitor/styles.css">
-<style>
-.share-social i {
-    color: #333333;
-    font-size: 40px !important;
-    margin: 0 2px;
-    position: relative;
-    top: 0;
-}
-.facebook, .twitter {
-    /*color: #fff;
-    font-family: "Socialico";
-    font-size: 60px !important;
-    margin: 0 10px;
-    position: relative;
-    top: -17px;*/
-}
-.windows, .email {
-    font-family: "SocialicoPlus";
-}
-</style>
  
  
  <?php 
