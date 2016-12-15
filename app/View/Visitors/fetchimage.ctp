@@ -14,12 +14,12 @@ http://puzel.stage.n-framescorp.com/css/visitor/styles.css"> -->
     top: 0;
 }
 .facebook, .twitter {
-    color: #fff;
+    /*color: #fff;
     font-family: "Socialico";
     font-size: 60px !important;
     margin: 0 10px;
     position: relative;
-    top: -17px;
+    top: -17px;*/
 }
 .windows, .email {
     font-family: "SocialicoPlus";
