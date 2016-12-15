@@ -83,8 +83,7 @@
                                     </div>
                                 </div> 
                             </div>
-
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                               <div class="form-group">
                                     <select name="data[Puzzel][peice]" class="form-control chosen-select" id="validation-pieces">
                                       <option style="display:none">Number of Pieces</option>
