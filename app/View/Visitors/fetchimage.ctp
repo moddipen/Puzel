@@ -1,7 +1,11 @@
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
- -->
- <link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/css/bootstrap.css">
-<?php 
+<link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/css/bootstrap.css">
+<link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/css/visitor/add-oct-13-2016.css">
+
+<link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/css/visitor/styles.css">
+
+ 
+ 
+ <?php 
   if(!empty($PuzzleData)) {   
 
     $this->webroot = Configure::read('SITE_URL')?>
@@ -88,6 +92,32 @@
     </div>
 <div class="puzle-form">   
 <div class="row">
+	<div class="col-md-12">
+	<div class="col-md-3">
+		<div class="share-social">
+          <h3>Share with your friends</h3>
+             
+                  <a class="share-btn" href="http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $Company ;?>/<?php echo $PuzzleData['Puzzle']['name'];?>&title=<?php echo $PuzzleData['Puzzle']['name'];?>&description=Price 33$" onclick="return !window.open(this.href, 'Facebook', 'width=640,height=580')"><i class="facebook">f</i></a>
+                   <a class="twitter-share-button"
+                    href="https://twitter.com/intent/tweet?text=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $Company ?>.'/'.<?php echo $PuzzleData['Puzzle']['name'];?>" data-size="large" target = "_blank"><i class="twitter">l</i>
+                  <a href="http://mail.live.com/default.aspx?rru=compose&to=&subject=Share new puzzle <?php echo $PuzzleData['Puzzle']['name'];?>&body=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $Company ?>.'/'.<?php echo $PuzzleData['Puzzle']['name'];?>" onclick="return !window.open(this.href, 'Outlook', 'width=640,height=580')"  target="_blank">
+                  <i class="windows">w</i></a>
+                  
+
+                  <a class="icon-gplus" href ="https://mail.google.com/mail/?view=cm&fs=1&to=&su=Share new puzzle <?php echo $PuzzleData['Puzzle']['name'];?>&body=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $Company ?>.'/'.<?php echo $PuzzleData['Puzzle']['name'];?>" onclick="return !window.open(this.href, 'Google', 'width=640,height=580')">
+                  <i class="email">m</i></a>
+             
+        </div>
+	</div>
+	<?php //if($ShowPuzzel['Show'] != 0) {?>
+	<div class="col-md-9">
+    <div class="col-md-6 col-md-offset-6">
+      <div class="col-md-12">
+	  <div class="six columns">
+      
+      </div>
+    </div>
+	</div>
   
     <?php //if($ShowPuzzel['Show'] != 0) {?>
     <div class="col-md-6 col-md-offset-6">
@@ -145,7 +175,9 @@
           </form>
           </div>
     </div>
+	</div>
     <?php //}?>
+	</div>
 </div>
 </div> 
 
