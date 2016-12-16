@@ -174,9 +174,7 @@ padding: 0;
 .modal-backdrop.in{
     opacity: 0.5 !important;
 }
-.modal-backdrop{
-    z-index: 1040!important;
-}
+
 .btn , .form-control{
     border-radius: 0px !important;
 }
