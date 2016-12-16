@@ -1,9 +1,11 @@
 <!-- <link href="bootstrap.css" rel="stylesheet"> -->
-<?php echo $this->HTML->css("visitor/bootstrap.css");?>
+
+<link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/app/webroot/visitor/bootstrap.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<?php echo $this->HTML->script('scrolling-nav.js');
-      echo $this->HTML->script('bootstrap.min.js');?>
+<script type="text/javascript" src="http://puzel.stage.n-framescorp.com/app/webroot/js/scrolling-nav.js"></script>
+<script type="text/javascript" src="http://puzel.stage.n-framescorp.com/app/webroot/js/bootstrap.min.js"></script>
+
 
 <?php
   //echo "<pre>";print_r($PuzzleData);exit; 
