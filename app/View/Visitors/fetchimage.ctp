@@ -48,9 +48,7 @@ padding: 0;
 .termbtn{
     padding-right: 45px;
 }
-.modal-backdrop{
-    z-index: 999 !important;
-}
+
 .navbar-nav{
     float: right; !important;
     margin-top: 40px !important;
@@ -64,17 +62,12 @@ padding: 0;
 .navbar-default{
     border: none !important;
 }
-.modal-backdrop.in{
-    opacity: 0.5 !important;
-}
+
 
 .btn , .form-control{
     border-radius: 0px !important;
 }
- .modal {
-        overflow-x: hidden!important;
-        overflow-y: auto!important;
-}
+ 
 
 
 
