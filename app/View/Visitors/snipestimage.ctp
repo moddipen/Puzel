@@ -1,4 +1,3 @@
-<!-- <link href="bootstrap.css" rel="stylesheet"> -->
 
 <link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/app/webroot/css/visitor/bootstrap.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
@@ -45,13 +44,13 @@
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                     <div class="row">
                             <div class="col-md-5 col-xs-6">
-                               <button type="button" class="btn button-header" data-toggle="modal" data-target="#modal">Grand Prize</button>
+                               <button type="button" class="btn button-header" data-toggle="modal" data-target="#modal">Grand Price</button>
                                <div class="modal fade" id="modal" role="dialog">
                                     <div class="modal-dialog">
                                       <div class="modal-content">
                                         <div class="modal-header">
                                           <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                          <h3 class="modal-title">Grand prize</h3>
+                                          <h3 class="modal-title">Grand price</h3>
                                         </div>
                                         <div class="modal-body">
                                           <div style="margin-bottom:40px;"><?php echo $PuzzleData['Puzzle']['price']?></div>
@@ -62,13 +61,13 @@
                                 </div>
                              </div>
                             <div class="col-md-7 col-xs-7 termbtn">
-                                <button type="button" class="btn button-header btn-tab" data-toggle="modal" data-target="#modalterm">Terms / Description</button>
+                                <button type="button" class="btn button-header btn-tab" data-toggle="modal" data-target="#modalterm">Terms/Descrption</button>
                                   <div class="modal fade" id="modalterm" role="dialog">
                                     <div class="modal-dialog">
                                       <div class="modal-content">
                                         <div class="modal-header">
                                           <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                          <h3 class="modal-title">Terms / Description</h3>
+                                          <h3 class="modal-title">Terms/Descrption</h3>
                                         </div>
                                         <div class="modal-body">
                                           <div style="margin-bottom:40px;"><?php echo $PuzzleData['Puzzle']['terms']?></div>
@@ -107,9 +106,9 @@
       .merge div div{width:<?php echo $image[0]['width']."px";?>;height:<?php echo $image[0]['height']."px";?>;display:inline-block;margin-left:-5px;margin-bottom:-5px;}
       .merge{width:<?php echo $image[0]['total_width']."px";?>;margin:50px auto;}
       .button-puzzle{background:#e58b16;font-size: 18px;text-align:center;font-weight: 300;padding: 5px 20px;color: #fff;width:100%;margin-bottom:20px;}
-      .puzle-form .active, .button-puzzle:hover{background:none;color: #e58b16;border:1px solid #e58b16;box-shadow:none;}
+      .puzle-form .active, .button-puzzle:hover{background:none;color: #e58b16 !important;border:1px solid #e58b16;box-shadow:none;}
       .button-header{background:#e58b16;font-size: 18px;text-align:center;font-weight: 300;padding: 5px 20px;color: #fff;width:100%;margin-bottom:20px;}
-      .button-header .active, .button-header:hover{background:#e58b16;color:#8421CF; border: none !important;}
+      .button-header .active, .button-header:hover{background:#e58b16;color:#8421CF ; border: none !important;}
       #alert{left: 30px;position: absolute;top: 52px;}
       .puzel{padding-top: 120px;}
       .social {margin: 0;padding: 0;}
@@ -152,12 +151,16 @@
       .modal-backdrop.in{
           opacity: 0.3 !important;
       }
-      .btn{
-          border-radius: 0px !important;
+      .btn , .form-control{
+      border-radius: 0px !important;
       }
       #Imageenroll, #Imagedata {
           padding-top: 25px;
       }
+      .modal-open {
+          overflow: hidden;
+      }
+
       </style>
         <?php $peices = $PuzzleData['Puzzle']['pieces'] ; ?>
         <div class="merge">
