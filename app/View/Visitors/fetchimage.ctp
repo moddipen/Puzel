@@ -45,7 +45,7 @@
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                     <div class="row">
                             <div class="col-md-5 col-xs-6">
-                               <button type="button" class="btn button-header" data-toggle="modal" data-target="#modal">Grand Price</button>
+                               <button type="button" class="btn button-header" data-toggle="modal" data-target="#modal">Grand Prize</button>
                                <div class="modal fade" id="modal" role="dialog">
                                     <div class="modal-dialog">
                                       <div class="modal-content">
@@ -62,7 +62,7 @@
                                 </div>
                              </div>
                             <div class="col-md-7 col-xs-7 termbtn">
-                                <button type="button" class="btn button-header btn-tab" data-toggle="modal" data-target="#modalterm">Terms/Descrption</button>
+                                <button type="button" class="btn button-header btn-tab" data-toggle="modal" data-target="#modalterm">Terms / Description</button>
                                   <div class="modal fade" id="modalterm" role="dialog">
                                     <div class="modal-dialog">
                                       <div class="modal-content">

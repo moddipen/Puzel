@@ -45,13 +45,13 @@
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                     <div class="row">
                             <div class="col-md-5 col-xs-6">
-                               <button type="button" class="btn button-header" data-toggle="modal" data-target="#modal">Grand Price</button>
+                               <button type="button" class="btn button-header" data-toggle="modal" data-target="#modal">Grand Prize</button>
                                <div class="modal fade" id="modal" role="dialog">
                                     <div class="modal-dialog">
                                       <div class="modal-content">
                                         <div class="modal-header">
                                           <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                          <h3 class="modal-title">Grand price</h3>
+                                          <h3 class="modal-title">Grand prize</h3>
                                         </div>
                                         <div class="modal-body">
                                           <div style="margin-bottom:40px;"><?php echo $PuzzleData['Puzzle']['price']?></div>
@@ -62,13 +62,13 @@
                                 </div>
                              </div>
                             <div class="col-md-7 col-xs-7 termbtn">
-                                <button type="button" class="btn button-header btn-tab" data-toggle="modal" data-target="#modalterm">Terms/Descrption</button>
+                                <button type="button" class="btn button-header btn-tab" data-toggle="modal" data-target="#modalterm">Terms / Description</button>
                                   <div class="modal fade" id="modalterm" role="dialog">
                                     <div class="modal-dialog">
                                       <div class="modal-content">
                                         <div class="modal-header">
                                           <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                          <h3 class="modal-title">Terms/Descrption</h3>
+                                          <h3 class="modal-title">Terms / Description</h3>
                                         </div>
                                         <div class="modal-body">
                                           <div style="margin-bottom:40px;"><?php echo $PuzzleData['Puzzle']['terms']?></div>
