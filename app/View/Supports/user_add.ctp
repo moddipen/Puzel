@@ -43,7 +43,7 @@
                   <div class="tile-body">
                     <!-- <form class="form-horizontal custom-form" role="form"> -->
                     <?php echo $this->Form->create('Support',array('action'=>'add','class'=>"form-horizontal custom-form" ,'role'=>"form"));?>
-                      <!-- <div class="form-group">
+                      <div class="form-group">
                         <label class="col-sm-1 control-label">Name</label>
                         <div class="col-sm-6">
                           <label class="control-label"><?php echo $this->Session->read('ADMINDETAIL.User.firstname').' '.$this->Session->read('ADMINDETAIL.User.lastname');?></label>
@@ -54,7 +54,7 @@
                         <div class="col-sm-6">
                           <label class="control-label"><?php echo $this->Session->read('ADMINDETAIL.User.company_name');?></label>
                         </div>
-                      </div> -->
+                      </div>
                       <div class="form-group">
                         <label for="input01" class="col-sm-1 control-label">Subject</label>
                         <div class="col-sm-6">
