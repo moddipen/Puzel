@@ -265,8 +265,7 @@ class  SubscriptionsController  extends AppController {
 										}
 										else
 										{
-											$this->Session->setFlash('<div><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Failed </b>: Error processing transaction:</p><br>
-											</div>');	
+											$this->Session->setFlash(__('Failed : Error processing transaction'),'default');	
 										}	
 									}	
 								}
@@ -340,7 +339,7 @@ class  SubscriptionsController  extends AppController {
 									'reply_to'=>"support@puzel.co"
 									);	
 									$this->sendinvoice($email);
-									$this->Session->setFlash('<div><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Success </b>: Your subscription upgraded </p></div>');
+									$this->Session->setFlash(__('Your subscription upgraded'),'default');
 									$this->redirect(array('controller'=>'orders','action'=>'index','business'=>true));		
 								}
 								else{
