@@ -4,6 +4,9 @@
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 <link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/app/webroot/css/visitor/bootstrap.min.css">
 <style type="text/css">
+.no-right:focus, .no-right a:focus{
+    outline:none !important;
+}
   .modal-open {
     overflow: hidden;
 }
