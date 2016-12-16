@@ -116,7 +116,22 @@ padding: 0;
                     <div class="row">
                             <div class="col-md-5 col-xs-6">
                                <button type="button" class="btn button-header" data-toggle="modal" data-target="#modal">Grand Prize</button>
-                               <div class="modal fade" id="modal" role="dialog">
+                               
+                            <div class="col-md-7 col-xs-7 termbtn">
+                                <button type="button" class="btn button-header btn-tab" data-toggle="modal" data-target="#modalterm">Terms / Description</button>
+                                  
+                    
+                            </div>
+                     </div>
+            
+                    </div>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <div class="modal fade" id="modal" role="dialog">
                                     <div class="modal-dialog">
                                       <div class="modal-content">
                                         <div class="modal-header">
@@ -131,9 +146,7 @@ padding: 0;
                                     </div>
                                 </div>
                              </div>
-                            <div class="col-md-7 col-xs-7 termbtn">
-                                <button type="button" class="btn button-header btn-tab" data-toggle="modal" data-target="#modalterm">Terms / Description</button>
-                                  <div class="modal fade" id="modalterm" role="dialog">
+                             <div class="modal fade" id="modalterm" role="dialog">
                                     <div class="modal-dialog">
                                       <div class="modal-content">
                                         <div class="modal-header">
@@ -146,17 +159,7 @@ padding: 0;
                                       </div>
                                     </div>
                                 </div>
-                    
-                            </div>
-                     </div>
-            
-                    </div>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+
   <div class="puzel">
     <h2 style="text-align:center;"><?php echo $PuzzleData['Puzzle']['name'];?></h2>
 
