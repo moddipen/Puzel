@@ -34,6 +34,7 @@
     margin-bottom: 25px;
     position: relative;
 }
+.modal-open{overflow:hidden !important;}
 </style>
 <script type="text/javascript">
 var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
@@ -303,7 +304,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
         
          <ul id="nav">
             
-            <li class="no-right"><a href="#" data-toggle="modal" data-target="#modal1"><span class="button-sign">Terms / Descrption</span></a></li>                     
+            <li class="no-right"><a href="#" data-toggle="modal" data-target="#modal1"><span class="button-sign">Terms / Description</span></a></li>                     
             <li class="no-right"><a href="#" data-toggle="modal" data-target="#modal3"><span class="button-sign">Grand Prize</span></a></li>                     
          </ul>
        
