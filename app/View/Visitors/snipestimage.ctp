@@ -1,6 +1,6 @@
 <!-- <link href="bootstrap.css" rel="stylesheet"> -->
 
-<link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/app/webroot/visitor/bootstrap.css">
+<link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/app/webroot/css/visitor/bootstrap.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script type="text/javascript" src="http://puzel.stage.n-framescorp.com/app/webroot/js/scrolling-nav.js"></script>
