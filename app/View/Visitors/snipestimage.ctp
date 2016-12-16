@@ -160,7 +160,9 @@
       .modal-open {
           overflow: hidden;
       }
-
+          .modal-backdrop{
+        z-index: 1040!important;
+    }
       </style>
         <?php $peices = $PuzzleData['Puzzle']['pieces'] ; ?>
         <div class="merge">
