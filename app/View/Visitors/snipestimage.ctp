@@ -152,7 +152,7 @@ padding: 0;
                                             $blurr_class = "blur";
                                           }
                                           else
-                                          {
+                                           {
                                             $blurr_class = "";
                                           }
                                         ?>

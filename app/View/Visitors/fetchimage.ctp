@@ -15,7 +15,7 @@
 }
   .modal-open {
     overflow: hidden;
-}
+} 
 .puzel{
     padding-top: 120px;
 }
