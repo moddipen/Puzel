@@ -4,6 +4,12 @@
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 <link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/app/webroot/css/visitor/bootstrap.min.css">
 <style type="text/css">
+#blur{
+   -webkit-filter: blur(13px);
+    -moz-filter: blur(13px);
+    -o-filter: blur(13px);
+    -ms-filter: blur(13px);
+ filter: blur(13px);}
 .no-right:focus, .no-right a:focus{
     outline:none !important;
 }
@@ -140,8 +146,26 @@ padding: 0;
                                           <h3 class="modal-title">Grand prize</h3>
                                         </div>
                                         <div class="modal-body">
+                                        <?php
+                                          if($PuzzleData['Puzzle']['type'] == "Mystery")
+                                          {
+                                            $blurr_class = "blur";
+                                          }
+                                          else
+                                          {
+                                            $blurr_class = "";
+                                          }
+                                        ?>
                                           <div style="margin-bottom:40px;"><?php echo $PuzzleData['Puzzle']['price']?></div>
-                                          <p><img src ="<?php echo $this->webroot.'img/grand_price/'.$PuzzleData['Puzzle']['price_image']?>"></p>
+                                           <?php
+                                            if($PuzzleData['Puzzle']['price_image'] != "")
+                                            {
+                                          ?>
+                                               <div id="<?php echo $blurr_class;?>" style="background:url('<?php echo Configure::read("SITE_URL") ;?>app/webroot/img/grand_price/<?php echo $PuzzleData['Puzzle']['price_image'];?>')">
+                                              </div>
+                                          <?php
+                                            }
+                                          ?>
                                         </div>
                                       </div>
                                     </div>
