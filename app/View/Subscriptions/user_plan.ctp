@@ -218,8 +218,8 @@
 
         <input type="hidden" name="b_07f1846d778e631822b8f85cf_e5b207e707" tabindex="-1" value="">
         <?php if(!$cardDetail) {?>
-            <div class="clear text-center" style="padding-bottom:30px;"><input type="submit" value="Upgrade confirm" name="subscribe" id="mc-embedded-subscribe" class="btn btn-oranges"></div><?php } else {?>
-            <div class="clear text-center" style="padding-bottom:30px;"><input type="submit" value="Sign up" name="subscribe" id="mc-embedded-subscribe" class="btn btn-oranges"></div>
+            <div class="clear text-center" style="padding-bottom:30px;"><input type="submit" value="Sign up" name="subscribe" id="mc-embedded-subscribe" class="btn btn-oranges"></div><?php } else {?>
+            <div class="clear text-center" style="padding-bottom:30px;"><input type="submit" value="Upgrade confirm" name="subscribe" id="mc-embedded-subscribe" class="btn btn-oranges"></div>
             <?php }?>
         </div>
       </section>
