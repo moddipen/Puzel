@@ -3,8 +3,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 <link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/app/webroot/css/visitor/bootstrap.min.css">
-<script type="text/javascript" src="http://puzel.stage.n-framescorp.com/app/webroot/js/scrolling-nav.js"></script>
-<script type="text/javascript" src="http://puzel.stage.n-framescorp.com/app/webroot/js/bootstrap.min.js"></script>
 
 
 <?php
@@ -326,3 +324,6 @@ padding: 0;
 
 
   <?php   } ?>
+
+  <script type="text/javascript" src="http://puzel.stage.n-framescorp.com/app/webroot/js/scrolling-nav.js"></script>
+<script type="text/javascript" src="http://puzel.stage.n-framescorp.com/app/webroot/js/bootstrap.min.js"></script>
