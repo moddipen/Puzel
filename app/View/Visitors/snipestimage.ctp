@@ -1,8 +1,17 @@
-<link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/css/bootstrap.css">
-<?php 
+<!-- <link href="bootstrap.css" rel="stylesheet"> -->
+
+<link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/app/webroot/visitor/bootstrap.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script type="text/javascript" src="http://puzel.stage.n-framescorp.com/app/webroot/js/scrolling-nav.js"></script>
+<script type="text/javascript" src="http://puzel.stage.n-framescorp.com/app/webroot/js/bootstrap.min.js"></script>
+
+
+<?php
+  //echo "<pre>";print_r($PuzzleData);exit; 
   if(!empty($PuzzleData)) {   
 
-    $this->webroot = Configure::read('SITE_URL')?>
+    $this->webroot = Configure::read('SITE_URL');?>
 
  
     <input type ="hidden" id="transition" value ="<?php echo $PuzzleData['Puzzle']['transtion']?>">
@@ -19,9 +28,67 @@
 <!-- END HEADER ############################################### -->
 
 <!-- BEGIN CONTAINER ############################################### -->
-
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+              <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                
+             </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav wow fadeInDown top__element">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <div class="row">
+                            <div class="col-md-5 col-xs-6">
+                               <button type="button" class="btn button-header" data-toggle="modal" data-target="#modal">Grand Price</button>
+                               <div class="modal fade" id="modal" role="dialog">
+                                    <div class="modal-dialog">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                          <h3 class="modal-title">Grand price</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                          <div style="margin-bottom:40px;"><?php echo $PuzzleData['Puzzle']['price']?></div>
+                                          <p><img src ="<?php echo $this->webroot.'img/grand_price/'.$PuzzleData['Puzzle']['price_image']?>"></p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+                             </div>
+                            <div class="col-md-7 col-xs-7 termbtn">
+                                <button type="button" class="btn button-header btn-tab" data-toggle="modal" data-target="#modalterm">Terms/Descrption</button>
+                                  <div class="modal fade" id="modalterm" role="dialog">
+                                    <div class="modal-dialog">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                          <h3 class="modal-title">Terms/Descrption</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                          <div style="margin-bottom:40px;"><?php echo $PuzzleData['Puzzle']['terms']?></div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+                    
+                            </div>
+                     </div>
+            
+                    </div>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
   <div class="puzel">
-    <h3 style="text-align:center;"><?php echo $PuzzleData['Puzzle']['name'];?></h3>
+    <h2 style="text-align:center;"><?php echo $PuzzleData['Puzzle']['name'];?></h2>
 
 
 <!-- <div id = 'puzzle1' hello> -->
@@ -33,17 +100,64 @@
     if ($drawimage_s > 0) 
     {?>
        <style>
-      /*.merge div div{width:;height:;display:inline-block;margin-left:-5px;margin-bottom:-5px;}
-      .merge{width:<?php echo $image[0]['total_width']."px";?>;}*/
-body{line-height: inherit;}
+    
+    
+    
+      body{line-height: inherit;}
       .merge div div{width:<?php echo $image[0]['width']."px";?>;height:<?php echo $image[0]['height']."px";?>;display:inline-block;margin-left:-5px;margin-bottom:-5px;}
       .merge{width:<?php echo $image[0]['total_width']."px";?>;margin:50px auto;}
-      .button-puzzle,.button-confirm{background:#e58b16;font-size: 18px;text-align:center;font-weight: 300;padding: 5px 20px;color: #fff;width:100%;margin-bottom:50px;border-radius: none !important;}
-      .form-control{border-radius: none !important;}
+      .button-puzzle{background:#e58b16;font-size: 18px;text-align:center;font-weight: 300;padding: 5px 20px;color: #fff;width:100%;margin-bottom:20px;}
       .puzle-form .active, .button-puzzle:hover{background:none;color: #e58b16;border:1px solid #e58b16;box-shadow:none;}
+      .button-header{background:#e58b16;font-size: 18px;text-align:center;font-weight: 300;padding: 5px 20px;color: #fff;width:100%;margin-bottom:20px;}
+      .button-header .active, .button-header:hover{background:#e58b16;color:#8421CF; border: none !important;}
       #alert{left: 30px;position: absolute;top: 52px;}
-      .button-puzzle{background:#e58b16;font-size: 18px;text-align:center;font-weight: 300;padding: 5px 20px;color: #fff;width:100%;margin-bottom:50px;}
-      @media (max-width:433px){.button-puzzle,.button-confirm{font-size:12px}}
+      .puzel{padding-top: 120px;}
+      .social {margin: 0;padding: 0;}
+      .social ul {margin: 0;padding: 5px;}
+      .social ul li {margin: 5px;list-style: none outside none;display: inline-block;width: 30px;height: 30px;background-color: #333333;text-align:center;padding: 6px;border-radius: 50%;border: 1px solid #000;}
+      .social i {
+          color: #fff;
+          font-size: 15px;
+      }
+      .navbar{
+          background-color: #aaaaaa!important;
+          min-height: 120px !important;
+      }
+      .top-nav-collapse {
+              padding: 0;
+              background: rgba(0,0,0,0.4) !important;
+      }
+      .socialbtn{
+        padding-left: 50px;
+      }
+      .termbtn{
+          padding-right: 45px;
+      }
+      .modal-backdrop{
+          z-index: 999 !important;
+      }
+      .navbar-nav{
+          float: right; !important;
+          margin-top: 40px !important;
+      }
+      .modal{
+          top: 150px !important;
+      }
+      .modal-title ,.modal-body {
+          color: #E58B16 !important;
+      }
+      .navbar-default{
+          border: none !important;
+      }
+      .modal-backdrop.in{
+          opacity: 0.3 !important;
+      }
+      .btn{
+          border-radius: 0px !important;
+      }
+      #Imageenroll, #Imagedata {
+          padding-top: 25px;
+      }
       </style>
         <?php $peices = $PuzzleData['Puzzle']['pieces'] ; ?>
         <div class="merge">
@@ -85,14 +199,32 @@ body{line-height: inherit;}
 
     </div>
 <div class="puzle-form">   
-<div class="row">
-  
-    <?php if($ShowPuzzel['Show'] != 0) {?>
-    <div class="col-md-6 col-md-offset-6">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6 socialbtn">
+          <h3>Share with your friends</h3>
+              <div class="social">
+                  <ul>
+                      <li>
+                        <a href="http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $PuzzleData['Business']['company_name'].'/'.$PuzzleData['Puzzle']['name']?>&title=<?php $PuzzleData['Puzzle']['name'];?>&description=Price 33$" onclick="return !window.open(this.href, 'Facebook', 'width=640,height=580')"><i class="fa fa-facebook"></i></a>
+                      </li>
+                      <li>
+                        <a href="https://twitter.com/intent/tweet?text=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $PuzzleData['Business']['company_name'].'/'.$PuzzleData['Puzzle']['name']?>" data-size="large" target = "_blank"><i class="fa fa-twitter"></i></a>
+                      </li>
+                      <li>
+                        <a href="http://mail.live.com/default.aspx?rru=compose&to=&subject=Share new puzzle <?php echo $PuzzleData['Puzzle']['name'];?>&body=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $PuzzleData['Business']['company_name'].'/'.$PuzzleData['Puzzle']['name'];?>" onclick="return !window.open(this.href, 'Outlook', 'width=640,height=580')"  target="_blank"><i class="fa fa-windows"></i></a>
+                      </li>
+                      <li>
+                        <a href ="https://mail.google.com/mail/?view=cm&fs=1&to=&su=Share new puzzle <?php echo $PuzzleData['Puzzle']['name'];?>&body=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $PuzzleData['Business']['company_name'].'/'.$PuzzleData['Puzzle']['name'];?>" onclick="return !window.open(this.href, 'Google', 'width=640,height=580')"><i class="fa fa-envelope-o"></i></a>
+                      </li>
+                  </ul>
+              </div>
+      </div>
+     <div class="col-md-6">
       <div class="col-md-6 col-xs-6">
         <button type="button" class="btn button-puzzle btn-tab active" id="puzelasubmit" name="puzzle">Signup for Puzel</button>
       </div>
-      <div class="col-md-6 col-xs-6">  
+      <div class="col-md-6">  
         <button type="button" class="btn button-puzzle btn-tab" id="enrollformshow">Enroll Now</button>
       </div>
        <div id="alert"></div> 
@@ -143,7 +275,11 @@ body{line-height: inherit;}
           </form>
           </div>
     </div>
-    <?php }?>
+
+     
+   
+    </div>
+    <?php //}?>
 </div>
 </div> 
 
