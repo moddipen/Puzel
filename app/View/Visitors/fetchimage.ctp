@@ -160,7 +160,7 @@ padding: 0;
                                            <?php
                                             if($PuzzleData['Puzzle']['price_image'] != "")
                                             {
-                                          ?>
+                                          ?> 
                                                <div id="<?php echo $blurr_class;?>" style="background:url('<?php echo Configure::read("SITE_URL") ;?>app/webroot/img/grand_price/<?php echo $PuzzleData['Puzzle']['price_image'];?>')">
                                               </div>
                                           <?php
