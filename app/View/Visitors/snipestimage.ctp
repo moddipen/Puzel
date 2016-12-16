@@ -3,7 +3,86 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 <link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/app/webroot/css/visitor/bootstrap.min.css">
+<style type="text/css">
+  .modal-open {
+    overflow: hidden;
+}
+.puzel{
+    padding-top: 120px;
+}
+.social {
+margin: 0;
+padding: 0;
+}
+.social ul {
+    margin: 0;
+    padding: 5px;
+}
+.social ul li {
+    margin: 5px;
+    list-style: none outside none;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-color: #333333;
+    text-align:center;
+    padding: 6px;
+    border-radius: 50%;
+    border: 1px solid #000;
+}
+.social i {
+    color: #fff;
+    font-size: 15px;
+}
+.navbar{
+    background-color: #aaaaaa!important;
+    min-height: 120px !important;
+}
+.top-nav-collapse {
+        padding: 0;
+        background: rgba(0,0,0,0.4) !important;
+}
+.socialbtn{
+  padding-left: 50px;
+}
+.termbtn{
+    padding-right: 45px;
+}
+.modal-backdrop{
+    z-index: 999 !important;
+}
+.navbar-nav{
+    float: right; !important;
+    margin-top: 40px !important;
+}
+.modal{
+    top: 150px !important;
+}
+.modal-title ,.modal-body {
+    color: #E58B16 !important;
+}
+.navbar-default{
+    border: none !important;
+}
+.modal-backdrop.in{
+    opacity: 0.5 !important;
+}
 
+.btn , .form-control{
+    border-radius: 0px !important;
+}
+ .modal {
+        overflow-x: hidden!important;
+        overflow-y: auto!important;
+}
+
+
+
+
+      #Imageenroll, #Imagedata {
+          padding-top: 25px;
+      }
+</style>
 
 
 <?php
@@ -110,84 +189,7 @@
       .button-header{background:#e58b16;font-size: 18px;text-align:center;font-weight: 300;padding: 5px 20px;color: #fff;width:100%;margin-bottom:20px;}
       .button-header .active, .button-header:hover{background:#e58b16;color:#8421CF ; border: none !important;}
       #alert{left: 30px;position: absolute;top: 52px;}
-     .modal-open {
-    overflow: hidden;
-}
-.puzel{
-    padding-top: 120px;
-}
-.social {
-margin: 0;
-padding: 0;
-}
-.social ul {
-    margin: 0;
-    padding: 5px;
-}
-.social ul li {
-    margin: 5px;
-    list-style: none outside none;
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    background-color: #333333;
-    text-align:center;
-    padding: 6px;
-    border-radius: 50%;
-    border: 1px solid #000;
-}
-.social i {
-    color: #fff;
-    font-size: 15px;
-}
-.navbar{
-    background-color: #aaaaaa!important;
-    min-height: 120px !important;
-}
-.top-nav-collapse {
-        padding: 0;
-        background: rgba(0,0,0,0.4) !important;
-}
-.socialbtn{
-  padding-left: 50px;
-}
-.termbtn{
-    padding-right: 45px;
-}
-.modal-backdrop{
-    z-index: 999 !important;
-}
-.navbar-nav{
-    float: right; !important;
-    margin-top: 40px !important;
-}
-.modal{
-    top: 150px !important;
-}
-.modal-title ,.modal-body {
-    color: #E58B16 !important;
-}
-.navbar-default{
-    border: none !important;
-}
-.modal-backdrop.in{
-    opacity: 0.5 !important;
-}
-
-.btn , .form-control{
-    border-radius: 0px !important;
-}
- .modal {
-        overflow-x: hidden!important;
-        overflow-y: auto!important;
-}
-
-
-
-
-      #Imageenroll, #Imagedata {
-          padding-top: 25px;
-      }
+     
       </style>
         <?php $peices = $PuzzleData['Puzzle']['pieces'] ; ?>
         <div class="merge">
