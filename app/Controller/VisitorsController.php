@@ -221,7 +221,7 @@ class  VisitorsController  extends AppController {
 	{
 		header('Access-Control-Allow-Origin: *');
 		$this->layout = '';
-		$image = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id)));	
+		$image = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id,'Puzzle.status'=>0)));
 		$this->set('image',$image['Image']);
 		$this->set('drawimage_s',count($image['Image']));
 		$this->set('PuzzleData',$image);
