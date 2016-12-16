@@ -107,6 +107,9 @@ class  VisitorsController  extends AppController {
 						if(isset($this->request->data['refrel']))
 						{
 							$this->request->data['is_refrel'] = 1;
+							// fetch refrel person detail
+							$referel_preson = $this->User->find('first',array('conditions'=>array('User.refrel_id'=>$this->request->data['refrel_id'])));
+							$this->request->data['refrel_id'] = $referel_preson['User']['id'];
 						}		
 
 
@@ -172,11 +175,6 @@ class  VisitorsController  extends AppController {
 					else
 					{
 						$this->Visitor->create();
-						if(isset($this->request->data['refrel']))
-							{
-								$this->request->data['is_refrel'] = 1;
-							}		
-
 						if($this->Visitor->save($this->request->data))
 						{
 							$modified = date('Y-m-d H:i:s');
