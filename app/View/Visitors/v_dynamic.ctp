@@ -35,6 +35,7 @@
     position: relative;
 }
 .modal-open{overflow:hidden !important;}
+.modal{top:10% !important;}
 </style>
 <script type="text/javascript">
 var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
