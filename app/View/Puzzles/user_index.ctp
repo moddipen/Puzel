@@ -107,7 +107,7 @@
                         </thead>
                         <tbody id ="datafile">
                         <?php 
-                        echo "<pre>";print_r($user);exit; 
+                        debug($user);exit; 
                         if(!empty($List)) {
 
                           $user = AuthComponent::user();
