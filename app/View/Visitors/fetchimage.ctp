@@ -75,9 +75,6 @@ padding: 0;
         overflow-x: hidden!important;
         overflow-y: auto!important;
 }
-.modal-backdrop{
-    z-index: 1040!important;
-}
 
 
 
