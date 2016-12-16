@@ -32,8 +32,10 @@
                 </div>  
                 
                <div class="klaus_getaquote skinonegetquote"><li><a href="<?php echo Configure::read('SITE_USER_URL');?>/subscriptions/plan/<?php echo $list['Subscription']['id'] ;?>">
-               <?php if($Upgrade == "all"){
-                echo "GET A QUOTE";
+               <?php if($Upgrade == "all")
+               {
+                 echo "GET A QUOTE";
+                } 
                 else
                 {
                     echo "Upgrade";
