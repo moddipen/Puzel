@@ -228,7 +228,7 @@ padding: 0;
 
     </div>
 
-<?php if($ShowPuzzel['Show'] != 0){?>    
+    
 <div class="puzle-form">   
   <div class="container-fluid">
     <div class="row">
@@ -251,6 +251,7 @@ padding: 0;
                   </ul>
               </div>
       </div>
+     <?php if($ShowPuzzel['Show'] != 0){?> 
      <div class="col-md-6">
       <div class="col-md-6 col-xs-6">
         <button type="button" class="btn button-puzzle btn-tab active" id="puzelasubmit" name="puzzle">Signup for Puzel</button>
@@ -306,14 +307,14 @@ padding: 0;
           </form>
           </div>
     </div>
-
+    <?php }?>
      
    
     </div>
     <?php //}?>
 </div>
 </div> 
-<?php }?>
+
 
 
 </div>
