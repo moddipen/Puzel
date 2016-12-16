@@ -110,7 +110,7 @@
 
                           $user = AuthComponent::user();
 
-                          echo "<pre>";print_r($user);exit;
+                          echo "<pre>";print_r($user);exit; 
                           foreach ($List as $value) {  ?>
                           <tr>
                             <td><?php echo date('m/d/Y',strtotime($value['Visitor']['created']));?></td>
