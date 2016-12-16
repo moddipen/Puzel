@@ -353,7 +353,7 @@ public function get_statistics()
 	            //     // write the cookie
 	            //     $this->Cookie->write('remember_me_cookie', $this->Auth->user(), true, '2 weeks');
             	// }
-				debug($this->Auth->user());exit;
+				
 				if($this->Auth->user('usertype') == 2)
               	{
               		$this->Session->setFlash(__('Login successfully!!....', true), 'default');
