@@ -4,7 +4,7 @@
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 <link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/app/webroot/css/visitor/bootstrap.min.css">
 <style type="text/css">
-  .no-right:focus, .no-right a:focus{
+.no-right:focus, .no-right a:focus{
     outline:none !important;
 }
   .modal-open {
@@ -70,17 +70,15 @@ padding: 0;
 .btn , .form-control{
     border-radius: 0px !important;
 }
- 
-
-
 
       #Imageenroll, #Imagedata {
           padding-top: 25px;
       }
-      .btn.focus, .btn:focus, .btn:hover{
+
+   .btn.focus, .btn:focus, .btn:hover{
     color: #fff;
     outline:none!important;
-}
+}   
 </style>
 
 
@@ -186,7 +184,7 @@ padding: 0;
       .puzle-form .active, .button-puzzle:hover{background:none;color: #e58b16 !important;border:1px solid #e58b16;box-shadow:none;}
       .button-header{background:#e58b16;font-size: 18px;text-align:center;font-weight: 300;padding: 5px 20px;color: #fff;width:100%;margin-bottom:20px;}
       .button-header .active, {background:#e58b16;color:#fff ; border: none !important;}
-      /*.btn.focus, .btn:focus, .btn:hover {color: #333 !important;}*/
+      /*.btn.focus, .btn:focus, .btn:hover {color: #fff !important;}*/
       #alert{left: 30px;position: absolute;top: 52px;}
      
       </style>
@@ -229,6 +227,8 @@ padding: 0;
     }?>
 
     </div>
+
+<?php if($ShowPuzzel['Show'] != 0){?>    
 <div class="puzle-form">   
   <div class="container-fluid">
     <div class="row">
@@ -313,6 +313,8 @@ padding: 0;
     <?php //}?>
 </div>
 </div> 
+<?php }?>
+
 
 </div>
 </div>

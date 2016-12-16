@@ -227,6 +227,8 @@ padding: 0;
     }?>
 
     </div>
+
+<?php if($ShowPuzzel['Show'] != 0){?>    
 <div class="puzle-form">   
   <div class="container-fluid">
     <div class="row">
@@ -311,6 +313,8 @@ padding: 0;
     <?php //}?>
 </div>
 </div> 
+<?php }?>
+
 
 </div>
 </div>
