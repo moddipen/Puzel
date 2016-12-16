@@ -70,13 +70,15 @@ padding: 0;
 .btn , .form-control{
     border-radius: 0px !important;
 }
- 
-
-
 
       #Imageenroll, #Imagedata {
           padding-top: 25px;
       }
+
+   .btn.focus, .btn:focus, .btn:hover{
+    color: #fff;
+    outline:none!important;
+}   
 </style>
 
 

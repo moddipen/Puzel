@@ -77,6 +77,10 @@ padding: 0;
       #Imageenroll, #Imagedata {
           padding-top: 25px;
       }
+      .btn.focus, .btn:focus, .btn:hover{
+    color: #fff;
+    outline:none!important;
+}
 </style>
 
 
