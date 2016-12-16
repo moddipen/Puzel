@@ -97,7 +97,8 @@ class  VisitorsController  extends AppController {
 					$array = array(
 					'firstname'=>$this->request->data['firstname'],
 					'lastname'=>$this->request->data['lastname'],
-					'email'=>$this->request->data['email']);
+					'email'=>$this->request->data['email'],
+					'refrel_id'=>$this->generateRandomString());
 					$this->User->create();
 					if($this->User->save($array))
 					{	
