@@ -175,7 +175,7 @@
 <div class="form-group">
     
       <?php
-    	
+    	$cardDetail->creditCard['last4'];
     	if(!$cardDetail){
     		echo '<select required  name="data[Subscription][ex_date_year][year]" id="year" class="chosen-select chosen-transparent form-control">';
     		
