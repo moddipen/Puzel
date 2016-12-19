@@ -2976,3 +2976,4 @@ select.form-control.chosen-transparent + .chosen-container.chosen-container-sing
 .chosen-container-single .chosen-single span{margin-right:10px !important;}
 .modal-open{overflow:hidden !important;}
 .modal{top:10% !important;}
+body.modal-open #wrap #content{overflow: hidden !important;}
