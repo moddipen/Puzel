@@ -33,6 +33,8 @@
 	Router::connect('/puzel-for-business', array('controller' => 'users', 'action' => 'business'));
 	Router::connect('/contact', array('controller' => 'users', 'action' => 'contact'));
 	Router::connect('/thank-you', array('controller' => 'subscriptions', 'action' => 'thankyou'));
+
+
 	
 	//---------------------User Account----------------------------//
 	
@@ -48,6 +50,7 @@
 	Router::connect('/support', array('controller' => 'supports', 'action' => 'index','business'=>true));
 	Router::connect('/settings', array('controller' => 'users', 'action' => 'setting','business'=>true));
 	Router::connect('/create-puzel', array('controller' => 'puzzles', 'action' => 'create','business'=>true));
+  Router::connect('/export', array('controller' => 'visitors', 'action' => 'export','business'=>true));
 	
 
 	//---------------------Admin Account----------------------------//

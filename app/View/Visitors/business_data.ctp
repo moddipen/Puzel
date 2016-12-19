@@ -114,7 +114,7 @@
                     </div>
                     <div class="col-md-2">
                       <div class="form-group iconwithtext">
-						<a href="<?php echo Configure::read("SITE_BUSINESS_URL");?>/visitors/export" id="downloadcsv">
+						<a href="<?php echo Configure::read("SITE_BUSINESS_URL");?>/export" id="downloadcsv">
 						<i class="fa fa-downloads"></i>
 						<span class="text" style="color:#FFF;">Download as CSV</span></a>
                          <?php //echo $this->html->link(' Download as CSV',array('action' => 'export'),array('class'=>'fa fa-download','style'=>"color:white;"));?><!-- i class="fa fa-downloads"></i> --> 
@@ -342,7 +342,7 @@ $(document).ready(function()
       $("#emailfilter").change(function()
       {
         var email = this.value ;
-        var path = "<?php echo Configure::read('SITE_BUSINESS_URL')?>/visitors/export/"+email;
+        var path = "<?php echo Configure::read('SITE_BUSINESS_URL')?>/export/"+email;
         $.ajax(
         {
           type: "POST",
@@ -373,7 +373,7 @@ $(document).ready(function()
         var curr_year = d.getFullYear(); // Selected date year
         var desired_date_fromat = curr_year+"-"+curr_month+"-"+curr_date; //Desired date format 
         $("#selectedenddate").val(desired_date_fromat);
-          var path = "<?php echo Configure::read('SITE_BUSINESS_URL')?>/visitors/export/0/"+$("#selectedstartdate").val()+"/"+$("#selectedenddate").val();
+          var path = "<?php echo Configure::read('SITE_BUSINESS_URL')?>/export/0/"+$("#selectedstartdate").val()+"/"+$("#selectedenddate").val();
           $.ajax(
           {
             type: "POST",
@@ -430,7 +430,7 @@ $(document).ready(function()
 
         if($("#startdate").val() == "" && $("#enddate").val() == "")
          {
-           var path = "<?php echo Configure::read('SITE_BUSINESS_URL')?>/visitors/export";
+           var path = "<?php echo Configure::read('SITE_BUSINESS_URL')?>/export";
 
          } 
          else
@@ -460,7 +460,7 @@ $(document).ready(function()
         var search = this.value ;
         if(search != "")
         {
-          var path = "<?php echo Configure::read('SITE_BUSINESS_URL')?>/visitors/export/"+search;
+          var path = "<?php echo Configure::read('SITE_BUSINESS_URL')?>/export/"+search;
           $.ajax(
             {
               type: "POST",
