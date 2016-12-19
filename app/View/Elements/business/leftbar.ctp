@@ -3,7 +3,7 @@
 
           <!-- Branding -->
           <div class="navbar-header col-md-1">
-            <a class="navbar-brand" href="<?php echo Configure::read('SITE_URL');?>puzel">
+            <a class="navbar-brand" href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/puzzles/index">
               
             </a>
             <div class="sidebar-collapse hidden-md hidden-lg">
@@ -50,7 +50,7 @@
                           $mainClass = "";
                         } ?>
                   <li class="<?php echo $mainClass;?>">
-                    <a href="<?php echo Configure::read('SITE_URL');?>puzel">
+                    <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/puzzles/index">
                       <i class="fa fa-puzel-icon-left"></i> Puzel
                       
                     </a>
@@ -72,7 +72,8 @@
                           $mainClass = "";
                         } ?>
                   <li class="<?php echo $mainClass;?>">
-                    <a href="<?php echo Configure::read('SITE_URL');?>data-captured">
+                    <!-- <a href="<?php echo Configure::read('SITE_URL');?>data-captured"> -->
+                    <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/visitors/data">
                       <i class="fa fa-database"></i> Data Captured
                       
                     </a>
@@ -95,6 +96,7 @@
                         } ?>
                   <li class="<?php echo $mainClass;?>">
                     <a href="<?php echo Configure::read('SITE_URL');?>billing">
+                    <!-- <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/orders/index"> -->
                       <i class="fa fa-billing"></i> Billing
                       
                     </a>
@@ -116,7 +118,7 @@
                           $mainClass = "";
                         } ?>
                   <li class="<?php echo $mainClass;?>">
-                    <a href="<?php echo Configure::read('SITE_URL');?>support">
+                    <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/supports/index">
                       <i class="fa fa-support-16"></i> Support
                       
                     </a>
