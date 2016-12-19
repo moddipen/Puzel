@@ -105,16 +105,16 @@ Configure::write('Dispatcher.filters', array(
 App::uses('CakeLog', 'Log');
 
 // define('BASE_URL',"http://localhost/puzzel/");
-Configure::write('SITE_URL',"http://localhost/puzzle/");
+Configure::write('SITE_URL',"http://puzel.stage.n-framescorp.com/");
 
 // Business Url 
-Configure::write('SITE_BUSINESS_URL',"http://localhost/puzzle/business");
+Configure::write('SITE_BUSINESS_URL',"http://puzel.stage.n-framescorp.com/business");
 
 // Admin Url 
-Configure::write('SITE_ADMIN_URL',"http://localhost/puzzle/admin");
+Configure::write('SITE_ADMIN_URL',"http://puzel.stage.n-framescorp.com/admin");
 
 // Admin Url 
-Configure::write('SITE_USER_URL',"http://localhost/puzzle/user");
+Configure::write('SITE_USER_URL',"http://puzel.stage.n-framescorp.com/user");
 
 // Postmark Tokenid
 Configure::write('POSTMARKTOKEN',"4fc3bc33-f599-4d30-8444-8eb159dc0318");
