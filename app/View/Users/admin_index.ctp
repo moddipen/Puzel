@@ -97,7 +97,7 @@
                     </div>
                     <div class="col-md-2">
                       <div class="form-group iconwithtext">
-                          <a href="<?php echo Configure::read("SITE_ADMIN_URL");?>/users/userexport" id="userdownload">
+                          <a href="<?php echo Configure::read("SITE_ADMIN_URL");?>/users/export" id="userdownload">
                             <i class="fa fa-downloads"></i> <span class="text" style="color:#FFF;">Download as CSV</span>
                           </a>  
                         </div>

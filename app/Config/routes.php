@@ -60,6 +60,7 @@
   Router::connect('/admin/businesses', array('controller' => 'users', 'action' => 'business','admin'=>true)); 
   Router::connect('/admin/businesses/export', array('controller' => 'users', 'action' => 'export','admin'=>true)); 
   Router::connect('/admin/users', array('controller' => 'users', 'action' => 'index','admin'=>true)); 
+  Router::connect('/admin/users/export', array('controller' => 'users', 'action' => 'userexport','admin'=>true)); 
 
 
 
