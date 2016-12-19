@@ -33,7 +33,7 @@
 	Router::connect('/puzel-for-business', array('controller' => 'users', 'action' => 'business'));
 	Router::connect('/contact', array('controller' => 'users', 'action' => 'contact'));
 	Router::connect('/thank-you', array('controller' => 'subscriptions', 'action' => 'thankyou'));
-  Router::connect('/sign-up/plan-name', array('controller' => 'subscriptions', 'action' => 'plan','plan-name','user'=>true));
+  Router::connect('/sign-up/plan-name', array('controller' => 'subscriptions','action' => 'plan','user'=>true));
 
 
 	
