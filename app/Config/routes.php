@@ -42,7 +42,7 @@
 	Router::connect('/login', array('controller' => 'users', 'action' => 'login','user'=>true));
 	Router::connect('/forgot-password', array('controller' => 'users', 'action' => 'forgetpassword','user'=>true));
 	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout','user'=>true));
-  Router::connect('/puzel', array('controller' => 'puzzles', 'action' => 'index','user'=>true));
+  //Router::connect('/puzel', array('controller' => 'puzzles', 'action' => 'index','user'=>true));
   Router::connect('/support', array('controller' => 'supports', 'action' => 'index','user'=>true));
 	Router::connect('/create-ticket', array('controller' => 'supports', 'action' => 'add','user'=>true));
 	Router::connect('/settings', array('controller' => 'users', 'action' => 'setting','user'=>true));
