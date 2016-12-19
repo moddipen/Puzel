@@ -24,7 +24,34 @@
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
+	
+	//--------------------Fronend--------------------------//
+	
 	Router::connect('/', array('controller' => 'users', 'action' => 'index'));
+	Router::connect('/pricing', array('controller' => 'subscriptions', 'action' => 'package'));
+	Router::connect('/how-it-works', array('controller' => 'users', 'action' => 'about'));
+	Router::connect('/puzel-for-business', array('controller' => 'users', 'action' => 'business'));
+	Router::connect('/contact', array('controller' => 'users', 'action' => 'contact'));
+	Router::connect('/thank-you', array('controller' => 'subscriptions', 'action' => 'thankyou'));
+	
+	//---------------------User Account----------------------------//
+	
+	Router::connect('/login', array('controller' => 'users', 'action' => 'login','user'=>true));
+	Router::connect('/forgot-password', array('controller' => 'users', 'action' => 'forgetpassword','user'=>true));
+	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout','user'=>true));
+	
+	//---------------------Business Account----------------------------//
+	
+	Router::connect('/puzel', array('controller' => 'puzzles', 'action' => 'index','business'=>true));
+	Router::connect('/data-captured', array('controller' => 'visitors', 'action' => 'data','business'=>true));
+	Router::connect('/billing', array('controller' => 'orders', 'action' => 'index','business'=>true));
+	Router::connect('/support', array('controller' => 'supports', 'action' => 'index','business'=>true));
+	Router::connect('/settings', array('controller' => 'users', 'action' => 'setting','business'=>true));
+	Router::connect('/create-puzel', array('controller' => 'puzzles', 'action' => 'create','business'=>true));
+	
+
+	//---------------------Admin Account----------------------------//
+	
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
  */
