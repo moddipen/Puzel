@@ -64,7 +64,7 @@
   Router::connect('/admin/data-captured', array('controller' => 'users', 'action' => 'data','admin'=>true)); 
   Router::connect('/admin/data-captured', array('controller' => 'users', 'action' => 'data','admin'=>true)); 
   Router::connect('/admin/support', array('controller' => 'supports', 'action' => 'index','admin'=>true)); 
-
+  Router::connect('/admin/create-ticket', array('controller' => 'supports', 'action' => 'add','admin'=>true));
 
  
 
