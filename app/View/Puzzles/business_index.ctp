@@ -117,7 +117,7 @@
                           <?php 
                           }
                           else{?>
-                          <input type="button" value="Create Puzel" onClick="location.href='<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/create';" class="btn btn-oranges pull-right">
+                          <input type="button" value="Create Puzel" onClick="location.href='<?php echo Configure::read('SITE_URL')?>create-puzel';" class="btn btn-oranges pull-right">
                           <?php } ?>
 
                           

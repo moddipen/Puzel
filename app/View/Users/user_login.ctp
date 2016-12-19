@@ -41,7 +41,7 @@ div#flashMessage{
                     <input type="checkbox" value="1"  name ="data[User][remember_me]" id="remember" checked="">
                     <label for="remember">Remember me</label>
                   </div>
-                  <a href="<?php echo Configure::read('SITE_USER_URL');?>/users/forgetpassword">Forgot password?</a>
+                  <a href="<?php echo Configure::read('SITE_URL');?>forgot-password">Forgot password?</a>
                 </section>
                 <section class="log-in">
                   <button class="btn btn-oranges" type="submit"><b>Log In</b></button>
