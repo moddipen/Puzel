@@ -57,7 +57,7 @@
 	//---------------------Admin Account----------------------------//
 	
   Router::connect('/admin/puzel', array('controller' => 'puzzles', 'action' => 'index','admin'=>true)); 
-
+  Router::connect('/admin/businesses', array('controller' => 'users', 'action' => 'business','admin'=>true)); 
 
 
 

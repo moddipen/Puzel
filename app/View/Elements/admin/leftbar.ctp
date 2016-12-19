@@ -50,7 +50,7 @@
                           $mainClass = "";
                         } ?>
                   <li class="<?php echo $mainClass;?>">
-                    <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/users/business">
+                    <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/businesses">
                       <i class="fa fa-briefcase"></i> Business
                       
                     </a>
