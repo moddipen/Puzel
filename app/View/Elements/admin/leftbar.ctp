@@ -178,7 +178,7 @@
                         </a>
                       </li>
                       <li>
-                        <a href="<?php echo Configure::read('SITE_USER_URL');?>/users/logout">
+                        <a href="<?php echo Configure::read('SITE_URL');?>logout">
                           <i class="fa fa-power-off"></i> Logout
                         </a>
                       </li>
