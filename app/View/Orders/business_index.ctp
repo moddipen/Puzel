@@ -1,4 +1,8 @@
-
+<style type="text/css">
+    .pagesubheader .title, .pagesubheader .alert{float: left;}
+    .alert{margin-left: 20px;margin-top: 25px;font-size: 16px;color:#FFF;}
+    .title {margin-bottom: 15px;}
+</style>
 
       
                 
@@ -9,17 +13,13 @@
           <div class="main">
             <!-- cards -->
             <?php echo $this->element('business/header');?>
-           <?php 
-       echo $this->Session->flash();
-       ?>
                <!-- /cards -->
             
-             <div class="pagesubheader">
-            
-
-              <h2><i class="fa fa-billing-big"></i> Billing</h2>
+              <div class="pagesubheader">
+              <h2 class="title"><i class="fa fa-billing-big"></i>Billing</h2><div id="alert" class="alert"><?php echo $this->Session->flash();?> </div>
 
             </div>
+             
 
 
             <!-- row -->

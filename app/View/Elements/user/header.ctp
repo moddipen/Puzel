@@ -52,7 +52,7 @@
  -->
 
 
-              <div class="card-container col-lg-3 col-sm-6 col-sm-12">
+              <!-- <div class="card-container col-lg-3 col-sm-6 col-sm-12">
                 <div class="card card-transparent hover">
                   <div class="front">        
                     
@@ -75,7 +75,7 @@
                     </a>
                   </div>
                 </div>
-              </div>
+              </div> -->
 
 
               <div class="card-container col-lg-3 col-sm-6 col-xs-12">

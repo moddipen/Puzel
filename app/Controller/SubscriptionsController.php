@@ -73,9 +73,11 @@ class  SubscriptionsController  extends AppController {
 		if($id)
 		{
 			$plan = $this->Subscription->find('all',array("conditions"=>array("Subscription.id >"=>$id)));	
+			$this->set('Upgrade','upgrade');
 		}
 		else{
 			$plan = $this->Subscription->find('all');
+			$this->set('Upgrade','all');
 		}
 		$this->set('Plan',$plan);
 	}	
@@ -160,8 +162,8 @@ class  SubscriptionsController  extends AppController {
 									// {
 										$result = Braintree_Subscription::create([
 									  'paymentMethodToken' => $customer->customer->paymentMethods[0]->token,
-									  'planId' => $plan['Subscription']['id'],
-									  'firstBillingDate' => $tomorrow
+									  'planId' => $plan['Subscription']['id']
+									  // 'firstBillingDate' => $tomorrow
 										]);	
 									// } 
 									// else
@@ -265,8 +267,7 @@ class  SubscriptionsController  extends AppController {
 										}
 										else
 										{
-											$this->Session->setFlash('<div><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Failed </b>: Error processing transaction:</p><br>
-											</div>');	
+											$this->Session->setFlash(__('Failed : Error processing transaction'),'default');	
 										}	
 									}	
 								}
@@ -340,7 +341,7 @@ class  SubscriptionsController  extends AppController {
 									'reply_to'=>"support@puzel.co"
 									);	
 									$this->sendinvoice($email);
-									$this->Session->setFlash('<div><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Success </b>: Your subscription upgraded </p></div>');
+									$this->Session->setFlash(__('Your subscription upgraded'),'default');
 									$this->redirect(array('controller'=>'orders','action'=>'index','business'=>true));		
 								}
 								else{
@@ -388,8 +389,8 @@ class  SubscriptionsController  extends AppController {
 									$tomorrow->setTime(0,0,0);	
 									$result = Braintree_Subscription::create([
 									  'paymentMethodToken' => $customer->customer->paymentMethods[0]->token,
-									  'planId' => $plan['Subscription']['id'],
-									   'firstBillingDate' => $tomorrow
+									  'planId' => $plan['Subscription']['id']
+									   // 'firstBillingDate' => $tomorrow
 									]);
 									// if($plan['Subscription']['id'] != 2)
 									// {

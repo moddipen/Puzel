@@ -106,9 +106,13 @@
                           </tr>
                         </thead>
                         <tbody id ="datafile">
-                        <?php if(!empty($List)) {
+                        <?php 
+                       
+                        if(!empty($List)) {
 
-                          $user = AuthComponent::user();
+                          $user = $this->session->read('Auth.User');
+
+
                           foreach ($List as $value) {  ?>
                           <tr>
                             <td><?php echo date('m/d/Y',strtotime($value['Visitor']['created']));?></td>
@@ -127,30 +131,14 @@
                                   return false">
                                   <i class="fa fa-facebook"></i>
                               </a> -->
-                              <a class="share-btn" href="http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $value['Puzzle']['Business']['company_name'].'/'.$value['Puzzle']['Puzzle']['name'].'/'.$value['Puzzle']['Business']['firstname'].'_'.$value['Puzzle']['Business']['id'];?>&title=<?php echo $value['Puzzle']['Puzzle']['name'];?>&description=Price 33$" onclick="return !window.open(this.href, 'Facebook', 'width=640,height=580')"><i class="fa fa-facebook"></i></a>
+                              <a class="share-btn" href="http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $value['Puzzle']['Business']['company_name'].'/'.$value['Puzzle']['Puzzle']['name'].'/'.$user['refrel_id'];?>&title=<?php echo $value['Puzzle']['Puzzle']['name'];?>&description=Price 33$" onclick="return !window.open(this.href, 'Facebook', 'width=640,height=580')"><i class="fa fa-facebook"></i></a>
                                 &nbsp;&nbsp;
-                                <a class="twitter-share-button"
-                                    href="http://puzel.stage.n-framescorp.com/puzzle/<?php echo $value['Puzzle']['Business']['company_name'].'/'.$value['Puzzle']['Puzzle']['name'].'/'.$value['Puzzle']['Business']['firstname'].'_'.$value['Puzzle']['Business']['id'];?>"
-                                     data-size="large"
-                                    target = "_blank">
+                                <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $value['Puzzle']['Business']['company_name'].'/'.$value['Puzzle']['Puzzle']['name'].'/'.$user['refrel_id'];?>" data-size="large" target = "_blank">
                                 <i class="fa fa-twitter"></i></a>
                                &nbsp;&nbsp; 
-                                <!-- Place this tag where you want the share button to render. -->
-                                <!-- <a class="icon-gplus" rel="nofollow"
-                                    href="http://www.plus.google.com/"
-                                    onclick="popUp=window.open(
-                                        'https://plus.google.com/share?url=https://postmarkapp.com',
-                                        'popupwindow',
-                                        'scrollbars=yes,width=800,height=400');
-                                    popUp.focus();
-                                    return false">
-                                    <i class="fa fa-envelope"></i>
-                                </a> -->
-                                <!-- <a class="icon-gplus" href ="https://plus.google.com/share?url=http://puzel.stage.n-framescorp.com/<?php echo $value['Puzzle']['Puzzle']['name'];?>&title=<?php echo $value['Puzzle']['Puzzle']['name'];?>" onclick="return !window.open(this.href, 'Google', 'width=640,height=580')"><i class="fa fa-envelope"></i></a>
-                               &nbsp;&nbsp;<a href="https://login.live.com/login.srf" target="_blank" style="color:white;"><i class="fa fa-windows"></i></a> -->
-                               <a class="icon-gplus" href ="http://puzel.stage.n-framescorp.com/puzzle/<?php echo $value['Puzzle']['Business']['company_name'].'/'.$value['Puzzle']['Puzzle']['name'].'/'.$value['Puzzle']['Business']['firstname'].'_'.$value['Puzzle']['Business']['id'];?>" onclick="return !window.open(this.href, 'Google', 'width=640,height=580')"><i class="fa fa-envelope"></i></a>
+                               <a class="icon-gplus" href ="https://mail.google.com/mail/?view=cm&fs=1&to=&su=Share new puzzle <?php echo $value['Puzzle']['Puzzle']['name'];?>&body=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $value['Puzzle']['Business']['company_name'].'/'.$value['Puzzle']['Puzzle']['name'].'/'.$user['refrel_id'];?>" onclick="return !window.open(this.href, 'Google', 'width=640,height=580')"><i class="fa fa-envelope"></i></a>
                                &nbsp;&nbsp;
-                               <a href="http://mail.live.com/default.aspx?rru=compose&to=&subject=Share new puzzle <?php echo $value['Puzzle']['Puzzle']['name'];?>&body=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $value['Puzzle']['Business']['company_name'].'/'.$value['Puzzle']['Puzzle']['name'].'/'.$value['Puzzle']['Business']['firstname'].'_'.$value['Puzzle']['Business']['id'];?>" onclick="return !window.open(this.href, 'Outlook', 'width=640,height=580')" target="_blank" style="color:white;"><i class="fa fa-windows"></i></a>
+                               <a href="http://mail.live.com/default.aspx?rru=compose&to=&subject=Share new puzzle <?php echo $value['Puzzle']['Puzzle']['name'];?>&body=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $value['Puzzle']['Business']['company_name'].'/'.$value['Puzzle']['Puzzle']['name'].'/'.$user['refrel_id'];?>" onclick="return !window.open(this.href, 'Outlook', 'width=640,height=580')" target="_blank" style="color:white;"><i class="fa fa-windows"></i></a>
                             
                           </td>
                           </tr>

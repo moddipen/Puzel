@@ -281,7 +281,7 @@ public function get_statistics()
 		foreach($add as $key => $value)
 		{
 			$add[$key]['Visitor'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.user_id'=>$value['User']['id'])));	
-			$add[$key]['Refrel'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.user_id'=>$value['User']['id'],'Visitor.is_refrel'=>1)));	
+			$add[$key]['Refrel'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.refrel_id'=>$value['User']['id'],'Visitor.is_refrel'=>1)));	
 		}
 		$this->set("User",$add);
 	}			

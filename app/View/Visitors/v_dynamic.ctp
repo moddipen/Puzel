@@ -462,7 +462,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
             <?php if(isset($Refrel))
               {?>
                 <input type = "hidden" name ="refrel" value = "1">
-                <input type = "hidden" name ="refrel_id" value = "<?php echo $PuzzleData['Puzzle']['user_id']?>">
+                <input type = "hidden" name ="refrel_id" value = "<?php echo $Refrel?>">
             <?php }?>
             <input type = "hidden" name ="puzzlename" value = "<?php echo $explode[5];?>">
             <input type = "hidden" name ="signwithpuzzleaccount" id ="signwithpuzzleaccount" value = "">
@@ -478,13 +478,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
           <div class="form-group" id="pasword">
             <input type="password" name="password"   id="password"  class="form-control" placeholder="Password" required>
           </div>
-          
-            <?php if(isset($Refrel))
-              {?>
-                <input type = "hidden" name ="refrel" value = "1">
-                <input type = "hidden" name ="refrel_id" value = "<?php echo $PuzzleData['Puzzle']['user_id']?>">
-            <?php }?>
-            <input type = "hidden" name ="puzzlename" value = "<?php echo $explode[5];?>">
+          <input type = "hidden" name ="puzzlename" value = "<?php echo $explode[5];?>">
             <input type = "hidden" name ="enrollwithpuzzleaccount" id ="enrollwithpuzzleaccount" value = "">
             <div class="form-group text-center">
               <button type="submit" class="btn button-sign btn-confirm" id="normalsign" value = "2" style="width:100%">Enroll Now</button>

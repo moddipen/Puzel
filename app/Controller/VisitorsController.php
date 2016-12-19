@@ -97,7 +97,8 @@ class  VisitorsController  extends AppController {
 					$array = array(
 					'firstname'=>$this->request->data['firstname'],
 					'lastname'=>$this->request->data['lastname'],
-					'email'=>$this->request->data['email']);
+					'email'=>$this->request->data['email'],
+					'refrel_id'=>$this->generateRandomString());
 					$this->User->create();
 					if($this->User->save($array))
 					{	
@@ -106,6 +107,9 @@ class  VisitorsController  extends AppController {
 						if(isset($this->request->data['refrel']))
 						{
 							$this->request->data['is_refrel'] = 1;
+							// fetch refrel person detail
+							$referel_preson = $this->User->find('first',array('conditions'=>array('User.refrel_id'=>$this->request->data['refrel_id'])));
+							$this->request->data['refrel_id'] = $referel_preson['User']['id'];
 						}		
 
 
@@ -171,11 +175,6 @@ class  VisitorsController  extends AppController {
 					else
 					{
 						$this->Visitor->create();
-						if(isset($this->request->data['refrel']))
-							{
-								$this->request->data['is_refrel'] = 1;
-							}		
-
 						if($this->Visitor->save($this->request->data))
 						{
 							$modified = date('Y-m-d H:i:s');
@@ -221,14 +220,13 @@ class  VisitorsController  extends AppController {
 	{
 		header('Access-Control-Allow-Origin: *');
 		$this->layout = '';
-		$image = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id)));	
+		$image = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id,'Puzzle.status'=>0)));
 		$this->set('image',$image['Image']);
 		$this->set('drawimage_s',count($image['Image']));
 		$this->set('PuzzleData',$image);
 		$puzel['Show'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$id,'Image.status'=>0))); 
 		$puzel['Hide'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$id,'Image.status'=>1))); 
 		$this->set("ShowPuzzel",$puzel);
-		
 		$this->render('/Visitors/fetchimage');
 	}
 

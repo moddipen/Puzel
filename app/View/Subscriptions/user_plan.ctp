@@ -175,7 +175,7 @@
 <div class="form-group">
     
       <?php
-    	
+    	$cardDetail->creditCard['last4'];
     	if(!$cardDetail){
     		echo '<select required  name="data[Subscription][ex_date_year][year]" id="year" class="chosen-select chosen-transparent form-control">';
     		
@@ -217,7 +217,10 @@
       </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
 
         <input type="hidden" name="b_07f1846d778e631822b8f85cf_e5b207e707" tabindex="-1" value="">
-        <div class="clear text-center" style="padding-bottom:30px;"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-oranges"></div>
+        <?php if(!$cardDetail) {?>
+            <div class="clear text-center" style="padding-bottom:30px;"><input type="submit" value="Sign up" name="subscribe" id="mc-embedded-subscribe" class="btn btn-oranges"></div><?php } else {?>
+            <div class="clear text-center" style="padding-bottom:30px;"><input type="submit" value="Upgrade confirm" name="subscribe" id="mc-embedded-subscribe" class="btn btn-oranges"></div>
+            <?php }?>
         </div>
       </section>
     </form>

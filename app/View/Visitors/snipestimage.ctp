@@ -1,10 +1,91 @@
-<!-- <link href="bootstrap.css" rel="stylesheet"> -->
 
-<link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/app/webroot/visitor/bootstrap.css">
+<!-- <link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/app/webroot/css/visitor/bootstrap.css"> -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script type="text/javascript" src="http://puzel.stage.n-framescorp.com/app/webroot/js/scrolling-nav.js"></script>
-<script type="text/javascript" src="http://puzel.stage.n-framescorp.com/app/webroot/js/bootstrap.min.js"></script>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/app/webroot/css/visitor/bootstrap.min.css">
+<style type="text/css">
+#blur{
+   -webkit-filter: blur(13px);
+    -moz-filter: blur(13px);
+    -o-filter: blur(13px);
+    -ms-filter: blur(13px);
+ filter: blur(13px);}
+.no-right:focus, .no-right a:focus{
+    outline:none !important;
+}
+  .modal-open {
+    overflow: hidden;
+} 
+.puzel{
+    padding-top: 120px;
+}
+.social {
+margin: 0;
+padding: 0;
+}
+.social ul {
+    margin: 0;
+    padding: 5px;
+}
+.social ul li {
+    margin: 5px;
+    list-style: none outside none;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-color: #333333;
+    text-align:center;
+    padding: 6px;
+    border-radius: 50%;
+    border: 1px solid #000;
+}
+.social i {
+    color: #fff;
+    font-size: 15px;
+}
+.navbar{
+    background-color: #aaaaaa!important;
+    min-height: 120px !important;
+}
+.top-nav-collapse {
+        padding: 0;
+        background: rgba(0,0,0,0.4) !important;
+}
+.socialbtn{
+  padding-left: 50px;
+}
+.termbtn{
+    padding-right: 45px;
+}
+
+.navbar-nav{
+    float: right; !important;
+    margin-top: 40px !important;
+}
+.modal{
+    top: 150px !important;
+}
+.modal-title ,.modal-body {
+    color: #E58B16 !important;
+}
+.navbar-default{
+    border: none !important;
+}
+
+
+.btn , .form-control{
+    border-radius: 0px !important;
+}
+
+      #Imageenroll, #Imagedata {
+          padding-top: 25px;
+      }
+
+   .btn.focus, .btn:focus, .btn:hover{
+    color: #fff;
+    outline:none!important;
+}   
+</style>
 
 
 <?php
@@ -45,30 +126,60 @@
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                     <div class="row">
                             <div class="col-md-5 col-xs-6">
-                               <button type="button" class="btn button-header" data-toggle="modal" data-target="#modal">Grand Price</button>
-                               <div class="modal fade" id="modal" role="dialog">
+                               <button type="button" class="btn button-header" data-toggle="modal" data-target="#modal">Grand Prize</button>
+                            </div>     
+                            <div class="col-md-7 col-xs-7 termbtn">
+                                <button type="button" class="btn button-header btn-tab" data-toggle="modal" data-target="#modalterm">Terms / Description</button>
+                            </div>
+                     </div>
+                 </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <div class="modal fade" id="modal" role="dialog">
                                     <div class="modal-dialog">
                                       <div class="modal-content">
                                         <div class="modal-header">
                                           <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                          <h3 class="modal-title">Grand price</h3>
+                                          <h3 class="modal-title">Grand prize</h3>
                                         </div>
                                         <div class="modal-body">
+                                        <?php
+                                          if($PuzzleData['Puzzle']['type'] == "Mystery")
+                                          {
+                                            $blurr_class = "blur";
+                                          }
+                                          else
+                                          {
+                                            $blurr_class = "";
+                                          }
+                                        ?>
                                           <div style="margin-bottom:40px;"><?php echo $PuzzleData['Puzzle']['price']?></div>
-                                          <p><img src ="<?php echo $this->webroot.'img/grand_price/'.$PuzzleData['Puzzle']['price_image']?>"></p>
+                                          <div>
+                                           <?php
+                                            if($PuzzleData['Puzzle']['price_image'] != "")
+                                            {
+                                          ?> 
+                                               <div id="<?php echo $blurr_class;?>" style="background:url('<?php echo Configure::read("SITE_URL") ;?>app/webroot/img/grand_price/<?php echo $PuzzleData['Puzzle']['price_image'];?>')">
+                                               <img src = "<?php echo Configure::read("SITE_URL") ;?>app/webroot/img/grand_price/<?php echo $PuzzleData['Puzzle']['price_image'];?>"  width="540px"/>
+                                              </div>
+                                          <?php
+                                            }
+                                          ?>
+                                          </div>
                                         </div>
                                       </div>
                                     </div>
                                 </div>
                              </div>
-                            <div class="col-md-7 col-xs-7 termbtn">
-                                <button type="button" class="btn button-header btn-tab" data-toggle="modal" data-target="#modalterm">Terms/Descrption</button>
-                                  <div class="modal fade" id="modalterm" role="dialog">
+                             <div class="modal fade" id="modalterm" role="dialog">
                                     <div class="modal-dialog">
                                       <div class="modal-content">
                                         <div class="modal-header">
                                           <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                          <h3 class="modal-title">Terms/Descrption</h3>
+                                          <h3 class="modal-title">Terms / Description</h3>
                                         </div>
                                         <div class="modal-body">
                                           <div style="margin-bottom:40px;"><?php echo $PuzzleData['Puzzle']['terms']?></div>
@@ -76,17 +187,7 @@
                                       </div>
                                     </div>
                                 </div>
-                    
-                            </div>
-                     </div>
-            
-                    </div>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+
   <div class="puzel">
     <h2 style="text-align:center;"><?php echo $PuzzleData['Puzzle']['name'];?></h2>
 
@@ -107,57 +208,12 @@
       .merge div div{width:<?php echo $image[0]['width']."px";?>;height:<?php echo $image[0]['height']."px";?>;display:inline-block;margin-left:-5px;margin-bottom:-5px;}
       .merge{width:<?php echo $image[0]['total_width']."px";?>;margin:50px auto;}
       .button-puzzle{background:#e58b16;font-size: 18px;text-align:center;font-weight: 300;padding: 5px 20px;color: #fff;width:100%;margin-bottom:20px;}
-      .puzle-form .active, .button-puzzle:hover{background:none;color: #e58b16;border:1px solid #e58b16;box-shadow:none;}
+      .puzle-form .active, .button-puzzle:hover{background:none;color: #e58b16 !important;border:1px solid #e58b16;box-shadow:none;}
       .button-header{background:#e58b16;font-size: 18px;text-align:center;font-weight: 300;padding: 5px 20px;color: #fff;width:100%;margin-bottom:20px;}
-      .button-header .active, .button-header:hover{background:#e58b16;color:#8421CF; border: none !important;}
+      .button-header .active, {background:#e58b16;color:#fff ; border: none !important;}
+      /*.btn.focus, .btn:focus, .btn:hover {color: #fff !important;}*/
       #alert{left: 30px;position: absolute;top: 52px;}
-      .puzel{padding-top: 120px;}
-      .social {margin: 0;padding: 0;}
-      .social ul {margin: 0;padding: 5px;}
-      .social ul li {margin: 5px;list-style: none outside none;display: inline-block;width: 30px;height: 30px;background-color: #333333;text-align:center;padding: 6px;border-radius: 50%;border: 1px solid #000;}
-      .social i {
-          color: #fff;
-          font-size: 15px;
-      }
-      .navbar{
-          background-color: #aaaaaa!important;
-          min-height: 120px !important;
-      }
-      .top-nav-collapse {
-              padding: 0;
-              background: rgba(0,0,0,0.4) !important;
-      }
-      .socialbtn{
-        padding-left: 50px;
-      }
-      .termbtn{
-          padding-right: 45px;
-      }
-      .modal-backdrop{
-          z-index: 999 !important;
-      }
-      .navbar-nav{
-          float: right; !important;
-          margin-top: 40px !important;
-      }
-      .modal{
-          top: 150px !important;
-      }
-      .modal-title ,.modal-body {
-          color: #E58B16 !important;
-      }
-      .navbar-default{
-          border: none !important;
-      }
-      .modal-backdrop.in{
-          opacity: 0.3 !important;
-      }
-      .btn{
-          border-radius: 0px !important;
-      }
-      #Imageenroll, #Imagedata {
-          padding-top: 25px;
-      }
+     
       </style>
         <?php $peices = $PuzzleData['Puzzle']['pieces'] ; ?>
         <div class="merge">
@@ -198,6 +254,8 @@
     }?>
 
     </div>
+
+    
 <div class="puzle-form">   
   <div class="container-fluid">
     <div class="row">
@@ -220,6 +278,7 @@
                   </ul>
               </div>
       </div>
+     <?php if($ShowPuzzel['Show'] != 0){?> 
      <div class="col-md-6">
       <div class="col-md-6 col-xs-6">
         <button type="button" class="btn button-puzzle btn-tab active" id="puzelasubmit" name="puzzle">Signup for Puzel</button>
@@ -275,13 +334,15 @@
           </form>
           </div>
     </div>
-
-     
+    <?php }?>
+      
    
     </div>
     <?php //}?>
 </div>
 </div> 
+
+
 
 </div>
 </div>
@@ -295,3 +356,5 @@
 
 
   <?php   } ?>
+  <script type="text/javascript" src="http://puzel.stage.n-framescorp.com/app/webroot/js/scrolling-nav.js"></script>
+<script type="text/javascript" src="http://puzel.stage.n-framescorp.com/app/webroot/js/bootstrap.min.js"></script>
