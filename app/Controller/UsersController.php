@@ -358,21 +358,24 @@ public function get_statistics()
 				if($this->Auth->user('usertype') == 2)
               	{
 
+              		exit("admin");
               		$this->Session->setFlash(__('Login successfully!!....', true), 'default');
               		return $this->redirect(array('controller'=>'puzzles','action'=>'index','admin'=>true));
-              		exit("admin");
+              		
               	}	
               	elseif($this->Auth->user('usertype') == 1)
               	{
+              		exit("business");
               		$this->Session->setFlash(__('Login successfully!!....', true), 'default');
               		return $this->redirect(array('controller'=>'puzzles','action'=>'index','business'=>true));
-              		exit("business");
+              		
               	}
               	else
               	{
+              		exit("user");
               		$this->Session->setFlash(__('Login successfully!!....', true), 'default');
               		return $this->redirect(array('controller'=>'puzzles','action'=>'index','user'=>true));	
-              		exit("user");
+              		
               	}	
                 
             }
