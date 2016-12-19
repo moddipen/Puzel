@@ -67,13 +67,12 @@ class  SubscriptionsController  extends AppController {
 */	
 	public function package($id = null)
 	{	
-		echo "<pre>";print_r($id);exit;
 		$signup = 0;
 		$this->set("Signup",$signup);
 		$this->set('title',"Packages");
 		if($id)
 		{
-			$plan = $this->Subscription->find('all',array("conditions"=>array("Subscription.name >"=>$id)));	
+			$plan = $this->Subscription->find('all',array("conditions"=>array("Subscription.id >"=>$id)));	
 			$this->set('Upgrade','upgrade');
 		}
 		else{
