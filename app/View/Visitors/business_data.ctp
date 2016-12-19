@@ -342,7 +342,7 @@ $(document).ready(function()
       $("#emailfilter").change(function()
       {
         var email = this.value ;
-        var path = "<?php echo Configure::read('SITE_URL')?>export/"+email;
+        var path = "<?php echo Configure::read('SITE_BUSINESS_URL')?>/visitors/export/"+email;
         $.ajax(
         {
           type: "POST",
@@ -373,7 +373,7 @@ $(document).ready(function()
         var curr_year = d.getFullYear(); // Selected date year
         var desired_date_fromat = curr_year+"-"+curr_month+"-"+curr_date; //Desired date format 
         $("#selectedenddate").val(desired_date_fromat);
-          var path = "<?php echo Configure::read('SITE_URL')?>export/0/"+$("#selectedstartdate").val()+"/"+$("#selectedenddate").val();
+          var path = "<?php echo Configure::read('SITE_BUSINESS_URL')?>/visitors/export/0/"+$("#selectedstartdate").val()+"/"+$("#selectedenddate").val();
           $.ajax(
           {
             type: "POST",
@@ -430,12 +430,12 @@ $(document).ready(function()
 
         if($("#startdate").val() == "" && $("#enddate").val() == "")
          {
-           var path = "<?php echo Configure::read('SITE_URL')?>export";
+           var path = "<?php echo Configure::read('SITE_BUSINESS_URL')?>/visitors/export";
 
          } 
          else
          {
-           var path = "<?php echo Configure::read('SITE_URL')?>export/0/"+$("#startdate").val()+"/"+$("#enddate").val();
+           var path = "<?php echo Configure::read('SITE_BUSINESS_URL')?>/visitors/export/0/"+$("#startdate").val()+"/"+$("#enddate").val();
          } 
 
 
@@ -460,7 +460,7 @@ $(document).ready(function()
         var search = this.value ;
         if(search != "")
         {
-          var path = "<?php echo Configure::read('SITE_URL')?>export/"+search;
+          var path = "<?php echo Configure::read('SITE_BUSINESS_URL')?>/visitors/export/"+search;
           $.ajax(
             {
               type: "POST",
