@@ -173,7 +173,7 @@
                           $mainClass = "";
                         } ?>
                       <li class="<?php echo $mainClass;?>">
-                        <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/setting">
+                        <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/settings">
                           <i class="fa fa-cog"></i> Settings
                         </a>
                       </li>
