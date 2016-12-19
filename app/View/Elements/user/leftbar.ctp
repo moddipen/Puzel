@@ -3,7 +3,7 @@
 
           <!-- Branding -->
           <div class="navbar-header col-md-1">
-            <a class="navbar-brand" href="<?php echo Configure::read('SITE_USER_URL');?>/puzzles/index">
+            <a class="navbar-brand" href="<?php echo Configure::read('SITE_URL');?>puzel">
               
             </a>
             <div class="sidebar-collapse hidden-md hidden-lg">
@@ -51,7 +51,7 @@
                           $mainClass = "";
                         } ?>
                   <li class="<?php echo $mainClass;?>">
-                    <a href="<?php echo Configure::read('SITE_USER_URL');?>/puzzles/index">
+                    <a href="<?php echo Configure::read('SITE_URL');?>puzel">
                       <i class="fa fa-puzel-icon-left"></i> Puzel
                       
                     </a>
