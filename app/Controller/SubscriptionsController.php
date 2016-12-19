@@ -72,7 +72,7 @@ class  SubscriptionsController  extends AppController {
 		$this->set('title',"Packages");
 		if($id)
 		{
-			$plan = $this->Subscription->find('all',array("conditions"=>array("Subscription.id >"=>$id)));	
+			$plan = $this->Subscription->find('all',array("conditions"=>array("Subscription.name >"=>$id)));	
 			$this->set('Upgrade','upgrade');
 		}
 		else{
