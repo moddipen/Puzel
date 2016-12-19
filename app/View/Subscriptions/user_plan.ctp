@@ -283,10 +283,7 @@ $(document ).ready(function(){
       		'data[Subscription][confirm_password]': {required: 'Please enter valid password.'}
 		}
 	});
-	
-	<?php }?> 
-      
-$('#card_number1').validateCreditCard(function(result) {
+	$('#card_number1').validateCreditCard(function(result) {
             if(result.card_type == null)
             {
                 $('#card_number1').removeClass();
@@ -307,9 +304,8 @@ $('#card_number1').validateCreditCard(function(result) {
                 $('#card_number1').addClass("valid");
             }
         }); 
-
-
-
+	<?php }?> 
+      
      $("form").submit(function()
      {
        
