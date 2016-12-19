@@ -42,19 +42,19 @@
 	Router::connect('/login', array('controller' => 'users', 'action' => 'login','user'=>true));
 	Router::connect('/forgot-password', array('controller' => 'users', 'action' => 'forgetpassword','user'=>true));
 	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout','user'=>true));
-  if(isset($this->params['user']))
-  {
+  // if(isset($this->params['user']))
+  // {
     Router::connect('/puzel', array('controller' => 'puzzles', 'action' => 'index','user'=>true));
-  }  
+  // }  
   Router::connect('/support', array('controller' => 'supports', 'action' => 'index','user'=>true));
 	Router::connect('/create-ticket', array('controller' => 'supports', 'action' => 'add','user'=>true));
 	Router::connect('/settings', array('controller' => 'users', 'action' => 'setting','user'=>true));
   //---------------------Business Account----------------------------//
 	
-  if(isset($this->params['business']))
-  {
+  // if(isset($this->params['business']))
+  // {
 	 Router::connect('/puzel', array('controller' => 'puzzles', 'action' => 'index','business'=>true));
-  } 
+  // } 
 	Router::connect('/data-captured', array('controller' => 'visitors', 'action' => 'data','business'=>true));
 	Router::connect('/billing', array('controller' => 'orders', 'action' => 'index','business'=>true));
 	Router::connect('/support', array('controller' => 'supports', 'action' => 'index','business'=>true));
