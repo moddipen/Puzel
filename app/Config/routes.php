@@ -56,6 +56,15 @@
 
 	//---------------------Admin Account----------------------------//
 	
+  Router::connect('/puzel', array('controller' => 'puzzles', 'action' => 'index','admin'=>true));
+
+
+
+
+
+
+
+
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
  */
