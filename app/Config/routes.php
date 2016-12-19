@@ -56,7 +56,7 @@
   Router::prefix('business', function($routes) {
     // All routes here will be prefixed with `/admin`
     // And have the prefix => admin route element added.
-    $routes->connect('/:controller', ['action' => 'index']);
+    $routes->connect('/puzel', ['controller'=>'puzzles','action' => 'index']);
     $routes->connect('/:controller/:action/*');
 });
 	 // Router::connect('/puzel', array('controller' => 'puzzles', 'action' => 'index','business'=>true));
