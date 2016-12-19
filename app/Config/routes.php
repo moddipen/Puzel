@@ -51,6 +51,7 @@
 	Router::connect('/settings', array('controller' => 'users', 'action' => 'setting','business'=>true));
 	Router::connect('/create-puzel', array('controller' => 'puzzles', 'action' => 'create','business'=>true));
   Router::connect('/export', array('controller' => 'visitors', 'action' => 'export','business'=>true));
+  Router::connect('/create-ticket', array('controller' => 'supports', 'action' => 'add','business'=>true));
 	
 
 	//---------------------Admin Account----------------------------//
