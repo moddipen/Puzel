@@ -42,6 +42,7 @@
 	Router::connect('/forgot-password', array('controller' => 'users', 'action' => 'forgetpassword','user'=>true));
 	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout','user'=>true));
   Router::connect('/puzel', array('controller' => 'puzzles', 'action' => 'index','user'=>true));
+  Router::connect('/support', array('controller' => 'supports', 'action' => 'index','user'=>true));
 	
 	//---------------------Business Account----------------------------//
 	

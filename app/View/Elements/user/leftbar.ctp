@@ -73,7 +73,7 @@
                           $mainClass = "";
                         } ?>
                   <li class="<?php echo $mainClass;?>">
-                    <a href="<?php echo Configure::read('SITE_USER_URL');?>/supports/index">
+                    <a href="<?php echo Configure::read('SITE_URL');?>support">
                       <i class="fa fa-support-16"></i> Support
                       
                     </a>
