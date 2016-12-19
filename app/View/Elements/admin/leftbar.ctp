@@ -70,7 +70,7 @@
                       else
                         {
                           $mainClass = "";
-                        } ?>
+                        } ?> 
                   <li class="<?php echo $mainClass;?>">
                     <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/users">
                       <i class="fa fa-users"></i> Users
