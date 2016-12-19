@@ -4,6 +4,13 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'HelveticaNeue-Bold';
+  src: url('../fonts/HelveticaNeue-Bold.eot?#iefix') format('embedded-opentype'),  url('../fonts/HelveticaNeue-Bold.woff') format('woff'), url('../fonts/HelveticaNeue-Bold.ttf')  format('truetype'), url('../fonts/HelveticaNeue-Bold.svg#HelveticaNeue-Bold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 
 /************************************/
 /************* CALENDAR *************/
@@ -461,7 +468,7 @@ table tbody.files > tr > td .preview canvas, table tbody.files > tr > td .previe
 .vertical-mail ul.navigation > li.mark, .horizontal-mail ul.navigation > li.mark { text-align: center; font-size: 70px; background-color: transparent; padding: initial; }
 .vertical-mail ul.navigation > li.compose, .horizontal-mail ul.navigation > li.compose { text-align: center; margin: 20px 0 30px 0; }
 .vertical-mail ul.navigation > li.compose .btn, .horizontal-mail ul.navigation > li.compose .btn { color: white; font-size: 13px; padding: 10px 20px; text-transform: uppercase; font-weight: 700; }
-.vertical-mail ul.navigation > li.heading h5, .horizontal-mail ul.navigation > li.heading h5 { text-transform: uppercase; font-weight: 700; font-size: 11px; -webkit-font-smoothing: antialiased; font-family: "Helvetica Neue", sans-serif; padding-bottom: 2px; border-bottom: 1px solid rgba(255, 255, 255, 0.3); color: rgba(255, 255, 255, 0.8); }
+.vertical-mail ul.navigation > li.heading h5, .horizontal-mail ul.navigation > li.heading h5 { text-transform: uppercase; font-size: 11px; -webkit-font-smoothing: antialiased; font-family: "HelveticaNeue-Bold", sans-serif; padding-bottom: 2px; border-bottom: 1px solid rgba(255, 255, 255, 0.3); color: rgba(255, 255, 255, 0.8); }
 .vertical-mail ul.navigation > li.heading h5 a, .horizontal-mail ul.navigation > li.heading h5 a { color: rgba(255, 255, 255, 0.5); }
 .vertical-mail ul.navigation > li.heading h5 a:hover, .horizontal-mail ul.navigation > li.heading h5 a:hover { color: white; }
 .vertical-mail ul.navigation > li > ul, .horizontal-mail ul.navigation > li > ul { list-style-type: none; padding: 0; margin: 0 -20px; }
@@ -593,7 +600,7 @@ ul.inbox > li.msg.active { background-color: rgba(0, 0, 0, 0.3); border: 1px sol
 /************* PROFILE PAGE **************/
 /*****************************************/
 .user-card h3 { text-align: center; }
-.user-card h5 { text-align: center; font-size: 12px; color: rgba(0, 0, 0, 0.3); font-family: "Helvetica Neue", "Arial", sans-serif; }
+.user-card h5 { text-align: center; font-size: 12px; color: rgba(0, 0, 0, 0.3); font-family: "HelveticaNeue-Bold", "Arial", sans-serif; }
 .user-card .profile-controls { text-align: center; }
 .user-card .profile-controls .profile-photo { width: 120px; border: 5px solid white; position: relative; z-index: 99; -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1); }
 .user-card .profile-controls > li { vertical-align: middle; padding: 0; }
@@ -1133,8 +1140,8 @@ body > .videocontent .ui-video-background { display: none; }
 
 .el-reloader { background: url(../../img/dashboard/loader.gif) center center no-repeat; height: 15px; width: 15px; left: 50%; top: 75%; position: absolute; }
 
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Helvetica Neue", serif; -webkit-font-smoothing: antialiased; font-weight:700}
-h1.sans-serif, h2.sans-serif, h3.sans-serif, h4.sans-serif, h5.sans-serif, h6.sans-serif, .h1.sans-serif, .h2.sans-serif, .h3.sans-serif, .h4.sans-serif, .h5.sans-serif, .h6.sans-serif { font-family: "Helvetica Neue", "Arial", sans-serif; }
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "HelveticaNeue-Bold", serif; -webkit-font-smoothing: antialiased; }
+h1.sans-serif, h2.sans-serif, h3.sans-serif, h4.sans-serif, h5.sans-serif, h6.sans-serif, .h1.sans-serif, .h2.sans-serif, .h3.sans-serif, .h4.sans-serif, .h5.sans-serif, .h6.sans-serif { font-family: "HelveticaNeue-Bold", "Arial", sans-serif; }
 h1.underline, h2.underline, h3.underline, h4.underline, h5.underline, h6.underline, .h1.underline, .h2.underline, .h3.underline, .h4.underline, .h5.underline, .h6.underline { border-bottom: 1px solid rgba(255, 255, 255, 0.3); padding-bottom: 5px; }
 h1.inline, h2.inline, h3.inline, h4.inline, h5.inline, h6.inline, .h1.inline, .h2.inline, .h3.inline, .h4.inline, .h5.inline, .h6.inline { display: inline-block; margin: 0 10px; vertical-align: middle; }
 
@@ -1312,7 +1319,7 @@ menu button .fa, menu .btn .fa { margin-right: 3px; }
 .navbar-nav.side-nav > li.collapsed-content > ul > li.user > .settings > li #color-schemes > li > a.bg-6 { background: url(../../img/dashboard/backgrounds/thumbs/6.jpg) center center no-repeat; }
 .navbar-nav.side-nav > li.collapsed-content > ul > li.user > .settings > li .form-group label { color: #717171; font-size: 12px; font-weight: 400; }
 .navbar-nav.side-nav > li.collapsed-content > ul > li.user > .settings.arrow:before { border-bottom-color: white; left: 55px; }
-.navbar-nav.side-nav > li > a.sidebar-toggle { font-family: "Helvetica Neue", sans-serif; font-size: 11px; color: rgba(0, 0, 0, 0.3); text-transform: uppercase; font-weight: 700; }
+.navbar-nav.side-nav > li > a.sidebar-toggle { font-family: "HelveticaNeue-Bold", sans-serif; font-size: 11px; color: rgba(0, 0, 0, 0.3); text-transform: uppercase; }
 .navbar-nav.side-nav > li > a.sidebar-toggle > i { font-size: 14px; line-height: 45px; float: right; }
 .navbar-nav.side-nav > li > a.sidebar-toggle:hover { color: rgba(0, 0, 0, 0.4); }
 .navbar-nav.side-nav > li > a.sidebar-toggle.underline { border-bottom: 1px solid rgba(0, 0, 0, 0.2); padding: 0; margin: 0 15px; }
