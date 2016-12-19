@@ -94,7 +94,7 @@
                           $mainClass = "";
                         } ?>
                   <li class="<?php echo $mainClass;?>">
-                    <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/puzzles/index">
+                    <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/puzel">
                       <i class="fa fa-puzel-icon-left"></i> Puzel
                       
                     </a>
