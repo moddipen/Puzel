@@ -116,7 +116,7 @@
                           $mainClass = "";
                         } ?>
                   <li class="<?php echo $mainClass;?>">
-                    <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/users/data">
+                    <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/data-captured">
                       <i class="fa fa-database"></i> Data Captured
                       
                     </a>

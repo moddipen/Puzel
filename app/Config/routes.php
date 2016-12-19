@@ -61,7 +61,7 @@
   Router::connect('/admin/businesses/export', array('controller' => 'users', 'action' => 'export','admin'=>true)); 
   Router::connect('/admin/users', array('controller' => 'users', 'action' => 'index','admin'=>true)); 
   Router::connect('/admin/users/export', array('controller' => 'users', 'action' => 'userexport','admin'=>true)); 
-
+  Router::connect('admin/data-captured', array('controller' => 'users', 'action' => 'data','admin'=>true)); 
 
 
  
