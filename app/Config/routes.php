@@ -43,7 +43,7 @@
 	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout','user'=>true));
   Router::connect('/puzel', array('controller' => 'puzzles', 'action' => 'index','user'=>true));
   Router::connect('/support', array('controller' => 'supports', 'action' => 'index','user'=>true));
-	
+	Router::connect('/create-ticket', array('controller' => 'supports', 'action' => 'add','user'=>true));
 	//---------------------Business Account----------------------------//
 	
 	Router::connect('/puzel', array('controller' => 'puzzles', 'action' => 'index','business'=>true));
