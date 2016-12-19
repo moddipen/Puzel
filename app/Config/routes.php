@@ -58,6 +58,7 @@
 	
   Router::connect('/admin/puzel', array('controller' => 'puzzles', 'action' => 'index','admin'=>true)); 
   Router::connect('/admin/businesses', array('controller' => 'users', 'action' => 'business','admin'=>true)); 
+  Router::connect('/admin/businesses/export', array('controller' => 'users', 'action' => 'export','admin'=>true)); 
 
 
 
