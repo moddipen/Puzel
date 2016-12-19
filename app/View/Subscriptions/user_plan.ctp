@@ -1,6 +1,6 @@
   
 <style>
-  body {overflow-y:scroll;}  
+  body {overflow-y:auto;}  
   #content.full-page .inside-block form .input-group input#cvv {
     border-bottom-right-radius: 4px !important;
     border-top-right-radius: 4px !important;
@@ -283,8 +283,7 @@ $(document ).ready(function(){
       		'data[Subscription][confirm_password]': {required: 'Please enter valid password.'}
 		}
 	});
-	<?php }?> 
-      $('#card_number1').validateCreditCard(function(result) {
+	$('#card_number1').validateCreditCard(function(result) {
             if(result.card_type == null)
             {
                 $('#card_number1').removeClass();
@@ -305,6 +304,8 @@ $(document ).ready(function(){
                 $('#card_number1').addClass("valid");
             }
         }); 
+	<?php }?> 
+      
 
 
 
