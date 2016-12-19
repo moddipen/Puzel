@@ -53,8 +53,13 @@
 	
   // if(isset($this->Auth->user('usertype') == 1))
   // {
-
-	 Router::connect('/puzel', array('controller' => 'puzzles', 'action' => 'index','business'=>true));
+  Router::prefix('business', function($routes) {
+    // All routes here will be prefixed with `/admin`
+    // And have the prefix => admin route element added.
+    $routes->connect('/:controller', ['action' => 'index']);
+    $routes->connect('/:controller/:action/*');
+});
+	 // Router::connect('/puzel', array('controller' => 'puzzles', 'action' => 'index','business'=>true));
    // } 
 	Router::connect('/data-captured', array('controller' => 'visitors', 'action' => 'data','business'=>true));
 	Router::connect('/billing', array('controller' => 'orders', 'action' => 'index','business'=>true));
