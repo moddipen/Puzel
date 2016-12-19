@@ -353,21 +353,26 @@ public function get_statistics()
 	            //     // write the cookie
 	            //     $this->Cookie->write('remember_me_cookie', $this->Auth->user(), true, '2 weeks');
             	// }
-				
+				echo "<pre>";print_r($this->Auth->user());
+
 				if($this->Auth->user('usertype') == 2)
               	{
+
               		$this->Session->setFlash(__('Login successfully!!....', true), 'default');
               		return $this->redirect(array('controller'=>'puzzles','action'=>'index','admin'=>true));
+              		exit("admin");
               	}	
               	elseif($this->Auth->user('usertype') == 1)
               	{
               		$this->Session->setFlash(__('Login successfully!!....', true), 'default');
               		return $this->redirect(array('controller'=>'puzzles','action'=>'index','business'=>true));
+              		exit("business");
               	}
               	else
               	{
               		$this->Session->setFlash(__('Login successfully!!....', true), 'default');
               		return $this->redirect(array('controller'=>'puzzles','action'=>'index','user'=>true));	
+              		exit("user");
               	}	
                 
             }
