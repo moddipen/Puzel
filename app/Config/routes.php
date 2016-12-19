@@ -53,6 +53,7 @@
 	
   // if(isset($this->params['business']))
   // {
+  echo "<pre>";print_r($this->Auth->user());
 	 Router::connect('/puzel', array('controller' => 'puzzles', 'action' => 'index','business'=>true));
   // } 
 	Router::connect('/data-captured', array('controller' => 'visitors', 'action' => 'data','business'=>true));
