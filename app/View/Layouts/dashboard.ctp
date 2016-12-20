@@ -107,10 +107,7 @@ $cakeDescription = __d('cake_dev', 'Puzzel');
 		<?php echo $this->fetch('content'); ?>
 		</div>
 	</div>
-	
-</body>
-</html>
-<script>
+	<script>
 $("textarea#script").focus(function() { $(this).select(); } );
     $(function(){
 		$(".chosen-select").chosen({disable_search_threshold: 10});
@@ -138,3 +135,5 @@ $("textarea#script").focus(function() { $(this).select(); } );
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
   </script>
+</body>
+</html>
