@@ -135,7 +135,7 @@
                             <td class="minipadding controls">
                               <div class="col-xs-5 text-right">
                                 <?php 
-                                  echo $this->html->link( '',array('action' => 'preview',$list['Puzzle']['id']),array('class'=>'fa fa-eye','style'=>"color:white;"));?></div><div class="col-xs-7">
+                                  echo $this->html->link( '',array('action' => 'preview',$list['Puzzle']['random']),array('class'=>'fa fa-eye','style'=>"color:white;"));?></div><div class="col-xs-7">
                                   <div class="onoffswitch green small">
                                   <?php 
                                   // check puzzle s activate or not
