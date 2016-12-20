@@ -901,7 +901,7 @@ class  PuzzlesController  extends AppController {
 		$this->set('title',"Preview");
 		if($id)
 		{
-			$puzel = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id))) ; 	
+			$puzel = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.random'=>$id))) ; 	
 			$this->set("Capturedata",$puzel);					
 		}
 	}
