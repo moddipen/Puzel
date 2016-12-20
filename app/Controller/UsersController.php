@@ -1172,7 +1172,7 @@ public function user_reset($token=null)
 	{
 	 	$data =  $this->User->find('all',array('conditions'=>array('AND'=>array(array('DATE(User.created) >='=>$startdate,'DATE(User.created) <='=>$enddate)),'User.usertype'=>0),'order'=>'User.firstname Asc','fields'=>array('User.firstname','User.lastname','User.email','User.usertype','User.website')));		
 	}
-	else if($status !=2 && $startdate == 0  && $enddate == 0)
+	else if($status !=2 && $startdate == 0  && $enddate == 0 && $enddate != '')
 	{
 		$data =  $this->User->find('all',array('conditions'=>array('User.usertype'=>0,'User.status'=>$status),'order'=>'User.firstname Asc','fields'=>array('User.firstname','User.lastname','User.email','User.usertype','User.website')));		
 	}	
