@@ -1183,7 +1183,7 @@ public function user_reset($token=null)
 		foreach($data as $key => $value)
 		{
 			$data[$key]['User']['usertype'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.email'=>$value['User']['email'])));	
-			$data[$key]['User']['website'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.email'=>$value['User']['email'],'Visitor.is_refrel'=>1)));	
+			$data[$key]['User']['website'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.refrel_id'=>$value['User']['id'],'Visitor.is_refrel'=>1)));	
 			
 		}
 
