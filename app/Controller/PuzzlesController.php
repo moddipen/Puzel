@@ -81,6 +81,8 @@ class  PuzzlesController  extends AppController {
 
 		$status = $this->UserSubscription->find('first',array('conditions'=>array('UserSubscription.user_id'=>$this->Auth->user('id')),'Limit'=>1,'order'=>'UserSubscription.created Desc'));
 		$this->set('Userpieces',$status);
+		$random = $this->generateRandomString();
+		$this->set('Randomstring',$random);
 	}	
 
 /**
@@ -120,11 +122,11 @@ class  PuzzlesController  extends AppController {
 /**
 	Store image in session business view page 
 */	
-	public function business_view()
+	public function business_preview($id=null)
 	{
-		$this->set('sub_action','view');
-		$this->set("title","View");
-		
+		$this->set('sub_action','preview');
+		$this->set("title","Preview");
+		$this->set('Random',$id);
 		if(!empty($this->request->data))
 		{
 			$count = $this->Puzzle->find('first',array('order'=>'Puzzle.id Desc' , 'limit'=>1));
@@ -690,10 +692,10 @@ class  PuzzlesController  extends AppController {
 /**
 	Puzzle preview in business panel
 */
-	public function business_preview($id= Null)
+	public function business_view($id= Null)
 	{
-		$this->set('sub_action','preview');
-		$this->set('title',"Preview");
+		$this->set('sub_action','view');
+		$this->set('title',"View");
 		if($id)
 		{
 			$puzel = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id))) ; 	
@@ -951,6 +953,20 @@ class  PuzzlesController  extends AppController {
 		}	
 	}		
 
+/**
+	Generate rndom string
+*/			
+	public function generateRandomString($length = 10)
+	{
+	    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	    $charactersLength = strlen($characters);
+	    $randomString = '';
+	    for ($i = 0; $i < $length; $i++) {
+	        $randomString .= $characters[rand(0, $charactersLength - 1)];
+	    }
+	    return $randomString;
+	}
+	
 
 
 
