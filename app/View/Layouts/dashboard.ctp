@@ -110,7 +110,7 @@ $cakeDescription = __d('cake_dev', 'Puzzel');
 	<script>
 $("textarea#script").focus(function() { $(this).select(); } );
     $(function(){
-		$(".chosen-select").chosen({disable_search_threshold: 10});
+		$(".chosen-select").chosen({disable_search_threshold: 40});
 		$('.date').datepicker({ format: 'yyyy-mm-dd', autoclose: true});
 		$('.input-group span.input-group-addon').click(function(){
 			$(this).parent().children('input.date').focus();
