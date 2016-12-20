@@ -152,7 +152,7 @@
                             ?>
                           <tr>
                             <td><?php echo date('m/d/Y',strtotime($puzel['Puzzle']['created']))?></td>
-                            <td><?php echo $puzel['Puzzle']['name']?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $this->html->link('',array('action' => 'preview',$puzel['Puzzle']['id']),array('class'=>'fa fa-eye','style'=>"color:white;"));
+                            <td><?php echo $puzel['Puzzle']['name']?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $this->html->link('',array('action' => 'view',$puzel['Puzzle']['random']),array('class'=>'fa fa-eye','style'=>"color:white;"));
                               echo "&nbsp;&nbsp;"; ?></td>
                             <td><?php echo $puzel['Puzzle']['pieces']?></td>
                             <td><?php echo $puzel['Show']?></td>
@@ -177,7 +177,7 @@
                               
                                <?php
                                
-                                echo $this->html->link('',array('action' => 'edit',$puzel['Puzzle']['id']),array('class'=>'fa fa-pencil','style'=>"color:white;"));     
+                                echo $this->html->link('',array('action' => 'edit',$puzel['Puzzle']['random']),array('class'=>'fa fa-pencil','style'=>"color:white;"));     
                               
                             ?></div>
                              
