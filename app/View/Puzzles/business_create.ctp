@@ -52,10 +52,10 @@
                   
                   <!-- /tile header -->
 
-
+                   <?php $unique =  $Randomstring;?>
                   <!-- tile body -->
                   <!-- <form role="form" class="custom-form" action ="puzzels/view" method="post"> -->
-                  <?php echo $this->form->create('Puzzle',array('action'=>'view','method'=>'post','class'=>"custom-form"));?>
+                  <?php echo $this->form->create('Puzzle',array('preview/'.$unique,'method'=>'post','class'=>"custom-form"));?>
                   <div class="tile-body">
                   <div class="row">
                     <div class="col-md-10">
