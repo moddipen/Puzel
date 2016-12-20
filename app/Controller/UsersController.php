@@ -20,6 +20,7 @@
 
 App::uses('AppController', 'Controller');
 App::uses('CakeEmail', 'Network/Email');
+App::import('Vendor', 'Csv', array('file' => 'Csv.php'));
 // App::import('Vendor', 'postmark', array('file' => 'postmark/Lib/Network/Email/PostmarkTransport.php'));
 /**
  * Static content controller
@@ -36,7 +37,7 @@ class UsersController extends AppController {
  *
  * @var array
  */
- public $helpers = array('Html', 'Form','Session');
+ public $helpers = array('Html', 'Form','Session','Csv');
  public $components = array('Session','RequestHandler');
  public $uses = array('Puzzle','User','Image','Visitor','Support','Order','Plan','Subscription');
  var $name = 'Users';
@@ -353,21 +354,25 @@ public function get_statistics()
 	            //     // write the cookie
 	            //     $this->Cookie->write('remember_me_cookie', $this->Auth->user(), true, '2 weeks');
             	// }
-				
+
 				if($this->Auth->user('usertype') == 2)
               	{
-              		$this->Session->setFlash(__('Login successfully!!....', true), 'default');
+					$this->Session->setFlash(__('Login successfully!!....', true), 'default');
               		return $this->redirect(array('controller'=>'puzzles','action'=>'index','admin'=>true));
+              		
               	}	
               	elseif($this->Auth->user('usertype') == 1)
               	{
+              		
               		$this->Session->setFlash(__('Login successfully!!....', true), 'default');
               		return $this->redirect(array('controller'=>'puzzles','action'=>'index','business'=>true));
+              		
               	}
               	else
               	{
               		$this->Session->setFlash(__('Login successfully!!....', true), 'default');
               		return $this->redirect(array('controller'=>'puzzles','action'=>'index','user'=>true));	
+              		
               	}	
                 
             }
@@ -1106,6 +1111,7 @@ public function user_reset($token=null)
 	{
 		$data =  $this->User->find('all',array('conditions'=>array('User.usertype'=>1),'order'=>'User.firstname Asc','fields'=>array('User.firstname','User.lastname','User.email','User.website','User.usertype','User.company_name','User.tokenhash','UserSubscription.used_pieces','UserSubscription.subscription_id','UserSubscription.id')));	
 	}	
+
 	$index = 0;
 		foreach($data as $business)
 		{
@@ -1166,7 +1172,7 @@ public function user_reset($token=null)
 	{
 	 	$data =  $this->User->find('all',array('conditions'=>array('AND'=>array(array('DATE(User.created) >='=>$startdate,'DATE(User.created) <='=>$enddate)),'User.usertype'=>0),'order'=>'User.firstname Asc','fields'=>array('User.firstname','User.lastname','User.email','User.usertype','User.website')));		
 	}
-	else if($status !=2 && $startdate == 0  && $enddate == 0)
+	else if($status !=2 && $startdate == 0  && $enddate == 0 && $enddate != '')
 	{
 		$data =  $this->User->find('all',array('conditions'=>array('User.usertype'=>0,'User.status'=>$status),'order'=>'User.firstname Asc','fields'=>array('User.firstname','User.lastname','User.email','User.usertype','User.website')));		
 	}	
@@ -1177,7 +1183,7 @@ public function user_reset($token=null)
 		foreach($data as $key => $value)
 		{
 			$data[$key]['User']['usertype'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.email'=>$value['User']['email'])));	
-			$data[$key]['User']['website'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.email'=>$value['User']['email'],'Visitor.is_refrel'=>1)));	
+			$data[$key]['User']['website'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.refrel_id'=>$value['User']['id'],'Visitor.is_refrel'=>1)));	
 			
 		}
 

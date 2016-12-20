@@ -3,7 +3,7 @@
 
           <!-- Branding -->
           <div class="navbar-header col-md-1">
-            <a class="navbar-brand" href="<?php echo Configure::read('SITE_ADMIN_URL');?>/users/index">
+            <a class="navbar-brand" href="<?php echo Configure::read('SITE_ADMIN_URL');?>/users">
               
             </a>
             <div class="sidebar-collapse hidden-md hidden-lg">
@@ -50,7 +50,7 @@
                           $mainClass = "";
                         } ?>
                   <li class="<?php echo $mainClass;?>">
-                    <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/users/business">
+                    <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/businesses">
                       <i class="fa fa-briefcase"></i> Business
                       
                     </a>
@@ -70,9 +70,9 @@
                       else
                         {
                           $mainClass = "";
-                        } ?>
+                        } ?> 
                   <li class="<?php echo $mainClass;?>">
-                    <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/users/index">
+                    <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/users">
                       <i class="fa fa-users"></i> Users
                       
                     </a>
@@ -94,7 +94,7 @@
                           $mainClass = "";
                         } ?>
                   <li class="<?php echo $mainClass;?>">
-                    <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/puzzles/index">
+                    <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/puzel">
                       <i class="fa fa-puzel-icon-left"></i> Puzel
                       
                     </a>
@@ -116,7 +116,7 @@
                           $mainClass = "";
                         } ?>
                   <li class="<?php echo $mainClass;?>">
-                    <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/users/data">
+                    <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/data-captured">
                       <i class="fa fa-database"></i> Data Captured
                       
                     </a>
@@ -138,7 +138,7 @@
                           $mainClass = "";
                         } ?>
                   <li class="<?php echo $mainClass;?>">
-                    <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/supports/index">
+                    <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/support">
                       <i class="fa fa-support-16"></i> Support
                       
                     </a>
@@ -173,12 +173,12 @@
                           $mainClass = "";
                         } ?>
                       <li class="<?php echo $mainClass;?>">
-                        <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/users/setting">
+                        <a href="<?php echo Configure::read('SITE_ADMIN_URL');?>/settings">
                           <i class="fa fa-cog"></i> Settings
                         </a>
                       </li>
                       <li>
-                        <a href="<?php echo Configure::read('SITE_USER_URL');?>/users/logout">
+                        <a href="<?php echo Configure::read('SITE_URL');?>logout">
                           <i class="fa fa-power-off"></i> Logout
                         </a>
                       </li>

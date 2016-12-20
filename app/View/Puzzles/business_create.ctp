@@ -187,22 +187,24 @@
           </div>
          <div class="modal-body">
           <form class="popup-form" id="terms" >
+             <?php if(!empty($Name))
+                            { ?>
             <div class="form-group">
               <div class="row">
                   <div class="col-md-5">
                         <select name="opton" class="form-control chosen-select" id = "changetemplate">
                             <option style="display:none">Select previous template</option>
                             <?php 
-                            if(!empty($Name))
-                            {  
+                             
                               foreach ($Name as $value)
                                 {?>
                                 <option value ="<?php echo $value['Puzzle']['id']; ?>"><?php echo $value['Puzzle']['name']; ?></option>
-                            <?php } }?>
+                            <?php } ?>
                         </select>
                   </div>
                 </div>
             </div>
+            <?php } ?>
 
             <div class="form-group">
               <textarea name="textarea" id="textarea" class="form-control wysiwyg"></textarea>

@@ -28,7 +28,7 @@
                 <ul class="menu">
                   
                   <!-- <li>
-                    <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/puzzles/index">
+                    <a href="<?php echo Configure::read('SITE_URL');?>puzel">
                       <i class="fa fa-home"></i> Dashboard
                       
                     </a>
@@ -72,6 +72,7 @@
                           $mainClass = "";
                         } ?>
                   <li class="<?php echo $mainClass;?>">
+                    <!-- <a href="<?php echo Configure::read('SITE_URL');?>data-captured"> -->
                     <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/visitors/data">
                       <i class="fa fa-database"></i> Data Captured
                       
@@ -94,7 +95,8 @@
                           $mainClass = "";
                         } ?>
                   <li class="<?php echo $mainClass;?>">
-                    <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/orders/index">
+                    <a href="<?php echo Configure::read('SITE_URL');?>billing">
+                    <!-- <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/orders/index"> -->
                       <i class="fa fa-billing"></i> Billing
                       
                     </a>
@@ -156,7 +158,7 @@
                         </a>
                       </li>
                       <li>
-                        <a href="<?php echo Configure::read('SITE_USER_URL');?>/users/logout">
+                        <a href="<?php echo Configure::read('SITE_URL');?>logout">
                           <i class="fa fa-power-off"></i> Logout
                         </a>
                       </li>

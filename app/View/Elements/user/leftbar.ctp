@@ -3,7 +3,7 @@
 
           <!-- Branding -->
           <div class="navbar-header col-md-1">
-            <a class="navbar-brand" href="<?php echo Configure::read('SITE_USER_URL');?>/puzzles/index">
+            <a class="navbar-brand" href="<?php echo Configure::read('SITE_URL');?>puzel">
               
             </a>
             <div class="sidebar-collapse hidden-md hidden-lg">
@@ -51,7 +51,7 @@
                           $mainClass = "";
                         } ?>
                   <li class="<?php echo $mainClass;?>">
-                    <a href="<?php echo Configure::read('SITE_USER_URL');?>/puzzles/index">
+                    <a href="<?php echo Configure::read('SITE_URL');?>puzel">
                       <i class="fa fa-puzel-icon-left"></i> Puzel
                       
                     </a>
@@ -73,7 +73,7 @@
                           $mainClass = "";
                         } ?>
                   <li class="<?php echo $mainClass;?>">
-                    <a href="<?php echo Configure::read('SITE_USER_URL');?>/supports/index">
+                    <a href="<?php echo Configure::read('SITE_URL');?>support">
                       <i class="fa fa-support-16"></i> Support
                       
                     </a>
@@ -108,12 +108,12 @@
                           $mainClass = "";
                         } ?>
                        <li class="<?php echo $mainClass;?>">
-                        <a href="<?php echo Configure::read('SITE_USER_URL');?>/users/setting">
+                        <a href="<?php echo Configure::read('SITE_URL');?>settings">
                           <i class="fa fa-cog"></i> Settings
                         </a>
                       </li>
                       <li>
-                        <a href="<?php echo Configure::read('SITE_USER_URL');?>/users/logout">
+                        <a href="<?php echo Configure::read('SITE_URL');?>logout">
                           <i class="fa fa-power-off"></i> Logout
                         </a>
                       </li>

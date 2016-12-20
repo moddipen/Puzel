@@ -114,7 +114,7 @@
                     </div>
                     <div class="col-md-2">
                       <div class="form-group iconwithtext">
-						<a href="<?php echo Configure::read("SITE_BUSINESS_URL");?>/visitors/export" id="downloadcsv">
+						<a href="<?php echo Configure::read("SITE_URL");?>export" id="downloadcsv">
 						<i class="fa fa-downloads"></i>
 						<span class="text" style="color:#FFF;">Download as CSV</span></a>
                          <?php //echo $this->html->link(' Download as CSV',array('action' => 'export'),array('class'=>'fa fa-download','style'=>"color:white;"));?><!-- i class="fa fa-downloads"></i> --> 

@@ -24,7 +24,56 @@
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
+	
+	//--------------------Fronend--------------------------//
+	
 	Router::connect('/', array('controller' => 'users', 'action' => 'index'));
+	Router::connect('/pricing', array('controller' => 'subscriptions', 'action' => 'package'));
+	Router::connect('/how-it-works', array('controller' => 'users', 'action' => 'about'));
+	Router::connect('/puzel-for-business', array('controller' => 'users', 'action' => 'business'));
+	Router::connect('/contact', array('controller' => 'users', 'action' => 'contact'));
+	Router::connect('/thank-you', array('controller' => 'subscriptions', 'action' => 'thankyou'));
+
+
+
+	
+	//---------------------User Account----------------------------//
+	
+	Router::connect('/login', array('controller' => 'users', 'action' => 'login','user'=>true));
+	Router::connect('/forgot-password', array('controller' => 'users', 'action' => 'forgetpassword','user'=>true));
+	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout','user'=>true));
+  Router::connect('/puzel', array('controller' => 'puzzles', 'action' => 'index','user'=>true));
+  Router::connect('/support', array('controller' => 'supports', 'action' => 'index','user'=>true));
+	Router::connect('/create-ticket', array('controller' => 'supports', 'action' => 'add','user'=>true));
+	Router::connect('/settings', array('controller' => 'users', 'action' => 'setting','user'=>true));
+  //---------------------Business Account----------------------------//
+	
+  // Router::connect('/puzel', array('controller' => 'puzzles', 'action' => 'index','business'=>true));
+	Router::connect('/data-captured', array('controller' => 'visitors', 'action' => 'data','business'=>true));
+	Router::connect('/billing', array('controller' => 'orders', 'action' => 'index','business'=>true));
+	// Router::connect('/support', array('controller' => 'supports', 'action' => 'index','business'=>true));
+	// Router::connect('/settings', array('controller' => 'users', 'action' => 'setting','business'=>true));
+	Router::connect('/create-puzel', array('controller' => 'puzzles', 'action' => 'create','business'=>true));
+  Router::connect('/export', array('controller' => 'visitors', 'action' => 'export','business'=>true));
+  // Router::connect('/create-ticket', array('controller' => 'supports', 'action' => 'add','business'=>true));
+	
+
+	//---------------------Admin Account----------------------------//
+	
+  Router::connect('/admin/puzel', array('controller' => 'puzzles', 'action' => 'index','admin'=>true)); 
+  Router::connect('/admin/businesses', array('controller' => 'users', 'action' => 'business','admin'=>true)); 
+  Router::connect('/admin/businesses/export', array('controller' => 'users', 'action' => 'export','admin'=>true)); 
+  Router::connect('/admin/users', array('controller' => 'users', 'action' => 'index','admin'=>true)); 
+  Router::connect('/admin/users/export', array('controller' => 'users', 'action' => 'userexport','admin'=>true)); 
+  Router::connect('/admin/data-captured', array('controller' => 'users', 'action' => 'data','admin'=>true)); 
+  Router::connect('/admin/data-captured', array('controller' => 'users', 'action' => 'data','admin'=>true)); 
+  Router::connect('/admin/support', array('controller' => 'supports', 'action' => 'index','admin'=>true)); 
+  Router::connect('/admin/create-ticket', array('controller' => 'supports', 'action' => 'add','admin'=>true));
+  Router::connect('/admin/settings', array('controller' => 'users', 'action' => 'setting','admin'=>true));
+ 
+
+
+
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
  */

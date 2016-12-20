@@ -1,3 +1,4 @@
+<?php echo $this->Html->css('animations.css'); ?>
 <style type="text/css">
     textarea.note-codable{ display: none;}
     .btn-toolbar{margin-left:0px !important; }
@@ -229,7 +230,7 @@
                   }  
 
                   ?> 
-                  <div class= "pt-page pt-page-<?php echo $index;?> <?php echo $class_name ;?>" style = "<?php echo $class_image ;?>"></div>  
+                  <div class= "pt-page pt-page-<?php echo $index;?>" style = "<?php echo $class_image ;?>"></div>  
                   <?php
 
                   $index ++;
@@ -622,6 +623,70 @@ processData:false,
       });   
     }
   });
+
+  $("#PuzzleTranstion").on("change",function(){
+
+
+
+      var transition = this.value ;
+      if(transition  == "Newspaper")
+        {
+          $(".pt-page-0").removeClass().addClass('pt-page-0');  
+          var classes = 'pt-page-rotateOutNewspaper pt-page-rotateInNewspaper pt-page-delay500';
+          $(".pt-page-0").addClass(classes);
+        }
+      else if(transition  == "Cube to left")
+        {
+          $(".pt-page-0").removeClass().addClass('pt-page-0');  
+          var classes = 'pt-page-rotateCubeLeftOut pt-page-ontop pt-page-rotateCubeLeftIn';
+          $(".pt-page-0").addClass(classes);
+        }
+      else if(transition  == "Cube to right")
+        {
+          $(".pt-page-0").removeClass().addClass('pt-page-0');  
+          var classes = 'pt-page-rotateCubeRightOut pt-page-ontop pt-page-rotateCubeRightIn';
+          $(".pt-page-0").addClass(classes);
+        }
+      else if(transition  == "Cube to top")
+        {
+          $(".pt-page-0").removeClass().addClass('pt-page-0');  
+          var classes = 'pt-page-rotateCubeTopOut pt-page-ontop pt-page-rotateCubeTopIn';
+          $(".pt-page-0").addClass(classes);
+        }
+      else if(transition  == "Cube to bottom")
+        {
+          $(".pt-page-0").removeClass().addClass('pt-page-0');  
+          var classes = 'pt-page-rotateCubeBottomOut pt-page-ontop pt-page-rotateCubeBottomIn';
+          $(".pt-page-0").addClass(classes);
+        }
+      else if(transition  == "Flip right")
+        {
+          $(".pt-page-0").removeClass().addClass('pt-page-0');  
+          var classes = 'pt-page-flipOutRight pt-page-flipInLeft pt-page-delay500';
+          $(".pt-page-0").addClass(classes);
+        }
+      else if(transition  == "Flip left")
+        { 
+          $(".pt-page-0").removeClass().addClass('pt-page-0');  
+          var classes = 'pt-page-flipOutLeft pt-page-flipInRight pt-page-delay500';
+          $(".pt-page-0").addClass(classes);
+        }
+      else if(transition  == "Flip top")
+        {
+          $(".pt-page-0").removeClass().addClass('pt-page-0');  
+          var classes = 'pt-page-flipOutTop pt-page-flipInBottom pt-page-delay500';
+          $(".pt-page-0").addClass(classes);
+        }
+      // if(transition  == "Flip bottom"){var classes = 'pt-page-flipOutBottom pt-page-flipInTop pt-page-delay500';}
+      else
+      {
+        $(".pt-page-0").removeClass().addClass('pt-page-0');  
+        var classes = 'pt-page-flipOutBottom pt-page-flipInTop pt-page-delay500';
+        $(".pt-page-0").addClass(classes);
+      }
+   });
+
+
   
   function copyToClipboard(elem) {
     // create hidden text element, if it doesn't already exist
