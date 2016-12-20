@@ -240,7 +240,7 @@ class  OrdersController  extends AppController {
 			
 		$pdf = new MYPDF(PDF_PAGE_FORMAT, PDF_UNIT,array(150,150), true, 'UTF-8', false);
 		//$this->Order->recursive = -1;
-		$order = $this->Order->find("first",array("conditions"=>array("Order.id"=>$id)));
+		$order = $this->Order->find("first",array("conditions"=>array("Order.transiction_id"=>$id)));
 		//debug($order);exit;
 		
 		// set default header data

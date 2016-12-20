@@ -175,7 +175,7 @@
                                     }  
                                     echo $name;?>
                               </td>
-                              <td><a href = "<?php echo Configure::read('SITE_ADMIN_URL');?>/supports/conversation/<?php echo $support['Support']['random'];?>" style="color:white;"><?php echo $support['Support']['subject'];?></td>
+                              <td><a href = "<?php echo Configure::read('SITE_URL');?>admin/ticket/<?php echo $support['Support']['random'];?>" style="color:white;"><?php echo $support['Support']['subject'];?></td>
                               <td><?php 
                                 echo date('g:i A dS M Y',strtotime($support['Support']['created']));?></td>
                               <td>

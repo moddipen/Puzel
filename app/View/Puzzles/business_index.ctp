@@ -173,13 +173,9 @@
                             <td class="minipadding controls">
                               <input type ="hidden" value = "<?php echo $puzel['Puzzle']['id'];?>" class ="puzelid" >
                               <div class="col-xs-5 text-right"> 
-
+								<a class="fa fa-pencil" href="<?php echo Configure::read("SITE_URL");?>edit/QvKUOsWWbk" style="color:white;"></a>
                               
-                               <?php
-                               
-                                echo $this->html->link('',array('action' => 'edit',$puzel['Puzzle']['random']),array('class'=>'fa fa-pencil','style'=>"color:white;"));     
-                              
-                            ?></div>
+                               </div>
                              
                                 <div class="col-xs-7">
                                 <div class="onoffswitch green small">

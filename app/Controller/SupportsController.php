@@ -79,9 +79,11 @@ class  SupportsController  extends AppController {
 		$this->Session->write("ADMINDETAIL",$admin);
 		if(!empty($this->request->data))
 		{
+			
 			$user = $this->Auth->user();
 			$this->request->data['Support']['sender_id'] = $this->Auth->user('id');
 			$this->request->data['Support']['random'] = $this->generateRandomString();
+			
 			$this->Support->create();
 			if($this->Support->save($this->request->data))
 			{
