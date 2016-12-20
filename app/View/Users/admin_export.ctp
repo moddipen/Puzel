@@ -1,4 +1,7 @@
 <?php
+
+exit("hello");
+
  $header_row = array("Firstname"=>"firstname","Lastname"=>"lastname","Company Name"=>"company_name","Puzels created"=>"email","Active Puzels"=>"website","Balance Credits"=>"usertype","Membership Plan"=>"tokenhash");
 
  $this->CSV->addRow(array_keys($header_row));

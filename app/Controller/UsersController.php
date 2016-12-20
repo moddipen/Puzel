@@ -1155,9 +1155,6 @@ public function user_reset($token=null)
   			}
 			$index ++;
 		}
-
-
-		echo "<pre>";print_r($data);exit;
 		$this->set('Business',$data);
 		$this->layout = null;
 	}
