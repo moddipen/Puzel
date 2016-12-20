@@ -1110,7 +1110,7 @@ public function user_reset($token=null)
 	{
 		$data =  $this->User->find('all',array('conditions'=>array('User.usertype'=>1),'order'=>'User.firstname Asc','fields'=>array('User.firstname','User.lastname','User.email','User.website','User.usertype','User.company_name','User.tokenhash','UserSubscription.used_pieces','UserSubscription.subscription_id','UserSubscription.id')));	
 	}	
-	
+
 	$index = 0;
 		foreach($data as $business)
 		{
@@ -1155,6 +1155,9 @@ public function user_reset($token=null)
   			}
 			$index ++;
 		}
+
+
+		echo "<pre>";print_r($data);exit;
 		$this->set('Business',$data);
 		$this->layout = null;
 	}
