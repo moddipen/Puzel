@@ -37,7 +37,7 @@ class UsersController extends AppController {
  *
  * @var array
  */
- public $helpers = array('Html', 'Form','Session');
+ public $helpers = array('Html', 'Form','Session','Csv');
  public $components = array('Session','RequestHandler');
  public $uses = array('Puzzle','User','Image','Visitor','Support','Order','Plan','Subscription');
  var $name = 'Users';
