@@ -41,7 +41,7 @@
 var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 	jQuery.validator.addMethod("validateemail", function(value, element) {
   // allow any non-whitespace characters as the host part
-  return this.optional( element ) || value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
+  return this.optional( element ) || value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/);
 }, 'Please enter a valid email address.');
     $( document ).ready(function() {  
       $("#puzelacount").click(function()
