@@ -111,7 +111,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
          {
             return false;
          } 
-         else if( !validateEmail($("#userenrollemail").val()) || $("#userenrollemail").val() == '') 
+         else if( $("#userenrollemail").val() == '') 
          {
             return false;
          } 
@@ -198,7 +198,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
          {
             return false;
          }
-         else if( !validateEmail($("#useremail").val()) || $("#useremail").val() == '') 
+         else if( $("#useremail").val() == '') 
          {
             return false;
          } 
