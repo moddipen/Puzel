@@ -20,6 +20,7 @@
 
 App::uses('AppController', 'Controller');
 App::uses('CakeEmail', 'Network/Email');
+App::import('Vendor', 'Csv', array('file' => 'Csv.php'));
 // App::import('Vendor', 'postmark', array('file' => 'postmark/Lib/Network/Email/PostmarkTransport.php'));
 /**
  * Static content controller
