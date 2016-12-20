@@ -62,7 +62,7 @@
                             <div class="col-md-2">
                               <div class="form-group">
                                     <select name="datetime" class="form-control chosen-select" id="datetime">
-                                      <option style="display:none;" >Pleasen select</option>
+                                      <option style="display:none;" >Please select</option>
                                       <option value="Today">Today</option>
                                       <option value="Weeks">Weeks</option>
                                       <option value="Month">Month</option>
