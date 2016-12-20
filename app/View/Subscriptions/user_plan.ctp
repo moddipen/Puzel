@@ -5,6 +5,12 @@
     border-bottom-right-radius: 4px !important;
     border-top-right-radius: 4px !important;
 }
+.chosen-container .chosen-drop {
+    border-bottom: 0;
+    border-top: 1px solid #aaa;
+    top: auto;
+    bottom: 40px;
+}
 </style>
 
 
