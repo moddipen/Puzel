@@ -68,6 +68,12 @@
   Router::connect('/business/puzzles/filter', array('controller' => 'puzzles', 'action' => 'filter','business'=>true));
   Router::connect('/business/puzzles/datefilter', array('controller' => 'puzzles', 'action' => 'datefilter','business'=>true));
   Router::connect('/business/puzzles/status', array('controller' => 'puzzles', 'action' => 'status','business'=>true));
+  Router::connect('/puzzles/checkpieces', array('controller' => 'puzzles', 'action' => 'checkpieces'));
+  Router::connect('/business/puzzles/template', array('controller' => 'puzzles', 'action' => 'template','business'=>true));
+  Router::connect('/business/puzzles/terms', array('controller' => 'puzzles', 'action' => 'terms','business'=>true));
+  Router::connect('/business/puzzles/price', array('controller' => 'puzzles', 'action' => 'price','business'=>true));
+  Router::connect('/business/puzzles/send', array('controller' => 'puzzles', 'action' => 'send','business'=>true));
+  Router::connect('/business/puzzles/pieces', array('controller' => 'puzzles', 'action' => 'pieces','business'=>true));
 
 
 
