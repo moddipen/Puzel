@@ -52,6 +52,11 @@
  
   //-------------------------------------------------//
 
+   Router::connect('/user/puzzles/filter', array('controller' => 'puzzles', 'action' => 'filter','user'=>true));
+   Router::connect('/user/supports/filter', array('controller' => 'supports', 'action' => 'filter','user'=>true));
+
+
+
 
   //---------------------Business Account----------------------------//
 	
