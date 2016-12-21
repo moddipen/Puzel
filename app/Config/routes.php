@@ -63,6 +63,18 @@
   Router::connect('/receipt/*', array('controller' => 'orders', 'action' => 'receipt'));
   Router::connect('/ticket/*', array('controller' => 'supports', 'action' => 'conversation','business'=>true));
 	
+  //------------------------------------------------------//
+
+  Router::connect('/business/puzzles/filter', array('controller' => 'puzzles', 'action' => 'filter','business'=>true));
+  Router::connect('/business/puzzles/datefilter', array('controller' => 'puzzles', 'action' => 'datefilter','business'=>true));
+  Router::connect('/business/puzzles/status', array('controller' => 'puzzles', 'action' => 'status','business'=>true));
+
+
+
+
+
+
+
 
 	//---------------------Admin Account----------------------------//
 	
