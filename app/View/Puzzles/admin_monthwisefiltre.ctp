@@ -1,7 +1,7 @@
 <?php if(!empty($Puzzel))
                             {
                               foreach ($Puzzel as $list) { ?>
-                          <tr>
+                           <tr>
                             <td><?php echo date('m/d/Y',strtotime($list['Puzzle']['created']));?></td>
                             <td><?php echo $list['Business']['company_name'];?></td>
                             <td><?php echo $list['Puzzle']['name'];?></td>
@@ -9,8 +9,10 @@
                             <td><?php echo $list['Show'];?></td>
                             <td><?php echo $list['Hide'];?></td>
                             <td class="minipadding controls">
-                              <div class="col-xs-5 text-right"><i class="fa fa-pencil"></i></div><div class="col-xs-7">
-                            <div class="onoffswitch green small">
+                              <div class="col-xs-5 text-right">
+                                <a class="fa fa-eye" href="<?php echo Configure::read('SITE_URL');?>admin/preview/<?php echo $list['Puzzle']['random'];?>" style="color:white;"></a>
+                                  </div><div class="col-xs-7">
+                                  <div class="onoffswitch green small">
                                   <?php 
                                   // check puzzle s activate or not
                                   if($list['Puzzle']['status'] == 0)
