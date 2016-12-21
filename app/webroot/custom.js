@@ -138,7 +138,7 @@ $(document).ready(function()
                        success: function(data)
                        {
 
-                        console.log(data.message);
+                        
                         if(data.message == "success" )
                           {
                             $.ajax
