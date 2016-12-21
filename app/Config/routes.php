@@ -105,17 +105,17 @@
 	Router::connect('/user', array('controller' => 'users', 'action' => 'login', 'user' => true));
 
      // Get current URl 
-  $path = "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
+  // $path = "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
   
-  // Make parition or url and use conditions
-  $explode = explode('/',$path);
+  // // Make parition or url and use conditions
+  // $explode = explode('/',$path);
   
 
-  // refrel hosting page 
-  if(isset($explode[6]))
-  {
+  // // refrel hosting page 
+  // if(isset($explode[6]))
+  // {
         Router::connect(
-            '/puzzle/:company_name/:name/:refrel', // E.g. /blog/3-CakePHP_Rocks
+            '/:company_name/:name/:refrel', // E.g. /blog/3-CakePHP_Rocks
             array('controller' => 'visitors', 'action' => 'dynamic','v'=>true),
             array(
                 // order matters since this will simply map ":id" to
@@ -124,12 +124,12 @@
                 
             )
         );
-  }
-  // normal hosting page 
-  else
-  {
+  // }
+  // // normal hosting page 
+  // else
+  // {
      Router::connect(
-            '/puzzle/:company_name/:name', // E.g. /blog/3-CakePHP_Rocks
+            '/:company_name/:name', // E.g. /blog/3-CakePHP_Rocks
             array('controller' => 'visitors', 'action' => 'dynamic','v'=>true),
             array(
                 // order matters since this will simply map ":id" to
@@ -138,7 +138,7 @@
                 
             )
         );   
-  }  
+  // }  
 
 
 	
