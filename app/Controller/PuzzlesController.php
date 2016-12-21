@@ -536,8 +536,9 @@ class  PuzzlesController  extends AppController {
 */	
 	public function business_export($id = null)
 	{
+	  $puzel = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.random'=>$id)));				
 	  $data =  $this->Visitor->find('all',
-			array('conditions'=>array('Visitor.puzzle_id'=>$id),
+			array('conditions'=>array('Visitor.puzzle_id'=>$puzel['Puzzle']['id']),
 			'fields'=>array(
 			"Puzzle.name as PuzzleName,
 			Visitor.firstname as `Visitor Firstname`,
