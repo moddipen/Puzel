@@ -67,7 +67,7 @@
                                       <div class="form-group">
                                         <?php $name = str_replace(' ','', $this->Session->read('IMAGECAPTURE.Puzzel.name'));?>
                                         <?php $company = str_replace(' ','', $this->Session->read('IMAGECAPTURE.Puzzel.compnay_name'));?>
-                                          <input type="text" class="form-control" value="<?php echo Configure::read("SITE_URL").$company."/".$name;?>" id="puzlename">
+                                          <input type="text" class="form-control" value="<?php echo Configure::read("SITE_URL").'puzzle/'.$company."/".$name;?>" id="puzlename">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">

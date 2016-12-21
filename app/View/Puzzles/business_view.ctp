@@ -76,7 +76,7 @@
                                       <div class="form-group">
                                         <?php $name = str_replace(' ','', $Capturedata['Puzzle']['name']);?>
                                         <?php $company = str_replace(' ','', $Capturedata['Business']['company_name']);?>
-                                          <input type="text" class="form-control" style="background-color:#fff;color:black;" value="<?php echo Configure::read("SITE_URL").$Capturedata['Business']['company_name']."/".$Capturedata['Puzzle']['name'];?>" id="puzlename">
+                                          <input type="text" class="form-control" style="background-color:#fff;color:black;" value="<?php echo Configure::read("SITE_URL").'puzzle/'.$Capturedata['Business']['company_name']."/".$Capturedata['Puzzle']['name'];?>" id="puzlename">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
