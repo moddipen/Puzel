@@ -115,7 +115,7 @@
   if(isset($explode[5]))
   {
         Router::connect(
-            '/:company_name/:name/:refrel', // E.g. /blog/3-CakePHP_Rocks
+            '/puzzle/:company_name/:name/:refrel', // E.g. /blog/3-CakePHP_Rocks
             array('controller' => 'visitors', 'action' => 'dynamic','v'=>true),
             array(
                 // order matters since this will simply map ":id" to
@@ -129,7 +129,7 @@
   else
   {
      Router::connect(
-            '/:company_name/:name', // E.g. /blog/3-CakePHP_Rocks
+            '/puzzle/:company_name/:name', // E.g. /blog/3-CakePHP_Rocks
             array('controller' => 'visitors', 'action' => 'dynamic','v'=>true),
             array(
                 // order matters since this will simply map ":id" to
