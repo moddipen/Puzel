@@ -57,7 +57,7 @@
                               <div class="row minipadding">
                                   <div class="col-sm-8">
                                       <div class="form-group">
-                                        <textarea class="form-control" style="height:87px;line-height:14pt;background-color:#fff;color:black;" id="script"><script type="text/javascript" src="<?php echo Configure::read("SITE_URL");?>custom.js"></script><div class="snipest" id="puzzle_<?php echo $Capturedata['Puzzle']['random']; ?>"></div> </textarea>
+                                        <textarea class="form-control" style="height:87px;line-height:14pt;background-color:#fff;color:black;" id="script"><script type="text/javascript" src="<?php echo Configure::read("SITE_URL");?>custom.js"></script><div class="snippet" id="<?php echo $Capturedata['Puzzle']['random']; ?>"></div> </textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">

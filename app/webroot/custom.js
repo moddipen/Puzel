@@ -13,7 +13,8 @@ $(document).ready(function()
   
   $('head').append('<link rel="stylesheet" type="text/css" href="http://puzel.stage.n-framescorp.com/app/webroot/css/animations.css">');
   var snipest_id =$('.snipest').attr('id');
-  var puzzle_id = snipest_id.replace("puzzle_", "");
+  // var puzzle_id = snipest_id.replace("puzzle_", "");
+  var puzzle_id = snipest_id;
   
   $.ajax
     ({
