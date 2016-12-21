@@ -48,7 +48,7 @@
 
                   <!-- tile body -->
                   <div class="tile-body">
-                    <?php echo $this->form->create('User',array('action'=>'setting','class'=>"profile-settings custom-form"));?>
+                    <?php echo $this->form->create('',array('action'=>'settings','class'=>"profile-settings custom-form"));?>
 
                       
 
