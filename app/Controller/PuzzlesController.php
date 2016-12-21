@@ -320,7 +320,7 @@ class  PuzzlesController  extends AppController {
 						
 						$company_name = str_replace(' ','', $this->Session->read('IMAGECAPTURE.Puzzel.compnay_name'));
 						
-						$html = '<script type="text/javascript" src="'.Configure::read("SITE_URL").'app/webroot/js/custom.js"></script><div class="snipest" id="puzzle_'.$this->Puzzle->getLastInsertID().'"></div>';
+						$html = '<script type="text/javascript" src="'.Configure::read("SITE_URL").'custom.js"></script><div class="snipest" id="puzzle_'.$this->Puzzle->getLastInsertID().'"></div>';
 						$hosted = Configure::read("SITE_URL").$company_name.'/'.$name;
 
 					 	$email = array(
