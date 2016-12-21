@@ -689,6 +689,8 @@ public function user_reset($token=null)
 			
 		}
 		$user = $this->User->find('first',array('conditions'=>array('User.id'=>$this->Auth->user('id'))));
+		echo "<pre>";
+		print_r($user);exit;
 		$this->set("User",$user);
 
 	}			
