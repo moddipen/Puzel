@@ -17,7 +17,12 @@
 
 <div id="content" class="col-md-12 full-page login">
   <div class="inside-block">
-    <a href="<?php echo Configure::read("SITE_URL");?>subscriptions/package"><img src="<?php echo $this->webroot;?>img/logo.png" class="logo"></a>
+    <!-- <a href="<?php echo Configure::read("SITE_URL");?>subscriptions/package"><img src="<?php echo $this->webroot;?>img/logo.png" class="logo"></a> -->
+    <?php if($this->Session->read('Auth.UserSubscription.subscription_id')) {?>
+      <a href="<?php echo Configure::read("SITE_URL");?>pricing/<?php echo $this->Session->read('Auth.UserSubscription.subscription_id');?>"><img src="<?php echo $this->webroot;?>img/logo.png" class="logo"></a>
+      <?php } else {?>
+      <a href="<?php echo Configure::read("SITE_URL");?>pricing"><img src="<?php echo $this->webroot;?>img/logo.png" class="logo"></a>
+      <?php } ?>
     <h3 class="purple">Grow your customer base with Puzel.<br>
       Sign up to be first in line to take it for a test drive once it launches.</h3>
   
