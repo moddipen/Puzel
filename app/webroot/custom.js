@@ -68,7 +68,6 @@ $(document).ready(function()
                                  success:function(data)
                                  {
                                     var transition = $("#transition").val();
-                                    alert(transition);
                                     var obj = $.parseJSON(data);
                                     obj = obj.name;
                                     objs = obj.split('.');
