@@ -322,7 +322,7 @@ class  PuzzlesController  extends AppController {
 						
 						$snipes = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$this->Puzzle->getLastInsertID())));	
 
-						$html = '<script type="text/javascript" src="'.Configure::read("SITE_URL").'custom.js"></script><div class="snipest" id="'.$snipes['Puzzle']['random'].'"></div>';
+						$html = '<script type="text/javascript" src="'.Configure::read("SITE_URL").'custom.js"></script><div class="snippet" id="'.$snipes['Puzzle']['random'].'"></div>';
 						$hosted = Configure::read("SITE_URL").$company_name.'/'.$name;
 
 					 	$email = array(
