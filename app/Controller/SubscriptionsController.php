@@ -121,7 +121,7 @@ class  SubscriptionsController  extends AppController {
 			}			
 		}
 		
-		$plan = $this->Subscription->find('first',array('conditions'=>array('Subscription.id'=>$id))); 
+		$plan = $this->Subscription->find('first',array('conditions'=>array('Subscription.name'=>$id))); 
 		$this->set('Rate',$plan);
 		$id =$plan['Subscription']['id'];
 		if($this->request->data)
