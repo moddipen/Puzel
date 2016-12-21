@@ -44,17 +44,21 @@
 	Router::connect('/login', array('controller' => 'users', 'action' => 'login','user'=>true));
 	Router::connect('/forgot-password', array('controller' => 'users', 'action' => 'forgetpassword','user'=>true));
 	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout','user'=>true));
-  //Router::connect('/puzel', array('controller' => 'puzzles', 'action' => 'index','user'=>true));
-  //Router::connect('/support', array('controller' => 'supports', 'action' => 'index','user'=>true));
+  Router::connect('/puzel', array('controller' => 'puzzles', 'action' => 'index','user'=>true));
+  Router::connect('/support', array('controller' => 'supports', 'action' => 'index','user'=>true));
 	Router::connect('/create-ticket', array('controller' => 'supports', 'action' => 'add','user'=>true));
 	Router::connect('/settings', array('controller' => 'users', 'action' => 'setting','user'=>true));
   Router::connect('/sign-up/*', array('controller' => 'subscriptions', 'action' => 'plan','user'=>true));
+ 
+  //-------------------------------------------------//
+
+
   //---------------------Business Account----------------------------//
 	
-  Router::connect('/puzel', array('controller' => 'puzzles', 'action' => 'index','business'=>true));
+  //Router::connect('/puzel', array('controller' => 'puzzles', 'action' => 'index','business'=>true));
 	Router::connect('/data-captured', array('controller' => 'visitors', 'action' => 'data','business'=>true));
 	Router::connect('/billing', array('controller' => 'orders', 'action' => 'index','business'=>true));
-	Router::connect('/support', array('controller' => 'supports', 'action' => 'index','business'=>true));
+	//Router::connect('/support', array('controller' => 'supports', 'action' => 'index','business'=>true));
 	// Router::connect('/settings', array('controller' => 'users', 'action' => 'setting','business'=>true));
 	Router::connect('/create-puzel', array('controller' => 'puzzles', 'action' => 'create','business'=>true));
   Router::connect('/export', array('controller' => 'visitors', 'action' => 'export','business'=>true));
@@ -79,13 +83,6 @@
   Router::connect('/business/visitors/emailFilter', array('controller' => 'visitors', 'action' => 'emailFilter','business'=>true));
   Router::connect('/business/supports/datefilter', array('controller' => 'supports', 'action' => 'datefilter','business'=>true));
   Router::connect('/business/users/cancel', array('controller' => 'users', 'action' => 'cancel','business'=>true));
-
-
-
-
-
-
-
 
 	//---------------------Admin Account----------------------------//
 	
