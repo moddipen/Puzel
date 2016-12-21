@@ -46,8 +46,8 @@
 	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout','user'=>true));
   //Router::connect('/puzel', array('controller' => 'puzzles', 'action' => 'index','user'=>true));
   //Router::connect('/support', array('controller' => 'supports', 'action' => 'index','user'=>true));
-	Router::connect('/create-ticket', array('controller' => 'supports', 'action' => 'add','user'=>true));
-	Router::connect('/settings', array('controller' => 'users', 'action' => 'setting','user'=>true));
+	//Router::connect('/create-ticket', array('controller' => 'supports', 'action' => 'add','user'=>true));
+	//Router::connect('/settings', array('controller' => 'users', 'action' => 'setting','user'=>true));
   Router::connect('/sign-up/*', array('controller' => 'subscriptions', 'action' => 'plan','user'=>true));
  
   //-------------------------------------------------//
@@ -64,7 +64,7 @@
 	Router::connect('/data-captured', array('controller' => 'visitors', 'action' => 'data','business'=>true));
 	Router::connect('/billing', array('controller' => 'orders', 'action' => 'index','business'=>true));
 	Router::connect('/support', array('controller' => 'supports', 'action' => 'index','business'=>true));
-	// Router::connect('/settings', array('controller' => 'users', 'action' => 'setting','business'=>true));
+	Router::connect('/settings', array('controller' => 'users', 'action' => 'setting','business'=>true));
 	Router::connect('/create-puzel', array('controller' => 'puzzles', 'action' => 'create','business'=>true));
   Router::connect('/export', array('controller' => 'visitors', 'action' => 'export','business'=>true));
   Router::connect('/view/*', array('controller' => 'puzzles', 'action' => 'view','business'=>true));
