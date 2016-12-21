@@ -61,7 +61,7 @@
                                     if($get_current_plan['UserSubscription']['subscription_id'] != 4)
                                     { ?>
                                       <u>
-                                        <a href="<?php echo Configure::read("SITE_URL")."subscriptions/package/".$get_current_plan['Subscription']['id'];?>">Upgrade
+                                        <a href="<?php echo Configure::read("SITE_URL")."pricing/".$get_current_plan['Subscription']['id'];?>">Upgrade
                                         </a>
                                       </u>
                                     <?php 
@@ -70,7 +70,7 @@
                                   else
                                   {?>
                                     <u>
-                                      <a href="<?php echo Configure::read("SITE_URL")."subscriptions/package/1"?>">Upgrade
+                                      <a href="<?php echo Configure::read("SITE_URL")."pricing/1"?>">Upgrade
                                       </a>
                                     </u>  
                                  <?php }?>
