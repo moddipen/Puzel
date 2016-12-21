@@ -56,6 +56,7 @@
 	Router::connect('/create-puzel', array('controller' => 'puzzles', 'action' => 'create','business'=>true));
   Router::connect('/export', array('controller' => 'visitors', 'action' => 'export','business'=>true));
   Router::connect('/view/*', array('controller' => 'puzzles', 'action' => 'view','business'=>true));
+  Router::connect('/preview/*', array('controller' => 'puzzles', 'action' => 'preview','business'=>true));
   Router::connect('/edit/*', array('controller' => 'puzzles', 'action' => 'edit','business'=>true));
   Router::connect('/receipt/*', array('controller' => 'orders', 'action' => 'receipt'));
   Router::connect('/ticket/*', array('controller' => 'supports', 'action' => 'conversation','business'=>true));
@@ -69,13 +70,13 @@
   Router::connect('/admin/users', array('controller' => 'users', 'action' => 'index','admin'=>true)); 
   Router::connect('/admin/users/export', array('controller' => 'users', 'action' => 'userexport','admin'=>true)); 
   Router::connect('/admin/data-captured', array('controller' => 'users', 'action' => 'data','admin'=>true)); 
-  Router::connect('/admin/data-captured', array('controller' => 'users', 'action' => 'data','admin'=>true)); 
+  //Router::connect('/admin/data-captured', array('controller' => 'users', 'action' => 'data','admin'=>true)); 
   Router::connect('/admin/support', array('controller' => 'supports', 'action' => 'index','admin'=>true)); 
   Router::connect('/admin/create-ticket', array('controller' => 'supports', 'action' => 'add','admin'=>true));
   Router::connect('/admin/settings', array('controller' => 'users', 'action' => 'setting','admin'=>true));
   Router::connect('/admin/preview/*', array('controller' => 'puzzles', 'action' => 'preview','admin'=>true));
   Router::connect('/admin/ticket/*', array('controller' => 'supports', 'action' => 'conversation','admin'=>true));
-  //Router::connect('/admin/data-captured/export', array('controller' => 'visitors', 'action' => 'export','admin'=>true));
+  Router::connect('/admin/data-captured/export', array('controller' => 'visitors', 'action' => 'export','admin'=>true));
  
 
 
