@@ -83,6 +83,13 @@
 
 
 
+
+
+  Router::connect('/process/*', array('controller' => 'visitors', 'action' => 'process'));
+  Router::connect('/fetchimage/*', array('controller' => 'visitors', 'action' => 'fetchimage'));
+
+
+
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
  */
