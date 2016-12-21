@@ -76,6 +76,7 @@
   Router::connect('/business/puzzles/pieces', array('controller' => 'puzzles', 'action' => 'pieces','business'=>true));
   Router::connect('/business/visitors/datefilter', array('controller' => 'visitors', 'action' => 'datefilter','business'=>true));
   Router::connect('/business/visitors/emailFilter', array('controller' => 'visitors', 'action' => 'emailFilter','business'=>true));
+  Router::connect('/business/supports/datefilter', array('controller' => 'supports', 'action' => 'datefilter','business'=>true));
 
 
 
