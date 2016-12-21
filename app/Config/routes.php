@@ -51,7 +51,7 @@
   Router::connect('/sign-up/*', array('controller' => 'subscriptions', 'action' => 'plan','user'=>true));
  
   //-------------------------------------------------//
-
+   Router::connect('/user/puzzles/datefilter', array('controller' => 'puzzles', 'action' => 'datefilter','user'=>true)); 
    Router::connect('/user/puzzles/filter', array('controller' => 'puzzles', 'action' => 'filter','user'=>true));
    Router::connect('/user/supports/datefilter', array('controller' => 'supports', 'action' => 'datefilter','user'=>true)); 
 
