@@ -18,7 +18,7 @@ $(document).ready(function()
   $.ajax
     ({
      type: "POST",
-     url: "http://puzel.stage.n-framescorp.com/visitors/snipestimage/"+puzzle_id,
+     url: "http://puzel.stage.n-framescorp.com/snipestimage/"+puzzle_id,
      dataType: 'text', 
      success:function(data)
      {
@@ -48,7 +48,7 @@ $(document).ready(function()
          else 
          {
 
-            var url = "http://puzel.stage.n-framescorp.com/visitors/process/"+puzzle_id; 
+            var url = "http://puzel.stage.n-framescorp.com/process/"+puzzle_id; 
              // Form Submit Ajax  
               $.ajax({
                        type: "POST",
@@ -62,7 +62,7 @@ $(document).ready(function()
                             $.ajax
                               ({
                                  type: "POST",
-                                 url: "http://puzel.stage.n-framescorp.com/visitors/fetchimage/"+data.ImageId,
+                                 url: "http://puzel.stage.n-framescorp.com/fetchimage/"+data.ImageId,
                                  dataType: 'text', 
                                  success:function(data)
                                  {
@@ -128,7 +128,7 @@ $(document).ready(function()
          } 
          else 
          {
-            var url = "http://puzel.stage.n-framescorp.com/visitors/process/"+puzzle_id; 
+            var url = "http://puzel.stage.n-framescorp.com/process/"+puzzle_id; 
              // Form Submit Ajax  
               $.ajax({
                        type: "POST",
@@ -144,7 +144,7 @@ $(document).ready(function()
                             $.ajax
                               ({
                                  type: "POST",
-                                 url: "http://puzel.stage.n-framescorp.com/visitors/fetchimage/"+data.ImageId,
+                                 url: "http://puzel.stage.n-framescorp.com/fetchimage/"+data.ImageId,
                                  dataType: 'text', 
                                  success:function(data)
                                  {
