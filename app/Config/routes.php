@@ -87,6 +87,7 @@
 
   Router::connect('/process/*', array('controller' => 'visitors', 'action' => 'process'));
   Router::connect('/fetchimage/*', array('controller' => 'visitors', 'action' => 'fetchimage'));
+  Router::connect('/snipestimage/*', array('controller' => 'visitors', 'action' => 'snipestimage'));
 
 
 
