@@ -34,7 +34,8 @@
     <?php   
       echo $this->Session->flash();
       $id = $Rate['Subscription']['id']; 
-      echo $this->Form->create('Subscription', array('action' => 'plan/'.$id,'class'=>'Formsubmit'));?>
+      //echo $this->Form->create('Subscription', array('action' => 'plan/'.$id,'class'=>'Formsubmit'));?>
+      <form id="SubscriptionPlan" class="Formsubmit" action="<?php echo Configure::read("SITE_URL");?>sign-up/<?php echo $id;?>" method="post" accept-charset="utf-8" novalidate="novalidate">
     <!-- <form action="<?php echo $Type;?>" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" novalidate> -->
       <section>
       <div id="mc_embed_signup_scroll">

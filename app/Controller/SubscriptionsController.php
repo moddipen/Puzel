@@ -123,7 +123,7 @@ class  SubscriptionsController  extends AppController {
 		
 		$plan = $this->Subscription->find('first',array('conditions'=>array('Subscription.id'=>$id))); 
 		$this->set('Rate',$plan);
-
+		$id =$plan['Subscription']['id'];
 		if($this->request->data)
 		{
 			if($this->request->data['Subscription']['action'] && $this->request->data['Subscription']['action'] == "upgrade")
