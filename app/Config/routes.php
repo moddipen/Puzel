@@ -79,9 +79,30 @@
   Router::connect('/admin/preview/*', array('controller' => 'puzzles', 'action' => 'preview','admin'=>true));
   Router::connect('/admin/ticket/*', array('controller' => 'supports', 'action' => 'conversation','admin'=>true));
   Router::connect('/admin/data-captured/export', array('controller' => 'visitors', 'action' => 'export','admin'=>true));
- 
+  
+  Router::connect('/admin/users/monthwisefiltre', array('controller' => 'users', 'action' => 'monthwisefiltre','admin'=>true));
+  Router::connect('/admin/users/datefilter', array('controller' => 'users', 'action' => 'datefilter','admin'=>true));
+  Router::connect('/admin/users/status', array('controller' => 'users', 'action' => 'status','admin'=>true));
+  Router::connect('/admin/users/status', array('controller' => 'users', 'action' => 'status','admin'=>true)); 
+  Router::connect('/admin/puzzles/monthwisefiltre', array('controller' => 'puzzles', 'action' => 'monthwisefiltre','admin'=>true));
+  Router::connect('/admin/puzzles/status', array('controller' => 'puzzles', 'action' => 'status','admin'=>true));
+  Router::connect('/admin/puzzles/datefilter', array('controller' => 'puzzles', 'action' => 'datefilter','admin'=>true));
+  Router::connect('/admin/visitors/datefilter', array('controller' => 'visitors', 'action' => 'datefilter','admin'=>true));
+  Router::connect('/admin/visitors/emailFilter', array('controller' => 'visitors', 'action' => 'emailFilter','admin'=>true));
+  Router::connect('/admin/supports/datefilter', array('controller' => 'supports', 'action' => 'datefilter','admin'=>true));
+  Router::connect('/admin/supports/emailfilter', array('controller' => 'supports', 'action' => 'emailfilter','admin'=>true));
 
 
+
+
+
+
+
+
+
+
+
+  //----------------------------------------------------------------------//
 
 
 
