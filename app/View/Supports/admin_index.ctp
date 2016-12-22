@@ -182,7 +182,7 @@
                                   <?php 
                                   echo $this->html->link( '',array('action' => 'conversation',$support['Support']['random']),array('class'=>'fa fa-comments','style'=>"color:white;"));
                                   echo "&nbsp; &nbsp;";
-                                  echo $this->html->link( '',array('action' => 'delete',$support['Support']['id']),array('class'=>'fa fa-trash-o','style'=>"color:white;"),' Do you want to delete this record?');
+                                  echo $this->html->link( '',array('action' => 'delete',$support['Support']['random']),array('class'=>'fa fa-trash-o','style'=>"color:white;"),' Do you want to delete this record?');
                                   ?>
                               </td>
                           </tr>
