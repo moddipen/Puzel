@@ -592,7 +592,7 @@
        
     // validation form 
 
-    $("#PuzzleViewForm").submit(function(e)
+    $(".custom-form").submit(function(e)
     {
       if($('#clickterm').val()=='')
       {
@@ -619,6 +619,7 @@
           alert("Please enter puzzle name");
           e.preventDefault();      
        }
+	   
        if($("#validation-pieces").val() == $("#validation-pieces option:first").val())
       {
         alert("Please select number of pieces of puzzel");
