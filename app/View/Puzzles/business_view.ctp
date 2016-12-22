@@ -110,6 +110,12 @@
                       
                     </div>
                   </div> 
+				  
+				  <div>
+                        Please insert jquery library to use snippet code.  <a href = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" target="_blank">Download jquery library </a>
+                    </div> 
+                    </br>
+				  
                   <div class="row">
                     <div class="col-md-10">
                       <!-- <form role="form" class="custom-form" action ="business/puzzels/view"> -->
@@ -168,7 +174,7 @@
 
                   </div>
 
-
+				
 
 
 
