@@ -74,6 +74,7 @@
   Router::connect('/receipt/*', array('controller' => 'orders', 'action' => 'receipt'));
   Router::connect('/ticket/*', array('controller' => 'supports', 'action' => 'conversation','business'=>true));
   Router::connect('/export/*', array('controller' => 'puzzles', 'action' => 'export','business'=>true));
+  Router::connect('/cancel', array('controller' => 'users', 'action' => 'cancel','business'=>true));
 
 
 
