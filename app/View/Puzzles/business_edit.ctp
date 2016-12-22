@@ -242,7 +242,7 @@
                   <?php ?>
 
 				<script>
-				jQuery( document ).ready(function() {
+				/*jQuery( document ).ready(function() {
 				var imgw=<?php echo $Capturedata['Image'][0]['total_width'];?>;
 				var parentw=jQuery('#showimage').width()+50;
 				var childw=parentw/5;
@@ -256,7 +256,7 @@
 					jQuery('.merge div div').css('width',childw+'px');
 					jQuery('.merge div div').css('height',newh+'px');
 				}
-				});
+				});*/
 				</script>
                   </div>
                   </div>
