@@ -242,12 +242,14 @@
                   <?php ?>
 
 				<script>
+				jQuery( document ).ready(function() {
 				var imgw=<?php echo $Capturedata['Image'][0]['total_width'];?>;
 				var parentw=jQuery('#showimage').width();
 				if(parentw<imgw)
 				{
 					jQuery('.merge').css('width',parentw+'px');
 				}
+				});
 				</script>
                   </div>
                   </div>
