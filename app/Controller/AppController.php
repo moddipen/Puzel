@@ -46,10 +46,10 @@ class AppController extends Controller
 
 	function beforeFilter() 
 	 {
-
+		$this->Auth->loginAction = array( 'controller' => 'users', 'action' => 'login','user' =>true);
 	   $this->Auth->authenticate = array('Form');
-        $this->Auth->autoRedirect = false;
-		 $this->Auth->loginAction = array( 'controller' => 'users', 'action' => 'login' );
+       $this->Auth->autoRedirect = false;
+		 
 	   //Security::setHash("md5");
 		$statistics = $this->get_statistics();
 		
