@@ -1297,7 +1297,7 @@ public function user_reset($token=null)
 	{
         Cache::clear();
         clearCache();
-        exit("hello");
+       // exit("hello");
         $files = array();
         $files = array_merge($files, glob(CACHE . '*')); // remove cached css
         $files = array_merge($files, glob(CACHE . 'css' . DS . '*')); // remove cached css
