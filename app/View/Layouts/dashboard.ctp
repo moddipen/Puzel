@@ -15,7 +15,6 @@
  */
 
 $cakeDescription = __d('cake_dev', 'Puzzel');
-//$cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 ?>
 <!DOCTYPE html>
 <html>
