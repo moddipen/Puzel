@@ -9,8 +9,36 @@
 						 <li><a href="<?php echo Configure::read('SITE_URL');?>subscriptions/package">Packages</a></li>
 						 <li><a href="<?php echo Configure::read('SITE_URL');?>contact">Contact</a></li>
 						 <li><a href="http://blog.puzel.co/">Blog</a></li>
-                         <li><a href="<?php echo Configure::read('SITE_URL');?>login">Sign In</a></li>
-						 <li><a href="<?php echo Configure::read('SITE_URL');?>pricing">Join as a Business</a></li>
+                         <?php
+							if($this->Session->read("Auth.User"))
+							{
+						?>
+								<li><a href="<?php echo Configure::read('SITE_URL');?>logout">Sign Out</a></li>
+						<?php
+							}
+							else
+							{
+						?>
+								<li><a href="<?php echo Configure::read('SITE_URL');?>login">Sign In</a></li>
+						<?php
+							}
+						 ?>
+						 
+						 <?php
+							if($this->Session->read("Auth.User"))
+							{
+						?>
+								
+						<?php
+							}
+							else
+							{
+						?>
+								 <li><a href="<?php echo Configure::read('SITE_URL');?>pricing">Join as a Business</a></li>
+						<?php
+							}
+						?>
+						
 						</ul>
 					</div>
 				</div>
@@ -35,8 +63,24 @@
 				 <div id="logo"><a href="<?php echo Configure::read('SITE_URL');?>"><img src="<?php echo $this->webroot ;?>img/logo.png"></a></div>
 				
 				 <ul id="nav">
-                 	<li><a href="<?php echo Configure::read('SITE_URL');?>pricing"><span class="button-join">Join as a Business</span></a></li>
-				 	<li><a href="<?php echo Configure::read('SITE_URL');?>login" style="margin-right: 0px; padding-right: 0px;"><span class="button-sign">Sign In</span></a></li>
+                 	<?php
+							if($this->Session->read("Auth.User"))
+							{
+						?>
+									<li><a href="<?php echo Configure::read('SITE_URL');?>logout" style="margin-right: 0px; padding-right: 0px;"><span class="button-sign">Sign out</span></a></li>
+						<?php
+							}
+							else
+							{
+						?>
+								<li><a href="<?php echo Configure::read('SITE_URL');?>pricing"><span class="button-join">Join as a Business</span></a></li>
+								<li><a href="<?php echo Configure::read('SITE_URL');?>login" style="margin-right: 0px; padding-right: 0px;"><span class="button-sign">Sign In</span></a></li>
+						<?php
+							}
+						?>
+					
+				 	
+					
 					<li><a href="http://blog.puzel.co/">Blog</a></li>
 					<li><a href="<?php echo Configure::read('SITE_URL');?>contact">Contact</a></li>
 					<li><a href="<?php echo Configure::read('SITE_URL');?>pricing">Packages</a></li>
