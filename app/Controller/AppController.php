@@ -144,7 +144,7 @@ class AppController extends Controller
     	    }
 
             /// User header count and prefix 
-    	    elseif ($this->params['prefix'] == 'user' || $this->Session->read("Auth.User.usertype") == 0)
+    	    elseif ($this->params['prefix'] == 'user' || ($this->Session->read("Auth.User.usertype") && $this->Session->read("Auth.User.usertype") == 0))
     	     {
     	     	$signup = 0 ;
         		$this->set('Signup',$signup);
