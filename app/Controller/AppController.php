@@ -49,7 +49,7 @@ class AppController extends Controller
 
 	   $this->Auth->authenticate = array('Form');
         $this->Auth->autoRedirect = false;
-		
+		 $this->Auth->loginAction = array( 'controller' => 'users', 'action' => 'login' );
 	   //Security::setHash("md5");
 		$statistics = $this->get_statistics();
 		
