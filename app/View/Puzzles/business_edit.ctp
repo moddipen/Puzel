@@ -63,7 +63,7 @@
                               <div class="row minipadding">
                                   <div class="col-sm-8">
                                       <div class="form-group">
-                                        <textarea class="form-control" style="height:87px; line-height:14pt;" id="script"><script type="text/javascript" src="<?php echo Configure::read("SITE_URL");?>custom.js"></script><div class="snippet" id="<?php echo $Capturedata['Puzzle']['random']; ?>"></div> </textarea>
+                                        <textarea class="form-control" style="height:87px; line-height:14pt;" id="script"><script type="text/javascript" src="<?php echo Configure::read("SITE_URL");?>app/webroot/js/custom.js"></script><div class="snipest" id="puzzle_<?php echo $Capturedata['Puzzle']['id']; ?>"></div> </textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
@@ -82,7 +82,7 @@
                                       <div class="form-group">
                                         <?php $name = str_replace(' ','', $Capturedata['Puzzle']['name']);?>
                                         <?php $company = str_replace(' ','', $Capturedata['Business']['company_name']);?>
-                                          <input type="text" class="form-control" value="<?php echo Configure::read("SITE_URL").$Capturedata['Business']['company_name']."/".$Capturedata['Puzzle']['name'];?>" id="puzlename">
+                                          <input type="text" class="form-control" value="<?php echo Configure::read("SITE_URL")."puzzle/".$Capturedata['Business']['company_name']."/".$Capturedata['Puzzle']['name'];?>" id="puzlename">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
@@ -119,7 +119,7 @@
                     <!-- -------------------------------------- ---------------------------- -->  
 
                     <div>
-                        Please insert jquery library to use snippet code.  <a href = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" target="_blank">Download jquery library </a>
+                        Please insert jquery library to use snippest code.  <a href = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" target="_blank">Download jquery library </a>
                     </div> 
                     </br>
 
@@ -200,7 +200,7 @@
                   <input type = "hidden" name="data[Puzzle][user_id]" value="<?php echo $this->Session->read('USERDETAIL.User.id');?>">
                   <div class="body" id="showimage">
                   <style>
-                  .merge div div{width:<?php echo $Capturedata['Image'][0]['width']."px";?>;height:<?php echo $Capturedata['Image'][0]['height']."px";?>;display:inline-block;margin-left:-5px;margin-bottom:-6px;-webkit-filter: brightness(0.55); filter: brightness(0.55);border:1px solid #FFF;}
+                  .merge div div{width:<?php echo $Capturedata['Image'][0]['width']."px";?>;height:<?php echo $Capturedata['Image'][0]['height']."px";?>;display:inline-block;margin-left:-5px;margin-bottom:-6px;-webkit-filter: brightness(0.55); filter: brightness(0.55);border:1px solid #FFF; background-size: 100% !important; background-repeat: no-repeat !important;background-position: center !important;}
                    .merge div div:last-child{border-right:none}
 				 .merge div div:first-child{border-left:none}
 				 .merge div:first-child div{border-top:none}
@@ -230,7 +230,7 @@
                   }  
 
                   ?> 
-                  <div class= "pt-page pt-page-<?php echo $index;?>" style = "<?php echo $class_image ;?>"></div>  
+                  <div class= "pt-page pt-page-<?php echo $index;?>" style = " <?php echo $class_image ;?>"></div>  
                   <?php
 
                   $index ++;
@@ -241,7 +241,23 @@
                   </div>
                   <?php ?>
 
-
+				<script>
+				jQuery( document ).ready(function() {
+				var imgw=<?php echo $Capturedata['Image'][0]['total_width'];?>;
+				var parentw=jQuery('#showimage').width()+50;
+				var childw=parentw/5;
+				var currentw=jQuery('.merge div div').width();
+				var currenth=jQuery('.merge div div').height();
+				var perw= childw/currentw;
+				var newh= currenth * perw;
+				if(parentw<imgw)
+				{
+					jQuery('.merge').css('width',parentw+'px');
+					jQuery('.merge div div').css('width',childw+'px');
+					jQuery('.merge div div').css('height',newh+'px');
+				}
+				});
+				</script>
                   </div>
                   </div>
 
