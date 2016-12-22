@@ -577,7 +577,10 @@ class  PuzzlesController  extends AppController {
 	  {
 	  		$list = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.random'=>$id)));
   			$list['Template'] = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.terms'=>$list['Puzzle']['terms']),'fields'=>array('Puzzle.id','Puzzle.name')));
-	 
+	 		
+
+
+	 		echo "<pre>";print_r($list);exit;
 	  		$this->set('title',$list['Puzzle']['name']);
 	  		if(!empty($this->request->data))
 	  		{
