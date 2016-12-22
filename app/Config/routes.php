@@ -50,8 +50,8 @@
   Router::connect('/create-ticket', array('controller' => 'supports', 'action' => 'add','business'=>true));
   Router::connect('/settings', array('controller' => 'users', 'action' => 'setting','user'=>true));
   Router::connect('/sign-up/*', array('controller' => 'subscriptions', 'action' => 'plan','user'=>true));
-  Router::connect('/date', array('controller' => 'puzzles', 'action' => 'datefilter','user'=>true));
-  Router::connect('/datesupport', array('controller' => 'supports', 'action' => 'datefilter','user'=>true));
+  Router::connect('/user/puzzles/datefilter', array('controller' => 'puzzles', 'action' => 'datefilter','user'=>true));
+  Router::connect('/user/supports/datefilter', array('controller' => 'supports', 'action' => 'datefilter','user'=>true));
  
 
 
