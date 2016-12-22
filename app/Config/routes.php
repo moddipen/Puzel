@@ -52,6 +52,7 @@
   Router::connect('/sign-up/*', array('controller' => 'subscriptions', 'action' => 'plan','user'=>true));
   Router::connect('/user/puzzles/datefilter', array('controller' => 'puzzles', 'action' => 'datefilter','user'=>true));
   Router::connect('/user/supports/datefilter', array('controller' => 'supports', 'action' => 'datefilter','user'=>true));
+  Router::connect('/delete/*', array('controller' => 'supports', 'action' => 'delete','user'=>true));
  
 
 
@@ -91,6 +92,7 @@
   Router::connect('/business/puzzles/pieces', array('controller' => 'puzzles', 'action' => 'pieces','business'=>true));
   Router::connect('/business/users/cancel', array('controller' => 'users', 'action' => 'cancel','business'=>true));
   Router::connect('/business/puzzles/template', array('controller' => 'puzzles', 'action' => 'template','business'=>true));
+  Router::connect('/delete/*', array('controller' => 'supports', 'action' => 'delete','business'=>true));
 
   //---------------------Admin Account----------------------------//
   
@@ -122,7 +124,7 @@
   Router::connect('/admin/visitors/emailFilter', array('controller' => 'visitors', 'action' => 'emailFilter','admin'=>true));
   Router::connect('/admin/supports/datefilter', array('controller' => 'supports', 'action' => 'datefilter','admin'=>true));
   Router::connect('/admin/supports/emailfilter', array('controller' => 'supports', 'action' => 'emailfilter','admin'=>true));
-
+  Router::connect('/admin/delete/*', array('controller' => 'supports', 'action' => 'delete','admin'=>true));
 
 
 /**

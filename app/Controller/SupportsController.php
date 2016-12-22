@@ -216,12 +216,17 @@ class  SupportsController  extends AppController {
 */	
 	public function admin_delete($id= Null)
 	{
+		$this->autoRender = false;
 		if($id)
 		{
-			if($this->Support->delete($id))
+			$Support = $this->Support->find('first',array('conditions'=>array('Support.random'=>$id)));
+			if($this->Support->delete($Support['Support']['id']))
 			{	
-				$this->Session->setFlash(__('Delete successfully!!....', true), 'default');
-				$this->redirect(array('action'=>'index','admin'=>true));
+				if($this->Support->deleteAll(array('Support.subject'=>$Support['Support']['subject'])))
+				{
+					$this->Session->setFlash(__('Delete successfully!!....', true), 'default');
+					$this->redirect(array('action'=>'index','business'=>true));	
+				}
 			}
 			else
 			{
@@ -320,12 +325,17 @@ class  SupportsController  extends AppController {
 */	
 	public function user_delete($id= Null)
 	{
+		$this->autoRender = false;
 		if($id)
 		{
-			if($this->Support->delete($id))
+			$Support = $this->Support->find('first',array('conditions'=>array('Support.random'=>$id)));
+			if($this->Support->delete($Support['Support']['id']))
 			{	
-				$this->Session->setFlash(__('Delete successfully!!....', true), 'default');
-				$this->redirect(array('action'=>'index','user'=>true));
+				if($this->Support->deleteAll(array('Support.subject'=>$Support['Support']['subject'])))
+				{
+					$this->Session->setFlash(__('Delete successfully!!....', true), 'default');
+					$this->redirect(array('action'=>'index','business'=>true));	
+				}
 			}
 			else
 			{
@@ -540,12 +550,17 @@ class  SupportsController  extends AppController {
 */	
 	public function business_delete($id= Null)
 	{
+		$this->autoRender = false;
 		if($id)
 		{
-			if($this->Support->delete($id))
+			$Support = $this->Support->find('first',array('conditions'=>array('Support.random'=>$id)));
+			if($this->Support->delete($Support['Support']['id']))
 			{	
-				$this->Session->setFlash(__('Delete successfully!!....', true), 'default');
-				$this->redirect(array('action'=>'index','business'=>true));
+				if($this->Support->deleteAll(array('Support.subject'=>$Support['Support']['subject'])))
+				{
+					$this->Session->setFlash(__('Delete successfully!!....', true), 'default');
+					$this->redirect(array('action'=>'index','business'=>true));	
+				}
 			}
 			else
 			{
@@ -556,8 +571,7 @@ class  SupportsController  extends AppController {
 		{
 			$this->Session->setFlash(__('No data found....', true), 'default');
 		}	
-	}	
-
+	}
 /**
 	Ajax calender filter in business panel
 */
