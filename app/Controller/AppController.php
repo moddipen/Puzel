@@ -109,12 +109,12 @@ class AppController extends Controller
     	     	$signup = 0 ;
         		$this->set('Signup',$signup);
     	     	 
-               if (preg_match('/pricing/',$_SERVER[ 'REQUEST_URI' ])){
+               if (preg_match('/pricing/',$_SERVER[ 'REQUEST_URI' ]) || preg_match('/thank-you/',$_SERVER[ 'REQUEST_URI' ])){
                     $this->layout = "default";
-                } 
+                }
                 else
                 {
-                 $this->layout = "dashboard";
+                    $this->layout = "dashboard";
                 }
                 $data = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
                 if(empty($data))
