@@ -2935,7 +2935,7 @@ input:-ms-input-placeholder { color: rgba(0, 0, 0, .3) !important; }
 .note-editor .note-toolbar>.btn-group{margin-right: 0px; border-right:1px solid #ccc; margin-top:0;}
 .note-editor .note-toolbar>.btn-group:last-child{border-right:0px;}
 .note-editor .note-toolbar{padding-bottom:0px; padding-left:0px;}
-.modal.orange .modal-body{padding:15px 30px;}
+.modal.orange .modal-body{padding:15px 30px; word-break: break-word; word-wrap: break-word;}
 .fullwidth{width:100%;}
 .popup-form select, .popup-form input, .popup-form select.form-control + .chosen-container.chosen-container-single .chosen-single, .popup-form textarea, .popup-form .btn.btn-file{border: 1px solid #a9a9a9 !important; border-radius:0;}
 h4.title{font-size:16px;}
