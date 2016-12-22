@@ -108,14 +108,14 @@ class AppController extends Controller
     	     {
     	     	$signup = 0 ;
         		$this->set('Signup',$signup);
-    	     	if (strpos($this->params['url'], 'pricing') !== false) {
-                        $this->layout = "default";
+    	     	 
+                if (preg_match('/pricing/',$_SERVER[ 'REQUEST_URI' ])){
+                    $this->layout = "default";
                 }
                 else
                 {
                  $this->layout = "dashboard";
                 }
-
                 $data = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
                 if(empty($data))
                 {
