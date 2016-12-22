@@ -106,7 +106,7 @@
                     </div>
                     <div class="col-md-2">
                       <div class="form-group">
-                          <input type="button" value="Create Request" onClick="location.href='<?php echo Configure::read('SITE_URL');?>create-ticket';" class="btn btn-oranges pull-right">
+                          <input type="button" value="Create Request" onClick="location.href='<?php echo Configure::read('SITE_URL');?>create-tickets';" class="btn btn-oranges pull-right">
                         </div>
                     </div>
                   </div>

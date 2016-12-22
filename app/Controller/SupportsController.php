@@ -125,7 +125,13 @@ class  SupportsController  extends AppController {
 					if($this->sendemail($useremail))
 				    {
 						$this->Session->setFlash(__('Support Send to admin!!....', true), 'default');
-						$this->redirect(array('action'=>'index','business'=>true));
+						if($this->Session->read("Auth.User.usertype") == 1){
+							$this->redirect(array('action'=>'index','business'=>true));
+						}
+						else
+						{
+							$this->redirect(array('action'=>'index','user'=>true));	
+						}
 					}
 					else
 					{

@@ -51,7 +51,7 @@
                           $mainClass = "";
                         } ?>
                   <li class="<?php echo $mainClass;?>">
-                    <a href="<?php echo Configure::read('SITE_URL');?>puzel">
+                    <a href="<?php echo Configure::read('SITE_URL');?>puzels">
                       <i class="fa fa-puzel-icon-left"></i> Puzel
                       
                     </a>
@@ -73,7 +73,7 @@
                           $mainClass = "";
                         } ?>
                   <li class="<?php echo $mainClass;?>">
-                    <a href="<?php echo Configure::read('SITE_URL');?>support">
+                    <a href="<?php echo Configure::read('SITE_URL');?>supports">
                       <i class="fa fa-support-16"></i> Support
                       
                     </a>

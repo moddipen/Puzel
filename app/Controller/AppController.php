@@ -78,7 +78,7 @@ class AppController extends Controller
             } 
 
             // prefix setting  and header count
-            if ($this->params['prefix'] == 'admin')
+            if ($this->params['prefix'] == 'admin' || $this->Session->read("Auth.User.usertype") == 2)
         	{
         		$signup = 0 ;
         		$this->set('Signup',$signup);
@@ -104,7 +104,7 @@ class AppController extends Controller
 
         	}
             // Business prefix annd header count 
-    	    elseif ($this->params['prefix'] == 'business')
+    	    elseif ($this->params['prefix'] == 'business' || $this->Session->read("Auth.User.usertype") == 1)
     	     {
     	     	$signup = 0 ;
         		$this->set('Signup',$signup);
@@ -144,7 +144,7 @@ class AppController extends Controller
     	    }
 
             /// User header count and prefix 
-    	    elseif ($this->params['prefix'] == 'user')
+    	    elseif ($this->params['prefix'] == 'user' || $this->Session->read("Auth.User.usertype") == 0)
     	     {
     	     	$signup = 0 ;
         		$this->set('Signup',$signup);

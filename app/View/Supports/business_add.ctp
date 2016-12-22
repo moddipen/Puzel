@@ -8,7 +8,16 @@
           <!-- content main container -->
           <div class="main">
             <!-- cards -->
-            <?php echo $this->element('business/header');?>
+            <?php 
+              if ($this->Session->read("Auth.User.usertype") == 1)
+              {
+                echo $this->element('business/header');
+              }
+              else
+              {
+                echo $this->element('user/header'); 
+              }
+            ?>
             
               <!-- /cards -->
             

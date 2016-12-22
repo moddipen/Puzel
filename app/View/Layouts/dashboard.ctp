@@ -81,7 +81,7 @@ $cakeDescription = __d('cake_dev', 'Puzzel');
     <div id="wrap">
     	<div class="row">
     	<?php 
-    	if ($this->params['prefix'] == 'admin')
+    	if ($this->params['prefix'] == 'admin' || $this->Session->read("Auth.User.usertype") == 2)
     	{
     		if($Signup  == 0)
     		{
@@ -89,7 +89,7 @@ $cakeDescription = __d('cake_dev', 'Puzzel');
     		}
     		
     	}
-	    elseif($this->params['prefix'] == 'business')
+	    elseif($this->params['prefix'] == 'business' || $this->Session->read("Auth.User.usertype") == 1)
 	     {
 	     	if($Signup  == 0)
     		{
