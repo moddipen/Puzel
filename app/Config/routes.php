@@ -90,6 +90,7 @@
   Router::connect('/send', array('controller' => 'puzzles', 'action' => 'send','business'=>true));
   Router::connect('/business/puzzles/pieces', array('controller' => 'puzzles', 'action' => 'pieces','business'=>true));
   Router::connect('/business/users/cancel', array('controller' => 'users', 'action' => 'cancel','business'=>true));
+  Router::connect('/business/puzzles/template', array('controller' => 'puzzles', 'action' => 'template','business'=>true));
 
   //---------------------Admin Account----------------------------//
   
