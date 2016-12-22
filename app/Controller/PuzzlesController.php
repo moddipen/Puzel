@@ -320,8 +320,10 @@ class  PuzzlesController  extends AppController {
 						
 						$company_name = str_replace(' ','', $this->Session->read('IMAGECAPTURE.Puzzel.compnay_name'));
 						
-						$html = '<script type="text/javascript" src="'.Configure::read("SITE_URL").'app/webroot/js/custom.js"></script><div class="snipest" id="puzzle_'.$this->Puzzle->getLastInsertID().'"></div>';
-						$hosted = Configure::read("SITE_URL").'puzzle/'.$company_name.'/'.$name;
+						$snipes = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$this->Puzzle->getLastInsertID())));	
+
+						$html = '<script type="text/javascript" src="'.Configure::read("SITE_URL").'custom.js"></script><div class="snippet" id="'.$snipes['Puzzle']['random'].'"></div>';
+						$hosted = Configure::read("SITE_URL").$company_name.'/'.$name;
 
 					 	$email = array(
 	              			"templateid"=>1017941,
@@ -536,8 +538,9 @@ class  PuzzlesController  extends AppController {
 */	
 	public function business_export($id = null)
 	{
+	  $puzel = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.random'=>$id)));				
 	  $data =  $this->Visitor->find('all',
-			array('conditions'=>array('Visitor.puzzle_id'=>$id),
+			array('conditions'=>array('Visitor.puzzle_id'=>$puzel['Puzzle']['id']),
 			'fields'=>array(
 			"Puzzle.name as PuzzleName,
 			Visitor.firstname as `Visitor Firstname`,
@@ -574,8 +577,7 @@ class  PuzzlesController  extends AppController {
 	  {
 	  		$list = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.random'=>$id)));
   			$list['Template'] = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.terms'=>$list['Puzzle']['terms']),'fields'=>array('Puzzle.id','Puzzle.name')));
-	 
-	  		$this->set('title',$list['Puzzle']['name']);
+	 		$this->set('title',$list['Puzzle']['name']);
 	  		if(!empty($this->request->data))
 	  		{
 

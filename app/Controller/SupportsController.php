@@ -79,8 +79,11 @@ class  SupportsController  extends AppController {
 		$this->Session->write("ADMINDETAIL",$admin);
 		if(!empty($this->request->data))
 		{
+			
 			$user = $this->Auth->user();
 			$this->request->data['Support']['sender_id'] = $this->Auth->user('id');
+			$this->request->data['Support']['random'] = $this->generateRandomString();
+			
 			$this->Support->create();
 			if($this->Support->save($this->request->data))
 			{
@@ -122,7 +125,13 @@ class  SupportsController  extends AppController {
 					if($this->sendemail($useremail))
 				    {
 						$this->Session->setFlash(__('Support Send to admin!!....', true), 'default');
-						$this->redirect(array('action'=>'index','business'=>true));
+						if($this->Session->read("Auth.User.usertype") == 1){
+							$this->redirect(array('action'=>'index','business'=>true));
+						}
+						else
+						{
+							$this->redirect(array('action'=>'index','user'=>true));	
+						}
 					}
 					else
 					{
@@ -145,7 +154,7 @@ class  SupportsController  extends AppController {
 	{
 		$this->set('sub_action','index');
 		$this->set("title","Support");
-		$support = $this->Support->find('all',array('conditions'=>array('OR'=>array('Support.receiver_id' =>$this->Auth->user('id'),'Support.sender_id' =>$this->Auth->user('id'))),'order'=>'Support.created desc','fields' => array('Support.subject','Sender.firstname','Receiver.firstname','Sender.lastname','Receiver.lastname','Sender.company_name','Receiver.company_name','Support.created','Sender.id','Receiver.id','Support.message','Support.id'),'group' => array('Support.subject HAVING  1')));
+		$support = $this->Support->find('all',array('conditions'=>array('OR'=>array('Support.receiver_id' =>$this->Auth->user('id'),'Support.sender_id' =>$this->Auth->user('id'))),'order'=>'Support.created desc','fields' => array('Support.subject','Support.random','Sender.firstname','Receiver.firstname','Sender.lastname','Receiver.lastname','Sender.company_name','Receiver.company_name','Support.created','Sender.id','Receiver.id','Support.message','Support.id'),'group' => array('Support.subject HAVING  1')));
 		$this->set('Supports',$support);
 		$this->User->recursive = -2;
 		$email_list = $this->User->find('all',array('conditions'=>array('User.usertype'=>1),'fields'=>array('User.id','User.email')));
@@ -165,6 +174,7 @@ class  SupportsController  extends AppController {
 		{
 			$user = $this->Auth->user();
 			$this->request->data['Support']['sender_id'] = $user['id'];
+			$this->request->data['Support']['random'] = $this->generateRandomString();
 			$this->Support->create();
 			if($this->Support->save($this->request->data))
 			{
@@ -247,6 +257,7 @@ class  SupportsController  extends AppController {
 		{
 			$user = $this->Auth->user();
 			$this->request->data['Support']['sender_id'] = $this->Auth->user('id');
+			$this->request->data['Support']['random'] = $this->generateRandomString();
 			$this->Support->create();
 			if($this->Support->save($this->request->data))
 			{
@@ -336,7 +347,7 @@ class  SupportsController  extends AppController {
 		$this->set('title',"Conversation");
 		if($id)
 		{
-			$viseversa  = $this->Support->find('all',array('conditions'=>array(array('OR'=>array('Support.receiver_id'=>$this->Auth->user('id'),'Support.sender_id'=>$this->Auth->user('id'),'Support.id'=>$id,'Support.reply_id'=>$id))),'order'=>'Support.created asc'));
+			$viseversa  = $this->Support->find('all',array('conditions'=>array(array('OR'=>array('Support.receiver_id'=>$this->Auth->user('id'),'Support.sender_id'=>$this->Auth->user('id'),'Support.random'=>$id,'Support.reply_id'=>$id))),'order'=>'Support.created asc'));
 			$this->set("Conversation",$viseversa);
 		}
 	}
@@ -366,6 +377,7 @@ class  SupportsController  extends AppController {
 			}	
 			
 			$this->request->data['Support']['subject'] = $support['Support']['subject'];
+			$this->request->data['Support']['random'] = $this->generateRandomString();
 			$this->Support->create();
 			if($this->Support->save($this->request->data))
 			{
@@ -418,6 +430,7 @@ class  SupportsController  extends AppController {
 			$this->request->data['Support']['sender_id'] = $this->Auth->user('id');
 			$this->request->data['Support']['receiver_id'] = $support['Support']['receiver_id'];
 			$this->request->data['Support']['subject'] = $support['Support']['subject'];
+			$this->request->data['Support']['random'] = $this->generateRandomString();
 			$this->Support->create();
 			if($this->Support->save($this->request->data))
 			{
@@ -460,7 +473,7 @@ class  SupportsController  extends AppController {
 		$this->set('title',"Conversation");
 		if($id)
 		{
-			$viseversa  = $this->Support->find('all',array('conditions'=>array(array('OR'=>array('Support.receiver_id'=>$this->Auth->user('id'),'Support.sender_id'=>$this->Auth->user('id'),'Support.id'=>$id,'Support.reply_id'=>$id))),'order'=>'Support.created asc'));
+			$viseversa  = $this->Support->find('all',array('conditions'=>array(array('OR'=>array('Support.receiver_id'=>$this->Auth->user('id'),'Support.sender_id'=>$this->Auth->user('id'),'Support.random'=>$id,'Support.reply_id'=>$id))),'order'=>'Support.created asc'));
 			$this->set("Conversation",$viseversa);
 		}
 	}
@@ -488,6 +501,7 @@ class  SupportsController  extends AppController {
 				$this->request->data['Support']['receiver_id'] = $support['Support']['receiver_id'];	
 			}	
 			$this->request->data['Support']['subject'] = $support['Support']['subject'];
+			$this->request->data['Support']['random'] = $this->generateRandomString();
 			$this->Support->create();
 			if($this->Support->save($this->request->data))
 			{
@@ -578,7 +592,7 @@ class  SupportsController  extends AppController {
 		$this->set('title',"Conversation");
 		if($id)
 		{
-			$get_data = $this->Support->find('first',array('conditions'=>array('Support.id'=>$id)));
+			$get_data = $this->Support->find('first',array('conditions'=>array('Support.random'=>$id)));
 			 $viseversa  = $this->Support->find('all',array('conditions'=>array('Support.subject'=>$get_data['Support']['subject']),'order'=>'Support.created asc'));
 			// $viseversa = $this->Support->find('all',array('conditions'=>array('OR'=>array('Support.receiver_id' =>$this->Auth->user('id'),'Support.sender_id' =>$this->Auth->user('id'))),'order'=>'Support.created desc','fields' => array('Support.subject','Sender.firstname','Receiver.firstname','Sender.lastname','Receiver.lastname','Sender.company_name','Receiver.company_name','Support.created','Sender.id','Receiver.id','Support.message','Support.id'),'group' => array('Support.subject HAVING  1')));
 			
@@ -642,6 +656,21 @@ class  SupportsController  extends AppController {
 			
 		}	
 	}
+
+/**
+	Generate rndom string
+*/			
+	public function generateRandomString($length = 10)
+	{
+	    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	    $charactersLength = strlen($characters);
+	    $randomString = '';
+	    for ($i = 0; $i < $length; $i++) {
+	        $randomString .= $characters[rand(0, $charactersLength - 1)];
+	    }
+	    return $randomString;
+	}
+	
 
 
 

@@ -220,12 +220,12 @@ class  VisitorsController  extends AppController {
 	{
 		header('Access-Control-Allow-Origin: *');
 		$this->layout = '';
-		$image = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id,'Puzzle.status'=>0)));
+		$image = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.random'=>$id,'Puzzle.status'=>0)));
 		$this->set('image',$image['Image']);
 		$this->set('drawimage_s',count($image['Image']));
 		$this->set('PuzzleData',$image);
-		$puzel['Show'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$id,'Image.status'=>0))); 
-		$puzel['Hide'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$id,'Image.status'=>1))); 
+		$puzel['Show'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$image['Puzzle']['id'],'Image.status'=>0))); 
+		$puzel['Hide'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$image['Puzzle']['id'],'Image.status'=>1))); 
 		$this->set("ShowPuzzel",$puzel);
 		$this->render('/Visitors/fetchimage');
 	}

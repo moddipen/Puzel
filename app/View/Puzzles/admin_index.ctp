@@ -134,8 +134,8 @@
                             <td><?php echo $list['Hide'];?></td>
                             <td class="minipadding controls">
                               <div class="col-xs-5 text-right">
-                                <?php 
-                                  echo $this->html->link( '',array('action' => 'preview',$list['Puzzle']['random']),array('class'=>'fa fa-eye','style'=>"color:white;"));?></div><div class="col-xs-7">
+                                <a class="fa fa-eye" href="<?php echo Configure::read('SITE_URL');?>admin/preview/<?php echo $list['Puzzle']['random'];?>" style="color:white;"></a>
+								</div><div class="col-xs-7">
                                   <div class="onoffswitch green small">
                                   <?php 
                                   // check puzzle s activate or not

@@ -11,7 +11,7 @@
       <?php 
       if($puzel['Hide'] != '')
       {
-        echo $this->html->link('',array('action' => 'export',$puzel['Puzzle']['id']),array('class'=>'fa fa-download-16px','style'=>"color:white;"));
+        echo $this->html->link('',array('action' => 'export',$puzel['Puzzle']['random']),array('class'=>'fa fa-download-16px','style'=>"color:white;"));
         echo "&nbsp;&nbsp;";
         echo $this->html->link('',array('controller'=>'visitors','action' => 'data',$puzel['Puzzle']['id']),array('class'=>'fa fa-eye','style'=>"color:white;"));
       
@@ -21,7 +21,7 @@
       <td class="minipadding controls">
         <input type ="hidden" value = "<?php echo $puzel['Puzzle']['id'];?>" class ="puzelid" >
         <div class="col-xs-5 text-right"> <?php 
-      echo $this->html->link('',array('action' => 'edit',$puzel['Puzzle']['id']),array('class'=>'fa fa-pencil','style'=>"color:white;"));?><!-- <i class="fa fa-pencil"></i> --></div>
+      echo $this->html->link('',array('action' => 'edit',$puzel['Puzzle']['random']),array('class'=>'fa fa-pencil','style'=>"color:white;"));?><!-- <i class="fa fa-pencil"></i> --></div>
         <div class="col-xs-7">
           <div class="onoffswitch green small">
             <?php 

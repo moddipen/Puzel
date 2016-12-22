@@ -54,8 +54,8 @@
 
                    <?php $unique =  $Randomstring;?>
                   <!-- tile body -->
-                  <!-- <form role="form" class="custom-form" action ="puzzels/view" method="post"> -->
-                  <?php echo $this->form->create('Puzzle',array('action'=>'preview/'.$unique,'method'=>'post','class'=>"custom-form"));?>
+                  <form role="form" class="custom-form" action ="preview/<?php echo $unique;?>" method="post">
+                  <?php //echo $this->form->create('Puzzle',array('action'=>'preview/'.$unique,'method'=>'post','class'=>"custom-form"));?>
                   <div class="tile-body">
                   <div class="row">
                     <div class="col-md-10">
@@ -592,7 +592,7 @@
        
     // validation form 
 
-    $("#PuzzleViewForm").submit(function(e)
+    $(".custom-form").submit(function(e)
     {
       if($('#clickterm').val()=='')
       {
@@ -619,6 +619,7 @@
           alert("Please enter puzzle name");
           e.preventDefault();      
        }
+	   
        if($("#validation-pieces").val() == $("#validation-pieces option:first").val())
       {
         alert("Please select number of pieces of puzzel");

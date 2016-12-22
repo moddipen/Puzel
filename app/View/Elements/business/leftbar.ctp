@@ -3,7 +3,7 @@
 
           <!-- Branding -->
           <div class="navbar-header col-md-1">
-            <a class="navbar-brand" href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/puzzles/index">
+            <a class="navbar-brand" href="<?php echo Configure::read('SITE_URL');?>puzel">
               
             </a>
             <div class="sidebar-collapse hidden-md hidden-lg">
@@ -50,7 +50,8 @@
                           $mainClass = "";
                         } ?>
                   <li class="<?php echo $mainClass;?>">
-                    <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/puzzles/index">
+                    <!-- <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/puzzles/index"> -->
+                      <a href="<?php echo Configure::read('SITE_URL');?>puzel">
                       <i class="fa fa-puzel-icon-left"></i> Puzel
                       
                     </a>
@@ -72,8 +73,8 @@
                           $mainClass = "";
                         } ?>
                   <li class="<?php echo $mainClass;?>">
-                    <!-- <a href="<?php echo Configure::read('SITE_URL');?>data-captured"> -->
-                    <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/visitors/data">
+                    <a href="<?php echo Configure::read('SITE_URL');?>data-captured">
+                    <!-- <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/visitors/data"> -->
                       <i class="fa fa-database"></i> Data Captured
                       
                     </a>
@@ -118,7 +119,8 @@
                           $mainClass = "";
                         } ?>
                   <li class="<?php echo $mainClass;?>">
-                    <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/supports/index">
+                    <!-- <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/supports/index"> -->
+                    <a href="<?php echo Configure::read('SITE_URL');?>support">
                       <i class="fa fa-support-16"></i> Support
                       
                     </a>
@@ -153,7 +155,8 @@
                           $mainClass = "";
                         } ?>
                       <li class="<?php echo $mainClass;?>">
-                        <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/users/setting">
+                        <!-- <a href="<?php echo Configure::read('SITE_BUSINESS_URL');?>/users/setting"> -->
+                        <a href="<?php echo Configure::read('SITE_URL');?>setting">
                           <i class="fa fa-cog"></i> Settings
                         </a>
                       </li>

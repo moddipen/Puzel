@@ -12,8 +12,9 @@ $(document).ready(function()
       }); 
   
   $('head').append('<link rel="stylesheet" type="text/css" href="http://puzel.stage.n-framescorp.com/app/webroot/css/animations.css">');
-  var snipest_id =$('.snipest').attr('id');
-  var puzzle_id = snipest_id.replace("puzzle_", "");
+  var snipest_id =$('.snippet').attr('id');
+  // var puzzle_id = snipest_id.replace("puzzle_", "");
+  var puzzle_id = snipest_id;
   
   $.ajax
     ({
@@ -67,7 +68,6 @@ $(document).ready(function()
                                  success:function(data)
                                  {
                                     var transition = $("#transition").val();
-                  
                                     var obj = $.parseJSON(data);
                                     obj = obj.name;
                                     objs = obj.split('.');
@@ -138,7 +138,7 @@ $(document).ready(function()
                        success: function(data)
                        {
 
-                        console.log(data.message);
+                        
                         if(data.message == "success" )
                           {
                             $.ajax

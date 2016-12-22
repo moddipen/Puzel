@@ -17,7 +17,12 @@
 
 <div id="content" class="col-md-12 full-page login">
   <div class="inside-block">
-    <a href="<?php echo Configure::read("SITE_URL");?>subscriptions/package"><img src="<?php echo $this->webroot;?>img/logo.png" class="logo"></a>
+    <!-- <a href="<?php echo Configure::read("SITE_URL");?>subscriptions/package"><img src="<?php echo $this->webroot;?>img/logo.png" class="logo"></a> -->
+    <?php if($this->Session->read('Auth.UserSubscription.subscription_id')) {?>
+      <a href="<?php echo Configure::read("SITE_URL");?>pricing/<?php echo $this->Session->read('Auth.UserSubscription.subscription_id');?>"><img src="<?php echo $this->webroot;?>img/logo.png" class="logo"></a>
+      <?php } else {?>
+      <a href="<?php echo Configure::read("SITE_URL");?>pricing"><img src="<?php echo $this->webroot;?>img/logo.png" class="logo"></a>
+      <?php } ?>
     <h3 class="purple">Grow your customer base with Puzel.<br>
       Sign up to be first in line to take it for a test drive once it launches.</h3>
   
@@ -33,8 +38,9 @@
     <!-- <div id="mc_embed_signup"> -->
     <?php   
       echo $this->Session->flash();
-      $id = $Rate['Subscription']['id']; 
-      echo $this->Form->create('Subscription', array('action' => 'plan/'.$id,'class'=>'Formsubmit'));?>
+      $id = $Rate['Subscription']['name']; 
+      //echo $this->Form->create('Subscription', array('action' => 'plan/'.$id,'class'=>'Formsubmit'));?>
+      <form id="SubscriptionPlan" class="Formsubmit" action="<?php echo Configure::read("SITE_URL");?>sign-up/<?php echo $id;?>" method="post" accept-charset="utf-8" novalidate="novalidate">
     <!-- <form action="<?php echo $Type;?>" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" novalidate> -->
       <section>
       <div id="mc_embed_signup_scroll">

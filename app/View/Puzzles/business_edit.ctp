@@ -63,7 +63,7 @@
                               <div class="row minipadding">
                                   <div class="col-sm-8">
                                       <div class="form-group">
-                                        <textarea class="form-control" style="height:87px; line-height:14pt;" id="script"><script type="text/javascript" src="<?php echo Configure::read("SITE_URL");?>app/webroot/js/custom.js"></script><div class="snipest" id="puzzle_<?php echo $Capturedata['Puzzle']['id']; ?>"></div> </textarea>
+                                        <textarea class="form-control" style="height:87px; line-height:14pt;" id="script"><script type="text/javascript" src="<?php echo Configure::read("SITE_URL");?>custom.js"></script><div class="snippet" id="<?php echo $Capturedata['Puzzle']['random']; ?>"></div> </textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
@@ -82,7 +82,7 @@
                                       <div class="form-group">
                                         <?php $name = str_replace(' ','', $Capturedata['Puzzle']['name']);?>
                                         <?php $company = str_replace(' ','', $Capturedata['Business']['company_name']);?>
-                                          <input type="text" class="form-control" value="<?php echo Configure::read("SITE_URL")."puzzle/".$Capturedata['Business']['company_name']."/".$Capturedata['Puzzle']['name'];?>" id="puzlename">
+                                          <input type="text" class="form-control" value="<?php echo Configure::read("SITE_URL").$Capturedata['Business']['company_name']."/".$Capturedata['Puzzle']['name'];?>" id="puzlename">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
@@ -119,7 +119,7 @@
                     <!-- -------------------------------------- ---------------------------- -->  
 
                     <div>
-                        Please insert jquery library to use snippest code.  <a href = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" target="_blank">Download jquery library </a>
+                        Please insert jquery library to use snippet code.  <a href = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" target="_blank">Download jquery library </a>
                     </div> 
                     </br>
 

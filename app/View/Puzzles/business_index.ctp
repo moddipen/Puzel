@@ -160,7 +160,7 @@
                             <?php 
                             if($puzel['Hide'] != '')
                             {
-                              echo $this->html->link('',array('action' => 'export',$puzel['Puzzle']['id']),array('class'=>'fa fa-download-16px','style'=>"color:white;"));
+                              echo $this->html->link('',array('action' => 'export',$puzel['Puzzle']['random']),array('class'=>'fa fa-download-16px','style'=>"color:white;"));
                               echo "&nbsp;&nbsp;";
                               echo $this->html->link('',array('controller'=>'visitors','action' => 'data',$puzel['Puzzle']['id']),array('class'=>'fa fa-eye','style'=>"color:white;"));
                             
@@ -173,13 +173,9 @@
                             <td class="minipadding controls">
                               <input type ="hidden" value = "<?php echo $puzel['Puzzle']['id'];?>" class ="puzelid" >
                               <div class="col-xs-5 text-right"> 
-
+								                <a class="fa fa-pencil" href="<?php echo Configure::read("SITE_URL");?>edit/<?php echo $puzel['Puzzle']['random']?>" style="color:white;"></a>
                               
-                               <?php
-                               
-                                echo $this->html->link('',array('action' => 'edit',$puzel['Puzzle']['random']),array('class'=>'fa fa-pencil','style'=>"color:white;"));     
-                              
-                            ?></div>
+                               </div>
                              
                                 <div class="col-xs-7">
                                 <div class="onoffswitch green small">

@@ -48,7 +48,7 @@
 
                   <!-- tile body -->
                   <div class="tile-body">
-                    <?php echo $this->form->create('User',array('action'=>'setting','class'=>"profile-settings custom-form"));?>
+                    <form id="PuzzleSettingsForm" class="profile-settings custom-form" action="/settings" method="post" accept-charset="utf-8">
 
                       
 

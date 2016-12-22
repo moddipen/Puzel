@@ -175,12 +175,12 @@
                                     }  
                                     echo $name;?>
                               </td>
-                              <td><a href = "<?php echo Configure::read('SITE_ADMIN_URL');?>/supports/conversation/<?php echo $support['Support']['id'];?>" style="color:white;"><?php echo $support['Support']['subject'];?></td>
+                              <td><a href = "<?php echo Configure::read('SITE_URL');?>admin/ticket/<?php echo $support['Support']['random'];?>" style="color:white;"><?php echo $support['Support']['subject'];?></td>
                               <td><?php 
                                 echo date('g:i A dS M Y',strtotime($support['Support']['created']));?></td>
                               <td>
                                   <?php 
-                                  echo $this->html->link( '',array('action' => 'conversation',$support['Support']['id']),array('class'=>'fa fa-comments','style'=>"color:white;"));
+                                  echo $this->html->link( '',array('action' => 'conversation',$support['Support']['random']),array('class'=>'fa fa-comments','style'=>"color:white;"));
                                   echo "&nbsp; &nbsp;";
                                   echo $this->html->link( '',array('action' => 'delete',$support['Support']['id']),array('class'=>'fa fa-trash-o','style'=>"color:white;"),' Do you want to delete this record?');
                                   ?>

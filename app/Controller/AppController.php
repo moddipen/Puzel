@@ -78,7 +78,7 @@ class AppController extends Controller
             } 
 
             // prefix setting  and header count
-            if ($this->params['prefix'] == 'admin')
+            if ($this->params['prefix'] == 'admin' || $this->Session->read("Auth.User.usertype") == 2)
         	{
         		$signup = 0 ;
         		$this->set('Signup',$signup);
@@ -104,12 +104,18 @@ class AppController extends Controller
 
         	}
             // Business prefix annd header count 
-    	    elseif ($this->params['prefix'] == 'business')
+    	    elseif ($this->params['prefix'] == 'business' || $this->Session->read("Auth.User.usertype") == 1)
     	     {
     	     	$signup = 0 ;
         		$this->set('Signup',$signup);
-    	     	$this->layout = "dashboard";
-
+    	     	 
+               if (preg_match('/pricing/',$_SERVER[ 'REQUEST_URI' ]) || preg_match('/thank-you/',$_SERVER[ 'REQUEST_URI' ])){
+                    $this->layout = "default";
+                }
+                else
+                {
+                    $this->layout = "dashboard";
+                }
                 $data = $this->Puzzle->find('count',array('conditions'=>array('Puzzle.user_id'=>$this->Auth->user('id'))));
                 if(empty($data))
                 {
@@ -144,7 +150,7 @@ class AppController extends Controller
     	    }
 
             /// User header count and prefix 
-    	    elseif ($this->params['prefix'] == 'user')
+    	    elseif ($this->params['prefix'] == 'user' || ($this->Session->read("Auth.User.usertype") && $this->Session->read("Auth.User.usertype") == 0))
     	     {
     	     	$signup = 0 ;
         		$this->set('Signup',$signup);

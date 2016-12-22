@@ -264,16 +264,16 @@ padding: 0;
               <div class="social">
                   <ul>
                       <li>
-                        <a href="http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $PuzzleData['Business']['company_name'].'/'.$PuzzleData['Puzzle']['name']?>&title=<?php $PuzzleData['Puzzle']['name'];?>&description=Price 33$" onclick="return !window.open(this.href, 'Facebook', 'width=640,height=580')"><i class="fa fa-facebook"></i></a>
+                        <a href="http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/<?php echo $PuzzleData['Business']['company_name'].'/'.$PuzzleData['Puzzle']['name']?>&title=<?php $PuzzleData['Puzzle']['name'];?>&description=Price 33$" onclick="return !window.open(this.href, 'Facebook', 'width=640,height=580')"><i class="fa fa-facebook"></i></a>
                       </li>
                       <li>
-                        <a href="https://twitter.com/intent/tweet?text=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $PuzzleData['Business']['company_name'].'/'.$PuzzleData['Puzzle']['name']?>" data-size="large" target = "_blank"><i class="fa fa-twitter"></i></a>
+                        <a href="https://twitter.com/intent/tweet?text=http://puzel.stage.n-framescorp.com/<?php echo $PuzzleData['Business']['company_name'].'/'.$PuzzleData['Puzzle']['name']?>" data-size="large" target = "_blank"><i class="fa fa-twitter"></i></a>
                       </li>
                       <li>
-                        <a href="http://mail.live.com/default.aspx?rru=compose&to=&subject=Share new puzzle <?php echo $PuzzleData['Puzzle']['name'];?>&body=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $PuzzleData['Business']['company_name'].'/'.$PuzzleData['Puzzle']['name'];?>" onclick="return !window.open(this.href, 'Outlook', 'width=640,height=580')"  target="_blank"><i class="fa fa-windows"></i></a>
+                        <a href="http://mail.live.com/default.aspx?rru=compose&to=&subject=Share new puzzle <?php echo $PuzzleData['Puzzle']['name'];?>&body=http://puzel.stage.n-framescorp.com/<?php echo $PuzzleData['Business']['company_name'].'/'.$PuzzleData['Puzzle']['name'];?>" onclick="return !window.open(this.href, 'Outlook', 'width=640,height=580')"  target="_blank"><i class="fa fa-windows"></i></a>
                       </li>
                       <li>
-                        <a href ="https://mail.google.com/mail/?view=cm&fs=1&to=&su=Share new puzzle <?php echo $PuzzleData['Puzzle']['name'];?>&body=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $PuzzleData['Business']['company_name'].'/'.$PuzzleData['Puzzle']['name'];?>" onclick="return !window.open(this.href, 'Google', 'width=640,height=580')"><i class="fa fa-envelope-o"></i></a>
+                        <a href ="https://mail.google.com/mail/?view=cm&fs=1&to=&su=Share new puzzle <?php echo $PuzzleData['Puzzle']['name'];?>&body=http://puzel.stage.n-framescorp.com/<?php echo $PuzzleData['Business']['company_name'].'/'.$PuzzleData['Puzzle']['name'];?>" onclick="return !window.open(this.href, 'Google', 'width=640,height=580')"><i class="fa fa-envelope-o"></i></a>
                       </li>
                   </ul>
               </div>

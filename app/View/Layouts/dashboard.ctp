@@ -15,7 +15,6 @@
  */
 
 $cakeDescription = __d('cake_dev', 'Puzzel');
-//$cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,7 +31,7 @@ $cakeDescription = __d('cake_dev', 'Puzzel');
 		echo $this->Html->meta('icon');
 		echo $this->Html->css('dashboard/vendor/bootstrap/bootstrap.min');?>
 		<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">	
-	<?php //echo $this->Html->css('fonts/font-awesome.min.css');
+	<?php 
 		echo $this->Html->css('dashboard/vendor/animate/animate.min');
 		echo $this->Html->css('dashboard/vendor/mmenu/jquery.mmenu.all.css');
 		echo $this->Html->css('dashboard/vendor/videobackground/jquery.videobackground');
@@ -59,14 +58,7 @@ $cakeDescription = __d('cake_dev', 'Puzzel');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
-        <!-- <meta property="og:url"           content="https://postmarkapp.com" />
-        <meta property="og:type"          content="website" />
-        <meta property="og:title"         content="Puzzle" />
-        <meta property="og:description"   content="Detail" />
-        <meta property="og:image"         content="https://postmarkapp.com" />
-      -->
-        <!-- Place this tag in your head or just before your close body tag. -->
-		<script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 </head>
 <body class="bg-1">
@@ -81,7 +73,7 @@ $cakeDescription = __d('cake_dev', 'Puzzel');
     <div id="wrap">
     	<div class="row">
     	<?php 
-    	if ($this->params['prefix'] == 'admin')
+    	if ($this->params['prefix'] == 'admin' || $this->Session->read("Auth.User.usertype") == 2)
     	{
     		if($Signup  == 0)
     		{
@@ -89,7 +81,7 @@ $cakeDescription = __d('cake_dev', 'Puzzel');
     		}
     		
     	}
-	    elseif($this->params['prefix'] == 'business')
+	    elseif($this->params['prefix'] == 'business' || $this->Session->read("Auth.User.usertype") == 1)
 	     {
 	     	if($Signup  == 0)
     		{
