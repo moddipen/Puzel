@@ -1265,7 +1265,8 @@ public function user_reset($token=null)
 					$user = $this->User->find('all',array('conditions'=>array('AND'=>array(array('DATE(User.created) >='=>$this->request->data['startDate'],'DATE(User.created) <='=>$this->request->data['endDate'])), 'User.usertype' =>0)));
 					foreach($user as $key => $value)
 					{
-						$user[$key]['Visitor'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.email'=>$value['User']['email'])));	
+						$user[$key]['Visitor'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.email'=>$value['User']['email'])));
+						$user[$key]['Refrel'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.refrel_id'=>$value['User']['id'],'Visitor.is_refrel'=>1)));		
 					}
 
 				}	
@@ -1283,7 +1284,9 @@ public function user_reset($token=null)
 					foreach($user as $key => $value)
 					{
 						$user[$key]['Visitor'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.email'=>$value['User']['email'])));	
-					}					
+						$user[$key]['Refrel'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.refrel_id'=>$value['User']['id'],'Visitor.is_refrel'=>1)));		
+			
+			}					
 				}	
 			}
 		}	

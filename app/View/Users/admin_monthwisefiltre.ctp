@@ -1,6 +1,3 @@
-
-
-
 <?php 
     if($Flag == 'Business')
     {
