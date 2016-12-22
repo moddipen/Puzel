@@ -246,10 +246,15 @@
 				var imgw=<?php echo $Capturedata['Image'][0]['total_width'];?>;
 				var parentw=jQuery('#showimage').width();
 				var childw=parentw/5;
+				var currentw=jQuery('.merge div div').width();
+				var currenth=jQuery('.merge div div').height();
+				var perw= childw/currentw;
+				var newh= currenth * perw;
 				if(parentw<imgw)
 				{
 					jQuery('.merge').css('width',parentw+'px');
 					jQuery('.merge div div').css('width',childw+'px');
+					jQuery('.merge div div').css('height',newh+'px');
 				}
 				});
 				</script>
