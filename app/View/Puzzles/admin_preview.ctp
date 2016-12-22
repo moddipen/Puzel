@@ -108,7 +108,7 @@
                  <div class="body" id="showimage">
                     <!-- <img src="<?php echo $this->webroot ?>img/puzzel/<?php echo $Capturedata['Puzzle']['image_ext']?>" class="img-responsive" id="img_preview" alt="Please upload your image" /> -->
                              <style>
-            .merge div div{width:<?php echo $Capturedata['Image'][0]['width']."px";?>;height:<?php echo $Capturedata['Image'][0]['height']."px";?>;display:inline-block;margin-left:-5px;margin-bottom:-6px;border:1px solid #FFF;}
+            .merge div div{width:<?php echo $Capturedata['Image'][0]['width']."px";?>;height:<?php echo $Capturedata['Image'][0]['height']."px";?>;display:inline-block;margin-left:-5px;margin-bottom:-6px;border:1px solid #FFF;filter: brightness(0.55);}
        .merge div div:last-child{border-right:none}
             .merge{width:<?php echo $Capturedata['Image'][0]['total_width']."px";?>;}
             </style>
