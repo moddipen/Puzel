@@ -58,7 +58,7 @@ class UsersController extends AppController {
 		$this->set("statistics",$statistics);
 	  	$signup = 0;
 		$this->set("Signup",$signup);
-	  	$this->Auth->allow(array('index','contact','user_register','user_login','about','business','user_forgetpassword','admin_login','user_reset'));
+	  	$this->Auth->allow(array('index','contact','user_register','user_login','about','business','user_forgetpassword','admin_login','user_reset','clearcache'));
 	  	$this->set('main_action','User');
 	 	// Count of total puzzle 
 	 	// Count of total puzzle 
@@ -1291,7 +1291,34 @@ public function user_reset($token=null)
 		$this->set("Business", $user);				
 	}
 
-			
+
+
+	public function clearcache()
+	{
+        Cache::clear();
+        clearCache();
+
+        $files = array();
+        $files = array_merge($files, glob(CACHE . '*')); // remove cached css
+        $files = array_merge($files, glob(CACHE . 'css' . DS . '*')); // remove cached css
+        $files = array_merge($files, glob(CACHE . 'js' . DS . '*'));  // remove cached js           
+        $files = array_merge($files, glob(CACHE . 'models' . DS . '*'));  // remove cached models           
+        $files = array_merge($files, glob(CACHE . 'persistent' . DS . '*'));  // remove cached persistent           
+
+        foreach ($files as $f) {
+            if (is_file($f)) {
+                unlink($f);
+            }
+        }
+
+        if(function_exists('apc_clear_cache')):      
+        apc_clear_cache();
+        apc_clear_cache('user');
+        endif;
+
+        $this->set(compact('files'));
+        $this->autoRender = false;
+    }			
 
 
 

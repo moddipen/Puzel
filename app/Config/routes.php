@@ -35,7 +35,7 @@
   Router::connect('/thank-you', array('controller' => 'subscriptions', 'action' => 'thankyou'));
   Router::connect('/pricing/*', array('controller' => 'subscriptions', 'action' => 'package'));
   Router::connect('/subscriptions/failure', array('controller' => 'subscriptions', 'action' => 'failure'));
-
+  Router::connect('/users/clearcache', array('controller' => 'users', 'action' => 'clearcache'));
 
   
   //---------------------User Account----------------------------//
