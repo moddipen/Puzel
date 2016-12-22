@@ -1067,6 +1067,7 @@ public function user_reset($token=null)
 			foreach($add as $key => $value)
 			{
 				$add[$key]['Visitor'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.email'=>$value['User']['email'])));	
+				$add[$key]['Refrel'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.refrel_id'=>$value['User']['id'],'Visitor.is_refrel'=>1)));	
 			}
 			$this->set("User",$add);			
 		}
@@ -1085,7 +1086,8 @@ public function user_reset($token=null)
 				$list = $this->User->find('all',array('conditions'=>array('AND'=>array(array('DATE(User.created) >='=>$this->request->data['startdate'],'DATE(User.created) <='=>$this->request->data['enddate'])), 'User.usertype' =>$this->request->data['usertype']),'order'=>'User.id Desc'));
 				foreach($list as $key => $value)
 				{
-					$list[$key]['Visitor'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.email'=>$value['User']['email'])));	
+					$list[$key]['Visitor'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.email'=>$value['User']['email'])));
+					$list[$key]['Refrel'] = $this->Visitor->find('count',array('conditions'=>array('Visitor.refrel_id'=>$value['User']['id'],'Visitor.is_refrel'=>1)));		
 				}
 			}
 			else

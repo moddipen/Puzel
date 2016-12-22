@@ -7,7 +7,7 @@
   <td><?php echo $user['User']['lastname'];?></td>
   <td><?php echo $user['User']['email'];?></td>
   <td><?php echo $user['Visitor'];?></td>
-  <td>10</td>
+  <td><?php echo $user['Refrel'];?></td>
   <td class="minipadding controls">
   <div class="onoffswitch green small" style="margin:0px auto;">
   <?php 
