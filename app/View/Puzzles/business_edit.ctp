@@ -200,7 +200,7 @@
                   <input type = "hidden" name="data[Puzzle][user_id]" value="<?php echo $this->Session->read('USERDETAIL.User.id');?>">
                   <div class="body" id="showimage">
                   <style>
-                  .merge div div{width:<?php echo $Capturedata['Image'][0]['width']."px";?>;height:<?php echo $Capturedata['Image'][0]['height']."px";?>;display:inline-block;margin-left:-5px;margin-bottom:-6px;-webkit-filter: brightness(0.55); filter: brightness(0.55);border:1px solid #FFF;}
+                  .merge div div{width:<?php echo $Capturedata['Image'][0]['width']."px";?>;height:<?php echo $Capturedata['Image'][0]['height']."px";?>;display:inline-block;margin-left:-5px;margin-bottom:-6px;-webkit-filter: brightness(0.55); filter: brightness(0.55);border:1px solid #FFF; background-size: 100% !important; background-repeat: no-repeat !important;background-position: center !important;}
                    .merge div div:last-child{border-right:none}
 				 .merge div div:first-child{border-left:none}
 				 .merge div:first-child div{border-top:none}
@@ -230,7 +230,7 @@
                   }  
 
                   ?> 
-                  <div class= "pt-page pt-page-<?php echo $index;?>" style = "<?php echo $class_image ;?>"></div>  
+                  <div class= "pt-page pt-page-<?php echo $index;?>" style = " <?php echo $class_image ;?>"></div>  
                   <?php
 
                   $index ++;
@@ -241,7 +241,14 @@
                   </div>
                   <?php ?>
 
-
+				<script>
+				var imgw=<?php echo $Capturedata['Image'][0]['total_width'];?>
+				var parentw=jQuery('#showimage').width();
+				if(parentw<imgw)
+				{
+					jQuery('.merge').css('width',parentw+'px');
+				}
+				</script>
                   </div>
                   </div>
 
