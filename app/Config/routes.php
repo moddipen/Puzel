@@ -78,16 +78,16 @@
 
 
 
-  Router::connect('/puzelfilter', array('controller' => 'puzzles', 'action' => 'filter','business'=>true));
-  Router::connect('/puzelstatus', array('controller' => 'puzzles', 'action' => 'status','business'=>true));
-  Router::connect('/visitorfilter', array('controller' => 'visitors', 'action' => 'datefilter','business'=>true));
-  Router::connect('/visitoremailfilter', array('controller' => 'visitors', 'action' => 'emailFilter','business'=>true));
-  Router::connect('/supportfilter', array('controller' => 'supports', 'action' => 'datefilter','business'=>true));
-  Router::connect('/checkpieces', array('controller' => 'puzzles', 'action' => 'checkpieces'));
-  Router::connect('/template', array('controller' => 'puzzles', 'action' => 'template','business'=>true));
-  Router::connect('/terms', array('controller' => 'puzzles', 'action' => 'terms','business'=>true));
-  Router::connect('/price', array('controller' => 'puzzles', 'action' => 'price','business'=>true));
-  Router::connect('/send', array('controller' => 'puzzles', 'action' => 'send','business'=>true));
+  Router::connect('/business/puzzles/filter', array('controller' => 'puzzles', 'action' => 'filter','business'=>true));
+  Router::connect('/business/puzzles/status', array('controller' => 'puzzles', 'action' => 'status','business'=>true));
+  Router::connect('/business/visitors/datefilter', array('controller' => 'visitors', 'action' => 'datefilter','business'=>true));
+  Router::connect('/business/visitors/emailFilter', array('controller' => 'visitors', 'action' => 'emailFilter','business'=>true));
+  Router::connect('/business/supports/datefilter', array('controller' => 'supports', 'action' => 'datefilter','business'=>true));
+  Router::connect('/business/puzzles/checkpieces', array('controller' => 'puzzles', 'action' => 'checkpieces'));
+  Router::connect('/business/puzzles/template', array('controller' => 'puzzles', 'action' => 'template','business'=>true));
+  Router::connect('/business/puzzles/terms', array('controller' => 'puzzles', 'action' => 'terms','business'=>true));
+  Router::connect('/business/puzzles/price', array('controller' => 'puzzles', 'action' => 'price','business'=>true));
+  Router::connect('/business/puzzles/send', array('controller' => 'puzzles', 'action' => 'send','business'=>true));
   Router::connect('/business/puzzles/pieces', array('controller' => 'puzzles', 'action' => 'pieces','business'=>true));
   Router::connect('/business/users/cancel', array('controller' => 'users', 'action' => 'cancel','business'=>true));
   Router::connect('/business/puzzles/template', array('controller' => 'puzzles', 'action' => 'template','business'=>true));
