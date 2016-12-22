@@ -245,9 +245,11 @@
 				jQuery( document ).ready(function() {
 				var imgw=<?php echo $Capturedata['Image'][0]['total_width'];?>;
 				var parentw=jQuery('#showimage').width();
+				var childw=parentw/5;
 				if(parentw<imgw)
 				{
 					jQuery('.merge').css('width',parentw+'px');
+					jQuery('.merge div div').css('width',childw+'px');
 				}
 				});
 				</script>
