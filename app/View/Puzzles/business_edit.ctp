@@ -244,7 +244,7 @@
 				<script>
 				jQuery( document ).ready(function() {
 				var imgw=<?php echo $Capturedata['Image'][0]['total_width'];?>;
-				var parentw=jQuery('.custom-form').width()-30;
+				var parentw=jQuery('#showimage').width()+50;
 				var childw=parentw/5;
 				var currentw=jQuery('.merge div div').width();
 				var currenth=jQuery('.merge div div').height();
