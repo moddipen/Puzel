@@ -1212,9 +1212,7 @@ public function user_reset($token=null)
 		$this->set('sub_action','setting');
 		$this->layout = 'dashboard';
 		$this->set("title","Profile Page");
-		$user = $this->User->find('first',array('conditions'=>array('User.id'=>$this->Auth->user('id'))));
-		$this->set("User",$user);
-
+		
 		if(!empty($this->request->data))
 		{
 			unset($this->User->validate['email']);
@@ -1241,6 +1239,9 @@ public function user_reset($token=null)
 			}	
 			
 		}
+		$user = $this->User->find('first',array('conditions'=>array('User.id'=>$this->Auth->user('id'))));
+		$this->set("User",$user);
+
 	}	
 
 
