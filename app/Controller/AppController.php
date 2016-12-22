@@ -1,4 +1,4 @@
-+<?php
+<?php
 /**
  * Application level Controller
  *
@@ -109,9 +109,9 @@ class AppController extends Controller
     	     	$signup = 0 ;
         		$this->set('Signup',$signup);
     	     	 
-                if (preg_match('/pricing/',$_SERVER[ 'REQUEST_URI' ])){
+               if (preg_match('/pricing/',$_SERVER[ 'REQUEST_URI' ])){
                     $this->layout = "default";
-                }
+                } 
                 else
                 {
                  $this->layout = "dashboard";
