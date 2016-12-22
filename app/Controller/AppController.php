@@ -49,7 +49,8 @@ class AppController extends Controller
 
 	   $this->Auth->authenticate = array('Form');
         $this->Auth->autoRedirect = false;
-        //Security::setHash("md5");
+		
+	   //Security::setHash("md5");
 		$statistics = $this->get_statistics();
 		
 		$this->set("statistics",$statistics);
@@ -60,21 +61,21 @@ class AppController extends Controller
                 $this->Cookie->delete('remember_me_cookie');
                 $this->Auth->logout();
                 $this->Session->setFlash(__('<div><p>Unable access this panel.</p></div>'));
-                $this->redirect(array('controller'=>'users','action'=>'login','user'=>true));
+                $this->redirect("/login");
             }
             elseif($this->params['prefix'] == 'business' && $this->Auth->user('usertype') != 1 &&  $this->params['login'] && $this->params['register'])
             {
                 $this->Cookie->delete('remember_me_cookie');
                 $this->Auth->logout();   
                 $this->Session->setFlash(__('<div><p>Unable access this panel.</p></div>'));
-                $this->redirect(array('controller'=>'users','action'=>'login','user'=>true));
+                $this->redirect("/login");
             }
             elseif($this->params['prefix'] == 'user' && $this->Auth->user('usertype') != 0 && $this->params['login'] && $this->params['register'])
             {
                 $this->Cookie->delete('remember_me_cookie');
                 $this->Auth->logout();   
                 $this->Session->setFlash(__('<div><p>Unable access this panel.</p></div>'));
-                $this->redirect(array('controller'=>'users','action'=>'login','user'=>true));
+                $this->redirect("/login");
             } 
 
             // prefix setting  and header count
