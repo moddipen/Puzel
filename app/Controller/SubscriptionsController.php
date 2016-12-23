@@ -550,6 +550,7 @@ class  SubscriptionsController  extends AppController {
 							$data['Order']['created']=date('Y-m-d H:i:s',time());
 							$data['Order']['modified']=date('Y-m-d H:i:s',time());
 							$data['Order']['subscription_id'] = $id;
+							$data['Order']['transiction_id'] = $this->generateRandomString();
 							// check user is already exists or not 
 
 							$user = $this->User->find('first',array('conditions'=>array('User.email'=>$this->request->data['Subscription']['email'])));
@@ -815,6 +816,19 @@ class  SubscriptionsController  extends AppController {
 		}
 }	
 
+/**
+	Generate rndom string
+*/			
+	public function generateRandomString($length = 10)
+	{
+	    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	    $charactersLength = strlen($characters);
+	    $randomString = '';
+	    for ($i = 0; $i < $length; $i++) {
+	        $randomString .= $characters[rand(0, $charactersLength - 1)];
+	    }
+	    return $randomString;
+	}
 
 
 
