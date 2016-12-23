@@ -135,6 +135,12 @@ CakePlugin::load('Facebook');
 CakePlugin::load('Braintree');
 
 
+
+Configure::write('Google.clientId', '586593920128-9fggbr8mvjf6ii8dcf71pu5tufh7d4on.apps.googleusercontent.com');
+Configure::write('Google.clientSecret', 'i5JAdnnvrJL2A6T0IxUzYZtW');
+
+
+
 // BrainTree Deatil 
 Configure::write('BraintreeMerchan',"r2hhgdvm8ft8khbn");
 Configure::write('BraintreePublicKey',"rrw5mnfjmvh3shh8");
