@@ -254,6 +254,7 @@ class  SubscriptionsController  extends AppController {
 													$this->sendinvoice($email);
 													//$this->Session->setFlash(__('Signup Successfully!!....', true), 'default', array('class' => 'alert alert-success'));
 													//$this->redirect(array('controller'=>'orders','action'=>'index','business'=>true));	
+													exit("1");
 													$this->redirect(array('controller'=>'subscriptions','action'=>'thankyou'));			
 												}
 											}
@@ -518,6 +519,7 @@ class  SubscriptionsController  extends AppController {
 												if($this->UserSubscription->save($insert))
 												{
 													$this->sendinvoice($email);
+													exit("2");
 													$this->redirect(array('controller'=>'subscriptions','action'=>'thankyou'));		
 												}
 											}
@@ -622,6 +624,7 @@ class  SubscriptionsController  extends AppController {
 								{
 									$this->sendinvoice($email);
 									//$this->Session->setFlash('<div class="alert alert-success"><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Success </b>: Offer saved for Approval. </p></div>');
+									exit("3");
 									$this->redirect(array('controller'=>'subscriptions','action'=>'thankyou'));		
 								}
 							}	
