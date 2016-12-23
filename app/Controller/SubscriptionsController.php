@@ -518,7 +518,7 @@ class  SubscriptionsController  extends AppController {
 												if($this->UserSubscription->save($insert))
 												{
 													$this->sendinvoice($email);
-													$this->redirect(array('controller'=>'subscriptions','action'=>'thankyou','user'=>false));		
+													$this->redirect(array('controller'=>'subscriptions','action'=>'thankyou'));		
 												}
 											}
 									}
@@ -622,7 +622,7 @@ class  SubscriptionsController  extends AppController {
 								{
 									$this->sendinvoice($email);
 									//$this->Session->setFlash('<div class="alert alert-success"><button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button><p class="text-small"><b>Success </b>: Offer saved for Approval. </p></div>');
-									$this->redirect(array('controller'=>'subscriptions','action'=>'thankyou','user'=>false));		
+									$this->redirect(array('controller'=>'subscriptions','action'=>'thankyou'));		
 								}
 							}	
 				
