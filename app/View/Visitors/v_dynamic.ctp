@@ -333,7 +333,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
  <div class="row"> 
   <div class="col-md-12">
     <div id="puzzle">
-      <div id="contentfield">
+      <div id="contentfield" align="center">
 
 <!-- <div id = 'puzzle1'> -->
 <?php 
