@@ -254,7 +254,7 @@ class  SubscriptionsController  extends AppController {
 													$this->sendinvoice($email);
 													//$this->Session->setFlash(__('Signup Successfully!!....', true), 'default', array('class' => 'alert alert-success'));
 													//$this->redirect(array('controller'=>'orders','action'=>'index','business'=>true));	
-													$this->Session->setFlash(__('Subscription plan upgraded successfully', true), 'default', array('class' => 'alert alert-success'));
+													//$this->Session->setFlash(__('Subscription plan upgraded successfully', true), 'default', array('class' => 'alert alert-success'));
 													$this->redirect('/thank-you');				
 												}
 											}
