@@ -543,18 +543,18 @@ class  PuzzlesController  extends AppController {
 			array('conditions'=>array('Visitor.puzzle_id'=>$puzel['Puzzle']['id']),
 			'fields'=>array(
 			"Puzzle.name as PuzzleName,
-			Visitor.firstname as `Visitor Firstname`,
-			Visitor.lastname as `Visitor Lastname`,
-			Visitor.email as `Visitor email`,
+			Visitor.firstname as `Firstname`,
+			Visitor.lastname as `Lastname`,
+			Visitor.email as `Email`,
 			Visitor.created as `Date`")));
 
 	  	$index = 0;
 		foreach($data as $visitor)
 		{
 			$date =  date('m/d/Y',strtotime($visitor['Visitor']['Date']));
-			$data[$index]['Visitor']['Visitor Firstname'] = $visitor['Visitor']['Visitor Firstname'];
-			$data[$index]['Visitor']['Visitor Lastname'] =  $visitor['Visitor']["Visitor Lastname"];
-			$data[$index]['Visitor']['Visitor email'] =  $visitor['Visitor']["Visitor email"];
+			$data[$index]['Visitor']['Firstname'] = $visitor['Visitor']['Firstname'];
+			$data[$index]['Visitor']['Lastname'] =  $visitor['Visitor']["Lastname"];
+			$data[$index]['Visitor']['Email'] =  $visitor['Visitor']["Email"];
 			$data[$index]['Visitor']['Date'] = $date;
 			$data[$index]['Visitor']['Puzzle Name'] = $visitor['Puzzle']['PuzzleName'];
 			$index ++;
