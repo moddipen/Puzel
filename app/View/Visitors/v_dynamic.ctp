@@ -12,6 +12,10 @@
  .no-right:focus, .no-right a:focus{
     outline:none !important;
 }
+.form-control:focus {
+    border-color: #e58b16;
+    outline: 0 none;
+}
  #blur{
    -webkit-filter: blur(13px);
     -moz-filter: blur(13px);
