@@ -36,6 +36,11 @@
 }
 .modal-open{overflow:hidden !important;}
 .modal{top:10% !important;}
+
+a:hover {
+    color: #fff;
+}
+
 </style>
 <script type="text/javascript">
 var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
