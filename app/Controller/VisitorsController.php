@@ -237,8 +237,9 @@ class  VisitorsController  extends AppController {
 	public function v_dynamic($company_name = null,$name = null,$refrel = null)
 	{
 		$this->layout = "visitor";
-		$this->set('title',$name);
-		$name = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.name'=>$name,'Puzzle.status'=>0)));
+		
+		$name = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.random'=>$name,'Puzzle.status'=>0)));
+		$this->set('title',$name['Puzzle']['name']);
 		$this->set('PuzzleData',$name);
 		$image = $this->Image->find('all',array('conditions'=>array('Image.puzzle_id'=>$name['Puzzle']['id'])));
 		$this->set('image',$image);
