@@ -358,7 +358,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
         // elseif($peices == 75)  {   $cut_width = 15;   $cut_height = 5;  }
         // else {   $cut_width = 10;  $cut_height = 10; }  ?>
     
-        <div class="merge pt-perspective">
+        <div class="merge pt-perspective" style="background:rgba(0,0,0,0.03);">
       <div>
            <?php 
        $index = 0;
