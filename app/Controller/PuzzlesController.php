@@ -545,7 +545,6 @@ class  PuzzlesController  extends AppController {
 			"Puzzle.name as PuzzleName,
 			Visitor.firstname as `Visitor Firstname`,
 			Visitor.lastname as `Visitor Lastname`,
-			Visitor.company_name as `Company Name`,
 			Visitor.email as `Visitor email`,
 			Visitor.created as `Date`")));
 
@@ -555,7 +554,6 @@ class  PuzzlesController  extends AppController {
 			$date =  date('m/d/Y',strtotime($visitor['Visitor']['Date']));
 			$data[$index]['Visitor']['Visitor Firstname'] = $visitor['Visitor']['Visitor Firstname'];
 			$data[$index]['Visitor']['Visitor Lastname'] =  $visitor['Visitor']["Visitor Lastname"];
-			$data[$index]['Visitor']['Company Name'] = $visitor['Visitor']['Company Name'];
 			$data[$index]['Visitor']['Visitor email'] =  $visitor['Visitor']["Visitor email"];
 			$data[$index]['Visitor']['Date'] = $date;
 			$data[$index]['Visitor']['Puzzle Name'] = $visitor['Puzzle']['PuzzleName'];
