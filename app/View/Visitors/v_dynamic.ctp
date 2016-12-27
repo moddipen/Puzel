@@ -333,7 +333,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 <!-- BEGIN CONTAINER ############################################### -->
 
 
-<div id="container" class="page-hosted">
+<div id="container" class="page-hosted" style="background:url(<?php echo $this->webroot?>img/visitor/summer-bokeh.png);background-size: 100% auto;">
 <h2 class="text-center title-page"><?php echo $PuzzleData['Puzzle']['name'];?></h2>
  <div class="row"> 
   <div class="col-md-12">
