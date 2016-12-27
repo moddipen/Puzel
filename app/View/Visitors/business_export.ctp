@@ -1,5 +1,5 @@
 <?php
- $header_row = array("Visitor Firstname"=>"Visitor Firstname","Visitor Lastname"=>"Visitor Lastname","Visitor email"=>"Visitor email","Date"=>"Date","Puzzle Name"=>"Puzzle Name");
+ $header_row = array("Firstname"=>"Visitor Firstname","Lastname"=>"Visitor Lastname","Email"=>"Visitor email","Date"=>"Date","Puzzle Name"=>"Puzzle Name");
 
  $this->CSV->addRow(array_keys($header_row));
 
