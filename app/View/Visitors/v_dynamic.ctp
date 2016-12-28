@@ -256,6 +256,20 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 
                                     // $(".ja_wrap_black").show().delay(5000).fadeOut(function(){ $(this).remove(); });
                                     javascript:successAlert("You have been enrolled. </br></br>Share with your friends</br><?php if(isset($Refrel)) {?><a class='share-btn' href='http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/<?php echo $Company.'/'.$explode[4].'/'.substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>&title=<?php echo $puzle_name;?>&description=Price 33$' onclick='return !window.open(this.href,Facebook,width=640,height=580)'><i class='facebook' style='color:black !important;font-size:40px !important;top: 0px;'>f</i></a><a class='twitter-share-button' href='https://twitter.com/intent/tweet?text=http://puzel.stage.n-framescorp.com/<?php echo $Company.'/'.$explode[4].'/'.substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>' data-size='large' target ='_blank'><i class='twitter' style='color:black !important;font-size:40px !important;top: 0px;'>l</i></a><a href='http://mail.live.com/default.aspx?rru=compose&to=&subject=Share new puzzle <?php echo $puzle_name;?>&body=http://puzel.stage.n-framescorp.com/<?php echo $Company.'/'.$explode[4].'/'.substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>' onclick='return !window.open(this.href,Outlook,width=640,height=580)' target='_blank'><i class='windows' style='color:black !important;font-size:40px !important;margin: 0 10px;'>w</i></a><a class='icon-gplus' href ='https://mail.google.com/mail/?view=cm&fs=1&to=&su=Share new puzzle <?php echo $puzle_name;?>&body=http://puzel.stage.n-framescorp.com/<?php echo $Company.'/'.$explode[4].'/'.substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>' onclick='return !window.open(this.href,Google,width=640,height=580)'><i class='email' style='color:black !important;font-size:40px !important;margin: 0 10px;'>m</i></a><?php } else {?><a class='share-btn' href='http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/<?php echo $Company.'/'.substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>&title=<?php echo substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>&description=Price 33$' onclick ='return !window.open(this.href,Facebook,width=640,height=580)'><i class='facebook' style='color:black !important;font-size:40px !important;top: 0px;'>f</i></a><a class='twitter-share-button' href='https://twitter.com/intent/tweet?text=http://puzel.stage.n-framescorp.com/<?php echo $Company.'/'.substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>' data-size='large' target = '_blank'><i class='twitter' style='color:black !important;font-size:40px !important;top: 0px;'>l</i><a href='http://mail.live.com/default.aspx?rru=compose&to=&subject=Share new puzzle <?php echo $puzle_name;?>&body=http://puzel.stage.n-framescorp.com/<?php echo $Company.'/'.substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>' onclick='return !window.open(this.href,Outlook,width=640,height=580)' target='_blank'><i class='windows' style='color:black !important;font-size:40px !important;margin: 0 10px;'>w</i></a><a class='icon-gplus' href ='https://mail.google.com/mail/?view=cm&fs=1&to=&su=Share new puzzle <?php echo $puzle_name;?>&body=http://puzel.stage.n-framescorp.com/<?php echo $Company.'/'.substr($_SERVER['REQUEST_URI'],strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>' onclick='return !window.open(this.href,Google,width=640,height=580)'><i class='email' style='color:black !important;font-size:40px !important;margin: 0 10px;'>m</i></a><?php } ?>");
+
+                                      var newaddcount = parseInt($("#showimagecontent").val()) - 1 ;
+                                      var newminuscount = parseInt($("#hideimagecontent").val()) + 1;
+                                      if(newaddcount != 0)
+                                      {
+                                        $("#messagecontent").html(newminuscount+" have signed up so far, "+newaddcount+" more to go before we give away the rewards, enroll yourself now!");     
+                                      }
+                                      else
+                                      {
+                                        $("#messagecontent").html(newminuscount+" have signed up so far,");   
+                                      }  
+                                      
+                                      $("#showimagecontent").val(newaddcount);
+                                      $("#hideimagecontent").val(newminuscount);
                                    }
                               });
                           }
@@ -347,6 +361,20 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 
                                     // $(".ja_wrap_black").show().delay(5000).fadeOut(function(){ $(this).remove(); });
                                     javascript:successAlert("You have been enrolled. </br></br>Share with your friends</br><?php if(isset($Refrel)) {?><a class='share-btn' href='http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/<?php echo $Company.'/'.$explode[4].'/'.substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>&title=<?php echo $puzle_name;?>&description=Price 33$' onclick='return !window.open(this.href,Facebook,width=640,height=580)'><i class='facebook' style='color:black !important;font-size:40px !important;top: 0px;'>f</i></a><a class='twitter-share-button' href='https://twitter.com/intent/tweet?text=http://puzel.stage.n-framescorp.com/<?php echo $Company.'/'.$explode[4].'/'.substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>' data-size='large' target ='_blank'><i class='twitter' style='color:black !important;font-size:40px !important;top: 0px;'>l</i></a><a href='http://mail.live.com/default.aspx?rru=compose&to=&subject=Share new puzzle <?php echo $puzle_name;?>&body=http://puzel.stage.n-framescorp.com/<?php echo $Company.'/'.$explode[4].'/'.substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>' onclick='return !window.open(this.href,Outlook,width=640,height=580)' target='_blank'><i class='windows' style='color:black !important;font-size:40px !important;margin: 0 10px;'>w</i></a><a class='icon-gplus' href ='https://mail.google.com/mail/?view=cm&fs=1&to=&su=Share new puzzle <?php echo $puzle_name;?>&body=http://puzel.stage.n-framescorp.com/<?php echo $Company.'/'.$explode[4].'/'.substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>' onclick='return !window.open(this.href,Google,width=640,height=580)'><i class='email' style='color:black !important;font-size:40px !important;margin: 0 10px;'>m</i></a><?php } else {?><a class='share-btn' href='http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/<?php echo $Company.'/'.substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>&title=<?php echo substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>&description=Price 33$' onclick ='return !window.open(this.href,Facebook,width=640,height=580)'><i class='facebook' style='color:black !important;top: 0px;font-size:40px !important;'>f</i></a><a class='twitter-share-button' href='https://twitter.com/intent/tweet?text=http://puzel.stage.n-framescorp.com/<?php echo $Company.'/'.substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>' data-size='large' target = '_blank'><i class='twitter' style='color:black !important;font-size:40px !important;top: 0px;'>l</i><a href='http://mail.live.com/default.aspx?rru=compose&to=&subject=Share new puzzle <?php echo $puzle_name;?>&body=http://puzel.stage.n-framescorp.com/<?php echo $Company.'/'.substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>' onclick='return !window.open(this.href,Outlook,width=640,height=580)' target='_blank'><i class='windows' style='color:black !important;font-size:40px !important;margin: 0 10px;'>w</i></a><a class='icon-gplus' href ='https://mail.google.com/mail/?view=cm&fs=1&to=&su=Share new puzzle <?php echo $puzle_name;?>&body=http://puzel.stage.n-framescorp.com/<?php echo $Company.'/'.substr($_SERVER['REQUEST_URI'],strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>' onclick='return !window.open(this.href,Google,width=640,height=580)'><i class='email' style='color:black !important;font-size:40px !important;margin: 0 10px;'>m</i></a><?php } ?>");
+
+                                      var newaddcount = parseInt($("#showimagecontent").val()) - 1 ;
+                                      var newminuscount = parseInt($("#hideimagecontent").val()) + 1;
+                                      if(newaddcount != 0)
+                                      {
+                                        $("#messagecontent").html(newminuscount+" have signed up so far, "+newaddcount+" more to go before we give away the rewards, enroll yourself now!");     
+                                      }
+                                      else
+                                      {
+                                        $("#messagecontent").html(newminuscount+" have signed up so far,");   
+                                      }  
+                                      
+                                      $("#showimagecontent").val(newaddcount);
+                                      $("#hideimagecontent").val(newminuscount);
                                   }
                             });
                           }
@@ -511,12 +539,20 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
       </div>
     </div>
     </div>
+<input type ="hidden" id="showimagecontent" value="<?php echo $ShowPuzzel['Show']?>">
+<input type ="hidden" id="hideimagecontent" value="<?php echo $ShowPuzzel['Hide']?>">
+    
  
 <div class="row">
   <div class="six columns">
       <div class="share-social">
           <h3>Share with your friends</h3>
-              <p><?php echo $ShowPuzzel['Show']?> have signed up so far, <?php echo $ShowPuzzel['Hide']?> more to go before we give away the rewards, enroll yourself now!</p>
+              <p id="messagecontent">
+          <?php if($ShowPuzzel['Show'] > 0){?>
+             <?php echo $ShowPuzzel['Hide']?> have signed up so far, <?php echo $ShowPuzzel['Show']?> more to go before we give away the rewards, enroll yourself now!
+              <?php } else {
+               echo $ShowPuzzel['Hide'];}?> have signed up so far,
+             </p><br/>
               <?php if(isset($Refrel))
               { ?>
                   <a class="share-btn" href="http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/<?php echo $Company.'/'.$explode[4].'/'.substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>&title=<?php echo $PuzzleData['Puzzle']['name'];?>&description=Price 33$" onclick="return !window.open(this.href, 'Facebook', 'width=640,height=580')"><i class="facebook">f</i></a>
