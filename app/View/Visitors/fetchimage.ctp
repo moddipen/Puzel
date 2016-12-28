@@ -114,7 +114,7 @@ padding: 0;
     border-color: #e58b16;
     box-shadow: none;
 }
-.ja_red {
+.jAlert {
       margin-top: 150px !important;
 }
 </style>
