@@ -110,6 +110,9 @@ padding: 0;
   border:1px solid #e58b16;
   color: #e58b16;
 }
+.form-control:focus {
+    border-color: #e58b16;
+}
 </style>
 
 
@@ -234,7 +237,7 @@ padding: 0;
       .merge div div{width:<?php echo $image[0]['width']."px";?>;height:<?php echo $image[0]['height']."px";?>;display:inline-block;margin-left:-5px;margin-bottom:-5px;}
       .merge{width:<?php echo $image[0]['total_width']."px";?>;margin:50px auto;}
       .button-puzzle{background:#e58b16;font-size: 18px;text-align:center;font-weight: 300;padding: 5px 20px;color: #fff;width:100%;}
-      .puzle-form .active, .button-puzzle:hover{background:none;color: #e58b16 !important;border:1px solid #e58b16;box-shadow:none;}
+      .puzle-form .active, .button-puzzle:hover{background:#fff;color: #e58b16 !important;border:1px solid #e58b16;box-shadow:none;}
       .button-header{background:#e58b16;font-size: 18px;text-align:center;font-weight: 300;padding: 5px 20px;color: #fff;width:100%;margin-bottom:20px;}
       .button-header .active, {background:#e58b16;color:#fff ; border: none !important;}
       /*.btn.focus, .btn:focus, .btn:hover {color: #fff !important;}*/
