@@ -482,6 +482,8 @@
     $('#submitterms').click(function()
     {
        var html = $('.note-editable').html(); 
+       $(".mask").show();
+       $("#loader").show() ; 
        if(html == "<p><br></p>")
        {
            $("#modal1" ).effect("shake");
@@ -498,6 +500,8 @@
             success: function(data)
              {
                 $('#modal1').modal('hide');
+                $("#loader").hide() ; 
+                $(".mask").hide(); 
              }
            });
        } 
@@ -509,18 +513,22 @@
     {
       e.preventDefault();
       var html = $('.note-editable').html(); 
+      $(".mask").show();
+      $("#loader").show() ; 
        $.ajax(
        {
          type: "POST",
          url: "<?php echo Configure::read('SITE_BUSINESS_URL')?>/puzzles/price",
          data: new FormData(this),
-contentType: false,
-cache: false,
-processData:false,     
+          contentType: false,
+          cache: false,
+          processData:false,     
         success: function(data)
          {
             $("#image").html(data);
-      $('#modal3').modal('hide');
+            $('#modal3').modal('hide');
+            $("#loader").hide() ; 
+            $(".mask").hide(); 
          }
        });
     }));  
@@ -529,6 +537,8 @@ processData:false,
 
     $("#changetemplate").change(function()
     {
+      $(".mask").show();
+      $("#loader").show() ; 
       $.ajax(
        {
          type: "POST",
@@ -538,6 +548,8 @@ processData:false,
          success: function(data)
          {
             $('#terms .note-editable').html(data.Puzzle.terms);  
+            $("#loader").hide() ; 
+            $(".mask").hide(); 
           }
        });
       // alert();
