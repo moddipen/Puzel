@@ -1,4 +1,9 @@
-
+<link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/app/webroot/css/visitor/jAlert-master/src/jAlert.css">
+<script type="text/javascript" src="http://puzel.stage.n-framescorp.com/app/webroot/js/visitor/jAlert-master/src/jAlert.js"></script>
+<script type="text/javascript" src="http://puzel.stage.n-framescorp.com/app/webroot/js/visitor/jAlert-master/src/jAlert-functions.js"></script>
+<?php //echo $this->Html->css('visitor/jAlert-master/src/jAlert.css');
+//     echo $this->Html->script('visitor/jAlert-master/src/jAlert.js');
+//     echo $this->Html->script('visitor/jAlert-master/src/jAlert-functions.js');?>
 <!-- <link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/app/webroot/css/visitor/bootstrap.css"> -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
@@ -84,7 +89,31 @@ padding: 0;
    .btn.focus, .btn:focus, .btn:hover{
     color: #fff;
     outline:none!important;
-}   
+}  
+#Imagedata .col-md-4, #Imageenroll .col-md-6{
+  padding-left:0px;
+}
+.button-submit{
+    width: 40%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    background: #e58b16;
+    font-size: 18px;
+    text-align: center;
+    font-weight: 300;
+    padding: 5px 20px;
+    color: #fff;
+}
+.button-submit:hover{
+  background: #fff;
+  border:1px solid #e58b16;
+  color: #e58b16;
+}
+.form-control:focus {
+    border-color: #e58b16;
+    box-shadow: none;
+}
 </style>
 
 
@@ -94,7 +123,10 @@ padding: 0;
 
     $this->webroot = Configure::read('SITE_URL');?>
 
- 
+    
+    <input type ="hidden" id="businesname" value ="<?php echo $PuzzleData['Business']['company_name']?>">
+    <input type ="hidden" id="randomid" value ="<?php echo $PuzzleData['Puzzle']['random']?>">
+    <input type ="hidden" id="puzzlename" value ="<?php echo $PuzzleData['Puzzle']['name']?>">
     <input type ="hidden" id="transition" value ="<?php echo $PuzzleData['Puzzle']['transtion']?>">
 
 <!-- END NAVIGATION ############################################### -->
@@ -188,7 +220,7 @@ padding: 0;
                                     </div>
                                 </div>
 
-  <div class="puzel">
+  <div class="puzel" style="background:url(<?php echo $this->webroot?>img/visitor/summer-bokeh.png);background-size: cover;">
     <h2 style="text-align:center;"><?php echo $PuzzleData['Puzzle']['name'];?></h2>
 
 
@@ -207,8 +239,8 @@ padding: 0;
       body{line-height: inherit;}
       .merge div div{width:<?php echo $image[0]['width']."px";?>;height:<?php echo $image[0]['height']."px";?>;display:inline-block;margin-left:-5px;margin-bottom:-5px;}
       .merge{width:<?php echo $image[0]['total_width']."px";?>;margin:50px auto;}
-      .button-puzzle{background:#e58b16;font-size: 18px;text-align:center;font-weight: 300;padding: 5px 20px;color: #fff;width:100%;margin-bottom:20px;}
-      .puzle-form .active, .button-puzzle:hover{background:none;color: #e58b16 !important;border:1px solid #e58b16;box-shadow:none;}
+      .button-puzzle{background:#e58b16;font-size: 18px;text-align:center;font-weight: 300;padding: 5px 20px;color: #fff;width:100%;}
+      .puzle-form .active, .button-puzzle:hover{background:#fff;color: #e58b16 !important;border:1px solid #e58b16;box-shadow:none;}
       .button-header{background:#e58b16;font-size: 18px;text-align:center;font-weight: 300;padding: 5px 20px;color: #fff;width:100%;margin-bottom:20px;}
       .button-header .active, {background:#e58b16;color:#fff ; border: none !important;}
       /*.btn.focus, .btn:focus, .btn:hover {color: #fff !important;}*/
@@ -216,7 +248,7 @@ padding: 0;
      
       </style>
         <?php $peices = $PuzzleData['Puzzle']['pieces'] ; ?>
-        <div class="merge">
+        <div class="merge" style="background:rgba(0,0,0,0.03);" align="center">
           <div>
            <?php 
            
@@ -264,16 +296,16 @@ padding: 0;
               <div class="social">
                   <ul>
                       <li>
-                        <a href="http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $PuzzleData['Business']['company_name'].'/'.$PuzzleData['Puzzle']['name']?>&title=<?php $PuzzleData['Puzzle']['name'];?>&description=Price 33$" onclick="return !window.open(this.href, 'Facebook', 'width=640,height=580')"><i class="fa fa-facebook"></i></a>
+                        <a href="http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/<?php echo $PuzzleData['Business']['company_name'].'/'.$PuzzleData['Puzzle']['random']?>&title=<?php $PuzzleData['Puzzle']['name'];?>&description=Price 33$" onclick="return !window.open(this.href, 'Facebook', 'width=640,height=580')"><i class="fa fa-facebook"></i></a>
                       </li>
                       <li>
-                        <a href="https://twitter.com/intent/tweet?text=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $PuzzleData['Business']['company_name'].'/'.$PuzzleData['Puzzle']['name']?>" data-size="large" target = "_blank"><i class="fa fa-twitter"></i></a>
+                        <a href="https://twitter.com/intent/tweet?text=http://puzel.stage.n-framescorp.com/<?php echo $PuzzleData['Business']['company_name'].'/'.$PuzzleData['Puzzle']['random']?>" data-size="large" target = "_blank"><i class="fa fa-twitter"></i></a>
                       </li>
                       <li>
-                        <a href="http://mail.live.com/default.aspx?rru=compose&to=&subject=Share new puzzle <?php echo $PuzzleData['Puzzle']['name'];?>&body=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $PuzzleData['Business']['company_name'].'/'.$PuzzleData['Puzzle']['name'];?>" onclick="return !window.open(this.href, 'Outlook', 'width=640,height=580')"  target="_blank"><i class="fa fa-windows"></i></a>
+                        <a href="http://mail.live.com/default.aspx?rru=compose&to=&subject=Share new puzzle <?php echo $PuzzleData['Puzzle']['name'];?>&body=http://puzel.stage.n-framescorp.com/<?php echo $PuzzleData['Business']['company_name'].'/'.$PuzzleData['Puzzle']['random'];?>" onclick="return !window.open(this.href, 'Outlook', 'width=640,height=580')"  target="_blank"><i class="fa fa-windows"></i></a>
                       </li>
                       <li>
-                        <a href ="https://mail.google.com/mail/?view=cm&fs=1&to=&su=Share new puzzle <?php echo $PuzzleData['Puzzle']['name'];?>&body=http://puzel.stage.n-framescorp.com/puzzle/<?php echo $PuzzleData['Business']['company_name'].'/'.$PuzzleData['Puzzle']['name'];?>" onclick="return !window.open(this.href, 'Google', 'width=640,height=580')"><i class="fa fa-envelope-o"></i></a>
+                        <a href ="https://mail.google.com/mail/?view=cm&fs=1&to=&su=Share new puzzle <?php echo $PuzzleData['Puzzle']['name'];?>&body=http://puzel.stage.n-framescorp.com/<?php echo $PuzzleData['Business']['company_name'].'/'.$PuzzleData['Puzzle']['random'];?>" onclick="return !window.open(this.href, 'Google', 'width=640,height=580')"><i class="fa fa-envelope-o"></i></a>
                       </li>
                   </ul>
               </div>
@@ -283,21 +315,27 @@ padding: 0;
       <div class="col-md-6 col-xs-6">
         <button type="button" class="btn button-puzzle btn-tab active" id="puzelasubmit" name="puzzle">Signup for Puzel</button>
       </div>
-      <div class="col-md-6">  
+      <div class="col-md-6 col-xs-6">  
         <button type="button" class="btn button-puzzle btn-tab" id="enrollformshow">Enroll Now</button>
       </div>
        <div id="alert"></div> 
       <div class="col-md-12">
         <form id="Imagedata" >
-            <div class="form-group" id="firsname">
-              <input type="text" name="firstname" id="fname" class="form-control" placeholder="First Name"  required>
-            </div>
-            <div class="form-group" id="laname">
-              <input type="text" name="lastname"   id="lname"  class="form-control" placeholder="Last Name" required>
-            </div>
-            <div class="form-group" id="useemail">
-               <input type="email" name="email"  id="useremail"  class="form-control" placeholder="Email" required>
-            </div>
+            <div class="col-md-4">
+              <div class="form-group" id="firsname">
+                <input type="text" name="firstname" id="fname" class="form-control" placeholder="First Name"  required>
+              </div>
+             </div>
+             <div class="col-md-4"> 
+              <div class="form-group" id="laname">
+                <input type="text" name="lastname"   id="lname"  class="form-control" placeholder="Last Name" required>
+              </div>
+             </div>
+             <div class="col-md-4">
+              <div class="form-group" id="useemail">
+                 <input type="email" name="email"  id="useremail"  class="form-control" placeholder="Email" required>
+              </div>
+             </div> 
               <?php if(isset($Refrel))
                 {?>
                   <input type = "hidden" name ="refrel" value = "1">
@@ -306,20 +344,24 @@ padding: 0;
               <input type = "hidden" name ="puzzlename" value = "<?php echo $PuzzleData['Puzzle']['name'];?>">
               <input type = "hidden" name ="signwithpuzzleaccount" id ="signwithpuzzleaccount" value = "">
               <div class="form-group">
-                <button type="submit" class="btn button-puzzle" id="puzelacount" name="puzzle" value = "1" style="width:100%">Submit</button>
+                <button type="submit" class="btn button-submit" id="puzelacount" name="puzzle" value = "1" >Submit</button>
                 <!-- button type="button" class="btn button-sign" id="enrollformshow">Enroll Now</button> -->
               </div>
           </form>
         </div>
         <div class="col-md-12">  
           <form id="Imageenroll" style="display:none;" method="post">
-            <div class="form-group" id="usenrollemail">
-               <input type="email" name="email1"  id="userenrollemail"  class="form-control" placeholder="Email" required>
+            <div class="col-md-6">
+              <div class="form-group" id="usenrollemail">
+                 <input type="email" name="email1"  id="userenrollemail"  class="form-control" placeholder="Email" required>
+              </div>
             </div>
-            <div class="form-group" id="pasword">
-              <input type="password" name="password"   id="password"  class="form-control" placeholder="Password" required>
-            </div>
-            
+            <div class="col-md-6">  
+              <div class="form-group" id="pasword">
+                <input type="password" name="password"   id="password"  class="form-control" placeholder="Password" required>
+              </div>
+            </div>  
+
               <?php if(isset($Refrel))
                 {?>
                   <input type = "hidden" name ="refrel" value = "1">
@@ -329,7 +371,7 @@ padding: 0;
               <input type = "hidden" name ="enrollwithpuzzleaccount" id ="enrollwithpuzzleaccount" value = "">
               <div class="form-group">
                 <!-- <button type="button" class="btn button-sign" id="puzelasubmit" name="puzzle" >Submit</button> -->
-                <button type="submit" class="btn button-puzzle" id="normalsign" value = "2" style="width:100%">Enroll Now</button>
+                <button type="submit" class="btn button-submit" id="normalsign" value = "2" >Enroll Now</button>
               </div>
           </form>
           </div>
