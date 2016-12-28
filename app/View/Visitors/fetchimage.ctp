@@ -112,6 +112,7 @@ padding: 0;
 }
 .form-control:focus {
     border-color: #e58b16;
+    box-shadow: none;
 }
 </style>
 
