@@ -351,7 +351,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
             } 
           });  
           
-
+ 
 
 
 
