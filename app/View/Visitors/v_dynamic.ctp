@@ -415,7 +415,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 
 
 <div id="container" class="page-hosted" style="background:url(<?php echo $this->webroot?>img/visitor/summer-bokeh.png);background-size: cover;">
-<h2 class="text-center title-page"><?php echo $PuzzleData['Puzzle']['name'];?></h2>
+<h2 class="text-center title-page" style="padding:30px 0px 0px;"><?php echo $PuzzleData['Puzzle']['name'];?></h2>
  <div class="row"> 
   <div class="col-md-12">
     <div id="puzzle">
@@ -530,23 +530,23 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
     <?php if($ShowPuzzel['Show'] != 0) {?>
     <div class="six columns" >
      
-      <div class="form-group">
+      <div class="form-group" style="margin-bottom:0px;">
         <button type="button" class="btn button-sign btn-tab active" id="puzelasubmit" name="puzzle" >Signup for Puzel</button>
         <button type="button" class="btn button-sign btn-tab " id="enrollformshow" >Enroll Now</button>
       </div>  
        <div id="alert"></div>
       <form id="Imagedata">
-          <div class="col-md-4">
+          <div class="four columns">
             <div class="form-group" id="firsname">
               <input type="text" name="firstname" id="fname" class="form-control" placeholder="First Name"  required>
             </div>
           </div>
-          <div class="col-md-4">  
+          <div class="four columns">  
             <div class="form-group" id="laname">
               <input type="text" name="lastname"   id="lname"  class="form-control" placeholder="Last Name" required>
             </div>
           </div> 
-          <div class="col-md-4"> 
+          <div class="four columns"> 
             <div class="form-group" id="useemail">
                <input type="email" name="email"  id="useremail"  class="form-control" placeholder="Email"  required>
             </div>
@@ -564,12 +564,12 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
             </div>
         </form>
         <form id="Imageenroll" style="display:none;padding-top: 25px;">
-        <div class="col-md-6">
+        <div class="six columns">
           <div class="form-group" id="useenrollemail">
              <input type="email" name="email1"  id="userenrollemail"  class="form-control" placeholder="Email" required>
           </div>
         </div>
-        <div class="col-md-6">  
+        <div class="six columns">  
           <div class="form-group" id="pasword">
             <input type="password" name="password"   id="password"  class="form-control" placeholder="Password" required>
           </div>
