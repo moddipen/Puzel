@@ -323,7 +323,11 @@ padding: 0;
     <div class="row">
       <div class="col-md-6 socialbtn">
           <h3>Share with your friends</h3>
-              <p><?php echo $ShowPuzzel['Show']?> have signed up so far, <?php echo $ShowPuzzel['Hide']?> more to go before we give away the rewards, enroll yourself now!</p>
+               <?php if($ShowPuzzel['Show'] > 0){?>
+             <?php echo $ShowPuzzel['Hide']?> have signed up so far, <?php echo $ShowPuzzel['Show']?> more to go before we give away the rewards, enroll yourself now!
+              <?php } else {
+               echo $ShowPuzzel['Hide'];}?> have signed up so far,
+             </p><br/>
               <div class="social">
                   <ul>
                       <li>
