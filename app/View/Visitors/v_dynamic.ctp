@@ -113,7 +113,11 @@ a:hover {
 .btn-confirm:focus , .btn-tab:focus{
   outline: none !important;
 }
-</style>
+.row .four.columns {
+    width: 31.1489%;
+    float: none;
+    display: inline-block;
+}
 
 </style>
 <script type="text/javascript">
