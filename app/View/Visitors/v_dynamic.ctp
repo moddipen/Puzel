@@ -70,7 +70,7 @@ a:hover {
 @media (max-width:433px){
 .btn-tab, .btn-confirm{font-size:12px}
 }
- .columns .active, .button-btn:hover{
+ .columns .active, .button-btn:hover, .btn-tab:hover{
      background: #e58b16;
     color: #fff;
     border:1px solid #e58b16 !important;
@@ -101,7 +101,7 @@ a:hover {
   width:50%;
   }
 }
-.btn-tab:hover, .btn-confirm:hover{
+.btn-confirm:hover{
    background: #fff;
     color: #e58b16;
     border: 1px solid #e58b16;
