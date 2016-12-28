@@ -27,9 +27,7 @@ $(document).ready(function()
      }
   });
   
-    var businesname = $("#businesname").val();
-    var randomid = $("#randomid").val();
-    var puzzlename = $("#puzzlename").val();  
+    
 
   $(document).on('submit', "#Imagedata", function(e) 
   {
@@ -72,6 +70,9 @@ $(document).ready(function()
                                  success:function(data)
                                  {
                                     var transition = $("#transition").val();
+                                    var businesname = $("#businesname").val();
+                                    var randomid = $("#randomid").val();
+                                    var puzzlename = $("#puzzlename").val();  
                                     var obj = $.parseJSON(data);
                                     obj = obj.name;
                                     objs = obj.split('.');
