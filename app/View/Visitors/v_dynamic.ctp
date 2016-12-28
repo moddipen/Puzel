@@ -14,7 +14,7 @@
 ?>
 <style>
 
- .no-right:focus, .no-right a:focus{
+/* .no-right:focus, .no-right a:focus{
     outline:none !important;
 }
 .form-control:focus {
@@ -48,7 +48,72 @@
 
 a:hover {
     color: #fff;
+}*/
+<style>
+.no-right:focus, .no-right a:focus{
+    outline:none !important;
 }
+.form-control:focus {
+    border-color: #e58b16;
+    outline: 0 none;
+}
+ #blur{
+   -webkit-filter: blur(13px);
+    -moz-filter: blur(13px);
+    -o-filter: blur(13px);
+    -ms-filter: blur(13px);
+ filter: blur(13px);}
+ .btn-tab{width:47% !important;}
+ @media (max-width:992px){
+  .btn-tab{width:46% !important;word-wrap: break-word !important;white-space: pre-wrap;}
+}
+@media (max-width:433px){
+.btn-tab, .btn-confirm{font-size:12px}
+}
+ .columns .active{
+     background: #fff;
+    color: #e58b16;
+    border:1px solid #e58b16;
+  }
+
+  #Imageenroll .form-group {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+a:hover {
+    color: #fff;
+}
+.columns .col-md-4, .columns .col-md-6{
+    padding-right: 0px;
+    padding-left: 0px;
+    float:none;
+    display: inline-block;
+}
+.columns .col-md-4{
+  width:32.333%;
+}
+.columns .col-md-6{
+  width: 49%;
+}
+@media (max-width:378px){
+  .columns .col-md-4, .columns .col-md-6{
+  width:50%;
+  }
+}
+.btn-tab:hover, .btn-confirm:hover{
+   background: #fff;
+    color: #e58b16;
+    border: 1px solid #e58b16;
+}
+.btn-confirm{
+  margin: 0 auto !important;
+  display:flex;
+}
+.btn-confirm:focus , .btn-tab:focus{
+  outline: none !important;
+}
+</style>
 
 </style>
 <script type="text/javascript">
@@ -348,7 +413,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 <!-- BEGIN CONTAINER ############################################### -->
 
 
-<div id="container" class="page-hosted" style="background:url(<?php echo $this->webroot?>img/visitor/summer-bokeh.png);background-size: 100% auto;">
+<div id="container" class="page-hosted" style="background:url(<?php echo $this->webroot?>img/visitor/summer-bokeh.png);background-size: cover;">
 <h2 class="text-center title-page"><?php echo $PuzzleData['Puzzle']['name'];?></h2>
  <div class="row"> 
   <div class="col-md-12">
@@ -470,15 +535,21 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
       </div>  
        <div id="alert"></div>
       <form id="Imagedata">
-          <div class="form-group" id="firsname">
-            <input type="text" name="firstname" id="fname" class="form-control" placeholder="First Name"  required>
+          <div class="col-md-4">
+            <div class="form-group" id="firsname">
+              <input type="text" name="firstname" id="fname" class="form-control" placeholder="First Name"  required>
+            </div>
           </div>
-          <div class="form-group" id="laname">
-            <input type="text" name="lastname"   id="lname"  class="form-control" placeholder="Last Name" required>
-          </div>
-          <div class="form-group" id="useemail">
-             <input type="email" name="email"  id="useremail"  class="form-control" placeholder="Email"  required>
-          </div>
+          <div class="col-md-4">  
+            <div class="form-group" id="laname">
+              <input type="text" name="lastname"   id="lname"  class="form-control" placeholder="Last Name" required>
+            </div>
+          </div> 
+          <div class="col-md-4"> 
+            <div class="form-group" id="useemail">
+               <input type="email" name="email"  id="useremail"  class="form-control" placeholder="Email"  required>
+            </div>
+          </div>  
             <?php if(isset($Refrel))
               {?>
                 <input type = "hidden" name ="refrel" value = "1">
@@ -487,21 +558,25 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
             <input type = "hidden" name ="puzzlename" value = "<?php echo $PuzzleData['Puzzle']['name'];?>">
             <input type = "hidden" name ="signwithpuzzleaccount" id ="signwithpuzzleaccount" value = "">
             <div class="form-group text-center">
-              <button type="submit" class="btn button-sign btn-confirm" id="puzelacount" name="puzzle" value = "1" style="width:100%">Submit</button>
+              <button type="submit" class="btn button-sign btn-confirm" id="puzelacount" name="puzzle" value = "1" >Submit</button>
               
             </div>
         </form>
         <form id="Imageenroll" style="display:none;padding-top: 25px;">
+        <div class="col-md-6">
           <div class="form-group" id="useenrollemail">
              <input type="email" name="email1"  id="userenrollemail"  class="form-control" placeholder="Email" required>
           </div>
+        </div>
+        <div class="col-md-6">  
           <div class="form-group" id="pasword">
             <input type="password" name="password"   id="password"  class="form-control" placeholder="Password" required>
           </div>
+        </div>  
           <input type = "hidden" name ="puzzlename" value = "<?php echo $PuzzleData['Puzzle']['name'];?>">
             <input type = "hidden" name ="enrollwithpuzzleaccount" id ="enrollwithpuzzleaccount" value = "">
             <div class="form-group text-center">
-              <button type="submit" class="btn button-sign btn-confirm" id="normalsign" value = "2" style="width:100%">Enroll Now</button>
+              <button type="submit" class="btn button-sign btn-confirm" id="normalsign" value = "2" >Enroll Now</button>
             </div>
         </form>
     </div>
