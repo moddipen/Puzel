@@ -89,7 +89,26 @@ padding: 0;
    .btn.focus, .btn:focus, .btn:hover{
     color: #fff;
     outline:none!important;
-}   
+}  
+#Imagedata .col-md-4, #Imageenroll .col-md-6{
+  padding-left:0px;
+}
+.button-submit{
+    width: 40%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    background: #e58b16;
+    font-size: 18px;
+    text-align: center;
+    font-weight: 300;
+    padding: 5px 20px;
+    color: #fff;
+}
+.button-puzzle {
+    margin-bottom: 0px;
+}
+
 </style>
 
 
@@ -99,7 +118,8 @@ padding: 0;
 
     $this->webroot = Configure::read('SITE_URL');?>
 
- 
+    
+    <input type ="hidden" id="businesname" value ="<?php echo $PuzzleData['Business']['company_name']?>">
     <input type ="hidden" id="transition" value ="<?php echo $PuzzleData['Puzzle']['transtion']?>">
 
 <!-- END NAVIGATION ############################################### -->
@@ -288,7 +308,7 @@ padding: 0;
       <div class="col-md-6 col-xs-6">
         <button type="button" class="btn button-puzzle btn-tab active" id="puzelasubmit" name="puzzle">Signup for Puzel</button>
       </div>
-      <div class="col-md-6">  
+      <div class="col-md-6 col-xs-6">  
         <button type="button" class="btn button-puzzle btn-tab" id="enrollformshow">Enroll Now</button>
       </div>
        <div id="alert"></div> 
@@ -317,7 +337,7 @@ padding: 0;
               <input type = "hidden" name ="puzzlename" value = "<?php echo $PuzzleData['Puzzle']['name'];?>">
               <input type = "hidden" name ="signwithpuzzleaccount" id ="signwithpuzzleaccount" value = "">
               <div class="form-group">
-                <button type="submit" class="btn button-puzzle" id="puzelacount" name="puzzle" value = "1" >Submit</button>
+                <button type="submit" class="btn button-submit" id="puzelacount" name="puzzle" value = "1" >Submit</button>
                 <!-- button type="button" class="btn button-sign" id="enrollformshow">Enroll Now</button> -->
               </div>
           </form>
@@ -344,7 +364,7 @@ padding: 0;
               <input type = "hidden" name ="enrollwithpuzzleaccount" id ="enrollwithpuzzleaccount" value = "">
               <div class="form-group">
                 <!-- <button type="button" class="btn button-sign" id="puzelasubmit" name="puzzle" >Submit</button> -->
-                <button type="submit" class="btn button-puzzle" id="normalsign" value = "2" >Enroll Now</button>
+                <button type="submit" class="btn button-submit" id="normalsign" value = "2" >Enroll Now</button>
               </div>
           </form>
           </div>
