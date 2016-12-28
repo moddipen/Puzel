@@ -118,8 +118,15 @@ a:hover {
     float: none;
     display: inline-block;
 }
-.share-social h3, .share-social p{
-  float:left;
+  .share-social h3{
+   float:left;
+    margin-right: 25px;
+}
+.share-social p{
+    padding-top: 17px;
+}
+.share-social i {
+    top: -25px;
 }
 </style>
 <script type="text/javascript">
