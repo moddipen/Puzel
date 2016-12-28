@@ -108,7 +108,7 @@ a:hover {
 }
 .btn-confirm{
   margin: 0 auto !important;
-  display:flex;
+  /*display:flex;*/
 }
 .btn-confirm:focus , .btn-tab:focus{
   outline: none !important;
@@ -144,7 +144,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
       messages: {
         firstname: "Please enter first name.",
         lastname: "Please enter last name.",
-        email: "Please enter a valid email address.",
+        email: "Please enter a valid email.",
       }
     });
 
