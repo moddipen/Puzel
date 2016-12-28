@@ -139,7 +139,7 @@ padding: 0;
     margin-right: 25px;
 }
 .socialbtn p{
-    padding-top: 17px;
+    padding-top: 25px;
 }
 .socialbtn i {
     top: -25px;
