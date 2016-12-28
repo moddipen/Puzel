@@ -291,15 +291,21 @@ padding: 0;
        <div id="alert"></div> 
       <div class="col-md-12">
         <form id="Imagedata" >
-            <div class="form-group" id="firsname">
-              <input type="text" name="firstname" id="fname" class="form-control" placeholder="First Name"  required>
-            </div>
-            <div class="form-group" id="laname">
-              <input type="text" name="lastname"   id="lname"  class="form-control" placeholder="Last Name" required>
-            </div>
-            <div class="form-group" id="useemail">
-               <input type="email" name="email"  id="useremail"  class="form-control" placeholder="Email" required>
-            </div>
+            <div class="col-md-4">
+              <div class="form-group" id="firsname">
+                <input type="text" name="firstname" id="fname" class="form-control" placeholder="First Name"  required>
+              </div>
+             </div>
+             <div class="col-md-4"> 
+              <div class="form-group" id="laname">
+                <input type="text" name="lastname"   id="lname"  class="form-control" placeholder="Last Name" required>
+              </div>
+             </div>
+             <div class="col-md-4">
+              <div class="form-group" id="useemail">
+                 <input type="email" name="email"  id="useremail"  class="form-control" placeholder="Email" required>
+              </div>
+             </div> 
               <?php if(isset($Refrel))
                 {?>
                   <input type = "hidden" name ="refrel" value = "1">
@@ -308,20 +314,24 @@ padding: 0;
               <input type = "hidden" name ="puzzlename" value = "<?php echo $PuzzleData['Puzzle']['name'];?>">
               <input type = "hidden" name ="signwithpuzzleaccount" id ="signwithpuzzleaccount" value = "">
               <div class="form-group">
-                <button type="submit" class="btn button-puzzle" id="puzelacount" name="puzzle" value = "1" style="width:100%">Submit</button>
+                <button type="submit" class="btn button-puzzle" id="puzelacount" name="puzzle" value = "1" >Submit</button>
                 <!-- button type="button" class="btn button-sign" id="enrollformshow">Enroll Now</button> -->
               </div>
           </form>
         </div>
         <div class="col-md-12">  
           <form id="Imageenroll" style="display:none;" method="post">
-            <div class="form-group" id="usenrollemail">
-               <input type="email" name="email1"  id="userenrollemail"  class="form-control" placeholder="Email" required>
+            <div class="col-md-6">
+              <div class="form-group" id="usenrollemail">
+                 <input type="email" name="email1"  id="userenrollemail"  class="form-control" placeholder="Email" required>
+              </div>
             </div>
-            <div class="form-group" id="pasword">
-              <input type="password" name="password"   id="password"  class="form-control" placeholder="Password" required>
-            </div>
-            
+            <div class="col-md-6">  
+              <div class="form-group" id="pasword">
+                <input type="password" name="password"   id="password"  class="form-control" placeholder="Password" required>
+              </div>
+            </div>  
+
               <?php if(isset($Refrel))
                 {?>
                   <input type = "hidden" name ="refrel" value = "1">
@@ -331,7 +341,7 @@ padding: 0;
               <input type = "hidden" name ="enrollwithpuzzleaccount" id ="enrollwithpuzzleaccount" value = "">
               <div class="form-group">
                 <!-- <button type="button" class="btn button-sign" id="puzelasubmit" name="puzzle" >Submit</button> -->
-                <button type="submit" class="btn button-puzzle" id="normalsign" value = "2" style="width:100%">Enroll Now</button>
+                <button type="submit" class="btn button-puzzle" id="normalsign" value = "2" >Enroll Now</button>
               </div>
           </form>
           </div>
