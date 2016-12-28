@@ -117,6 +117,22 @@ padding: 0;
 .jAlert {
       margin-top: 150px !important;
 }
+.social-icons{
+   margin:20px 0;
+}
+.social-icons a{
+    background: #000;
+    border-radius: 50%;
+    margin-right: 10px;
+    color: #fff;
+    font-size: 15px;
+}
+.social-icons .fb{
+   padding:6px 11px;
+}
+.social-icons .twitter,.social-icons .window, .social-icons .email{
+   padding:6px 8px;
+}
 </style>
 
 
