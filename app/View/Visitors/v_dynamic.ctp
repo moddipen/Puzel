@@ -70,17 +70,17 @@ a:hover {
 @media (max-width:433px){
 .btn-tab, .btn-confirm{font-size:12px}
 }
- .columns .active{
-     background: #fff;
-    color: #e58b16;
-    border:1px solid #e58b16;
+ .columns .active, .button-btn:hover{
+     background: #e58b16;
+    color: #fff;
+    border:1px solid #e58b16 !important;
   }
 
   #Imageenroll .form-group {
     margin-bottom: 25px;
     position: relative;
 }
-
+.button-btn{ background:#fff; color:#808080 !important; border-color: #808080 !important}
 a:hover {
     color: #fff;
 }
@@ -586,8 +586,8 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
     <div class="six columns" >
      
       <div class="form-group" style="margin-bottom:0px;">
-        <button type="button" class="btn button-sign btn-tab active" id="puzelasubmit" name="puzzle" >Signup for Puzel</button>
-        <button type="button" class="btn button-sign btn-tab " id="enrollformshow" >Enroll Now</button>
+        <button type="button" class="btn button-btn btn-tab active" id="puzelasubmit" name="puzzle" >Signup for Puzel</button>
+        <button type="button" class="btn button-btn btn-tab " id="enrollformshow" >Enroll Now</button>
       </div>  
        <div id="alert"></div>
       <form id="Imagedata">
