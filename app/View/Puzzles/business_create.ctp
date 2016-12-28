@@ -496,6 +496,9 @@
     $('#submitterms').click(function()
     {
        var html = $('.note-editable').html(); 
+      $(".mask").show();
+      $("#loader").show() ; 
+    
        if(html == "<p><br></p>")
        {
            $("#modal1" ).effect("shake");
@@ -512,7 +515,8 @@
             success: function(data)
              {
                 $('#modal1').modal('hide');
-                // $('.note-editable').html(''); 
+                $("#loader").hide() ; 
+                $(".mask").hide(); 
              }
            });
        } 
@@ -522,7 +526,8 @@
    $("#grand_price").on('submit',(function(e) 
     {
       e.preventDefault();
-       
+      $(".mask").show();
+      $("#loader").show() ; 
       var html = $('.note-editable').html(); 
        $.ajax(
        {
@@ -538,6 +543,8 @@
             //alert($('#filecontent').val());
             $('#modal3').modal('hide');
             $('#pricepuzzle').val($('#filecontent').val());
+            $("#loader").hide() ; 
+            $(".mask").hide(); 
          }
        });
     }));  
@@ -546,6 +553,8 @@
 
     $("#changetemplate").change(function()
     {
+      $(".mask").show();
+      $("#loader").show() ; 
       $.ajax(
        {
          type: "POST",
@@ -556,6 +565,8 @@
          {
             $('#modal1 .note-editable').html(data.Puzzle.terms);
             $('#puzzleterm').val(data.Puzzle.terms);  
+            $("#loader").hide() ; 
+            $(".mask").hide(); 
           }
        });
       // alert();
