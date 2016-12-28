@@ -193,7 +193,7 @@ padding: 0;
                                     </div>
                                 </div>
 
-  <div class="puzel">
+  <div class="puzel" style="background:url(<?php echo $this->webroot?>img/visitor/summer-bokeh.png);background-size: cover;">
     <h2 style="text-align:center;"><?php echo $PuzzleData['Puzzle']['name'];?></h2>
 
 
@@ -221,7 +221,7 @@ padding: 0;
      
       </style>
         <?php $peices = $PuzzleData['Puzzle']['pieces'] ; ?>
-        <div class="merge">
+        <div class="merge" style="background:rgba(0,0,0,0.03);" align="center">
           <div>
            <?php 
            
