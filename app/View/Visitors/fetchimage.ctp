@@ -316,6 +316,8 @@ padding: 0;
     }?>
 
     </div>
+<input type ="hidden" id="showimagecontent" value="<?php echo $ShowPuzzel['Show']?>">
+<input type ="hidden" id="hideimagecontent" value="<?php echo $ShowPuzzel['Hide']?>">
 
     
 <div class="puzle-form">   

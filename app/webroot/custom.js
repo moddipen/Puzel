@@ -95,6 +95,20 @@ $(document).ready(function()
                                     // $("#alert").html("<p>You have been enrolled.</p>");
                                     // $("p").show().delay(3000).fadeOut(function(){ $(this).remove(); });
                                      javascript:successAlert("You have been enrolled. </br></br>Share with your friends</br><div class='social-icons'><a href=http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/"+businesname+"/"+randomid+"&title="+puzzlename+"&description=Price 33$' onclick='return !window.open(this.href,Facebook,width=640,height=580)' class='fb'><i class='fa fa-facebook'></i></a><a href='https://twitter.com/intent/tweet?text=http://puzel.stage.n-framescorp.com/http://puzel.stage.n-framescorp.com/"+businesname+"/"+randomid+" data-size='large' target ='_blank' class='twitter'><i class='fa fa-twitter'></i></a><a href='http://mail.live.com/default.aspx?rru=compose&to=&subject=Share new puzzle "+puzzlename+"&body=http://puzel.stage.n-framescorp.com/"+businesname+"/"+randomid+" onclick='return !window.open(this.href,Outlook,width=640,height=580)' target='_blank' class='window'><i class='fa fa-windows'></i></a><a href ='https://mail.google.com/mail/?view=cm&fs=1&to=&su=Share new puzzle "+puzzlename+"&body=http://puzel.stage.n-framescorp.com/"+businesname+"'/'"+randomid+" onclick='return !window.open(this.href,Google,width=640,height=580)' class='email'><i class='fa fa-envelope-o'></i></a></div>");
+
+                                        var newaddcount = parseInt($("#showimagecontent").val()) - 1 ;
+                                      var newminuscount = parseInt($("#hideimagecontent").val()) + 1;
+                                      if(newaddcount != 0)
+                                      {
+                                        $("#messagecontent").html(newminuscount+" have signed up so far, "+newaddcount+" more to go before we give away the rewards, enroll yourself now!");     
+                                      }
+                                      else
+                                      {
+                                        $("#messagecontent").html(newminuscount+" have signed up so far,");   
+                                      }  
+                                      
+                                      $("#showimagecontent").val(newaddcount);
+                                      $("#hideimagecontent").val(newminuscount); 
                                  }
                             }); 
                           }
@@ -180,6 +194,20 @@ $(document).ready(function()
                                     // $("#alert").html("<p>Puzzle created successfully.</p>");
                                     // $("p").show().delay(3000).fadeOut(function(){ $(this).remove(); });
                                     javascript:successAlert("You have been enrolled. </br></br>Share with your friends</br><div class='social-icons'><a href=http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/"+businesname+"/"+randomid+"&title="+puzzlename+"&description=Price 33$' onclick='return !window.open(this.href,Facebook,width=640,height=580)' class='fb'><i class='fa fa-facebook'></i></a><a href='https://twitter.com/intent/tweet?text=http://puzel.stage.n-framescorp.com/http://puzel.stage.n-framescorp.com/"+businesname+"/"+randomid+" data-size='large' target ='_blank' class='twitter'><i class='fa fa-twitter'></i></a><a href='http://mail.live.com/default.aspx?rru=compose&to=&subject=Share new puzzle "+puzzlename+"&body=http://puzel.stage.n-framescorp.com/"+businesname+"/"+randomid+" onclick='return !window.open(this.href,Outlook,width=640,height=580)' target='_blank' class='window'><i class='fa fa-windows'></i></a><a href ='https://mail.google.com/mail/?view=cm&fs=1&to=&su=Share new puzzle "+puzzlename+"&body=http://puzel.stage.n-framescorp.com/"+businesname+"'/'"+randomid+" onclick='return !window.open(this.href,Google,width=640,height=580)' class='email'><i class='fa fa-envelope-o'></i></a></div>");
+
+                                      var newaddcount = parseInt($("#showimagecontent").val()) - 1 ;
+                                      var newminuscount = parseInt($("#hideimagecontent").val()) + 1;
+                                      if(newaddcount != 0)
+                                      {
+                                        $("#messagecontent").html(newminuscount+" have signed up so far, "+newaddcount+" more to go before we give away the rewards, enroll yourself now!");     
+                                      }
+                                      else
+                                      {
+                                        $("#messagecontent").html(newminuscount+" have signed up so far,");   
+                                      }  
+                                      
+                                      $("#showimagecontent").val(newaddcount);
+                                      $("#hideimagecontent").val(newminuscount);
                                    }
                               });
                           }
