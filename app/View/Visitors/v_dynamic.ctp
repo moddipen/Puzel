@@ -118,7 +118,9 @@ a:hover {
     float: none;
     display: inline-block;
 }
-
+.share-social h3, .share-social p{
+  float:left;
+}
 </style>
 <script type="text/javascript">
 var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
@@ -507,6 +509,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
   <div class="six columns">
       <div class="share-social">
           <h3>Share with your friends</h3>
+              <p><?php echo $ShowPuzzel['Show']?> have signed up so far, <?php echo $ShowPuzzel['Hide']?> more to go before we give away the rewards, enroll yourself now!</p>
               <?php if(isset($Refrel))
               { ?>
                   <a class="share-btn" href="http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/<?php echo $Company.'/'.$explode[4].'/'.substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);?>&title=<?php echo $PuzzleData['Puzzle']['name'];?>&description=Price 33$" onclick="return !window.open(this.href, 'Facebook', 'width=640,height=580')"><i class="facebook">f</i></a>
