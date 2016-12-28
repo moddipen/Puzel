@@ -522,7 +522,8 @@
    $("#grand_price").on('submit',(function(e) 
     {
       e.preventDefault();
-      $(".mask").show();  
+      $(".mask").show();
+      $("#loader").show() ; 
       var html = $('.note-editable').html(); 
        $.ajax(
        {
@@ -538,6 +539,7 @@
             //alert($('#filecontent').val());
             $('#modal3').modal('hide');
             $('#pricepuzzle').val($('#filecontent').val());
+            $("#loader").hide() ; 
             $(".mask").hide(); 
          }
        });
