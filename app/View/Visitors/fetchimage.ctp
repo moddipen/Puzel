@@ -133,6 +133,17 @@ padding: 0;
 .social-icons .twitter,.social-icons .window, .social-icons .email{
    padding:6px 8px;
 }
+
+  .socialbtn h3{
+   float:left;
+    margin-right: 25px;
+}
+.socialbtn p{
+    padding-top: 17px;
+}
+.socialbtn i {
+    top: -25px;
+}
 </style>
 
 
@@ -312,6 +323,7 @@ padding: 0;
     <div class="row">
       <div class="col-md-6 socialbtn">
           <h3>Share with your friends</h3>
+              <p><?php echo $ShowPuzzel['Show']?> have signed up so far, <?php echo $ShowPuzzel['Hide']?> more to go before we give away the rewards, enroll yourself now!</p>
               <div class="social">
                   <ul>
                       <li>
