@@ -72,7 +72,7 @@ a:hover {
 }
  .columns .active, .button-btn:hover, .btn-tab:hover{
      background: #e58b16;
-    color: #fff;
+    color: #fff !important;
     border:1px solid #e58b16 !important;
   }
 
