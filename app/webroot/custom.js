@@ -102,7 +102,7 @@ $(document).ready(function()
                             // $("#alert").html("<p>"+data.message+"</p>");
                             // $("p").show().delay(3000).fadeOut(function(){ $(this).remove(); });
                             javascript:errorAlert(data.message);
-                            $(".ja_wrap_black").show().delay(5000).fadeOut(function(){ $(this).remove(); });
+                           // $(".ja_wrap_black").show().delay(5000).fadeOut(function(){ $(this).remove(); });
                           }
                           //$("#Imagedata")[0].reset();  
                        }
@@ -187,7 +187,7 @@ $(document).ready(function()
                             // $("#alert").html("<p>"+data.message+"</p>");
                             // $("p").show().delay(3000).fadeOut(function(){ $(this).remove(); });
                             javascript:errorAlert(data.message);
-                            $(".ja_wrap_black").show().delay(5000).fadeOut(function(){ $(this).remove(); });
+                           // $(".ja_wrap_black").show().delay(5000).fadeOut(function(){ $(this).remove(); });
                           }
                        }
                      });
