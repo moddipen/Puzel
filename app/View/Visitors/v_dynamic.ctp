@@ -114,9 +114,9 @@ a:hover {
   outline: none !important;
 }
 .row .four.columns {
-    width: 31.1489%;
+   /* width: 31.1489%;
     float: none;
-    display: inline-block;
+    display: inline-block;*/
 }
   .share-social h3{
     margin-right: 25px;
