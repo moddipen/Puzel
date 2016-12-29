@@ -70,7 +70,7 @@ a:hover {
 @media (max-width:433px){
 .btn-tab, .btn-confirm{font-size:12px}
 }
- .columns .active, .button-btn:hover, .btn-tab:hover{
+  .button-btn:hover, .btn-tab:hover{
      background: #e58b16;
     color: #fff !important;
     border:1px solid #e58b16 !important;
@@ -127,6 +127,7 @@ a:hover {
 .share-social i {
     top: -25px;
 }
+#Imagedata .form-group, #Imageenroll .form-group{margin-bottom:20px;}
 </style>
 <script type="text/javascript">
 var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
@@ -436,8 +437,8 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
         
          <ul id="nav">
             
-            <li class="no-right"><a href="#" data-toggle="modal" data-target="#modal1"><span class="button-sign">Terms / Description</span></a></li>                     
-            <li class="no-right"><a href="#" data-toggle="modal" data-target="#modal3"><span class="button-sign">Grand Prize</span></a></li>                     
+            <li class="no-right"><a href="#" data-toggle="modal" data-target="#modal1"><span class="button-btn btn" style="width:100%">Terms / Description</span></a></li>                     
+            <li class="no-right"><a href="#" data-toggle="modal" data-target="#modal3"><span class="button-btn btn" style="width:100%">Grand Prize</span></a></li>                     
          </ul>
        
       </nav>
@@ -582,7 +583,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
           <?php if($ShowPuzzel['Show'] > 0){?>
              <?php echo $ShowPuzzel['Hide']?> have signed up so far, <?php echo $ShowPuzzel['Show']?> more to go before we give away the rewards, enroll yourself now!
               <?php } else {
-               echo $ShowPuzzel['Hide'];}?> have signed up so far,
+               echo $ShowPuzzel['Hide'].' have signed up so far,';}?>
              </p>
 
             
