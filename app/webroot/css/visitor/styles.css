@@ -189,7 +189,7 @@ p a:hover {
 	color:#808080;
 	border-color: #808080 !important;
 }
-.button-sign:hover{color: #8421cf}
+.button-sign:hover{color: #8421cf; }
 .button-join{
 	background:#8421cf;
 	font-size:20px;
@@ -197,7 +197,7 @@ p a:hover {
 	padding:5px 20px;
 	color:#fff;
 }
-.button-join:hover{color:#e58b16;border-color: #e58b16 !important; }
+.button-join:hover{color:#e58b16; }
 .button2:hover {
 	background-color: #51A351;
     color: #FFFFFF;

@@ -105,7 +105,7 @@ a:hover {
 .btn-confirm:hover{
    background: #fff;
     color: #e58b16;
-    border: 1px solid #e58b16;
+    border: 1px solid #e58b16 !important;
 }
 .btn-confirm{
   margin: 0 auto !important;
