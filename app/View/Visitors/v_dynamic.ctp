@@ -70,7 +70,7 @@ a:hover {
 @media (max-width:433px){
 .btn-tab, .btn-confirm{font-size:12px}
 }
-  .button-btn:hover, .btn-tab:hover{
+  .btn-tab.active, .button-btn:hover, .btn-tab:hover{
      background: #fff;
     color: #e58b16 !important;
     border:1px solid #e58b16 !important;
