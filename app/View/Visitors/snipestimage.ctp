@@ -295,7 +295,7 @@ padding: 0;
 <div class="puzle-form">   
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-3 socialbtn">
+      <div class="col-md-6 socialbtn">
           <h3>Share with your friends</h3>
               <div class="social">
                   <ul>
@@ -314,7 +314,6 @@ padding: 0;
                   </ul>
               </div>
       </div>
-      <div class="col-md-3"></div>
      <?php if($ShowPuzzel['Show'] != 0){?> 
      <div class="col-md-6">
       <div class="col-md-6 col-xs-6">

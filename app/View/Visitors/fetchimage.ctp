@@ -83,15 +83,17 @@ padding: 0;
 }
 
       #Imageenroll, #Imagedata {
-          padding-top: 25px;
+          padding-top: 15px;
       }
 
    .btn.focus, .btn:focus, .btn:hover{
     color: #fff;
     outline:none!important;
 }  
-#Imagedata .col-md-4, #Imageenroll .col-md-6{
-  padding-left:0px;
+#Imagedata .row, #Imageenroll .row{margin-left:-8px; margin-right:-8px;}
+#Imagedata .col-md-4, #Imageenroll .col-md-6,#Imagedata .col-md-12, #Imageenroll .col-md-12{
+  padding-left:8px;
+  padding-right:8px;
 }
 .button-submit{
     width: 40%;
@@ -269,9 +271,10 @@ padding: 0;
       body{line-height: inherit;}
       .merge div div{width:<?php echo $image[0]['width']."px";?>;height:<?php echo $image[0]['height']."px";?>;display:inline-block;margin-left:-5px;margin-bottom:-5px;}
       .merge{width:<?php echo $image[0]['total_width']."px";?>;margin:50px auto;}
-      .button-puzzle{background:#e58b16;font-size: 18px;text-align:center;font-weight: 300;padding: 5px 20px;color: #fff;width:100%;}
-      .puzle-form .active, .button-puzzle:hover{background:#fff;color: #e58b16 !important;border:1px solid #e58b16;box-shadow:none;}
-      .button-header{background:#e58b16;font-size: 18px;text-align:center;font-weight: 300;padding: 5px 20px;color: #fff;width:100%;margin-bottom:20px;}
+      .button-puzzle{background:#fff;font-size: 18px;text-align:center;font-weight: 300;padding: 5px 20px;color: #808080 !important;width:100%; border-color:#808080 !important;}
+      /*.puzle-form .active, */.button-puzzle:hover{background:#fff;color: #e58b16 !important;border:1px solid #e58b16;box-shadow:none;}
+      .button-header{background:#fff;font-size: 18px;text-align:center;font-weight: 300;padding: 5px 20px;color: #808080 !important;width:100%;margin-bottom:20px; border-color:#808080 !important;}
+	  .button-header:hover{background:#e58b16 !important; color:#fff !important; border-color: #e58b16 !important;}
       .button-header .active, {background:#e58b16;color:#fff ; border: none !important;}
       /*.btn.focus, .btn:focus, .btn:hover {color: #fff !important;}*/
       #alert{left: 30px;position: absolute;top: 52px;}
@@ -323,14 +326,9 @@ padding: 0;
 <div class="puzle-form">   
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-6 socialbtn">
+      <div class="col-md-3 socialbtn">
           <h3>Share with your friends</h3>
-               <p id="messagecontent"> 
-               <?php if($ShowPuzzel['Show'] > 0){?>
-             <?php echo $ShowPuzzel['Hide']?> have signed up so far, <?php echo $ShowPuzzel['Show']?> more to go before we give away the rewards, enroll yourself now!
-              <?php } else {
-               echo $ShowPuzzel['Hide'];}?> have signed up so far,
-             </p><br/>
+               <br/>
               <div class="social">
                   <ul>
                       <li>
@@ -348,6 +346,14 @@ padding: 0;
                   </ul>
               </div>
       </div>
+      <div class="col-md-3">
+      	<p id="messagecontent"> 
+               <?php if($ShowPuzzel['Show'] > 0){?>
+             <?php echo $ShowPuzzel['Hide']?> have signed up so far, <?php echo $ShowPuzzel['Show']?> more to go before we give away the rewards, enroll yourself now!
+              <?php } else {
+               echo $ShowPuzzel['Hide'].' have signed up so far,';}?>
+             </p>
+      </div>
      <?php if($ShowPuzzel['Show'] != 0){?> 
      <div class="col-md-6">
       <div class="col-md-6 col-xs-6">
@@ -359,6 +365,7 @@ padding: 0;
        <div id="alert"></div> 
       <div class="col-md-12">
         <form id="Imagedata" >
+        	<div class="row">
             <div class="col-md-4">
               <div class="form-group" id="firsname">
                 <input type="text" name="firstname" id="fname" class="form-control" placeholder="First Name"  required>
@@ -381,14 +388,18 @@ padding: 0;
               <?php }?>
               <input type = "hidden" name ="puzzlename" value = "<?php echo $PuzzleData['Puzzle']['name'];?>">
               <input type = "hidden" name ="signwithpuzzleaccount" id ="signwithpuzzleaccount" value = "">
+              <div class="col-md-12">
               <div class="form-group">
                 <button type="submit" class="btn button-submit" id="puzelacount" name="puzzle" value = "1" >Submit</button>
                 <!-- button type="button" class="btn button-sign" id="enrollformshow">Enroll Now</button> -->
+              </div>
+              </div>
               </div>
           </form>
         </div>
         <div class="col-md-12">  
           <form id="Imageenroll" style="display:none;" method="post">
+          <div class="row">
             <div class="col-md-6">
               <div class="form-group" id="usenrollemail">
                  <input type="email" name="email1"  id="userenrollemail"  class="form-control" placeholder="Email" required>
@@ -407,9 +418,12 @@ padding: 0;
               <?php }?>
               <input type = "hidden" name ="puzzlename" value = "<?php echo $PuzzleData['Puzzle']['name'];?>">
               <input type = "hidden" name ="enrollwithpuzzleaccount" id ="enrollwithpuzzleaccount" value = "">
+              <div class="col-md-12">
               <div class="form-group">
                 <!-- <button type="button" class="btn button-sign" id="puzelasubmit" name="puzzle" >Submit</button> -->
                 <button type="submit" class="btn button-submit" id="normalsign" value = "2" >Enroll Now</button>
+              </div>
+              </div>
               </div>
           </form>
           </div>
