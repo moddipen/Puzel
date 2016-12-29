@@ -292,7 +292,7 @@ padding: 0;
       .merge div div{width:<?php echo $image[0]['width']."px";?>;height:<?php echo $image[0]['height']."px";?>;display:inline-block;margin-left:-5px;margin-bottom:-5px;}
       .merge{width:<?php echo $image[0]['total_width']."px";?>;margin:30px auto;}
       .button-puzzle{background:#fff;font-size: 18px;text-align:center;font-weight: 300;padding: 5px 20px;color: #808080 !important;width:100%; border-color:#808080 !important;}
-      .puzle-form .active, .button-puzzle:hover{background:#fff; color: #e58b16 !important;border:1px solid #e58b16 !important; }
+      .puzle-form .active, .button-puzzle:hover{background:#fff; color: #e58b16 !important;border:1px solid #e58b16 !important; box-shadow:none;}
       .button-header{background:#fff;font-size: 18px;text-align:center;font-weight: 300;padding: 5px 20px;color: #808080 !important;width:100%;margin-bottom:20px; border-color:#808080 !important;}
 	  .button-header:hover{background:#fff !important; color:#e58b16 !important; border-color: #e58b16 !important;}
       .button-header .active, {background:#e58b16;color:#fff ; border: none !important;}
