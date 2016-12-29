@@ -128,7 +128,7 @@ a:hover {
 .share-social i {
     top: -25px;
 }
-#Imagedata .form-group, #Imageenroll .form-group{margin-bottom:20px;}
+#Imagedata .form-group, #Imageenroll .form-group{margin-bottom:16px;}
 </style>
 <script type="text/javascript">
 var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
@@ -598,7 +598,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
         <button type="button" class="btn button-btn btn-tab " id="enrollformshow" >Enroll Now</button>
       </div>  
        <div id="alert"></div>
-      <form id="Imagedata" style="padding-top: 20px;">
+      <form id="Imagedata" style="padding-top: 16px;">
           <div class="four columns">
             <div class="form-group" id="firsname">
               <input type="text" name="firstname" id="fname" class="form-control" placeholder="First Name"  required>
@@ -627,7 +627,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
               
             </div>
         </form>
-        <form id="Imageenroll" style="display:none;padding-top: 20px;">
+        <form id="Imageenroll" style="display:none;padding-top: 16px;">
         <div class="six columns">
           <div class="form-group" id="useenrollemail">
              <input type="email" name="email1"  id="userenrollemail"  class="form-control" placeholder="Email" required>
