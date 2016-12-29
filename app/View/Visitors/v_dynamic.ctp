@@ -96,6 +96,7 @@ a:hover {
 .columns .col-md-6{
   width: 49%;
 }
+.modal{top:10%;}
 @media (max-width:378px){
   .columns .col-md-4, .columns .col-md-6{
   width:50%;

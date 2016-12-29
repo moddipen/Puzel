@@ -21,6 +21,7 @@
   .modal-open {
     overflow: hidden;
 } 
+.modal{top:10%;}
 .puzel{
     padding-top: 120px;
 }
