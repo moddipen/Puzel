@@ -2277,8 +2277,8 @@ ul.chart-legend > li small { color: rgba(255, 255, 255, 0.7); margin-left: 5px; 
 .btn.btn-orange:hover { background-color: #f0b500; color: white; }
 /*.btn.btn-oranges { background-color: #e88932; color: #f2f2f2;    padding: 8px 12px; }
 .btn.btn-oranges:hover { background-color: #ef9848; color: white; }*/
-.btn.btn-oranges { background-color: #fff; color: #808080; border-color: #808080 !important;   padding: 8px 12px; }
-.btn.btn-oranges:hover { background-color: #fff; color: #e88932 !important; border-color: #e88932 !important; }
+.btn.btn-oranges { background-color: #fff; color: #808080; border: 1px solid #808080 !important;   padding: 8px 12px; }
+.btn.btn-oranges:hover { background-color: #fff; color: #e88932 !important; border:  1px solid #e88932 !important; }
 .btn.btn-amethyst { background-color: #cd97eb; color: #f2f2f2; }
 .btn.btn-amethyst:hover { background-color: #b86ce3; color: white; }
 .btn.btn-greensea { background-color: #1ccdaa; color: #f2f2f2; }
