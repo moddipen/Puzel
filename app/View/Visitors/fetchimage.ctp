@@ -164,6 +164,7 @@ padding: 0;
     font-size: 34px;
     color: #555555;
 	font-weight:300;
+	    margin-top: 0.33em;
 }
 </style>
 
