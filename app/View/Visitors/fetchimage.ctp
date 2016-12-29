@@ -9,6 +9,16 @@
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 <link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/app/webroot/css/visitor/bootstrap.min.css">
 <style type="text/css">
+body{
+    background: rgba(203,129,127,1);
+    background: -moz-linear-gradient(left, rgba(203,129,127,1) 0%, rgba(159,78,210,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(203,129,127,1)), color-stop(100%, rgba(159,78,210,1)));
+    background: -webkit-linear-gradient(left, rgba(203,129,127,1) 0%, rgba(159,78,210,1) 100%);
+    background: -o-linear-gradient(left, rgba(203,129,127,1) 0%, rgba(159,78,210,1) 100%);
+    background: -ms-linear-gradient(left, rgba(203,129,127,1) 0%, rgba(159,78,210,1) 100%);
+    background: linear-gradient(to right, rgba(203,129,127,1) 0%, rgba(159,78,210,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cb817f', endColorstr='#9f4ed2', GradientType=1 );
+}
 #blur{
    -webkit-filter: blur(13px);
     -moz-filter: blur(13px);
