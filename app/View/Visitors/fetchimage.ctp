@@ -68,7 +68,7 @@ padding: 0;
     margin-top: 40px !important;
 }
 .modal{
-    top: 150px !important;
+    top: 10% !important;
 }
 .modal-title ,.modal-body {
     color: #E58B16 !important;
