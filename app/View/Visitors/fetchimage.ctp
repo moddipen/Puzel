@@ -383,8 +383,9 @@ padding: 0;
         <button type="button" class="btn button-puzzle btn-tab" id="enrollformshow">Enroll Now</button>
       </div>
        <div id="alert"></div> 
-      <div class="col-md-12">
+      
         <form id="Imagedata" >
+        <div class="col-md-12">
         	<div class="row">
             <div class="col-md-4">
               <div class="form-group" id="firsname">
@@ -414,11 +415,12 @@ padding: 0;
                 <!-- button type="button" class="btn button-sign" id="enrollformshow">Enroll Now</button> -->
               </div>
               </div>
-              </div>
+              </div> </div>
           </form>
-        </div>
-        <div class="col-md-12">  
+       
+          
           <form id="Imageenroll" style="display:none;" method="post">
+          <div class="col-md-12">
           <div class="row">
             <div class="col-md-6">
               <div class="form-group" id="usenrollemail">
@@ -444,9 +446,9 @@ padding: 0;
                 <button type="submit" class="btn button-submit" id="normalsign" value = "2" >Enroll Now</button>
               </div>
               </div>
-              </div>
+              </div></div>
           </form>
-          </div>
+          
     </div>
     <?php }?>
       
