@@ -147,7 +147,7 @@
                     </div>
                     <div class="form-group">
                       <button type="submit" class="btn btn-oranges" id="validateform">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                          <button type="reset" class="btn btn-black-transparent">Cancel</button>
+                          <button type="reset" class="btn btn-oranges">Cancel</button>
                     </div>
                   </div>
                   <input type ="hidden" id="hiddenpieces" value=""/>
@@ -219,7 +219,7 @@
                 </div>
                <div class="col-md-3">
                    <div class="form-group">
-                   <button type="reset" class="btn btn-black-transparent fullwidth" data-dismiss="modal">Cancel</button>
+                   <button type="reset" class="btn btn-oranges fullwidth" data-dismiss="modal">Cancel</button>
                    </div>
                </div>
             </div>
