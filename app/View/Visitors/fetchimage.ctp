@@ -408,10 +408,9 @@ padding: 0;
               <?php }?>
               <input type = "hidden" name ="puzzlename" value = "<?php echo $PuzzleData['Puzzle']['name'];?>">
               <input type = "hidden" name ="signwithpuzzleaccount" id ="signwithpuzzleaccount" value = "">
-              <div class="col-md-4"></div>
-              <div class="col-md-4">
-              <div class="form-group">
-                <button type="submit" class="btn button-puzzle" id="puzelacount" name="puzzle" value = "1" >Submit</button>
+              <div class="col-md-12">
+              <div class="form-group text-center">
+                <button type="submit" class="btn button-puzzle" id="puzelacount" style="width:40%;" name="puzzle" value = "1" >Submit</button>
                 <!-- button type="button" class="btn button-sign" id="enrollformshow">Enroll Now</button> -->
               </div>
               </div>
@@ -439,11 +438,10 @@ padding: 0;
               <?php }?>
               <input type = "hidden" name ="puzzlename" value = "<?php echo $PuzzleData['Puzzle']['name'];?>">
               <input type = "hidden" name ="enrollwithpuzzleaccount" id ="enrollwithpuzzleaccount" value = "">
-              <div class="col-md-4"></div>
-              <div class="col-md-4">
-              <div class="form-group">
+              <div class="col-md-12">
+              <div class="form-group text-center">
                 <!-- <button type="button" class="btn button-sign" id="puzelasubmit" name="puzzle" >Submit</button> -->
-                <button type="submit" class="btn button-puzzle" id="normalsign" value = "2" >Enroll Now</button>
+                <button type="submit" class="btn button-puzzle" id="normalsign" style="width:40%;" value = "2" >Enroll Now</button>
               </div>
               </div>
               </div>
