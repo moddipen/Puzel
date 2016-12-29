@@ -276,7 +276,7 @@
                           <button type="submit" class="btn btn-oranges fullwidth">Submit</button>
                        </div>
                        <div class="col-sm-2 col-xs-6">
-                          <button type="reset" class="btn btn-black-transparent fullwidth">Cancel</button>
+                          <button type="reset" class="btn btn-oranges fullwidth">Cancel</button>
                         </div>
                        </div>
 
