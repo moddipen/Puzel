@@ -158,7 +158,7 @@ padding: 0;
 }
 .title-page{
 	    text-align: center;
-    padding: 30px 0px 0px;
+    padding: 15px 0px 0px;
     text-shadow: 0px 3px 7px rgba(150, 150, 150,0.4);
     font-weight: inherit;
     font-size: 34px;
