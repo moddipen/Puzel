@@ -263,7 +263,7 @@
                  </div>
                  <div class="col-md-3">
                      <div class="form-group">
-                     <button type="reset" class="btn btn-black-transparent fullwidth" data-dismiss="modal">Cancel</button>
+                     <button type="reset" class="btn btn-oranges fullwidth" data-dismiss="modal">Cancel</button>
                      </div>
                  </div>
               </div>
