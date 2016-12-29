@@ -146,6 +146,15 @@ padding: 0;
 .socialbtn i {
     top: -25px;
 }
+.title-page{
+	    text-align: center;
+    padding: 30px 0px 0px;
+    text-shadow: 0px 3px 7px rgba(150, 150, 150,0.4);
+    font-weight: inherit;
+    font-size: 34px;
+    color: #555555;
+	font-weight:300;
+}
 </style>
 
 
@@ -253,7 +262,7 @@ padding: 0;
                                 </div>
 
   <div class="puzel" style="background:url(<?php echo $this->webroot?>img/visitor/summer-bokeh.png);background-size: cover;">
-    <h2 style="text-align:center;"><?php echo $PuzzleData['Puzzle']['name'];?></h2>
+    <h2 style="text-align:center;" class="title-page"><?php echo $PuzzleData['Puzzle']['name'];?></h2>
 
 
 <!-- <div id = 'puzzle1' hello> -->
@@ -270,7 +279,7 @@ padding: 0;
     
       body{line-height: inherit;}
       .merge div div{width:<?php echo $image[0]['width']."px";?>;height:<?php echo $image[0]['height']."px";?>;display:inline-block;margin-left:-5px;margin-bottom:-5px;}
-      .merge{width:<?php echo $image[0]['total_width']."px";?>;margin:50px auto;}
+      .merge{width:<?php echo $image[0]['total_width']."px";?>;margin:30px auto;}
       .button-puzzle{background:#fff;font-size: 18px;text-align:center;font-weight: 300;padding: 5px 20px;color: #808080 !important;width:100%; border-color:#808080 !important;}
       .puzle-form .active {box-shadow:none;} .button-puzzle:hover{background:#e58b16; color: #fff !important;border:1px solid #e58b16 !important; }
       .button-header{background:#fff;font-size: 18px;text-align:center;font-weight: 300;padding: 5px 20px;color: #808080 !important;width:100%;margin-bottom:20px; border-color:#808080 !important;}
