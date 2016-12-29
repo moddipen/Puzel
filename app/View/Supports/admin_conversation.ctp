@@ -99,7 +99,7 @@ border-radius: 4px;
                         <?php echo $this->form->create('Support',array('action'=>'reply/'.$Conversation[0]['Support']['id']))?>
                           <textarea name = "data[Support][message]" class="form-control" rows="5"></textarea>
 
-                          <button type="submit" class="btn btn-greensea">Send</button>
+                          <button type="submit" class="btn btn-oranges">Send</button>
                         <?php echo $this->form->end();?>
                       </div>
                       
