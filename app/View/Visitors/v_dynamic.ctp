@@ -71,8 +71,8 @@ a:hover {
 .btn-tab, .btn-confirm{font-size:12px}
 }
   .button-btn:hover, .btn-tab:hover{
-     background: #e58b16;
-    color: #fff !important;
+     background: #fff;
+    color: #e58b16 !important;
     border:1px solid #e58b16 !important;
   }
 
