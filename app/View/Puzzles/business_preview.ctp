@@ -65,7 +65,7 @@
                               <div class="row minipadding">
                                   <div class="col-sm-8">
                                       <div class="form-group">
-                                        <?php $name = str_replace(' ','', $this->Session->read('IMAGECAPTURE.Puzzel.name'));?>
+                                        <?php $name = $this->Session->read('IMAGECAPTURE.Puzzel.name');?>
                                         <?php $company = str_replace(' ','', $this->Session->read('IMAGECAPTURE.Puzzel.compnay_name'));?>
                                           <input type="text" class="form-control" value="<?php echo Configure::read("SITE_URL").$company."/".$Random;?>" id="puzlename">
                                         </div>

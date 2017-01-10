@@ -205,7 +205,7 @@ class  PuzzlesController  extends AppController {
 				{
 					$this->request->data['Puzzle']['user_id'] = $user_id;
 					// remove space from name 
-					$this->request->data['Puzzle']['name'] = str_replace(' ','', $this->request->data['Puzzle']['name']);
+					$this->request->data['Puzzle']['name'] = $this->request->data['Puzzle']['name'];
 					
 					// create image directory 
 					$multipleimagefolder = WWW_ROOT.'img/puzzel/'.$this->request->data['Puzzle']['name'];//WWW_ROOT."img\puzzel\";
