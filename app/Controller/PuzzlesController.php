@@ -316,7 +316,7 @@ class  PuzzlesController  extends AppController {
 						   
 					 	}
 						
-						$name = str_replace(' ','',$this->request->data['Puzzle']['name']);
+						$name = $this->request->data['Puzzle']['name'];
 						
 						$company_name = str_replace(' ','', $this->Session->read('IMAGECAPTURE.Puzzel.compnay_name'));
 						
