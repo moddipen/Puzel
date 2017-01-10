@@ -211,7 +211,7 @@ class  PuzzlesController  extends AppController {
 					$multipleimagefolder = WWW_ROOT.'img/puzzel/'.$this->request->data['Puzzle']['name'];//WWW_ROOT."img\puzzel\";
 					$folder = mkdir($multipleimagefolder);
 					$URL = $_SERVER['DOCUMENT_ROOT'].'/app/webroot/img/puzzel/';
-					$imageName = $this->request->data['Puzzle']['name'].".jpg";
+					$imageName = str_replace(' ','',$this->request->data['Puzzle']['name']).".jpg";
 					$path = $URL.$imageName;
 					$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i','', $this->request->data['Puzzle']['image']));
 					$success = file_put_contents($path,$data);
@@ -316,7 +316,7 @@ class  PuzzlesController  extends AppController {
 						   
 					 	}
 						
-						$name = $this->request->data['Puzzle']['name'];
+						$name = str_replace(' ','',$this->request->data['Puzzle']['name']);
 						
 						$company_name = str_replace(' ','', $this->Session->read('IMAGECAPTURE.Puzzel.compnay_name'));
 						
