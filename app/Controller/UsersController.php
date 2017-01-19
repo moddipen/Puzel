@@ -354,12 +354,12 @@ public function get_statistics()
 	            //     // write the cookie
 	            //     $this->Cookie->write('remember_me_cookie', $this->Auth->user(), true, '2 weeks');
             	// }
-            	if($this->Auth->user('status') == 2)
-              	{
-					$this->Session->setFlash(__('Please activate your account', true), 'default');
-              		return $this->redirect(array('action'=>'login'));
+     //        	if($this->Auth->user('status') == 2)
+     //          	{
+					// $this->Session->setFlash(__('Please activate your account', true), 'default');
+     //          		return $this->redirect(array('action'=>'login'));
               		
-              	}	
+     //          	}	
 
 
 
