@@ -134,7 +134,7 @@ class  VisitorsController  extends AppController {
 							    
 							    $message = "You have signup successfully \n\n\n  your password is :" .$password_random;
 								$useremail = array(
-					              			"templateid"=>1007661,
+					              			"templateid"=>1240783,
 					              			"name"=>$user['User']['firstname'].' '.$user['User']['lastname'],
 					              			"TemplateModel"=> array(
 											    "user_name"=> $user['User']['firstname'].' '.$user['User']['lastname'],
