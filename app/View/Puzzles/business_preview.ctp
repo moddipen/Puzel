@@ -240,4 +240,13 @@
     }
     return succeed;
 }
+
+
+$("#PuzzlePiecesForm").submit(function()
+{
+  $(".mask").show();
+  $("#loader").show() ; 
+
+})
+
 </script>
