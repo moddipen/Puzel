@@ -1347,7 +1347,7 @@ public function user_confirm($token=null)
 			    "user_name"=> $user['User']['firstname'].' '.$user['User']['lastname'],
 			    "product_name"=>"Signup Successfully",
 			    "company"=>array("name"=>""),
-				"action_url"=>$message),
+				"action_url"=>$mesage),
 			"InlineCss"=> true, 
   			"from"=> "support@puzel.co",
   			'to'=>$user['User']['email'],
@@ -1356,7 +1356,7 @@ public function user_confirm($token=null)
 
   		if($this->sendemail($useremail))
   		{
-  			$this->Session->setFlash(__('Account activate.', true), 'default');	
+  			$this->Session->setFlash(__('Please check you email to access.', true), 'default');	
 			$this->redirect(array('action'=>'login'));		
   		}	
 	}
