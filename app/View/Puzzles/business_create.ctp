@@ -8,6 +8,36 @@
     top: 67px;
  
 }
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    opacity: 1 !important;
+    font-size: 25px;
+}
+.tool{
+ margin-right: -55px;
+}
+.tooltiptext {
+  font-size: 13px;
+}
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 150px;
+    background-color: rgb(141, 78, 142);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
 </style>
 
 
@@ -82,6 +112,11 @@
                                     <input name="data[Puzzel][source]" class="form-control" type="file" id="imgpre">
                                     </div>
                                 </div> 
+                            </div>
+                             <div class="col-md-1 tool">
+                              <div class="tooltip"><i class="fa fa-info-circle"></i>
+                                <span class="tooltiptext">Set width to 1000 px & height to 600 px maximum.</span>
+                              </div>
                             </div>
                             <div class="col-md-2">
                               <div class="form-group">
