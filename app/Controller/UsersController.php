@@ -1327,8 +1327,10 @@ public function user_reset($token=null)
 
 public function user_confirm($token=null)
 {
-	$this->Session->setFlash(__('Account activate !!....', true), 'default');		
-	$this->render('login');
+	$this->autoRender = false ;
+	$this->Session->setFlash(__('Account activate !!....', true), 'default');	
+	// $this->render('login');
+	$this->redirect(array('action'=>'login'));
 }
 
 
