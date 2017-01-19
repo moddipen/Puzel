@@ -1341,7 +1341,7 @@ public function user_confirm($token=null)
 
 		$mesage = "Email :". $user['User']['email']. "\n Password :" .  $user['User']['password'] ;
 		$useremail = array(
-  			"templateid"=>1240783,
+  			"templateid"=>1240905,
   			"name"=>$user['User']['firstname'].' '.$user['User']['lastname'],
   			"TemplateModel"=> array(
 			    "user_name"=> $user['User']['firstname'].' '.$user['User']['lastname'],
