@@ -1340,7 +1340,7 @@ public function user_confirm($token=null)
 	if($this->User->save($update))
 	{
 
-		$mesage = "Email :". $user['User']['email']. "\n Password :". $password ;
+		$mesage = "Email :". $user['User']['email']. " Password :". $password ;
 		$useremail = array(
   			"templateid"=>1240905,
   			"name"=>$user['User']['firstname'].' '.$user['User']['lastname'],
