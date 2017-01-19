@@ -105,7 +105,7 @@ class  VisitorsController  extends AppController {
 					'firstname'=>$this->request->data['firstname'],
 					'lastname'=>$this->request->data['lastname'],
 					'email'=>$this->request->data['email'],
-					'status'=>1,
+					'status'=>2,
 					'tokenhash'=> $key,
 					'refrel_id'=>$this->generateRandomString());
 					$this->User->create();
