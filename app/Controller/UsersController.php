@@ -1328,12 +1328,55 @@ public function user_reset($token=null)
 public function user_confirm($token=null)
 {
 	$this->autoRender = false ;
-	$this->Session->setFlash(__('Account activate !!....', true), 'default');	
-	// $this->render('login');
-	$this->redirect(array('action'=>'login'));
+	
+	$user = $this->User->find('first',array('conditions'=>array('User.tokenhash'=>$token)));
+
+	$update = array(
+		'id'=>$user['User']['id'],
+		'password'=>$this->generateRandomString(6),
+		'status'=>0);
+
+	if($this->User->save($update))
+	{
+
+		$mesage = "Email :". $user['User']['email']. "\n Password :" .  $user['User']['password'] ;
+		$useremail = array(
+  			"templateid"=>1240783,
+  			"name"=>$user['User']['firstname'].' '.$user['User']['lastname'],
+  			"TemplateModel"=> array(
+			    "user_name"=> $user['User']['firstname'].' '.$user['User']['lastname'],
+			    "product_name"=>"Signup Successfully",
+			    "company"=>array("name"=>""),
+				"action_url"=>$message),
+			"InlineCss"=> true, 
+  			"from"=> "support@puzel.co",
+  			'to'=>$user['User']['email'],
+  			'reply_to'=>"support@puzel.co"
+  			);
+
+  		if($this->sendemail($useremail))
+  		{
+  			$this->Session->setFlash(__('Account activate.', true), 'default');	
+			$this->redirect(array('action'=>'login'));		
+  		}	
+	}
 }
 
 
+
+/**
+	Generate rndom string
+*/			
+	public function generateRandomString($length = 10)
+	{
+	    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	    $charactersLength = strlen($characters);
+	    $randomString = '';
+	    for ($i = 0; $i < $length; $i++) {
+	        $randomString .= $characters[rand(0, $charactersLength - 1)];
+	    }
+	    return $randomString;
+	}
 
 
 
