@@ -114,7 +114,7 @@
                                 </div> 
                             </div>
                              <div class="col-md-1 tool">
-                              <div class="tooltip"><i class="fa fa-info-circle"></i>
+                              <div class="tooltip"><i class="fa fa-info"></i>
                                 <span class="tooltiptext">Set width to 1000 px & height to 600 px maximum.</span>
                               </div>
                             </div>
