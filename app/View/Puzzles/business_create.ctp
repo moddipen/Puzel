@@ -285,6 +285,7 @@
                       <div class="btn btn-file imageupload">
                           <input name="data[Puzzle][uploadfile]" class="form-control" type="file" id="filecontent">
                       </div>
+                      <br/>
                       <div id="prizepreview"></div>
                     </div>
                   </div>
