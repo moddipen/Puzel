@@ -348,9 +348,25 @@
         var reader = new FileReader();
         reader.onload = function (e) {
 
-          $("#base64image").val(e.target.result);
-          $('#showimage').html('<div id ="tictactoe"><img src="'+e.target.result+'" id="img_preview" class="img-responsive" /></div>');
-          $("#filedimage").css("display", "block");
+          // $("#base64image").val(e.target.result);
+          // $('#showimage').html('<div id ="tictactoe"><img src="'+e.target.result+'" id="img_preview" class="img-responsive" /></div>');
+          // $("#filedimage").css("display", "block");
+           var i = new Image(); 
+
+            i.src = e.target.result;
+            i.onload = function(){
+              if(i.width > 1000 || i.height > 600 )
+              {
+                alert("Maximum image width 1000px and height 600px allow only.");
+                e.preventDefault();
+              }
+              else
+              {
+                $("#base64image").val(e.target.result);
+                $('#showimage').html('<div id ="tictactoe"><img src="'+e.target.result+'" id="img_preview" class="img-responsive" /></div>');
+                $("#filedimage").css("display", "block");      
+              }  
+           }
         }
         reader.readAsDataURL(this.files[0]);
       }
