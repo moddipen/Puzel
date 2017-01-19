@@ -58,6 +58,9 @@
                                         <div class="form-group">
                                           <button type="button" id="sendTo" class="btn btn-oranges fullwidth">Send to Developer</button>
                                         </div>
+                                        <div class="form-group">
+                                          <button type="submit" class="btn btn-oranges fullwidth">Start Capturing</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -123,9 +126,6 @@
           
                   <!-- tile footer -->
                   <div class="tile-footer text-center">
-                  <div class="form-group">
-                      <button type="submit" class="btn btn-oranges">Start Capturing</button>
-                    </div>
                   </div>
                   <!-- /tile footer -->
 
