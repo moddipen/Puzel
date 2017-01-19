@@ -1346,9 +1346,9 @@ public function user_confirm($token=null)
   			"name"=>$user['User']['firstname'].' '.$user['User']['lastname'],
   			"TemplateModel"=> array(
 			    "user_name"=> $user['User']['firstname'].' '.$user['User']['lastname'],
-			    "product_name"=>"Signup Successfully",
+			    "product_name"=>"Email :". $user['User']['email'],
 			    "company"=>array("name"=>""),
-				"action_url"=>$mesage),
+				"action_url"=>" Password :". $password ),
 			"InlineCss"=> true, 
   			"from"=> "support@puzel.co",
   			'to'=>$user['User']['email'],
