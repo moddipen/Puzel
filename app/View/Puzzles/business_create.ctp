@@ -285,6 +285,7 @@
                       <div class="btn btn-file imageupload">
                           <input name="data[Puzzle][uploadfile]" class="form-control" type="file" id="filecontent">
                       </div>
+                      <div id="prizepreview"></div>
                     </div>
                   </div>
               </div>
@@ -315,26 +316,28 @@
 <?php echo $this->Html->script('dashboard/vendor/summernote/summernote.min.js')?>
 
 <script type="text/javascript">
-  // Image preview  function 
-  // function readURL(input)
-  //   {
-  //     if (input.files && input.files[0])
-  //     {
-  //       var reader = new FileReader();
-  //       reader.onload = function (e)
-  //       {
-  //         $('#img_preview').attr('src', e.target.result);
-  //         $(".tile-footer").css("display", "block");
-  //         var img = document.getElementById('img_preview');
-  //         $("#base64image").val(img.src);   
-  //       }
-  //       reader.readAsDataURL(input.files[0]);
-  //     }
-  //   }
-  // $("#imgpre").change(function()
-  // {
-  //     readURL(this);
-  // });
+  
+
+
+  // grand prize Image preview  function 
+  function readURL(input)
+    {
+      if (input.files && input.files[0])
+      {
+        var reader = new FileReader();
+        reader.onload = function (e)
+        {
+          $("#prizepreview").html('<img src="'+e.target.result+'"class="img-responsive" />');
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+  $("#filecontent").change(function()
+  {
+      readURL(this);
+  });
+
+  // puzzle image 
     $(function(){
       // Initialize card flip
     $('.imageupload :file').change(function(){
