@@ -94,10 +94,19 @@ class  VisitorsController  extends AppController {
 				}
 				else
 				{
+					
+					$key = Security::hash(String::uuid(),'sha512',true);
+					$hash=sha1($fu['User']['email'].rand(0,100));
+					$url = Router::url( array('controller'=>'users','action'=>'confirm','user'=>true), true ).'/'.$key.'#'.$hash;
+					$ms=$url;
+					$ms=wordwrap($ms,1000);
+					
 					$array = array(
 					'firstname'=>$this->request->data['firstname'],
 					'lastname'=>$this->request->data['lastname'],
 					'email'=>$this->request->data['email'],
+					'status'=>1,
+					'tokenhash'=> $key,
 					'refrel_id'=>$this->generateRandomString());
 					$this->User->create();
 					if($this->User->save($array))
@@ -131,20 +140,20 @@ class  VisitorsController  extends AppController {
 											    "user_name"=> $user['User']['firstname'].' '.$user['User']['lastname'],
 											    "product_name"=>"Signup Successfully",
 											    "company"=>array("name"=>""),
-												"action_url"=>$message),
+												"action_url"=>$ms),
 											"InlineCss"=> true, 
 					              			"from"=> "support@puzel.co",
 					              			'to'=>$user['User']['email'],
 					              			'reply_to'=>"support@puzel.co"
 					              			);	
 
-								$update = array(
-										'id'=>$user['User']['id'],
-										'password'=>$password_random);
-								if($this->User->save($update))
-								{
+								// $update = array(
+								// 		'id'=>$user['User']['id'],
+								// 		'password'=>$password_random);
+								// if($this->User->save($update))
+								// {
 									$this->hostedemail($useremail,$update_puzzle['Image']['puzzle_id'],$update_puzzle['Image']['id'],"Front")	;
-								}	
+								// }	
 							}
 						}		
 					}	

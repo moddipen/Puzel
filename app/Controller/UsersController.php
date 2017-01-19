@@ -58,7 +58,7 @@ class UsersController extends AppController {
 		$this->set("statistics",$statistics);
 	  	$signup = 0;
 		$this->set("Signup",$signup);
-	  	$this->Auth->allow(array('index','contact','user_register','user_login','about','business','user_forgetpassword','admin_login','user_reset','clearcache'));
+	  	$this->Auth->allow(array('index','contact','user_register','user_login','about','business','user_forgetpassword','admin_login','user_reset','clearcache','user_confirm'));
 	  	$this->set('main_action','User');
 	 	// Count of total puzzle 
 	 	// Count of total puzzle 
@@ -1324,6 +1324,12 @@ public function user_reset($token=null)
         $this->set(compact('files'));
         $this->autoRender = false;
     }			
+
+public function user_confirm()
+{
+	$this->Session->setFlash(__('Account activate !!....', true), 'default');		
+	$this->render('login');
+}
 
 
 
