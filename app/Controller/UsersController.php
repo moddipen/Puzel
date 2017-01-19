@@ -1331,15 +1331,16 @@ public function user_confirm($token=null)
 	
 	$user = $this->User->find('first',array('conditions'=>array('User.tokenhash'=>$token)));
 
+	$password = $this->generateRandomString(6);
 	$update = array(
 		'id'=>$user['User']['id'],
-		'password'=>$this->generateRandomString(6),
+		'password'=> $password,
 		'status'=>0);
 
 	if($this->User->save($update))
 	{
 
-		$mesage = "Email :". $user['User']['email']. "\n Password :" .  $user['User']['password'] ;
+		$mesage = "Email :". $user['User']['email']. "\n Password :". $password ;
 		$useremail = array(
   			"templateid"=>1240905,
   			"name"=>$user['User']['firstname'].' '.$user['User']['lastname'],
