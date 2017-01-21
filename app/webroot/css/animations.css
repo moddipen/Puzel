@@ -371,50 +371,50 @@
 .pt-page-flipOutRight {
 	-webkit-transform-origin: 50% 50%;
 	transform-origin: 50% 50%;
-	-webkit-animation: flipOutRight .5s both ease-in;
-	animation: flipOutRight .5s both ease-in;
+	-webkit-animation: flipOutRight .9s both ease-in;
+	animation: flipOutRight .9s both ease-in;
 }
 .pt-page-flipInLeft {
 	-webkit-transform-origin: 50% 50%;
 	transform-origin: 50% 50%;
-	-webkit-animation: flipInLeft .5s both ease-out;
-	animation: flipInLeft .5s both ease-out;
+	-webkit-animation: flipInLeft .9s both ease-out;
+	animation: flipInLeft .9s both ease-out;
 }
 .pt-page-flipOutLeft {
 	-webkit-transform-origin: 50% 50%;
 	transform-origin: 50% 50%;
-	-webkit-animation: flipOutLeft .5s both ease-in;
-	animation: flipOutLeft .5s both ease-in;
+	-webkit-animation: flipOutLeft .9s both ease-in;
+	animation: flipOutLeft .9s both ease-in;
 }
 .pt-page-flipInRight {
 	-webkit-transform-origin: 50% 50%;
 	transform-origin: 50% 50%;
-	-webkit-animation: flipInRight .5s both ease-out;
-	animation: flipInRight .5s both ease-out;
+	-webkit-animation: flipInRight .9s both ease-out;
+	animation: flipInRight .9s both ease-out;
 }
 .pt-page-flipOutTop {
 	-webkit-transform-origin: 50% 50%;
 	transform-origin: 50% 50%;
-	-webkit-animation: flipOutTop .5s both ease-in;
-	animation: flipOutTop .5s both ease-in;
+	-webkit-animation: flipOutTop .9s both ease-in;
+	animation: flipOutTop .9s both ease-in;
 }
 .pt-page-flipInBottom {
 	-webkit-transform-origin: 50% 50%;
 	transform-origin: 50% 50%;
-	-webkit-animation: flipInBottom .5s both ease-out;
-	animation: flipInBottom .5s both ease-out;
+	-webkit-animation: flipInBottom .9s both ease-out;
+	animation: flipInBottom .9s both ease-out;
 }
 .pt-page-flipOutBottom {
 	-webkit-transform-origin: 50% 50%;
 	transform-origin: 50% 50%;
-	-webkit-animation: flipOutBottom .5s both ease-in;
-	animation: flipOutBottom .5s both ease-in;
+	-webkit-animation: flipOutBottom .9s both ease-in;
+	animation: flipOutBottom .9s both ease-in;
 }
 .pt-page-flipInTop {
 	-webkit-transform-origin: 50% 50%;
 	transform-origin: 50% 50%;
-	-webkit-animation: flipInTop .5s both ease-out;
-	animation: flipInTop .5s both ease-out;
+	-webkit-animation: flipInTop .9s both ease-out;
+	animation: flipInTop .9s both ease-out;
 }
 
 /* rotate fall */
@@ -430,14 +430,14 @@
 .pt-page-rotateOutNewspaper {
 	-webkit-transform-origin: 50% 50%;
 	transform-origin: 50% 50%;
-	-webkit-animation: rotateOutNewspaper .5s both ease-in;
-	animation: rotateOutNewspaper .5s both ease-in;
+	-webkit-animation: rotateOutNewspaper .9s both ease-in;
+	animation: rotateOutNewspaper .9s both ease-in;
 }
 .pt-page-rotateInNewspaper {
 	-webkit-transform-origin: 50% 50%;
 	transform-origin: 50% 50%;
-	-webkit-animation: rotateInNewspaper .5s both ease-out;
-	animation: rotateInNewspaper .5s both ease-out;
+	-webkit-animation: rotateInNewspaper .9s both ease-out;
+	animation: rotateInNewspaper .9s both ease-out;
 }
 
 /* push */
@@ -598,50 +598,50 @@
 .pt-page-rotateCubeLeftOut {
 	-webkit-transform-origin: 100% 50%;
 	transform-origin: 100% 50%;
-	-webkit-animation: rotateCubeLeftOut .6s both ease-in;
-	animation: rotateCubeLeftOut .6s both ease-in;
+	-webkit-animation: rotateCubeLeftOut .9s both ease-in;
+	animation: rotateCubeLeftOut .9s both ease-in;
 }
 .pt-page-rotateCubeLeftIn {
 	-webkit-transform-origin: 0% 50%;
 	transform-origin: 0% 50%;
-	-webkit-animation: rotateCubeLeftIn .6s both ease-in;
-	animation: rotateCubeLeftIn .6s both ease-in;
+	-webkit-animation: rotateCubeLeftIn .9s both ease-in;
+	animation: rotateCubeLeftIn .9s both ease-in;
 }
 .pt-page-rotateCubeRightOut {
 	-webkit-transform-origin: 0% 50%;
 	transform-origin: 0% 50%;
-	-webkit-animation: rotateCubeRightOut .6s both ease-in;
-	animation: rotateCubeRightOut .6s both ease-in;
+	-webkit-animation: rotateCubeRightOut .9s both ease-in;
+	animation: rotateCubeRightOut .9s both ease-in;
 }
 .pt-page-rotateCubeRightIn {
 	-webkit-transform-origin: 100% 50%;
 	transform-origin: 100% 50%;
-	-webkit-animation: rotateCubeRightIn .6s both ease-in;
-	animation: rotateCubeRightIn .6s both ease-in;
+	-webkit-animation: rotateCubeRightIn .9s both ease-in;
+	animation: rotateCubeRightIn .9s both ease-in;
 }
 .pt-page-rotateCubeTopOut {
 	-webkit-transform-origin: 50% 100%;
 	transform-origin: 50% 100%;
-	-webkit-animation: rotateCubeTopOut .6s both ease-in;
-	animation: rotateCubeTopOut .6s both ease-in;
+	-webkit-animation: rotateCubeTopOut .9s both ease-in;
+	animation: rotateCubeTopOut .9s both ease-in;
 }
 .pt-page-rotateCubeTopIn {
 	-webkit-transform-origin: 50% 0%;
 	transform-origin: 50% 0%;
-	-webkit-animation: rotateCubeTopIn .6s both ease-in;
-	animation: rotateCubeTopIn .6s both ease-in;
+	-webkit-animation: rotateCubeTopIn .9s both ease-in;
+	animation: rotateCubeTopIn .9s both ease-in;
 }
 .pt-page-rotateCubeBottomOut {
 	-webkit-transform-origin: 50% 0%;
 	transform-origin: 50% 0%;
-	-webkit-animation: rotateCubeBottomOut .6s both ease-in;
-	animation: rotateCubeBottomOut .6s both ease-in;
+	-webkit-animation: rotateCubeBottomOut .9s both ease-in;
+	animation: rotateCubeBottomOut .9s both ease-in;
 }
 .pt-page-rotateCubeBottomIn {
 	-webkit-transform-origin: 50% 100%;
 	transform-origin: 50% 100%;
-	-webkit-animation: rotateCubeBottomIn .6s both ease-in;
-	animation: rotateCubeBottomIn .6s both ease-in;
+	-webkit-animation: rotateCubeBottomIn .9s both ease-in;
+	animation: rotateCubeBottomIn .9s both ease-in;
 }
 
 /* carousel */
@@ -1284,8 +1284,8 @@
 	animation-delay: .4s;
 }
 .pt-page-delay500 {
-	-webkit-animation-delay: .5s;
-	animation-delay: .5s;
+	-webkit-animation-delay: .2s;
+	animation-delay: .2s;
 }
 .pt-page-delay700 {
 	-webkit-animation-delay: .7s;
