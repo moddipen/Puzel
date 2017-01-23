@@ -254,7 +254,7 @@
               {
                 
                 // Get Image path 
-              $path =  $this->webroot.'img/puzzel/'.$Capturedata['Puzzle']['name'].'/'.$image_data['name'] ;
+              $path =  $this->webroot.'img/puzzel/'.str_replace(' ','',$Capturedata['Puzzle']['name']).'/'.$image_data['name'] ;
            
               $getname = preg_replace('/\\.[^.\\s]{3,4}$/', '', $image_data['name']); 
               $class_name = $getname  ;
