@@ -341,6 +341,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
                        dataType: 'json', 
                        success: function(data)
                        {
+                         alert("dasd");
                          if(data.message != "You have already enrolled")
                           {
                             $.ajax
