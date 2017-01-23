@@ -259,7 +259,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
                                     // $(".ja_wrap_black").show().delay(5000).fadeOut(function(){ $(this).remove(); });
                                     if(data != ''){
 
-                                      setTimeout(timeout, 2000);
+                                      setTimeout(timeout, 5000);
                                     
 
                                       var newaddcount = parseInt($("#showimagecontent").val()) - 1 ;
