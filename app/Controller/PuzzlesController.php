@@ -300,7 +300,7 @@ class  PuzzlesController  extends AppController {
 					  		  $image_pieces = array(
 					  		  'puzzle_id'=>$this->Puzzle->getLastInsertID(),
 					  		  'user_id'=>$this->request->data['Puzzle']['user_id'],
-					  		  'name'=>trim($this->request->data['Puzzle']['name']," ").'_'.$j.'_'.$i.'1.jpg',
+					  		  'name'=>str_replace(' ','',$this->request->data['Puzzle']['name']).'_'.$j.'_'.$i.'1.jpg',
 					  		  'width'=>$storewidth,
 					  		  'height'=>$storeheight,
 					  		  'total_width'=>$width,
@@ -308,7 +308,7 @@ class  PuzzlesController  extends AppController {
 					  		  )	;		  
 					  		  $this->Image->create();
 					  		  $insert = $this->Image->save($image_pieces);
-					  		  imagejpeg($output,$multipleimagefolder.'/'.trim($this->request->data['Puzzle']['name']," ").'_'.$j.'_'.$i.'1.jpg');
+					  		  imagejpeg($output,$multipleimagefolder.'/'.str_replace(' ','',$this->request->data['Puzzle']['name']).'_'.$j.'_'.$i.'1.jpg');
 					  		  $Y = $Y + $width/$cut_width; 							  
 					  	  	}
 						   
