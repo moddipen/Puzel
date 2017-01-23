@@ -340,7 +340,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
                                  success:function(data)
                                  {
 
-                                    
+                                     
                                     var obj = $.parseJSON(data);
                                     obj = obj.name;
                                     objs = obj.split('.');
