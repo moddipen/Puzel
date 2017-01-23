@@ -80,12 +80,12 @@ $(document).ready(function()
 
                                      function alert()
                                        {
-                                          javascript:successAlert("You have been enrolled. </br></br>Share with your friends</br><div class='social-icons'><a href=http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/"+businesname+"/"+randomid+"&title="+puzzlename+"&description=Price 33$' onclick='return !window.open(this.href,Facebook,width=640,height=580)' class='fb'><i class='fa fa-facebook'></i></a><a href='https://twitter.com/intent/tweet?text=http://puzel.stage.n-framescorp.com/"+businesname+"/"+randomid+" data-size='large' target ='_blank' class='twitter'><i class='fa fa-twitter'></i></a><a href='http://mail.live.com/default.aspx?rru=compose&to=&subject=Share new puzzle "+puzzlename+"&body=http://puzel.stage.n-framescorp.com/"+businesname+"/"+randomid+" onclick='return !window.open(this.href,Outlook,width=640,height=580)' target='_blank' class='window'><i class='fa fa-windows'></i></a><a href ='https://mail.google.com/mail/?view=cm&fs=1&to=&su=Share new puzzle "+puzzlename+"&body=http://puzel.stage.n-framescorp.com/"+businesname+"'/'"+randomid+" onclick='return !window.open(this.href,Google,width=640,height=580)' class='email'><i class='fa fa-envelope-o'></i></a></div>");
+                                          javascript:successAlert("You have been enrolled. </br></br>Share with your friends</br><div class='social-icons'><a href=http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/"+businesname+"/"+randomid+"&title="+puzzlename+"&description=Price 33$' onclick='return !window.open(this.href,Facebook,width=640,height=580)' class='fb'><i class='fa fa-facebook'></i></a><a href='https://twitter.com/intent/tweet?text=http://puzel.stage.n-framescorp.com/"+businesname+"/"+randomid+" data-size='large' target ='_blank' class='twitter'><i class='fa fa-twitter'></i></a><a href='http://mail.live.com/default.aspx?rru=compose&to=&subject=Share new puzzle "+puzzlename+"&body=http://puzel.stage.n-framescorp.com/"+businesname+"/"+randomid+" onclick='return !window.open(this.href,Outlook,width=640,height=580)' target='_blank' class='window'><i class='fa fa-windows'></i></a><a href ='https://mail.google.com/mail/?view=cm&fs=1&to=&su=Share new puzzle "+puzzlename+"&body=http://puzel.stage.n-framescorp.com/"+businesname+"/"+randomid+" onclick='return !window.open(this.href,Google,width=640,height=580)' class='email'><i class='fa fa-envelope-o'></i></a></div>");
                                        } 
 
 
 
-                                    
+
                                     var obj = $.parseJSON(data);
                                     obj = obj.name;
                                     objs = obj.split('.');
@@ -193,6 +193,18 @@ $(document).ready(function()
                                  success:function(data)
                                  {
                                     var obj = $.parseJSON(data);
+                                    
+                                    var businesname = $("#businesname").val();
+                                    var randomid = $("#randomid").val();
+                                    var puzzlename = $("#puzzlename").val();  
+  
+                                    function enrollalert()
+                                       {
+                                          javascript:successAlert("You have been enrolled. </br></br>Share with your friends</br><div class='social-icons'><a href=http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/"+businesname+"/"+randomid+"&title="+puzzlename+"&description=Price 33$' onclick='return !window.open(this.href,Facebook,width=640,height=580)' class='fb'><i class='fa fa-facebook'></i></a><a href='https://twitter.com/intent/tweet?text=http://puzel.stage.n-framescorp.com/"+businesname+"/"+randomid+" data-size='large' target ='_blank' class='twitter'><i class='fa fa-twitter'></i></a><a href='http://mail.live.com/default.aspx?rru=compose&to=&subject=Share new puzzle "+puzzlename+"&body=http://puzel.stage.n-framescorp.com/"+businesname+"/"+randomid+" onclick='return !window.open(this.href,Outlook,width=640,height=580)' target='_blank' class='window'><i class='fa fa-windows'></i></a><a href ='https://mail.google.com/mail/?view=cm&fs=1&to=&su=Share new puzzle "+puzzlename+"&body=http://puzel.stage.n-framescorp.com/"+businesname+"/"+randomid+" onclick='return !window.open(this.href,Google,width=640,height=580)' class='email'><i class='fa fa-envelope-o'></i></a></div>");
+                                       } 
+
+
+
                                     obj = obj.name;
                                     objs = obj.split('.');
                                     var get_name = objs[0].split('_');
@@ -215,7 +227,10 @@ $(document).ready(function()
                                     // $("#success").show().delay(3000).fadeOut(function(){ $(this).remove(); });
                                     // $("#alert").html("<p>Puzzle created successfully.</p>");
                                     // $("p").show().delay(3000).fadeOut(function(){ $(this).remove(); });
-                                    setTimeout( alert, 3000);
+
+
+
+                                    setTimeout( enrollalert, 3000);
 
                                       var newaddcount = parseInt($("#showimagecontent").val()) - 1 ;
                                       var newminuscount = parseInt($("#hideimagecontent").val()) + 1;
