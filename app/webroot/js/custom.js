@@ -72,6 +72,8 @@ $(document).ready(function()
                                     obj = obj.name;
                                     objs = obj.split('.');
                                     var get_name = objs[0].split('_');
+                                    console.log(get_name);
+                                    console.log(obj);
                                     $('.'+objs[0]).css("background-image","url('http://puzel.stage.n-framescorp.com/img/puzzel/"+get_name[0]+"/"+obj+"')");  //background:url('<?php echo $this->webroot;?>'img/puzzel/"+objs[0]+"/"+obj+"')");
                                     
                                     if(transition  == "Newspaper"){var classes = 'pt-page-rotateOutNewspaper pt-page-rotateInNewspaper pt-page-delay500';}
