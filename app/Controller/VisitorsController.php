@@ -97,7 +97,7 @@ class  VisitorsController  extends AppController {
 					
 					$key = Security::hash(String::uuid(),'sha512',true);
 					$hash=sha1($fu['User']['email'].rand(0,100));
-					$url = Router::url( array('action'=>'confirm'), true ).'/'.$key.'#'.$hash;
+					$url = Router::url(Configure::read('SITE_URL').'/confirm').'/'.$key.'#'.$hash;
 					$ms=$url;
 					$ms=wordwrap($ms,1000);
 					
