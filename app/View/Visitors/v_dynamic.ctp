@@ -230,13 +230,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
                                  dataType: 'text', 
                                  success:function(data)
                                  {
-                                    alert("dasdsad54545");
-                                    var audioElement = document.createElement('audio');
-                                    audioElement.setAttribute('src', 'http://www.soundjay.com/misc/sounds/bell-ringing-01.mp3');
-                                    alert("Play");
-                                    audioElement.addEventListener('ended', function() {
-                                        this.play();
-                                    }, false);
+                                   
                                     var obj = $.parseJSON(data);
                                     obj = obj.name;
                                     objs = obj.split('.');
@@ -341,7 +335,6 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
                        dataType: 'json', 
                        success: function(data)
                        {
-                         alert("dasd");
                          if(data.message != "You have already enrolled")
                           {
                             $.ajax
@@ -351,13 +344,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
                                  dataType: 'text', 
                                  success:function(data)
                                  {
-                                  alert("dasdsad");
-                                    var audioElement = document.createElement('audio');
-                                    audioElement.setAttribute('src', 'http://www.soundjay.com/misc/sounds/bell-ringing-01.mp3');
-                                    alert("Play");
-                                    audioElement.addEventListener('ended', function() {
-                                        this.play();
-                                    }, false);
+
                                     
                                     var obj = $.parseJSON(data);
                                     obj = obj.name;
