@@ -1,4 +1,4 @@
-new<link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/app/webroot/css/visitor/jAlert-master/src/jAlert.css">
+<link rel="stylesheet" href="http://puzel.stage.n-framescorp.com/app/webroot/css/visitor/jAlert-master/src/jAlert.css">
 <script type="text/javascript" src="http://puzel.stage.n-framescorp.com/app/webroot/js/visitor/jAlert-master/src/jAlert.js"></script>
 <script type="text/javascript" src="http://puzel.stage.n-framescorp.com/app/webroot/js/visitor/jAlert-master/src/jAlert-functions.js"></script>
 <?php //echo $this->Html->css('visitor/jAlert-master/src/jAlert.css');
