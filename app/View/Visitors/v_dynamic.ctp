@@ -342,7 +342,9 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 
                                     
                                     var obj = $.parseJSON(data);
+                                    console.log(obj);
                                     obj = obj.name;
+                                    
                                     objs = obj.split('.');
                                     var get_name = objs[0].split('_');
                                     $('.'+objs[0]).css("background-image","url('<?php echo $this->webroot;?>img/puzzel/"+get_name[0]+"/"+obj+"')");  //background:url('<?php echo $this->webroot;?>'img/puzzel/"+objs[0]+"/"+obj+"')");
