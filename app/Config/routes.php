@@ -41,6 +41,7 @@
   //---------------------User Account----------------------------//
   
   Router::connect('/login', array('controller' => 'users', 'action' => 'login','user'=>true));
+  Router::connect('/confirm/*', array('controller' => 'users', 'action' => 'confirm','user'=>true));
   Router::connect('/forgot-password', array('controller' => 'users', 'action' => 'forgetpassword','user'=>true));
   Router::connect('/logout', array('controller' => 'users', 'action' => 'logout','user'=>true));
   Router::connect('/puzels', array('controller' => 'puzzles', 'action' => 'index','user'=>true));
