@@ -246,7 +246,7 @@ class  PuzzlesController  extends AppController {
 					  	 $this->request->data['Puzzle']['price'] =  $grandprice['textarea']; 		
 					  	 if(isset($grandprice['Puzzle']['price_image']))
 					  	 {
-					  	 	$this->request->data['Puzzle']['price_image'] =  $grandprice['Puzzle']['price_image']; 			
+					  	 	$this->request->data['Puzzle']['price_image'] =  str_replace(' ','',$grandprice['Puzzle']['price_image']); 			
 					  	 }	
 					  }
 					  $this->request->data['Puzzle']['status'] = 0;
