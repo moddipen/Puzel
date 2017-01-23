@@ -217,8 +217,7 @@ class  VisitorsController  extends AppController {
 		$this->layout = '';
 		$this->autoRendar = false;
 		$image = $this->Image->find('first',array('conditions'=>array('Image.id'=>$id),'fields'=>array("Image.name"),'order' => 'rand()'));
-		$image = urlencode($image['Image']['name']);
-		echo json_encode($image['Image']);exit; 
+		echo json_encode($image['Image']);exit;
 		// $this->set('image',$image);
 		// $this->set('drawimage_s',count($image));
 		// $puzzle = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id)));
