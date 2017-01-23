@@ -438,7 +438,7 @@ class  PuzzlesController  extends AppController {
 				if(isset($this->request->data['Puzzle']['uploadfile']))
 				{
 
-					$img = trim($this->request->data['Puzzle']['uploadfile']['name']);
+					$img = str_replace(' ','',$this->request->data['Puzzle']['uploadfile']['name']);
 					$tmp = trim($this->request->data['Puzzle']['uploadfile']['tmp_name']); 
 					 // get uploaded file's extension
 					 $ext = strtolower(pathinfo($img, PATHINFO_EXTENSION));
@@ -466,7 +466,7 @@ class  PuzzlesController  extends AppController {
 				if(isset($_FILES['uploadfile']))
 				{
 
-				$img = trim($_FILES['uploadfile']['name']);
+				$img = str_replace(' ','',$_FILES['uploadfile']['name']);
 				$tmp = trim($_FILES['uploadfile']['tmp_name']); 
 				 // get uploaded file's extension
 				 $ext = strtolower(pathinfo($img, PATHINFO_EXTENSION));
