@@ -208,7 +208,7 @@ class  PuzzlesController  extends AppController {
 					$this->request->data['Puzzle']['name'] = $this->request->data['Puzzle']['name'];
 					
 					// create image directory 
-					$multipleimagefolder = WWW_ROOT.'img/puzzel/'.$this->request->data['Puzzle']['name'];//WWW_ROOT."img\puzzel\";
+					$multipleimagefolder = WWW_ROOT.'img/puzzel/'.str_replace(' ','',$this->request->data['Puzzle']['name']);//WWW_ROOT."img\puzzel\";
 					$folder = mkdir($multipleimagefolder);
 					$URL = $_SERVER['DOCUMENT_ROOT'].'/app/webroot/img/puzzel/';
 					$imageName = str_replace(' ','',$this->request->data['Puzzle']['name']).".jpg";
