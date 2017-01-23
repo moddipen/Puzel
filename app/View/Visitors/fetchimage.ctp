@@ -247,7 +247,7 @@ padding: 0;
                                             {
                                           ?> 
                                                <div id="<?php echo $blurr_class;?>" >
-                                               <img src = "<?php echo Configure::read("SITE_URL") ;?>app/webroot/img/grand_price/<?php echo $PuzzleData['Puzzle']['price_image'];?>"  width="540px"/>
+                                               <img src = "<?php echo Configure::read("SITE_URL") ;?>app/webroot/img/grand_price/<?php echo strtolower($PuzzleData['Puzzle']['price_image']);?>"  width="540px"/>
                                               </div>
                                           <?php
                                             }
