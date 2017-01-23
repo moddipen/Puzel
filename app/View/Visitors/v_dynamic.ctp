@@ -1,5 +1,4 @@
 <?php
-    echo "Old";
     echo $this->Html->css('visitor/jAlert-master/src/jAlert.css');
     echo $this->Html->script('visitor/jAlert-master/src/jAlert.js');
     echo $this->Html->script('visitor/jAlert-master/src/jAlert-functions.js');
@@ -231,6 +230,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
                                  dataType: 'text', 
                                  success:function(data)
                                  {
+                                    alert("dasdsad54545");
                                     var audioElement = document.createElement('audio');
                                     audioElement.setAttribute('src', 'http://www.soundjay.com/misc/sounds/bell-ringing-01.mp3');
                                     alert("Play");
@@ -350,6 +350,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
                                  dataType: 'text', 
                                  success:function(data)
                                  {
+                                  alert("dasdsad");
                                     var audioElement = document.createElement('audio');
                                     audioElement.setAttribute('src', 'http://www.soundjay.com/misc/sounds/bell-ringing-01.mp3');
                                     alert("Play");
