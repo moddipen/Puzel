@@ -339,10 +339,11 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
                                  dataType: 'text', 
                                  success:function(data)
                                  {
-
+                                 	console.log(data);
+                                 	alert(data);
                                     
                                     var obj = $.parseJSON(data);
-                                    console.log(obj);
+                                    
                                     obj = obj.name;
                                     
                                     objs = obj.split('.');
