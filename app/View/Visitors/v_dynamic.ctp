@@ -339,16 +339,13 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
                                  dataType: 'text', 
                                  success:function(data)
                                  {
-                                 	
-                                 	
+
                                     
                                     var obj = $.parseJSON(data);
-                                    
                                     obj = obj.name;
-                                    
                                     objs = obj.split('.');
                                     var get_name = objs[0].split('_');
-                                    $('.'+objs[0]).css("background-image","url('<?php echo $this->webroot;?>img/puzzel/"+get_name[0]+"/"+encodeURIComponent(obj)+"')");  //background:url('<?php echo $this->webroot;?>'img/puzzel/"+objs[0]+"/"+obj+"')");
+                                    $('.'+objs[0]).css("background-image","url('<?php echo $this->webroot;?>img/puzzel/"+get_name[0]+"/"+obj+"')");  //background:url('<?php echo $this->webroot;?>'img/puzzel/"+objs[0]+"/"+obj+"')");
                                     
                                     if(transition  == "Newspaper"){var classes = 'pt-page-rotateOutNewspaper pt-page-rotateInNewspaper pt-page-delay500';}
                                     if(transition  == "Cube to left"){var classes = 'pt-page-rotateCubeLeftOut pt-page-ontop pt-page-rotateCubeLeftIn';}
