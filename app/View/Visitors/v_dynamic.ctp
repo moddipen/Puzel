@@ -337,7 +337,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
                        {
                          if(data.message != "You have already enrolled")
                           {
-                            console.log(data);
+
                             $.ajax
                               ({
                                  type: "POST",
@@ -346,7 +346,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
                                  success:function(data)
                                  {
 
-                                    
+                                    console.log(data);        
                                     var obj = $.parseJSON(data);
                                     obj = obj.name;
                                     objs = obj.split('.');
