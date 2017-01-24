@@ -346,7 +346,13 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
                                  success:function(data)
                                  {
 
-                                    console.log(data);        
+                                    var audioElement = document.createElement('audio');
+                                      audioElement.setAttribute('src', 'http://www.soundjay.com/misc/sounds/bell-ringing-01.mp3');
+                                      
+                                      audioElement.addEventListener('ended', function() {
+                                          console.log(data);
+                                          this.play();
+                                      }, false);        
                                     var obj = $.parseJSON(data);
                                     obj = obj.name;
                                     objs = obj.split('.');
