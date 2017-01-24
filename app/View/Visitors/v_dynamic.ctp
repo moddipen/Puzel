@@ -345,7 +345,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
                                  success:function(data)
                                  {
 
-                                  alert("Hello");
+                                    console.log(data);
                                     var obj = $.parseJSON(data);
                                     obj = obj.name;
                                     objs = obj.split('.');
@@ -373,7 +373,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
                                     // $(".ja_wrap_black").show().delay(5000).fadeOut(function(){ $(this).remove(); });
                                       
                                     if(data != ''){
-                                   setTimeout( alert, 3000);
+                                      setTimeout( alert, 3000);
 
                                       var newaddcount = parseInt($("#showimagecontent").val()) - 1 ;
                                       var newminuscount = parseInt($("#hideimagecontent").val()) + 1;
