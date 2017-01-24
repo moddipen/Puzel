@@ -98,20 +98,36 @@ class  VisitorsController  extends AppController {
 
 					if(!empty($account_already_exists))
 					{
-						// when user can't activate their account 
 						if($account_already_exists['User']['password'] == '')
 						{
 							$this->request->data['user_id'] =  $account_already_exists['User']['id'];
 							if(isset($this->request->data['refrel']))
 							{
 								$this->request->data['is_refrel'] = 1;
-								// fetch refrel person detail
 								$referel_preson = $this->User->find('first',array('conditions'=>array('User.refrel_id'=>$this->request->data['refrel_id'])));
 								$this->request->data['refrel_id'] = $referel_preson['User']['id'];
 							}		
 							$this->Visitor->create();
 							if($this->Visitor->save($this->request->data))
-							{
+							{	
+								$message = "Your have signed up for Puzel ".$puzle['Puzzle']['name'];
+
+							    $thankemail = array(
+					              			"templateid"=>1254016,
+					              			"name"=>$account_already_exists['User']['firstname'].' '.$account_already_exists['User']['lastname'],
+					              			"TemplateModel"=> array(
+											    "user_name"=> $account_already_exists['User']['firstname'].' '.$account_already_exists['User']['lastname'],
+											    "product_name"=>"Thank you for using Puzel",
+											    "company"=>array("name"=>""),
+												"action_url"=>$message),
+											"InlineCss"=> true, 
+					              			"from"=> "support@puzel.co",
+					              			'to'=>$account_already_exists['User']['email'],
+					              			'reply_to'=>"support@puzel.co"
+					              			);	
+						    	$this->sendemail($thankemail);			
+
+
 								$modified = date('Y-m-d H:i:s');
 								$update = $this->Image->query("UPDATE images SET status = 1 ,modified = '".$modified."' WHERE status <> '1' AND user_id = '".$puzle['Puzzle']['user_id']."' AND puzzle_id = '".$puzle['Puzzle']['id']."' ORDER BY RAND() LIMIT 1 ");  
 								$update_puzzle = $this->Image->find('first',array('conditions'=>array('Image.modified'=>$modified,'Image.puzzle_id'=>$puzle['Puzzle']['id'],'Image.user_id'=>$puzle['Puzzle']['user_id'])));
@@ -123,7 +139,6 @@ class  VisitorsController  extends AppController {
 									$ms=$url;
 									$ms=wordwrap($ms,1000);
 									
-									// save new token in user table  
 									$array = array(
 									'id'=>$account_already_exists['User']['id'],
 									'tokenhash'=> $key);	
@@ -143,19 +158,17 @@ class  VisitorsController  extends AppController {
 						              			'reply_to'=>"support@puzel.co"
 						              			);	
 
-										$this->hostedemail($useremail,$update_puzzle['Image']['puzzle_id'],$update_puzzle['Image']['id'],"Front")	;
+										$this->hostedemail($useremail,$update_puzzle['Image']['puzzle_id'],$update_puzzle['Image']['id'],"Front");
 								    }	
 								}
 							}		
 						}
 						else
 						{
-							// activate sign up account register as a visitor 
 							$this->request->data['user_id'] =  $account_already_exists['User']['id'];
 							if(isset($this->request->data['refrel']))
 							{
 								$this->request->data['is_refrel'] = 1;
-								// fetch refrel person detail
 								$referel_preson = $this->User->find('first',array('conditions'=>array('User.refrel_id'=>$this->request->data['refrel_id'])));
 								$this->request->data['refrel_id'] = $referel_preson['User']['id'];
 							}		
@@ -163,6 +176,23 @@ class  VisitorsController  extends AppController {
 							$this->Visitor->create();
 							if($this->Visitor->save($this->request->data))
 							{
+								$message = "Your have signed up for Puzel ".$puzle['Puzzle']['name'];
+
+							    $thankemail = array(
+					              			"templateid"=>1254016,
+					              			"name"=>$account_already_exists['User']['firstname'].' '.$account_already_exists['User']['lastname'],
+					              			"TemplateModel"=> array(
+											    "user_name"=> $account_already_exists['User']['firstname'].' '.$account_already_exists['User']['lastname'],
+											    "product_name"=>"Thank you for using Puzel",
+											    "company"=>array("name"=>""),
+												"action_url"=>$message),
+											"InlineCss"=> true, 
+					              			"from"=> "support@puzel.co",
+					              			'to'=>$account_already_exists['User']['email'],
+					              			'reply_to'=>"support@puzel.co"
+					              			);	
+						    	$this->sendemail($thankemail);		
+
 								$modified = date('Y-m-d H:i:s');
 								$update = $this->Image->query("UPDATE images SET status = 1 ,modified = '".$modified."' WHERE status <> '1' AND user_id = '".$puzle['Puzzle']['user_id']."' AND puzzle_id = '".$puzle['Puzzle']['id']."' ORDER BY RAND() LIMIT 1 ");  
 								$update_puzzle = $this->Image->find('first',array('conditions'=>array('Image.modified'=>$modified,'Image.puzzle_id'=>$puzle['Puzzle']['id'],'Image.user_id'=>$puzle['Puzzle']['user_id'])));
@@ -175,7 +205,6 @@ class  VisitorsController  extends AppController {
 						}	
 					}	
 					
-					// send confirm email to activate their account 
 					else
 					{
 						$key = Security::hash(String::uuid(),'sha512',true);
@@ -200,7 +229,6 @@ class  VisitorsController  extends AppController {
 							if(isset($this->request->data['refrel']))
 							{
 								$this->request->data['is_refrel'] = 1;
-								// fetch refrel person detail
 								$referel_preson = $this->User->find('first',array('conditions'=>array('User.refrel_id'=>$this->request->data['refrel_id'])));
 								$this->request->data['refrel_id'] = $referel_preson['User']['id'];
 							}		
@@ -209,6 +237,26 @@ class  VisitorsController  extends AppController {
 							$this->Visitor->create();
 							if($this->Visitor->save($this->request->data))
 							{
+								$message = "Your have signed up for Puzel ".$puzle['Puzzle']['name'];
+
+							    $thankemail = array(
+					              			"templateid"=>1254016,
+					              			"name"=>$user['User']['firstname'].' '.$user['User']['lastname'],
+					              			"TemplateModel"=> array(
+											    "user_name"=> $user['User']['firstname'].' '.$user['User']['lastname'],
+											    "product_name"=>"Thank you for using Puzel",
+											    "company"=>array("name"=>""),
+												"action_url"=>$message),
+											"InlineCss"=> true, 
+					              			"from"=> "support@puzel.co",
+					              			'to'=>$user['User']['email'],
+					              			'reply_to'=>"support@puzel.co"
+					              			);	
+						    	$this->sendemail($thankemail);	
+
+
+
+
 								$modified = date('Y-m-d H:i:s');
 								$update = $this->Image->query("UPDATE images SET status = 1 ,modified = '".$modified."' WHERE status <> '1' AND user_id = '".$puzle['Puzzle']['user_id']."' AND puzzle_id = '".$puzle['Puzzle']['id']."' ORDER BY RAND() LIMIT 1 ");  
 								$update_puzzle = $this->Image->find('first',array('conditions'=>array('Image.modified'=>$modified,'Image.puzzle_id'=>$puzle['Puzzle']['id'],'Image.user_id'=>$puzle['Puzzle']['user_id'])));
@@ -264,6 +312,24 @@ class  VisitorsController  extends AppController {
 						$this->Visitor->create();
 						if($this->Visitor->save($this->request->data))
 						{
+							$message = "Your have signed up for Puzel".$puzle['Puzzle']['name'];
+
+							$thankemail = array(
+				              			"templateid"=>1254016,
+				              			"name"=>$user['User']['firstname'].' '.$user['User']['lastname'],
+				              			"TemplateModel"=> array(
+										    "user_name"=> $user['User']['firstname'].' '.$user['User']['lastname'],
+										    "product_name"=>"Thank you for using Puzel",
+										    "company"=>array("name"=>""),
+											"action_url"=>$message),
+										"InlineCss"=> true, 
+				              			"from"=> "support@puzel.co",
+				              			'to'=>$user['User']['email'],
+				              			'reply_to'=>"support@puzel.co"
+				              			);	
+					    	$this->sendemail($thankemail);		
+
+
 							$modified = date('Y-m-d H:i:s');
 							$update = $this->Image->query("UPDATE images SET status = 1 ,modified = '".$modified."' WHERE status <> '1' AND user_id = '".$puzle['Puzzle']['user_id']."' AND puzzle_id = '".$puzle['Puzzle']['id']."' ORDER BY RAND() LIMIT 1 ");  
 							$update_puzzle = $this->Image->find('first',array('conditions'=>array('Image.modified'=>$modified,'Image.puzzle_id'=>$puzle['Puzzle']['id'],'Image.user_id'=>$puzle['Puzzle']['user_id'])));
