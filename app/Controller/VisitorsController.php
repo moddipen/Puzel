@@ -85,8 +85,8 @@ class  VisitorsController  extends AppController {
 			
 			// Signup with puzzle account 
 			if($this->request->data['signwithpuzzleaccount'] == 1)
-			{
-				$visitor = $this->User->find('first',array('conditions'=>array('User.email'=>$this->request->data['email'])));
+			{ 
+				$visitor = $this->Visitor->find('first',array('conditions'=>array('Visitor.email'=>$this->request->data['email'])));
 				if(!empty($visitor))
 				{
 					$response = array("message"=>"You have already enrolled");
@@ -94,69 +94,147 @@ class  VisitorsController  extends AppController {
 				}
 				else
 				{
-					
-					$key = Security::hash(String::uuid(),'sha512',true);
-					$hash=sha1($fu['User']['email'].rand(0,100));
-					$url = Router::url(Configure::read('SITE_URL').'confirm').'/'.$key.'#'.$hash;
-					$ms=$url;
-					$ms=wordwrap($ms,1000);
-					
-					$array = array(
-					'firstname'=>$this->request->data['firstname'],
-					'lastname'=>$this->request->data['lastname'],
-					'email'=>$this->request->data['email'],
-					'status'=>2,
-					'tokenhash'=> $key,
-					'refrel_id'=>$this->generateRandomString());
-					$this->User->create();
-					if($this->User->save($array))
-					{	
-						$user = $this->User->find('first',array('conditions'=>array('User.id'=>$this->User->getLastInsertId())));
-						$this->request->data['user_id'] =  $user['User']['id'];
-						if(isset($this->request->data['refrel']))
-						{
-							$this->request->data['is_refrel'] = 1;
-							// fetch refrel person detail
-							$referel_preson = $this->User->find('first',array('conditions'=>array('User.refrel_id'=>$this->request->data['refrel_id'])));
-							$this->request->data['refrel_id'] = $referel_preson['User']['id'];
-						}		
+					$account_already_exists = $this->User->find('first',array('conditions'=>array('User.email'=>$this->request->data['email'])));
 
-
-						$this->Visitor->create();
-						if($this->Visitor->save($this->request->data))
+					if(!empty($account_already_exists))
+					{
+						// when user can't activate their account 
+						if($account_already_exists['User']['password'] == '')
 						{
-							$modified = date('Y-m-d H:i:s');
-							$update = $this->Image->query("UPDATE images SET status = 1 ,modified = '".$modified."' WHERE status <> '1' AND user_id = '".$puzle['Puzzle']['user_id']."' AND puzzle_id = '".$puzle['Puzzle']['id']."' ORDER BY RAND() LIMIT 1 ");  
-							$update_puzzle = $this->Image->find('first',array('conditions'=>array('Image.modified'=>$modified,'Image.puzzle_id'=>$puzle['Puzzle']['id'],'Image.user_id'=>$puzle['Puzzle']['user_id'])));
-							if($update_puzzle)
+							$this->request->data['user_id'] =  $account_already_exists['User']['id'];
+							if(isset($this->request->data['refrel']))
 							{
-								$password_random = $this->generateRandomString();
-							    
-							    $message = "You have signup successfully \n\n\n  your password is :" .$password_random;
-								$useremail = array(
-					              			"templateid"=>1240783,
-					              			"name"=>$user['User']['firstname'].' '.$user['User']['lastname'],
-					              			"TemplateModel"=> array(
-											    "user_name"=> $user['User']['firstname'].' '.$user['User']['lastname'],
-											    "product_name"=>"Signup Successfully",
-											    "company"=>array("name"=>""),
-												"action_url"=>$ms),
-											"InlineCss"=> true, 
-					              			"from"=> "support@puzel.co",
-					              			'to'=>$user['User']['email'],
-					              			'reply_to'=>"support@puzel.co"
-					              			);	
+								$this->request->data['is_refrel'] = 1;
+								// fetch refrel person detail
+								$referel_preson = $this->User->find('first',array('conditions'=>array('User.refrel_id'=>$this->request->data['refrel_id'])));
+								$this->request->data['refrel_id'] = $referel_preson['User']['id'];
+							}		
+							$this->Visitor->create();
+							if($this->Visitor->save($this->request->data))
+							{
+								$modified = date('Y-m-d H:i:s');
+								$update = $this->Image->query("UPDATE images SET status = 1 ,modified = '".$modified."' WHERE status <> '1' AND user_id = '".$puzle['Puzzle']['user_id']."' AND puzzle_id = '".$puzle['Puzzle']['id']."' ORDER BY RAND() LIMIT 1 ");  
+								$update_puzzle = $this->Image->find('first',array('conditions'=>array('Image.modified'=>$modified,'Image.puzzle_id'=>$puzle['Puzzle']['id'],'Image.user_id'=>$puzle['Puzzle']['user_id'])));
+								if($update_puzzle)
+								{
+									$key = Security::hash(String::uuid(),'sha512',true);
+									$hash=sha1($fu['User']['email'].rand(0,100));
+									$url = Router::url(Configure::read('SITE_URL').'confirm').'/'.$key.'#'.$hash;
+									$ms=$url;
+									$ms=wordwrap($ms,1000);
+									
+									// save new token in user table  
+									$array = array(
+									'id'=>$account_already_exists['User']['id'],
+									'tokenhash'=> $key);	
+								    if($this->User->save($array))
+								    {
+								    	$useremail = array(
+						              			"templateid"=>1240783,
+						              			"name"=>$user['User']['firstname'].' '.$user['User']['lastname'],
+						              			"TemplateModel"=> array(
+												    "user_name"=> $user['User']['firstname'].' '.$user['User']['lastname'],
+												    "product_name"=>"Signup Successfully",
+												    "company"=>array("name"=>""),
+													"action_url"=>$ms),
+												"InlineCss"=> true, 
+						              			"from"=> "support@puzel.co",
+						              			'to'=>$user['User']['email'],
+						              			'reply_to'=>"support@puzel.co"
+						              			);	
 
-								// $update = array(
-								// 		'id'=>$user['User']['id'],
-								// 		'password'=>$password_random);
-								// if($this->User->save($update))
-								// {
-									$this->hostedemail($useremail,$update_puzzle['Image']['puzzle_id'],$update_puzzle['Image']['id'],"Front")	;
-								// }	
-							}
-						}		
+										$this->hostedemail($useremail,$update_puzzle['Image']['puzzle_id'],$update_puzzle['Image']['id'],"Front")	;
+								    }	
+								}
+							}		
+						}
+						else
+						{
+							// activate sign up account register as a visitor 
+							$this->request->data['user_id'] =  $account_already_exists['User']['id'];
+							if(isset($this->request->data['refrel']))
+							{
+								$this->request->data['is_refrel'] = 1;
+								// fetch refrel person detail
+								$referel_preson = $this->User->find('first',array('conditions'=>array('User.refrel_id'=>$this->request->data['refrel_id'])));
+								$this->request->data['refrel_id'] = $referel_preson['User']['id'];
+							}		
+							
+							$this->Visitor->create();
+							if($this->Visitor->save($this->request->data))
+							{
+								$modified = date('Y-m-d H:i:s');
+								$update = $this->Image->query("UPDATE images SET status = 1 ,modified = '".$modified."' WHERE status <> '1' AND user_id = '".$puzle['Puzzle']['user_id']."' AND puzzle_id = '".$puzle['Puzzle']['id']."' ORDER BY RAND() LIMIT 1 ");  
+								$update_puzzle = $this->Image->find('first',array('conditions'=>array('Image.modified'=>$modified,'Image.puzzle_id'=>$puzle['Puzzle']['id'],'Image.user_id'=>$puzle['Puzzle']['user_id'])));
+								if($update_puzzle)
+								{
+									$response = array("message"=>"success","Id"=>$update_puzzle['Image']['puzzle_id'],"ImageId"=>$update_puzzle['Image']['id']);
+				                    echo json_encode($response);
+								}
+							}		
+						}	
 					}	
+					
+					// send confirm email to activate their account 
+					else
+					{
+						$key = Security::hash(String::uuid(),'sha512',true);
+						$hash=sha1($fu['User']['email'].rand(0,100));
+						$url = Router::url(Configure::read('SITE_URL').'confirm').'/'.$key.'#'.$hash;
+						$ms=$url;
+						$ms=wordwrap($ms,1000);
+						$array = array(
+						'firstname'=>$this->request->data['firstname'],
+						'lastname'=>$this->request->data['lastname'],
+						'email'=>$this->request->data['email'],
+						'status'=>2,
+						'tokenhash'=> $key,
+						'refrel_id'=>$this->generateRandomString());	
+					
+					
+						$this->User->create();
+						if($this->User->save($array))
+						{	
+							$user = $this->User->find('first',array('conditions'=>array('User.id'=>$this->User->getLastInsertId())));
+							$this->request->data['user_id'] =  $user['User']['id'];
+							if(isset($this->request->data['refrel']))
+							{
+								$this->request->data['is_refrel'] = 1;
+								// fetch refrel person detail
+								$referel_preson = $this->User->find('first',array('conditions'=>array('User.refrel_id'=>$this->request->data['refrel_id'])));
+								$this->request->data['refrel_id'] = $referel_preson['User']['id'];
+							}		
+
+
+							$this->Visitor->create();
+							if($this->Visitor->save($this->request->data))
+							{
+								$modified = date('Y-m-d H:i:s');
+								$update = $this->Image->query("UPDATE images SET status = 1 ,modified = '".$modified."' WHERE status <> '1' AND user_id = '".$puzle['Puzzle']['user_id']."' AND puzzle_id = '".$puzle['Puzzle']['id']."' ORDER BY RAND() LIMIT 1 ");  
+								$update_puzzle = $this->Image->find('first',array('conditions'=>array('Image.modified'=>$modified,'Image.puzzle_id'=>$puzle['Puzzle']['id'],'Image.user_id'=>$puzle['Puzzle']['user_id'])));
+								if($update_puzzle)
+								{
+									$password_random = $this->generateRandomString();
+								    
+								    $message = "You have signup successfully \n\n\n  your password is :" .$password_random;
+									$useremail = array(
+						              			"templateid"=>1240783,
+						              			"name"=>$user['User']['firstname'].' '.$user['User']['lastname'],
+						              			"TemplateModel"=> array(
+												    "user_name"=> $user['User']['firstname'].' '.$user['User']['lastname'],
+												    "product_name"=>"Signup Successfully",
+												    "company"=>array("name"=>""),
+													"action_url"=>$ms),
+												"InlineCss"=> true, 
+						              			"from"=> "support@puzel.co",
+						              			'to'=>$user['User']['email'],
+						              			'reply_to'=>"support@puzel.co"
+						              			);	
+									$this->hostedemail($useremail,$update_puzzle['Image']['puzzle_id'],$update_puzzle['Image']['id'],"Front")	;
+								}
+							}		
+						}
+					}		
 				}	
 				
 			}
