@@ -335,11 +335,9 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
                        dataType: 'json', 
                        success: function(data)
                        {
-                        alert("hello");
-                        console.log(data);
                          if(data.message != "You have already enrolled")
                           {
-
+                            console.log(data);
                             $.ajax
                               ({
                                  type: "POST",
@@ -348,7 +346,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
                                  success:function(data)
                                  {
 
-                                    console.log(data);
+                                    
                                     var obj = $.parseJSON(data);
                                     obj = obj.name;
                                     objs = obj.split('.');
