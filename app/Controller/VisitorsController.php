@@ -129,7 +129,24 @@ class  VisitorsController  extends AppController {
 									'tokenhash'=> $key);	
 								    if($this->User->save($array))
 								    {
-								    	$useremail = array(
+								    	$message = "Your have signed up for Puzel".$puzle['Puzzle']['name'];
+
+									    $thankemail = array(
+							              			"templateid"=>1254016,
+							              			"name"=>$account_already_exists['User']['firstname'].' '.$account_already_exists['User']['lastname'],
+							              			"TemplateModel"=> array(
+													    "user_name"=> $account_already_exists['User']['firstname'].' '.$account_already_exists['User']['lastname'],
+													    "product_name"=>"Thank you for using Puzel",
+													    "company"=>array("name"=>""),
+														"action_url"=>$message),
+													"InlineCss"=> true, 
+							              			"from"=> "support@puzel.co",
+							              			'to'=>$account_already_exists['User']['email'],
+							              			'reply_to'=>"support@puzel.co"
+							              			);	
+								    	if($this->sendemail($thankemail))
+								    	{
+								    		$useremail = array(
 						              			"templateid"=>1240783,
 						              			"name"=>$account_already_exists['User']['firstname'].' '.$account_already_exists['User']['lastname'],
 						              			"TemplateModel"=> array(
@@ -143,7 +160,8 @@ class  VisitorsController  extends AppController {
 						              			'reply_to'=>"support@puzel.co"
 						              			);	
 
-										$this->hostedemail($useremail,$update_puzzle['Image']['puzzle_id'],$update_puzzle['Image']['id'],"Front")	;
+											$this->hostedemail($useremail,$update_puzzle['Image']['puzzle_id'],$update_puzzle['Image']['id'],"Front")	;	
+								    	}
 								    }	
 								}
 							}		
@@ -168,6 +186,23 @@ class  VisitorsController  extends AppController {
 								$update_puzzle = $this->Image->find('first',array('conditions'=>array('Image.modified'=>$modified,'Image.puzzle_id'=>$puzle['Puzzle']['id'],'Image.user_id'=>$puzle['Puzzle']['user_id'])));
 								if($update_puzzle)
 								{
+									 $message = "Your have signed up for Puzel".$puzle['Puzzle']['name'];
+
+								    $thankemail = array(
+						              			"templateid"=>1254016,
+						              			"name"=>$account_already_exists['User']['firstname'].' '.$account_already_exists['User']['lastname'],
+						              			"TemplateModel"=> array(
+												    "user_name"=> $account_already_exists['User']['firstname'].' '.$account_already_exists['User']['lastname'],
+												    "product_name"=>"Thank you for using Puzel",
+												    "company"=>array("name"=>""),
+													"action_url"=>$message),
+												"InlineCss"=> true, 
+						              			"from"=> "support@puzel.co",
+						              			'to'=>$account_already_exists['User']['email'],
+						              			'reply_to'=>"support@puzel.co"
+						              			);	
+							    	$this->sendemail($thankemail);
+
 									$response = array("message"=>"success","Id"=>$update_puzzle['Image']['puzzle_id'],"ImageId"=>$update_puzzle['Image']['id']);
 				                    echo json_encode($response);
 								}
@@ -214,23 +249,22 @@ class  VisitorsController  extends AppController {
 								$update_puzzle = $this->Image->find('first',array('conditions'=>array('Image.modified'=>$modified,'Image.puzzle_id'=>$puzle['Puzzle']['id'],'Image.user_id'=>$puzle['Puzzle']['user_id'])));
 								if($update_puzzle)
 								{
-									$password_random = $this->generateRandomString();
-								    
-								    $message = "You have signup successfully \n\n\n  your password is :" .$password_random;
-									$useremail = array(
-						              			"templateid"=>1240783,
-						              			"name"=>$user['User']['firstname'].' '.$user['User']['lastname'],
-						              			"TemplateModel"=> array(
-												    "user_name"=> $user['User']['firstname'].' '.$user['User']['lastname'],
-												    "product_name"=>"Signup Successfully",
-												    "company"=>array("name"=>""),
-													"action_url"=>$ms),
-												"InlineCss"=> true, 
-						              			"from"=> "support@puzel.co",
-						              			'to'=>$user['User']['email'],
-						              			'reply_to'=>"support@puzel.co"
-						              			);	
-									$this->hostedemail($useremail,$update_puzzle['Image']['puzzle_id'],$update_puzzle['Image']['id'],"Front")	;
+									 $message = "Your have signed up for Puzel".$puzle['Puzzle']['name'];
+
+									    $thankemail = array(
+							              			"templateid"=>1254016,
+							              			"name"=>$user['User']['firstname'].' '.$user['User']['lastname'],
+							              			"TemplateModel"=> array(
+													    "user_name"=> $user['User']['firstname'].' '.$user['User']['lastname'],
+													    "product_name"=>"Thank you for using Puzel",
+													    "company"=>array("name"=>""),
+														"action_url"=>$message),
+													"InlineCss"=> true, 
+							              			"from"=> "support@puzel.co",
+							              			'to'=>$user['User']['email'],
+							              			'reply_to'=>"support@puzel.co"
+							              			);	
+								    	$this->sendemail($thankemail);
 								}
 							}		
 						}
