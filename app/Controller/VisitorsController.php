@@ -86,7 +86,7 @@ class  VisitorsController  extends AppController {
 			// Signup with puzzle account 
 			if($this->request->data['signwithpuzzleaccount'] == 1)
 			{ 
-				$visitor = $this->Visitor->find('first',array('conditions'=>array('Visitor.email'=>$this->request->data['email'])));
+				$visitor = $this->Visitor->find('first',array('conditions'=>array('Visitor.email'=>$this->request->data['email'] ,'Visitor.puzzle_id'=>$puzle['Puzzle']['id'])));
 				if(!empty($visitor))
 				{
 					$response = array("message"=>"You have already enrolled");
