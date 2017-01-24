@@ -131,15 +131,15 @@ class  VisitorsController  extends AppController {
 								    {
 								    	$useremail = array(
 						              			"templateid"=>1240783,
-						              			"name"=>$user['User']['firstname'].' '.$user['User']['lastname'],
+						              			"name"=>$account_already_exists['User']['firstname'].' '.$account_already_exists['User']['lastname'],
 						              			"TemplateModel"=> array(
-												    "user_name"=> $user['User']['firstname'].' '.$user['User']['lastname'],
+												    "user_name"=> $account_already_exists['User']['firstname'].' '.$account_already_exists['User']['lastname'],
 												    "product_name"=>"Signup Successfully",
 												    "company"=>array("name"=>""),
 													"action_url"=>$ms),
 												"InlineCss"=> true, 
 						              			"from"=> "support@puzel.co",
-						              			'to'=>$user['User']['email'],
+						              			'to'=>$account_already_exists['User']['email'],
 						              			'reply_to'=>"support@puzel.co"
 						              			);	
 
