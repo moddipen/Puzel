@@ -231,6 +231,9 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
                                  success:function(data)
                                  {
                                     
+                                    var audioElement = document.createElement('audio');
+                                      audioElement.setAttribute('src', '<?php echo Configure::read("SITE_URL")?>tone/notification.mp3');
+                                       audioElement.play();      
                                     var obj = $.parseJSON(data);
                                     obj = obj.name;
                                     objs = obj.split('.');
@@ -347,7 +350,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
                                  {
 
                                     var audioElement = document.createElement('audio');
-                                      audioElement.setAttribute('src', 'http://www.soundjay.com/misc/sounds/bell-ringing-01.mp3');
+                                      audioElement.setAttribute('src', '<?php echo Configure::read("SITE_URL")?>tone/notification.mp3');
                                        audioElement.play();      
                                     var obj = $.parseJSON(data);
                                     obj = obj.name;
