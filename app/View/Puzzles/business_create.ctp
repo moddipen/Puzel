@@ -792,11 +792,10 @@ $('#puzzlename').on('keypress', function (event) {
     //    event.preventDefault();
     //    return false;
     // }
-     var regex = new RegExp("^[a-zA-Z0-9\b \s]+$");
+     var regex = new RegExp("^[a-zA-Z0-9\b\s]+$");
     var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
     if (!regex.test(key)) {
-      
-       event.preventDefault();
+      event.preventDefault();
        return false;
 });
 
