@@ -210,13 +210,19 @@ class  PuzzlesController  extends AppController {
 					// create image directory 
 					$multipleimagefolder = WWW_ROOT.'img/puzzel/'.str_replace(' ','',$this->request->data['Puzzle']['name']);//WWW_ROOT."img\puzzel\";
 					$folder = mkdir($multipleimagefolder);
-					$URL = $_SERVER['DOCUMENT_ROOT'].'/app/webroot/img/puzzel/';
-					$imageName = str_replace(' ','',$this->request->data['Puzzle']['name']).".jpg";
-					$path = $URL.$imageName;
+					// $URL = $_SERVER['DOCUMENT_ROOT'].'/app/webroot/img/puzzel/';
+					// $imageName = str_replace(' ','',$this->request->data['Puzzle']['name']).".jpg";
+					// $path = $URL.$imageName;
+					$array_sign = array('!','"','#','$','%','&','()','*','+','-',':',';','<','=','>','?','@','[]','^','`','{|}~');
+					$imageName = str_ireplace($array_sign,'_', $this->request->data['Puzzle']['name']);
+							
+
+					$newimageName = $imageName.".jpg";
+					$path = $URL.$newimageName;
 					$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i','', $this->request->data['Puzzle']['image']));
 					$success = file_put_contents($path,$data);
 					
-					$get_image = Configure::read('SITE_URL').'img/puzzel/'.$imageName;
+					$get_image = Configure::read('SITE_URL').'img/puzzel/'.$newimageName;
 					$read_image = getimagesize($get_image); 
 					
 					if(isset($read_image))
@@ -250,7 +256,7 @@ class  PuzzlesController  extends AppController {
 					  	 }	
 					  }
 					  $this->request->data['Puzzle']['status'] = 0;
-					  $this->request->data['Puzzle']['image_ext'] = $imageName;
+					  $this->request->data['Puzzle']['image_ext'] = $newimageName;
 					  $this->Puzzle->create();
 					  if($this->Puzzle->save($this->request->data))
 					  {
@@ -300,7 +306,8 @@ class  PuzzlesController  extends AppController {
 					  		  $image_pieces = array(
 					  		  'puzzle_id'=>$this->Puzzle->getLastInsertID(),
 					  		  'user_id'=>$this->request->data['Puzzle']['user_id'],
-					  		  'name'=>str_replace(' ','',$this->request->data['Puzzle']['name']).'_'.$j.'_'.$i.'1.jpg',
+					  		  // 'name'=>str_replace(' ','',$this->request->data['Puzzle']['name']).'_'.$j.'_'.$i.'1.jpg',
+					  		  'name'=>$imageName.'_'.$j.'_'.$i.'1.jpg',
 					  		  'width'=>$storewidth,
 					  		  'height'=>$storeheight,
 					  		  'total_width'=>$width,
@@ -308,7 +315,8 @@ class  PuzzlesController  extends AppController {
 					  		  )	;		  
 					  		  $this->Image->create();
 					  		  $insert = $this->Image->save($image_pieces);
-					  		  imagejpeg($output,$multipleimagefolder.'/'.str_replace(' ','',$this->request->data['Puzzle']['name']).'_'.$j.'_'.$i.'1.jpg');
+					  		  // imagejpeg($output,$multipleimagefolder.'/'.str_replace(' ','',$this->request->data['Puzzle']['name']).'_'.$j.'_'.$i.'1.jpg');
+					  		  imagejpeg($output,$multipleimagefolder.'/'.$imageName.'_'.$j.'_'.$i.'1.jpg');
 					  		  $Y = $Y + $width/$cut_width; 							  
 					  	  	}
 						   
