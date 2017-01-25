@@ -797,6 +797,7 @@ $('#puzzlename').on('keypress', function (event) {
     if (!regex.test(key)) {
       event.preventDefault();
        return false;
+      } 
 });
 
 
