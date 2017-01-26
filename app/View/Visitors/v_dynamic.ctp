@@ -513,7 +513,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
               {
                 
                 // Get Image path 
-              $path =  $this->webroot.'img/puzzel/'.str_replace(' ','',$PuzzleData['Puzzle']['name']).'/'.$image_data['Image']['name'] ;
+              $path =  $this->webroot.'img/puzzel/'.$PuzzleData['Puzzle']['random'].'/'.$image_data['Image']['name'] ;
               // $split = substr($image_data['Image']['name'], strrpos($image_data['Image']['name'], '_') + 1);
                 
                 // if    ($split == "01.jpg")  {   $block = "1";   }

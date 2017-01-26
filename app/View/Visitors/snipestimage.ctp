@@ -260,7 +260,7 @@ padding: 0;
             foreach($image as $image_data)
               {
                   // Get Image path 
-                $path =  $this->webroot.'/img/puzzel/'.$PuzzleData['Puzzle']['name'].'/'.$image_data['name'] ;
+                $path =  $this->webroot.'/img/puzzel/'.$PuzzleData['Puzzle']['random'].'/'.$image_data['name'] ;
                   if($image_data['status'] == 0)
                 {
                   $class_image = "background-display:none;";
