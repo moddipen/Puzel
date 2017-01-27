@@ -59,7 +59,7 @@
                                           <button type="button" id="sendTo" class="btn btn-oranges fullwidth">Send to Developer</button>
                                         </div>
                                         <div class="form-group">
-                                          <button type="submit" class="btn btn-oranges fullwidth">Start Capturing</button>
+                                          <button type="submit" class="btn btn-oranges fullwidth">Launch Campaign</button>
                                         </div>
                                     </div>
                                 </div>
