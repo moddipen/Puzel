@@ -846,7 +846,7 @@ class  PuzzlesController  extends AppController {
 	}
 
 /**
-	Deactive puzzle in puzzle list when click on  onoff switch
+	Deactive puzzle in puzzle list when click on  on off switch
 */	
 	public function admin_deactive($id = Null)
 	{
