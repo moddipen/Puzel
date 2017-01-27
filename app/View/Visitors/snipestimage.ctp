@@ -129,7 +129,7 @@ padding: 0;
     
     <input type ="hidden" id="businesname" value ="<?php echo $PuzzleData['Business']['company_name']?>">
     <input type ="hidden" id="randomid" value ="<?php echo $PuzzleData['Puzzle']['random']?>">
-    <input type ="hidden" id="puzzlename" value ="<?php echo $PuzzleData['Puzzle']['name']?>">
+    <input type ="hidden" id="puzzlename" value ="<?php echo htmlspecialchars($PuzzleData['Puzzle']['name']);?>">
     <input type ="hidden" id="transition" value ="<?php echo $PuzzleData['Puzzle']['transtion']?>">
 
 <!-- END NAVIGATION ############################################### -->
@@ -346,7 +346,7 @@ padding: 0;
                   <input type = "hidden" name ="refrel" value = "1">
                   <input type = "hidden" name ="refrel_id" value = "<?php echo $PuzzleData['Puzzle']['user_id']?>">
               <?php }?>
-              <input type = "hidden" name ="puzzlename" value = "<?php echo $PuzzleData['Puzzle']['name'];?>">
+              <input type = "hidden" name ="puzzlename" value = "<?php echo htmlspecialchars($PuzzleData['Puzzle']['name']);?>">
               <input type = "hidden" name ="signwithpuzzleaccount" id ="signwithpuzzleaccount" value = "">
               <div class="col-md-12">
                   <div class="form-group">
@@ -376,7 +376,7 @@ padding: 0;
                   <input type = "hidden" name ="refrel" value = "1">
                   <input type = "hidden" name ="refrel_id" value = "<?php echo $PuzzleData['Puzzle']['user_id']?>">
               <?php }?>
-              <input type = "hidden" name ="puzzlename" value = "<?php echo $PuzzleData['Puzzle']['name'];?>">
+              <input type = "hidden" name ="puzzlename" value = "<?php echo htmlspecialchars($PuzzleData['Puzzle']['name']);?>">
               <input type = "hidden" name ="enrollwithpuzzleaccount" id ="enrollwithpuzzleaccount" value = "">
               <div class="col-md-12">
                   <div class="form-group">
