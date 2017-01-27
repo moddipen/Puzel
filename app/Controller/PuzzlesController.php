@@ -767,12 +767,13 @@ class  PuzzlesController  extends AppController {
 				// fetch puzzle detail and their pieces
 				$sub_detal = $this->UserSubscription->find('first',array('conditions'=>array('UserSubscription.user_id'=>$user['Puzzle']['user_id']),'order'=>'UserSubscription.id Desc'));
 				
+				$puzzle_detail_imge = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$id,'Image.status'=>0))); 
 				// check puzzle balance is not greater then user subsciption pieces
 
-				if($sub_detal['UserSubscription']['used_pieces'] > $user['Puzzle']['pieces'])	
+				if($sub_detal['UserSubscription']['used_pieces'] > $puzzle_detail_imge)	
 				{
 						// Update their balance 	
-					$newbalnce = $sub_detal['UserSubscription']['used_pieces'] - $user['Puzzle']['pieces'];
+					$newbalnce = $sub_detal['UserSubscription']['used_pieces'] - $puzzle_detail_imge;
 					$update = array(
 						'id'=>$sub_detal['UserSubscription']['id'],
 						'used_pieces'=>$newbalnce);
@@ -862,12 +863,12 @@ class  PuzzlesController  extends AppController {
 				// fetch puzzle detail and their pieces
 				$puzzle_detail = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id)));
 				
-
+				$puzzle_detail_imge = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$id,'Image.status'=>0))); 
 				// get User subscriptions and their total balance 
 				$sub_detal = $this->UserSubscription->find('first',array('conditions'=>array('UserSubscription.user_id'=>$puzzle_detail['Puzzle']['user_id']),'order'=>'UserSubscription.id Desc'));
 				
 				// Update their balance 	
-				$newbalnce = $sub_detal['UserSubscription']['used_pieces'] + $puzzle_detail['Puzzle']['pieces'];
+				$newbalnce = $sub_detal['UserSubscription']['used_pieces'] + $puzzle_detail_imge;
 				$update = array(
 					'id'=>$sub_detal['UserSubscription']['id'],
 					'used_pieces'=>$newbalnce);
