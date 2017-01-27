@@ -638,7 +638,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
                 <input type = "hidden" name ="refrel" value = "1">
                 <input type = "hidden" name ="refrel_id" value = "<?php echo $Refrel?>">
             <?php }?>
-            <input type = "hidden" name ="puzzlename" value = "<?php echo $PuzzleData['Puzzle']['name'];?>">
+            <input type = "hidden" name ="puzzlename" value = "<?php echo htmlspecialchars($PuzzleData['Puzzle']['name']);?>">
             <input type = "hidden" name ="signwithpuzzleaccount" id ="signwithpuzzleaccount" value = "">
             <div class="clearfix"></div>
             <div class="form-group text-center">
@@ -657,7 +657,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
             <input type="password" name="password"   id="password"  class="form-control" placeholder="Password" required>
           </div>
         </div>  
-          <input type = "hidden" name ="puzzlename" value = "<?php echo $PuzzleData['Puzzle']['name'];?>">
+          <input type = "hidden" name ="puzzlename" value = "<?php echo htmlspecialchars($PuzzleData['Puzzle']['name']);?>">
             <input type = "hidden" name ="enrollwithpuzzleaccount" id ="enrollwithpuzzleaccount" value = "">
             <div class="clearfix"></div>
             <div class="form-group text-center">
