@@ -81,6 +81,7 @@ class  VisitorsController  extends AppController {
 		if(!empty($this->request->data))
 		{
 			$this->request->data['puzzlename'] = htmlspecialchars($this->request->data['puzzlename']);
+			echo "<pre>";print_r($this->request->data);exit;
 			$puzle = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.name'=>$this->request->data['puzzlename'])));
 			$this->request->data['puzzle_id'] = $puzle['Puzzle']['id'];
 			
