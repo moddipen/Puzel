@@ -139,7 +139,7 @@ class  PuzzlesController  extends AppController {
 				$data = 1;
 			}	
 			$this->set("IMAGEID",$data);
-			
+			$this->request->data['Puzzel']['name'] =  htmlspecialchars($this->request->data['Puzzel']['name']);
 			$this->Session->write('IMAGECAPTURE',$this->request->data);
 		}		
 	}
