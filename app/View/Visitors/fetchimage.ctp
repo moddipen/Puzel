@@ -178,7 +178,7 @@ padding: 0;
     
     <input type ="hidden" id="businesname" value ="<?php echo $PuzzleData['Business']['company_name']?>">
     <input type ="hidden" id="randomid" value ="<?php echo $PuzzleData['Puzzle']['random']?>">
-    <input type ="hidden" id="puzzlename" value ="<?php echo $PuzzleData['Puzzle']['name']?>">
+    <input type ="hidden" id="puzzlename" value ="<?php echo htmlspecialchars($PuzzleData['Puzzle']['name']);?>">
     <input type ="hidden" id="transition" value ="<?php echo $PuzzleData['Puzzle']['transtion']?>">
 
 <!-- END NAVIGATION ############################################### -->
