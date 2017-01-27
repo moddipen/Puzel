@@ -80,7 +80,7 @@ class  VisitorsController  extends AppController {
 		$this->autoRender = false;
 		if(!empty($this->request->data))
 		{
-			$puzle = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.name'=>$this->request->data['puzzlename'])));
+			$puzle = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.random'=>$this->request->data['puzzlename'])));
 			$this->request->data['puzzle_id'] = $puzle['Puzzle']['id'];
 			
 			// Signup with puzzle account 
