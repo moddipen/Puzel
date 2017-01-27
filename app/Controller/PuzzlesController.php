@@ -374,7 +374,92 @@ class  PuzzlesController  extends AppController {
 		{
 			if($this->Image->updateAll(array('Image.puzzle_active'=>0),array('Image.puzzle_id'=>$id)))
 			{
-				$response = array("message" =>"Puzzle Active");	
+				
+					$user = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id)));
+					
+					
+					// update balance when admin activate puzzle flow
+
+					// fetch puzzle detail and their pieces
+					$sub_detal = $this->UserSubscription->find('first',array('conditions'=>array('UserSubscription.user_id'=>$user['Puzzle']['user_id']),'order'=>'UserSubscription.id Desc'));
+					
+					$puzzle_detail_imge = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$id,'Image.status'=>0))); 
+
+
+					// check puzzle balance is not greater then user subsciption pieces
+
+					if($sub_detal['UserSubscription']['used_pieces'] > $puzzle_detail_imge)	
+					{
+							// Update their balance 	
+						$newbalnce = $sub_detal['UserSubscription']['used_pieces'] - $puzzle_detail_imge;
+						$update = array(
+							'id'=>$sub_detal['UserSubscription']['id'],
+							'used_pieces'=>$newbalnce);
+
+						$this->UserSubscription->save($update);	
+
+						$balanceemail = array(
+		              			"templateid"=>1258523,
+		              			"name"=>$user['Business']['firstname'].' '.$user['Business']['lastname'],
+		              			"TemplateModel"=> array(
+								    "user_name"=> $user['Business']['firstname'].' '.$user['Business']['lastname'],
+								    "product_name"=>$user['Puzzle']['name'],
+									"company"=> array(
+										"name"=> $user['Business']['company_name']),
+									"action_url"=>"Puzzle pieces ".$user['Puzzle']['pieces']. " debit in your balance."),
+								"InlineCss"=> true, 
+		              			"from"=> "support@puzel.co",
+		              			'to'=>$user['Business']['email'],
+		              			'reply_to'=>"support@puzel.co"
+		              			);	
+						$this->sendemail($balanceemail);
+					}
+
+
+
+
+					
+						
+					// Send email to business acount 
+					// $email = array(
+		   //            			"templateid"=>1062363,
+		   //            			"name"=>$user['Business']['firstname'].' '.$user['Business']['lastname'],
+		   //            			"TemplateModel"=> array(
+					// 			    "user_name"=> $user['Business']['firstname'].' '.$user['Business']['lastname'],
+					// 			    "product_name"=>$user['Puzzle']['name'],
+					// 				"company"=> array(
+					// 					"name"=> $user['Business']['company_name']),
+					// 				"action_url"=>"Puzzle had been active by administrative department"),
+					// 			"InlineCss"=> true, 
+		   //            			"from"=> "support@puzel.co",
+		   //            			'to'=>$user['Business']['email'],
+		   //            			'reply_to'=>"support@puzel.co"
+		   //            			);	
+					// if($this->sendemail($email))
+					// {
+					// 	// Send email to visitor  acount 
+						foreach($user['Visitor'] as $value)
+						{
+							$visitemail = array(
+			              			"templateid"=>1062363,
+			              			"name"=>$value['firstname'].' '.$value['lastname'],
+			              			"TemplateModel"=> array(
+									    "user_name"=> $value['firstname'].' '.$value['lastname'],
+									    "product_name"=>$user['Puzzle']['name'],
+										"company"=> array(
+											"name"=> $value['company_name']),
+										"action_url"=>"Puzzle had been active by administrative department"),
+									"InlineCss"=> true, 
+			              			"from"=> "support@puzel.co",
+			              			'to'=>$value['email'],
+			              			'reply_to'=>"support@puzel.co"
+			              			);	
+							$this->sendemail($visitemail);					
+						}	
+					//}
+				
+			
+				$response = array("message" =>"Puzzle Active","newbalnce"=>$newbalnce);	
 			}
 			
 		}
@@ -394,7 +479,86 @@ class  PuzzlesController  extends AppController {
 		{
 			if($this->Image->updateAll(array('Image.puzzle_active'=>1),array('Image.puzzle_id'=>$id)))
 			{
-				$response = array("message" =>"Puzzle Deactive");	
+					// update balance when admin deactivate puzzle flow
+
+					// fetch puzzle detail and their pieces
+					$puzzle_detail = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id)));
+					//$puzzle_detail['Show'] = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$id,'Image.status'=>0))); 
+					$puzzle_detail_imge = $this->Image->find('count',array('conditions'=>array('Image.puzzle_id'=>$id,'Image.status'=>0))); 
+					
+
+					
+					// get User subscriptions and their total balance 
+					$sub_detal = $this->UserSubscription->find('first',array('conditions'=>array('UserSubscription.user_id'=>$puzzle_detail['Puzzle']['user_id']),'order'=>'UserSubscription.id Desc'));
+					
+					// Update their balance 	
+					$newbalnce = $sub_detal['UserSubscription']['used_pieces'] + $puzzle_detail_imge;
+					$update = array(
+						'id'=>$sub_detal['UserSubscription']['id'],
+						'used_pieces'=>$newbalnce);
+
+					$this->UserSubscription->save($update);
+					
+					$user = $this->Puzzle->find('first',array('conditions'=>array('Puzzle.id'=>$id)));
+					
+					// Balance pieces email 
+
+					$balanceemail = array(
+		              			"templateid"=>1258522,
+		              			"name"=>$user['Business']['firstname'].' '.$user['Business']['lastname'],
+		              			"TemplateModel"=> array(
+								    "user_name"=> $user['Business']['firstname'].' '.$user['Business']['lastname'],
+								    "product_name"=>$user['Puzzle']['name'],
+									"company"=> array(
+										"name"=> $user['Business']['company_name']),
+									"action_url"=>"Puzzle pieces ".$user['Puzzle']['pieces']. " credit in your balance."),
+								"InlineCss"=> true, 
+		              			"from"=> "support@puzel.co",
+		              			'to'=>$user['Business']['email'],
+		              			'reply_to'=>"support@puzel.co"
+		              			);	
+
+					if($this->sendemail($balanceemail))
+					{	
+
+						// // puzzle deactivate email 
+						// $email = array(
+			   //            			"templateid"=>1062344,
+			   //            			"name"=>$user['Business']['firstname'].' '.$user['Business']['lastname'],
+			   //            			"TemplateModel"=> array(
+						// 			    "user_name"=> $user['Business']['firstname'].' '.$user['Business']['lastname'],
+						// 			    "product_name"=>$user['Puzzle']['name'],
+						// 				"company"=> array(
+						// 					"name"=> $user['Business']['company_name']),
+						// 				"action_url"=>"Puzzle had been deactive by administrative department"),
+						// 			"InlineCss"=> true, 
+			   //            			"from"=> "support@puzel.co",
+			   //            			'to'=>$user['Business']['email'],
+			   //            			'reply_to'=>"support@puzel.co"
+			   //            			);	
+						// if($this->sendemail($email))
+						// {
+							foreach($user['Visitor'] as $value)
+							{
+								$visitoremail = array(
+			              			"templateid"=>1062344,
+			              			"name"=>$value['firstname'].' '.$value['lastname'],
+			              			"TemplateModel"=> array(
+									    "user_name"=> $value['firstname'].' '.$value['lastname'],
+									    "product_name"=>$user['Puzzle']['name'],
+										"company"=> array(
+											"name"=> $value['company_name']),
+										"action_url"=>"Puzzle had been deactive by Business Department"),
+									"InlineCss"=> true, 
+			              			"from"=> "support@puzel.co",
+			              			'to'=>$value['email'],
+			              			'reply_to'=>"support@puzel.co"
+			              			);	
+								$this->sendemail($visitoremail);
+							}
+						//}
+					}		
+				$response = array("message" =>"Puzzle Deactive","newbalnce"=>$newbalnce);	
 			}
 			
 		}

@@ -381,6 +381,14 @@ $(document).ready(function(){
           data: {'id':this.value} ,
           success: function (data)
           { 
+               var obj = $.parseJSON(data);
+              var updated_pieces = obj.newbalnce;
+              $("#balance_pieces_live").text(updated_pieces);
+
+              var activated_puzel = $("#active_puzel_live").text();
+              var live_activate_puzel = parseInt($("#active_puzel_live").text()) + 1;
+              $("#active_puzel_live").text(live_activate_puzel)
+
               // Button message 
               $("#alert").html("<p>Puzzle activated</p>");
               $("#alert").show().delay(3000).fadeOut();
@@ -398,6 +406,14 @@ $(document).ready(function(){
           data: {'id':this.value} ,
           success: function (data)
           {
+            var obj = $.parseJSON(data);
+            var updated_pieces = obj.newbalnce;
+            $("#balance_pieces_live").text(updated_pieces);
+
+            var activated_puzel = $("#active_puzel_live").text();
+            var live_activate_puzel = parseInt($("#active_puzel_live").text()) - 1;
+            $("#active_puzel_live").text(live_activate_puzel);
+
             // button alert message 
             $("#alert").html("<p>Puzzle deactivate</p>");
             $("#alert").show().delay(3000).fadeOut();
