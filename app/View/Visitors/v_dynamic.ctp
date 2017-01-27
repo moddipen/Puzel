@@ -329,7 +329,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
          else 
          {
 
-            var url = "<?php echo Configure::read('SITE_URL')?>process/<?php echo $PuzzleData['Puzzle']['name'];?>"; 
+            var url = "<?php echo Configure::read('SITE_URL')?>process/<?php echo $PuzzleData['Puzzle']['random'];?>"; 
              // Form Submit Ajax  
               $.ajax({
                        type: "POST",
