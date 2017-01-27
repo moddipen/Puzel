@@ -53,7 +53,7 @@ $(document).ready(function()
          else 
          {
 
-            var url = "http://puzel.stage.n-framescorp.com/process/"+randomid; 
+            var url = "http://puzel.stage.n-framescorp.com/process/"+puzzle_id; 
              // Form Submit Ajax  
               $.ajax({
                        type: "POST",
@@ -174,7 +174,7 @@ $(document).ready(function()
          } 
          else 
          {
-            var url = "http://puzel.stage.n-framescorp.com/process/"+randomid; 
+            var url = "http://puzel.stage.n-framescorp.com/process/"+puzzle_id; 
              // Form Submit Ajax  
               $.ajax({
                        type: "POST",
