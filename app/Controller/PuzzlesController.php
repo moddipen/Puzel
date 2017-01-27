@@ -448,7 +448,7 @@ class  PuzzlesController  extends AppController {
 									    "product_name"=>$user['Puzzle']['name'],
 										"company"=> array(
 											"name"=> $value['company_name']),
-										"action_url"=>"Puzzle had been active by administrative department"),
+										"action_url"=>"Puzzle has been actived by Business department"),
 									"InlineCss"=> true, 
 			              			"from"=> "support@puzel.co",
 			              			'to'=>$value['email'],
@@ -548,7 +548,7 @@ class  PuzzlesController  extends AppController {
 									    "product_name"=>$user['Puzzle']['name'],
 										"company"=> array(
 											"name"=> $value['company_name']),
-										"action_url"=>"Puzzle had been deactive by Business Department"),
+										"action_url"=>"Puzzle has been deactived by Business Department"),
 									"InlineCss"=> true, 
 			              			"from"=> "support@puzel.co",
 			              			'to'=>$value['email'],
