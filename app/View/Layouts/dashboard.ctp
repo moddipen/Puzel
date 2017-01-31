@@ -23,7 +23,7 @@ $cakeDescription = __d('cake_dev', 'Puzel');
 	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:image" content="http://puzel.stage.n-framescorp.com/app/webroot/img/grand_price/994203sjdfldsjflksdjlkdsjflkdsmfjdslkfjdslkfjdsflkjdskfdsjfkdsfjdskfjdsfkdsfjdsfkdfsjdsfk.jpg"/>
+    
 	<title>
 		<?php echo $cakeDescription ?>:
 		<?php echo  $title; ?>
