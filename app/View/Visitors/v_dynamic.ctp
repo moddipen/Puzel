@@ -130,7 +130,6 @@ a:hover {
 }
 #Imagedata .form-group, #Imageenroll .form-group{margin-bottom:16px;}
 </style>
-
 <script type="text/javascript">
 var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 	jQuery.validator.addMethod("validateemail", function(value, element) {
