@@ -148,7 +148,7 @@ padding: 0;
 
   .socialbtn h3{
    float:left;
-    margin-right: 25px;
+    margin-right: 41px;
 }
 .socialbtn p{
     padding-top: 25px;
