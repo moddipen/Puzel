@@ -298,7 +298,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 
 
     function alert() {    
-      var html = '</br></br>Share with your friends</br><a class="share-btn" href="http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/<?php echo $Company."/".$explode[4]."/".substr($_SERVER["REQUEST_URI"], strrpos($_SERVER["REQUEST_URI"], "/") + 1);?>&title=<?php echo $puzle_name;?>" id="magicPopup"><i class="facebook" style="color:black !important;font-size:40px !important;top: 0px;"">f</i></a>';
+      var html = '</br></br>Share with your friends</br><a class="share-btn" href="http://www.facebook.com/share.php?u=http://puzel.stage.n-framescorp.com/<?php echo $Company."/".$explode[4]."/".substr($_SERVER["REQUEST_URI"], strrpos($_SERVER["REQUEST_URI"], "/") + 1);?>&title=<?php echo $puzle_name;?>" id="magicPopup"><i class="facebook" style="color:black !important;font-size:40px !important;top: 0px;">f</i></a>';
       javascript:successAlert("You have been enrolled. "+html);
     }
 
@@ -306,7 +306,8 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
   
 
 $('#magicPopup').on('click',function(){
-     window.open(this.href,'Facebook',width='640',height='580');
+     alert("magicPopup");
+    return  !window.open(this.href,'Facebook',width='640',height='580');
 });
 
 
