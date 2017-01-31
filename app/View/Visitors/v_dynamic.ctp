@@ -305,7 +305,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 
   
 
-$('#magicPopup').live('click',function(){
+$('#magicPopup').click({
      alert("magicPopup");
     return  !window.open(this.href,'Facebook',width='640',height='580');
 });
