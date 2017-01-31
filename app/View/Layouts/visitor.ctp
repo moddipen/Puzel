@@ -37,8 +37,7 @@ $cakeDescription = __d('cake_dev', 'Puzel');
     <?php
     	}
     ?>
-    <meta property="og:image" content="http://puzel.stage.n-framescorp.com/app/webroot/img/grand_price/994203sjdfldsjflksdjlkdsjflkdsmfjdslkfjdslkfjdsflkjdskfdsjfkdsfjdskfjdsfkdsfjdsfkdfsjdsfk.jpg"/>
-	<title>
+    <title>
 		<?php echo $cakeDescription ?>:
 		<?php echo  $title; ?>
 	</title>
