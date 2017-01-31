@@ -130,7 +130,7 @@ a:hover {
 }
 #Imagedata .form-group, #Imageenroll .form-group{margin-bottom:16px;}
 </style>
-<meta property="og:image" content="<?php echo Configure::read("SITE_URL") ;?>app/webroot/img/grand_price/<?php echo strtolower($PuzzleData['Puzzle']['price_image']);?>"/>
+
 <script type="text/javascript">
 var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 	jQuery.validator.addMethod("validateemail", function(value, element) {
