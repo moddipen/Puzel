@@ -146,6 +146,8 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
       {
         $("#enrollwithpuzzleaccount").val(2);
       }); 
+
+      jQuery.noConflict();
       $("#Imagedata").validate({
       rules: {
         firstname: "required",
