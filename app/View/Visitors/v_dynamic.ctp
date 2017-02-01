@@ -2,9 +2,7 @@
     echo $this->Html->css('visitor/jAlert-master/src/jAlert.css');
     echo $this->Html->script('visitor/jAlert-master/src/jAlert.js');
     echo $this->Html->script('visitor/jAlert-master/src/jAlert-functions.js');
-    echo $this->Html->css('barfiller');
-    echo $this->Html->script('jquery-3.1.0.slim.min');
-    echo $this->Html->script('jquery.barfiller');
+    
 
 
  
@@ -600,6 +598,11 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
             
         </div>
     </div>
+    <?php
+      echo $this->Html->css('barfiller');
+    echo $this->Html->script('jquery-3.1.0.slim.min');
+    echo $this->Html->script('jquery.barfiller');
+    ?>
      <div class="three columns">
       <div class="share-social">
               <p id="messagecontent">
