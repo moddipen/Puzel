@@ -725,7 +725,7 @@ $(document).ready(function()
         $(this).addClass('active');
     });
 
-
+jQuery.noConflict();
  $('#bar1').barfiller({
 
   // color of bar
