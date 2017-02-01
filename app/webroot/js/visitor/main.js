@@ -67,11 +67,11 @@ var cbpAnimatedHeader = (function() {
 /*-----------------------------------------------------------------------------------*/
 		
 		
-		// $('.fade1').delay(400).fadeIn(2000);
+		$('.fade1').delay(400).fadeIn(2000);
 		
-		// $('.fade2').delay(700).fadeIn(1500);
+		$('.fade2').delay(700).fadeIn(1500);
 		
-		// $('.fade3').delay(1000).fadeIn(1500);
+		$('.fade3').delay(1000).fadeIn(1500);
 		
 
 
