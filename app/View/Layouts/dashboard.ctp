@@ -23,7 +23,16 @@ $cakeDescription = __d('cake_dev', 'Puzel');
 	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+        <?php
+    	if(isset($value['Puzzle']['Puzzle']['grand_price']))
+    	{
+    ?>
     
+    		<meta property="og:image" content="<?php echo Configure::read("SITE_URL") ;?>app/webroot/img/grand_price/<?php echo strtolower($value['Puzzle']['Puzzle']['grand_price']);?>"/>
+    <?php
+    	}
+    ?>
+
 	<title>
 		<?php echo $cakeDescription ?>:
 		<?php echo  $title; ?>
