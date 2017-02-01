@@ -619,7 +619,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
   animateOnResize: true
   
 });
-    </script>>
+      </script>
      <div class="three columns">
       <div class="share-social">
               <p id="messagecontent">
