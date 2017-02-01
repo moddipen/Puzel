@@ -2,6 +2,9 @@
     echo $this->Html->css('visitor/jAlert-master/src/jAlert.css');
     echo $this->Html->script('visitor/jAlert-master/src/jAlert.js');
     echo $this->Html->script('visitor/jAlert-master/src/jAlert-functions.js');
+    echo $this->Html->css('barfiller');
+    echo $this->Html->script('jquery-3.1.0.slim.min');
+    echo $this->Html->script('jquery.barfiller');
 
 
  
@@ -600,6 +603,12 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
      <div class="three columns">
       <div class="share-social">
               <p id="messagecontent">
+               <div id="bar1" class="barfiller">
+                <div class="tipWrap">
+                <span class="tip"></span>
+                </div>
+                <span class="fill" data-percentage="50"></span>
+              </div>
           <?php if($ShowPuzzel['Show'] > 0){?>
              <?php echo $ShowPuzzel['Hide']?> have signed up so far, <?php echo $ShowPuzzel['Show']?> more to go before we give away the rewards, enroll yourself now!
               <?php } else {
