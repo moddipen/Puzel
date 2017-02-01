@@ -606,6 +606,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
     echo $this->Html->script('jquery.barfiller');
     ?>
     <script type="text/javascript">
+    $(document).ready(function(){
        $('#bar1').barfiller({
 
   // color of bar
@@ -621,6 +622,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
   animateOnResize: true
   
 });
+     });
     </script>
      <div class="three columns">
       <div class="share-social">
