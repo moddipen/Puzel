@@ -2,9 +2,6 @@
     echo $this->Html->css('visitor/jAlert-master/src/jAlert.css');
     echo $this->Html->script('visitor/jAlert-master/src/jAlert.js');
     echo $this->Html->script('visitor/jAlert-master/src/jAlert-functions.js');
-    echo $this->Html->css('barfiller');
-    echo $this->Html->script('jquery-3.1.0.slim.min');
-    echo $this->Html->script('jquery.barfiller');
 
 
  
@@ -15,31 +12,6 @@
   $explode = explode('/',$path);
   echo $this->Html->css('animations.css');
 ?>
-<script type="text/javascript">
-    $(document).ready(function(){
-       $('#bar1').barfiller({
-
-  // color of bar
-  barColor: '#16b597',
-
-  // shows a tooltip
-  tooltip: true,
-
-  // duration in ms
-  duration: 1000,
-
-  // re-animate on resize
-  animateOnResize: true
-  
-});
-     });
-    </script>
-    <div id="bar1" class="barfiller">
-                <div class="tipWrap">
-                <span class="tip"></span>
-                </div>
-                <span class="fill" data-percentage="50"></span>
-              </div>
 <style>
 
 /* .no-right:focus, .no-right a:focus{
@@ -160,7 +132,7 @@ a:hover {
 </style>
 <script type="text/javascript">
 var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
-	$.validator.addMethod("validateemail", function(value, element) {
+	jQuery.validator.addMethod("validateemail", function(value, element) {
   // allow any non-whitespace characters as the host part
   return this.optional( element ) || value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,5})+$/);
 }, 'Please enter a valid email address.');
