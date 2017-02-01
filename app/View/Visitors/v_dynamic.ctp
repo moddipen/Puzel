@@ -603,23 +603,6 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
     echo $this->Html->script('jquery-3.1.0.slim.min');
     echo $this->Html->script('jquery.barfiller');
     ?>
-    <script type="text/javascript">
-      $('#bar1').barfiller({
-
-  // color of bar
-  barColor: '#16b597',
-
-  // shows a tooltip
-  tooltip: true,
-
-  // duration in ms
-  duration: 1000,
-
-  // re-animate on resize
-  animateOnResize: true
-  
-});
-      </script>
      <div class="three columns">
       <div class="share-social">
               <p id="messagecontent">
@@ -741,7 +724,21 @@ $(document).ready(function()
     });
 
 
+ $('#bar1').barfiller({
 
+  // color of bar
+  barColor: '#16b597',
+
+  // shows a tooltip
+  tooltip: true,
+
+  // duration in ms
+  duration: 1000,
+
+  // re-animate on resize
+  animateOnResize: true
+  
+});
 
 });
 </script>
