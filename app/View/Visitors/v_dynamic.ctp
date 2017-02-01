@@ -599,9 +599,9 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
         </div>
     </div>
     <?php
-      echo $this->Html->css('barfiller');
-    echo $this->Html->script('jquery-3.1.0.slim.min');
-    echo $this->Html->script('jquery.barfiller');
+    //   echo $this->Html->css('barfiller');
+    // echo $this->Html->script('jquery-3.1.0.slim.min');
+    // echo $this->Html->script('jquery.barfiller');
     ?>
      <div class="three columns">
       <div class="share-social">
