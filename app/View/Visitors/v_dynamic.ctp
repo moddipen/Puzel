@@ -2,7 +2,9 @@
     echo $this->Html->css('visitor/jAlert-master/src/jAlert.css');
     echo $this->Html->script('visitor/jAlert-master/src/jAlert.js');
     echo $this->Html->script('visitor/jAlert-master/src/jAlert-functions.js');
-    
+    echo $this->Html->css('barfiller');
+    echo $this->Html->script('jquery-3.1.0.slim.min');
+    echo $this->Html->script('jquery.barfiller');
 
 
  
@@ -13,6 +15,31 @@
   $explode = explode('/',$path);
   echo $this->Html->css('animations.css');
 ?>
+<script type="text/javascript">
+    $(document).ready(function(){
+       $('#bar1').barfiller({
+
+  // color of bar
+  barColor: '#16b597',
+
+  // shows a tooltip
+  tooltip: true,
+
+  // duration in ms
+  duration: 1000,
+
+  // re-animate on resize
+  animateOnResize: true
+  
+});
+     });
+    </script>
+    <div id="bar1" class="barfiller">
+                <div class="tipWrap">
+                <span class="tip"></span>
+                </div>
+                <span class="fill" data-percentage="50"></span>
+              </div>
 <style>
 
 /* .no-right:focus, .no-right a:focus{
@@ -146,8 +173,6 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
       {
         $("#enrollwithpuzzleaccount").val(2);
       }); 
-
-      jQuery.noConflict();
       $("#Imagedata").validate({
       rules: {
         firstname: "required",
@@ -600,39 +625,9 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
             
         </div>
     </div>
-    <?php
-    echo $this->Html->css('barfiller');
-    echo $this->Html->script('jquery-3.1.0.slim.min');
-    echo $this->Html->script('jquery.barfiller');
-    ?>
-    <script type="text/javascript">
-    $(document).ready(function(){
-       $('#bar1').barfiller({
-
-  // color of bar
-  barColor: '#16b597',
-
-  // shows a tooltip
-  tooltip: true,
-
-  // duration in ms
-  duration: 1000,
-
-  // re-animate on resize
-  animateOnResize: true
-  
-});
-     });
-    </script>
      <div class="three columns">
       <div class="share-social">
               <p id="messagecontent">
-               <div id="bar1" class="barfiller">
-                <div class="tipWrap">
-                <span class="tip"></span>
-                </div>
-                <span class="fill" data-percentage="50"></span>
-              </div>
           <?php if($ShowPuzzel['Show'] > 0){?>
              <?php echo $ShowPuzzel['Hide']?> have signed up so far, <?php echo $ShowPuzzel['Show']?> more to go before we give away the rewards, enroll yourself now!
               <?php } else {
@@ -743,6 +738,7 @@ $(document).ready(function()
         $("#Imagedata").css('display','block');
         $(this).addClass('active');
     });
+
 
 
 
