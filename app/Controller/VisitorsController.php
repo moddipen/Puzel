@@ -291,6 +291,7 @@ class  VisitorsController  extends AppController {
 
 			elseif($this->request->data['sessionwithpuzzleaccount'] == 3)
 			{
+				echo "<pre>";print_r($this->Auth->user());
 				exit("dfgdfgdf");
 			}	
 
