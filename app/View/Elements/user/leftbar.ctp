@@ -78,6 +78,12 @@
                       
                     </a>
                   </li>
+                  <li class="<?php echo $mainClass;?>">
+                    <a href="<?php echo Configure::read('SITE_URL');?>top-20-puzels">
+                      <i class="fa fa-puzel-icon-left"></i> Most recent 20 puzels
+                      
+                    </a>
+                  </li>
                   <li class="welcome"><?php 
                       
                       if(AuthComponent::user('User'))
