@@ -312,6 +312,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
 
 
 
+
       $("#Imagedata").submit(function(e)
       {
          if($("#fname").val() == '')
@@ -413,8 +414,85 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
             } 
           });  
           
- 
+// Session already login user 
 
+    
+    $("#Imagesession").submit(function(e)
+      {
+            var url = "<?php echo Configure::read('SITE_URL')?>process/<?php echo $PuzzleData['Puzzle']['random'];?>"; 
+             // Form Submit Ajax  
+              $.ajax({
+                       type: "POST",
+                       url: url,
+                       data: $("#Imagesession").serialize(), // serializes the form's elements.
+                       dataType: 'json', 
+                       success: function(data)
+                       {
+                         if(data.message != "You have already enrolled")
+                          {
+
+                            $.ajax
+                              ({
+                                 type: "POST",
+                                 url: "<?php echo Configure::read('SITE_URL');?>fetchimage/"+data.ImageId,
+                                 dataType: 'text', 
+                                 success:function(data)
+                                 {
+
+                                    var audioElement = document.createElement('audio');
+                                      audioElement.setAttribute('src', '<?php echo Configure::read("SITE_URL")?>tone/notification.mp3');
+                                       audioElement.play();      
+                                    var obj = $.parseJSON(data);
+                                    obj = obj.name;
+                                    objs = obj.split('.');
+                                    var get_name = objs[0].split('_');
+                                    $('.'+objs[0]).css("background-image","url('<?php echo $this->webroot;?>img/puzzel/"+get_name[0]+"/"+obj+"')");  //
+                                    
+                                    if(transition  == "Newspaper"){var classes = 'pt-page-rotateOutNewspaper pt-page-rotateInNewspaper pt-page-delay500';}
+                                    if(transition  == "Cube to left"){var classes = 'pt-page-rotateCubeLeftOut pt-page-ontop pt-page-rotateCubeLeftIn';}
+                                    if(transition  == "Cube to right"){var classes = 'pt-page-rotateCubeRightOut pt-page-ontop pt-page-rotateCubeRightIn';}
+                                    if(transition  == "Cube to top"){var classes = 'pt-page-rotateCubeTopOut pt-page-ontop pt-page-rotateCubeTopIn';}
+                                    if(transition  == "Cube to bottom"){var classes = 'pt-page-rotateCubeBottomOut pt-page-ontop pt-page-rotateCubeBottomIn';}
+                                    if(transition  == "Flip right"){var classes = 'pt-page-flipOutRight pt-page-flipInLeft pt-page-delay500';}
+                                    if(transition  == "Flip left"){var classes = 'pt-page-flipOutLeft pt-page-flipInRight pt-page-delay500';}
+                                    if(transition  == "Flip top"){var classes = 'pt-page-flipOutTop pt-page-flipInBottom pt-page-delay500';}
+                                    if(transition  == "Flip bottom"){var classes = 'pt-page-flipOutBottom pt-page-flipInTop pt-page-delay500';}
+                                    
+                                    $('.'+objs[0]).addClass(classes);
+                                      
+                                    if(data != ''){
+                                      setTimeout( alert, 3000);
+
+                                      var newaddcount = parseInt($("#showimagecontent").val()) - 1 ;
+                                      var newminuscount = parseInt($("#hideimagecontent").val()) + 1;
+                                      if(newaddcount != 0)
+                                      {
+                                        $("#messagecontent").html(newminuscount+" have signed up so far, "+newaddcount+" more to go before we give away the rewards, enroll yourself now!");     
+                                      }
+                                      else
+                                      {
+                                        $("#messagecontent").html(newminuscount+" have signed up so far,");   
+                                      }  
+                                      
+                                      $("#showimagecontent").val(newaddcount);
+                                      $("#hideimagecontent").val(newminuscount);
+                                    }  
+                                  }
+                            });
+                          }
+                          else
+                          {
+                            javascript:errorAlert(data.message);
+                            $(".ja_wrap_black").show().delay(5000).fadeOut(function(){ $(this).remove(); });
+                          }
+                       }
+                     });
+
+                e.preventDefault(); // avoid to execute the actual submit of the form.
+          });
+
+
+ 
 
 
         
@@ -664,6 +742,20 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
               <button type="submit" class="btn button-sign btn-confirm" id="normalsign" value = "2" >Enroll Now</button>
             </div>
         </form>
+
+        <form id="Imagesession" style="display:none;padding-top: 16px;">
+        <div class="twelve columns">
+          <div class="form-group" >
+             <p>You're already logged in, click on the button below to Enroll!</p>
+          </div>
+        </div>
+          <input type = "hidden" name ="puzzlename" value = "<?php echo htmlspecialchars($PuzzleData['Puzzle']['name']);?>">
+            <input type = "hidden" name ="enrollwithpuzzleaccount" id ="enrollwithpuzzleaccount" value = "">
+            <div class="clearfix"></div>
+            <div class="form-group text-center">
+              <button type="submit" class="btn button-sign btn-confirm" id="normalsign" value = "2" >Enroll Now</button>
+            </div>
+        </form>
     </div>
     <?php } ?>
 </div>
@@ -694,23 +786,58 @@ $(document).ready(function()
 
     // hide submit form when click on enroll button
 
+    // $("#enrollformshow").on("click",function()
+    // {
+    //     $(this).siblings().removeClass('active')
+    //     $("#Imagedata").css('display','none');
+    //     $("#Imageenroll").css('display','block');
+    //     $(this).addClass('active');
+    // });
+    
+    // // hide enroll form when click on submit button    
+    // $("#puzelasubmit").on("click",function()
+    // { 
+    //     $(this).siblings().removeClass('active')
+    //     $("#Imageenroll").css('display','none');
+    //     $("#Imagedata").css('display','block');
+    //     $(this).addClass('active');
+    // });
+
+    
     $("#enrollformshow").on("click",function()
     {
         $(this).siblings().removeClass('active')
         $("#Imagedata").css('display','none');
-        $("#Imageenroll").css('display','block');
+        <?php 
+        if(empty(AuthComponent::user()))
+        {?>
+          $("#Imageenroll").css('display','block');  
+        <?php }  
+       if(!empty(AuthComponent::user()))
+        {?>
+          $("#Imagesession").css('display','block');  
+        <?php }  
+         ?> 
+
+
+        
         $(this).addClass('active');
     });
     
     // hide enroll form when click on submit button    
     $("#puzelasubmit").on("click",function()
-    { 
+    {
         $(this).siblings().removeClass('active')
         $("#Imageenroll").css('display','none');
+        <?php 
+        if(!empty(AuthComponent::user()))
+        {?>
+          $("#Imagesession").css('display','none');  
+        <?php }  
+         ?> 
         $("#Imagedata").css('display','block');
         $(this).addClass('active');
     });
-
 
 
 
