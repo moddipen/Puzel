@@ -1214,6 +1214,28 @@ class  PuzzlesController  extends AppController {
 	
 
 
+/**
+	User most recent puzzles
+*/	
+	public function user_recent()
+	{
+		$this->set("title","Index");
+		$this->Puzzle->unbindModel(array("hasMany"=>array("Image")));
+		$puzel = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.status'=>0),'order'=>'Puzzle.created Desc','limit'=>20)) ; 
+		$this->set("Puzzel",$puzel);	
+	}
+
+/**
+	Set User panel click puzzle in session
+*/	
+	public function user_recentclick($id = null)
+	{
+		$this->autoRender = false;	
+		// Store random value in session 
+		$this->Session->write('USERDASHBOARDFROMLOGIN',$id);
+}
+
+
 
 
 
