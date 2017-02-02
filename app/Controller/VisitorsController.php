@@ -318,7 +318,7 @@ class  VisitorsController  extends AppController {
 							
 						    $message = "Your have signed up for Puzel ".$puzle['Puzzle']['name'];
 							$useremail = array(
-				              			"templateid"=>1240783,
+				              			"templateid"=>1254016,
 				              			"name"=>$this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
 				              			"TemplateModel"=> array(
 										    "user_name"=> $this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
