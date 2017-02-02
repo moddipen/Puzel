@@ -287,6 +287,19 @@ class  VisitorsController  extends AppController {
 				
 			}
 			
+			// Sign up with session login 
+
+			elseif($this->request->data['sessionwithpuzzleaccount'] == 3)
+			{
+				exit("dfgdfgdf");
+			}	
+
+
+
+
+
+
+
 			// Normal sign up process 
 			else
 			{
