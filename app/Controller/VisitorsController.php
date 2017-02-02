@@ -291,16 +291,51 @@ class  VisitorsController  extends AppController {
 
 			elseif($this->request->data['sessionwithpuzzleaccount'] == 3)
 			{
-				echo "<pre>";print_r($this->Auth->user());
-				exit("dfgdfgdf");
-			}	
-
-
-
-
-
-
-
+				$visitor = $this->Visitor->find('first',array('conditions'=>array('Visitor.email'=>$this->Auth->user('email') ,'Visitor.puzzle_id'=>$puzle['Puzzle']['id'])));
+				if(!empty($visitor))
+				{
+					$response = array("message"=>"You have already enrolled");
+                    echo json_encode($response);
+				}
+				else
+				{
+					$data = array(
+						'firstname'=>$this->Auth->user('firstname'),
+						'lastname'=>$this->Auth->user('lastname'),
+						'email'=>$this->Auth->user('email'),
+						'puzzle_id'=>$puzle['Puzzle']['id'],
+						'user_id'=>$this->Auth->user('id'));
+					
+					$this->Visitor->create();
+					if($this->Visitor->save($data))
+					{
+						
+						$modified = date('Y-m-d H:i:s');
+						$update = $this->Image->query("UPDATE images SET status = 1 ,modified = '".$modified."' WHERE status <> '1' AND user_id = '".$puzle['Puzzle']['user_id']."' AND puzzle_id = '".$puzle['Puzzle']['id']."' ORDER BY RAND() LIMIT 1 ");  
+						$update_puzzle = $this->Image->find('first',array('conditions'=>array('Image.modified'=>$modified,'Image.puzzle_id'=>$puzle['Puzzle']['id'],'Image.user_id'=>$puzle['Puzzle']['user_id'])));
+						if($update_puzzle)
+						{
+							
+						    $message = "Your have signed up for Puzel ".$puzle['Puzzle']['name'];
+							$useremail = array(
+				              			"templateid"=>1240783,
+				              			"name"=>$this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+				              			"TemplateModel"=> array(
+										    "user_name"=> $this->Auth->user('firstname').' '.$this->Auth->user('lastname'),
+										    "product_name"=>"Signup Successfully",
+										    "company"=>array("name"=>""),
+											"action_url"=>$message),
+										"InlineCss"=> true, 
+				              			"from"=> "support@puzel.co",
+				              			'to'=>$this->Auth->user('email'),
+				              			'reply_to'=>"support@puzel.co"
+				              			);	
+							$this->hostedemail($useremail,$update_puzzle['Image']['puzzle_id'],$update_puzzle['Image']['id'],"Front")	;
+						}
+					}		
+				}
+			}		
+			
 			// Normal sign up process 
 			else
 			{
