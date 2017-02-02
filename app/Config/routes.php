@@ -45,6 +45,7 @@
   Router::connect('/forgot-password', array('controller' => 'users', 'action' => 'forgetpassword','user'=>true));
   Router::connect('/logout', array('controller' => 'users', 'action' => 'logout','user'=>true));
   Router::connect('/puzels', array('controller' => 'puzzles', 'action' => 'index','user'=>true));
+  Router::connect('/top-20-puzels', array('controller' => 'puzzles', 'action' => 'recent','user'=>true));
  // Router::connect('/puzel', array('controller' => 'puzzles', 'action' => 'checkuser'));
   Router::connect('/supports', array('controller' => 'supports', 'action' => 'index','user'=>true));
   Router::connect('/create-tickets', array('controller' => 'supports', 'action' => 'add','user'=>true));
