@@ -145,6 +145,12 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
       {
         $("#enrollwithpuzzleaccount").val(2);
       }); 
+      $("#sessionsign").click(function()
+      {
+        $("#sessionwithpuzzleaccount").val(3);
+      }); 
+
+
       $("#Imagedata").validate({
       rules: {
         firstname: "required",
@@ -750,10 +756,10 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
           </div>
         </div>
           <input type = "hidden" name ="puzzlename" value = "<?php echo htmlspecialchars($PuzzleData['Puzzle']['name']);?>">
-            <input type = "hidden" name ="enrollwithpuzzleaccount" id ="enrollwithpuzzleaccount" value = "">
+            <input type = "hidden" name ="sessionwithpuzzleaccount" id ="sessionwithpuzzleaccount" value = "1">
             <div class="clearfix"></div>
             <div class="form-group text-center">
-              <button type="submit" class="btn button-sign btn-confirm" id="normalsign" value = "2" >Enroll Now</button>
+              <button type="submit" class="btn button-sign btn-confirm" id="sessionsign" value = "2" >Enroll Now</button>
             </div>
         </form>
     </div>
