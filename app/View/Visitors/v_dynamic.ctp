@@ -752,7 +752,7 @@ var transition = '<?php echo $PuzzleData['Puzzle']['transtion'];?>';
         <form id="Imagesession" style="display:none;padding-top: 16px;">
         <div class="twelve columns">
           <div class="form-group" >
-             <p>You're already logged in, click on the button below to Enroll!</p>
+             <p align="center">You're already logged in, click on the button below to Enroll!</p>
           </div>
         </div>
           <input type = "hidden" name ="puzzlename" value = "<?php echo htmlspecialchars($PuzzleData['Puzzle']['name']);?>">
