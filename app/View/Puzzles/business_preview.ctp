@@ -64,7 +64,7 @@
 												border-color: #e58b16 !important;
 												color: #fff;
 										}
-										button.btn.btn-oranges.fullwidth.button-sign:hover{color: #fff;}
+										button.btn.btn-oranges.fullwidth.button-sign:hover{background: #fff !important;}
 										</style>
                                         <div class="form-group">
                                           <button type="submit" class="btn btn-oranges fullwidth button-sign">Launch Campaign</button>
