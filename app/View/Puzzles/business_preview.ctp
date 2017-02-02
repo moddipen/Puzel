@@ -58,8 +58,16 @@
                                         <div class="form-group">
                                           <button type="button" id="sendTo" class="btn btn-oranges fullwidth">Send to Developer</button>
                                         </div>
+                                        <style>
+										button.btn.btn-oranges.fullwidth.button-sign{
+											    background: #e58b16;
+												border-color: #e58b16 !important;
+												color: #fff;
+										}
+										button.btn.btn-oranges.fullwidth.button-sign:hover{color: #fff;}
+										</style>
                                         <div class="form-group">
-                                          <button type="submit" class="btn btn-oranges fullwidth">Launch Campaign</button>
+                                          <button type="submit" class="btn btn-oranges fullwidth button-sign">Launch Campaign</button>
                                         </div>
                                     </div>
                                 </div>
