@@ -56,7 +56,7 @@
   Router::connect('/user/puzzles/datefilter', array('controller' => 'puzzles', 'action' => 'datefilter','user'=>true));
   Router::connect('/user/supports/datefilter', array('controller' => 'supports', 'action' => 'datefilter','user'=>true));
   Router::connect('/delete/*', array('controller' => 'supports', 'action' => 'delete','user'=>true));
- 
+  Router::connect('/confirms/*', array('controller' => 'users', 'action' => 'confirms','user'=>true));
 
 
 
