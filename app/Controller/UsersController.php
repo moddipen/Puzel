@@ -58,7 +58,7 @@ class UsersController extends AppController {
 		$this->set("statistics",$statistics);
 	  	$signup = 0;
 		$this->set("Signup",$signup);
-	  	$this->Auth->allow(array('index','contact','user_register','user_login','about','business','user_forgetpassword','admin_login','user_reset','clearcache','user_confirm','user_signup'));
+	  	$this->Auth->allow(array('index','contact','user_register','user_login','about','business','user_forgetpassword','admin_login','user_reset','clearcache','user_confirm','user_signup','user_confirms'));
 	  	$this->set('main_action','User');
 	 	// Count of total puzzle 
 	 	// Count of total puzzle 
@@ -1468,6 +1468,46 @@ public function user_confirm($token=null)
 	}
 
 
+
+
+/**
+	When click on activate button on email account	
+*/
+
+	public function user_confirms($token=null)
+	{
+		$this->autoRender = false ;
+	
+		$user = $this->User->find('first',array('conditions'=>array('User.tokenhash'=>$token)));
+
+		$update = array(
+			'id'=>$user['User']['id'],
+			'status'=>0);
+
+		if($this->User->save($update))
+		{
+
+			$useremail = array(
+	  			"templateid"=>1279587,
+	  			"name"=>$user['User']['firstname'].' '.$user['User']['lastname'],
+	  			"TemplateModel"=> array(
+				    "user_name"=> $user['User']['firstname'].' '.$user['User']['lastname'],
+				    "product_name"=>'',
+				    "company"=>array("name"=>""),
+					"action_url"=>" Your account has been activate"),
+				"InlineCss"=> true, 
+	  			"from"=> "support@puzel.co",
+	  			'to'=>$user['User']['email'],
+	  			'reply_to'=>"support@puzel.co"
+	  			);
+
+	  		if($this->sendemail($useremail))
+	  		{
+	  			$this->Session->setFlash(__('Your account has been activate ', true), 'default');	
+				$this->redirect(array('action'=>'login'));		
+	  		}	
+		}
+	}
 
 
 
