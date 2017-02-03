@@ -95,7 +95,7 @@
                     </div>
                   </div>-->
                     <div class="table-responsive">
-                      <table class="table nomargin text-center">
+                      <table class="table nomargin">
                        <!--  <thead>
                           <tr>
                             <th class="text-center">Companyname</th>
