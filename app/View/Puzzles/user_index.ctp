@@ -13,7 +13,7 @@
           <!-- content main container -->
           <div class="main">
             <!-- cards -->
-            <?php echo $this->element('user/header');?>
+            <?php echo $this->element('user/header'); if(!empty($List)) {?>
                <!-- /cards -->
              <div class="pagesubheader">
               <h2 class="title"><i class="fa fa-puzel-icon-left-big"></i> Puzel</h2><div id="alert" class="alert"><?php echo $this->Session->flash();?> 
@@ -184,7 +184,7 @@
 
 
 
-
+          <?php  } ?>
 
         </div>
         <!-- Page content end -->
