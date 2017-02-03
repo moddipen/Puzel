@@ -1420,7 +1420,7 @@ public function user_confirm($token=null)
 
 					$key = Security::hash(String::uuid(),'sha512',true);
 					$hash=sha1($this->request->data['User']['email'].rand(0,100));
-					$url = Router::url(Configure::read('SITE_URL').'confirm').'/'.$key.'#'.$hash;
+					$url = Router::url(Configure::read('SITE_URL').'confirms').'/'.$key.'#'.$hash;
 					$ms=$url;
 					$ms=wordwrap($ms,1000);
 					$this->request->data['User']['status'] = 1;
