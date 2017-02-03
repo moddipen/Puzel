@@ -3,7 +3,11 @@
 
           <!-- Branding -->
           <div class="navbar-header col-md-1">
-            <a class="navbar-brand" href="<?php echo Configure::read('SITE_URL');?>puzels">
+
+            <?php if($Activepuzzle > 0) { $datavalue = "puzels";} else { $datavalue = "top-20-puzels";} ?>
+
+
+            <a class="navbar-brand" href="<?php echo Configure::read('SITE_URL').$datavalue;?>">
               
             </a>
             <div class="sidebar-collapse hidden-md hidden-lg">
