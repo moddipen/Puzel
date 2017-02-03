@@ -378,8 +378,26 @@ public function get_statistics()
               	}
               	else
               	{
-              		$this->Session->setFlash(__('Login successfully!!....', true), 'default');
-              		return $this->redirect(array('controller'=>'puzzles','action'=>'index','user'=>true));	
+              		$active_puzzle = $this->Visitor->find('count',array('conditions'=>array('Visitor.user_id'=>$this->Auth->user('id'),'Puzzle.status'=>0)));
+                    if(!empty($active_puzzle))
+		            {
+		                $active_puzzle = $active_puzzle ;
+		            }
+		            else
+		            {
+		                $active_puzzle = 0;
+		            }      
+
+              		if($active_puzzle > 0)
+              		{
+              			$this->Session->setFlash(__('Login successfully!!....', true), 'default');
+              			return $this->redirect(array('controller'=>'puzzles','action'=>'index','user'=>true));		
+              		}
+              		else
+              		{
+              			$this->Session->setFlash(__('Login successfully!!....', true), 'default');
+              			return $this->redirect(array('controller'=>'puzzles','action'=>'recent','user'=>true));	
+              		}	
               		
               	}	
                 

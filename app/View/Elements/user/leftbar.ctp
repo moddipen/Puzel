@@ -49,7 +49,11 @@
                       else
                         {
                           $mainClass = "";
-                        } ?>
+                        } 
+                         if($Activepuzzle > 0) {
+
+                        
+                        ?>
                   <li class="<?php echo $mainClass;?>">
                     <a href="<?php echo Configure::read('SITE_URL');?>puzels">
                       <i class="fa fa-puzel-icon-left"></i> Puzel
@@ -57,6 +61,8 @@
                     </a>
                   </li>
                   <?php 
+
+                    }
                     if($main == "Support")
                       {
                         if($sub == "index" || $sub == "add" || $sub == "conversation")
