@@ -96,14 +96,14 @@
                   </div>-->
                     <div class="table-responsive">
                       <table class="table nomargin text-center">
-                        <thead>
+                       <!--  <thead>
                           <tr>
                             <th class="text-center">Companyname</th>
                             <th class="text-center">Launch</th>
                             <th class="text-center">Puzel Name</th>
                             <th class="text-center">Click here to Enroll Now</th>
                           </tr>
-                        </thead>
+                        </thead> -->
                         <tbody id ="datafile">
                         <?php 
                        
@@ -114,7 +114,7 @@
                               <td>Launch</td>
                               <td><?php echo $value['Puzzle']['name'];?></td>
                               <td><!-- <a target="_blank" style="color: rgba(255, 255, 255, 0.9);" href="<?php echo Configure::read("SITE_URL").$value['Business']['company_name']."/".$value['Puzzle']['random'];?>"><?php echo Configure::read("SITE_URL").$value['Business']['company_name']."/".$value['Puzzle']['random'];?></a> -->
-                              <a  style="color: rgba(255, 255, 255, 0.9);" href="javascript:void(0)" onclick="mostrecent('<?php echo $value['Puzzle']['random'];?>','<?php echo Configure::read("SITE_URL").$value['Business']['company_name']."/".$value['Puzzle']['random'];?>')"><?php echo Configure::read("SITE_URL").$value['Business']['company_name']."/".$value['Puzzle']['random'];?></a>
+                              <a  style="color: rgba(255, 255, 255, 0.9);" href="javascript:void(0)" onclick="mostrecent('<?php echo $value['Puzzle']['random'];?>','<?php echo Configure::read("SITE_URL").$value['Business']['company_name']."/".$value['Puzzle']['random'];?>')"> - Click here to Enroll Now</a>
 
 
 
