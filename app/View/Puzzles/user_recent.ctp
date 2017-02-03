@@ -109,16 +109,8 @@
                        
                         if(!empty($Puzzel)) {
                           foreach ($Puzzel as $value) {  ?>
-                            <tr>
-                              <td><?php echo $value['Business']['company_name'];?></td>
-                              <td>Launch</td>
-                              <td><?php echo $value['Puzzle']['name'];?></td>
-                              <td><!-- <a target="_blank" style="color: rgba(255, 255, 255, 0.9);" href="<?php echo Configure::read("SITE_URL").$value['Business']['company_name']."/".$value['Puzzle']['random'];?>"><?php echo Configure::read("SITE_URL").$value['Business']['company_name']."/".$value['Puzzle']['random'];?></a> -->
-                              <a  style="color: rgba(255, 255, 255, 0.9);" href="javascript:void(0)" onclick="mostrecent('<?php echo $value['Puzzle']['random'];?>','<?php echo Configure::read("SITE_URL").$value['Business']['company_name']."/".$value['Puzzle']['random'];?>')"> - Click here to Enroll Now</a>
-
-
-
-                              </td>
+                           <tr>
+                              <td><?php echo $value['Business']['company_name'];?> launch <?php echo $value['Puzzle']['name'];?>  <a  style="color: rgba(255, 255, 255, 0.9);" href="javascript:void(0)" onclick="mostrecent('<?php echo $value['Puzzle']['random'];?>','<?php echo Configure::read("SITE_URL").$value['Business']['company_name']."/".$value['Puzzle']['random'];?>')">- Click here to Enroll Now</a> </td>
                             </tr>
                          <?php } }?>
                         </tbody>
