@@ -17,7 +17,9 @@
       ?>
         <script type="text/javascript">
         $( document ).ready(function() {
+        $("#puzelasubmit").removeClass("btn button-sign btn-tab active").addClass("btn button-sign btn-tab");
         $("#enrollformshow").removeClass("btn button-sign btn-tab").addClass("btn button-sign btn-tab active");
+
         $("#Imageenroll").css("display", "none");
         $("#Imagedata").css("display", "none");
         $("#Imagesession").css("display", "block");
