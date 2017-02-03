@@ -11,8 +11,10 @@
   // Make parition or url and get puzzle name 
   $explode = explode('/',$path);
   echo $this->Html->css('animations.css');
-      if(!empty(AuthComponent::user()))
-    {?>
+    if(!empty(AuthComponent::user()))
+    { 
+      if(AuthComponent::user('usertype') == 0) {
+      ?>
         <script type="text/javascript">
         $( document ).ready(function() {
         $("#enrollformshow").removeClass("btn button-sign btn-tab").addClass("btn button-sign btn-tab active");
@@ -22,8 +24,7 @@
         
       });
     </script>
-    <?php } 
-
+    <?php } }
 
 
 
@@ -829,6 +830,8 @@ $(document).ready(function()
     // });
 
     
+  // hide submit form when click on enroll button
+
     $("#enrollformshow").on("click",function()
     {
         $(this).siblings().removeClass('active')
@@ -839,9 +842,16 @@ $(document).ready(function()
           $("#Imageenroll").css('display','block');  
         <?php }  
        if(!empty(AuthComponent::user()))
-        {?>
+        {
+          if(AuthComponent::user('usertype') == 0) {
+          ?>
           $("#Imagesession").css('display','block');  
-        <?php }  
+        <?php }
+        else
+        {?>
+          $("#Imageenroll").css('display','block');  
+        <?php }
+         }  
          ?> 
 
 
@@ -856,10 +866,14 @@ $(document).ready(function()
         $("#Imageenroll").css('display','none');
         <?php 
         if(!empty(AuthComponent::user()))
-        {?>
+        {
+          if(AuthComponent::user('usertype') == 0) {
+          ?>
           $("#Imagesession").css('display','none');  
-        <?php }  
+        <?php } } 
          ?> 
+  
+
         $("#Imagedata").css('display','block');
         $(this).addClass('active');
     });
