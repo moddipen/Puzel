@@ -1220,9 +1220,23 @@ class  PuzzlesController  extends AppController {
 	public function user_recent()
 	{
 		$this->set("title","Index");
+		// $this->Puzzle->unbindModel(array("hasMany"=>array("Image")));
+		// $puzel = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.status'=>0),'order'=>'Puzzle.created Desc','limit'=>20)) ; 
+		// $this->set("Puzzel",$puzel);	
 		$this->Puzzle->unbindModel(array("hasMany"=>array("Image")));
-		$puzel = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.status'=>0),'order'=>'Puzzle.created Desc','limit'=>20)) ; 
-		$this->set("Puzzel",$puzel);	
+		
+		$puzel = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.status'=>0),'order'=>'Puzzle.created Desc','limit'=>20)) ;
+		foreach($puzel as $k => $v)
+		{
+			$find_visitor = $this->Visitor->Find("first",array("conditions"=>array("Visitor.user_id"=>$this->Auth->user('id'),"Visitor.puzzle_id"=>$v['Puzzle']['id'])));
+			if(!empty($find_visitor))
+			{
+				unset($puzel[$k]);
+			}
+		} 
+		 
+		$this->set("Puzzel",array_values($puzel));	
+
 	}
 
 /**
