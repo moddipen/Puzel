@@ -58,7 +58,7 @@ class UsersController extends AppController {
 		$this->set("statistics",$statistics);
 	  	$signup = 0;
 		$this->set("Signup",$signup);
-	  	$this->Auth->allow(array('index','contact','user_register','user_login','about','business','user_forgetpassword','admin_login','user_reset','clearcache','user_confirm'));
+	  	$this->Auth->allow(array('index','contact','user_register','user_login','about','business','user_forgetpassword','admin_login','user_reset','clearcache','user_confirm','user_signup'));
 	  	$this->set('main_action','User');
 	 	// Count of total puzzle 
 	 	// Count of total puzzle 
@@ -1387,6 +1387,85 @@ public function user_confirm($token=null)
 	    return $randomString;
 	}
 
+/**
+	User sign up front side 
+*/
+
+	public function user_signup()
+	{
+		$this->layout = 'dashboard';
+		$this->set("title","Signup");
+		$signup = 1 ;		
+		$this->set('Signup',$signup);
+		if(!empty($this->request->data))
+		{
+			// password and confirm password does not match
+			if($this->request->data['User']['password'] != $this->request->data['User']['confirm_password'])
+			{
+				$this->Session->setFlash(__('Password does not match', true), 'default');		
+				$this->redirect(array('controller'=>'users','action'=>'signup','user' => true));				
+			}
+			else
+			{
+				// check email id already register or not 
+
+				$already_exists_account  = $this->User->find('first',array('conditions'=>array('User.email'=>$this->request->data['User']['email'])));	
+				if(!empty($already_exists_account))
+				{
+					$this->Session->setFlash(__('Email id already exists ', true), 'default');		
+					$this->redirect(array('controller'=>'users','action'=>'signup','user' => true));						
+				}
+				else
+				{
+
+					$key = Security::hash(String::uuid(),'sha512',true);
+					$hash=sha1($this->request->data['User']['email'].rand(0,100));
+					$url = Router::url(Configure::read('SITE_URL').'confirm').'/'.$key.'#'.$hash;
+					$ms=$url;
+					$ms=wordwrap($ms,1000);
+					$this->request->data['User']['status'] = 1;
+					$this->request->data['User']['tokenhash'] = $key ;
+					$this->request->data['User']['refrel_id'] = $this->generateRandomString() ;
+					$this->request->data['User']['usertype'] = 0 ;
+
+					$this->User->create();
+					if($this->User->save($this->request->data))
+					{
+						$lastInsertrecord = $this->User->find('first',array('conditions'=>array('User.id'=>$this->User->getLastInsertID())));
+						$useremail = array(
+								"templateid"=>1240783,
+								"name"=>$lastInsertrecord['User']['firstname'].' '.$lastInsertrecord['User']['lastname'],
+								"TemplateModel"=> array(
+							    "user_name"=> $lastInsertrecord['User']['firstname'].' '.$lastInsertrecord['User']['lastname'],
+							    "product_name"=>"Signup Successfully",
+							    "company"=>array("name"=>""),
+								"action_url"=>$ms),
+								"InlineCss"=> true, 
+								"from"=> "support@puzel.co",
+								'to'=>$lastInsertrecord['User']['email'],
+								'reply_to'=>"support@puzel.co"
+								);	
+
+						if($this->sendemail($useremail))
+						{
+							$this->Session->setFlash(__('Please confirm activate link ', true), 'default');		
+							$this->redirect(array('controller'=>'users','action'=>'login','user' => true));							
+						}
+						else
+						{
+							$this->Session->setFlash(__('Email not send ', true), 'default');		
+							$this->redirect(array('controller'=>'users','action'=>'signup','user' => true));							
+						}		    		
+					}
+					else
+					{
+						$this->Session->setFlash(__('Unable to save record ', true), 'default');		
+						$this->redirect(array('controller'=>'users','action'=>'login','user' => true));							
+					}					
+				}	
+			}	
+		}		
+	}
 
 
 
