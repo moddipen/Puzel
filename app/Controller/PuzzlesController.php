@@ -1220,6 +1220,7 @@ class  PuzzlesController  extends AppController {
 	public function user_recent()
 	{
 		$this->set("title","Index");
+		$this->set('sub_action','recent');
 		// $this->Puzzle->unbindModel(array("hasMany"=>array("Image")));
 		// $puzel = $this->Puzzle->find('all',array('conditions'=>array('Puzzle.status'=>0),'order'=>'Puzzle.created Desc','limit'=>20)) ; 
 		// $this->set("Puzzel",$puzel);	

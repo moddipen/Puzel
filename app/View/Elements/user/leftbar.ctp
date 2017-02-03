@@ -78,6 +78,23 @@
                       
                     </a>
                   </li>
+                   <?php 
+                    if($main == "Puzzle")
+                      {
+                        if($sub == "recent")
+                        {
+                          $mainClass = "active";  
+                        }
+                        else
+                        {
+                          $mainClass = "";
+                        }  
+                      }
+                      else
+                        {
+                          $mainClass = "";
+                        } ?>
+
                   <li class="<?php echo $mainClass;?>">
                     <a href="<?php echo Configure::read('SITE_URL');?>top-20-puzels">
                       <i class="fa fa-puzel-icon-left"></i> Most recent 20 puzels
