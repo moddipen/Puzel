@@ -371,6 +371,9 @@ $(document).ready(function(){
 
   function mostrecent(id,url)
   { 
+      $(".mask").show();
+      $("#loader").show() ; 
+      
       $.ajax(
       {
         type: "POST",
@@ -378,6 +381,8 @@ $(document).ready(function(){
         data: {'random':id},
         success: function(data)
         {
+          $("#loader").hide() ; 
+          $(".mask").hide();   
           window.open(url,'_blank');
         }
       });  
