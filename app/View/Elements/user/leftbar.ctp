@@ -3,7 +3,7 @@
 
           <!-- Branding -->
           <div class="navbar-header col-md-1">
-            <a class="navbar-brand" href="<?php echo Configure::read('SITE_URL');?>puzel">
+            <a class="navbar-brand" href="<?php echo Configure::read('SITE_URL');?>puzels">
               
             </a>
             <div class="sidebar-collapse hidden-md hidden-lg">
