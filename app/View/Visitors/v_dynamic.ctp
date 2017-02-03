@@ -11,7 +11,26 @@
   // Make parition or url and get puzzle name 
   $explode = explode('/',$path);
   echo $this->Html->css('animations.css');
+      if(!empty(AuthComponent::user()))
+    {?>
+        <script type="text/javascript">
+        $( document ).ready(function() {
+        $("#enrollformshow").removeClass("btn button-sign btn-tab").addClass("btn button-sign btn-tab active");
+        $("#Imageenroll").css("display", "none");
+        $("#Imagedata").css("display", "none");
+        $("#Imagesession").css("display", "block");
+        
+      });
+    </script>
+    <?php } 
+
+
+
+
+
 ?>
+
+
 <style>
 
 /* .no-right:focus, .no-right a:focus{
