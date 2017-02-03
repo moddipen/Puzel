@@ -76,7 +76,7 @@
 						?>
 								<li><a href="<?php echo Configure::read('SITE_URL');?>pricing"><span class="button-join">Join as a Business</span></a></li>
 								<li><a href="<?php echo Configure::read('SITE_URL');?>login" style="margin-right: 0px; padding-right: 0px;"><span class="button-sign">Sign In</span></a></li>
-								<li><a href="<?php echo Configure::read('SITE_URL');?>user/sign-up"><span class="button-sign">Sign Up</span></a></li>
+								<li><a href="<?php echo Configure::read('SITE_URL');?>user/sign-up" style="margin-right: 0px; padding-right: 0px;"><span class="button-sign">Sign Up</span></a></li>
 						<?php
 							}
 						?>
