@@ -116,6 +116,24 @@ Configure::write('SITE_ADMIN_URL',"http://puzel.stage.n-framescorp.com/admin");
 // Admin Url 
 Configure::write('SITE_USER_URL',"http://puzel.stage.n-framescorp.com/user");
 
+// // Postmark Tokenid
+// Configure::write('POSTMARKTOKEN',"4fc3bc33-f599-4d30-8444-8eb159dc0318");
+
+// // Postmark Server Tokenid
+// Configure::write('POSTMARKSERVERTOKEN',"1e1c0acd-3356-446b-b604-8d5972592b06");
+
+// // Postmark Email id 
+// Configure::write('POSTMARKEMAIL',"016b0b1a09738628dd9daee086fde019@inbound.postmarkapp.com");
+
+
+
+$_SERVER['SERVER_NAME'] = str_replace('www.', '', $_SERVER['SERVER_NAME']);
+
+
+if ($_SERVER['SERVER_NAME'] === "http://puzel.stage.n-framescorp.com/")
+{
+
+
 // Postmark Tokenid
 Configure::write('POSTMARKTOKEN',"4fc3bc33-f599-4d30-8444-8eb159dc0318");
 
@@ -124,6 +142,27 @@ Configure::write('POSTMARKSERVERTOKEN',"1e1c0acd-3356-446b-b604-8d5972592b06");
 
 // Postmark Email id 
 Configure::write('POSTMARKEMAIL',"016b0b1a09738628dd9daee086fde019@inbound.postmarkapp.com");
+
+// Rollbar 
+Configure::write('ROLLBARKEY',"567f0fcc90cb44ce940c4cd91ce3c3c0");
+
+
+}
+else
+{
+	// Postmark Tokenid
+Configure::write('POSTMARKTOKEN',"4fc3bc33-f599-4d30-8444-8eb159dc0318");
+
+// Postmark Server Tokenid
+Configure::write('POSTMARKSERVERTOKEN',"1e1c0acd-3356-446b-b604-8d5972592b06");
+
+// Postmark Email id 
+Configure::write('POSTMARKEMAIL',"016b0b1a09738628dd9daee086fde019@inbound.postmarkapp.com");
+
+// Rollbar 
+Configure::write('ROLLBARKEY',"567f0fcc90cb44ce940c4cd91ce3c3c0");
+
+}
 
 // Sent Email Postmark
 CakePlugin::load('Postmark');
