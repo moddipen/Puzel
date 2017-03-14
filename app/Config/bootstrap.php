@@ -127,7 +127,7 @@ Configure::write('SITE_USER_URL',"http://puzel.stage.n-framescorp.com/user");
 
 
 
-$_SERVER['SERVER_NAME'] = str_replace('www.', '', $_SERVER['SERVER_NAME']);
+echo $_SERVER['SERVER_NAME'] = str_replace('www.', '', $_SERVER['SERVER_NAME']);
 
 
 if ($_SERVER['SERVER_NAME'] === "http://puzel.stage.n-framescorp.com/")
