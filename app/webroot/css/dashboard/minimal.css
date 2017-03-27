@@ -1629,7 +1629,7 @@ select.form-control.input-lg + .chosen-container .chosen-choices .search-field i
 .tile.color .controls a { color: #f2f2f2; }
 .tile.color .controls a:hover { color: white; }
 .tile.color [class^="tile-"] { color: #cbd6e2; background-color: transparent; }
-.tile.color [class^="tile-"] a{color: rgba(255, 255, 255, 0.9)!important;}
+.tile.color [class^="tile-"] a{color: rgba(203, 214, 226, .9) !important}
 .tile.color [class^="tile-"] ul.inline.divided > li { border-right: 1px solid rgba(255, 255, 255, 0.2); }
 .tile.color [class^="tile-"] .form-group .help-block { color: white; }
 .tile.color .tile-header h1 { color: white; }
@@ -2896,13 +2896,15 @@ a.submit:hover { text-decoration: none; }
 .fa-downloads{background: url(../../img/dashboard/download.png);  background-repeat:no-repeat; background-position:center; width:32px; height:34px;}
 .fa-download-16px{background: url(../../img/dashboard/download-16px.png); background-repeat:no-repeat; background-position:center; width:16px; height:18px; margin-bottom:-1px;}
 .fa-puzel-icon-left, .fa-support-16, .fa-billing{display:block; margin-top:10px; float:left;}
-.fa-puzel-icon-left{background: url(../../img/dashboard/puzel-icon-left.png);  background-repeat:no-repeat; background-position:top center; width:20px !important; margin-right:11px !important;}
+.fa-puzel-icon-left{background: url(../../img/dashboard/puzel-icon-left-active.png);  background-repeat:no-repeat; background-position:top center; width:20px !important; margin-right:11px !important;}
+.hovered .fa-puzel-icon-left, .active .fa-puzel-icon-left{background: url(../../img/dashboard/puzel-icon-left.png);  background-repeat:no-repeat; background-position:top center; width:20px !important; margin-right:11px !important;}
 .fa-billing{background:url(../../img/dashboard/billing.svg); background-repeat:no-repeat; background-position:top center; width:25px !important; margin-right:6px !important;}
 .fa-eye{background: url(../../img/dashboard/eye.svg);  background-repeat:no-repeat; background-position:center; width:21px; height:15px; margin-bottom:-2px;}
 .fa-eye:before{content:'' !important;}
 .fa-billing-big{background: url(../../img/dashboard/billing-big.svg);  background-repeat:no-repeat; background-position:center;}
 .fa-puzel-icon-left-big{background: url(../../img/dashboard/puzel-icon-left-big.png);  background-repeat:no-repeat; background-position:center;}
-.fa-support-16{background: url(../../img/dashboard/support-16px.svg); background-repeat:no-repeat; background-position:top center; width:20px !important; margin-right:12px !important;}
+ .fa-support-16{background: url(../../img/dashboard/support-16px.svg); background-repeat:no-repeat; background-position:top center; width:20px !important; margin-right:12px !important;}
+.hovered .fa-support-16, .active .fa-support-16{background: url(../../img/dashboard/support-16px-active.svg); background-repeat:no-repeat; background-position:top center; width:20px !important; margin-right:12px !important;}
 .fa-support-32{background: url(../../img/dashboard/support-32px.svg); background-repeat:no-repeat; background-position:center;}
 .welcome{padding-left:15px; padding-top:100px; color:#cbd6e2; font-weight:700;}
 .padding10px{padding:10px;}
