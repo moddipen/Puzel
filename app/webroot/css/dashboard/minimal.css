@@ -1674,7 +1674,7 @@ select.form-control.input-lg + .chosen-container .chosen-choices .search-field i
 [class^="tile"][class*="transparent-"] .progress-list .status { background-color: rgba(0, 0, 0, 0.15); color: white; }
 [class^="tile"][class*="transparent-"] .btn { border-width: 0; }
 [class^="tile"][class*="transparent-"] .btn.btn-default { border-width: 1px; }
-[class^="tile"][class*="transparent-"] .form-control { background-color: #f5f8fa; border: 1px solid #cbd6e2 !important; color: #; font-size: 14px; -webkit-font-smoothing: antialiased; line-height: 20px; }
+[class^="tile"][class*="transparent-"] .form-control { background-color: #f5f8fa !important; border: 1px solid #cbd6e2 !important; color: #425b76 !important; font-size: 14px; -webkit-font-smoothing: antialiased; line-height: 20px; }
 [class^="tile"][class*="transparent-"] .form-control:focus { background-color: rgba(66, 91, 118, 0.5); }
 [class^="tile"][class*="transparent-"] .form-control::-webkit-input-placeholder { color: rgba(66, 91, 118, 0.8); }
 [class^="tile"][class*="transparent-"] .form-control:-moz-placeholder { color: rgba(66, 91, 118, 0.8); }
