@@ -329,10 +329,10 @@ ul.chat-nav.side-nav > li .form-control:focus { background-color: white; }
 #content.full-page .inside-block form .input-group .input-group-addon i:after { content: ""; height: 50%; margin-left: -25px; position: absolute; top: 25%; }
 #content.full-page .inside-block form .input-group input { background-color: #f5f8fa !important; -webkit-border-radius: 4px 0 0 4px !important; -moz-border-radius: 4px 0 0 4px !important; -ms-border-radius: 4px 0 0 4px !important; -o-border-radius: 4px 0 0 4px !important; border-radius: 4px 0 0 4px !important; color: #33475b !important; -webkit-transition: all 0.1s linear; -moz-transition: all 0.1s linear; transition: all 0.1s linear;     border: 1px solid #cbd6e2; border-right: 0px;}
 #content.full-page .inside-block form .input-group input:focus, #content.full-page .inside-block form .input-group input:focus + .input-group-addon { background-color: rgb(173, 183, 193) !important; -webkit-box-shadow: none !important; box-shadow: none !important; }
-#content.full-page .inside-block form .input-group input::-webkit-input-placeholder { color: rgba(255, 255, 255, 0.6) !important; }
-#content.full-page .inside-block form .input-group input:-moz-placeholder { color: rgba(255, 255, 255, 0.6) !important; }
-#content.full-page .inside-block form .input-group input::-moz-placeholder { color: rgba(255, 255, 255, 0.6) !important; }
-#content.full-page .inside-block form .input-group input:-ms-input-placeholder { color: rgba(255, 255, 255, 0.6) !important; }
+#content.full-page .inside-block form .input-group input::-webkit-input-placeholder { color: rgba(66, 91, 118, .6) !important; }
+#content.full-page .inside-block form .input-group input:-moz-placeholder { color: rgba(66, 91, 118, .6) !important; }
+#content.full-page .inside-block form .input-group input::-moz-placeholder { color: rgba(66, 91, 118, .6) !important; }
+#content.full-page .inside-block form .input-group input:-ms-input-placeholder { color: rgba(66, 91, 118, .6) !important; }
 #content.full-page .inside-block form section.controls { text-align: left; position: relative; }
 #content.full-page .inside-block form section.controls .checkbox { padding: 0; display: inline-block; margin: 0 !important; }
 #content.full-page .inside-block form section.controls a { font-size: 12px; margin-top: 5px; display: inline-block; position: absolute; right: 0; top: 0; color:#425b76; }
@@ -1425,11 +1425,11 @@ textarea { height: auto; }
 .form-control[disabled]:focus, .form-control[readonly]:focus, fieldset[disabled] .form-control:focus { background-color: #e8e8e8; border: 0; -webkit-box-shadow: none !important; box-shadow: none !important; }
 
 div.checkbox { margin: 5px 0; }
-div.checkbox.check-transparent input[type=checkbox] + label:before { background-color: rgba(203, 214, 226, 1); border: 0; -webkit-box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.1); box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.1); }
-div.checkbox.check-transparent input[type=checkbox]:checked + label:before { background-color: #adb7c1; -webkit-box-shadow: none; box-shadow: none; border: 0; }
-div.checkbox.check-transparent input[type=checkbox]:checked + label::after { color: #717171; }
-div.checkbox.check-transparent label { color: rgba(255, 255, 255, 0.5); }
-div.checkbox.check-transparent input[type=checkbox]:checked + label { color: #425b76; }
+div.checkbox.check-transparent input[type=checkbox] + label:before { background-color: #ffffff; border: 0; -webkit-box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.1); box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.1); border: 2px solid #cbd6e2;}
+div.checkbox.check-transparent input[type=checkbox]:checked + label:before { background-color: #ffffff; -webkit-box-shadow: none; box-shadow: none; border: 0; border: 2px solid #00a4bd;}
+div.checkbox.check-transparent input[type=checkbox]:checked + label::after { color: #00a4bd; }
+div.checkbox.check-transparent label { color: #425b76; }
+div.checkbox.check-transparent input[type=checkbox]:checked + label { color: #00a4bd; }
 div.checkbox.check-transparent input[type=checkbox].parsley-error + label::before { background-color: rgba(255, 74, 67, 0.2); border: 1px solid rgba(255, 74, 67, 0.5); }
 div.checkbox.check-transparent input[type=checkbox].parsley-error + label::after { color: white; }
 div.checkbox.check-transparent input[type=checkbox].parsley-success + label::before { background-color: rgba(162, 210, 0, 0.2); border: 1px solid rgba(162, 210, 0, 0.5); }
