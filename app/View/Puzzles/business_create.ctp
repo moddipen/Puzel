@@ -24,14 +24,14 @@
 .tooltip .tooltiptext {
     visibility: hidden;
     width: 150px;
-    background-color: rgb(141, 78, 142);
-    color: #fff;
+    background-color: rgba(245, 248, 250, 1);
+    color: #425b76;
     text-align: center;
     border-radius: 6px;
     padding: 5px 0;
-    /* Position the tooltip */
     position: absolute;
     z-index: 1;
+    border: 1px solid #cbd6e2;
 }
 
 .tooltip:hover .tooltiptext {
