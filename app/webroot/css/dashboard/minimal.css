@@ -2374,7 +2374,7 @@ a.submit:hover { text-decoration: none; }
 /**************************************************/
 /************* ALERTS & NOTIFICATIONS *************/
 /**************************************************/
-.alert { padding: 5px 15px; font-size: 12px; }
+.alert { padding: 5px 15px; font-size: 12px; color: rgba(0, 145, 174, .3) !important;}
 .alert.alert-big { padding: 15px; }
 .alert.alert-dismissable { padding-right: 35px; }
 .alert.alert-red { color: #ff4a43; background-color: #ffdddc; border-color: #ffaca9; }
