@@ -2986,6 +2986,7 @@ blockquote.reply, blockquote.filled{ word-wrap:break-word;}
 .input-group-addon{padding-top:4px; padding-bottom:4px;}
 .tile-footer .btn.btn-black-orange{background:#ff7a59 !important; color:#fff; border-radius:2px;}
 .tile-footer .btn.btn-black-orange:hover{background:#fff !important; color:#e88932; border: 1px solid #e88932 !important;}
+button.btn.btn-oranges.fullwidth.button-sign:hover{background:#fff !important; color:#e58b16; border: 1px solid #e58b16 !important;}
 select.form-control.chosen-transparent + .chosen-container.chosen-container-single .chosen-single div{ right:2px !important;}
 .chosen-container-single .chosen-single span{margin-right:10px !important;}
 .modal-open{overflow:hidden !important;}
