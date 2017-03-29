@@ -2903,6 +2903,7 @@ a.submit:hover { text-decoration: none; }
 .fa-puzel-icon-left{background: url(../../img/dashboard/puzel-icon-left.png);  background-repeat:no-repeat; background-position:top center; width:20px !important; margin-right:11px !important;}
 .hovered .fa-puzel-icon-left, .active .fa-puzel-icon-left{background: url(../../img/dashboard/puzel-icon-left-active.png);  background-repeat:no-repeat; background-position:top center; width:20px !important; margin-right:11px !important;}
 .fa-billing{background:url(../../img/dashboard/billing.svg); background-repeat:no-repeat; background-position:top center; width:25px !important; margin-right:6px !important;}
+.hovered .fa-billing, .active .fa-billing{background:url(../../img/dashboard/billing-active.svg); background-repeat:no-repeat; background-position:top center; width:25px !important; margin-right:6px !important;}
 .fa-eye{background: url(../../img/dashboard/eye.svg);  background-repeat:no-repeat; background-position:center; width:21px; height:15px; margin-bottom:-2px;}
 .fa-eye:before{content:'' !important;}
 .fa-billing-big{background: url(../../img/dashboard/billing-big.svg);  background-repeat:no-repeat; background-position:center;}

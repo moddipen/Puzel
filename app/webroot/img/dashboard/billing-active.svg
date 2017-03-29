@@ -3,16 +3,16 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="23px" height="24px" viewBox="0 0 23 24" enable-background="new 0 0 23 24" xml:space="preserve">
-<path fill="none" stroke="#425b76" stroke-width="0.7" stroke-miterlimit="10" d="M16.766,19.494c0,0.313-0.254,0.566-0.566,0.566
+<path fill="none" stroke="#FFFFFF" stroke-width="0.7" stroke-miterlimit="10" d="M16.766,19.494c0,0.313-0.254,0.566-0.566,0.566
 	H1.567C1.253,20.061,1,19.808,1,19.494V2.182c0-0.314,0.253-0.567,0.567-0.567h14.632c0.314,0,0.568,0.254,0.568,0.567v17.312
 	H16.766z"/>
-<polygon fill="none" stroke="#425b76" stroke-width="0.5" stroke-miterlimit="10" points="14.656,17.375 14.656,17.375 
+<polygon fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-miterlimit="10" points="14.656,17.375 14.656,17.375 
 	3.156,17.375 3.156,17.375 3.156,17.375 3.156,17.375 14.656,17.375 "/>
-<polygon fill="none" stroke="#425b76" stroke-width="0.5" stroke-miterlimit="10" points="14.656,14.924 14.656,14.924 
+<polygon fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-miterlimit="10" points="14.656,14.924 14.656,14.924 
 	3.156,14.924 3.156,14.924 3.156,14.924 3.156,14.924 14.656,14.924 "/>
-<polygon fill="none" stroke="#425b76" stroke-width="0.5" stroke-miterlimit="10" points="14.656,12.406 14.656,12.406 
+<polygon fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-miterlimit="10" points="14.656,12.406 14.656,12.406 
 	3.156,12.406 3.156,12.406 3.156,12.406 3.156,12.406 14.656,12.406 "/>
-<polygon fill="none" stroke="#425b76" stroke-width="0.5" stroke-miterlimit="10" points="14.656,10.035 14.656,10.035 
+<polygon fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-miterlimit="10" points="14.656,10.035 14.656,10.035 
 	3.156,10.035 3.156,10.035 3.156,10.035 3.156,10.035 14.656,10.035 "/>
-<text transform="matrix(1 0 0 1 6.7109 8.1895)" fill="#425b76" font-family="'MyriadPro-Regular'" font-size="7.1794">$</text>
+<text transform="matrix(1 0 0 1 6.7109 8.1895)" fill="#FFFFFF" font-family="'MyriadPro-Regular'" font-size="7.1794">$</text>
 </svg>
