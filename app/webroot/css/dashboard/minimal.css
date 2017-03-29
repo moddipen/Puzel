@@ -1628,10 +1628,10 @@ select.form-control.input-lg + .chosen-container .chosen-choices .search-field i
 .tile [class^="tile-"].color.transparent-black { background-color: rgba(0, 0, 0, 0.3); }
 .tile [class^="tile-"].color.transparent-black.textured { background: rgba(0, 0, 0, 0.3) url(../../img/dashboard/dot_pattern.png) repeat; }
 .tile [class^="tile-"].color.transparent-white { background-color: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.1); }
-.tile.color .controls a { color: #f2f2f2; }
+.tile.color .controls a { color: #0091ae; }
 .tile.color .controls a:hover { color: white; }
 .tile.color [class^="tile-"] { color: #425b76; background-color: transparent; }
-.tile.color [class^="tile-"] a{color: rgba(66, 91, 118, .8) !important}
+.tile.color [class^="tile-"] a{color: #0091ae !important;}
 .tile.color [class^="tile-"] ul.inline.divided > li { border-right: 1px solid rgba(255, 255, 255, 0.2); }
 .tile.color [class^="tile-"] .form-group .help-block { color: white; }
 .tile.color .tile-header h1 { color: white; }
