@@ -311,7 +311,7 @@ ul.chat-nav.side-nav > li .form-control:focus { background-color: white; }
 /************* LOGIN & LOCK PAGE *************/
 /*********************************************/
 #content.full-page { position: fixed; width: 100%; height: 100%; padding: 0 0 45px 0 !important; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; top:-5px;}
-#content.full-page .inside-block { display: block; margin: 0 auto; text-align: center;background-color: rgba(0, 0, 0, 0.2); height: auto; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; padding: 50px 100px; color: white; overflow: auto; margin-top:5%; min-height:400px; width:500px;}
+#content.full-page .inside-block { display: block; margin: 0 auto; text-align: center;background-color: rgba(255, 255, 255, 1); height: auto; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; padding: 50px 100px; color: #425b76; overflow: auto; margin-top:5%; min-height:400px; width:500px;}
 #content.full-page .inside-block img { margin-top: 0px; }
 #content.full-page .inside-block .user-photo img { margin: 0 0 20px 0; width: 100px; border: 5px solid rgba(0, 0, 0, 0.2); }
 #content.full-page .inside-block h1 { text-transform: uppercase; font-size: 26px; margin-bottom: 5px; }
@@ -323,18 +323,18 @@ ul.chat-nav.side-nav > li .form-control:focus { background-color: white; }
 #content.full-page .inside-block form { margin-top: 50px; margin-bottom: 40px; }
 #content.full-page .inside-block form.form-unlock { margin-top: 20px; }
 #content.full-page .inside-block form .input-group { margin-bottom: 25px; }
-#content.full-page .inside-block form .input-group .input-group-addon { background-color: rgba(0, 0, 0, 0.2); -webkit-border-radius: 0 4px 4px 0 !important; -moz-border-radius: 0 4px 4px 0 !important; -ms-border-radius: 0 4px 4px 0 !important; -o-border-radius: 0 4px 4px 0 !important; border-radius: 0 4px 4px 0 !important; -webkit-transition: all 0.1s linear; -moz-transition: all 0.1s linear; transition: all 0.1s linear; border: 0; }
+#content.full-page .inside-block form .input-group .input-group-addon { background-color: rgba(203, 214, 226, 1); -webkit-border-radius: 0 4px 4px 0 !important; -moz-border-radius: 0 4px 4px 0 !important; -ms-border-radius: 0 4px 4px 0 !important; -o-border-radius: 0 4px 4px 0 !important; border-radius: 0 4px 4px 0 !important; -webkit-transition: all 0.1s linear; -moz-transition: all 0.1s linear; transition: all 0.1s linear; border: 0; }
 #content.full-page .inside-block form .input-group .input-group-addon i { width: 18px; color: rgba(255, 255, 255, 0.6); }
 #content.full-page .inside-block form .input-group .input-group-addon i:after { content: ""; height: 50%; margin-left: -25px; position: absolute; top: 25%; }
-#content.full-page .inside-block form .input-group input { background-color: rgba(0, 0, 0, 0.2) !important; border: 0 !important; -webkit-border-radius: 4px 0 0 4px !important; -moz-border-radius: 4px 0 0 4px !important; -ms-border-radius: 4px 0 0 4px !important; -o-border-radius: 4px 0 0 4px !important; border-radius: 4px 0 0 4px !important; color: white !important; -webkit-transition: all 0.1s linear; -moz-transition: all 0.1s linear; transition: all 0.1s linear; }
-#content.full-page .inside-block form .input-group input:focus, #content.full-page .inside-block form .input-group input:focus + .input-group-addon { background-color: rgba(0, 0, 0, 0.3) !important; -webkit-box-shadow: none !important; box-shadow: none !important; }
+#content.full-page .inside-block form .input-group input { background-color: rgba(203, 214, 226, 1) !important; border: 0 !important; -webkit-border-radius: 4px 0 0 4px !important; -moz-border-radius: 4px 0 0 4px !important; -ms-border-radius: 4px 0 0 4px !important; -o-border-radius: 4px 0 0 4px !important; border-radius: 4px 0 0 4px !important; color: white !important; -webkit-transition: all 0.1s linear; -moz-transition: all 0.1s linear; transition: all 0.1s linear; }
+#content.full-page .inside-block form .input-group input:focus, #content.full-page .inside-block form .input-group input:focus + .input-group-addon { background-color: rgb(173, 183, 193) !important; -webkit-box-shadow: none !important; box-shadow: none !important; }
 #content.full-page .inside-block form .input-group input::-webkit-input-placeholder { color: rgba(255, 255, 255, 0.6) !important; }
 #content.full-page .inside-block form .input-group input:-moz-placeholder { color: rgba(255, 255, 255, 0.6) !important; }
 #content.full-page .inside-block form .input-group input::-moz-placeholder { color: rgba(255, 255, 255, 0.6) !important; }
 #content.full-page .inside-block form .input-group input:-ms-input-placeholder { color: rgba(255, 255, 255, 0.6) !important; }
 #content.full-page .inside-block form section.controls { text-align: left; position: relative; }
 #content.full-page .inside-block form section.controls .checkbox { padding: 0; display: inline-block; margin: 0 !important; }
-#content.full-page .inside-block form section.controls a { font-size: 12px; margin-top: 5px; display: inline-block; position: absolute; right: 0; top: 0; color:#fff; }
+#content.full-page .inside-block form section.controls a { font-size: 12px; margin-top: 5px; display: inline-block; position: absolute; right: 0; top: 0; color:#425b76; }
 #content.full-page .inside-block form section.controls a:hover { color: white; text-decoration:underline; }
 #content.full-page .inside-block form section.log-in { margin-top: 20px; border-top: 0px dashed rgba(0, 0, 0, 0.1); }
 #content.full-page .inside-block form section.log-in .btn { display: inline-block; margin-top: 20px; padding: 8px 25px; }
@@ -1424,11 +1424,11 @@ textarea { height: auto; }
 .form-control[disabled]:focus, .form-control[readonly]:focus, fieldset[disabled] .form-control:focus { background-color: #e8e8e8; border: 0; -webkit-box-shadow: none !important; box-shadow: none !important; }
 
 div.checkbox { margin: 5px 0; }
-div.checkbox.check-transparent input[type=checkbox] + label:before { background-color: rgba(0, 0, 0, 0.2); border: 0; -webkit-box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.1); box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.1); }
-div.checkbox.check-transparent input[type=checkbox]:checked + label:before { background-color: white; -webkit-box-shadow: none; box-shadow: none; border: 0; }
+div.checkbox.check-transparent input[type=checkbox] + label:before { background-color: rgba(203, 214, 226, 1); border: 0; -webkit-box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.1); box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.1); }
+div.checkbox.check-transparent input[type=checkbox]:checked + label:before { background-color: #adb7c1; -webkit-box-shadow: none; box-shadow: none; border: 0; }
 div.checkbox.check-transparent input[type=checkbox]:checked + label::after { color: #717171; }
 div.checkbox.check-transparent label { color: rgba(255, 255, 255, 0.5); }
-div.checkbox.check-transparent input[type=checkbox]:checked + label { color: white; }
+div.checkbox.check-transparent input[type=checkbox]:checked + label { color: #425b76; }
 div.checkbox.check-transparent input[type=checkbox].parsley-error + label::before { background-color: rgba(255, 74, 67, 0.2); border: 1px solid rgba(255, 74, 67, 0.5); }
 div.checkbox.check-transparent input[type=checkbox].parsley-error + label::after { color: white; }
 div.checkbox.check-transparent input[type=checkbox].parsley-success + label::before { background-color: rgba(162, 210, 0, 0.2); border: 1px solid rgba(162, 210, 0, 0.5); }
