@@ -1109,7 +1109,7 @@ html.mm-opened #wrap > .row #content { position: fixed; left: 0; padding-right: 
 
 body { font-family: "Helvetica Neue", "Arial", sans-serif; font-size: 14px; font-weight: 400; -webkit-font-smoothing: antialiased; }
 body.modal-open { overflow: auto; margin-right: 0; }
-body.bg-1 { background: #cbd6e2;/*background: rgba(203,129,127,1);
+body.bg-1 { background: #f5f8fa;/*background: rgba(203,129,127,1);
 background: -moz-linear-gradient(left, rgba(203,129,127,1) 0%, rgba(159,78,210,1) 100%);
 background: -webkit-gradient(left top, right top, color-stop(0%, rgba(203,129,127,1)), color-stop(100%, rgba(159,78,210,1)));
 background: -webkit-linear-gradient(left, rgba(203,129,127,1) 0%, rgba(159,78,210,1) 100%);
