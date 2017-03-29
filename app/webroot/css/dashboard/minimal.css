@@ -2918,6 +2918,7 @@ a.submit:hover { text-decoration: none; }
 .nobackground{background:none; color:#425b76; border:0px;}
 .custom-form select, .custom-form input, .custom-form select.form-control + .chosen-container.chosen-container-single .chosen-single, .custom-form textarea{border-radius: 0px; background-color:#f5f8fa !important; color:#7c98b6 !important; border: 1px solid #cbd6e2 !important; border-radius: 2px !important;}
 .custom-form select:focus, .custom-form input:focus, .custom-form select.form-control + .chosen-container.chosen-container-single .chosen-single:focus, .custom-form textarea:focus{border: 1px solid #00a4bd !important;}
+.custom-form input::-webkit-input-placeholder, .custom-form input:-moz-placeholder, .custom-form input::-moz-placeholder, .custom-form input::-ms-input-placeholder{color: rgba(66, 91, 118, .8) !important;}
 .minipadding .input-group .input-group-addon:first-child{padding-left:0px; padding-right:6px;}
 .minipadding .input-group .input-group-addon:last-child{padding-right:0px; padding-left:6px;}
 .iconwithtext .text{display:block; margin-top:-30px; padding-left:40px;}
@@ -2935,10 +2936,10 @@ a.submit:hover { text-decoration: none; }
     font-size: 10pt;
     float: left;max-width: 100px;overflow: hidden;text-overflow: ellipsis;}
 .imageupload:after{content:"\f0ee"; font: normal normal normal 14px/1 FontAwesome;    position: relative; float: right; top:5px; color: rgba(0, 0, 0, .3);}
-input::-webkit-input-placeholder { color: rgba(66, 91, 118, .3) !important; }
-input:-moz-placeholder { color: rgba(66, 91, 118, .3) !important; }
-input::-moz-placeholder { color: rgba(66, 91, 118, .3) !important; }
-input:-ms-input-placeholder { color: rgba(66, 91, 118, .3) !important; }
+input::-webkit-input-placeholder { color: rgba(66, 91, 118, .8) !important; }
+input:-moz-placeholder { color: rgba(66, 91, 118, .8) !important; }
+input::-moz-placeholder { color: rgba(66, 91, 118, .8) !important; }
+input:-ms-input-placeholder { color: rgba(66, 91, 118, .8) !important; }
 .modal-header a.close{background:none; font-weight:200 !important; color:#fff; opacity:1;}
 .modal.orange .modal-header{background:#e78932; color:#fff !important;}
 .modal.orange .modal-content .modal-header h3{ color:#fff !important; font-size:12pt; border-bottom:0px; font-family:Arial, Helvetica, sans-serif !important;}
