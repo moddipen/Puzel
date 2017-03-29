@@ -1925,7 +1925,7 @@ li.dropdown ul.dropdown-menu.bordered > li:last-child { border-bottom: 0; }
 
 .onoffswitch-inner:before { content: ""; padding-left: 9px; background-color: rgba(0, 0, 0, 0.2); color: #FFFFFF; }
 
-.onoffswitch-inner:after { content: ""; padding-right: 9px; background-color: #999999; color: #999999; text-align: right; }
+.onoffswitch-inner:after { content: ""; padding-right: 9px; background-color: #425b76; color: #425b76; text-align: right; }
 
 .onoffswitch-switch { display: block; width: 21px; margin: 0px; background: #FFFFFF; -webkit-border-radius: 50px; -moz-border-radius: 50px; -ms-border-radius: 50px; -o-border-radius: 50px; border-radius: 50px; position: absolute; top: 1px; bottom: 0; right: 15px; -webkit-transition: all 0.2s ease-in 0s; -moz-transition: all 0.2s ease-in 0s; transition: all 0.2s ease-in 0s; }
 
