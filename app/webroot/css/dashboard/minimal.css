@@ -1480,8 +1480,8 @@ select.form-control.chosen-transparent.parsley-error + .chosen-container-multi .
 
 select.form-control.chosen-transparent.parsley-success + .chosen-container-multi .chosen-choices { background-color: rgba(162, 210, 0, 0.2); border: 1px solid rgba(162, 210, 0, 0.5); }
 
-select.form-control.chosen-transparent + .chosen-container.chosen-container-single .chosen-single { background-color: rgba(0, 0, 0, 0.3) !important; border: 0 !important; color: rgba(255, 255, 255, 0.8) !important; }
-.custom-form select.form-control.chosen-transparent + .chosen-container.chosen-container-single .chosen-single { background-color: rgba(0, 0, 0, 0.3) !important; border: 0 !important; color: rgba(255, 255, 255, 0.8) !important; border-radius:4px !important; }
+select.form-control.chosen-transparent + .chosen-container.chosen-container-single .chosen-single { background-color: #f5f8fa !important; border: 0 !important; color: #526982 !important;border: 1px solid #cbd6e2 !important; }
+.custom-form select.form-control.chosen-transparent + .chosen-container.chosen-container-single .chosen-single { background-color: #f5f8fa !important; border: 0 !important; color: #526982 !important; border-radius:4px !important; border: 1px solid #cbd6e2 !important;}
 select.form-control.chosen-transparent + .chosen-container.chosen-container-single .chosen-single div b { background: url(../../img/dashboard/chosen-sprite-transparent.png) no-repeat 0 2px; }
 select.form-control.chosen-transparent + .chosen-container.chosen-container-single.chosen-container-active .chosen-single { background-color: rgba(0, 0, 0, 0.5); }
 
