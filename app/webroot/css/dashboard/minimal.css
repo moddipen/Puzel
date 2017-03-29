@@ -335,7 +335,7 @@ ul.chat-nav.side-nav > li .form-control:focus { background-color: white; }
 #content.full-page .inside-block form section.controls { text-align: left; position: relative; }
 #content.full-page .inside-block form section.controls .checkbox { padding: 0; display: inline-block; margin: 0 !important; }
 #content.full-page .inside-block form section.controls a { font-size: 12px; margin-top: 5px; display: inline-block; position: absolute; right: 0; top: 0; color:#425b76; }
-#content.full-page .inside-block form section.controls a:hover { color: white; text-decoration:underline; }
+#content.full-page .inside-block form section.controls a:hover { color: #253546; text-decoration:underline; }
 #content.full-page .inside-block form section.log-in { margin-top: 20px; border-top: 0px dashed rgba(0, 0, 0, 0.1); }
 #content.full-page .inside-block form section.log-in .btn { display: inline-block; margin-top: 20px; padding: 8px 25px; }
 #content.full-page .inside-block form section.log-in span { display: inline-block; vertical-align: bottom; line-height: 36px; margin: 0 10px; font-style: italic; font-family: Georgia, serif; }
