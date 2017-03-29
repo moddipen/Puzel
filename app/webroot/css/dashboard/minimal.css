@@ -525,7 +525,8 @@ ul.inbox > li.msg.active { background-color: rgba(0, 0, 0, 0.3); border: 1px sol
 .mail-content .quick-navigation button.prev { -webkit-border-radius: 4px 0 0 4px; -moz-border-radius: 4px 0 0 4px; -ms-border-radius: 4px 0 0 4px; -o-border-radius: 4px 0 0 4px; border-radius: 4px 0 0 4px; }
 .mail-content .quick-navigation button.next { -webkit-border-radius: 0 4px 4px 0; -moz-border-radius: 0 4px 4px 0; -ms-border-radius: 0 4px 4px 0; -o-border-radius: 0 4px 4px 0; border-radius: 0 4px 4px 0; }
 .mail-content .quick-navigation button:hover { background-color: rgba(255, 255, 255, 0.3); color: white; }
-.mail-content .message { overflow: hidden; -webkit-border-radius: 4px; -moz-border-radius: 4px; -ms-border-radius: 4px; -o-border-radius: 4px; border-radius: 4px; -webkit-box-shadow: 0 3px 0 rgba(0, 0, 0, 0.05); box-shadow: 0 3px 0 rgba(0, 0, 0, 0.05); }
+.mail-content .message { overflow: hidden; -webkit-border-radius: 4px; -moz-border-radius: 4px; -ms-border-radius: 4px; -o-border-radius: 4px; border-radius: 4px; -webkit-box-shadow: 0 1px 5px 0 rgba(45,62,80,0.12); box-shadow: 0 1px 5px 0 rgba(45,62,80,0.12); transition: box-shadow 150ms ease-in-out;}
+.mail-content .message:hover{box-shadow: 0 1px 20px 0 rgba(0,0,0,0.1);}
 .mail-content .message .header { background-color: rgba(0, 0, 0, 0.3); padding: 20px; }
 .mail-content .message .header h1 { margin: 0 0 10px 0; color: white; font-size: 26px; }
 .mail-content .message .header .message-info { list-style-type: none; padding: 0; margin: 0; }
